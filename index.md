@@ -1,6 +1,10 @@
-<!DOCTYPE html>
 <html>
 <head>
+	<style type="text/css">
+		body {
+			background-color: purple;
+		}
+	</style>
 	<title>Mikes Site</title>
 </head>
 <body>
