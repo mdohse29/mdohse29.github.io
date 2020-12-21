@@ -1,6 +1,9 @@
 <html>
 <head>
    <meta charset="utf-8"/>
+   	<script type="text/javascript">
+		window.location.href = "construction.html";
+	</script>
   <script src="pickerScript.js">
   </script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
