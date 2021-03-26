@@ -2,7 +2,7 @@
 <head>
    <meta charset="utf-8"/>
    	<script type="text/javascript">
-		window.location.href = "construction.md";
+		window.location.href = "construction.html";
 	</script>
   <script src="pickerScript.js">
   </script>
