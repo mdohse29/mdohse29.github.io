@@ -1,0 +1,13 @@
+img {
+    width: 30%;
+    margin: calc(10%/7);
+}
+
+nav {
+    font-family: 'Kirang Haerang', cursive;
+    text-transform: uppercase;
+    border-bottom: 2px solid #f1f1f1;
+    margin-left: calc(10%/7);
+    padding: 20px 0;
+}
+
