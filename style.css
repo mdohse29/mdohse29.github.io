@@ -11,3 +11,14 @@ nav {
     padding: 20px 0;
 }
 
+.ball {
+    height: 50px;
+    width: 50px;
+    background-color: red;
+    border-radius: 50%;
+    transition: margin-left 2s;
+}
+
+.ball:hover{
+    margin-left: 200px;
+}
