@@ -19,7 +19,7 @@ function picker(){
 		$("#display").append("<p>Everyone has been picked!</p>");
 	}else{
 		$("#display").append("<p>" + giftFor + "</p>");
-		$("#display").append("<p><img src=\"" + giftFor + ".jpg\" width=\"300px\" height=\"auto\" alt=\"testing\"/></p>");
+		// $("#display").append("<p><img src=\"" + giftFor + ".jpg\" width=\"300px\" height=\"auto\" alt=\"testing\"/></p>");
 	}
 
 }
