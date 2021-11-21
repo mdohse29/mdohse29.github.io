@@ -9,10 +9,16 @@
   <script src="testing.js">
   </script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+   <script src="list.js"></script>
   <style>
     html {
           font-family: 'Mountains of Christmas', cursive;
+    }
+    body {
+                background-image: url("./amy-shamblen-uYmf3FX2zHM-unsplash.jpg");
+          width: device-width;
+
+
     }
     h1 {
       text-align: center;
@@ -42,9 +48,18 @@
       transition: background-color 500ms ease-in;
       height: 400px;
       display: flex;
-      justify-content: center;
+      justify-content: space-evenly;
+      align-content: center;
+      overflow: scroll;
+      /*flex-direction: column;*/
+    }
+
+    #giftList {
+      align-items: top;
+    }
+
+    #nameChoice {
       align-items: center;
-      flex-direction: column;
     }
 
     #display:active {
@@ -59,6 +74,7 @@
       border: solid 5px;
     }*/
   </style>
+
   <title>Gift Picker</title>
 </head>
 <body>
@@ -68,7 +84,8 @@
     <button onclick="reset()">Try Again</button>
   </div>
   <div id="display">
-    
+    <div id="nameChoice"></div>
+    <div id="giftList"></div>
   </div>
   <div id="results">
     <table id="resultTBL">
