@@ -2,23 +2,35 @@
 <html>
 <head>
    <meta charset="utf-8"/>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas&display=swap" rel="stylesheet"> 
   <script src="testing.js">
   </script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+   <script src="list.js"></script>
   <style>
     html {
           font-family: 'Mountains of Christmas', cursive;
     }
+    body {
+                background-image: url("./amy-shamblen-uYmf3FX2zHM-unsplash.jpg");
+                background-size: cover;
+                background-repeat: no-repeat;
+                /*background-position: center;*/
+          /*width:;*/
+
+
+    }
     h1 {
       text-align: center;
+      font-size: 64px;
 
     }
     button {
       font-size: 32px;
+      /*opacity: 60%;*/
       font-family: 'Mountains of Christmas', cursive;
 
     }
@@ -37,42 +49,61 @@
 
     #display {
       margin-top: 100px;
-      background-color: green;
+      /*background-color: green;*/
       transition: background-color 500ms ease-in;
       height: 400px;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
+      justify-content: space-evenly;
+      align-content: center;
     }
 
-    #display:active {
+    #giftList {
       background-color: white;
+      font-size: 20px;
+      max-height: 68%;
+      overflow: scroll;
     }
+
+    #giftList, .listContent {
+      
+      display: none;
+      /*visibility: hidden;*/
+      position: absolute;
+      z-index: 2;
+    }
+
+    #nameChoice {
+      align-items: center;
+    }
+
     p {
       text-align: center;
-      font-size: 24px;
+      font-size: 48px;
       color: white;
     }
+
+
     /*#results{
       border: solid 5px;
     }*/
   </style>
+
   <title>Gift Picker</title>
 </head>
 <body>
   <h1>Gift Picker</h1>
   <div id="select">
-    <button onclick="picker()">Pick Someone</button>
     <button onclick="reset()">Try Again</button>
-  </div>
+    <button onclick="picker()">Pick Someone</button>
+    <button class="list" onclick="viewList()">THE LIST</button>
+   </div>
   <div id="display">
+    <div id="nameChoice"></div>
+    <div id="userGiftList" style="display: none;"></div>
+  <div id="giftList">
     
+  </div> 
   </div>
-  <div id="results">
-    <table id="resultTBL">
 
-    </table>
-  </div>
 </body>
 </html>
