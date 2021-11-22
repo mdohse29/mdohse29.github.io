@@ -16,16 +16,21 @@
     }
     body {
                 background-image: url("./amy-shamblen-uYmf3FX2zHM-unsplash.jpg");
-          width: device-width;
+                background-size: cover;
+                background-repeat: no-repeat;
+                /*background-position: center;*/
+          /*width:;*/
 
 
     }
     h1 {
       text-align: center;
+      font-size: 64px;
 
     }
     button {
       font-size: 32px;
+      /*opacity: 60%;*/
       font-family: 'Mountains of Christmas', cursive;
 
     }
@@ -44,32 +49,40 @@
 
     #display {
       margin-top: 100px;
-      background-color: green;
+      /*background-color: green;*/
       transition: background-color 500ms ease-in;
       height: 400px;
       display: flex;
       justify-content: space-evenly;
       align-content: center;
-      overflow: scroll;
-      /*flex-direction: column;*/
     }
 
     #giftList {
-      align-items: top;
+      background-color: white;
+      font-size: 20px;
+      max-height: 68%;
+      overflow: scroll;
+    }
+
+    #giftList, .listContent {
+      
+      display: none;
+      /*visibility: hidden;*/
+      position: absolute;
+      z-index: 2;
     }
 
     #nameChoice {
       align-items: center;
     }
 
-    #display:active {
-      background-color: white;
-    }
     p {
       text-align: center;
       font-size: 48px;
       color: white;
     }
+
+
     /*#results{
       border: solid 5px;
     }*/
@@ -80,17 +93,17 @@
 <body>
   <h1>Gift Picker</h1>
   <div id="select">
-    <button onclick="picker()">Pick Someone</button>
     <button onclick="reset()">Try Again</button>
-  </div>
+    <button onclick="picker()">Pick Someone</button>
+    <button class="list" onclick="viewList()">THE LIST</button>
+   </div>
   <div id="display">
     <div id="nameChoice"></div>
-    <div id="giftList"></div>
+    <div id="userGiftList" style="display: none;"></div>
+  <div id="giftList">
+    
+  </div> 
   </div>
-  <div id="results">
-    <table id="resultTBL">
 
-    </table>
-  </div>
 </body>
 </html>
