@@ -10,7 +10,9 @@ $(document).ready(function(){
 ["Michael","Gift card for Steam","Good mustache and nose hair trimmer","Dark color shoes (size 11 usually)"]
 ];
 
-	
+	$("#display").css("height", $(window).height());
+	$("#display").css("width", $(window).width());
+
 	for (z = 0; z < ideaList.length; z++){
 		let peep = ideaList[z];
 		$("#giftList").append("<ul class=\"listCotent\"><li>" + peep[0] + "</li><ul><li>" + peep[1] + "</li><li>" + peep[2] + "</li><li>" + peep[3] + "</li></ul><ul>");
