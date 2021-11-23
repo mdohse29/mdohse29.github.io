@@ -7,7 +7,8 @@ var people = [
 	"Krysta",
 	"Eileen",
 	"DeShawn",
-	"Hailey"
+	"Hailey",
+	"Collin"
 ]
 
 var ideaList = [
