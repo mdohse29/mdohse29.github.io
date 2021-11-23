@@ -55,7 +55,7 @@ function picker(){
 			$("#nameChoice").append("<p>" + giftFor + "</p>");
 			$("#userGiftList").append("<ul id=\"userItems\"></ul>");
 			for (item = 1; item < userListItems.length; item++){
-				$("#userItems").append("<li>" + userListItems[item] + "</li>");
+				$("#userItems").append("<li class=\"xmas\">" + userListItems[item] + "</li>");
 			}
 
 		}else{
