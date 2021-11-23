@@ -15,7 +15,8 @@
           font-family: 'Mountains of Christmas', cursive;
     }
     body {
-                background-image: url("./amy-shamblen-uYmf3FX2zHM-unsplash.jpg");
+                /*background-image: url("./amy-shamblen-uYmf3FX2zHM-unsplash.jpg");*/
+                background-image: url("./artboard-studio-B40ztSGQTZY-unsplash.jpg");
                 background-size: cover;
                 background-repeat: no-repeat;
                 /*background-position: center;*/
@@ -60,9 +61,12 @@
     }
 
     #giftList {
-      background-color: white;
+      /*background-color: #f1a5a7;*/
+      background-image: url("./markus-spiske-5jeRBN4-ZLE-unsplash.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
       font-size: 20px;
-      max-height: 68%;
+      max-height: 85%;
       overflow: scroll;
     }
 
@@ -71,14 +75,34 @@
       display: none;
       /*visibility: hidden;*/
       position: absolute;
-      z-index: 2;
+      z-index: 1;
     }
 
+    
     /*#nameChoice, #userGiftList {
       justify-items: center;
     }*/
+
+    #userGiftList ul {
+      list-style: none;
+    }
+
+    #userItems, .listContent ul {
+      max-width: 310px;
+    }
     ul {
             font-size: 20px;
+            
+
+    }
+    li {
+      padding: 5px 0px;
+    }
+    ul ul {
+      list-style-image: url("./listIcon-gift.png");
+      background-color: rgba(239, 235, 236, 0.6);
+      display: inline-block;
+      
 
     }
 
