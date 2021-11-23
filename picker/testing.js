@@ -59,7 +59,7 @@ function picker(){
 
 		}else{
 			$("#nameChoice").append("<p>" + giftFor + "</p>");
-			$("#userGiftList").append("<p>Sorry, there are no gift ideas to list for this person.</p>");
+			$("#userGiftList").append("<p style=\"margin-left: 5%\">Sorry, there are no gift ideas to list for this person.</p>");
 		}
 		// $("#nameChoice").append("<p>" + giftFor + "</p>");
 		// $("#display").append("<p><img src=\"" + giftFor + ".jpg\" width=\"300px\" height=\"auto\" alt=\"testing\"/></p>");
