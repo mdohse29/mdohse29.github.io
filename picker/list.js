@@ -21,4 +21,6 @@ $(document).ready(function(){
 	$("#giftList").mouseleave(function(event) {
 		$(this).toggle("hide");
 	});
+
+	
 })
