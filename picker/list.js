@@ -18,9 +18,9 @@ $(document).ready(function(){
 		$("#giftList").append("<ul class=\"listCotent\"><li>" + peep[0] + "</li><ul><li>" + peep[1] + "</li><li>" + peep[2] + "</li><li>" + peep[3] + "</li></ul><ul>");
 	}
 
-	$("#giftList").mouseleave(function(event) {
-		$(this).toggle("hide");
-	});
+	// $("#giftList").mouseleave(function(event) {
+	// 	$(this).toggle("hide");
+	// });
 
 	
 })
