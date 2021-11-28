@@ -13,7 +13,7 @@ var people = [
 
 var ideaList = [
 ["Krysta","Candles","Sweaters","House items"],
-["Eileen Dohse","Amazon leverback sterling silver Swarovski zirconia earrings. $26.00","Amazon wood Home sign with eucalyptus wreath $28.99","Amazon utopia 24 piece plastic food containers with lids $21.99"],
+["Eileen Dohse","Amazon leverback sterling silver Swarovski zirconia earrings.","Amazon wood Home sign with eucalyptus wreath","Amazon utopia 24 piece plastic food containers with lids"],
 ["Deshawn","Basketball shorts","Polo shirts Xl","Nike crew socks black"],
 ["Wayne Dohse","White Cardinals Hat ajustable","Screw Driver Set","US Navy Crew neck Blue wGold Navy & Anchor &#9875; Sweatshirt"],
 ["Alec","Champion ankle socks","White addidas shoes","Band tshirts/ 70s short inseam men's shorts"],
