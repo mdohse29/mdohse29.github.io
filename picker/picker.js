@@ -13,14 +13,15 @@ var people = [
 
 var ideaList = [
 ["Krysta","Candles","Sweaters","House items"],
-["Eileen Dohse","Amazon leverback sterling silver Swarovski zirconia earrings.","Amazon wood Home sign with eucalyptus wreath","Amazon utopia 24 piece plastic food containers with lids"],
+["Eileen","Amazon leverback sterling silver Swarovski zirconia earrings.","Amazon wood Home sign with eucalyptus wreath","Amazon utopia 24 piece plastic food containers with lids"],
 ["Deshawn","Basketball shorts","Polo shirts Xl","Nike crew socks black"],
-["Wayne Dohse","White Cardinals Hat ajustable","Screw Driver Set","US Navy Crew neck Blue wGold Navy & Anchor &#9875; Sweatshirt"],
+["Wayne","White Cardinals Hat ajustable","Screw Driver Set","US Navy Crew neck Blue wGold Navy & Anchor &#9875; Sweatshirt"],
 ["Alec","Champion ankle socks","White addidas shoes","Band tshirts/ 70s short inseam men's shorts"],
-["Ryan Dohse","Solar Lighting for backyard","Any Yard decoration, metal suns for wall, or any yard figurine.","Az Cardinals related stuff"],
+["Ryan","Solar Lighting for backyard","Any Yard decoration, metal suns for wall, or any yard figurine.","Az Cardinals related stuff"],
 ["Michael","Gift card for Steam","Good mustache and nose hair trimmer","Aero Garden","Dark color shoes (size 11 usually)"],
 ["Sabrina","Giftcard to Kirkland","1500 Count Deep Pocket Microfiber 7 piece King Sheet Set Teal from Walmart or gift card","Driftwood Buffalo Checker Pattern Lined Blackout Grommet Window Curtains Printed Plaid set of 2 Black and White 52×96 at Walmart online or gift card"],
-["Hailey","Red high Top Converse size 7.5","Forever 21 gift card","Tilly's Soda Lug Sole Womens Combat Boots Black 7.5"]
+["Hailey","Red high Top Converse size 7.5","Forever 21 gift card","Tilly's Soda Lug Sole Womens Combat Boots Black 7.5"],
+["Collin","gift card to boot barn, amazon, tillys","buckwear tshirts ford,don’t tread on me, we the people","assassins creed valhalla"]
 ];
 
 var userListItems;

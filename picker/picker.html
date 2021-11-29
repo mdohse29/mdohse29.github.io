@@ -69,6 +69,8 @@
       background-size: cover;
       font-size: 20px;
       max-height: 75%;
+      max-width: 50%;
+      /*min-width: 520px;*/
       overflow: scroll;
     }
 
@@ -118,6 +120,18 @@
       top: 0;
     }
 
+    .lst-note {
+      color: black;
+      font-size: 12px;
+      font-family: sans-serif;
+      font-weight: 700;
+      width: 60%;
+      margin-left: 15px;
+      text-align: left;
+      border: 1px solid black;
+      padding: 5px;
+    }
+
     p {
       text-align: center;
       font-size: 48px;
@@ -144,6 +158,7 @@
     <div id="userGiftList" style="display: none;"></div>
   <div id="giftList">
     <button onclick="$('#giftList').toggle('hide');" id="btn-close" style="position: sticky;">Close</button>
+    <p class="lst-note">ATTENTION: Keep in mind that the list is only suggestive. In the end the gift choice is up to the gift-er, the lists are meant to give an idea of what to give the person getting the gift(s). $50 is the max to be spent on a person, which does not mean you have to get 1 gift for $50. Multiple gifts can be given as long as the total is not more than $50.<br>If anything should need to be changed or added just let me know.</p>
   </div> 
   </div>
 
