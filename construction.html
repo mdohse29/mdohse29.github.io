@@ -1,6 +1,10 @@
 <html>
 <head>
 	<title>Under construction</title>
+	<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+			  integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
+			  crossorigin="anonymous"></script>
 	<style>
 		body{
 			display: flex;
@@ -10,6 +14,13 @@
 			padding-top: 15px;
 		}
 	</style>
+	<script>
+		$(document).ready(function(){
+			$('img').click(function(){
+				$(this).toggle("explode").delay(1000).fadeIn(400);
+			});
+		});
+	</script>
 </head>
 <body>
 	<h1>Under construction</h1>
