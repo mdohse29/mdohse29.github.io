@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        /*background-image: url("http://www.dicksoncreative.com/images/Logo_Design/glyn_large.jpg");*/
+        background-image: url("https://pbs.twimg.com/profile_images/3213168799/c42e9074dcd39ba15177694fdf763caf_400x400.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 700px;
+        clear: both;
+      }
+      .popup {
+        /*display: compact;*/
+        position: absolute;
+        z-index: 1;
+        width: 125px;
+        margin: 0px 3px 0px 3px;
+        background-color: rgba(128, 128, 128, 1.0);
+        border-radius: 5px 5px 5px 5px;
+        font-size: small;
+        line-height: normal;
+        opacity: initial;
+        -moz-user-select: none;
+        text-align: center;
+      }
+      p {
+        text-align: center;
+      }
+      table, tr, td, th{
+        border: solid 1px;
+        background-color: lightgrey;
+        margin: auto;
+      }
+      
+      td, th {
+        padding: 5px;
+      }
+      /*table {*/
+      /*  margin-left: 15%;*/
+      /*}*/
+      #searchBox {
+        margin: 20px 0px 20px 0px;
+        padding: 5px 5px 5px 5px;
+        border: solid;
+        display: inline-block;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+      }
+      input {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+      }
+      .regular tr, td, th {
+        border: inherit;
+        
+      }
+      .retired {
+        background: red;
+        position: relative;
+      }
+      #link {
+        background-color: red;
+        font-size: xx-large;
+      }
+      #submit {
+        border: none;
+        margin-left: 5px;
+      }
+      #linkbuild {
+        display: block;
+      }
+      #mediaData {
+        display: block;
+      }
+      #textarea {
+        height: auto;
+        width: auto;
+        text-align: center;
+        /*margin-top: 30px;*/
+        display: block;
+      }
+      br {
+        margin-bottom: 0.5px;
+        margin-top: 0.5px;
+      }
+    </style>
+    <script src="../jquery-ui-1.12.1/jquery-ui.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.8.3.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script> 
+    <script src='../data.js'></script>
+    <script src="../function.js" type='text/javascript'></script>
+    
+    <title>Repo Lookup</title>
+  </head>
+  <body>
+    <div id="searchBox">
+      <table class="regular">
+        <tr>
+          <td>
+            <!--Drop down box for options of what search to perform-->
+            <select id="searchType" disabled>
+              <optgroup>
+                <option value="all">ALL</option>
+                <option value="course_code">Course Code</option>
+                <option value="assignment_uuid">Assignment UUID</option>
+                <option value="repo_cc">Repo Course Code</option>
+                <option value="ctr">Course to Repo</option>
+              </optgroup>
+            </select>
+          </td>
+          <td>
+            <!--//Search box w/ button-->
+            <input type="text" id="searchData" disabled /><input type="button" id="submit" value="Submit" disabled />
+          </td>
+          <td id="repocheck" hidden="hidden">
+            <input type="checkbox" id="allrepos"/> Check to list all repo courses instead of parent courses.
+          </td>
+          <td id="listrepos" hidden="hidden">
+            <input type="checkbox" id="repolist"/> List all courses.
+          </td>
+          <td id="listretired" hidden="hidden">
+            <input type="checkbox" id="retiredList"/> List all retired courses.
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div id="spreadSheet">
+      <h1 style="text-align: center;">If you are seeing this message contact <a href="mailto:michael.dohse@imaginelearning.com">michael.dohse@imaginelearning.com</a></h1>
+    </div>
+  </body>
+</html>
