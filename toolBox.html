@@ -6,6 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        p {
+            text-align: center;
+        }
+        .mainHead {
+            margin-bottom: 5%;
+        }
         .toolLinks li {
             font-size: 24px;
             margin: 15px auto;
@@ -13,11 +19,8 @@
         #magic {
             cursor:crosshair;
         }
-        #repo {
-            display: none;
-        }
         .tilesContainer {
-            margin-top: 10%;
+            margin: 2.5% auto;
         }
         .tiles {
             display: flex;
@@ -30,6 +33,7 @@
         .tile {
             display: flex;
             justify-content: center;
+            text-justify: distribute;
             align-items: center;
             flex-wrap: wrap;
             height: 150px;
@@ -40,11 +44,14 @@
             border-radius: 50%;
             user-select: none;
         }
+        .repo {
+            display: none;
+        }
     </style>
     <script>
         $(document).ready(function(){
             $('#magic').click(function(){
-                $('[id="repo"]').each(function(){
+                $('.repo').each(function(){
                     if ( $(this).css('display') == 'none'){
                         $(this).css('display', 'flex');
                     }else{
@@ -66,7 +73,12 @@
                 $(this).css('box-shadow', '5px 5px darkgrey');
             });
             $('.tile').click(function(){
-                window.location.href = $(this).attr('url');
+                let link = $(this).attr('url');
+                if (link.includes('http')){
+                    window.open(link, '_blank');
+                }else{
+                    window.location.href = link;
+                }
             });
         });
     </script>
@@ -84,12 +96,20 @@
             <li><a href="./misc/scratchPad.html">Scratch Pad for notes (Does not Save)</a></li>
         </ul>
     </div> -->
-    <div class="tilesContainer" >
+    <div class="tilesContainer">
         <div class="tiles">
-            <div id="repo" class="tile" url="./repo/glyn/repo_lookup.htm"><p>Repo Lookup</p></div>
+            <div class="tile repo" url="./repo/glyn/repo_lookup.htm"><p>Repo Lookup</p></div>
             <div class="tile" url="./linkMaker/link.html"><p>The CDN Link Maker</p></div>
-            <div class="tile" url="./misc/scratchPad.html"><p style="text-align: center;">Scratch Pad for notes<br/><span style="font-size: small;">(Does not save)</span></p></div>
+            <div class="tile" url="./misc/scratchPad.html"><p>Scratch Pad for notes<br/><span style="font-size: small;">(Does not save)</span></p></div>
         </div>
+    </div>
+    <div class="tilesContainer">
+        <div class="tiles repo">
+            <div class="tile" url="https://ims-tools.owteam.com/"><p>IMS Tools</p></div>
+            <div class="tile" url="http://sandbox.education2020.com/questionimporter/"><p>CW Question Importer</p></div>
+            <div class="tile" url="http://sandbox.education2020.com/CurriculumUpload/UserLogin.aspx"><p>CW Curriculum Upload</p></div>
+        </div>
+
     </div>
 </body>
 </html>
