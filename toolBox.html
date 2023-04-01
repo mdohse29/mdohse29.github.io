@@ -10,11 +10,29 @@
             font-size: 24px;
             margin: 15px auto;
         }
+        #repo {
+            display: none;
+        }
+        
+        .tiles {
+            display: flex;
+            /* flex-direction: row; */
+            align-content: center;
+        }
+        .tile {
+            
+            height: 150px;
+            width: 150px;
+            background-color: lightblue;
+            margin: 0 10px;
+        }
     </style>
     <script>
         $(document).ready(function(){
             $('#magic').click(function(){
-                $('#repo').toggle();
+                $('[id="repo"]').each(function(){
+                    $(this).toggle();
+                });
             });
         });
     </script>
@@ -27,10 +45,17 @@
     </div>
     <div class="toolLinks">
         <ul style="list-style: none;">
-            <li id="repo" hidden><a href="./repo/glyn/repo_lookup.htm">Repo Lookup</a></li>
+            <li id="repo" ><a href="./repo/glyn/repo_lookup.htm">Repo Lookup</a></li>
             <li><a href="./linkMaker/link.html">The CDN Link Maker</a></li>
-            <li><a href="./misc/scratchPad.html">Scrtahc Pad for notes (Does not Save)</a></li>
+            <li><a href="./misc/scratchPad.html">Scratch Pad for notes (Does not Save)</a></li>
         </ul>
+    </div>
+    <div class="tilesContainer" >
+        <div class="tiles">
+            <div class="tile">Repo Lookup</div>
+            <div class="tile">The CDN Link Maker</div>
+            <div class="tile">Scratch Pad for notes<br/><span style="font-size: small;">(Does not save)</span></div>
+        </div>
     </div>
 </body>
 </html>
