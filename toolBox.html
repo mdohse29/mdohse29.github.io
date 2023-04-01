@@ -10,11 +10,63 @@
             font-size: 24px;
             margin: 15px auto;
         }
+        #magic {
+            cursor:crosshair;
+        }
+        #repo {
+            display: none;
+        }
+        .tilesContainer {
+            margin-top: 10%;
+        }
+        .tiles {
+            display: flex;
+            /* flex-direction: row; */
+            justify-content: space-evenly;
+            align-items: center;
+            width: 65%;
+            margin-left: 17.5%;
+        }
+        .tile {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            height: 150px;
+            width: 150px;
+            background-color: lightblue;
+            /* margin: 0 10px; */
+            box-shadow: 5px 5px darkgrey;
+            border-radius: 50%;
+            user-select: none;
+        }
     </style>
     <script>
         $(document).ready(function(){
             $('#magic').click(function(){
-                $('#repo').toggle();
+                $('[id="repo"]').each(function(){
+                    if ( $(this).css('display') == 'none'){
+                        $(this).css('display', 'flex');
+                    }else{
+                        $(this).css('display', 'none');
+                    }
+                });
+            });
+            $('#magic').mouseenter(function(){
+                $(this).css('border', '1px solid red');
+            });
+            $('#magic').mouseleave(function(){
+                $(this).css('border', 'none');
+            })
+
+            $('.tile').mousedown(function(){
+                $(this).css('box-shadow', '1px 1px darkgrey');
+            });
+            $('.tile').mouseup(function(){
+                $(this).css('box-shadow', '5px 5px darkgrey');
+            });
+            $('.tile').click(function(){
+                window.location.href = $(this).attr('url');
             });
         });
     </script>
@@ -25,12 +77,19 @@
     <div class="mainHead">
         <h1 style="text-align: center;">Mike's Super Awesome ToolBox</h1>
     </div>
-    <div class="toolLinks">
+    <!-- <div class="toolLinks">
         <ul style="list-style: none;">
-            <li id="repo" hidden><a href="./repo/glyn/repo_lookup.htm">Repo Lookup</a></li>
+            <li id="repo" ><a href="./repo/glyn/repo_lookup.htm">Repo Lookup</a></li>
             <li><a href="./linkMaker/link.html">The CDN Link Maker</a></li>
-            <li><a href="./misc/scratchPad.html">Scrtahc Pad for notes (Does not Save)</a></li>
+            <li><a href="./misc/scratchPad.html">Scratch Pad for notes (Does not Save)</a></li>
         </ul>
+    </div> -->
+    <div class="tilesContainer" >
+        <div class="tiles">
+            <div id="repo" class="tile" url="./repo/glyn/repo_lookup.htm"><p>Repo Lookup</p></div>
+            <div class="tile" url="./linkMaker/link.html"><p>The CDN Link Maker</p></div>
+            <div class="tile" url="./misc/scratchPad.html"><p style="text-align: center;">Scratch Pad for notes<br/><span style="font-size: small;">(Does not save)</span></p></div>
+        </div>
     </div>
 </body>
 </html>
