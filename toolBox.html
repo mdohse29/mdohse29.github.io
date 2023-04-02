@@ -40,10 +40,14 @@
             width: 150px;
             background-color: lightblue;
             /* margin: 0 10px; */
-            box-shadow: 5px 5px darkgrey;
+            box-shadow: 10px 0px 5px 2px darkgrey;
             border-radius: 50%;
             user-select: none;
             cursor: pointer;
+        }
+        .tile:hover {
+            background-color: rgb(26, 137, 173);
+            /* box-shadow: 10px 10px 5px 2px darkgrey; */
         }
         .repo {
             display: none;
@@ -68,10 +72,10 @@
             });
 
             $('.tile').mousedown(function(){
-                $(this).css('box-shadow', '1px 1px darkgrey');
+                $(this).css('box-shadow', '2px 0px 5px 2px darkgrey');
             });
             $('.tile').mouseup(function(){
-                $(this).css('box-shadow', '5px 5px darkgrey');
+                $(this).css('box-shadow', '10px 0px 5px 2px darkgrey');
             });
             $('.tile').click(function(){
                 let link = $(this).attr('url');
@@ -99,14 +103,15 @@
     </div> -->
     <div class="tilesContainer">
         <div class="tiles">
-            <div class="tile repo" url="./repo/glyn/repo_lookup.htm"><p>Repo Lookup</p></div>
+            <div class="tile repo" url="./repo/glyn/repo_lookup.htm"><p>Repo Lookup<br><span style="font-size: small;COLOR: RED;">RETIRED</span></p></div>
             <div class="tile" url="./linkMaker/link.html"><p>The CDN Link Maker</p></div>
             <div class="tile" url="./misc/scratchPad.html"><p>Scratch Pad for notes<br/><span style="font-size: small;">(Does not save)</span></p></div>
         </div>
     </div>
     <div class="tilesContainer">
         <div class="tiles repo">
-            <div class="tile" url="https://ims-tools.owteam.com/"><p>IMS Tools</p></div>
+            <div class="tile" url="https://ims-tools.owteam.com/"><p>IMS Tools<br/><span style="font-size: small;">(IL VPN Required)</span></p></div>
+            <div class="tile" url="http://sandbox.education2020.com/curriculum/">{N}ternal Tools</div>
             <div class="tile" url="http://sandbox.education2020.com/questionimporter/"><p>CW Question Importer</p></div>
             <div class="tile" url="http://sandbox.education2020.com/CurriculumUpload/UserLogin.aspx"><p>CW Curriculum Upload</p></div>
         </div>
