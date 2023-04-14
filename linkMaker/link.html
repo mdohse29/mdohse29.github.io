@@ -88,13 +88,13 @@
             $('#submit').css('visibility', 'visible');
             if (media == 'Animation'){
               $('#linkbuild').append('<p title="Either course base (alg01) if in curric media or unit UUID if in unit folder">Base: <input type="text" id="base" class="mediadata" value="' + base + '"/></p>');
-              $('#linkbuild').append('<p title="same as source in CAT or whats between the multimedia tags in the XML">File: <input type="text" id="file" class="mediadata" value="' + file + '"/></p>');
+              $('#linkbuild').append('<p title="The same data that is in the SOURCE in CAT media references.">File: <input type="text" id="file" class="mediadata" value="' + file + '"/></p>');
               if ($('#pffCheck').is(':checked')){
                 $('#linkbuild').append('<p>Data Base Path (Unit UUID): <input type="text" id="dataBasePath" class="mediadata" value="' + dataBasePath + '"/></p>');
               }
             }else if (media == 'DLA'){
               // $('#dlas').css('visibility', 'visible');
-              $('#linkbuild').append('<p title="same as source in CAT or whats between the multimedia tags in the XML">File: <input type="text" id="file" class="mediadata" value="' + file + '"/></p>');
+              $('#linkbuild').append('<p title="The same data that is in the SOURCE in CAT media references.">File: <input type="text" id="file" class="mediadata" value="' + file + '"/></p>');
               $('#linkbuild').append('<p>Data Base Path (Unit UUID): <input type="text" id="dataBasePath" class="mediadata" value="' + dataBasePath + '"/></p>');
               $('#linkbuild').append('<p title="Name of the DLA file that is in the unit folder">DLA File Name: <input type="text" id="dlaFile" class="mediadata" value="' + dlaFile + '"/></p>');
             }else if (media == "DOC") {
