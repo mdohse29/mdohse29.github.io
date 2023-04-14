@@ -18,16 +18,20 @@
   <script>
       $.get('https://mdohse29.github.io/archive.txt', function(data, status){
         let movies = data.split('\n');
+        if (movies.length > 0){
+          $('p[style="text-align: center;"]').remove();
+        }
         for (a = 0; a < movies.length; a++){
           $('.movies').append('<p>' + movies[a] + '</p>');
         }
       }, 'text');
+
   </script>
 </head>
 <body>
   <h1>Archived Movies</h1>
   <div class="movies">
-
+    <p style="text-align: center;">The file can not be found!<br><br>Nothing to see here</p>
   </div>
 </body>
 </html>
