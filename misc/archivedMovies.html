@@ -7,12 +7,51 @@
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <title>Archived Movies</title>
   <style>
+    body {
+      background-image: url('./data/lOOzu8wwrtEbQOvAdok4--2--o6phc.jpg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size:cover;
+    }
     .movies {
       height: 800px;
-      width: 50%;
+      width: 49%;
       overflow: scroll;
       border: 1px solid black;
       padding: 2px 10px;
+      background-color: beige;
+      opacity: 60%;
+    }
+    .msg {
+      float: right;
+      height: auto;
+      width: 49%;
+      text-align:center;
+      line-height: 2em;
+      background-color: beige;
+      opacity: 60%;
+    }
+    .msg p {
+      font-weight: 900;
+      opacity: 100%;
+    }
+    .movies p {
+      opacity: 100%;
+    }
+    @media (width < 1122px){
+      .msg {
+        float: none;
+        width: 96%;
+        margin: auto;
+      }
+      .movies {
+        width: 96%;
+      }
+    }
+    @media (width < 500px){
+      .msg {
+        display: none;
+      }
     }
   </style>
   <script>
@@ -22,14 +61,33 @@
           $('p[style="text-align: center;"]').remove();
         }
         for (a = 0; a < movies.length; a++){
-          $('.movies').append('<p>' + movies[a] + '</p>');
+          $('.movies').append('<p id="title">' + movies[a] + '</p>');
         }
       }, 'text');
 
   </script>
+  <script>
+    $(document).ready(function(){
+      setTimeout(function(){
+        $('p[id="title"]').mouseenter(function(){
+          $(this).css('background-color', 'yellow');
+          $(this).css('font-weight', '900');
+        });
+        $('p[id="title"]').mouseleave(function(){
+          $(this).css('background-color', 'inherit');
+          $(this).css('font-weight', 'normal');
+        });
+      }, 500);
+    });
+  </script>
+
 </head>
-<body>
-  <h1>Archived Movies</h1>
+<body style="background-color: lightblue;">
+  <h1 style="text-align:center;">Archived Movies</h1>
+  <div class="msg">
+  <p>If there is a movie in this list you would like to see,<br>just let me know and I will add it to the server.</p>
+
+  </div>
   <div class="movies">
     <p style="text-align: center;">The file can not be found!<br><br>Nothing to see here</p>
   </div>
