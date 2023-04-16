@@ -16,7 +16,7 @@ nav {
     width: 50px;
     background-color: red;
     border-radius: 50%;
-    transition: margin-left 2s;
+    transition: margin-left 5s;
 }
 
 .ball:hover{

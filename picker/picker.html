@@ -4,7 +4,7 @@
    <meta charset="utf-8"/>
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <script type="text/javascript">
-        location.replace("../construction.html")
+        // location.replace("../construction.html")
         // location.replace("./picker/picker.html")
     </script>
    <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -80,8 +80,7 @@
 
     #giftList, .listContent {
       
-      /*display: none;*/
-      /*visibility: hidden;*/
+      display: none;
       position: absolute;
       z-index: 2;
     }
@@ -153,8 +152,8 @@
 <body>
   <h1>Gift Picker</h1>
   <div id="select">
-    <button onclick="reset()" disabled>Try Again</button>
-    <button onclick="picker()" disabled>Pick Someone</button>
+    <button onclick="reset()" >Try Again</button>
+    <button onclick="picker()" >Pick Someone</button>
     <button class="list" onclick="viewList()">THE LIST</button>
    </div>
   <div id="display">
