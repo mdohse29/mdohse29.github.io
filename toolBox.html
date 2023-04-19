@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,6 +30,13 @@
             align-items: center;
             width: 65%;
             margin-left: 17.5%;
+            border: 1px dashed black;
+            border-radius: 5px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        div.tiles.expand {
+            border: 1px solid black;
         }
         .tile {
             display: flex;
@@ -39,7 +47,6 @@
             height: 150px;
             width: 150px;
             background-color: lightblue;
-            /* margin: 0 10px; */
             box-shadow: 10px 0px 5px 2px darkgrey;
             border-radius: 50%;
             user-select: none;
@@ -53,6 +60,9 @@
         .repo {
             display: none;
         }
+        .expand {
+            display: block;
+        }
     </style>
     <script>
         $(document).ready(function(){
@@ -65,6 +75,7 @@
                     }
                 });
             });
+            
             $('#magic').mouseenter(function(){
                 $(this).css('border', '1px solid red');
             });
@@ -108,6 +119,7 @@
         <h1 style="text-align: center;">Mike's Super Awesome ToolBox</h1>
     </div>
     <div class="tilesContainer">
+        <!-- <div class="expand tiles">X</div> -->
         <div class="tiles">
             <div class="tile repo" url="./repo/glyn/repo_lookup.htm"><p>Repo Lookup<br><span style="font-size: small;COLOR: RED;">RETIRED</span></p></div>
             <div class="tile" url="./linkMaker/link.html"><p>The CDN Link Maker</p></div>

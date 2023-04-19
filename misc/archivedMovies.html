@@ -15,7 +15,7 @@
     }
     h1 {
       background-color: beige;
-      opacity: 60%;
+      opacity: 65%;
       margin: 1% auto;
       max-width: 332px;
     }
@@ -27,7 +27,7 @@
       padding: 2px 10px;
       background-color: beige;
       margin-left: 1%;
-      opacity: 60%;
+      opacity: 65%;
     }
     .msg {
       float: right;
@@ -36,13 +36,14 @@
       text-align:center;
       line-height: 2em;
       background-color: beige;
-      opacity: 60%;
+      opacity: 65%;
       border: 1px solid black;
       margin-right: 1%;
     }
     .msg p {
       font-weight: 900;
       opacity: 100%;
+      font-size: 1.5em;
     }
     .movies p {
       opacity: 100%;
@@ -68,10 +69,10 @@
       $.get('https://mdohse29.github.io/archive.txt', function(data, status){
         let movies = data.split('\n');
         if (movies.length > 0){
-          $('p[style="text-align: center;"]').remove();
+          $('p[id="placeH"]').remove();
         }
         for (a = 0; a < movies.length; a++){
-          $('.movies').append('<p id="title">' + movies[a] + '</p>');
+          $('.movies').append('<p id="title" style="background-color: none;font-weight: bold;font-size: 1em;">' + movies[a] + '</p>');
         }
       }, 'text');
 
@@ -81,11 +82,13 @@
       setTimeout(function(){
         $('p[id="title"]').mouseenter(function(){
           $(this).css('background-color', 'yellow');
-          $(this).css('font-weight', '900');
+          $(this).css('font-size', '1.25em');
+          $(this).css('font-weight', 'normal');
         });
         $('p[id="title"]').mouseleave(function(){
           $(this).css('background-color', 'inherit');
-          $(this).css('font-weight', 'normal');
+          $(this).css('font-size', '1em');
+          $(this).css('font-weight', 'bold');
         });
       }, 500);
     });
@@ -101,7 +104,7 @@
 
   </div>
   <div class="movies">
-    <p style="text-align: center;">The file can not be found!<br><br>Nothing to see here</p>
+    <p id="placeH" style="text-align: center;">OOPS! Something Went Wrong!<br><br>Nothing to see here</p>
   </div>
 </body>
 </html>
