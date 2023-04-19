@@ -3,5 +3,5 @@ function wtf(){
 }
 
 function omg(){
-	document.getElementsByClassName("ball")[0].setAttribute("style", "background-color:blue");
+	document.getElementsByClassName("ball")[0].setAttribute("style", "background-color:green");
 }
