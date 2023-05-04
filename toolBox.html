@@ -89,12 +89,13 @@
             });
 
             $('.expand').click(function(){
-                let classCheck = $(this).parent().find('div.tiles');
-                if (classCheck.attr('class').includes('selected')){
-                    classCheck.removeClass('selected');
-                }else{
-                    classCheck.addClass('selected');
-                }
+                // let classCheck = $(this).parent().find('div.tiles');
+                // if (classCheck.attr('class').includes('selected')){
+                //     classCheck.removeClass('selected');
+                // }else{
+                //     classCheck.addClass('selected');
+                // }
+                $(this).parent().find('div.tiles').toggleClass('selected');
             });
             
             $('#magic').mouseenter(function(){
