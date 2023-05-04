@@ -24,7 +24,7 @@
             margin: 2.5% auto;
         }
         .tiles {
-            display: flex;
+            display: none;
             /* flex-direction: row; */
             justify-content: space-evenly;
             align-items: center;
@@ -35,8 +35,17 @@
             padding-top: 20px;
             padding-bottom: 20px;
         }
-        div.tiles.expand {
+        .expand {
+            display: flex;
+            /* flex-direction: row; */
+            justify-content: space-evenly;
+            align-items: center;
+            width: 65%;
+            margin-left: 17.5%;
             border: 1px solid black;
+            border-radius: 5px;
+            padding-top: 20px;
+            padding-bottom: 20px;
         }
         .tile {
             display: flex;
@@ -57,11 +66,16 @@
             background-color: rgb(26, 137, 173);
             /* box-shadow: 10px 10px 5px 2px darkgrey; */
         }
+        div.tiles.selected {
+            display: flex;
+        }
         .repo {
             display: none;
         }
         .expand {
             display: block;
+            text-align: center;
+            font-size: 1.25em;
         }
     </style>
     <script>
@@ -74,6 +88,15 @@
                         $(this).css('display', 'none');
                     }
                 });
+            });
+
+            $('.expand').click(function(){
+                let classCheck = $(this).parent().find('div.tiles');
+                if (classCheck.attr('class').includes('selected')){
+                    classCheck.removeClass('selected');
+                }else{
+                    classCheck.addClass('selected');
+                }
             });
             
             $('#magic').mouseenter(function(){
@@ -119,7 +142,7 @@
         <h1 style="text-align: center;">Mike's Super Awesome ToolBox</h1>
     </div>
     <div class="tilesContainer">
-        <!-- <div class="expand tiles">X</div> -->
+        <div class="expand">Home Made Tools</div>
         <div class="tiles">
             <div class="tile repo" url="./repo/glyn/repo_lookup.htm"><p>Repo Lookup<br><span style="font-size: small;COLOR: RED;">RETIRED</span></p></div>
             <div class="tile" url="./linkMaker/link.html"><p>The CDN Link Maker</p></div>
@@ -127,6 +150,7 @@
         </div>
     </div>
     <div class="tilesContainer">
+        <div class="expand">Company Tools</div>
         <div class="tiles">
             <div class="tile" url="https://ims-tools.owteam.com/"><p>IMS Tools<br/><span style="font-size: small;">(IL VPN Required)</span></p></div>
             <div class="tile" url="http://sandbox.education2020.com/curriculum/">{N}ternal Tools</div>
