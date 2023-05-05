@@ -15,8 +15,8 @@
     <script>
         $(document).ready(function(){
             let previous = document.referrer;
-            if (previous != "https://mdohse29.github.io/toolBox.html"){
-                $('#toolBox').css('display', 'none');
+            if (previous == "https://mdohse29.github.io/toolBox.html"){
+                $('#toolBox').show();
             }
 
             var currentVal = $('select').val();
@@ -50,7 +50,7 @@
     </style>
 </head>
 <body>
-    <h3 id="toolBox" style="float: right;"><a href="../toolBox.html">Back to ToolBox</a></h3>
+    <h3 id="toolBox" style="float: right;display:none"><a href="../toolBox.html">Back to ToolBox</a></h3>
     <div id="TextAreaContain" style="display: inline-block;">
     <select name="color" id="color" style="float: right;margin-left: 15px;">
         <option style="background-color: #242729;color: white;" value="#242729" selected>Dark</option>
