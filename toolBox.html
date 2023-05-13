@@ -112,24 +112,26 @@
             });
             $('.tile').mouseup(function(event){
                 $(this).css('box-shadow', '10px 0px 5px 2px darkgrey');
+                let link = $(this).attr('url');
 
                 /* Returns which mouse button is being used.
                 1 - Left Mouse Button
                 2 - Middle Mouse Button
                 3 - Right Mouse Button
                 */
-                switch(event.which){
-                    case 1:
-                        let link = $(this).attr('url');
-                        if (link.includes('http')){
+               if (link != null && link != ""){
+                    switch(event.which){
+                        case 1:
+                            if (link.includes('http')){
+                                window.open(link, '_blank');
+                            }else{
+                                window.location.href = link;
+                            }
+                            break;
+                        case 2:
                             window.open(link, '_blank');
-                        }else{
-                            window.location.href = link;
-                        }
-                        break;
-                    case 2:
-                        window.open($(this).attr('url'), '_blank');
-                        break;
+                            break;
+                    }
                 }
             });
             
@@ -148,6 +150,12 @@
             <div class="tile repo" url="./repo/glyn/repo_lookup.htm"><p>Repo Lookup<br><span style="font-size: small;COLOR: RED;">RETIRED</span></p></div>
             <div class="tile" url="./linkMaker/link.html"><p>The CDN Link Maker</p></div>
             <div class="tile" url="./misc/scratchPad.html"><p>Scratch Pad for notes<br/><span style="font-size: small;">(Does not save)</span></p></div>
+        </div>
+    </div>
+    <div class="tilesContainer">
+        <div class="expand repo">Other Stuff</div>
+        <div class="tiles">
+            <div class="tile" url="https://www.guidgenerator.com/online-guid-generator.aspx">GUID Generator</div>
         </div>
     </div>
     <div class="tilesContainer">
