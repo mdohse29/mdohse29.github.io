@@ -84,18 +84,7 @@
   <script>
     $(document).ready(function(){
       //Not sure why but I was looking at multiple events on one element, useful?
-      setTimeout(function(){
-        $('p.title').mouseenter(function(){
-          $(this).css('background-color', 'yellow');
-          $(this).css('font-size', '1.25em');
-          $(this).css('font-weight', 'normal');
-        });
-        $('p.title').mouseleave(function(){
-          $(this).css('background-color', 'inherit');
-          $(this).css('font-size', '1em');
-          $(this).css('font-weight', 'bold');
-        });
-      }, 500);
+
       $('#search-box').on("keydown", function(event){
         // click submit when the enter/return key is pressed in the search-box
         if (event.which == 13){
@@ -132,17 +121,43 @@
             $('.results').append('<p class="title" style="background-color: none;font-weight: bold;font-size: 1em;">Sorry! We could not find wehat you are looking for. Check Emby to see if it is already active. If not, make a request for what movie you would like to see.</p>');
           }
 
+          $('#search-box').attr('disabled', '');
           $('#submit-search').text("Reset");
           $('#submit-search').attr('id', 'search-reset');
-          $('#search-reset').attr('onclick', 'location.reload();');
+          $('#search-reset').attr('onclick', 'test();');
+
 
         }
       });
 
+      test = function(){
+        $('#search-box').removeAttr('disabled');
+        $('#search-reset').removeAttr('onclick');
+        $('.results').css('display', 'none');
+        $('.movies').css('display','block');
+        $('.results > .title').remove();
+        $('#search-reset').text("Submit");
+        $('#search-reset').attr('id', 'submit-search');
+
+      }
+
       $('#search-reset').click(function(){
+        $('#search-box').removeAttr('disabled');
         $('.results').css('display', 'none');
         $('.movies').css('display','block');
       });
+      setTimeout(function(){
+        $(document).on('mouseenter', 'p.title', function(){
+          $(this).css('background-color', 'yellow');
+          $(this).css('font-size', '1.25em');
+          $(this).css('font-weight', 'normal');
+        });
+        $(document).on('mouseleave', 'p.title', function(){
+          $(this).css('background-color', 'inherit');
+          $(this).css('font-size', '1em');
+          $(this).css('font-weight', 'bold');
+        });
+      }, 500);
     });
   </script>
 
