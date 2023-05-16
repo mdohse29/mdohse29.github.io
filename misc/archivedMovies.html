@@ -19,7 +19,7 @@
       margin: 1% auto;
       max-width: 332px;
     }
-    .movies {
+    .movies, .results {
       height: 800px;
       width: 47.9%;
       overflow: scroll;
@@ -45,16 +45,20 @@
       opacity: 100%;
       font-size: 1.5em;
     }
-    .movies p {
+    .movies p, .results p {
       opacity: 100%;
     }
+    .results{
+      display: none;
+    }
+    
     @media (width < 1122px){
       .msg {
         float: none;
         width: 96%;
         margin: 0.5% auto;
       }
-      .movies {
+      .movies, .results {
         width: 96%;
         margin: 0.5% auto;
       }
@@ -72,30 +76,76 @@
           $('p[id="placeH"]').remove();
         }
         for (a = 0; a < movies.length; a++){
-          $('.movies').append('<p id="title" style="background-color: none;font-weight: bold;font-size: 1em;">' + movies[a] + '</p>');
+          $('.movies').append('<p class="title" style="background-color: none;font-weight: bold;font-size: 1em;">' + movies[a].replaceAll('.', ' ') + '</p>');
         }
       }, 'text');
 
   </script>
   <script>
     $(document).ready(function(){
+      //Not sure why but I was looking at multiple events on one element, useful?
       setTimeout(function(){
-        $('p[id="title"]').mouseenter(function(){
+        $('p.title').mouseenter(function(){
           $(this).css('background-color', 'yellow');
           $(this).css('font-size', '1.25em');
           $(this).css('font-weight', 'normal');
         });
-        $('p[id="title"]').mouseleave(function(){
+        $('p.title').mouseleave(function(){
           $(this).css('background-color', 'inherit');
           $(this).css('font-size', '1em');
           $(this).css('font-weight', 'bold');
         });
       }, 500);
+
+      $('#submit-search').click(function(){
+        var searchText = $('#search-box').val();
+        var found = false;
+        if (searchText == "" || searchText == null){
+          window.alert("Please enter a title to search.");
+        }else{
+          var elements = $('.movies > p.title');
+          // window.alert(elements.length);
+          var titles = [];
+          
+          for (a = 0; a < elements.length; a++){
+            titles.push(elements[a].innerText);
+          }
+
+          $('.movies').css('display','none');
+          $('.results').css('display', 'block');
+          $('.results > .title').remove();
+
+          // window.alert(titles.length);
+          for (a in titles){
+            if (titles[a].toLowerCase().includes(searchText.toLowerCase())){
+              $('.results').append('<p class="title" style="background-color: none;font-weight: bold;font-size: 1em;">' + titles[a] + '</p>');
+              found = true;
+            }
+          }
+          if (!found){
+            $('.results').append('<p class="title" style="background-color: none;font-weight: bold;font-size: 1em;">Sorry! We could not find wehat you are looking for. Check Emby to see if it is already active. If not, make a request for what movie you would like to see.</p>');
+          }
+
+          $('#submit-search').text("Reset");
+          $('#submit-search').attr('id', 'search-reset');
+          $('#search-reset').attr('onclick', 'location.reload();');
+
+        }
+      });
+
+      $('#search-reset').click(function(){
+        $('.results').css('display', 'none');
+        $('.movies').css('display','block');
+      });
     });
   </script>
 
 </head>
 <body style="background-color: lightblue;">
+  <div class="search">
+    <input type="text" name="q" id="search-box" placeholder="Search Title Here">
+    <button id="submit-search">Submit</button>
+  </div>
   <div class="head">
     <h1 style="text-align:center;">Archived Movies</h1>
   </div>
@@ -105,6 +155,9 @@
   </div>
   <div class="movies">
     <p id="placeH" style="text-align: center;">OOPS! Something Went Wrong!<br><br>Nothing to see here</p>
+  </div>
+  <div class="results">
+
   </div>
 </body>
 </html>
