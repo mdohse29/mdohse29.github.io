@@ -22,6 +22,10 @@
     button {
       background-color: lightblue;
     }
+    .search {
+      float: left;
+      margin-left: 1%;
+    }
     .movies, .results {
       height: 800px;
       width: 47.9%;
@@ -50,6 +54,7 @@
     }
     .movies p, .results p {
       opacity: 100%;
+      cursor: pointer;
     }
     .results{
       display: none;
@@ -60,6 +65,12 @@
         float: none;
         width: 96%;
         margin: 0.5% auto;
+      }
+      .search {
+        float:none;
+        display: flex;
+        justify-content: center;
+        justify-items: center;
       }
       .movies, .results {
         width: 96%;
@@ -127,14 +138,15 @@
           $('#search-box').attr('disabled', '');
           $('#submit-search').text("Reset");
           $('#submit-search').attr('id', 'search-reset');
-          $('#search-reset').attr('onclick', 'test();');
+          $('#search-reset').attr('onclick', 'reset();');
 
 
         }
       });
 
-      test = function(){
+      reset = function(){
         $('#search-box').removeAttr('disabled');
+        $('#search-box').val('');
         $('#search-reset').removeAttr('onclick');
         $('.results').css('display', 'none');
         $('.movies').css('display','block');
@@ -144,12 +156,7 @@
 
       }
 
-      $('#search-reset').click(function(){
-        $('#search-box').removeAttr('disabled');
-        $('.results').css('display', 'none');
-        $('.movies').css('display','block');
-      });
-      setTimeout(function(){
+      // setTimeout(function(){
         $(document).on('mouseenter', 'p.title', function(){
           $(this).css('background-color', 'yellow');
           $(this).css('font-size', '1.25em');
@@ -160,7 +167,7 @@
           $(this).css('font-size', '1em');
           $(this).css('font-weight', 'bold');
         });
-      }, 500);
+      // }, 500);
     });
   </script>
 
