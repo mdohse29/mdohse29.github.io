@@ -96,6 +96,12 @@
           $(this).css('font-weight', 'bold');
         });
       }, 500);
+      $('#search-box').on("keydown", function(event){
+        // click submit when the enter/return key is pressed in the search-box
+        if (event.which == 13){
+          document.getElementById('submit-search').click();
+        }
+      });
 
       $('#submit-search').click(function(){
         var searchText = $('#search-box').val();
