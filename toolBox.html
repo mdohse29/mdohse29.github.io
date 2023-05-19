@@ -28,6 +28,7 @@
             /* flex-direction: row; */
             justify-content: space-evenly;
             align-items: center;
+            flex-wrap: wrap;
             width: 65%;
             margin-left: 17.5%;
             border: 1px dashed black;
@@ -65,6 +66,7 @@
             user-select: none;
             cursor: pointer;
             padding: 5px;
+            margin: 5px;
         }
         .tile:hover {
             background-color: rgb(26, 137, 173);
@@ -73,7 +75,7 @@
         div.tiles.selected {
             display: flex;
         }
-        .repo {
+        .flk {
             display: none;
         }
 
@@ -81,7 +83,7 @@
     <script>
         $(document).ready(function(){
             $('#magic').click(function(){
-                $('.repo').each(function(){
+                $('.flk').each(function(){
                     if ( $(this).css('display') == 'none'){
                         $(this).css('display', 'flex');
                     }else{
@@ -144,7 +146,7 @@
     <div class="tilesContainer">
         <div class="expand">Home Made Tools</div>
         <div class="tiles">
-            <div class="tile repo" url="./repo/glyn/repo_lookup.htm"><p>Repo Lookup<br><span style="font-size: small;COLOR: RED;">RETIRED</span></p></div>
+            <div class="tile flk" url="./repo/glyn/repo_lookup.htm"><p>Repo Lookup<br><span style="font-size: small;COLOR: RED;">RETIRED</span></p></div>
             <div class="tile" url="./linkMaker/link.html"><p>The CDN Link Maker</p></div>
             <div class="tile" url="./misc/scratchPad.html"><p>Scratch Pad for notes<br/><span style="font-size: small;">(Does not save)</span></p></div>
         </div>
@@ -153,16 +155,19 @@
         <div class="expand">Company Tools</div>
         <div class="tiles">
             <div class="tile" url="https://ims-tools.owteam.com/"><p>IMS Tools<br/><span style="font-size: small;">(IL VPN Required)</span></p></div>
-            <div class="tile" url="http://sandbox.education2020.com/curriculum/">{N}ternal Tools</div>
+            <div class="tile" url="http://sandbox.education2020.com/curriculum/"><p>{N}ternal Tools</p></div>
             <div class="tile" url="http://sandbox.education2020.com/questionimporter/"><p>CW Question Importer</p></div>
             <div class="tile" url="http://sandbox.education2020.com/CurriculumUpload/UserLogin.aspx"><p>CW Curriculum Upload</p></div>
+            <div class="tile" url="https://media.edgenuity.com/contentengine/common/closereader/"><p>CloseReaders Index</p></div>
         </div>
 
     </div>
     <div class="tilesContainer">
-        <div class="expand repo">Other Stuff</div>
+        <div class="expand flk">Other Stuff</div>
         <div class="tiles">
-            <div class="tile" url="https://www.guidgenerator.com/online-guid-generator.aspx">GUID Generator</div>
+            <div class="tile" url="https://www.guidgenerator.com/online-guid-generator.aspx"><p>GUID Generator</p></div>
+            <div class="tile" url="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference"><p>MDN</p></div>
+            <div class="tile" url="https://www.diffchecker.com/text-compare/"><p>Online Diff Checker</p></div>
         </div>
     </div>
 </body>
