@@ -59,6 +59,11 @@
     .results{
       display: none;
     }
+    .notFound {
+      background-color: white;
+      font-weight: bold;
+      font-size: 1.5em;
+    }
     
     @media (width < 1122px){
       .msg {
@@ -132,7 +137,7 @@
             }
           }
           if (!found){
-            $('.results').append('<p class="title" style="background-color: none;font-weight: bold;font-size: 1em;">Sorry! We could not find wehat you are looking for. Check Emby to see if it is already active. If not, make a request for what movie you would like to see.</p>');
+            $('.results').append('<p class="notFound">Sorry! We could not find what you are looking for. Check Emby to see if it is already active. If not, make a request for what movie you would like to see.</p>');
           }
 
           $('#search-box').attr('disabled', '');
@@ -150,7 +155,7 @@
         $('#search-reset').removeAttr('onclick');
         $('.results').css('display', 'none');
         $('.movies').css('display','block');
-        $('.results > .title').remove();
+        $('.results > p').remove();
         $('#search-reset').text("Submit");
         $('#search-reset').attr('id', 'submit-search');
 
