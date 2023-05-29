@@ -1,0 +1,43 @@
+System:    Kernel: 5.4.0-147-generic x86_64 bits: 64 compiler: gcc v: 9.4.0 
+           Desktop: Cinnamon 4.6.7 wm: muffin dm: LightDM Distro: Linux Mint 20 Ulyana 
+           base: Ubuntu 20.04 focal 
+Machine:   Type: Desktop System: Hewlett-Packard product: DC5800 v: N/A serial: <filter> Chassis: 
+           type: 4 serial: <filter> 
+           Mobo: Hewlett-Packard model: 2820h serial: <filter> BIOS: Hewlett-Packard 
+           v: 786F2 v01.54 date: 10/31/2008 
+CPU:       Topology: Dual Core model: Intel Core2 Duo E6550 bits: 64 type: MCP arch: Core Merom 
+           rev: B L2 cache: 4096 KiB 
+           flags: lm nx pae sse sse2 sse3 ssse3 vmx bogomips: 9310 
+           Speed: 1997 MHz min/max: 1998/2333 MHz Core speeds (MHz): 1: 1995 2: 1995 
+Graphics:  Device-1: Intel 82Q33 Express Integrated Graphics vendor: Hewlett-Packard driver: i915 
+           v: kernel bus ID: 00:02.0 chip ID: 8086:29d2 
+           Display: x11 server: X.Org 1.20.13 driver: intel unloaded: fbdev,modesetting,vesa 
+           resolution: 1600x900~60Hz 
+           OpenGL: renderer: Mesa DRI Intel Q33 v: 1.4 Mesa 21.2.6 direct render: Yes 
+Audio:     Device-1: Intel 82801I HD Audio vendor: Hewlett-Packard driver: snd_hda_intel v: kernel 
+           bus ID: 00:1b.0 chip ID: 8086:293e 
+           Sound Server: ALSA v: k5.4.0-147-generic 
+Network:   Device-1: Intel 82566DM-2 Gigabit Network vendor: Hewlett-Packard driver: e1000e 
+           v: 3.2.6-k port: 1100 bus ID: 00:19.0 chip ID: 8086:10bd 
+           IF: enp0s25 state: up speed: 1000 Mbps duplex: full mac: <filter> 
+Drives:    Local Storage: total: 6.37 TiB used: 2.98 TiB (46.8%) 
+           ID-1: /dev/sda vendor: Hitachi model: HDS722020ALA330 size: 1.82 TiB speed: 3.0 Gb/s 
+           serial: <filter> 
+           ID-2: /dev/sdb type: USB vendor: Western Digital model: WD Elements 25A2 
+           size: 931.48 GiB serial: <filter> 
+           ID-3: /dev/sdc type: USB vendor: Toshiba model: MQ04UBB400 size: 3.64 TiB 
+           serial: <filter> 
+Partition: ID-1: / size: 1.79 TiB used: 1.29 TiB (72.0%) fs: ext4 dev: /dev/sda5 
+Sensors:   System Temperatures: cpu: 45.0 C mobo: N/A 
+           Fan Speeds (RPM): N/A 
+Repos:     No active apt repos in: /etc/apt/sources.list 
+           Active apt repos in: /etc/apt/sources.list.d/official-package-repositories.list 
+           1: deb http: //packages.linuxmint.com ulyana main upstream import backport #id:linuxmint_main
+           2: deb http: //archive.ubuntu.com/ubuntu focal main restricted universe multiverse
+           3: deb http: //archive.ubuntu.com/ubuntu focal-updates main restricted universe multiverse
+           4: deb http: //archive.ubuntu.com/ubuntu focal-backports main restricted universe multiverse
+           5: deb http: //security.ubuntu.com/ubuntu/ focal-security main restricted universe multiverse
+           6: deb http: //archive.canonical.com/ubuntu/ focal partner
+Info:      Processes: 192 Uptime: 39d 13h 15m Memory: 5.79 GiB used: 996.9 MiB (16.8%) 
+           Init: systemd v: 245 runlevel: 5 Compilers: gcc: 9.4.0 alt: 9 
+           Client: Unknown python3.8 client inxi: 3.0.38 
