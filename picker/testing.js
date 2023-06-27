@@ -21,6 +21,13 @@ var ideaList = [
 ["Michael","Gift card for Steam","Good mustache and nose hair trimmer","Aero Garden","Dark color shoes (size 11 usually)"]
 ];
 
+$.get('https://mdohse29.github.io/picker/people.csv', function(data, status){
+  
+  for (a = 0; a < data.length; a++){
+    console.log(data.split('\n')[a]);
+  }
+}, "text");
+
 var userListItems;
 
 var giftFor = "";
