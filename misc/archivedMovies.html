@@ -167,12 +167,14 @@
 
       // setTimeout(function(){
         $(document).on('mouseenter', 'p.title', function(){
-          $(this).css('background-color', 'yellow');
+          $(this).css('background-color', 'black');
+          $(this).css('color', 'white');
           $(this).css('font-size', '1.25em');
           $(this).css('font-weight', 'normal');
         });
         $(document).on('mouseleave', 'p.title', function(){
           $(this).css('background-color', 'inherit');
+          $(this).css('color', 'black');
           $(this).css('font-size', '1em');
           $(this).css('font-weight', 'bold');
         });
