@@ -1,30 +1,42 @@
-var people = [
-	"Michael",
-	"Ryan",
-	"Wayne",
-	"Sabrina",
-	"Alec",
-	"Krysta",
-	"Eileen",
-	"DeShawn",
-	"Hailey",
-	"Collin"
-]
+// var people = [
+// 	"Michael",
+// 	"Ryan",
+// 	"Wayne",
+// 	"Sabrina",
+// 	"Alec",
+// 	"Krysta",
+// 	"Eileen",
+// 	"DeShawn",
+// 	"Hailey",
+// 	"Collin"
+// ]
 
-var ideaList = [
-["Krysta","Candles","Sweaters","House items"],
-["Eileen Dohse","Amazon leverback sterling silver Swarovski zirconia earrings.","Amazon wood Home sign with eucalyptus wreath.","Amazon utopia 24 piece plastic food containers with lids."],
-["Deshawn","Basketball shorts","Polo shirts Xl","Nike crew socks black"],
-["Wayne Dohse","White Cardinals Hat ajustable","Screw Driver Set","US Navy Crew neck Blue wGold Navy & Anchor &#9875; Sweatshirt"],
-["Alec","Champion ankle socks","White addidas shoes","Band tshirts/ 70s short inseam men's shorts"],
-["Ryan Dohse","Solar Lighting for backyard","Any Yard decoration, metal suns for wall, or any yard figurine.","Az Cardinals related stuff"],
-["Michael","Gift card for Steam","Good mustache and nose hair trimmer","Aero Garden","Dark color shoes (size 11 usually)"]
-];
+// var ideaList = [
+// ["Krysta","Candles","Sweaters","House items"],
+// ["Eileen Dohse","Amazon leverback sterling silver Swarovski zirconia earrings.","Amazon wood Home sign with eucalyptus wreath.","Amazon utopia 24 piece plastic food containers with lids."],
+// ["Deshawn","Basketball shorts","Polo shirts Xl","Nike crew socks black"],
+// ["Wayne Dohse","White Cardinals Hat ajustable","Screw Driver Set","US Navy Crew neck Blue wGold Navy & Anchor &#9875; Sweatshirt"],
+// ["Alec","Champion ankle socks","White addidas shoes","Band tshirts/ 70s short inseam men's shorts"],
+// ["Ryan Dohse","Solar Lighting for backyard","Any Yard decoration, metal suns for wall, or any yard figurine.","Az Cardinals related stuff"],
+// ["Michael","Gift card for Steam","Good mustache and nose hair trimmer","Aero Garden","Dark color shoes (size 11 usually)"]
+// ];
+var ideaList = [];
+var people = [];
 
 $.get('https://mdohse29.github.io/picker/people.csv', function(data, status){
-  
+  let aa = [];
   for (a = 0; a < data.length; a++){
-    console.log(data.split('\n')[a]);
+	if (data.split('\n')[a] != "" && data.split('\n')[a] != undefined){
+		let bb = [];
+		for (b = 0; b < data.split('\n')[a].split(',').length; b++){
+			bb.push(data.split('\n')[a].split(',')[b]);
+		}
+		aa.push(bb);
+	}
+  }
+  for (c = 0; c < aa.length; c++){
+	ideaList.push(aa[c]);
+	people.push(aa[c][0]);
   }
 }, "text");
 
@@ -103,18 +115,19 @@ $(document).ready(function(){
 // ["Ryan Dohse","Solar Lighting for backyard","Any Yard decoration, metal suns for wall, or any yard figurine.","Az Cardinals related stuff"],
 // ["Michael","Gift card for Steam","Good mustache and nose hair trimmer","Dark color shoes (size 11 usually)"]
 // ];
-
+setTimeout(function(){
 	$("#display").css("height", $(window).height());
 	$("#display").css("width", $(window).width());
 
 	for (z = 0; z < ideaList.length; z++){
 		let peep = ideaList[z];
-		if (peep[0].includes("Michael")){
-			$("#giftList").append("<ul class=\"listCotent\"><li>" + peep[0] + "</li><ul><li>" + peep[1] + "</li><li>" + peep[2] + "</li><li>" + peep[3] + "</li><li>" + peep[4] + "</li></ul><ul>");
-		}else{
-			$("#giftList").append("<ul class=\"listCotent\"><li>" + peep[0] + "</li><ul><li>" + peep[1] + "</li><li>" + peep[2] + "</li><li>" + peep[3] + "</li></ul><ul>");
+		$("#giftList").append("<ul class=\"listCotent build\"><li>" + peep[0] + "</li><ul></ul></ul>");
+		for (xy = 1; xy < peep.length; xy++){
+			$('.build > ul').append("<li>" + peep[xy] + "</li>");
 		}
+		$(".build").removeClass("build");
 	}
+}, 100);
 
 	// $("#giftList").mouseleave(function(event) {
 	// 	$(this).toggle("hide");
