@@ -2,6 +2,7 @@
 // var people = ["michael"];
 // var ideaList = [["Michael","Steam gift card","New Tennis Shoes","Pants and/or Shorts","Surprise Me!"]];
 
+
 var ideaList = [];
 var people = [];
 
@@ -96,6 +97,8 @@ function viewList(){
 // picker();
 $(document).ready(function(){
 
+$('button').attr('disabled', 'disabled');
+// Remove ^^^^^ to activate the picker
 
 setTimeout(function(){
 	$("#display").css("height", $(window).height());
