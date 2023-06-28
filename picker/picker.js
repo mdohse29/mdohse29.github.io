@@ -1,30 +1,26 @@
-// var people = [
-// 	"Michael",
-// 	"Ryan",
-// 	"Wayne",
-// 	"Sabrina",
-// 	"Alec",
-// 	"Krysta",
-// 	"Eileen",
-// 	"DeShawn",
-// 	"Hailey",
-// 	"Collin"
-// ]
 
-// var ideaList = [
-// ["Krysta","Candles","Sweaters","House items"],
-// ["Eileen","Amazon leverback sterling silver Swarovski zirconia earrings.","Amazon wood Home sign with eucalyptus wreath","Amazon utopia 24 piece plastic food containers with lids"],
-// ["Deshawn","Basketball shorts","Polo shirts Xl","Nike crew socks black"],
-// ["Wayne","White Cardinals Hat ajustable","Screw Driver Set","US Navy Crew neck Blue wGold Navy & Anchor &#9875; Sweatshirt"],
-// ["Alec","Champion ankle socks","White addidas shoes","Band tshirts/ 70s short inseam men's shorts"],
-// ["Ryan","Solar Lighting for backyard","Any Yard decoration, metal suns for wall, or any yard figurine.","Az Cardinals related stuff"],
-// ["Michael","Gift card for Steam","Good mustache and nose hair trimmer","Aero Garden","Dark color shoes (size 11 usually)"],
-// ["Sabrina","Giftcard to Kirkland","1500 Count Deep Pocket Microfiber 7 piece King Sheet Set Teal from Walmart or gift card","Driftwood Buffalo Checker Pattern Lined Blackout Grommet Window Curtains Printed Plaid set of 2 Black and White 52×96 at Walmart online or gift card"],
-// ["Hailey","Red high Top Converse size 7.5","Forever 21 gift card","Tilly's Soda Lug Sole Womens Combat Boots Black 7.5"],
-// ["Collin","gift card to boot barn, amazon, tillys","buckwear tshirts ford,don’t tread on me, we the people","assassins creed valhalla"]
-// ];
-var people = ["michael"];
-var ideaList = [["Michael","Steam gift card","New Tennis Shoes","Pants and/or Shorts","Surprise Me!"]];
+// var people = ["michael"];
+// var ideaList = [["Michael","Steam gift card","New Tennis Shoes","Pants and/or Shorts","Surprise Me!"]];
+
+var ideaList = [];
+var people = [];
+
+$.get('https://mdohse29.github.io/picker/people.csv', function(data, status){
+  let aa = [];
+  for (a = 0; a < data.length; a++){
+	if (data.split('\n')[a] != "" && data.split('\n')[a] != undefined){
+		let bb = [];
+		for (b = 0; b < data.split('\n')[a].split(',').length; b++){
+			bb.push(data.split('\n')[a].split(',')[b]);
+		}
+		aa.push(bb);
+	}
+  }
+  for (c = 0; c < aa.length; c++){
+	ideaList.push(aa[c]);
+	people.push(aa[c][0]);
+  }
+}, "text");
 
 var userListItems;
 
@@ -100,27 +96,20 @@ function viewList(){
 // picker();
 $(document).ready(function(){
 
-// 	var ideaList = [
-// ["Krysta","Candles","Sweaters","House items"],
-// ["Eileen Dohse","Amazon leverback sterling silver Swarovski zirconia earrings. $26.00","Amazon wood Home sign with eucalyptus wreath $28.99","Amazon utopia 24 piece plastic food containers with lids $21.99"],
-// ["Deshawn","Basketball shorts","Polo shirts Xl","Nike crew socks black"],
-// ["Wayne Dohse","White Cardinals Hat ajustable","Screw Driver Set","US Navy Crew neck Blue wGold Navy & Anchor &#9875; Sweatshirt"],
-// ["Alec","Champion ankle socks","White addidas shoes","Band tshirts/ 70s short inseam men's shorts"],
-// ["Ryan Dohse","Solar Lighting for backyard","Any Yard decoration, metal suns for wall, or any yard figurine.","Az Cardinals related stuff"],
-// ["Michael","Gift card for Steam","Good mustache and nose hair trimmer","Dark color shoes (size 11 usually)"]
-// ];
 
+setTimeout(function(){
 	$("#display").css("height", $(window).height());
 	$("#display").css("width", $(window).width());
 
 	for (z = 0; z < ideaList.length; z++){
 		let peep = ideaList[z];
-		if (peep[0].includes("Michael")){
-			$("#giftList").append("<ul class=\"listCotent\"><li>" + peep[0] + "</li><ul><li>" + peep[1] + "</li><li>" + peep[2] + "</li><li>" + peep[3] + "</li><li>" + peep[4] + "</li></ul><ul>");
-		}else{
-			$("#giftList").append("<ul class=\"listCotent\"><li>" + peep[0] + "</li><ul><li>" + peep[1] + "</li><li>" + peep[2] + "</li><li>" + peep[3] + "</li></ul><ul>");
+		$("#giftList").append("<ul class=\"listCotent build\"><li>" + peep[0] + "</li><ul></ul></ul>");
+		for (xy = 1; xy < peep.length; xy++){
+			$('.build > ul').append("<li>" + peep[xy] + "</li>");
 		}
+		$(".build").removeClass("build");
 	}
+}, 100);
 
 	// $("#giftList").mouseleave(function(event) {
 	// 	$(this).toggle("hide");
