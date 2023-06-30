@@ -89,34 +89,36 @@ function clearDisplay(){
 	$('#clear').toggle('hide');
 }
 function viewList(){
-		$("#giftList").toggle("show");
-
+	let visability = document.getElementsByClassName('listContent');
+	// alert(visability.length);
+	if (visability.length == 0){
+		for (z = 0; z < ideaList.length; z++){
+			let peep = ideaList[z];
+			$("#giftList").append("<ul class=\"listContent build\"><li>" + peep[0] + "</li><ul></ul></ul>");
+			for (xy = 1; xy < peep.length; xy++){
+				$('.build > ul').append("<li>" + peep[xy] + "</li>");
+			}
+			$(".build").removeClass("build");
+		}
 	}
+
+	$("#giftList").toggle("show");
+
+}
 
 // opening();
 // picker();
 $(document).ready(function(){
+	$("#display").css("height", $(window).height());
+	$("#display").css("width", $(window).width());
 
 $('button').attr('disabled', 'disabled');
 // Remove ^^^^^ to activate the picker
 
-setTimeout(function(){
-	$("#display").css("height", $(window).height());
-	$("#display").css("width", $(window).width());
 
-	for (z = 0; z < ideaList.length; z++){
-		let peep = ideaList[z];
-		$("#giftList").append("<ul class=\"listCotent build\"><li>" + peep[0] + "</li><ul></ul></ul>");
-		for (xy = 1; xy < peep.length; xy++){
-			$('.build > ul').append("<li>" + peep[xy] + "</li>");
-		}
-		$(".build").removeClass("build");
-	}
-}, 100);
-
-	// $("#giftList").mouseleave(function(event) {
-	// 	$(this).toggle("hide");
-	// });
+// $("#giftList").mouseleave(function(event) {
+// 	$(this).toggle("hide");
+// });
 
 	
 });
