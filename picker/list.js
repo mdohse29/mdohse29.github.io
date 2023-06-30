@@ -15,7 +15,7 @@ $(document).ready(function(){
 
 	for (z = 0; z < ideaList.length; z++){
 		let peep = ideaList[z];
-		$("#giftList").append("<ul class=\"listCotent\"><li>" + peep[0] + "</li><ul><li>" + peep[1] + "</li><li>" + peep[2] + "</li><li>" + peep[3] + "</li></ul><ul>");
+		$("#giftList").append("<ul class=\"listContent\"><li>" + peep[0] + "</li><ul><li>" + peep[1] + "</li><li>" + peep[2] + "</li><li>" + peep[3] + "</li></ul><ul>");
 	}
 
 	// $("#giftList").mouseleave(function(event) {
