@@ -31,7 +31,7 @@ var userListItems;
 
 var giftFor = "";
 
-var listCheck = function(name){
+function listCheck(name){
 	let found = false;
 	name = name.toString().toLowerCase();
 	for (item = 0; item < ideaList.length; item++){
@@ -77,14 +77,14 @@ function picker(){
 
 
 function reset(){
-			$("#userGiftList").empty();
-			$("#userGiftList").toggle("hide");
-			$('#clear').toggle('hide');
-		if (!(giftFor == "" || giftFor == undefined)){
-			people.push(giftFor);
-			$("#nameChoice").empty();
-			$("#nameChoice").append("<p>OOPS! Go a head and try again.</p>");
-		}
+    $("#userGiftList").empty();
+    $("#userGiftList").toggle("hide");
+    $('#clear').toggle('hide');
+    if (!(giftFor == "" || giftFor == undefined)){
+        people.push(giftFor);
+        $("#nameChoice").empty();
+        $("#nameChoice").append("<p>OOPS! Go a head and try again.</p>");
+    }
 }
 function clearDisplay(){
 	$("#userGiftList").empty();
