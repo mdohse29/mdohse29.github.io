@@ -6,13 +6,17 @@
 var ideaList = [];
 var people = [];
 
-$.get('https://mdohse29.github.io/picker/people.csv', function(data, status){
+$.get('./people.csv', function(data, status){
   let aa = [];
   for (a = 0; a < data.length; a++){
-	if (data.split('\n')[a] != "" && data.split('\n')[a] != undefined){
+	let row = data.split('\n')[a];
+	if (row != "" && row != undefined){
 		let bb = [];
-		for (b = 0; b < data.split('\n')[a].split(',').length; b++){
-			bb.push(data.split('\n')[a].split(',')[b]);
+		for (b = 0; b < row.split(',').length; b++){
+			let col = row.split(',')[b];
+			if (col != ""){
+				bb.push(col);
+			}
 		}
 		aa.push(bb);
 	}
@@ -27,7 +31,7 @@ var userListItems;
 
 var giftFor = "";
 
-var listCheck = function(name){
+function listCheck(name){
 	let found = false;
 	name = name.toString().toLowerCase();
 	for (item = 0; item < ideaList.length; item++){
@@ -73,14 +77,14 @@ function picker(){
 
 
 function reset(){
-			$("#userGiftList").empty();
-			$("#userGiftList").toggle("hide");
-			$('#clear').toggle('hide');
-		if (!(giftFor == "" || giftFor == undefined)){
-			people.push(giftFor);
-			$("#nameChoice").empty();
-			$("#nameChoice").append("<p>OOPS! Go a head and try again.</p>");
-		}
+    $("#userGiftList").empty();
+    $("#userGiftList").toggle("hide");
+    $('#clear').toggle('hide');
+    if (!(giftFor == "" || giftFor == undefined)){
+        people.push(giftFor);
+        $("#nameChoice").empty();
+        $("#nameChoice").append("<p>OOPS! Go a head and try again.</p>");
+    }
 }
 function clearDisplay(){
 	$("#userGiftList").empty();
@@ -96,7 +100,9 @@ function viewList(){
 			let peep = ideaList[z];
 			$("#giftList").append("<ul class=\"listContent build\"><li>" + peep[0] + "</li><ul></ul></ul>");
 			for (xy = 1; xy < peep.length; xy++){
-				$('.build > ul').append("<li>" + peep[xy] + "</li>");
+				if (peep[xy] != ""){
+					$('.build > ul').append("<li>" + peep[xy] + "</li>");
+				}
 			}
 			$(".build").removeClass("build");
 		}
@@ -113,6 +119,8 @@ $(document).ready(function(){
 	$("#display").css("width", $(window).width());
 
 $('button').attr('disabled', 'disabled');
+// $('button.list').removeAttr('disabled');
+$('#display').append("<p style=\"text-align: center\">Ohh, sorry! It is a little early.<br/>Come back in August 2023, The List will be online.</p>");
 // Remove ^^^^^ to activate the picker
 
 
