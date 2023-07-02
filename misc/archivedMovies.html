@@ -89,7 +89,7 @@
     }
   </style>
   <script>
-      $.get('https://mdohse29.github.io/archive.txt', function(data, status){
+      $.get('./archive.txt', function(data, status){
         let movies = data.split('\n');
         if (movies.length > 0){
           $('p[id="placeH"]').remove();
