@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eileen's Home Page</title>
+    <style>
+        .container {
+            position:static;
+            background: transparent;
+            height: 48%;
+            width: 48%;
+        }
+        iframe {
+            position:absolute;
+            z-index: -1;
+            width:48%;
+            height: inherit;
+        }
+        .container.right {
+            float:right;
+            margin-right: 5px;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            $('iframe > a').attr('disabled', 'disabled');
+        });
+    </script>
+</head>
+<body><!--Not really sure what I am doing with this yet, just playing around-->
+    <!--The container covers it but we can not scroll, hmmm-->
+        <div class="container right"><iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23616161&ctz=America%2FPhoenix&showCalendars=0&src=bWRvaHNlMjlAZ21haWwuY29t&color=%23F6BF26" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe></div>
+        <div class="container"><iframe allow="fullscreen" title="Fox News" src="https://www.foxnews.com/" frameborder="1"></iframe></div>
+</body>
+</html>

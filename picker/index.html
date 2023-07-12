@@ -76,10 +76,6 @@
       scrollbar-width: thin;
       /*min-width: 520px;*/
       overflow: scroll;
-    }
-
-    #giftList {
-      
       display: none;
       position: absolute;
       z-index: 2;
@@ -97,8 +93,8 @@
       cursor: pointer;
     }
     ul {
-            font-size: 20px;
-            list-style: none;
+      font-size: 20px;
+      list-style: none;
 
     }
     li {
@@ -112,7 +108,7 @@
 
     }
 
-    #btn-close {
+    #btn-close, #btn-add-lst {
       font-family: sans-serif;
       font-weight: 700;
       font-size: 10px;
@@ -147,6 +143,7 @@
       border: solid 5px;
     }*/
   </style>
+  <script src="picker_jq_docR.js"></script>
   <script src="picker.js">
   </script>
 
@@ -163,7 +160,7 @@
     <div id="nameChoice"></div>
     <div id="userGiftList" style="display: none;"></div>
   <div id="giftList">
-    <button onclick="$('#giftList').toggle('hide');" id="btn-close" style="position: sticky;">Close</button>
+    <button id="btn-close">Close</button><button id="btn-add-lst">Submit your list</button>
     <p class="lst-note">ATTENTION: Keep in mind that the list is only suggestive. In the end the gift choice is up to the gift-er, the lists are meant to give an idea of what to give the person getting the gift(s). $50 is the max to be spent on a person, which does not mean you have to get 1 gift for $50. Multiple gifts can be given as long as the total is not more than $50.<br>If anything should need to be changed or added just let me know.</p>
   </div> 
   </div>
