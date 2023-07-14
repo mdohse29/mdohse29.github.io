@@ -11,9 +11,18 @@ $(document).ready(function(){
 	});
 
 $('button').attr('disabled', 'disabled');
-// $('button.list').removeAttr('disabled');
 $('#display').append("<p style=\"text-align: center\">Ohh, sorry! It is a little early.<br/>Come back in August 2023, The List will be online.</p>");
-// Remove ^^^^^ to activate the picker
+// Comment out ^^^^^ to activate the picker
+
+// $('button.list').removeAttr('disabled');
+// Activate list button only ^^^^^^
+
+// $('#btn-add-lst').removeAttr('disabled');
+// viewList();
+// Remove ^^^^^ to allow list view only
+
+// $('#btn-add-lst').attr('disabled', 'disabled');
+// Uncomment for picking time ^^^^^ 
 
 
 // $("#giftList").mouseleave(function(event) {

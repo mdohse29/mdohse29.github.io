@@ -75,7 +75,6 @@ function picker(){
 
 }
 
-
 function reset(){
     $("#userGiftList").empty();
     $("#userGiftList").toggle("hide");
@@ -86,12 +85,14 @@ function reset(){
         $("#nameChoice").append("<p>OOPS! Go a head and try again.</p>");
     }
 }
+
 function clearDisplay(){
 	$("#userGiftList").empty();
 	$('#nameChoice').empty();
 	$("#userGiftList").toggle("hide");
 	$('#clear').toggle('hide');
 }
+
 function viewList(){
 	let visability = document.getElementsByClassName('listContent');
 	// alert(visability.length);
