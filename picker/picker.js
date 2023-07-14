@@ -93,6 +93,11 @@ function clearDisplay(){
 	$('#clear').toggle('hide');
 }
 
+function amazonUrl(searchItem){
+	let convertText = searchItem.replaceAll(" ", "+").toLowerCase();
+	return "https://www.amazon.com/s?k=" + convertText;
+}
+
 function viewList(){
 	let visability = document.getElementsByClassName('listContent');
 	// alert(visability.length);
@@ -101,8 +106,9 @@ function viewList(){
 			let peep = ideaList[z];
 			$("#giftList").append("<ul class=\"listContent build\"><li>" + peep[0] + "</li><ul></ul></ul>");
 			for (xy = 1; xy < peep.length; xy++){
+				let searchUrl = amazonUrl(peep[xy]);
 				if (peep[xy] != ""){
-					$('.build > ul').append("<li>" + peep[xy] + "</li>");
+					$('.build > ul').append("<li><a href=\"" + searchUrl + "\" target=\"_blank\" title=\"Click to search Amazon!\">" + peep[xy] + "</a></li>");
 				}
 			}
 			$(".build").removeClass("build");
