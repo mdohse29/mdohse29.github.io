@@ -6,7 +6,10 @@
 var ideaList = [];
 var people = [];
 
-$.get('./people.csv', function(data, status){
+// Use this to test without local server.
+// https://mdohse29.github.io/picker/people.csv
+
+$.get('https://mdohse29.github.io/picker/people.csv', function(data, status){
   let aa = [];
   for (a = 0; a < data.length; a++){
 	let row = data.split('\n')[a];
