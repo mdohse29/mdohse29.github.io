@@ -33,6 +33,10 @@ sup {
     font-size: 39px;
 }
 
+.santa {
+    display: inline-block;
+}
+
 #select {
     display: flex;
     justify-content: space-between;
