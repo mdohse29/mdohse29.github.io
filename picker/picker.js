@@ -59,6 +59,7 @@ function picker(){
 	giftFor = people.splice(num, 1);
 	$("#nameChoice").empty();
 	if (giftFor == "" || giftFor == undefined){
+		$('.pick').attr('disabled', 'disabled');
 		$("#nameChoice").append("<p>Everyone has been picked!</p>");
 	}else{
 		if (listCheck(giftFor) == true){
@@ -105,6 +106,9 @@ function viewList(){
 	let visability = document.getElementsByClassName('listContent');
 	// alert(visability.length);
 	if (visability.length == 0){
+		if (ideaList.length >= 1){
+			$('#emptyList').remove();
+		}
 		for (z = 0; z < ideaList.length; z++){
 			let peep = ideaList[z];
 			$("#giftList").append("<ul class=\"listContent build\"><li>" + peep[0] + "</li><ul></ul></ul>");
