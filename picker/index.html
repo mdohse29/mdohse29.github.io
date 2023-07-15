@@ -1,156 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <meta charset="utf-8"/>
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <script type="text/javascript">
-        // location.replace("../construction.html")
-        // location.replace("./picker/picker.html")
-    </script>
-   <link rel="preconnect" href="https://fonts.googleapis.com">
-   
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript">
+      // location.replace("../construction.html")
+      // location.replace("./picker/picker.html")
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="style.css">
+
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas&display=swap" rel="stylesheet"> 
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
    <!-- <script src="list.js"></script> -->
-  <style>
-    html {
-      font-family: 'Mountains of Christmas', cursive;
-      scrollbar-width: thin;
-    }
-    body {
-      /*background-image: url("./amy-shamblen-uYmf3FX2zHM-unsplash.jpg");*/
-      background-image: url("./artboard-studio-B40ztSGQTZY-unsplash.jpg");
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      /*width:;*/
-
-
-    }
-    h1 {
-      text-align: center;
-      font-size: 64px;
-
-    }
-    button {
-      font-size: 32px;
-      /*opacity: 60%;*/
-      font-family: 'Mountains of Christmas', cursive;
-
-    }
-
-    sup {
-      font-size: 39px;
-    }
-
-    #select {
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-    }
-
-    #text{
-      text-align: center;
-      font-size: 36px;
-      color: red;
-    }
-
-    #display {
-      margin: 5% auto;
-      /*background-color: green;*/
-      transition: background-color 500ms ease-in;
-      /*height: 400px;*/
-      display: flex;
-      justify-content: space-around;
-      justify-self: center;
-      align-content: center;
-      max-width: 600px;
-    }
-
-    #giftList {
-      /*background-color: #f1a5a7;*/
-      background-image: url("./markus-spiske-5jeRBN4-ZLE-unsplash.jpg");
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      font-size: 20px;
-      max-height: 75%;
-      max-width: 50%;
-      scrollbar-width: thin;
-      /*min-width: 520px;*/
-      overflow: scroll;
-      display: none;
-      position: absolute;
-      z-index: 2;
-    }
-
-    #userItems, .listContent ul {
-      max-width: 310px;
-    }
-    .xmas {
-      list-style-image: url("./xmas.png");
-      transition: font-size 1s;
-    }
-    .xmas:hover {
-      font-size: 120%;
-      cursor: pointer;
-    }
-    ul {
-      font-size: 20px;
-      list-style: none;
-
-    }
-    li {
-      padding: 5px 0px;
-    }
-    #giftList ul ul {
-      list-style-image: url("./listIcon-gift.png");
-      background-color: rgba(239, 235, 236, 0.6);
-      display: inline-block;
-      
-
-    }
-
-    #giftList > button {
-      font-family: sans-serif;
-      font-weight: 700;
-      font-size: 10px;
-      padding: 4px;
-      margin-left: 10px;
-      position: sticky;
-      position: -webkit-sticky;
-      top: 0;
-    }
-
-    .lst-note {
-      color: black;
-      font-size: 12px;
-      font-family: sans-serif;
-      font-weight: 700;
-      width: 60%;
-      margin-left: 15px;
-      text-align: left;
-      border: 1px solid black;
-      padding: 5px;
-      background-color: #f0eced;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-    p {
-      text-align: center;
-      font-size: 48px;
-      color: white;
-    }
-
-
-    /*#results{
-      border: solid 5px;
-    }*/
-  </style>
   <script src="picker.js"></script>
   <script src="picker_jq_docR.js"></script>
 
@@ -159,16 +22,18 @@
 <body>
   <h1><sup>The</sup> Dohse's Gift Picker</h1>
   <div id="select">
-    <button onclick="reset()" >Try Again</button>
-    <button onclick="picker()" >Pick Someone</button>
-    <button class="list" onclick="viewList()">THE LIST</button>
+    <button onclick="reset()" class="pick">Try Again</button>
+    <!-- <button onclick="clearDisplay()">Reset Display</button> -->
+    <button onclick="picker()" class="pick">Pick Someone</button>
+    <button onclick="viewList()">THE LIST</button>
    </div>
   <div id="display">
     <div id="nameChoice"></div>
     <div id="userGiftList" style="display: none;"></div>
   <div id="giftList">
     <button id="btn-close">Close</button><button id="btn-add-lst">Submit your list</button>
-    <p class="lst-note">ATTENTION: Keep in mind that the list is only suggestive. In the end the gift choice is up to the gift-er, the lists are meant to give an idea of what to give the person getting the gift(s). $75 is the max to be spent on a person, which does not mean you have to get 1 gift for $75. Multiple gifts can be given as long as the total is not more than $75.<br>If anything should need to be changed or added just let me know.</p>
+    <p class="lst-note">ATTENTION: Keep in mind that the list is only suggestive. In the end the gift choice is up to the gift-er, the lists are meant to give an idea of what to give the person getting the gift(s). $75 is the max to be spent on a person, which does not mean you have to get 1 gift for $75. Multiple gifts can be given as long as the total is not more than $75.<br>If anything should need to be changed or added just let me know.<br><br><span class="spcl">* Click on a list item to search Amazon for that item.</span></p>
+    <p id="emptyList">There isn't anything in the list yet.<br>Submit your list to be the first.</p>
   </div> 
   </div>
 

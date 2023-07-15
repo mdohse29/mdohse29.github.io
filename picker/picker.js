@@ -6,15 +6,18 @@
 var ideaList = [];
 var people = [];
 
+// Use this to test without local server.
+// https://mdohse29.github.io/picker/people.csv
+
 $.get('./people.csv', function(data, status){
   let aa = [];
-  for (a = 0; a < data.length; a++){
+  for (a = 1; a < data.length; a++){
 	let row = data.split('\n')[a];
 	if (row != "" && row != undefined){
 		let bb = [];
-		for (b = 0; b < row.split(',').length; b++){
+		for (b = 1; b < row.split(',').length; b++){
 			let col = row.split(',')[b];
-			if (col != ""){
+			if (col.length > 1 && col != ""){
 				bb.push(col);
 			}
 		}
@@ -56,6 +59,7 @@ function picker(){
 	giftFor = people.splice(num, 1);
 	$("#nameChoice").empty();
 	if (giftFor == "" || giftFor == undefined){
+		$('.pick').attr('disabled', 'disabled');
 		$("#nameChoice").append("<p>Everyone has been picked!</p>");
 	}else{
 		if (listCheck(giftFor) == true){
@@ -82,7 +86,7 @@ function reset(){
     if (!(giftFor == "" || giftFor == undefined)){
         people.push(giftFor);
         $("#nameChoice").empty();
-        $("#nameChoice").append("<p>OOPS! Go a head and try again.</p>");
+        $("#nameChoice").append("<p>" + giftFor + " has been put back.<br><br>Go a head and try again.</p>");
     }
 }
 
@@ -102,6 +106,9 @@ function viewList(){
 	let visability = document.getElementsByClassName('listContent');
 	// alert(visability.length);
 	if (visability.length == 0){
+		if (ideaList.length >= 1){
+			$('#emptyList').remove();
+		}
 		for (z = 0; z < ideaList.length; z++){
 			let peep = ideaList[z];
 			$("#giftList").append("<ul class=\"listContent build\"><li>" + peep[0] + "</li><ul></ul></ul>");
