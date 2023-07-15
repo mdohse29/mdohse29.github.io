@@ -9,15 +9,15 @@ var people = [];
 // Use this to test without local server.
 // https://mdohse29.github.io/picker/people.csv
 
-$.get('https://mdohse29.github.io/picker/people.csv', function(data, status){
+$.get('./people.csv', function(data, status){
   let aa = [];
-  for (a = 0; a < data.length; a++){
+  for (a = 1; a < data.length; a++){
 	let row = data.split('\n')[a];
 	if (row != "" && row != undefined){
 		let bb = [];
-		for (b = 0; b < row.split(',').length; b++){
+		for (b = 1; b < row.split(',').length; b++){
 			let col = row.split(',')[b];
-			if (col != ""){
+			if (col.length > 1 && col != ""){
 				bb.push(col);
 			}
 		}
@@ -85,7 +85,7 @@ function reset(){
     if (!(giftFor == "" || giftFor == undefined)){
         people.push(giftFor);
         $("#nameChoice").empty();
-        $("#nameChoice").append("<p>OOPS! Go a head and try again.</p>");
+        $("#nameChoice").append("<p>" + giftFor + " has been put back.<br><br>Go a head and try again.</p>");
     }
 }
 
