@@ -13,7 +13,12 @@ $.get('./people.csv', function(data, status){
   let aa = [];
   for (a = 1; a < data.length; a++){
 	let row = data.split('\n')[a];
+	
 	if (row != "" && row != undefined){
+		if (row.includes(", ") || row.includes("\"")){
+			row = row.replaceAll(", ", "; ");
+			row = row.replaceAll("\"", "");
+		}
 		let bb = [];
 		for (b = 1; b < row.split(',').length; b++){
 			let col = row.split(',')[b];
@@ -22,6 +27,13 @@ $.get('./people.csv', function(data, status){
 			}
 		}
 		aa.push(bb);
+	}
+	for (cc in aa){
+		for (dd in aa[cc]){
+			if (aa[cc][dd].includes("; ")){
+				aa[cc][dd] = aa[cc][dd].replaceAll("; ", ", ");
+			}
+		}
 	}
   }
   for (c = 0; c < aa.length; c++){
@@ -52,7 +64,15 @@ function listCheck(name){
 function picker(){
 	if ($("#userGiftList").css("display") == "none"){
 		$("#userGiftList").toggle("show");
-		$('#clear').toggle('show');
+		// $('#clear').toggle('show');
+	}
+	if ($("#nameChoice").css("display") == "none"){
+		$("#nameChoice").toggle("show");
+		// $('#clear').toggle('show');
+	}
+	if ($('#giftList').css('display') != 'none'){
+		alert("Please close the list before picking someone.");
+		return null;
 	}
 		$("#userGiftList").empty();
 	let num = Math.floor(Math.random() * people.length);
@@ -63,7 +83,7 @@ function picker(){
 		$("#nameChoice").append("<p>Everyone has been picked!</p>");
 	}else{
 		if (listCheck(giftFor) == true){
-			$("#nameChoice").append("<p>" + giftFor + "</p>");
+			$("#nameChoice").append("<p><img src=\"./icons8-santa-48.png\" class=\"santa\"/>" + giftFor + "</p>");
 			$("#userGiftList").append("<ul id=\"userItems\"></ul>");
 			for (item = 1; item < userListItems.length; item++){
 				$("#userItems").append("<li class=\"xmas\">" + userListItems[item] + "</li>");
@@ -82,7 +102,7 @@ function picker(){
 function reset(){
     $("#userGiftList").empty();
     $("#userGiftList").toggle("hide");
-    $('#clear').toggle('hide');
+    // $('#clear').toggle('hide');
     if (!(giftFor == "" || giftFor == undefined)){
         people.push(giftFor);
         $("#nameChoice").empty();
@@ -94,7 +114,7 @@ function clearDisplay(){
 	$("#userGiftList").empty();
 	$('#nameChoice').empty();
 	$("#userGiftList").toggle("hide");
-	$('#clear').toggle('hide');
+	// $('#clear').toggle('hide');
 }
 
 function amazonUrl(searchItem){
