@@ -34,7 +34,7 @@ $(document).ready(function(){
 	// $('button.list').removeAttr('disabled');
 	//// Activate list button only ^^^^^^
 	if (currentMonth > 5){
-		$('button.pick, #giftList > button').removeAttr('disabled');
+		$('button.pick, #giftList > .nav > button').removeAttr('disabled');
 		
 		$('#erlmsg').remove();
 		setTimeout(function(){
