@@ -1,5 +1,6 @@
 html {
-    font-family: 'Mountains of Christmas', cursive;
+    /* font-family: 'Mountains of Christmas', cursive; */
+    font-family: 'Akaya Kanadaka', cursive;
     scrollbar-width: thin;
 }
 
@@ -21,9 +22,13 @@ h1 {
 }
 
 button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 32px;
     /*opacity: 60%;*/
-    font-family: 'Mountains of Christmas', cursive;
+    /* font-family: 'Mountains of Christmas', cursive; */
+    font-family: 'Akaya Kanadaka', cursive;
     border-radius: 15px;
     padding: 1px 8px;
     cursor: pointer;
@@ -85,9 +90,13 @@ sup {
     max-width: 310px;
 }
 
+.listContent > li {
+    font-weight: 900;
+}
+
 .xmas {
     list-style-image: url("./xmas.png");
-    transition: font-size 1s;
+    transition: font-size 500ms;
 }
 
 .xmas:hover {
@@ -113,15 +122,16 @@ li {
 
 }
 
-#giftList>button {
+#giftList > button {
+    display: inline-block;
+    background-color: #f4a5a8;
     font-family: sans-serif;
     font-weight: 700;
     font-size: 10px;
     padding: 4px;
     margin-left: 10px;
     position: sticky;
-    position: -webkit-sticky;
-    top: 0;
+    top: 5px;
 }
 
 .lst-note {
@@ -161,4 +171,22 @@ p {
 
 .spcl {
     font-size: calc(100% - 0.3em);
+}
+
+
+@media (width < 616px){
+    h1 {
+        font-size: 35px;
+    }
+    sup {
+        font-size: 20px;
+    }
+    #select button {
+        font-size: 16px;
+    }
+
+    #giftList {
+        max-width: 97%;
+        margin: auto;
+    }
 }

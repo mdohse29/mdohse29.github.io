@@ -7,12 +7,14 @@
       // location.replace("../construction.html")
       // location.replace("./picker/picker.html")
   </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="stylesheet" href="style.css">
 
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas&display=swap" rel="stylesheet"> 
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas&display=swap" rel="stylesheet">  -->
+  <link href="https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&display=swap" rel="stylesheet"> 
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="style.css">
    <!-- <script src="list.js"></script> -->
   <script src="picker.js"></script>
   <script src="picker_jq_docR.js"></script>
@@ -25,10 +27,10 @@
     <button onclick="reset()" class="pick">Try Again</button>
     <!-- <button onclick="clearDisplay()">Reset Display</button> -->
     <button onclick="picker()" class="pick">Pick Someone</button>
-    <button onclick="viewList()">THE LIST</button>
+    <button onclick="viewList()" class="view"><img src="./icons8-list-48.png" stlye="display: inline;vertical-align: middle;"/> THE LIST</button>
    </div>
   <div id="display">
-    <div id="nameChoice"></div>
+    <div id="nameChoice" style="display: none;"></div>
     <div id="userGiftList" style="display: none;"></div>
   <div id="giftList">
     <button id="btn-close">Close</button><button id="btn-add-lst">Submit your list</button>
