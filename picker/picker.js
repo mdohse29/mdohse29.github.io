@@ -82,7 +82,7 @@ function picker(){
 	$("#nameChoice").empty();
 	if (giftFor == "" || giftFor == undefined){
 		$('.pick').attr('disabled', 'disabled');
-		$("#nameChoice").append("<p>Everyone has been picked!</p>");
+		$("#nameChoice").append("<p>Everyone has been picked!<br><br>Merry Christmas in advance!</p>");
 	}else{
 		if (listCheck(giftFor) == true){
 			$("#nameChoice").append("<p><img src=\"./icons8-santa-48.png\" class=\"santa\"/>" + giftFor + "</p>");
