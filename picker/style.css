@@ -15,6 +15,11 @@ body {
 
 }
 
+div.presentation {
+    display: flex;
+    flex-direction: column;
+}
+
 h1 {
     text-align: center;
     font-size: 64px;
@@ -45,7 +50,7 @@ sup {
 #select {
     display: flex;
     justify-content: space-between;
-    max-width: 860px;
+    width: 50%;
     margin: 0px auto;
 }
 
@@ -80,9 +85,9 @@ sup {
     scrollbar-width: thin;
     /*min-width: 520px;*/
     overflow: scroll;
-    display: none;
     position: absolute;
     z-index: 2;
+    flex-direction: column;
 }
 
 #userItems,
@@ -122,7 +127,7 @@ li {
 
 }
 
-#giftList > button {
+#giftList > .nav > button {
     display: inline-block;
     background-color: #f4a5a8;
     font-family: sans-serif;
@@ -174,13 +179,20 @@ p {
 }
 
 
-@media (width < 616px){
+@media (width < 1060px){
     h1 {
         font-size: 35px;
     }
+
     sup {
         font-size: 20px;
     }
+
+    #select {
+        justify-content: space-around;
+        width: 100%;
+    }
+
     #select button {
         font-size: 16px;
     }
@@ -189,4 +201,16 @@ p {
         max-width: 97%;
         margin: auto;
     }
+
+    #display {
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        max-width: 98%;
+    }
+
+    #erlmsg {
+        font-size: 30px;
+    }
+
 }

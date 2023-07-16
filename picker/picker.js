@@ -62,18 +62,20 @@ function listCheck(name){
 }
 
 function picker(){
-	if ($("#userGiftList").css("display") == "none"){
-		$("#userGiftList").toggle("show");
-		// $('#clear').toggle('show');
-	}
-	if ($("#nameChoice").css("display") == "none"){
-		$("#nameChoice").toggle("show");
-		// $('#clear').toggle('show');
-	}
 	if ($('#giftList').css('display') != 'none'){
 		alert("Please close the list before picking someone.");
 		return null;
 	}
+	
+	if ($("#userGiftList").css("display") == "none"){
+		$("#userGiftList").toggle("show");
+	}
+
+	if ($("#nameChoice").css("display") == "none"){
+		$("#nameChoice").toggle("show");
+	}
+
+	
 		$("#userGiftList").empty();
 	let num = Math.floor(Math.random() * people.length);
 	giftFor = people.splice(num, 1);
@@ -142,7 +144,7 @@ function viewList(){
 		}
 	}
 
-	$("#giftList").toggle("show");
+	$("#giftList").css('display', 'flex');
 
 }
 
