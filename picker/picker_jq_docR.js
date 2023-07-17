@@ -33,7 +33,7 @@ $(document).ready(function(){
 
 	// $('button.list').removeAttr('disabled');
 	//// Activate list button only ^^^^^^
-	if (currentMonth > 5){
+	if (currentMonth > 6){
 		$('button.pick, #giftList > .nav > button').removeAttr('disabled');
 		
 		$('#erlmsg').remove();
