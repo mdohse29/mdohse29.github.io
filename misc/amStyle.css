@@ -75,8 +75,8 @@ body {
     }
   }
   
-  @media (width < 500px){
+  @media (width < 600px){
     .msg {
-      display: none;
+      font-size: 0.5em;
     }
   }
