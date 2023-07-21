@@ -43,12 +43,16 @@
             });
 
             $('#TextArea').on('paste', function(){
+                /*
+                Possible regex for stripping html from the text
+                cleanText = strInputCode.replace(/<\/?[^>]+(>|$)/g, ""); -- stack overflow
+                */
                 setTimeout(function(){
                     let text = $('#TextArea').val();
                     if (text.includes("/>") || text.includes("</")){
                         alert("HTML MARKERS HAVE BEEN DETECTED\nDOUBLE CHECK THE DOCUMENT FOR UNUSUAL FORMATTING");
                     }
-                }, 1000);
+                }, 700);
             });
 
         });
