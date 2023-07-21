@@ -42,12 +42,18 @@
                 location.reload();
             });
 
+            $('#TextArea').on('paste', function(){
+                setTimeout(function(){
+                    let text = $('#TextArea').val();
+                    if (text.includes("/>") || text.includes("</")){
+                        alert("HTML MARKERS HAVE BEEN DETECTED\nDOUBLE CHECK THE DOCUMENT FOR UNUSUAL FORMATTING");
+                    }
+                }, 1000);
+            });
 
-        })
+        });
     </script>
-    <style>
-        
-    </style>
+
 </head>
 <body>
     <h3 id="toolBox" style="float: right;display:none"><a href="../toolBox.html">Back to ToolBox</a></h3>
