@@ -46,11 +46,23 @@
                 /*
                 Possible regex for stripping html from the text
                 cleanText = strInputCode.replace(/<\/?[^>]+(>|$)/g, ""); -- stack overflow
+
+                The following is the beginning of the format detector
+                Currently it only detects closing and self closing html tags
+                Waiting for positive case test where Unicode is slipping by.
+                So far I can not reproduce copying external formatting into the scratch pad
+                I have confirmed that the text I was using did have formatting,
+                    when I paste it into the scratch pad the formatting is removed
+                    as previously expected, but I have had reports of formatting
+                    still getting through. Isolated reports, but still. Not able to reproduce
+
+                I am also on the fence on whether or not to strip the found html
+                tags or stick with just alerting the user. There are cases where html tags maybe legit and not need to be removed. Maybe we just add a remove formatting button or something. Food for thought
                 */
                 setTimeout(function(){
                     let text = $('#TextArea').val();
                     if (text.includes("/>") || text.includes("</")){
-                        alert("HTML MARKERS HAVE BEEN DETECTED\nDOUBLE CHECK THE DOCUMENT FOR UNUSUAL FORMATTING");
+                        alert("HTML MARKERS HAVE BEEN DETECTED\n\nDOUBLE CHECK THE DOCUMENT FOR UNUSUAL FORMATTING");
                     }
                 }, 700);
             });
@@ -69,7 +81,7 @@
         <option value="white">White</option>
         <option style="background-color: #f2f224;color: black;" value="#f2f224">Yellow</option>
     </select>
-        <textarea name="scratchPad" src="../archive.txt" name="textArea" id="TextArea" cols="100" rows="50" encoding="UTF-8" style="font-size: 14px;" autofocus></textarea>
+        <textarea name="scratchPad" id="TextArea" cols="100" rows="50" encoding="UTF-8" style="font-size: 14px;" autofocus></textarea>
     </div>
     <!-- <p><iframe src="../archive.txt" frameborder="0" height="400"
         width="95%"></iframe></p> -->
