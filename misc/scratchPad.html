@@ -43,6 +43,10 @@
             });
 
             $('#TextArea').on('paste', function(){
+                /*
+                Possible regex for stripping html from the text
+                cleanText = strInputCode.replace(/<\/?[^>]+(>|$)/g, ""); -- stack overflow
+                */
                 setTimeout(function(){
                     let text = $('#TextArea').val();
                     if (text.includes("/>") || text.includes("</")){
