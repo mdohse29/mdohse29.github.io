@@ -78,7 +78,7 @@
             margin: 5px;
         }
         .msg {
-            width: 95%;
+            width: 75%;
         }
         .msg P {
             text-align: left;
@@ -101,7 +101,11 @@
             $('#magic').click(function(){
                 $('.flk').each(function(){
                     if ( $(this).css('display') == 'none'){
-                        $(this).css('display', 'flex');
+                        if ($(this).attr('class').includes('msg')){
+                            $(this).css('display','block');
+                        }else{
+                            $(this).css('display', 'flex');
+                        }
                     }else{
                         $(this).css('display', 'none');
                     }
@@ -167,11 +171,17 @@
         </div>
     </div>
     <div class="tilesContainer">
-        <div class="expand flk">About mdohse29</div>
+        <div class="expand">About mdohse29</div>
         <div class="tiles">
             <div class="msg">
                 <p>Howdy,</p>
-                <p>I like to learn new code related things. I do not develop profetionally, but I do like to just play around with silly things.</p>
+            </div>
+            <div class="msg flk">
+                <p>I currently work full time for a company that produces and publishes k-12 content for several online platforms. Because of what I did for the company, in the beginning, I had to learn HTML and CSS. It wasn't really necesarry, but it became very useful to know JavaScript so I took an online course. I didn't think I could enjoy something as much as I found out I do with coding.</p>
+                <p>Over the years I learned some Java to work with Selenium, which I used for testing and other things to help make my job more efficient. Most of the time I just learn what I need to in order to complete a task, which is not a great way to learn. Now my daughter is grown, so I have some more time on my hands to learn things the right way.</p>
+            </div>
+            <div class="msg">
+                <p>Right now I am just using this for some things I threw together. Hopefully there will be more to come.</p>
             </div>
         </div>
     </div>
