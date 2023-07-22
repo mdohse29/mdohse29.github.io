@@ -39,6 +39,11 @@ button {
     cursor: pointer;
 }
 
+button > img {
+    display: inline;
+    vertical-align: middle;
+}
+
 sup {
     font-size: 39px;
 }
@@ -66,10 +71,23 @@ sup {
     transition: background-color 1000ms ease-in;
     /*height: 400px;*/
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     justify-self: center;
     align-content: center;
     max-width: 600px;
+}
+
+#footer {
+    align-self: flex-start;
+}
+
+#footer a {
+    text-decoration: underline;
+    color: blue;
+}
+
+#footer > p {
+    font-size: 15px;
 }
 
 #giftList {
@@ -195,6 +213,10 @@ p {
         font-size: 20px;
     }
 
+    button > img {
+        width: 30%;
+    }
+    
     #select {
         justify-content: space-around;
         width: 100%;
