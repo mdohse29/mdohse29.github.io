@@ -195,6 +195,10 @@ p {
         font-size: 20px;
     }
 
+    button > img {
+        width: 30%;
+    }
+    
     #select {
         justify-content: space-around;
         width: 100%;
