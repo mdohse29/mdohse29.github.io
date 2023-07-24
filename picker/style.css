@@ -106,6 +106,7 @@ sup {
     position: absolute;
     z-index: 2;
     flex-direction: column;
+    border-radius: 10px;
 }
 
 #userItems,
@@ -196,7 +197,9 @@ p {
 }
 
 .spcl {
-    font-size: calc(100% - 0.3em);
+    font-size: calc(100% - 0.25em);
+    background-color: black;
+    color:cyan;
 }
 
 
