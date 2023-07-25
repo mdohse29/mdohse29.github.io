@@ -139,6 +139,11 @@
             $('.tile').mousedown(function(){
                 $(this).css('box-shadow', '2px 0px 5px 2px darkgrey');
             });
+
+            $('.tile').on('contextmenu', function(){
+                return false;
+            });
+
             $('.tile').mouseup(function(event){
                 $(this).css('box-shadow', '10px 0px 5px 2px darkgrey');
                 let link = $(this).attr('url');
