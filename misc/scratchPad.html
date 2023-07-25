@@ -22,6 +22,10 @@
                 $('#toolBox').show();
             }
 
+            if ($('.msg').length > 0){
+                $('.msg').append('<p style="text-align: right;"><a href="mailto:michael.dohse@imaginelearning.com">Michael.Dohse@imaginelearning.com</a></p>');
+            }
+
             var currentVal = $('select').val();
             $('#TextArea').css('background-color', currentVal);
             if(currentVal == '#242729' || currentVal == "#1f9fd1"){
@@ -111,7 +115,8 @@
         </div>
         <div class="msg">
             <h3>Update!</h3>
-            <p>An alert should happen if HTML formatting is attached to the text pasted into the text area.</p>
+            <p>An alert should happen if HTML formatting is attached to the text pasted into the text area. For the moment this is just to alert you there is HTML indicators in the textarea, nothing is being removed or altered presently.</p>
+            <p>If you do get the alert then take a look at what you just pasted and see if you find any HMTL that shouldn't be there. If you get the alert but can't find anything let me know and I will assist.</p>
         </div>
     </div>
     <!-- <p><iframe src="../archive.txt" frameborder="0" height="400"
