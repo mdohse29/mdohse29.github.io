@@ -15,7 +15,10 @@
     <script>
         $(document).ready(function(){
             let previous = document.referrer;
-            if (previous == "https://mdohse29.github.io/toolBox.html"){
+            // if (previous == "https://mdohse29.github.io/toolBox.html"){
+            //     $('#toolBox').show();
+            // }
+            if (previous.includes("toolBox.html")){
                 $('#toolBox').show();
             }
 
@@ -69,19 +72,39 @@
 
         });
     </script>
+    <style>
+        .presentation {
+            display: flex;
+            justify-content: space-between;
+        }
+        .msg{
+            width: 20%;
+            border: 1px solid black;
+            height: fit-content;
+            padding: 0px 10px;
+            font-size: .75em;
+            background-color: lightgray;
+        }
+    </style>
 
 </head>
 <body>
-    <h3 id="toolBox" style="float: right;display:none"><a href="../toolBox.html">Back to ToolBox</a></h3>
-    <div id="TextAreaContain" style="display: inline-block;">
-    <select name="color" id="color" style="float: right;margin-left: 15px;">
-        <option style="background-color: #242729;color: white;" value="#242729" selected>Dark</option>
-        <option style="background-color: #33f753;color: black;" value="#33f753">Green</option>
-        <option style="background-color: #1f9fd1;color: white;" value="#1f9fd1">Blue</option>
-        <option value="white">White</option>
-        <option style="background-color: #f2f224;color: black;" value="#f2f224">Yellow</option>
-    </select>
-        <textarea name="scratchPad" id="TextArea" cols="100" rows="50" encoding="UTF-8" style="font-size: 14px;" autofocus></textarea>
+    <h3 id="toolBox" style="text-align:right; display: none;"><a href="../toolBox.html">Back to ToolBox</a></h3>
+    <div class="presentation">
+        <div id="TextAreaContain">
+            <select name="color" id="color" style="float: right;margin-left: 15px;">
+                <option style="background-color: #242729;color: white;" value="#242729" selected>Dark</option>
+                <option style="background-color: #33f753;color: black;" value="#33f753">Green</option>
+                <option style="background-color: #1f9fd1;color: white;" value="#1f9fd1">Blue</option>
+                <option value="white">White</option>
+                <option style="background-color: #f2f224;color: black;" value="#f2f224">Yellow</option>
+            </select>
+            <textarea name="scratchPad" id="TextArea" cols="100" rows="50" encoding="UTF-8" style="font-size: 14px;" autofocus></textarea>
+        </div>
+        <div class="msg">
+            <h3>Update!</h3>
+            <p>An alert should happen if HTML formatting is attached to the text pasted into the text area.</p>
+        </div>
     </div>
     <!-- <p><iframe src="../archive.txt" frameborder="0" height="400"
         width="95%"></iframe></p> -->

@@ -1,12 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script>
+        $(document).ready(function(){
+            $.get('https://mdohse29.github.io/repo/glyn/function.js', function(data, status){
+                if (status == "success"){
+                    // let lines = data.split('\n');
+                    // for (a = 0; a < lines.length; a++){
+                    //     if (lines[a] == ""){
+                    //         lines[a] = "&nbsp;"
+                    //     }
+                    //     $('code').append('<pre>' + lines[a] + "</pre>");
+                    // }
+                    $('code').append('<pre>' + data + "</pre>");
+                }
+            }, 'text');
+        });
+    </script>
+    <style>
+        
+        pre {
+            border-bottom: 1px solid black;
+            background-color: lightgrey;
+            margin: 0px;
+            max-width: 800px;
+        }
+    </style>
 </head>
 <body>
-    
+    <code>
+    </code>
 </body>
 </html>
