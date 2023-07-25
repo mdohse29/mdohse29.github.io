@@ -4,10 +4,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant&display=swap" rel="stylesheet">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
@@ -31,6 +28,8 @@
         }
         #magic {
             cursor:crosshair;
+            height: 5px;
+            width:5px;
         }
         .tilesContainer {
             margin: 2.5% auto;
@@ -82,6 +81,7 @@
         }
         .msg {
             width: 75%;
+            display: grid;
         }
         .msg P {
             text-align: left;
@@ -105,11 +105,14 @@
     <script>
         // location.replace("./construction.html");
         $(document).ready(function(){
+            if ($('.flk').length <= 0){
+                $('#magic').hide();
+            }
             $('#magic').click(function(){
                 $('.flk').each(function(){
                     if ( $(this).css('display') == 'none'){
                         if ($(this).attr('class').includes('msg')){
-                            $(this).css('display','block');
+                            $(this).css('display','grid');
                         }else{
                             $(this).css('display', 'flex');
                         }
@@ -166,7 +169,7 @@
     <title>mdohse29 GitHub</title>
 </head>
 <body>
-    <div style="height: 5px; width: 5px;" id="magic">&nbsp;</div>
+    <div id="magic">&nbsp;</div>
     <div class="mainHead">
         <h1>mdohse29 GitHub</h1>
     </div>
@@ -183,9 +186,10 @@
             <div class="msg">
                 <p>Howdy,</p>
             </div>
-            <div class="msg flk">
-                <p>I currently work full time for a company that produces and publishes k-12 content for several online platforms. Because of what I did for the company, in the beginning, I had to learn HTML and CSS. It wasn't really necesarry, but it became very useful to know JavaScript so I took an online course. I didn't think I could enjoy something as much as I found out I do with coding.</p>
-                <p>Over the years I learned some Java to work with Selenium, which I used for testing and other things to help make my job more efficient. Most of the time I just learn what I need to in order to complete a task, which is not a great way to learn. Now my daughter is grown, so I have some more time on my hands to learn things the right way.</p>
+            <div class="msg">
+                <p>I currently work full time for a company that produces and publishes k-12 content for several online platforms. Because of what I did for the company, in the beginning, I had to learn HTML and CSS. It wasn't really necessary, but it became very useful to know JavaScript so I took an online course. I didn't think I could enjoy something as much as I found out I do with coding.</p>
+                <p>Over the years I learned some Java to work with Selenium, along with some very basic knowledge of various other languages (php, Node.JS, mySql, and others), which I used for testing and other things to help make my job more efficient. Most of the time I just learn what I need to in order to complete a task, which is not a great way to learn. Now my daughter is grown, so I have some more time on my hands to learn things the right way.</p>
+                <p>I would like to get into development at some point, and even get to fullstack hopefully. Just starting a frontend course, I figure the front is a good place to start.</p>
             </div>
             <div class="msg">
                 <p>Right now I am just using this for some things I threw together. Hopefully there will be more to come.</p>
