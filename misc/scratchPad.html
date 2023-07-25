@@ -73,6 +73,10 @@
         });
     </script>
     <style>
+        textarea {
+            width: 87%;
+            height:inherit;
+        }
         .presentation {
             display: flex;
             justify-content: space-between;
@@ -85,6 +89,10 @@
             font-size: .75em;
             background-color: lightgray;
         }
+        #TextAreaContain {
+            height: 85vh;
+            width: 50%;
+        }
     </style>
 
 </head>
@@ -92,14 +100,14 @@
     <h3 id="toolBox" style="text-align:right; display: none;"><a href="../toolBox.html">Back to ToolBox</a></h3>
     <div class="presentation">
         <div id="TextAreaContain">
-            <select name="color" id="color" style="float: right;margin-left: 15px;">
+            <select name="color" id="color" style="float: right;">
                 <option style="background-color: #242729;color: white;" value="#242729" selected>Dark</option>
                 <option style="background-color: #33f753;color: black;" value="#33f753">Green</option>
                 <option style="background-color: #1f9fd1;color: white;" value="#1f9fd1">Blue</option>
                 <option value="white">White</option>
                 <option style="background-color: #f2f224;color: black;" value="#f2f224">Yellow</option>
             </select>
-            <textarea name="scratchPad" id="TextArea" cols="100" rows="50" encoding="UTF-8" style="font-size: 14px;" autofocus></textarea>
+            <textarea name="scratchPad" id="TextArea" max-width="40%" encoding="UTF-8" style="font-size: 14px;" autofocus></textarea>
         </div>
         <div class="msg">
             <h3>Update!</h3>
