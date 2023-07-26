@@ -61,9 +61,22 @@
                 tags or stick with just alerting the user. There are cases where html tags maybe legit and not need to be removed. Maybe we just add a remove formatting button or something. Food for thought
                 */
                 setTimeout(function(){
+                    let changed = false;
                     let text = $('#TextArea').val();
-                    if (text.includes("/>") || text.includes("</")){
+                    if (text.includes("/>") || text.includes("</") || text.includes("• ") || text.includes("o ")){
                         alert("HTML MARKERS HAVE BEEN DETECTED\n\nDOUBLE CHECK THE DOCUMENT FOR UNUSUAL FORMATTING");
+                        if (text.includes("o ")){
+                            text = text.replaceAll('o ', '');
+                            changed = true;
+                        }
+                        if (text.includes("• ")){
+                            text = text.replaceAll('• ', '');
+                            changed = true;
+                        }
+                    }
+                    changed = false;
+                    if (changed){
+                        $('#TextArea').val(text);
                     }
                 }, 700);
             });
