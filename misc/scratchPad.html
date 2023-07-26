@@ -78,24 +78,43 @@
     </script>
     <style>
         textarea {
-            width: 90%;
+            width: 100%;
             height:inherit;
+        }
+        select {
+            max-width: 75px;
+            margin-bottom: 5px;
         }
         .presentation {
             display: flex;
             justify-content: space-between;
         }
         .msg{
-            width: 20%;
+            width: 80%;
             border: 1px solid black;
             height: fit-content;
             padding: 0px 10px;
             font-size: .85em;
             background-color: lightgray;
         }
+        .msgContainer {
+            display: flex;
+            justify-content: right;
+            width: 50%;
+        }
         #TextAreaContain {
             height: 85vh;
-            width: 45%;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+        }
+        @media (width > 1152px){
+            textarea {
+                width: 80%
+            }
+            .msg {
+                width: 50%;
+            }
         }
     </style>
 
@@ -104,7 +123,7 @@
     <h3 id="toolBox" style="text-align:right; display: none;"><a href="../toolBox.html">Back to ToolBox</a></h3>
     <div class="presentation">
         <div id="TextAreaContain">
-            <select name="color" id="color" style="float: right;">
+            <select name="color" id="color">
                 <option style="background-color: #242729;color: white;" value="#242729" selected>Dark</option>
                 <option style="background-color: #33f753;color: black;" value="#33f753">Green</option>
                 <option style="background-color: #1f9fd1;color: white;" value="#1f9fd1">Blue</option>
@@ -113,10 +132,12 @@
             </select>
             <textarea name="scratchPad" id="TextArea" max-width="40%" encoding="UTF-8" style="font-size: 14px;" autofocus></textarea>
         </div>
-        <div class="msg">
-            <h3>Update!</h3>
-            <p>An alert should happen if HTML formatting is attached to the text pasted into the text area. For the moment this is just to alert you there is HTML indicators in the textarea, nothing is being removed or altered presently.</p>
-            <p>If you do get the alert then take a look at what you just pasted and see if you find any HMTL that shouldn't be there. If you get the alert but can't find anything let me know and I will assist.</p>
+        <div class="msgContainer">
+            <div class="msg">
+                <h3>Update!</h3>
+                <p>An alert should happen if HTML formatting is attached to the text pasted into the text area. For the moment this is just to alert you there is HTML indicators in the textarea, nothing is being removed or altered presently.</p>
+                <p>If you do get the alert then take a look at what you just pasted and see if you find any HMTL that shouldn't be there. If you get the alert but can't find anything let me know and I will assist.</p>
+            </div>
         </div>
     </div>
     <!-- <p><iframe src="../archive.txt" frameborder="0" height="400"
