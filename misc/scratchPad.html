@@ -15,25 +15,21 @@
     <script>
         $(document).ready(function(){
             let previous = document.referrer;
-            // if (previous == "https://mdohse29.github.io/toolBox.html"){
-            //     $('#toolBox').show();
-            // }
             if (previous.includes("toolBox.html")){
                 $('#toolBox').show();
             }
 
             if ($('.msg').length > 0){
-                $('.msg').append('<p style="text-align: right;"><a href="mailto:michael.dohse@imaginelearning.com">Michael.Dohse@imaginelearning.com</a></p>');
+                // $('.msg').append('<p style="text-align: right;"><a href="mailto:michael.dohse@imaginelearning.com">Michael.Dohse@imaginelearning.com</a></p>');
+                $('.msg').append('<p style="text-align: right;"><a href="mailto:aaaabncggffyesoyicuhyz3u7u@imaginelearning.org.slack.com">Michael.Dohse@imaginelearning.com</a> &larr; Click to send a message to me in slack.</p>');
             }
 
             var currentVal = $('select').val();
             $('#TextArea').css('background-color', currentVal);
             if(currentVal == '#242729' || currentVal == "#1f9fd1"){
                 $('#TextArea').css('color', 'white');
-                // $('#TextArea').css('font-weight', 'normal');
             }else{
                 $('#TextArea').css('color', 'black');
-                // $('#TextArea').css('font-weight', '900');
             }
 
             $('option').click(function(){
@@ -41,10 +37,8 @@
                 $('#TextArea').css('background-color', color);
                 if (color == '#242729' || color == "#1f9fd1"){
                     $('#TextArea').css('color', 'white');
-                    // $('#TextArea').css('font-weight', 'normal');
                 }else{
                     $('#TextArea').css('color', 'black');
-                    // $('#TextArea').css('font-weight', '900');
                 }
                 location.reload();
             });
@@ -96,6 +90,7 @@
             padding: 0px 10px;
             font-size: .85em;
             background-color: lightgray;
+            user-select: none;
         }
         .msgContainer {
             display: flex;
@@ -140,7 +135,5 @@
             </div>
         </div>
     </div>
-    <!-- <p><iframe src="../archive.txt" frameborder="0" height="400"
-        width="95%"></iframe></p> -->
 </body>
 </html>
