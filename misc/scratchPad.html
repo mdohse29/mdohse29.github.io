@@ -79,13 +79,14 @@
 
                     regtest = /^[^a-zA-Z0-9\s,\.:\-–!?*+><;"'=&@\/‘’”()\\≤©#$%\][}{~`]\s/gm;
                     if (text.match(regtest)){
+                        console.log("Removing bullets");
                         text = text.replaceAll(regtest, '');
                         changed = true;
                     }
 
                     // changed = false;
                     if (changed){
-                        alert("removing bullets");
+                        // alert("removing bullets");
                         $('#TextArea').val(text);
                     }
                 }, 700);
