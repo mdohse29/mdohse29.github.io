@@ -3,7 +3,7 @@
 <head>
     <!-- 
         todo: 
-            * Add some sort of cache or cookie to allow for temporary storrage of the scratchpad
+            * Add some sort of cache or cookie to allow for temporary storage of the scratchpad
     
     -->
     <meta charset="UTF-8">
@@ -19,10 +19,10 @@
                 $('#toolBox').show();
             }
 
-            if ($('.msg').length > 0){
-                // $('.msg').append('<p style="text-align: right;"><a href="mailto:michael.dohse@imaginelearning.com">Michael.Dohse@imaginelearning.com</a></p>');
-                $('.msg').append('<p style="text-align: right;"><a href="mailto:aaaabncggffyesoyicuhyz3u7u@imaginelearning.org.slack.com">Michael.Dohse@imaginelearning.com</a> &larr; Click to send a message to me in slack.</p>');
-            }
+            // if ($('.msg').length > 0){
+            //     // $('.msg').append('<p style="text-align: right;"><a href="mailto:michael.dohse@imaginelearning.com">Michael.Dohse@imaginelearning.com</a></p>');
+            //     $('.msg').append('<p style="text-align: right;"><a href="mailto:aaaabncggffyesoyicuhyz3u7u@imaginelearning.org.slack.com">Michael.Dohse@slack</a> &larr; Click to send a message to me in slack.</p>');
+            // }
 
             var currentVal = $('select').val();
             $('#TextArea').css('background-color', currentVal);
@@ -62,20 +62,30 @@
                 */
                 setTimeout(function(){
                     let changed = false;
+                    let foundHTML = false;
                     let text = $('#TextArea').val();
-                    if (text.includes("/>") || text.includes("</") || text.includes("• ") || text.includes("o ")){
+
+                    if (text.includes("/>") || text.includes("</")){
+                        console.log("HTML closing tags have been detected.");
                         alert("HTML MARKERS HAVE BEEN DETECTED\n\nDOUBLE CHECK THE DOCUMENT FOR UNUSUAL FORMATTING");
-                        if (text.includes("o ")){
-                            text = text.replaceAll('o ', '');
-                            changed = true;
-                        }
-                        if (text.includes("• ")){
-                            text = text.replaceAll('• ', '');
-                            changed = true;
-                        }
                     }
-                    changed = false;
+
+                    let regtest = /\b[o]\b\s/gm;
+                    if (text.match(regtest)){
+                        console.log("Removing bullets");
+                        text = text.replaceAll(regtest, '');
+                        changed = true;
+                    }
+
+                    regtest = /^[^a-zA-Z0-9\s,\.:\-–!?*+><;"'=&@\/‘’”()\\≤©#$%\][}{~`]\s/gm;
+                    if (text.match(regtest)){
+                        text = text.replaceAll(regtest, '');
+                        changed = true;
+                    }
+
+                    // changed = false;
                     if (changed){
+                        alert("removing bullets");
                         $('#TextArea').val(text);
                     }
                 }, 700);
@@ -143,8 +153,12 @@
         <div class="msgContainer">
             <div class="msg">
                 <h3>Update!</h3>
-                <p>An alert should happen if HTML formatting is attached to the text pasted into the text area. For the moment this is just to alert you there is HTML indicators in the textarea, nothing is being removed or altered presently.</p>
-                <p>If you do get the alert then take a look at what you just pasted and see if you find any HMTL that shouldn't be there. If you get the alert but can't find anything let me know and I will assist.</p>
+                <p>There is some new functionality to the ScratchPad. The following functions are active:</p>
+                <ul>
+                    <li>HTML tag detection - if there are hidden HTML styles/formatting in the text there will be an alert. Currently HTML is only detected and not removed, since there is a possibility there could be a reason to have HTML in the text I want to see how often it occurs.</li>
+                    <li>List bullet removal - if there are bullets that copy over from a list they will/should be removed automatically. There will not be an alert for this.</li>
+                </ul>
+                <p>If anyone sees any formatting or HTML elements that are not detected please let me know. Send me whatever examples you can and I will review and update the functionality if possible.</p>
             </div>
         </div>
     </div>
