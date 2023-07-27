@@ -19,10 +19,10 @@
                 $('#toolBox').show();
             }
 
-            if ($('.msg').length > 0){
-                // $('.msg').append('<p style="text-align: right;"><a href="mailto:michael.dohse@imaginelearning.com">Michael.Dohse@imaginelearning.com</a></p>');
-                $('.msg').append('<p style="text-align: right;"><a href="mailto:aaaabncggffyesoyicuhyz3u7u@imaginelearning.org.slack.com">Michael.Dohse@imaginelearning.com</a> &larr; Click to send a message to me in slack.</p>');
-            }
+            // if ($('.msg').length > 0){
+            //     // $('.msg').append('<p style="text-align: right;"><a href="mailto:michael.dohse@imaginelearning.com">Michael.Dohse@imaginelearning.com</a></p>');
+            //     $('.msg').append('<p style="text-align: right;"><a href="mailto:aaaabncggffyesoyicuhyz3u7u@imaginelearning.org.slack.com">Michael.Dohse@imaginelearning.com</a> &larr; Click to send a message to me in slack.</p>');
+            // }
 
             var currentVal = $('select').val();
             $('#TextArea').css('background-color', currentVal);
@@ -62,19 +62,26 @@
                 */
                 setTimeout(function(){
                     let changed = false;
+                    let foundHTML = false;
                     let text = $('#TextArea').val();
-                    if (text.includes("/>") || text.includes("</") || text.includes("• ") || text.includes("o ")){
+
+                    if (text.includes("/>") || text.includes("</")){
                         alert("HTML MARKERS HAVE BEEN DETECTED\n\nDOUBLE CHECK THE DOCUMENT FOR UNUSUAL FORMATTING");
-                        if (text.includes("o ")){
-                            text = text.replaceAll('o ', '');
-                            changed = true;
-                        }
-                        if (text.includes("• ")){
-                            text = text.replaceAll('• ', '');
-                            changed = true;
-                        }
                     }
-                    changed = false;
+
+                    let regtest = /\b[o]\b\s/gm;
+                    if (text.match(regtest)){
+                        text = text.replaceAll(regtest, '');
+                        changed = true;
+                    }
+
+                    regtest = /[•§·]\s/gm;
+                    if (text.match(regtest)){
+                        text = text.replaceAll(regtest, '');
+                        changed = true;
+                    }
+
+                    // changed = false;
                     if (changed){
                         $('#TextArea').val(text);
                     }
@@ -143,7 +150,7 @@
         <div class="msgContainer">
             <div class="msg">
                 <h3>Update!</h3>
-                <p>An alert should happen if HTML formatting is attached to the text pasted into the text area. For the moment this is just to alert you there is HTML indicators in the textarea, nothing is being removed or altered presently.</p>
+                <p>An alert should happen if HTML formatting is attached to the text pasted into the text area. For the moment this is just to alert you there are HTML indicators in the textarea, no HTML tags are being removed. If there are bullets from a list that get copied over, they should be removed automatically.</p>
                 <p>If you do get the alert then take a look at what you just pasted and see if you find any HTML that shouldn't be there. If you get the alert but can't find anything let me know and I will assist.</p>
             </div>
         </div>
