@@ -50,15 +50,19 @@
 
                 The following is the beginning of the format detector
                 Currently it only detects closing and self closing html tags
-                Waiting for positive case test where Unicode is slipping by.
-                So far I can not reproduce copying external formatting into the scratch pad
+                Waiting for positive test case where Unicode is slipping by.
+                So far I have been able to reproduce copying a list and having the bullets remain in the text when pasted.
+                I have not had any success in reproducing the event that actual HTML styling is being pasted in, making it
+                very difficult to find a way to detect it.
                 I have confirmed that the text I was using did have formatting,
                     when I paste it into the scratch pad the formatting is removed
                     as previously expected, but I have had reports of formatting
                     still getting through. Isolated reports, but still. Not able to reproduce
 
                 I am also on the fence on whether or not to strip the found html
-                tags or stick with just alerting the user. There are cases where html tags maybe legit and not need to be removed. Maybe we just add a remove formatting button or something. Food for thought
+                tags or stick with just alerting the user. There are cases where html
+                tags maybe legit and not need to be removed. Maybe we just add a remove
+                formatting button or something. Food for thought
                 */
                 setTimeout(function(){
                     let changed = false;
