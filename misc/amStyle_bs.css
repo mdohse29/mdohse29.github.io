@@ -85,6 +85,9 @@ body {
       width: 100%;
       margin: 5px 0px;
     }
+    #toolBox {
+      text-align: center;
+    }
     h1 {
       font-size: 1.5em;
       margin: auto auto;
