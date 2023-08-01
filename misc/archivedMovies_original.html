@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <title>Archived Movies</title>
+  <link rel="stylesheet" href="amStyle.css">
+  <script>
+
+
+    $.get('./archive.txt', function(data, status){
+      let movies = data.split('\n');
+      if (movies.length > 0){
+        $('p[id="placeH"]').remove();
+      }
+      for (a = 0; a < movies.length; a++){
+        $('.movies').append('<p class="title" style="background-color: none;font-weight: bold;font-size: 1em;">' + movies[a].replaceAll('.', ' ') + '</p>');
+      }
+    }, 'text');
+      
+
+  </script>
+  <script>
+    $(document).ready(function(){
+      //Not sure why but I was looking at multiple events on one element, useful?
+      let previous = document.referrer;
+      if (previous.includes("toolBox.html")){
+          $('#toolBox').show();
+      }
+
+      $('#search-box').on("keydown", function(event){
+        // click submit when the enter/return key is pressed in the search-box
+        if (event.which == 13){
+          document.getElementById('submit-search').click();
+        }
+      });
+
+      $('#submit-search').click(function(){
+        var searchText = $('#search-box').val();
+        var found = false;
+        if (searchText == "" || searchText == null){
+          window.alert("Please enter a title to search.");
+        }else{
+          var elements = $('.movies > p.title');
+          // window.alert(elements.length);
+          var titles = [];
+          
+          for (a = 0; a < elements.length; a++){
+            titles.push(elements[a].innerText);
+          }
+
+          $('.movies').css('display','none');
+          $('.results').css('display', 'block');
+          $('.results > .title').remove();
+
+          // window.alert(titles.length);
+          for (a in titles){
+            if (titles[a].toLowerCase().includes(searchText.toLowerCase())){
+              $('.results').append('<p class="title" style="background-color: none;font-weight: bold;font-size: 1em;">' + titles[a] + '</p>');
+              found = true;
+            }
+          }
+          if (!found){
+            $('.results').append('<p class="notFound">Sorry! We could not find what you are looking for. Check Emby to see if it is already active. If not, make a request for what movie you would like to see, and I will try to download it.</p>');
+          }
+
+          $('#search-box').attr('disabled', '');
+          $('#submit-search').text("Reset");
+          $('#submit-search').attr('id', 'search-reset');
+          $('#search-reset').attr('onclick', 'reset();');
+
+
+        }
+      });
+
+      reset = function(){
+        $('#search-box').removeAttr('disabled');
+        $('#search-box').val('');
+        $('#search-reset').removeAttr('onclick');
+        $('.results').css('display', 'none');
+        $('.movies').css('display','block');
+        $('.results > p').remove();
+        $('#search-reset').text("Submit");
+        $('#search-reset').attr('id', 'submit-search');
+
+      }
+
+      // setTimeout(function(){
+        $(document).on('mouseenter', 'p.title', function(){
+          $(this).css('background-color', 'black');
+          $(this).css('color', 'white');
+          $(this).css('font-size', '1.25em');
+          $(this).css('font-weight', 'normal');
+        });
+        $(document).on('mouseleave', 'p.title', function(){
+          $(this).css('background-color', 'inherit');
+          $(this).css('color', 'black');
+          $(this).css('font-size', '1em');
+          $(this).css('font-weight', 'bold');
+        });
+      // }, 500);
+    });
+  </script>
+
+</head>
+<body style="background-color: lightblue;">
+  <div class="search">
+    <input type="text" name="q" id="search-box" placeholder="Search Title Here">
+    <button id="submit-search">Submit</button>
+  </div>
+  <div id="toolBox" style="float: right;display:none"><a href="../toolBox.html">Back to ToolBox</a></div>
+  <div class="head">
+    <h1 style="text-align:center;">Archived Movies</h1>
+  </div>
+  <div class="msg">
+  <p>If there is a movie in this list you would like to see,<br>just let me know and I will add it to the server.<br><a href="mailto:mdohse30@gmail.com">mdohse30@gmail.com</a></p>
+
+  </div>
+  <div class="movies">
+    <p id="placeH" style="text-align: center;font-size: 1.5em;">OOPS! Something Went Wrong!<br><br>Nothing to see here</p>
+  </div>
+  <div class="results">
+
+  </div>
+</body>
+</html>
