@@ -11,8 +11,8 @@ body {
     opacity: 65%;
     max-width: 332px;
   }
-  button {
-    background-color: lightblue;
+  #search-box {
+    max-width: 200px;
   }
   /* .search {
     float: left;
