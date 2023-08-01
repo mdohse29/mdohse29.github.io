@@ -11,8 +11,8 @@ body {
     opacity: 65%;
     max-width: 332px;
   }
-  button {
-    background-color: lightblue;
+  #search-box {
+    max-width: 200px;
   }
   /* .search {
     float: left;
@@ -84,6 +84,9 @@ body {
       overflow: scroll;
       width: 100%;
       margin: 5px 0px;
+    }
+    #toolBox {
+      text-align: center;
     }
     h1 {
       font-size: 1.5em;
