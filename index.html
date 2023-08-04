@@ -11,6 +11,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        body {
+            font-family:monospace;
+        }
         p {
             text-align: center;
         }
@@ -35,7 +38,9 @@
             margin: 2.5% auto;
         }
         .tiles {
-            display: none;
+            display: flex;
+            background-image: url("./8289995_25336.jpeg");
+            background-size: contain;
             /* flex-direction: row; */
             justify-content: space-evenly;
             align-items: center;
@@ -52,6 +57,8 @@
             display: block;
             justify-content: space-around;
             align-items: center;
+            background-color: #011c15;
+            color: #53ff1a;
             width: 65%;
             margin-left: 17.5%;
             border: 1px solid black;
@@ -71,8 +78,9 @@
             flex-wrap: wrap;
             height: 150px;
             width: 150px;
-            background-color: lightblue;
-            box-shadow: 10px 0px 5px 2px darkgrey;
+            background-color: #011c15;
+            color: #53ff1a;
+            box-shadow: 0px 0px 5px 3px darkgrey;
             border-radius: 50%;
             user-select: none;
             cursor: pointer;
@@ -82,6 +90,8 @@
         .msg {
             width: 75%;
             display: grid;
+            background-color: white;
+            padding-left: 2%;
         }
         .msg P {
             text-align: left;
@@ -94,8 +104,8 @@
             background-color: rgb(26, 137, 173);
             /* box-shadow: 10px 10px 5px 2px darkgrey; */
         }
-        div.tiles.selected {
-            display: flex;
+        .drawer {
+            display: none;
         }
         .flk {
             display: none;
@@ -123,10 +133,11 @@
             });
 
             $('.expand').click(function(){
-                if (!$(this).parent().find('div.tiles').hasClass('selected')){
-                    $('div.selected').removeClass('selected');
+                if (!$(this).parent().find('div.drawer').hasClass('selected')){
+                    //closes the other drawers if a different drawer is clicked
+                    $('div.selected').removeClass('selected').slideToggle();
                 }
-                $(this).parent().find('div.tiles').toggleClass('selected');
+                $(this).parent().find('div.drawer').toggleClass('selected').slideToggle();
             });
             
             $('#magic').mouseenter(function(){
@@ -137,7 +148,7 @@
             });
 
             $('.tile').mousedown(function(){
-                $(this).css('box-shadow', '2px 0px 5px 2px darkgrey');
+                $(this).css('box-shadow', '0px 0px 5px 0px darkgrey');
             });
 
             $('.tile').on('contextmenu', function(){
@@ -145,7 +156,7 @@
             });
 
             $('.tile').mouseup(function(event){
-                $(this).css('box-shadow', '10px 0px 5px 2px darkgrey');
+                $(this).css('box-shadow', '0px 0px 5px 3px darkgrey');
                 let link = $(this).attr('url');
 
                 /* Returns which mouse button is being used.
@@ -180,23 +191,27 @@
     </div>
     <div class="tilesContainer">
         <div class="expand">Silly Things I Made</div>
-        <div class="tiles">
-            <div class="tile" url="./picker/index.html"><p>The Gift Picker</p></div>
-            <div class="tile" url="./misc/archivedMovies.html"><p>My Archived Movie List</p></div>
+        <div class="drawer">
+            <div class="tiles">
+                <div class="tile" url="./picker/index.html"><p>The Gift Picker</p></div>
+                <div class="tile" url="./misc/archivedMovies.html"><p>My Archived Movie List</p></div>
+            </div>
         </div>
     </div>
     <div class="tilesContainer">
         <div class="expand">About mdohse29</div>
-        <div class="tiles">
-            <div class="msg">
-                <p>Howdy,</p>
-            </div>
-            <div class="msg flk">
-                <p>I currently work full time for a company that produces and publishes k-12 content for several online platforms. Because of what I did for the company, in the beginning, I had to learn HTML and CSS. It wasn't really necessary, but it became very useful to know JavaScript so I took an online course. I didn't think I could enjoy something as much as I found out I do with coding.</p>
-                <p>Over the years I learned some Java to work with Selenium, along with some very basic knowledge of various other languages (php, Node.JS, mySql, and others), which I used for testing and other things to help make my job more efficient. Most of the time I just learn what I need to in order to complete a task, which is not a great way to learn. Now my daughter is grown, so I have some more time on my hands to learn things the right way.</p>
-            </div>
-            <div class="msg">
-                <p>Right now I am just using this for some things I threw together. Hopefully there will be more to come.</p>
+        <div class="drawer">
+            <div class="tiles">
+                <div class="msg">
+                    <p>Howdy,</p>
+                </div>
+                <div class="msg flk">
+                    <p>I currently work full time for a company that produces and publishes k-12 content for several online platforms. Because of what I did for the company, in the beginning, I had to learn HTML and CSS. It wasn't really necessary, but it became very useful to know JavaScript so I took an online course. I didn't think I could enjoy something as much as I found out I do with coding.</p>
+                    <p>Over the years I learned some Java to work with Selenium, along with some very basic knowledge of various other languages (php, Node.JS, mySql, and others), which I used for testing and other things to help make my job more efficient. Most of the time I just learn what I need to in order to complete a task, which is not a great way to learn. Now my daughter is grown, so I have some more time on my hands to learn things the right way.</p>
+                </div>
+                <div class="msg">
+                    <p>Right now I am just using this for some things I threw together. Hopefully there will be more to come.</p>
+                </div>
             </div>
         </div>
     </div>

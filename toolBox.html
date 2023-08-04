@@ -36,7 +36,7 @@
             margin: 2.5% auto;
         }
         .tiles {
-            display: none;
+            display: flex;
             /* flex-direction: row; */
             background-color: #def7ff;
             justify-content: space-evenly;
@@ -87,8 +87,8 @@
             background-color: rgb(26, 137, 173);
             /* box-shadow: 10px 10px 5px 2px darkgrey; */
         }
-        div.tiles.selected {
-            display: flex;
+        .drawer {
+            display: none;
         }
         .flk {
             display: none;
@@ -108,10 +108,11 @@
             });
 
             $('.expand').click(function(){
-                if (!$(this).parent().find('div.tiles').hasClass('selected')){
-                    $('div.selected').removeClass('selected');
+                if (!$(this).parent().find('div.drawer').hasClass('selected')){
+                    //closes the other drawers if a different drawer is clicked
+                    $('div.selected').removeClass('selected').slideToggle();
                 }
-                $(this).parent().find('div.tiles').toggleClass('selected');
+                $(this).parent().find('div.drawer').toggleClass('selected').slideToggle();
             });
             
             $('#magic').mouseenter(function(){
@@ -165,38 +166,46 @@
     </div>
     <div class="tilesContainer">
         <div class="expand">Home Made Tools</div>
-        <div class="tiles">
-            <div class="tile flk" url="./repo/glyn/repo_lookup.htm"><p>Repo Lookup<br><span class="red">RETIRED</span></p></div>
-            <div class="tile flk" url="./misc/archivedMovies.html">Movie Archive</div>
-            <div class="tile" url="./linkMaker/link.html"><p>The CDN Link Maker</p></div>
-            <div class="tile" url="./misc/scratchPad.html"><p>Scratch Pad for notes<br/><span class="red">(Does not save)</span></p></div>
+        <div class="drawer">
+            <div class="tiles">
+                <div class="tile flk" url="./repo/glyn/repo_lookup.htm"><p>Repo Lookup<br><span class="red">RETIRED</span></p></div>
+                <div class="tile flk" url="./misc/archivedMovies.html">Movie Archive</div>
+                <div class="tile" url="./linkMaker/link.html"><p>The CDN Link Maker</p></div>
+                <div class="tile" url="./misc/scratchPad.html"><p>Scratch Pad for notes<br/><span class="red">(Does not save)</span></p></div>
+            </div>
         </div>
     </div>
     <div class="tilesContainer">
         <div class="expand">Company Tools</div>
-        <div class="tiles">
-            <div class="tile" url="https://ims-tools.owteam.com/"><p>IMS Tools<br/><span class="red">(IL VPN Required)</span></p></div>
-            <div class="tile" url="http://learn.bluejacks.edgenuity.com/login/"><p>Bluejacks<br/><span class="red">(Chrome Only)</span></p></div>
-            <div class="tile" url="./helpDocs.html"><p>Help Documents<br><span>Bluejacks and HMTL</span></p></div>
-            <div class="tile" url="http://sandbox.education2020.com/curriculum/"><p>{N}ternal Tools</p></div>
-            <div class="tile" url="https://media.edgenuity.com/contentengine/common/closereader/"><p>CloseReaders Index</p></div>
+        <div class="drawer">
+            <div class="tiles">
+                <div class="tile" url="https://ims-tools.owteam.com/"><p>IMS Tools<br/><span class="red">(IL VPN Required)</span></p></div>
+                <div class="tile" url="http://learn.bluejacks.edgenuity.com/login/"><p>Bluejacks<br/><span class="red">(Chrome Only)</span></p></div>
+                <div class="tile" url="./helpDocs.html"><p>Help Documents<br><span>Bluejacks and HMTL</span></p></div>
+                <div class="tile" url="http://sandbox.education2020.com/curriculum/"><p>{N}ternal Tools</p></div>
+                <div class="tile" url="https://media.edgenuity.com/contentengine/common/closereader/"><p>CloseReaders Index</p></div>
+            </div>
         </div>
 
     </div>
     <div class="tilesContainer">
         <div class="expand">Import HTML Courses</div>
-        <div class="tiles">
-            <div class="tile" url="http://sandbox.education2020.com/questionimporter/"><p>CW Question Importer</p></div>
-            <div class="tile" url="http://sandbox.education2020.com/CurriculumUpload/UserLogin.aspx"><p>CW CUT<br/><span>Curriculum Upload Tool</span></p></div>
-            <div class="tile" url="http://tools.education2020.com/CMT/"><p>CW CMT<br/><span>Content Management Tool</span></p></div>
+        <div class="drawer">
+            <div class="tiles">
+                <div class="tile" url="http://sandbox.education2020.com/questionimporter/"><p>CW Question Importer</p></div>
+                <div class="tile" url="http://sandbox.education2020.com/CurriculumUpload/UserLogin.aspx"><p>CW CUT<br/><span>Curriculum Upload Tool</span></p></div>
+                <div class="tile" url="http://tools.education2020.com/CMT/"><p>CW CMT<br/><span>Content Management Tool</span></p></div>
+            </div>
         </div>
     </div>
     <div class="tilesContainer">
         <div class="expand">Other Stuff</div>
-        <div class="tiles">
-            <div class="tile" url="https://www.guidgenerator.com/online-guid-generator.aspx"><p>GUID Generator</p></div>
-            <div class="tile" url="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference"><p>MDN</p></div>
-            <div class="tile" url="https://www.diffchecker.com/text-compare/"><p>Online Diff Checker</p></div>
+        <div class="drawer">
+            <div class="tiles">
+                <div class="tile" url="https://www.guidgenerator.com/online-guid-generator.aspx"><p>GUID Generator</p></div>
+                <div class="tile" url="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference"><p>MDN</p></div>
+                <div class="tile" url="https://www.diffchecker.com/text-compare/"><p>Online Diff Checker</p></div>
+            </div>
         </div>
     </div>
 </body>
