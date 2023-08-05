@@ -45,6 +45,7 @@ $.get('./people.csv', function(data, status){
 var userListItems;
 
 var giftFor = "";
+var putBack = "";
 
 function listCheck(name){
 	let found = false;
@@ -95,28 +96,41 @@ function picker(){
 			$("#nameChoice").append("<p>" + giftFor + "</p>");
 			$("#userGiftList").append("<p style=\"margin-left: 5%\">Sorry, there are no gift ideas to list for this person.</p>");
 		}
-		// $("#nameChoice").append("<p>" + giftFor + "</p>");
-		// $("#display").append("<p><img src=\"" + giftFor + ".jpg\" width=\"300px\" height=\"auto\" alt=\"testing\"/></p>");
+		if (putBack.length > 0){
+			people.push(putBack);
+			putBack = "";
+		}
+		
 	}
 
 }
 
 function reset(){
-    $("#userGiftList").empty();
-    $("#userGiftList").toggle("hide");
-    // $('#clear').toggle('hide');
-    if (!(giftFor == "" || giftFor == undefined)){
-        people.push(giftFor);
-        $("#nameChoice").empty();
-        $("#nameChoice").append("<p>" + giftFor + " has been put back.<br><br>Go a head and try again.</p>");
-    }
+	if (people.length > 0){
+		
+		$("#userGiftList").empty();
+		$("#userGiftList").toggle("hide");
+
+		if (!(giftFor == "" || giftFor == undefined)){
+
+			putBack = giftFor;
+			$("#nameChoice").empty();
+			$("#nameChoice").append("<p>" + giftFor + " has been put back.<br><br>Go a head and try again.</p>");
+		
+		}
+
+	}else{
+
+		alert("There are no other names to pick from.");
+		$('#select button:first-child').attr('disabled','disabled');
+	
+	}
 }
 
 function clearDisplay(){
 	$("#userGiftList").empty();
 	$('#nameChoice').empty();
 	$("#userGiftList").toggle("hide");
-	// $('#clear').toggle('hide');
 }
 
 function amazonUrl(searchItem){
@@ -149,6 +163,4 @@ function viewList(){
 
 }
 
-// opening();
-// picker();
 
