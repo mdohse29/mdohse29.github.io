@@ -75,8 +75,8 @@ function picker(){
 		$("#nameChoice").toggle("show");
 	}
 
-	
-		$("#userGiftList").empty();
+
+	$("#userGiftList").empty();
 	let num = Math.floor(Math.random() * people.length);
 	giftFor = people.splice(num, 1);
 	$("#nameChoice").empty();
@@ -144,7 +144,8 @@ function viewList(){
 		}
 	}
 
-	$("#giftList").css('display', 'flex');
+	// $("#giftList").css('display', 'flex');
+	$('#giftList').toggle('fade');
 
 }
 

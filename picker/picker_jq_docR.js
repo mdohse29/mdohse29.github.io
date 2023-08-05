@@ -12,7 +12,7 @@ $(document).ready(function(){
 
 	$('#btn-close').click(function(){
 		$('.view').removeAttr('disabled');
-		$('#giftList').toggle('hide');
+		$('#giftList').toggle('fade');
 	});
 
 	$('.view').click(function(){
