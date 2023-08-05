@@ -102,8 +102,8 @@ function picker(){
 }
 
 function reset(){
-    $("#userGiftList").toggle("explode");
     $("#userGiftList").empty();
+    $("#userGiftList").toggle("hide");
     // $('#clear').toggle('hide');
     if (!(giftFor == "" || giftFor == undefined)){
         people.push(giftFor);
