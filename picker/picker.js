@@ -75,8 +75,8 @@ function picker(){
 		$("#nameChoice").toggle("show");
 	}
 
-	
-		$("#userGiftList").empty();
+
+	$("#userGiftList").empty();
 	let num = Math.floor(Math.random() * people.length);
 	giftFor = people.splice(num, 1);
 	$("#nameChoice").empty();
@@ -102,8 +102,8 @@ function picker(){
 }
 
 function reset(){
+    $("#userGiftList").toggle("explode");
     $("#userGiftList").empty();
-    $("#userGiftList").toggle("hide");
     // $('#clear').toggle('hide');
     if (!(giftFor == "" || giftFor == undefined)){
         people.push(giftFor);
@@ -144,7 +144,8 @@ function viewList(){
 		}
 	}
 
-	$("#giftList").css('display', 'flex');
+	// $("#giftList").css('display', 'flex');
+	$('#giftList').toggle('fade');
 
 }
 
