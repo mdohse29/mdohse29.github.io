@@ -115,11 +115,11 @@
               $('#linkbuild').append('<p title="File name, including the file exention. (.pdf, .docx, .jpg, .mp3, ect.)">File: <input type="text" id="file" class="mediadata" value="' + file + '"/></p>');
             }
             if ($('#pffCheck').is(':checked') && media != "DOC"){
-              $('#linkbuild').append('<p>PFF File Name: <input type="text" id="pff" class="mediadata" value="' + pff + '"/></p>');
+              $('#linkbuild').append('<p title="Transcript text file using .pff extension.">PFF File Name: <input type="text" id="pff" class="mediadata" value="' + pff + '"/></p>');
             }
             if ($('#text').is(':checked') && media != "DOC"){
-              $('#linkbuild').append('<p>Top Text (optional): <input type="text" id="topText" class="mediadata" value="' + topText + '"/></p>');
-              $('#linkbuild').append('<p>Bottom Text (optional): <input type="text" id="bottomText" class="mediadata" value="' + bottomText + '"/></p>');
+              $('#linkbuild').append('<p title="Text will appear centered and above the media.">Top Text (optional): <input type="text" id="topText" class="mediadata" value="' + topText + '"/></p>');
+              $('#linkbuild').append('<p title="Text will appear centered and below the media.">Bottom Text (optional): <input type="text" id="bottomText" class="mediadata" value="' + bottomText + '"/></p>');
             }
             //$('#mediaselect').css('visibility', 'hidden');
           });
@@ -253,7 +253,7 @@
           
           <textarea wrap="hard" cols="50" style="width: 594px; height: 156px;" placeholder="Area to keep notes"></textarea>
           <div id="paths">
-            <h3>DLA File Paths</h3>
+            <h3>Common DLA File Paths</h3>
             <ul style="visibility: inherit;list-style: none; padding: 0px">
               <li>dla_tiletrial/js/tiletrial.js</li>
               <li>dla_dragdrop/js/dragdrop.js</li>
