@@ -159,7 +159,7 @@ function viewList(){
 	}
 
 	// $("#giftList").css('display', 'flex');
-	$('#giftList').toggle('fade');
+	$('#giftList').toggle('fade', 1000);
 
 }
 
