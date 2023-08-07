@@ -19,10 +19,10 @@
                 $('#toolBox').show();
             }
 
-            // if ($('.msg').length > 0){
-            //     // $('.msg').append('<p style="text-align: right;"><a href="mailto:michael.dohse@imaginelearning.com">Michael.Dohse@imaginelearning.com</a></p>');
-            //     $('.msg').append('<p style="text-align: right;"><a href="mailto:aaaabncggffyesoyicuhyz3u7u@imaginelearning.org.slack.com">Michael.Dohse@slack</a> &larr; Click to send a message to me in slack.</p>');
-            // }
+            if ($('.msg').length > 0){
+                // $('.msg').append('<p style="text-align: right;"><a href="mailto:michael.dohse@imaginelearning.com">Michael.Dohse@imaginelearning.com</a></p>');
+                $('.msg').append('<p style="text-align: right;">If an issue is found please report it here.<br/><a href="mailto:aaaabncggffyesoyicuhyz3u7u@imaginelearning.org.slack.com">BUG</a> &larr; Click to report an issue.</p>');
+            }
 
             var currentVal = $('select').val();
             $('#TextArea').css('background-color', currentVal);
