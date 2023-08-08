@@ -108,8 +108,8 @@ function picker(){
 function reset(){
 	if (people.length > 0){
 		
+		$("#userGiftList").css("display", "none");
 		$("#userGiftList").empty();
-		$("#userGiftList").toggle("hide");
 
 		if (!(giftFor == "" || giftFor == undefined)){
 
@@ -159,7 +159,10 @@ function viewList(){
 	}
 
 	// $("#giftList").css('display', 'flex');
-	$('#giftList').toggle('fade', 1000);
+	$('#giftList').toggle('fade',function(){
+		$('.view').attr('disabled', 'disabled');
+		$('.pick').attr('disabled', 'disabled');
+	}, 1000);
 
 }
 
