@@ -2,6 +2,7 @@ $(document).ready(function(){
 
 	let newDate = new Date();
 	let currentMonth = newDate.getMonth();
+	let currentDay = newDate.getDate();
 
 	$("#display").css("height", $(window).height());
 	$("#display").css("width", $(window).width());
@@ -11,12 +12,13 @@ $(document).ready(function(){
 	});
 
 	$('#btn-close').click(function(){
-		$('.view').removeAttr('disabled');
-		$('#giftList').toggle('fade', 1000);
+		$('#giftList').toggle('fade',function(){
+			$('.view').removeAttr('disabled');
+			$('.pick').removeAttr('disabled');
+		}, 1000);
 	});
 
 	$('.view').click(function(){
-		$(this).attr('disabled', 'disabled');
 
 		if ($('#nameChoice').css('display') != "none"){
 			$('#nameChoice').css('display', 'none');
@@ -33,13 +35,13 @@ $(document).ready(function(){
 
 	// $('button.list').removeAttr('disabled');
 	//// Activate list button only ^^^^^^
-	if (currentMonth > 6){
-		$('button.pick, #giftList > .nav > button').removeAttr('disabled');
+	if (currentMonth > 6 && (currentMonth <= 11 && currentDay <= 20)){
+		$('button').removeAttr('disabled');
 		
 		$('#erlmsg').remove();
 		setTimeout(function(){
 			viewList();
-		}, 500);
+		}, 700);
 	}
 	// Remove ^^^^^ to allow list view only and activate add to list button
 
