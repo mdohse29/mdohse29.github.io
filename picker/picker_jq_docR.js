@@ -13,8 +13,11 @@ $(document).ready(function(){
 
 	$('#btn-close').click(function(){
 		$('#giftList').toggle('fade',function(){
+			
 			$('.view').removeAttr('disabled');
-			$('.pick').removeAttr('disabled');
+			if ($('.pick').attr('data-listcomplete') === 'false'){
+				$('.pick').removeAttr('disabled');
+			}
 		}, 1000);
 	});
 

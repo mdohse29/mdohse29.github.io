@@ -83,6 +83,7 @@ function picker(){
 	$("#nameChoice").empty();
 	if (giftFor == "" || giftFor == undefined){
 		$('.pick').attr('disabled', 'disabled');
+		$('.pick').attr('data-listcomplete', 'true');
 		$("#nameChoice").append("<p>Everyone has been picked!<br><br>Merry Christmas in advance!</p>");
 	}else{
 		if (listCheck(giftFor) == true){
