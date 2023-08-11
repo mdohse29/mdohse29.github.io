@@ -5,32 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Testing Stuff</title>
     <script>
-        /*
-        new
-        list
-        delete
-        quit
-        */
-       let todoList = [];
-        while(true){
-            let option = prompt("What would you like to do?");
-            if (option === 'quit'){
-                break;
-            }else if (option === 'new'){
-                option = prompt('Enter a list item');
-                todoList.push(option);
-                console.log(option + 'was added to the list');
-            }else if (option === 'list'){
-                console.log('***********************************');
-                for (let todo in todoList){
-                    console.log(todo + ': ' + todoList[todo]);
-                }
-                console.log('***********************************');
-            }else if (option === 'delete'){
-                option = prompt('Which item would you like to delete?');
-                option.splice(parseInt(option), 1);
-            }
-        }
+        const input = document.querySelector('input');
+        const h1E = document.querySelector('h1');
+        input.addEventListener('input', function(e){
+            h1E.innerText = input.value;
+        })
     </script>
 </head>
 <body>
