@@ -1,0 +1,44 @@
+textarea {
+    width: 100%;
+    height:inherit;
+}
+select {
+    max-width: 75px;
+    margin-bottom: 5px;
+}
+
+.presentation {
+    display: flex;
+    justify-content: space-between;
+}
+.msg{
+    width: 80%;
+    border: 1px solid black;
+    height: fit-content;
+    padding: 0px 10px;
+    font-size: .85em;
+    background-color: lightgray;
+    user-select: none;
+}
+.msg li {
+    margin-bottom: 10px;;
+}
+.msgContainer {
+    display: flex;
+    justify-content: right;
+    width: 50%;
+}
+#TextAreaContain {
+    height: 85vh;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+@media (width > 1152px){
+    textarea {
+        width: 80%
+    }
+    .msg {
+        width: 50%;
+    }
+}
