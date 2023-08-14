@@ -3,16 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <title>Testing Stuff</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+    </style>
     <script>
-        const input = document.querySelector('input');
-        const h1E = document.querySelector('h1');
-        input.addEventListener('input', function(e){
-            h1E.innerText = input.value;
-        })
+        
     </script>
 </head>
 <body>
-    
+    <section class="hero">
+    <div class="container-fluid">
+        <div class="columns">
+            <div class="column is-half has-background-danger">
+                <h1 class="title is-1">Testing Bulma</h1>
+                <p class="title is-1">Testing Bulma</p>
+            </div>
+        </div>
+    </div>
+    </section>
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <p class="title">Testing Bulma</p>
+            <p class="sub-title">It ius going okay</p>
+        </div>
+    </section>
 </body>
 </html>
