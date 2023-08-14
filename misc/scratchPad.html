@@ -13,149 +13,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./data/scratchCSS.css">
     
     <title>Scratch Pad</title>
-    <script>
-        $(document).ready(function(){
-            let previous = document.referrer;
-            if (previous.includes("toolBox.html")){
-                $('#toolBox').show();
-            }
-
-            if ($('.msg').length > 0){
-                // $('.msg').append('<p style="text-align: right;"><a href="mailto:michael.dohse@imaginelearning.com">Michael.Dohse@imaginelearning.com</a></p>');
-                $('.msg').append('<p style="text-align: right;">If an issue is found please report it here.<br/><a href="mailto:aaaabncggffyesoyicuhyz3u7u@imaginelearning.org.slack.com">BUG</a> &larr; Click to report an issue.</p>');
-            }
-
-            var currentVal = $('select').val();
-            $('#TextArea').css('background-color', currentVal);
-            if(currentVal == '#242729' || currentVal == "#1f9fd1"){
-                $('#TextArea').css('color', 'white');
-            }else{
-                $('#TextArea').css('color', 'black');
-            }
-
-            $('option').click(function(){
-                var color = $(this).val();
-                $('#TextArea').css('background-color', color);
-                if (color == '#242729' || color == "#1f9fd1"){
-                    $('#TextArea').css('color', 'white');
-                }else{
-                    $('#TextArea').css('color', 'black');
-                }
-                location.reload();
-            });
-
-            $('#TextArea').on('paste', function(){
-                /*
-                Possible regex for stripping html from the text
-                cleanText = strInputCode.replace(/<\/?[^>]+(>|$)/g, ""); -- stack overflow
-
-                The following is the beginning of the format detector
-                Currently it only detects closing and self closing html tags
-                Waiting for positive test case where Unicode is slipping by.
-                So far I have been able to reproduce copying a list and having the bullets remain in the text when pasted.
-                I have not had any success in reproducing the event that actual HTML styling is being pasted in, making it
-                very difficult to find a way to detect it.
-                I have confirmed that the text I was using did have formatting,
-                    when I paste it into the scratch pad the formatting is removed
-                    as previously expected, but I have had reports of formatting
-                    still getting through. Isolated reports, but still. Not able to reproduce
-
-                I am also on the fence on whether or not to strip the found html
-                tags or stick with just alerting the user. There are cases where html
-                tags maybe legit and not need to be removed. Maybe we just add a remove
-                formatting button or something. Food for thought
-                */
-                setTimeout(function(){
-                    let changed = false;
-                    let foundHTML = false;
-                    let text = $('#TextArea').val();
-
-                    if (text.includes("/>") || text.includes("</")){
-                        console.log("HTML closing tags have been detected.");
-                        alert("HTML MARKERS HAVE BEEN DETECTED\n\nDOUBLE CHECK THE DOCUMENT FOR UNUSUAL FORMATTING");
-                    }
-
-                    let regtest = /\b[o]\b\s/gm;
-                    if (text.match(regtest)){
-                        console.log("Removing bullets");
-                        text = text.replaceAll(regtest, '');
-                        changed = true;
-                    }
-
-                    regtest = /^[^a-zA-Z0-9\s,\.:\-–!?*+><;"'=&@\/‘’”()\\≤©#$%\][}{~`]\s|^\s*[^a-zA-Z0-9\s,\.:\-–!?*+><;"'=&@\/‘’”()\\≤©#$%\][}{~`]\s/gm;
-                    if (text.match(regtest)){
-                        console.log("Removing bullets");
-                        text = text.replaceAll(regtest, '');
-                        changed = true;
-                    }
-
-                    // changed = false;
-                    if (changed){
-                        // alert("removing bullets");
-                        $('#TextArea').val(text);
-                    }
-                }, 700);
-            });
-
-        });
-    </script>
-    <style>
-        textarea {
-            width: 100%;
-            height:inherit;
-        }
-        select {
-            max-width: 75px;
-            margin-bottom: 5px;
-        }
-        .presentation {
-            display: flex;
-            justify-content: space-between;
-        }
-        .msg{
-            width: 80%;
-            border: 1px solid black;
-            height: fit-content;
-            padding: 0px 10px;
-            font-size: .85em;
-            background-color: lightgray;
-            user-select: none;
-        }
-        .msgContainer {
-            display: flex;
-            justify-content: right;
-            width: 50%;
-        }
-        #TextAreaContain {
-            height: 85vh;
-            width: 50%;
-            display: flex;
-            flex-direction: column;
-        }
-        @media (width > 1152px){
-            textarea {
-                width: 80%
-            }
-            .msg {
-                width: 50%;
-            }
-        }
-    </style>
 
 </head>
 <body>
     <h3 id="toolBox" style="text-align:right; display: none;"><a href="../toolBox.html">Back to ToolBox</a></h3>
     <div class="presentation">
         <div id="TextAreaContain">
-            <select name="color" id="color">
-                <option style="background-color: #242729;color: white;" value="#242729" selected>Dark</option>
-                <option style="background-color: #33f753;color: black;" value="#33f753">Green</option>
-                <option style="background-color: #1f9fd1;color: white;" value="#1f9fd1">Blue</option>
-                <option value="white">White</option>
-                <option style="background-color: #f2f224;color: black;" value="#f2f224">Yellow</option>
-            </select>
+            <div class="options">
+                <select name="color" id="color">
+                    <option style="background-color: #242729;color: white;" value="#242729" selected>Dark</option>
+                    <option style="background-color: #33f753;color: black;" value="#33f753">Green</option>
+                    <option style="background-color: #1f9fd1;color: white;" value="#1f9fd1">Blue</option>
+                    <option value="white">White</option>
+                    <option style="background-color: #f2f224;color: black;" value="#f2f224">Yellow</option>
+                </select>
+                <button id="exspc">Remove extra space</button>
+            </div>
             <textarea name="scratchPad" id="TextArea" max-width="40%" encoding="UTF-8" style="font-size: 14px;" autofocus></textarea>
         </div>
         <div class="msgContainer">
@@ -165,10 +41,12 @@
                 <ul>
                     <li>HTML tag detection - if there are hidden HTML styles/formatting in the text there will be an alert. Currently HTML is only detected and not removed, since there is a possibility there could be a reason to have HTML in the text I want to see how often it occurs.</li>
                     <li>List bullet removal - if there are bullets that copy over from a list they will/should be removed automatically. There will not be an alert for this.</li>
+                    <li><strong>NEW</strong> Remove extra space button - I added a button that will remove extra space between paragraphs to avoid adding empty paragraphs in CAT.<br/><sub>If you think this would be better as automatic and not a button let me know and I will change it.</sub></li>
                 </ul>
                 <p>If anyone sees any formatting or HTML elements that are not detected please let me know. Send me whatever examples you can and I will review and update the functionality if possible.</p>
             </div>
         </div>
     </div>
+    <script src="./data/scratchFunctions.js"></script>
 </body>
 </html>
