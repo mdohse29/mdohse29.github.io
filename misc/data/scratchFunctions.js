@@ -77,6 +77,13 @@ $(document).ready(function(){
                 changed = true;
             }
 
+            regtest = /^\n/gm;
+            if (text.match(regtest)){
+                console.log('Removing empty lines');
+                text = text.replaceAll(regtest, '');
+                changed = true;
+            }
+
             // changed = false;
             if (changed){
                 // alert("removing bullets");
