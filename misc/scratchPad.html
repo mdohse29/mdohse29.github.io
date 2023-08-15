@@ -30,7 +30,7 @@
                     <option value="white">White</option>
                     <option style="background-color: #f2f224;color: black;" value="#f2f224">Yellow</option>
                 </select>
-                <button id="exspc">Remove extra space</button>
+                <!-- <button id="exspc">Remove extra space</button> -->
             </div>
             <textarea name="scratchPad" id="TextArea" max-width="40%" encoding="UTF-8" style="font-size: 14px;" autofocus></textarea>
         </div>
@@ -39,9 +39,8 @@
                 <h3>Update!</h3>
                 <p>There is some new functionality to the ScratchPad. The following functions are active:</p>
                 <ul>
-                    <li>HTML tag detection - if there are hidden HTML styles/formatting in the text there will be an alert. Currently HTML is only detected and not removed, since there is a possibility there could be a reason to have HTML in the text I want to see how often it occurs.</li>
                     <li>List bullet removal - if there are bullets that copy over from a list they will/should be removed automatically. There will not be an alert for this.</li>
-                    <li><strong>NEW</strong> Remove extra space button - I added a button that will remove extra space between paragraphs to avoid adding empty paragraphs in CAT.<br/><sub>If you think this would be better as automatic and not a button let me know and I will change it.</sub></li>
+                    <li><strong>NEW</strong> Extra space removal - If there are empty lines in the text that is pasted they will be removed automatically. This is to keep from adding extra empty paragraphs when copying into CAT.</li>
                 </ul>
                 <p>If anyone sees any formatting or HTML elements that are not detected please let me know. Send me whatever examples you can and I will review and update the functionality if possible.</p>
             </div>
