@@ -61,6 +61,10 @@ body {
     text-align: right;
   }
 
+  .btn {
+    padding: 2px 5px;
+  }
+
   @media (width < 900px){
     .row.menu {
       flex-direction: column;

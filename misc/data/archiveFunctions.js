@@ -11,6 +11,10 @@ $(document).ready(function(){
       }
     })
 
+    $('#submit-reset').click(function(){
+      reset();
+    })
+
     $('#search-box').on('input',function(){
       var searchText = $('#search-box').val();
       var found = false;
@@ -41,9 +45,11 @@ $(document).ready(function(){
           $('.results').append('<p class="notFound">Sorry! Nothing was found that matched your keyword(s). Check Emby to see if it is already active. If not, make a request for what movie you would like to see, and I will try to download it.</p>');
         }
 
-        $('#submit-search').text("Reset");
-        $('#submit-search').attr('id', 'search-reset');
-        $('#search-reset').attr('onclick', 'reset();');
+        $('#submit-reset').removeClass('d-none');
+
+        // $('#submit-search').text("Reset");
+        // $('#submit-search').attr('id', 'search-reset');
+        // $('#search-reset').attr('onclick', 'reset();');
 
 
       }
@@ -51,12 +57,13 @@ $(document).ready(function(){
 
     reset = function(){
       $('#search-box').val('');
-      $('#search-reset').removeAttr('onclick');
+      // $('#search-reset').removeAttr('onclick');
       $('.results').addClass('d-none');
       $('.movies').removeClass('d-none');
       $('.results > p').remove();
-      $('#search-reset').text("Submit");
-      $('#search-reset').attr('id', 'submit-search');
+      $('#submit-reset').addClass('d-none');
+      // $('#search-reset').text("Submit");
+      // $('#search-reset').attr('id', 'submit-search');
 
     }
 
