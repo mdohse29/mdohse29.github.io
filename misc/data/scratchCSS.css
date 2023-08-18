@@ -28,6 +28,18 @@ select {
     justify-content: right;
     width: 50%;
 }
+#exspc {
+    display: inline-block;
+    font-size: small;
+    background-color: #63c1ff;
+    border: 1px solid grey;
+    padding: 2px 5px;
+    box-shadow: 0px 0px 0px 1px darkgrey;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 5px;
+}
+
 #TextAreaContain {
     height: 85vh;
     width: 50%;

@@ -30,6 +30,14 @@ $(document).ready(function(){
         location.reload();
     });
 
+    $('#exspc').mousedown(function(){
+        $(this).css('box-shadow', 'none');
+    });
+
+    $('#exspc').mouseup(function(){
+        $(this).css('box-shadow', '0px 0px 0px 1px darkgrey');
+    });
+
     $('#exspc').click(function(){
         $('#TextArea').val($('#TextArea').val().replaceAll(/^\s*[^\S]/mg, ''));
     });
