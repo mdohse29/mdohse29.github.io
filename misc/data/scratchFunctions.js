@@ -4,9 +4,11 @@ $(document).ready(function(){
         $('#toolBox').show();
     }
 
-    if ($('.msg').length > 0){
+    if (document.querySelector('.msg').innerText.length > 0){
         // $('.msg').append('<p style="text-align: right;"><a href="mailto:michael.dohse@imaginelearning.com">Michael.Dohse@imaginelearning.com</a></p>');
         $('.msg').append('<p style="text-align: right;">If an issue is found please report it here.<br/><a href="mailto:aaaabncggffyesoyicuhyz3u7u@imaginelearning.org.slack.com">BUG</a> &larr; Click to report an issue.</p>');
+    }else{
+        $('.msg').hide();
     }
 
     var currentVal = $('select').val();
@@ -29,7 +31,7 @@ $(document).ready(function(){
     });
 
     $('#exspc').click(function(){
-        $('#TextArea').val($('#TextArea').val().replaceAll(/^\n/gm, ''));
+        $('#TextArea').val($('#TextArea').val().replaceAll(/^\s*[^\S]/mg, ''));
     });
 
     $('#TextArea').on('paste', function(){
