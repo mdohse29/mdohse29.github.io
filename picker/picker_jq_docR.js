@@ -38,7 +38,7 @@ $(document).ready(function(){
 
 	// $('button.list').removeAttr('disabled');
 	//// Activate list button only ^^^^^^
-	if (currentMonth > 6 && (currentMonth <= 11 && currentDay <= 20)){
+	if (currentMonth > 6){
 		$('button').removeAttr('disabled');
 		
 		$('#erlmsg').remove();
