@@ -40,6 +40,10 @@ select {
     border-radius: 5px;
 }
 
+#toolBox {
+    margin: 1px;
+}
+
 #TextAreaContain {
     height: 85vh;
     width: 50%;

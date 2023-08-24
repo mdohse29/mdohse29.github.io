@@ -12,6 +12,8 @@ magic.addEventListener('click', () => {
             if (i.style.display === 'none'){
                 if (i.classList.contains('msg')){
                     i.style.display = 'grid';
+                }else if(i.classList.contains('tilesContainer')){
+                    i.style.display = 'block';
                 }else{
                     i.style.display = 'flex';
                 }
