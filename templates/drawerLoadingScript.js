@@ -24,7 +24,7 @@ for (let drawer in drawers){
 
     let expand = document.createElement('div');
     expand.classList.add('expand');
-    expand.innerHTML = drawers[drawer].title;
+    expand.innerText = drawers[drawer].title;
 
     let dwr = document.createElement('div');
     dwr.classList.add('drawer');
@@ -44,7 +44,7 @@ for (let drawer in drawers){
         tile.setAttribute('url', buttons[button].url);
 
         let p = document.createElement('p');
-        p.innerHTML = buttons[button].text.main;
+        p.innerText = buttons[button].text.main;
         if (buttons[button].text.sub){
             let br = document.createElement('br');
             p.appendChild(br);
@@ -53,7 +53,7 @@ for (let drawer in drawers){
             if (buttons[button].text.warn){
                 sub.classList.add('red');
             }
-            sub.innerHTML = buttons[button].text.sub;
+            sub.innerText = buttons[button].text.sub;
 
             p.appendChild(sub);
         }

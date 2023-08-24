@@ -1,9 +1,9 @@
 const drawers = {
     drawer1 : {
         hidden: false,
-        drawerTitle: 'Home Made Tools',
-        items:{
-            item1: {
+        title: 'Home Made Tools',
+        buttons:{
+            button1: {
                 hidden: true,
                 url: './repo/glyn/repo_lookup.htm',
                 text: {
@@ -12,7 +12,7 @@ const drawers = {
                     warn: true
                 }
             },
-            item2: {
+            button2: {
                 hidden: true,
                 url: './misc/archivedMovies.html',
                 text: {
@@ -21,7 +21,7 @@ const drawers = {
                     warn: false
                 }
             },
-            item3: {
+            button3: {
                 hidden: false,
                 url: './linkMaker/link.html',
                 text: {
@@ -30,7 +30,7 @@ const drawers = {
                     warn: false
                 }
             },
-            item4: {
+            button4: {
                 hidden: false,
                 url: './misc/scratchPad.html',
                 text: {
@@ -43,9 +43,9 @@ const drawers = {
     },
     drawer2 : {
         hidden: false,
-        drawerTitle: 'Company Tools',
-        items:{
-            item1: {
+        title: 'Company Tools',
+        buttons:{
+            button1: {
                 hidden: false,
                 url: 'https://ims-tools.owteam.com/',
                 text: {
@@ -54,7 +54,7 @@ const drawers = {
                     warn: true
                 }
             },
-            item2: {
+            button2: {
                 hidden: false,
                 url: 'http://learn.bluejacks.edgenuity.com/login/',
                 text: {
@@ -63,7 +63,7 @@ const drawers = {
                     warn: true
                 }
             },
-            item3: {
+            button3: {
                 hidden: false,
                 url: './helpDocs.html',
                 text: {
@@ -72,7 +72,7 @@ const drawers = {
                     warn: false
                 }
             },
-            item4: {
+            button4: {
                 hidden: false,
                 url: 'http://sandbox.education2020.com/curriculum/',
                 text: {
@@ -81,7 +81,7 @@ const drawers = {
                     warn: false
                 }
             },
-            item5: {
+            button5: {
                 hidden: false,
                 url: 'https://media.edgenuity.com/contentengine/common/closereader/',
                 text: {
@@ -94,9 +94,9 @@ const drawers = {
     },
     drawer3 : {
         hidden: false,
-        drawerTitle: 'Import HTML Courses',
-        items:{
-            item1: {
+        title: 'Import HTML Courses',
+        buttons:{
+            button1: {
                 hidden: false,
                 url: 'http://sandbox.education2020.com/questionimporter/',
                 text: {
@@ -105,7 +105,7 @@ const drawers = {
                     warn: false
                 }
             },
-            item2: {
+            button2: {
                 hidden: false,
                 url: 'http://sandbox.education2020.com/CurriculumUpload/UserLogin.aspx',
                 text: {
@@ -114,9 +114,18 @@ const drawers = {
                     warn: false
                 }
             },
-            item3: {
-                hidden: false,
+            button3: {
+                hidden: true,
                 url: 'http://tools.education2020.com/CMT/',
+                text: {
+                    main: 'CW CMT',
+                    sub: 'OLD<br>Content Management Tool',
+                    warn: true
+                }
+            },
+            button4: {
+                hidden: false,
+                url: 'http://cmt.education2020.com/CMT/',
                 text: {
                     main: 'CW CMT',
                     sub: 'Content Management Tool',
@@ -127,9 +136,9 @@ const drawers = {
     },
     drawer4 : {
         hidden: false,
-        drawerTitle: 'Other Stuff',
-        items:{
-            item1: {
+        title: 'Other Stuff',
+        buttons:{
+            button1: {
                 hidden: false,
                 url: 'https://www.guidgenerator.com/online-guid-generator.aspx',
                 text: {
@@ -138,7 +147,7 @@ const drawers = {
                     warn: false
                 }
             },
-            item2: {
+            button2: {
                 hidden: false,
                 url: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference',
                 text: {
@@ -147,7 +156,7 @@ const drawers = {
                     warn: false
                 }
             },
-            item3: {
+            button3: {
                 hidden: false,
                 url: 'https://www.diffchecker.com/text-compare/',
                 text: {
