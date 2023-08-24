@@ -6,105 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        p {
-            text-align: center;
-        }
-        .mainHead {
-            margin-bottom: 5%;
-            
-        }
-        h1 {
-            text-align: center;
-            font-size: 60px;
-        }
-        span {
-            font-size: x-small;
-        }
-        span.red {
-            color: red;
-            font-weight: bold;
-        }
-        .toolLinks li {
-            font-size: 24px;
-            margin: 15px auto;
-        }
-        #magic {
-            cursor:crosshair;
-        }
-        .tilesContainer {
-            margin: 2.5% auto;
-        }
-        .tiles {
-            display: flex;
-            /* flex-direction: row; */
-            background-color: #def7ff;
-            justify-content: space-evenly;
-            align-items: center;
-            flex-wrap: wrap;
-            width: 65%;
-            margin-left: 17.5%;
-            border: 1px dashed black;
-            border-top: none;
-            border-radius: 5px;
-            padding-top: 20px;
-            padding-bottom: 20px;
-        }
-        .expand {
-            display: block;
-            justify-content: space-around;
-            align-items: center;
-            width: 65%;
-            margin-left: 17.5%;
-            border: 1px solid black;
-            border-radius: 5px;
-            padding-top: 20px;
-            padding-bottom: 20px;
-            text-align: center;
-            font-size: 1.25em;
-            cursor: pointer;
-            user-select: none;
-            background-color: lightblue;
-
-        }
-        .tile {
-            display: flex;
-            justify-content: center;
-            text-justify: distribute;
-            align-items: center;
-            flex-wrap: wrap;
-            height: 150px;
-            width: 150px;
-            background-color: lightblue;
-            box-shadow: 10px 0px 5px 2px darkgrey;
-            border-radius: 50%;
-            user-select: none;
-            cursor: pointer;
-            padding: 5px;
-            margin: 5px;
-        }
-        .tile:hover {
-            background-color: rgb(26, 137, 173);
-            /* box-shadow: 10px 10px 5px 2px darkgrey; */
-        }
-        .drawer {
-            display: block;
-            max-height: 0;
-            overflow: hidden;
-            transition: 1s;
-        }
-        .flk {
-            display: none;
-        }
-
-        @media (width < 565px){
-            .tile {
-                width: 125px;
-                height: 125px;
-            }
-        }
-
-    </style>
+    <link rel="stylesheet" href="./data/tbStyle.css">
     <title>The Toolbox</title>
 </head>
 <body>
@@ -113,51 +15,10 @@
         <div class="mainHead">
             <h1><sup>The</sup> Toolbox</h1>
         </div>
-        <div class="tilesContainer">
-            <div class="expand">Home Made Tools</div>
-            <div class="drawer">
-                <div class="tiles">
-                    <div class="tile flk" url="./repo/glyn/repo_lookup.htm"><p>Repo Lookup<br><span class="red">RETIRED</span></p></div>
-                    <div class="tile flk" url="./misc/archivedMovies.html">Movie Archive</div>
-                    <div class="tile" url="./linkMaker/link.html"><p>The CDN Link Maker</p></div>
-                    <div class="tile" url="./misc/scratchPad.html"><p>Scratch Pad for notes<br/><span class="red">(Does not save)</span></p></div>
-                </div>
-            </div>
-        </div>
-        <div class="tilesContainer">
-            <div class="expand">Company Tools</div>
-            <div class="drawer">
-                <div class="tiles">
-                    <div class="tile" url="https://ims-tools.owteam.com/"><p>IMS Tools<br/><span class="red">(IL VPN Required)</span></p></div>
-                    <div class="tile" url="http://learn.bluejacks.edgenuity.com/login/"><p>Bluejacks<br/><span class="red">(Chrome Only)</span></p></div>
-                    <div class="tile" url="./helpDocs.html"><p>Help Documents<br><span>Bluejacks and HMTL</span></p></div>
-                    <div class="tile" url="http://sandbox.education2020.com/curriculum/"><p>{N}ternal Tools</p></div>
-                    <div class="tile" url="https://media.edgenuity.com/contentengine/common/closereader/"><p>CloseReaders Index</p></div>
-                </div>
-            </div>
-
-        </div>
-        <div class="tilesContainer">
-            <div class="expand">Import HTML Courses</div>
-            <div class="drawer">
-                <div class="tiles">
-                    <div class="tile" url="http://sandbox.education2020.com/questionimporter/"><p>CW Question Importer</p></div>
-                    <div class="tile" url="http://sandbox.education2020.com/CurriculumUpload/UserLogin.aspx"><p>CW CUT<br/><span>Curriculum Upload Tool</span></p></div>
-                    <div class="tile" url="http://tools.education2020.com/CMT/"><p>CW CMT<br/><span>Content Management Tool</span></p></div>
-                </div>
-            </div>
-        </div>
-        <div class="tilesContainer">
-            <div class="expand">Other Stuff</div>
-            <div class="drawer">
-                <div class="tiles">
-                    <div class="tile" url="https://www.guidgenerator.com/online-guid-generator.aspx"><p>GUID Generator</p></div>
-                    <div class="tile" url="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference"><p>MDN</p></div>
-                    <div class="tile" url="https://www.diffchecker.com/text-compare/"><p>Online Diff Checker</p></div>
-                </div>
-            </div>
-        </div>
+        
     </div>
+    <script src="./data/tbData.js"></script>
+    <script src="./data/tbLoad.js"></script>
     <script src="./data/functions.js"></script>
 </body>
 </html>
