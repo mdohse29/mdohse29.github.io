@@ -155,15 +155,6 @@ const drawers = {
                     sub: '',
                     warn: false
                 }
-            },
-            item4:{
-                hidden:true,
-                url:'./testingStuff',
-                text:{
-                    main: 'Just testing',
-                    sub: 'Well what do you know',
-                    warn:false
-                }
             }
         }
     }
