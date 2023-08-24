@@ -87,9 +87,23 @@ $(document).ready(function(){
                 changed = true;
             }
 
+            regtest = /[“”]/gm;
+            if (text.match(regtest)){
+                console.log("Replacing special formatted quotes with regular quotes");
+                text = text.replaceAll(regtest, "\"");
+                changed = true;
+            }
+
             regtest = /^\n/gm;
             if (text.match(regtest)){
                 console.log('Removing empty lines');
+                text = text.replaceAll(regtest, '');
+                changed = true;
+            }
+
+            regtest = /[]/gm;
+            if (text.match(regtest)){
+                console.log("Removing odd invisible character");
                 text = text.replaceAll(regtest, '');
                 changed = true;
             }
