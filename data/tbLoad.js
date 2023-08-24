@@ -18,7 +18,7 @@ for (let drawer in drawers){
 
     let expand = document.createElement('div');
     expand.classList.add('expand');
-    expand.innerText = drawers[drawer].drawerTitle;
+    expand.innerText = drawers[drawer].title;
 
     let dwr = document.createElement('div');
     dwr.classList.add('drawer');

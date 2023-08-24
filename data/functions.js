@@ -70,7 +70,7 @@ for (let ex of expand){
                     openDrawer.classList.remove('selected');
                     openDrawer.style.maxHeight = null;
                 }
-                drawer.style.maxHeight = drawer.scrollHeight + 'px'
+                drawer.style.maxHeight = drawer.scrollHeight + 'px';
             }else{
                 drawer.style.maxHeight = null;
 

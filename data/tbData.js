@@ -1,7 +1,7 @@
 const drawers = {
     drawer1 : {
         hidden: false,
-        drawerTitle: 'Home Made Tools',
+        title: 'Home Made Tools',
         items:{
             item1: {
                 hidden: true,
@@ -43,7 +43,7 @@ const drawers = {
     },
     drawer2 : {
         hidden: false,
-        drawerTitle: 'Company Tools',
+        title: 'Company Tools',
         items:{
             item1: {
                 hidden: false,
@@ -94,7 +94,7 @@ const drawers = {
     },
     drawer3 : {
         hidden: false,
-        drawerTitle: 'Import HTML Courses',
+        title: 'Import HTML Courses',
         items:{
             item1: {
                 hidden: false,
@@ -127,7 +127,7 @@ const drawers = {
     },
     drawer4 : {
         hidden: false,
-        drawerTitle: 'Other Stuff',
+        title: 'Other Stuff',
         items:{
             item1: {
                 hidden: false,
