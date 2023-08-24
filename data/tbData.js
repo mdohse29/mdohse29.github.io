@@ -115,8 +115,17 @@ const drawers = {
                 }
             },
             button3: {
-                hidden: false,
+                hidden: true,
                 url: 'http://tools.education2020.com/CMT/',
+                text: {
+                    main: 'CW CMT',
+                    sub: 'OLD<br>Content Management Tool',
+                    warn: true
+                }
+            },
+            button4: {
+                hidden: false,
+                url: 'http://cmt.education2020.com/CMT/',
                 text: {
                     main: 'CW CMT',
                     sub: 'Content Management Tool',
