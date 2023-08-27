@@ -9,7 +9,7 @@ const magic = document.querySelector('#magic');
 magic.addEventListener('click', () => {
     if (flk.length > 0){
         for (let i of flk){
-            if (i.style.display === 'none'){
+            if (i.style.display === 'none' || i.style.display === ''){
                 if (i.classList.contains('msg')){
                     i.style.display = 'grid';
                 }else if(i.classList.contains('tilesContainer')){
