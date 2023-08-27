@@ -33,12 +33,12 @@ $(document).ready(function(){
 	});
 
 	$('button').attr('disabled', 'disabled');
-	$('#display').append("<p style=\"text-align: center\" id=\"erlmsg\">Ohh, sorry! It is a little early.<br/>Come back in August 2023, The List will be online.</p>");
+	$('#display').append("<p style=\"text-align: center\" id=\"erlmsg\">Ohh, sorry! It is a little early.<br/>Come back in September 2024, The List will be online.</p>");
 	// Comment out ^^^^^ to activate the picker
 
 	// $('button.list').removeAttr('disabled');
 	//// Activate list button only ^^^^^^
-	if (currentMonth > 6){
+	if (currentMonth > 7){
 		$('button').removeAttr('disabled');
 		
 		$('#erlmsg').remove();
