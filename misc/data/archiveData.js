@@ -5,12 +5,12 @@ $.get('./data/archive.txt', function(data, status){
     }
     for (a = 0; a < movies.length; a++){
       let formatted = formatter(movies[a]);
-      if (movies[a].match(/\[\d\d\d\d\]/g) || movies[a].match(/\(\d\d\d\d\)/g)){
+      // if (movies[a].match(/\[\d\d\d\d\]/g) || movies[a].match(/\(\d\d\d\d\)/g)){
 
         // console.log(formatted.replace(/\[(\d\d\d\d)\].*/g, '($1)'));
       $('.movies').append('<p class="title" style="background-color: none;font-weight: bold;font-size: 1em;">' + formatted + '</p>');
       
-      }
+      // }
     }
   }, 'text');
 
