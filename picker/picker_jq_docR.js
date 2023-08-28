@@ -38,7 +38,8 @@ $(document).ready(function(){
 
 	// $('button.list').removeAttr('disabled');
 	//// Activate list button only ^^^^^^
-	if (currentMonth > 7){
+	
+	if ((currentMonth == 11 && currentDay <= 22) || (currentMonth > 7 && currentMonth < 11)){
 		$('button').removeAttr('disabled');
 		
 		$('#erlmsg').remove();
@@ -46,7 +47,7 @@ $(document).ready(function(){
 			viewList();
 		}, 700);
 	}
-	// Remove ^^^^^ to allow list view only and activate add to list button
+	// Activates the picker from September 01 thru December 22 ^^^^^
 
 	// $('#btn-add-lst').attr('disabled', 'disabled');
 	//// Uncomment for picking time ^^^^^ ** No one should be submitting lists at this time **
