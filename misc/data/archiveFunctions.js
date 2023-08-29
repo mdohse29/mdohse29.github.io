@@ -114,7 +114,7 @@ $(document).ready(function(){
 
       });
 
-      $('#num').keypress(function(event){
+      $('#num').keydown(function(event){
         event.preventDefault();
       })
   });
