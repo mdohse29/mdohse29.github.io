@@ -94,6 +94,9 @@ $(document).ready(function(){
       $('#rand').click(function(){
         let elements = $('.movies > p.title');
         let num = $('#num').val();
+        if (!num){
+          num = 5;
+        }
 
         $('.movies').addClass('d-none');
         $('.results').removeClass('d-none');
@@ -110,4 +113,8 @@ $(document).ready(function(){
         $('#submit-reset').removeClass('d-none');
 
       });
+
+      $('#num').keypress(function(event){
+        event.preventDefault();
+      })
   });
