@@ -14,6 +14,11 @@ body {
   #search-box {
     max-width: 200px;
   }
+
+  #num{
+    width: 65px;
+  }
+
   /* .search {
     float: left;
     margin-left: 1%;
