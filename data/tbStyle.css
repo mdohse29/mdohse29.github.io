@@ -67,7 +67,7 @@ span.red {
     height: 150px;
     width: 150px;
     background-color: lightblue;
-    box-shadow: 10px 0px 5px 2px darkgrey;
+    box-shadow: 0px 0px 5px 2px darkgrey;
     border-radius: 50%;
     user-select: none;
     cursor: pointer;
