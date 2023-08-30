@@ -9,23 +9,32 @@ $(document).ready(function(){
       if (!$('#search-box').val()){
         alert("Please enter a title to search.");
       }
-    })
+    });
 
     $('#submit-reset').click(function(){
       reset();
-    })
+    });
 
     $('#search-box').on('input',function(){
-      var searchText = $('#search-box').val();
-      var found = false;
+      let searchText = $('#search-box').val();
+
+      if (searchText == "random select"){
+        $('.spcl').removeClass('d-none');
+      }else if (searchText == "goodbye"){
+        $('.spcl').addClass('d-none');
+      }
+
+      let found = false;
+
       if ($('.notFound')){
         $('.notFound').remove();
       }
+
       if (searchText == "" || searchText == null){
         reset();
       }else{
-        var elements = $('.movies > p.title');
-        var titles = [];
+        let elements = $('.movies > p.title');
+        let titles = [];
         
         for (a = 0; a < elements.length; a++){
           titles.push(elements[a].innerText);
@@ -41,6 +50,7 @@ $(document).ready(function(){
             found = true;
           }
         }
+
         if (!found){
           $('.results').append('<p class="notFound">Sorry! Nothing was found that matched your keyword(s). Check Emby to see if it is already active. If not, make a request for what movie you would like to see, and I will try to download it.</p>');
         }
@@ -67,6 +77,7 @@ $(document).ready(function(){
 
     }
 
+
       $(document).on('mouseenter', 'p.title', function(){
         $(this).css('background-color', 'black');
         $(this).css('color', 'white');
@@ -79,4 +90,31 @@ $(document).ready(function(){
         $(this).css('font-size', '1em');
         $(this).css('font-weight', 'bold');
       });
+
+      $('#rand').click(function(){
+        let elements = $('.movies > p.title');
+        let num = $('#num').val();
+        if (!num){
+          num = 5;
+        }
+
+        $('.movies').addClass('d-none');
+        $('.results').removeClass('d-none');
+        if ($('.notFound')){
+          $('.notFound').remove();
+        }
+        $('.results > .title').remove();
+
+        for (let a = 0; a < num; a++){
+          let rand = Math.floor(Math.random() * (elements.length - 1));
+          $('.results').append(elements[rand]);
+        }
+
+        $('#submit-reset').removeClass('d-none');
+
+      });
+
+      $('#num').keydown(function(event){
+        event.preventDefault();
+      })
   });
