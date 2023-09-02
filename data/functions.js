@@ -53,7 +53,7 @@ for (let tile of tiles){
                     }
                     break;
                 case 1:
-                    window.open(link, '_blank');
+                    window.open(link, '_blank', 'popup');
                     break;
             }
         }

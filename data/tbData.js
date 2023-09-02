@@ -65,6 +65,15 @@ const drawers = {
             },
             button3: {
                 hidden: false,
+                url: 'https://cayman-ui.glct-prod.il-apps.com/#/login',
+                text: {
+                    main: 'Cayman Production',
+                    sub: 'NEW',
+                    warn: false
+                }
+            },
+            button4: {
+                hidden: false,
                 url: './helpDocs.html',
                 text: {
                     main: 'Help Documents',
@@ -72,7 +81,7 @@ const drawers = {
                     warn: false
                 }
             },
-            button4: {
+            button5: {
                 hidden: false,
                 url: 'http://sandbox.education2020.com/curriculum/',
                 text: {
@@ -81,13 +90,22 @@ const drawers = {
                     warn: false
                 }
             },
-            button5: {
+            button6: {
                 hidden: false,
                 url: 'https://media.edgenuity.com/contentengine/common/closereader/',
                 text: {
                     main: 'CloseReaders Index',
                     sub: '',
                     warn: false
+                }
+            },
+            button7: {
+                hidden: true,
+                url: 'https://curriculum-management.owteam.com/',
+                text: {
+                    main:'Cayman Production',
+                    sub:'OLD Retiring',
+                    warn:true
                 }
             }
         }
@@ -168,3 +186,7 @@ const drawers = {
         }
     }
 }
+// $.get('./data/buttons.txt', function(data, status) {
+//     console.log(data);
+//     console.log(status);
+// })
