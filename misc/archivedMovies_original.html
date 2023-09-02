@@ -6,11 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <title>Archived Movies</title>
-  <link rel="stylesheet" href="amStyle.css">
+  <link rel="stylesheet" href="./data/amStyle.css">
   <script>
 
 
-    $.get('./archive.txt', function(data, status){
+    $.get('./data/archive.txt', function(data, status){
       let movies = data.split('\n');
       if (movies.length > 0){
         $('p[id="placeH"]').remove();

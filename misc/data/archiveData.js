@@ -8,10 +8,16 @@ $.get('./data/archive.txt', function(data, status){
       // if (movies[a].match(/\[\d\d\d\d\]/g) || movies[a].match(/\(\d\d\d\d\)/g)){
 
         // console.log(formatted.replace(/\[(\d\d\d\d)\].*/g, '($1)'));
-      $('.movies').append('<p class="title" style="background-color: none;font-weight: bold;font-size: 1em;">' + formatted + '</p>');
+        if (formatted){
+          $('.movies').append('<p class="title" style="background-color: none;font-weight: bold;font-size: 1em;">' + formatted + '</p>');
+        }else{
+          console.log("Removing -> " + movies[a] + "EMPTY");
+          movies.splice(a,1);
+        }
       
       // }
     }
+    $('.movies').append('<p id="total"><sub>Total: ' + movies.length + '</sub></p>');
   }, 'text');
 
   const formatter = function (text){
