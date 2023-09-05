@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="./data/style.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="columns">
+            <div class="column">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-header-title is-justify-content-center is-size-2">Add a ToDo List Item</div>
+                    </div>
+                    <div class="card-content">
+                        <label class="label" for="item">New Item:</label>
+                        <input type="text" name="Item" id="item" class="input" placeholder="e.g. Laundry">
+                    </div>
+                    <div class="card-footer is-justify-content-center">
+                            <button class="button is-large is-rounded mt-2 mb-2 is-primary" id="submit">Submit</button>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="card-header">
+                    <div class="card-header-title is-justify-content-center is-size-2">ToDo List</div>
+                </div>
+                <div class="card">
+                    <div class="card-content" id="list"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./data/functions.js"></script>
+</body>
+</html>
