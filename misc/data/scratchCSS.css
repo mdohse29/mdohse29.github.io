@@ -45,7 +45,7 @@ select {
 }
 
 #TextAreaContain {
-    height: 85vh;
+    height: 90vh;
     width: 50%;
     display: flex;
     flex-direction: column;
