@@ -175,8 +175,8 @@ li {
 }
 
 a {
-    text-decoration: none;
-    color: inherit;
+    text-decoration: underline;
+    color: white;
 }
 
 a:hover {
