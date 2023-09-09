@@ -180,7 +180,7 @@ a {
 }
 
 .spcl a {
-    text-decoration: underline;
+    text-decoration: underline dashed;
     color: white;
 }
 
