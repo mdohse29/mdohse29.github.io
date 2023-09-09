@@ -175,6 +175,11 @@ li {
 }
 
 a {
+    text-decoration: underline wavy;
+    color: black;
+}
+
+.spcl a {
     text-decoration: underline;
     color: white;
 }
