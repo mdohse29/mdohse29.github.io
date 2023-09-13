@@ -73,6 +73,15 @@ const drawers = {
                 }
             },
             button4: {
+                hidden: true,
+                url: 'https://curriculum-management.owteam.com/',
+                text: {
+                    main:'Cayman Production',
+                    sub:'OLD Retiring',
+                    warn:true
+                }
+            },
+            button5: {
                 hidden: false,
                 url: './helpDocs.html',
                 text: {
@@ -81,7 +90,16 @@ const drawers = {
                     warn: false
                 }
             },
-            button5: {
+            button6: {
+                hidden: false,
+                url: './workDocs/htmlGlossaryHelp.html',
+                text: {
+                    main: 'HTML Glossary Help',
+                    sub: 'HTML Vocab/Glossary',
+                    warn: false
+                }
+            },
+            button7: {
                 hidden: false,
                 url: 'http://sandbox.education2020.com/curriculum/',
                 text: {
@@ -90,22 +108,13 @@ const drawers = {
                     warn: false
                 }
             },
-            button6: {
+            button8: {
                 hidden: false,
                 url: 'https://media.edgenuity.com/contentengine/common/closereader/',
                 text: {
                     main: 'CloseReaders Index',
                     sub: '',
                     warn: false
-                }
-            },
-            button7: {
-                hidden: true,
-                url: 'https://curriculum-management.owteam.com/',
-                text: {
-                    main:'Cayman Production',
-                    sub:'OLD Retiring',
-                    warn:true
                 }
             }
         }

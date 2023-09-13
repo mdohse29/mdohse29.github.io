@@ -87,7 +87,7 @@ function picker(){
 		$("#nameChoice").append("<p>Everyone has been picked!<br><br>Merry Christmas in advance!</p>");
 	}else{
 		if (listCheck(giftFor) == true){
-			$("#nameChoice").append("<p><img src=\"./icons8-santa-48.png\" class=\"santa\"/>" + giftFor + "</p>");
+			$("#nameChoice").append("<p><img src=\"./img/icons8-santa-48.png\" class=\"santa\"/>" + giftFor + "</p>");
 			$("#userGiftList").append("<ul id=\"userItems\"></ul>");
 			for (item = 1; item < userListItems.length; item++){
 				$("#userItems").append("<li class=\"xmas\">" + userListItems[item] + "</li>");
