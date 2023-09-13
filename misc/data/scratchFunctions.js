@@ -39,7 +39,12 @@ $(document).ready(function(){
     });
 
     $('#exspc').click(function(){
-        $('#TextArea').val($('#TextArea').val().replaceAll(/^\s*[^\S]/mg, ''));
+        let regex = /\s*[^\S]/g;
+        let text = $('#TextArea').val().split('\n');
+        for (let a in text){
+            text[a] = text[a].replaceAll(regex, '');
+        }
+        $('#TextArea').val(text.join('\n'));
     });
 
     $('#TextArea').on('paste', function(){
