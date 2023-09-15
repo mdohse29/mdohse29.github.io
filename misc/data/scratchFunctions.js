@@ -39,7 +39,7 @@ $(document).ready(function(){
     });
 
     $('#exspc').click(function(){
-        let regex = /\s*[^\S]/g;
+        let regex = /^\s*[^\S]/g;
         let text = $('#TextArea').val().split('\n');
         for (let a in text){
             text[a] = text[a].replaceAll(regex, '');
