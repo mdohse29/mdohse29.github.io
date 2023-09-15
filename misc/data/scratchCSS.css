@@ -1,6 +1,7 @@
 textarea {
     width: 100%;
     height:inherit;
+    z-index: 1;
 }
 select {
     max-width: 75px;
