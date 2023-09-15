@@ -28,6 +28,12 @@ select {
     justify-content: right;
     width: 50%;
 }
+.spclFtr{
+    display: block;
+}
+.dnone {
+    display: none;
+}
 #exspc {
     display: inline-block;
     font-size: small;
