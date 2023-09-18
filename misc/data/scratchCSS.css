@@ -47,6 +47,27 @@ select {
     border-radius: 5px;
 }
 
+.dark {
+    background-color: #242729;
+    color: white;
+}
+.green {
+    background-color: #33f753;
+    color: black;
+}
+.blue {
+    background-color: #1f9fd1;
+    color: white;
+}
+.white {
+    background-color: white;
+    color: black;
+}
+.yellow {
+    background-color: #f2f224;
+    color: black;
+}
+
 #toolBox {
     margin: 1px;
 }

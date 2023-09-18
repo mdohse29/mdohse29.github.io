@@ -11,24 +11,16 @@ $(document).ready(function(){
         $('.msg').hide();
     }
 
-    var currentVal = $('select').val();
-    $('#TextArea').css('background-color', currentVal);
-    if(currentVal == '#242729' || currentVal == "#1f9fd1"){
-        $('#TextArea').css('color', 'white');
-    }else{
-        $('#TextArea').css('color', 'black');
-    }
+    let currentVal = $('select').val();
+    $('#TextArea').addClass(currentVal);
+    
 
-    $('option').click(function(){
-        var color = $(this).val();
-        $('#TextArea').css('background-color', color);
-        if (color == '#242729' || color == "#1f9fd1"){
-            $('#TextArea').css('color', 'white');
-        }else{
-            $('#TextArea').css('color', 'black');
-        }
-        location.reload();
-    });
+    // $('option').click(function(){
+    //     let color = $(this).val();
+    //     $('#TextArea').addClass(currentVal);
+        
+    //     location.reload();
+    // });
 
     $('#exspc').mousedown(function(){
         $(this).css('box-shadow', 'none');
