@@ -97,6 +97,13 @@ $(document).ready(function(){
                 text = text.replaceAll(regtest, '');
                 changed = true;
             }
+            
+            regtest = /\s{2,}/gm;
+            if (text.match(regtest)){
+                console.log('Removing multiple spaces between words');
+                text = text.replaceAll(regtest, ' ');
+                changed = true;
+            }
 
             regtest = /[]/gm;
             if (text.match(regtest)){
