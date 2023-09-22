@@ -98,10 +98,14 @@ $(document).ready(function(){
                 changed = true;
             }
             
-            regtest = /\s{2,}/gm;
+            regtest = /(\S)\s{2,}(\S)/gm;
             if (text.match(regtest)){
                 console.log('Removing multiple spaces between words');
-                text = text.replaceAll(regtest, ' ');
+                let textArr = text.split('\n');
+                for (let i = 0; i < textArr.length; i++){
+                    textArr[i] = textArr[i].replaceAll(regtest, '$1 $2');
+                }
+                text = textArr.join('\n');
                 changed = true;
             }
 
