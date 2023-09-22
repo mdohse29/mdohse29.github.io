@@ -27,22 +27,24 @@
         <div id="TextAreaContain">
             <div class="options">
                 <select name="color" id="color">
-                    <option style="background-color: #242729;color: white;" value="#242729" selected>Dark</option>
-                    <option style="background-color: #33f753;color: black;" value="#33f753">Green</option>
-                    <option style="background-color: #1f9fd1;color: white;" value="#1f9fd1">Blue</option>
-                    <option value="white">White</option>
-                    <option style="background-color: #f2f224;color: black;" value="#f2f224">Yellow</option>
+                    <option class="dark" value="dark">Dark</option>
+                    <option class="green" value="green">Green</option>
+                    <option class="blue" value="blue">Blue</option>
+                    <option class="white" value="white">White</option>
+                    <option class="yellow" value="yellow">Yellow</option>
                 </select>
                 <div id="exspc" title="The empty space in front of the paragraphs">Remove Leading Space</div>
             </div>
-            <textarea name="scratchPad" id="TextArea" max-width="40%" encoding="UTF-8" style="font-size: 14px;" autofocus></textarea>
+            <textarea name="scratchPad" id="TextArea" max-width="50%" encoding="UTF-8" style="font-size: 14px;" autofocus></textarea>
         </div>
         <div class="msgContainer">
             <div class="msg">
                 <p>If anyone sees any formatting or HTML elements that are not detected please let me know. Send me whatever examples you can and I will review and update the functionality if possible.</p>
+                
             </div>
         </div>
     </div>
+    <script src="./data/spColorPick.js"></script>
     <script src="./data/scratchFunctions.js"></script>
 </body>
 </html>
