@@ -91,7 +91,7 @@ $(document).ready(function(){
                 changed = true;
             }
 
-            regtest = /^\n/gm;
+            regtest = /^\s*\n/gm;
             if (text.match(regtest)){
                 console.log('Removing empty lines');
                 text = text.replaceAll(regtest, '');
