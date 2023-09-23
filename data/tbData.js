@@ -120,7 +120,7 @@ const drawers = {
         }
     },
     drawer5 : {
-        hidden:false,
+        hidden:true,
         title:'Company Platforms',
         buttons:{
             button1 : {
