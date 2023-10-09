@@ -5,7 +5,7 @@ $(document).ready(function(){
     }
 
     if (document.querySelector('.msg').innerText.length > 0){
-        // $('.msg').append('<p style="text-align: right;"><a href="mailto:michael.dohse@imaginelearning.com">Michael.Dohse@imaginelearning.com</a></p>');
+        $('.msg').prepend('<h1>Update!</h1>');
         $('.msg').append('<p style="text-align: right;">If an issue is found please report it here.<br/><a href="mailto:aaaabncggffyesoyicuhyz3u7u@imaginelearning.org.slack.com">BUG</a> &larr; Click to report an issue.</p>');
     }else{
         $('.msg').hide();
