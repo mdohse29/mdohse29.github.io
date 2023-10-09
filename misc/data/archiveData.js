@@ -1,10 +1,13 @@
-$.get('./data/archive.txt', function(data, status){
-    let movies = data.split('\n');
+// $.get('./data/archive.txt', function(data, status){
+  axios.get("./data/archive.txt")
+  .then(archive => {
+    let movies = archive.data.split('\n');
     if (movies.length > 0){
       $('p[id="placeH"]').remove();
     }
     for (a = 0; a < movies.length; a++){
       let formatted = formatter(movies[a]);
+      // let formatted = movies[a];
       // if (movies[a].match(/\[\d\d\d\d\]/g) || movies[a].match(/\(\d\d\d\d\)/g)){
 
         // console.log(formatted.replace(/\[(\d\d\d\d)\].*/g, '($1)'));
@@ -18,7 +21,11 @@ $.get('./data/archive.txt', function(data, status){
       // }
     }
     $('.movies').append('<p id="total"><sub>Total: ' + movies.length + '</sub></p>');
-  }, 'text');
+  })
+  .catch(e => {
+    console.log("Something is wrong\n", e);
+  });
+  // }, 'text');
 
   const formatter = function (text){
     let format = text.replace(/(\(\d\d\d\d\)).*/g, '$1');
