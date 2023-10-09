@@ -36,10 +36,11 @@ $(document).ready(function(){
         for (let a in text){
             text[a] = text[a].replaceAll(regex, '');
         }
+        navigator.clipboard.writeText(text.join('\n'));
         $('#TextArea').val(text.join('\n'));
     });
 
-    $('#TextArea').on('paste', function(){
+    $('#TextArea').on('paste', function(event){
         /*
         Possible regex for stripping html from the text
         cleanText = strInputCode.replace(/<\/?[^>]+(>|$)/g, ""); -- stack overflow
@@ -60,6 +61,7 @@ $(document).ready(function(){
         tags maybe legit and not need to be removed. Maybe we just add a remove
         formatting button or something. Food for thought
         */
+       
         setTimeout(function(){
             let changed = false;
             let foundHTML = false;
@@ -119,6 +121,7 @@ $(document).ready(function(){
             // changed = false;
             if (changed){
                 // alert("removing bullets");
+                navigator.clipboard.writeText(text);
                 $('#TextArea').val(text);
             }
         }, 700);
