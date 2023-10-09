@@ -38,9 +38,17 @@ $(document).ready(function(){
         }
         navigator.clipboard.writeText(text.join('\n'));
         $('#TextArea').val(text.join('\n'));
+        $('.popup').append('<p>DONE!</p>');
+        $('.popup').removeClass('dnone');
+        setTimeout(() => {
+            $('.popup').removeClass('dnone');
+            $('.popup').empty();
+        }, 700);
     });
 
     $('#TextArea').on('paste', function(event){
+        $('.popup').append('<p>Processing ...</p>');
+        $('.popup').removeClass('dnone');
         /*
         Possible regex for stripping html from the text
         cleanText = strInputCode.replace(/<\/?[^>]+(>|$)/g, ""); -- stack overflow
@@ -124,6 +132,8 @@ $(document).ready(function(){
                 navigator.clipboard.writeText(text);
                 $('#TextArea').val(text);
             }
+            $('.popup').addClass('dnone');
+            $('.popup').empty();
         }, 700);
     });
 

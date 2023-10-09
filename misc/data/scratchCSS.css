@@ -3,6 +3,7 @@ textarea {
     height:inherit;
     z-index: 1;
 }
+
 select {
     max-width: 75px;
     margin-bottom: 5px;
@@ -11,6 +12,18 @@ select {
 .presentation {
     display: flex;
     justify-content: space-between;
+}
+.popup {
+    position: fixed;
+    display: inline-block;
+    margin-left: 13%;
+    margin-top: 15%;
+    height: auto;
+    width: 250px;
+    text-align: center;
+    font-weight: bold;
+    background-color: whitesmoke;
+    z-index: 1;
 }
 .msg{
     width: 80%;
