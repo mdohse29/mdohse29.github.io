@@ -6,6 +6,7 @@ $(document).ready(function(){
         setTimeout(() => {
             $('.popup').removeClass('dnone');
             $('.popup').empty();
+            $('#TextArea').focus();
         }, timeOut);
     }
     if (previous.includes("toolBox.html")){
