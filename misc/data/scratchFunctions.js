@@ -1,5 +1,6 @@
 $(document).ready(function(){
     let previous = document.referrer;
+    const currentDate = new Date();
     function popup(text, timeOut){
         $('.popup').append('<p>' + text + '</p>');
         $('.popup').removeClass('dnone');
@@ -11,6 +12,11 @@ $(document).ready(function(){
     }
     if (previous.includes("toolBox.html")){
         $('#toolBox').show();
+    }
+
+    // Set to clear user message after a certain number of days.
+    if (currentDate.getMonth() == 10 && currentDate.getDate() >= 3){
+        $('.msg > ul').empty();
     }
 
     if (document.querySelector('.msg').innerText.length > 0){
