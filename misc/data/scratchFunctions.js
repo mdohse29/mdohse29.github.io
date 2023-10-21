@@ -15,7 +15,7 @@ $(document).ready(function(){
     }
 
     // Set to clear user message after a certain number of days.
-    if (currentDate.getMonth() == 10 && currentDate.getDate() >= 3){
+    if (currentDate.getMonth() >= 10){
         $('.msg > ul').empty();
     }
 
