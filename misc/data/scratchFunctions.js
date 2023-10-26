@@ -136,12 +136,18 @@ $(document).ready(function(){
                 changed = true;
             }
 
-            // changed = false;
-            if (changed){
+            // If issues arise from replacing the text when no changes were made 
+            // uncomment the if statement
+            // remove the part checking for new line at the end and find the best spot for it
+            // if (changed){
+                if (text.substring(text.length - 1) == "\n"){
+                    console.log("Removing extra line at the end.")
+                    text = text.substring(0, text.length - 1);
+                }
                 // alert("removing bullets");
                 navigator.clipboard.writeText(text);
                 $('#TextArea').val(text);
-            }
+            // }
             $('.popup').addClass('dnone');
             $('.popup').empty();
         }, 700);
