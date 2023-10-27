@@ -2,62 +2,25 @@ $(document).ready(function(){
     let previous = document.referrer;
     const currentDate = new Date();
     function popup(text, timeOut){
-        $('.popup').append('<p>' + text + '</p>');
+        $('.popup > div').append('<p>' + text + '</p>');
         $('.popup').removeClass('dnone');
         setTimeout(() => {
-            $('.popup').removeClass('dnone');
-            $('.popup').empty();
+            $('.popup').addClass('dnone');
+            $('.popup > div').empty();
             $('#TextArea').focus();
         }, timeOut);
     }
-    if (previous.includes("toolBox.html")){
-        $('#toolBox').show();
-    }
 
-    // Set to clear user message after a certain number of days.
-    if (currentDate.getMonth() >= 10){
-        $('.msg > ul').empty();
-    }
-
-    if (document.querySelector('.msg').innerText.length > 0){
-        $('.msg').prepend('<h1>Update!</h1>');
-        $('.msg').append('<p style="text-align: right;">If an issue is found please report it here.<br/><a href="mailto:aaaabncggffyesoyicuhyz3u7u@imaginelearning.org.slack.com">BUG</a> &larr; Click to report an issue.</p>');
-    }else{
-        $('.msg').hide();
-    }
-
-    let currentVal = $('select').val();
-    $('#TextArea').addClass(currentVal);
-    
-
-    // $('option').click(function(){
-    //     let color = $(this).val();
-    //     $('#TextArea').addClass(currentVal);
-        
-    //     location.reload();
-    // });
-
-    $('#exspc').mousedown(function(){
-        $(this).css('box-shadow', 'none');
-    });
-
-    $('#exspc').mouseup(function(){
-        $(this).css('box-shadow', '0px 0px 0px 1px darkgrey');
-    });
-
-    $('#exspc').click(function(){
-        let regex = /^\s*[^\S]/g;
-        let text = $('#TextArea').val().split('\n');
-        for (let a in text){
-            text[a] = text[a].replaceAll(regex, '');
+    function toggleSpclFtr(text){
+        if (text == "Admin"){
+            $('.spclFtr').removeClass('dnone');
+        }else if (text == "goodbye"){
+            $('.spclFtr').addClass('dnone');
         }
-        navigator.clipboard.writeText(text.join('\n'));
-        $('#TextArea').val(text.join('\n'));
-        popup("Done!", 700);
-    });
+    }
 
-    $('#TextArea').on('paste', function(event){
-        $('.popup').append('<p>Processing ...</p>');
+    function processText(){
+        $('.popup > div').append('<p>Processing ...</p>');
         $('.popup').removeClass('dnone');
         /*
         Possible regex for stripping html from the text
@@ -82,7 +45,6 @@ $(document).ready(function(){
        
         setTimeout(function(){
             let changed = false;
-            let foundHTML = false;
             let text = $('#TextArea').val();
 
             if (text.includes("/>") || text.includes("</")){
@@ -149,8 +111,81 @@ $(document).ready(function(){
                 $('#TextArea').val(text);
             // }
             $('.popup').addClass('dnone');
-            $('.popup').empty();
+            $('.popup > div').empty();
         }, 700);
+    }
+
+    if (previous.includes("toolBox.html")){
+        $('#toolBox').show();
+    }
+
+    // Set to clear user message after a certain number of days.
+    if (currentDate.getMonth() >= 10){
+        $('.msg > ul').empty();
+    }
+
+    if (document.querySelector('.msg').innerText.length > 0){
+        $('.msg').prepend('<h1>Update!</h1>');
+        $('.msg').append('<p style="text-align: right;">If an issue is found please report it here.<br/><a href="mailto:aaaabncggffyesoyicuhyz3u7u@imaginelearning.org.slack.com">BUG</a> &larr; Click to report an issue.</p>');
+    }else{
+        $('.msg').hide();
+    }
+
+    let currentVal = $('select').val();
+    $('#TextArea').addClass(currentVal);
+    
+
+    // $('option').click(function(){
+    //     let color = $(this).val();
+    //     $('#TextArea').addClass(currentVal);
+        
+    //     location.reload();
+    // });
+
+    $('#exspc').mousedown(function(){
+        $(this).css('box-shadow', 'none');
     });
+
+    $('#exspc').mouseup(function(){
+        $(this).css('box-shadow', '0px 0px 0px 1px darkgrey');
+    });
+
+    $('#exspc').click(function(){
+        let regex = /^\s*[^\S]/g;
+        let text = $('#TextArea').val().split('\n');
+        for (let a in text){
+            text[a] = text[a].replaceAll(regex, '');
+        }
+        navigator.clipboard.writeText(text.join('\n'));
+        $('#TextArea').val(text.join('\n'));
+        popup("Done!", 700);
+    });
+
+    $('#stop').click(function (){
+        $('#TextArea').off('paste', processText);
+        // $('#TextArea').on('paste', () => {
+        //     let text = $('#TextArea').val();
+        //     toggleSpclFtr(text);
+        // })
+        popup("Processing has been disabled!", 1500);
+        $('#stop').addClass('dnone');
+        $('#start').removeClass('dnone');
+    });
+
+    $('#start').click(function (){
+        $('#TextArea').off('paste');
+        $('#TextArea').on('paste', processText);
+        popup("Processing has been enabled", 1500);
+        $('#start').addClass('dnone');
+        $('#stop').removeClass('dnone');
+    });
+
+    $('#TextArea').keyup(function (){
+        let text = $('#TextArea').val();
+        console.log(text);
+        toggleSpclFtr(text);
+    });
+
+    $('#TextArea').on('paste', processText);
 
 });

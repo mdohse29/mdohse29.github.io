@@ -13,6 +13,11 @@ select {
     display: flex;
     justify-content: space-between;
 }
+div.popup > div.presentation {
+    background-color: rgba(54, 235, 235, 0.25);
+    justify-content: center;
+    border-radius: 10px;
+}
 .popup {
     position: fixed;
     display: inline-block;
