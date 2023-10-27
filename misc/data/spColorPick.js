@@ -9,4 +9,5 @@ colorSelect.addEventListener('change', () => {
     textArea.classList.add(setting);
     colorSelect.querySelector('option[value="' + setting + '"]').setAttribute('selected', '');
     currentValue = setting;
+    textArea.focus();
 })
