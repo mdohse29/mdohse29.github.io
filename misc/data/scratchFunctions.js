@@ -107,8 +107,8 @@ $(document).ready(function(){
                     text = text.substring(0, text.length - 1);
                 }
                 // alert("removing bullets");
-                navigator.clipboard.writeText(text);
-                $('#TextArea').val(text);
+                navigator.clipboard.writeText(text.trim());
+                $('#TextArea').val(text.trim());
             // }
             $('.popup').addClass('dnone');
             $('.popup > div').empty();
@@ -156,10 +156,26 @@ $(document).ready(function(){
         for (let a in text){
             text[a] = text[a].replaceAll(regex, '');
         }
-        navigator.clipboard.writeText(text.join('\n'));
-        $('#TextArea').val(text.join('\n'));
-        popup("Done!", 700);
+        navigator.clipboard.writeText(text.join('\n').trim());
+        $('#TextArea').val(text.join('\n').trim());
+        popup("Done!", 1000);
     });
+
+    $('#sandr').click(function(){
+        $('.search-replace').removeClass('dnone');
+    });
+
+    $('#rep').click(function(){
+        let text = $('#TextArea').val();
+        let search = $('#search').val();
+        let replace = $('#replace').val();
+        let regex = "\\b" + search + "\\b"
+        text = text.replaceAll(new RegExp(regex, "gm"), replace);
+        $('#TextArea').val(text);
+        $('#search').val("");
+        $('#replace').val("");
+        $('.search-replace').addClass('dnone');
+    })
 
     $('#stop').click(function (){
         $('#TextArea').off('paste', processText);
@@ -182,7 +198,6 @@ $(document).ready(function(){
 
     $('#TextArea').keyup(function (){
         let text = $('#TextArea').val();
-        console.log(text);
         toggleSpclFtr(text);
     });
 

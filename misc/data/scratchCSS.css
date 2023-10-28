@@ -53,9 +53,7 @@ div.popup > div.presentation {
 .spclFtr{
     display: block;
 }
-.dnone {
-    display: none;
-}
+
 #exspc {
     display: inline-block;
     font-size: small;
@@ -100,6 +98,22 @@ div.popup > div.presentation {
     flex-direction: column;
 }
 
+.search-replace {
+    display: flex;
+    position: absolute;
+    z-index: 2;
+    margin: 15% 10%;
+    background-color: whitesmoke;
+    height: 5vh;
+    padding: 15px;
+}
+.search-replace > input {
+    margin-left: 3px;
+    margin-right: 3px;
+}
+.dnone {
+    display: none;
+}
 li::marker {
     content: "NEW!";
     font-weight: bold;
