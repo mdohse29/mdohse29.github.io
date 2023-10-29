@@ -20,29 +20,28 @@ $(document).ready(function(){
     }
 
     function searchRegex(searchText){
-        let spclCharCheck = new RegExp("([^A-Z a-z 0-9 \\w])", "g");
+        /*
+        Seems to be working so far. Most likely still needs some work.
+        Right now it is escaping any non-alphanumeric character, except white space
+        Further testing is needed.
+        */
+        // let spclCharCheck = new RegExp("([\[\]\.\,\\\/\!\@\#\$\%\^\&\*\(\)\_\-\=\+\<\>\{\}\"\?])", "g");
+        let spclCharCheck = new RegExp("([^A-Za-z0-9 \\w])", "g");
         
         if (searchText.match(spclCharCheck)){
             
-// Create special char check and escape any special characters
-//make a function
-/*
-Check scenarios:
-text!
-!text
-!text!
-*/          
-            spclCharCheck = new RegExp("([^A-Z a-z 0-9 \\w])")
             let formattedText = searchText.replace(spclCharCheck, '\\$1');
 
             let pat1 = new RegExp("\\b" + formattedText + "\\b", "g");
             let pat2 = new RegExp("\\b" + formattedText + "\\B", "g");
             let pat3 = new RegExp("\\B" + formattedText + "\\b", "g");
             let pat4 = new RegExp("\\B" + formattedText + "\\B", "g");
-            console.log(searchText.match(pat1));
-            console.log(searchText.match(pat2));
-            console.log(searchText.match(pat3));
-            console.log(searchText.match(pat4));
+
+            // console.log(searchText.match(pat1));
+            // console.log(searchText.match(pat2));
+            // console.log(searchText.match(pat3));
+            // console.log(searchText.match(pat4));
+
             if (searchText.match(pat1)){
                 return "\\b" + formattedText + "\\b";
             }else if (searchText.match(pat2)){
@@ -54,7 +53,7 @@ text!
             }
             // console.log("Special Char");
             // searchText = searchText.replace(spclCharCheck, '\\$1');
-            // console.log(searchText);
+            // console.log(formattedText);
         }else{
             return "\\b" + searchText + "\\b";
         }
@@ -111,6 +110,13 @@ text!
             if (text.match(regtest)){
                 console.log("Replacing special formatted quotes with regular quotes");
                 text = text.replaceAll(regtest, "\"");
+                changed = true;
+            }
+
+            regtest = /[\’]/gm;
+            if (text.match(regtest)){
+                console.log("Replacing odd characters");
+                text = text.replaceAll(regtest, "'");
                 changed = true;
             }
 
@@ -204,6 +210,7 @@ text!
 
     $('#sandr').click(function(){
         $('.search-replace').removeClass('dnone');
+        $('#search').focus();
     });
 
     $('#rep').click(function(){
@@ -212,13 +219,14 @@ text!
         let replace = $('#replace').val();
         let regex = searchRegex(search);
         // let regex = search;
-        console.log(regex);
+        // console.log(regex);
         text = text.replaceAll(new RegExp(regex, "gm"), replace);
 
         $('#TextArea').val(text);
         $('#search').val("");
         $('#replace').val("");
         $('.search-replace').addClass('dnone');
+        $('#TextArea').focus();
     })
 
     $('#stop').click(function (){
