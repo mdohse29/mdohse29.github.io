@@ -19,6 +19,57 @@ $(document).ready(function(){
         }
     }
 
+    function removeExtraLines(){
+        let regex = /^\s*[^\S]/g;
+        let text = $('#TextArea').val().split('\n');
+        for (let a in text){
+            text[a] = text[a].replaceAll(regex, '');
+        }
+        navigator.clipboard.writeText(text.join('\n').trim());
+        $('#TextArea').val(text.join('\n').trim());
+        popup("Done!", 1000);
+    }
+
+    function searchRegex(searchText){
+        /*
+        Seems to be working so far. Most likely still needs some work.
+        Right now it is escaping any non-alphanumeric character, except white space
+        Further testing is needed.
+        */
+        // let spclCharCheck = new RegExp("([\[\]\.\,\\\/\!\@\#\$\%\^\&\*\(\)\_\-\=\+\<\>\{\}\"\?])", "g");
+        let spclCharCheck = new RegExp("([^A-Za-z0-9 \\w])", "g");
+        
+        if (searchText.match(spclCharCheck)){
+            
+            let formattedText = searchText.replace(spclCharCheck, '\\$1');
+
+            let pat1 = new RegExp("\\b" + formattedText + "\\b", "g");
+            let pat2 = new RegExp("\\b" + formattedText + "\\B", "g");
+            let pat3 = new RegExp("\\B" + formattedText + "\\b", "g");
+            let pat4 = new RegExp("\\B" + formattedText + "\\B", "g");
+
+            // console.log(searchText.match(pat1));
+            // console.log(searchText.match(pat2));
+            // console.log(searchText.match(pat3));
+            // console.log(searchText.match(pat4));
+
+            if (searchText.match(pat1)){
+                return "\\b" + formattedText + "\\b";
+            }else if (searchText.match(pat2)){
+                return "\\b" + formattedText + "\\B";
+            }else if (searchText.match(pat3)){
+                return "\\B" + formattedText + "\\b";
+            }else if (searchText.match(pat4)){
+                return "\\B" + formattedText + "\\B";
+            }
+            // console.log("Special Char");
+            // searchText = searchText.replace(spclCharCheck, '\\$1');
+            // console.log(formattedText);
+        }else{
+            return "\\b" + searchText + "\\b";
+        }
+    }
+
     function processText(){
         $('.popup > div').append('<p>Processing ...</p>');
         $('.popup').removeClass('dnone');
@@ -73,6 +124,13 @@ $(document).ready(function(){
                 changed = true;
             }
 
+            regtest = /[\’]/gm;
+            if (text.match(regtest)){
+                console.log("Replacing odd characters");
+                text = text.replaceAll(regtest, "'");
+                changed = true;
+            }
+
             regtest = /^\s*\n/gm;
             if (text.match(regtest)){
                 console.log('Removing empty lines');
@@ -107,8 +165,8 @@ $(document).ready(function(){
                     text = text.substring(0, text.length - 1);
                 }
                 // alert("removing bullets");
-                navigator.clipboard.writeText(text);
-                $('#TextArea').val(text);
+                navigator.clipboard.writeText(text.trim());
+                $('#TextArea').val(text.trim());
             // }
             $('.popup').addClass('dnone');
             $('.popup > div').empty();
@@ -150,23 +208,34 @@ $(document).ready(function(){
         $(this).css('box-shadow', '0px 0px 0px 1px darkgrey');
     });
 
-    $('#exspc').click(function(){
-        let regex = /^\s*[^\S]/g;
-        let text = $('#TextArea').val().split('\n');
-        for (let a in text){
-            text[a] = text[a].replaceAll(regex, '');
-        }
-        navigator.clipboard.writeText(text.join('\n'));
-        $('#TextArea').val(text.join('\n'));
-        popup("Done!", 700);
+    $('#exspc').click(removeExtraLines);
+
+    $('#sandr').click(function(){
+        $('.search-replace').removeClass('dnone');
+        $('#search').focus();
     });
+
+    $('#rep').click(function(){
+        //Search and Replace
+        let text = $('#TextArea').val();
+        let search = $('#search').val();
+        let replace = $('#replace').val();
+        let regex = searchRegex(search);
+        // let regex = search;
+        // console.log(regex);
+        text = text.replaceAll(new RegExp(regex, "gm"), replace);
+
+        $('#TextArea').val(text);
+        $('#search').val("");
+        $('#replace').val("");
+        $('.search-replace').addClass('dnone');
+        $('#TextArea').focus();
+    })
 
     $('#stop').click(function (){
         $('#TextArea').off('paste', processText);
-        // $('#TextArea').on('paste', () => {
-        //     let text = $('#TextArea').val();
-        //     toggleSpclFtr(text);
-        // })
+        $('#exspc').off('click');
+
         popup("Processing has been disabled!", 1500);
         $('#stop').addClass('dnone');
         $('#start').removeClass('dnone');
@@ -175,14 +244,18 @@ $(document).ready(function(){
     $('#start').click(function (){
         $('#TextArea').off('paste');
         $('#TextArea').on('paste', processText);
+        $('#exspc').click(removeExtraLines);
         popup("Processing has been enabled", 1500);
         $('#start').addClass('dnone');
         $('#stop').removeClass('dnone');
     });
 
+    $('.btn-close').click(function(){
+        toggleSpclFtr("goodbye");
+    })
+
     $('#TextArea').keyup(function (){
         let text = $('#TextArea').val();
-        console.log(text);
         toggleSpclFtr(text);
     });
 

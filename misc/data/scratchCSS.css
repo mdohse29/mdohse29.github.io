@@ -2,6 +2,7 @@ textarea {
     width: 100%;
     height:inherit;
     z-index: 1;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 select {
@@ -17,6 +18,10 @@ div.popup > div.presentation {
     background-color: rgba(54, 235, 235, 0.25);
     justify-content: center;
     border-radius: 10px;
+    height: 7vh;
+}
+div.presentation > p {
+    margin:auto;
 }
 .popup {
     position: fixed;
@@ -48,14 +53,12 @@ div.popup > div.presentation {
 .msgContainer {
     display: flex;
     justify-content: right;
-    width: 50%;
+    width: 40%;
 }
 .spclFtr{
     display: block;
 }
-.dnone {
-    display: none;
-}
+
 #exspc {
     display: inline-block;
     font-size: small;
@@ -94,12 +97,28 @@ div.popup > div.presentation {
 }
 
 #TextAreaContain {
-    height: 90vh;
+    height: 95vh;
     width: 50%;
     display: flex;
     flex-direction: column;
 }
 
+.search-replace {
+    display: flex;
+    position: absolute;
+    z-index: 2;
+    margin: 15% 10%;
+    background-color: whitesmoke;
+    height: 8vh;
+    padding: 15px;
+}
+.search-replace > input {
+    margin-left: 3px;
+    margin-right: 3px;
+}
+.dnone {
+    display: none;
+}
 li::marker {
     content: "NEW!";
     font-weight: bold;
