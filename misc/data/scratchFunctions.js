@@ -19,6 +19,17 @@ $(document).ready(function(){
         }
     }
 
+    function removeExtraLines(){
+        let regex = /^\s*[^\S]/g;
+        let text = $('#TextArea').val().split('\n');
+        for (let a in text){
+            text[a] = text[a].replaceAll(regex, '');
+        }
+        navigator.clipboard.writeText(text.join('\n').trim());
+        $('#TextArea').val(text.join('\n').trim());
+        popup("Done!", 1000);
+    }
+
     function searchRegex(searchText){
         /*
         Seems to be working so far. Most likely still needs some work.
@@ -197,16 +208,7 @@ $(document).ready(function(){
         $(this).css('box-shadow', '0px 0px 0px 1px darkgrey');
     });
 
-    $('#exspc').click(function(){
-        let regex = /^\s*[^\S]/g;
-        let text = $('#TextArea').val().split('\n');
-        for (let a in text){
-            text[a] = text[a].replaceAll(regex, '');
-        }
-        navigator.clipboard.writeText(text.join('\n').trim());
-        $('#TextArea').val(text.join('\n').trim());
-        popup("Done!", 1000);
-    });
+    $('#exspc').click(removeExtraLines);
 
     $('#sandr').click(function(){
         $('.search-replace').removeClass('dnone');
@@ -214,6 +216,7 @@ $(document).ready(function(){
     });
 
     $('#rep').click(function(){
+        //Search and Replace
         let text = $('#TextArea').val();
         let search = $('#search').val();
         let replace = $('#replace').val();
@@ -231,10 +234,8 @@ $(document).ready(function(){
 
     $('#stop').click(function (){
         $('#TextArea').off('paste', processText);
-        // $('#TextArea').on('paste', () => {
-        //     let text = $('#TextArea').val();
-        //     toggleSpclFtr(text);
-        // })
+        $('#exspc').off('click');
+
         popup("Processing has been disabled!", 1500);
         $('#stop').addClass('dnone');
         $('#start').removeClass('dnone');
@@ -243,10 +244,15 @@ $(document).ready(function(){
     $('#start').click(function (){
         $('#TextArea').off('paste');
         $('#TextArea').on('paste', processText);
+        $('#exspc').click(removeExtraLines);
         popup("Processing has been enabled", 1500);
         $('#start').addClass('dnone');
         $('#stop').removeClass('dnone');
     });
+
+    $('.btn-close').click(function(){
+        toggleSpclFtr("goodbye");
+    })
 
     $('#TextArea').keyup(function (){
         let text = $('#TextArea').val();
