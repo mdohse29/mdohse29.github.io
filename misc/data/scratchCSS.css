@@ -62,9 +62,9 @@ div.presentation > p {
 #exspc {
     display: inline-block;
     font-size: small;
-    background-color: #63c1ff;
+    /* background-color: #63c1ff; */
     border: 1px solid grey;
-    padding: 2px 5px;
+    /* padding: 2px 5px; */
     box-shadow: 0px 0px 0px 1px darkgrey;
     cursor: pointer;
     user-select: none;
