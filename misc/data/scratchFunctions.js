@@ -239,6 +239,7 @@ $(document).ready(function(){
         popup("Processing has been disabled!", 1500);
         $('#stop').addClass('dnone');
         $('#start').removeClass('dnone');
+        $('#exspc').attr('disabled', 'disabled');
     });
 
     $('#start').click(function (){
@@ -248,6 +249,7 @@ $(document).ready(function(){
         popup("Processing has been enabled", 1500);
         $('#start').addClass('dnone');
         $('#stop').removeClass('dnone');
+        $('#exspc').removeAttr('disabled');
     });
 
     $('.btn-close').click(function(){
