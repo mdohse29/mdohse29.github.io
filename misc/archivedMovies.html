@@ -12,31 +12,41 @@
 </head>
 <body style="background-color: lightblue;">
     <div class="container-fluid">
+        <!-- Special Feature -->
         <div class="row spcl d-none">
             <div class="col col-md-3 mt-2 random">
                 <button class="btn btn-danger" id="rand">Random</button>
                 <div class="input-group-sm d-inline-block ms-1">
                     <input type="number" class="form-control-sm" name="num" id="num" min="5" max="15" value="5">
                 </div>
+                <button class="btn btn-close bg-light" id="close"></button>
             </div>
         </div>
+        <!-- Search Box and Header -->
         <div class="row menu">
             <div class="col col-md-5 mt-2 search">
                 <input type="text" name="q" class="w-50" id="search-box" placeholder="Search Title Here">
                 <button class="btn btn-primary d-none" id="submit-reset">Reset</button>
             </div>
             <div class="head my-1 col-sm-5">
-                <h1 style="text-align:center;">Archived Movies</h1>
+                <h1>Archived Movies</h1>
             </div>
             <div id="toolBox" class="col d-none"><a href="../toolBox.html">Back to ToolBox</a></div>
         </div>
+        <!-- Content Area -->
         <div class="row content">
             <div class="col movies">
+                <div class="tabs-container sticky-top">
+                    <div class="tabs w-50">
+                        <div class="tab bg-light">All</div>
+                        <div class="tab bg-light">Movies</div>
+                        <div class="tab bg-light">TV</div>
+                        <div class="tab bg-light">Archive</div>
+                    </div>
+                </div>
                 <p id="placeH" style="text-align: center;font-size: 1.5em;">OOPS! Something Went Wrong!<br><br>Nothing to see here</p>
             </div>
-            <div class="col d-none results">
-        
-            </div>
+            <div class="col results d-none"></div>
             <div class="msg col">
                 <p>If there is a movie in this list you would like to see,<br>just let me know and I will add it to the server.<br><a href="mailto:mdohse30@gmail.com">mdohse30@gmail.com</a></p>
         

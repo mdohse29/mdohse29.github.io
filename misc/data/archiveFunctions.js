@@ -45,7 +45,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
 
             for (a in titles) {
                 if (titles[a].toLowerCase().includes(searchText.toLowerCase())) {
-                    $('.results').append('<p class="title" style="background-color: none;font-weight: bold;font-size: 1em;">' + titles[a] + '</p>');
+                    $('.results').append('<p class="title">' + titles[a] + '</p>');
                     found = true;
                 }
             }
@@ -78,16 +78,10 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
 
 
     $(document).on('mouseenter', 'p.title', function () {
-        $(this).css('background-color', 'black');
-        $(this).css('color', 'white');
-        $(this).css('font-size', '1.25em');
-        $(this).css('font-weight', 'normal');
+        $(this).addClass('highlight');
     });
     $(document).on('mouseleave', 'p.title', function () {
-        $(this).css('background-color', 'inherit');
-        $(this).css('color', 'black');
-        $(this).css('font-size', '1em');
-        $(this).css('font-weight', 'bold');
+        $(this).removeClass('highlight');
     });
 
     $('#rand').click(function () {
@@ -115,5 +109,9 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
 
     $('#num').keydown(function (event) {
         event.preventDefault();
+    });
+
+    $('#close').click(function (){
+        $('.spcl').addClass('d-none');
     })
 });

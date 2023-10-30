@@ -10,6 +10,7 @@ body {
     background-color: beige;
     opacity: 65%;
     max-width: 332px;
+    text-align: center;
   }
   #search-box {
     max-width: 200px;
@@ -29,17 +30,17 @@ body {
     overflow: scroll;
     border: 1px solid black;
     padding: 2px 10px;
-    background-color: beige;
+    background-color: rgb(245, 245, 220, 0.5);
     margin-left: 1%;
     margin-right: .5%;
-    opacity: 50%;
+    /* opacity: 50%; */
   }
   .msg {
     height: fit-content;
     text-align:center;
     line-height: 2em;
-    background-color: beige;
-    opacity: 65%;
+    background-color: rgb(245, 245, 220, 0.5);
+    /* opacity: 65%; */
     border: 1px solid black;
     margin-right: 1%;
     margin-left: .5%;
@@ -53,13 +54,49 @@ body {
     opacity: 100%;
     cursor: pointer;
     margin: 0px;
-    padding: 5px 0px;
+    padding: 5px 0px 5px 10px;
+    text-transform: capitalize;
   }
  
   .notFound {
-    background-color: white;
+    /* background-color: white; */
     font-weight: bold;
     font-size: 1.5em;
+  }
+
+  .title {
+    background-color: none;
+    font-weight: bold;
+    font-size: 1em;
+    color: black;
+  }
+
+  .tabs-container {
+    display: none;
+    border-bottom: 3px solid black;
+  }
+
+  .tabs {
+    display: flex;
+    padding: 10px 10px 0px 10px;
+  }
+
+  .tab {
+    border: 1px solid black;
+    display: inline-block;
+    padding: 5px 0px;
+    font-weight: bolder;
+    width: 100px;
+    text-align: center;
+    border-radius: 10px 10px 0px 0px;
+    min-width: 68px;
+  }
+
+  .highlight {
+    background-color: black;
+    color: white;
+    font-size: 1.25em;
+    font-weight: normal;
   }
 
   #toolBox {

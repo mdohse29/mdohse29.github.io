@@ -256,7 +256,7 @@ $(document).ready(function(){
         toggleSpclFtr("goodbye");
     })
 
-    $('#TextArea').keyup(function (){
+    $('#TextArea').on('input', function (){
         let text = $('#TextArea').val();
         toggleSpclFtr(text);
     });

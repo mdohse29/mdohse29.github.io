@@ -12,7 +12,7 @@
 
         // console.log(formatted.replace(/\[(\d\d\d\d)\].*/g, '($1)'));
         if (formatted){
-          $('.movies').append('<p class="title" style="background-color: none;font-weight: bold;font-size: 1em;">' + formatted + '</p>');
+          $('.movies').append('<p class="title">' + formatted + '</p>');
         }else{
           console.log("Removing -> " + movies[a] + "EMPTY");
           movies.splice(a,1);
@@ -32,5 +32,5 @@
     format = format.replace(/\[(\d\d\d\d)\].*/g, '($1)');
     format = format.replaceAll('.', ' ');
     format = format.replace(/([\w\d])(\()/g, '$1 $2');
-    return format;
+    return format.toLowerCase();
   }
