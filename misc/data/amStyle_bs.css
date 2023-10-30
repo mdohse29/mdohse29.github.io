@@ -10,6 +10,7 @@ body {
     background-color: beige;
     opacity: 65%;
     max-width: 332px;
+    text-align: center;
   }
   #search-box {
     max-width: 200px;
@@ -71,19 +72,24 @@ body {
   }
 
   .tabs-container {
-    border-bottom: 1px solid black;
-
+    display: none;
+    border-bottom: 3px solid black;
   }
 
   .tabs {
-    padding: 10px;
+    display: flex;
+    padding: 10px 10px 0px 10px;
   }
 
   .tab {
     border: 1px solid black;
     display: inline-block;
-    padding: 10px;
+    padding: 5px 0px;
     font-weight: bolder;
+    width: 100px;
+    text-align: center;
+    border-radius: 10px 10px 0px 0px;
+    min-width: 68px;
   }
 
   .highlight {
