@@ -53,13 +53,28 @@ body {
     opacity: 100%;
     cursor: pointer;
     margin: 0px;
-    padding: 5px 0px;
+    padding: 5px 0px 5px 10px;
+    text-transform: capitalize;
   }
  
   .notFound {
     background-color: white;
     font-weight: bold;
     font-size: 1.5em;
+  }
+
+  .title {
+    background-color: none;
+    font-weight: bold;
+    font-size: 1em;
+    color: black;
+  }
+
+  .highlight {
+    background-color: black;
+    color: white;
+    font-size: 1.25em;
+    font-weight: normal;
   }
 
   #toolBox {

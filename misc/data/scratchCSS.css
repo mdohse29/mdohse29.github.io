@@ -128,7 +128,7 @@ li::marker {
 }
 @media (width > 1152px){
     textarea {
-        width: 80%
+        width: 90%
     }
     /* .msg {
         width: 50%;
