@@ -42,16 +42,17 @@ $(document).ready(function(){
         if (searchText.match(spclCharCheck)){
             
             let formattedText = searchText.replace(spclCharCheck, '\\$1');
+            formattedText = formattedText.replaceAll("_", "\\_");
 
             let pat1 = new RegExp("\\b" + formattedText + "\\b", "g");
             let pat2 = new RegExp("\\b" + formattedText + "\\B", "g");
             let pat3 = new RegExp("\\B" + formattedText + "\\b", "g");
             let pat4 = new RegExp("\\B" + formattedText + "\\B", "g");
 
-            // console.log(searchText.match(pat1));
-            // console.log(searchText.match(pat2));
-            // console.log(searchText.match(pat3));
-            // console.log(searchText.match(pat4));
+            console.log(searchText.match(pat1));
+            console.log(searchText.match(pat2));
+            console.log(searchText.match(pat3));
+            console.log(searchText.match(pat4));
 
             if (searchText.match(pat1)){
                 return "\\b" + formattedText + "\\b";
@@ -62,12 +63,11 @@ $(document).ready(function(){
             }else if (searchText.match(pat4)){
                 return "\\B" + formattedText + "\\B";
             }
+            
             // console.log("Special Char");
             // searchText = searchText.replace(spclCharCheck, '\\$1');
-            // console.log(formattedText);
-        }else{
-            return "\\b" + searchText + "\\b";
         }
+        return "\\b" + searchText + "\\b";
     }
 
     function processText(){
@@ -220,14 +220,19 @@ $(document).ready(function(){
         let text = $('#TextArea').val();
         let search = $('#search').val();
         let replace = $('#replace').val();
-        let regex = searchRegex(search);
-        // let regex = search;
-        // console.log(regex);
-        text = text.replaceAll(new RegExp(regex, "gm"), replace);
-
+        let strict = $('#word').is(':checked');
+        if (strict){
+            let regex = searchRegex(search);
+            // let regex = search;
+            // console.log(regex);
+            text = text.replaceAll(new RegExp(regex, "gm"), replace);
+        }else{
+            text = text.replaceAll(search, replace);
+        }
         $('#TextArea').val(text);
         $('#search').val("");
         $('#replace').val("");
+        $('#word').prop('checked', false);
         $('.search-replace').addClass('dnone');
         $('#TextArea').focus();
     })
