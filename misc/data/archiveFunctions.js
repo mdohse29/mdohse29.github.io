@@ -84,6 +84,11 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
         $(this).removeClass('highlight');
     });
 
+    $('.tab').click(function(){
+        $('.active').removeClass('active');
+        $(this).addClass('active');
+    })
+
     $('#rand').click(function () {
         let elements = $('.movies > p.title');
         let num = $('#num').val();

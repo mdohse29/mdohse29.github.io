@@ -1,5 +1,5 @@
 // $.get('./data/archive.txt', function(data, status){
-  axios.get("./data/archive.txt")
+  axios.get("https://mdohse29.github.io/misc/data/archive.txt")
   .then(archive => {
     let movies = archive.data.split('\n');
     if (movies.length > 0){
@@ -20,7 +20,7 @@
       
       // }
     }
-    $('.movies').append('<p id="total"><sub>Total: ' + movies.length + '</sub></p>');
+    $('.movies').append('<p id="total" class="sticky-bottom"><strong><sub>Total: ' + movies.length + '</sub></strong></p>');
   })
   .catch(e => {
     console.log("Something is wrong\n", e);
