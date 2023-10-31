@@ -46,6 +46,9 @@ div.presentation > p {
     background-color: lightgray;
     user-select: none;
 }
+.msg ul {
+    margin-left: 10px;
+}
 .msg li {
     padding-left: 5px;
     margin-bottom: 10px;
@@ -129,6 +132,7 @@ li::marker {
     content: "NEW!";
     font-weight: bold;
     margin-right: 5px;
+    
 }
 @media (width > 1152px){
     textarea {
