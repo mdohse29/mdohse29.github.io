@@ -87,7 +87,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
     });
 
     $('.tab').click(function(){
-        $('.active').removeClass('active');
+        $(this).parent().find('.active').removeClass('active');
         $(this).addClass('active');
         let tag = $(this).attr('tag');
         let movies = $('p.title');
@@ -134,4 +134,5 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
     $('#close').click(function (){
         $('.spcl').addClass('d-none');
     });
+
 });

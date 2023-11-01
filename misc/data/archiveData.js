@@ -30,11 +30,12 @@
     let p = document.createElement('p');
     let strong = document.createElement('strong');
     let sub = document.createElement('sub');
+    
     p.setAttribute('id', 'total');
     p.setAttribute('tag', 'all');
     p.classList.add('sticky-bottom');
-
     sub.innerText = 'Total: ' + movies.length;
+
     strong.appendChild(sub);
     p.appendChild(strong);
     list.appendChild(p);
