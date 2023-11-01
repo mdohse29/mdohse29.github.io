@@ -115,6 +115,11 @@ body {
     text-align: center;
     font-size: 1.5em;
   }
+  
+  #total sub:hover{
+    background-color: black;
+    color: white;
+  }
 
   .btn {
     padding: 2px 5px;

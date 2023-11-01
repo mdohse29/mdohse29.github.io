@@ -134,4 +134,5 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
     $('#close').click(function (){
         $('.spcl').addClass('d-none');
     });
+
 });
