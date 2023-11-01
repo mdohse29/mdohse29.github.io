@@ -28,7 +28,7 @@ body {
     width: 75%;
   }
   .movies, .results {
-    height: 800px;
+    height: 750px;
     width: 100%;
     overflow: scroll;
     scrollbar-width: none;
