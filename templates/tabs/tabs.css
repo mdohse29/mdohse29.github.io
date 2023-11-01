@@ -1,0 +1,21 @@
+.active {
+  background-color: rgba(127, 226, 243, 0.85) !important;
+  box-shadow: inset 0px -6px 3px rgb(52, 168, 197);
+}
+
+.tabs-container, .tabs {
+  display: flex;
+}
+
+.tab {
+  border: 1px solid black;
+  background-color: rgb(245, 245, 220, 0.5);
+  display: inline-block;
+  padding: 5px 0px;
+  font-weight: bolder;
+  width: 100px;
+  text-align: center;
+  border-radius: 10px 10px 0px 0px;
+  min-width: 68px;
+  cursor: pointer;
+}

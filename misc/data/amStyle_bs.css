@@ -16,6 +16,11 @@ body {
     max-width: 200px;
   }
 
+  .search {
+    margin-left: 10px;
+    flex-grow: .38;
+  }
+
   #num{
     width: 65px;
   }
@@ -41,8 +46,8 @@ body {
     /* opacity: 50%; */
   }
   .active {
-    background-color: rgba(127, 226, 243, 0.75) !important;
-    box-shadow: inset 0px -6px rgb(52, 168, 197);
+    background-color: rgba(127, 226, 243, 0.85) !important;
+    box-shadow: inset 0px -6px 3px rgb(52, 168, 197);
   }
   .msg {
     height: fit-content;
@@ -72,6 +77,8 @@ body {
     /* background-color: white; */
     font-weight: bold;
     font-size: 1.5em;
+    text-align: center;
+    line-height: 3em;
   }
 
   .title {
@@ -109,6 +116,13 @@ body {
     padding-left: calc(var(--bs-gutter-x) * .5);
     padding-right: calc(var(--bs-gutter-x) * .5);
   }
+  .menu {
+    margin-top: 10px;
+  }
+
+  .search.button {
+    flex-grow: .34;
+  }
 
   #toolBox {
     text-align: right;
@@ -129,12 +143,16 @@ body {
   }
 
   @media (width < 1136px){
-    .row.menu {
-      flex-direction: column;
+    .row.menu > .col {
+      flex-direction: column-reverse;
       align-items: center;
       min-width: max-content;
       text-align: center;
       
+    }
+    .head {
+      margin-top: 10px;
+      margin-bottom: 5px;
     }
     .container-fluid {
       width: 100%;
@@ -144,9 +162,11 @@ body {
     }
     .search {
       text-align: center;
+      margin-bottom: 5px;
     }
     .msg {
       font-size: 12px;
+      margin-bottom: 10px;
     }
     .row.content {
       flex-direction: column-reverse;
