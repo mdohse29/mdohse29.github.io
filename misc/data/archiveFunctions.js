@@ -39,8 +39,8 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
                 titles.push(elements[a].innerText);
             }
 
-            $('.movies').addClass('d-none');
-            $('.results').removeClass('d-none');
+            $('.movies').parent().addClass('d-none');
+            $('.results').parent().removeClass('d-none');
             $('.results > .title').remove();
 
             for (a in titles) {
@@ -67,8 +67,8 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
     reset = function () {
         $('#search-box').val('');
         // $('#search-reset').removeAttr('onclick');
-        $('.results').addClass('d-none');
-        $('.movies').removeClass('d-none');
+        $('.results').parent().addClass('d-none');
+        $('.movies').parent().removeClass('d-none');
         $('.results > p').remove();
         $('#submit-reset').addClass('d-none');
         // $('#search-reset').text("Submit");
@@ -76,7 +76,9 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
 
     }
 
-
+    let tabHeight = $('.tabs').prop('scrollHeight');
+    $('.msg').attr('style', 'margin-top: ' + tabHeight + 'px;');
+    
     $(document).on('mouseenter', 'p.title', function () {
         $(this).addClass('highlight');
     });
@@ -87,6 +89,19 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
     $('.tab').click(function(){
         $('.active').removeClass('active');
         $(this).addClass('active');
+        let tag = $(this).attr('tag');
+        let movies = $('p.title');
+
+        for (let movie = 0; movie < movies.length; movie++){
+            let movieTag = $(movies[movie]).attr('tag');
+
+            if (tag == "all" || tag == movieTag){
+                $(movies[movie]).removeClass('d-none');
+            }else{
+                $(movies[movie]).addClass('d-none');
+            }
+
+        }
     })
 
     $('#rand').click(function () {
@@ -96,8 +111,8 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
             num = 5;
         }
 
-        $('.movies').addClass('d-none');
-        $('.results').removeClass('d-none');
+        $('.movies').parent().addClass('d-none');
+        $('.results').parent().removeClass('d-none');
         if ($('.notFound')) {
             $('.notFound').remove();
         }

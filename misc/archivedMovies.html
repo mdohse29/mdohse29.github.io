@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./data/archiveData.js"></script>
 </head>
-<body style="background-color: lightblue;">
+<body style="background-color: lightblue; min-width: 430px;">
     <div class="container-fluid">
         <!-- Special Feature -->
         <div class="row spcl d-none">
@@ -34,27 +34,30 @@
             <div id="toolBox" class="col d-none"><a href="../toolBox.html">Back to ToolBox</a></div>
         </div>
         <!-- Content Area -->
-        <div class="row">
+        <!-- <div class="row">
             <div class="col">
-                <div class="tabs-container d-none">
+                
+            </div>
+        </div> -->
+        <div class="row content">
+            <div class="col">
+                <div class="tabs-container">
                     <div class="tabs">
-                        <div class="tab active">All</div>
-                        <div class="tab">Movies</div>
-                        <div class="tab">TV</div>
-                        <div class="tab">Archive</div>
+                        <div class="tab active" tag="all">All</div>
+                        <div class="tab" tag="mov">Movies</div>
+                        <div class="tab" tag="tv">TV</div>
+                        <div class="tab" tag="arch">Archive</div>
                     </div>
                 </div>
+                <div class="movies">
+                    <p id="placeH">OOPS! Something Went Wrong!<br><br>Nothing to see here</p>
+                </div>
             </div>
-        </div>
-        <div class="row content">
-            <div class="col movies">
-                
-                <p id="placeH">OOPS! Something Went Wrong!<br><br>Nothing to see here</p>
-            </div>
-            <div class="col results d-none"></div>
-            <div class="msg col">
-                <p>If there is a movie in this list you would like to see,<br>just let me know and I will add it to the server.<br><a href="mailto:mdohse30@gmail.com">mdohse30@gmail.com</a></p>
-        
+            <div class="col d-none"><div class="results"></div></div>
+            <div class="col">
+                <div class="msg">
+                    <p>If there is a movie in this list you would like to see,<br>just let me know and I will add it to the server.<br><a href="mailto:mdohse30@gmail.com">mdohse30@gmail.com</a></p>
+                </div>
             </div>
         </div>
     </div>
