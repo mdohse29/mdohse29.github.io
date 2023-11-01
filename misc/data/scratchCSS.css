@@ -62,7 +62,7 @@ div.presentation > p {
     display: block;
 }
 
-#exspc {
+.usr-btn {
     display: inline-block;
     font-size: small;
     /* background-color: #63c1ff; */
