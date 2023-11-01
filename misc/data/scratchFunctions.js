@@ -1,6 +1,27 @@
 $(document).ready(function(){
     let previous = document.referrer;
     const currentDate = new Date();
+
+    function stopProcessing(){
+        $('#TextArea').off('paste', processText);
+        $('#exspc').off('click');
+
+        popup("Processing has been disabled!", 1500);
+        $('#stop').addClass('dnone');
+        $('#start').removeClass('dnone');
+        $('#exspc').attr('disabled', 'disabled');
+    }
+
+    function startProcessing(){
+        $('#TextArea').off('paste');
+        $('#TextArea').on('paste', processText);
+        $('#exspc').click(removeExtraLines);
+        popup("Processing has been enabled", 1500);
+        $('#start').addClass('dnone');
+        $('#stop').removeClass('dnone');
+        $('#exspc').removeAttr('disabled');
+    }
+
     function popup(text, timeOut){
         $('.popup > div').append('<p>' + text + '</p>');
         $('.popup').removeClass('dnone');
@@ -175,6 +196,7 @@ $(document).ready(function(){
 
     if (previous.includes("toolBox.html")){
         $('#toolBox').show();
+        stopProcessing();
     }
 
     // Set to clear user message after a certain number of days.
@@ -238,23 +260,11 @@ $(document).ready(function(){
     })
 
     $('#stop').click(function (){
-        $('#TextArea').off('paste', processText);
-        $('#exspc').off('click');
-
-        popup("Processing has been disabled!", 1500);
-        $('#stop').addClass('dnone');
-        $('#start').removeClass('dnone');
-        $('#exspc').attr('disabled', 'disabled');
+        stopProcessing();
     });
 
     $('#start').click(function (){
-        $('#TextArea').off('paste');
-        $('#TextArea').on('paste', processText);
-        $('#exspc').click(removeExtraLines);
-        popup("Processing has been enabled", 1500);
-        $('#start').addClass('dnone');
-        $('#stop').removeClass('dnone');
-        $('#exspc').removeAttr('disabled');
+        startProcessing();
     });
 
     $('.btn-close').click(function(){
