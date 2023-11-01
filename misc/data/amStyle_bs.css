@@ -1,173 +1,199 @@
 body {
-    /* background-image: url('./data/lOOzu8wwrtEbQOvAdok4--2--o6phc.jpg'); */
-    background-image: url('./Chicago-theatre-1920x1080-wallpaper.jpg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size:cover;
-    min-height: 100vh;
-  }
-  h1 {
-    background-color: beige;
-    opacity: 65%;
-    max-width: 332px;
+  /* background-image: url('./data/lOOzu8wwrtEbQOvAdok4--2--o6phc.jpg'); */
+  background-image: url('./Chicago-theatre-1920x1080-wallpaper.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size:cover;
+  min-height: 100vh;
+}
+h1 {
+  background-color: beige;
+  opacity: 65%;
+  max-width: 332px;
+  text-align: center;
+}
+#search-box {
+  max-width: 200px;
+}
+
+.search {
+  margin-left: 10px;
+  flex-grow: .38;
+}
+
+#num{
+  width: 65px;
+}
+
+/* .search {
+  float: left;
+  margin-left: 1%;
+} */
+.container-fluid {
+  width: 75%;
+}
+.movies, .results {
+  height: 750px;
+  width: 100%;
+  overflow: scroll;
+  scrollbar-width: none;
+  border: 1px solid black;
+  padding: 2px 10px;
+  background-color: rgb(245, 245, 220, 0.5);
+  border-radius: 5px;
+  /* margin-left: .5%; */
+  margin-right: .5%;
+  /* opacity: 50%; */
+}
+.active {
+  background-color: rgba(127, 226, 243, 0.85) !important;
+  box-shadow: inset 0px -6px 3px rgb(52, 168, 197);
+}
+.msg {
+  height: fit-content;
+  width: 100%;
+  text-align:center;
+  line-height: 2em;
+  background-color: #f5f5dc80;
+  /* opacity: 65%; */
+  border: 1px solid black;
+  margin-right: 1%;
+  margin-left: .5%;
+}
+.msg p {
+  font-weight: 900;
+  opacity: 100%;
+  font-size: 1.5em;
+}
+.movies p, .results p {
+  opacity: 100%;
+  cursor: pointer;
+  margin: 0px;
+  padding: 5px 0px 5px 10px;
+  text-transform: capitalize;
+}
+
+.notFound {
+  /* background-color: white; */
+  font-weight: bold;
+  font-size: 1.5em;
+  text-align: center;
+  line-height: 3em;
+}
+
+.title {
+  background-color: none;
+  font-weight: bold;
+  font-size: 1em;
+  color: black;
+}
+
+.tabs-container, .tabs {
+  display: flex;
+}
+
+.tabs {
+  width: 100%
+}
+
+.tab {
+  border: 1px solid black;
+  background-color: rgb(245, 245, 220, 0.5);
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+  padding: 5px 0px;
+  font-weight: bolder;
+  width: 100px;
+  text-align: center;
+  border-radius: 10px 10px 0px 0px;
+  min-width: 68px;
+  cursor: pointer;
+}
+
+.highlight {
+  background-color: black;
+  color: white;
+  font-size: 1.25em;
+  font-weight: normal;
+}
+
+.content {
+  padding-left: calc(var(--bs-gutter-x) * .5);
+  padding-right: calc(var(--bs-gutter-x) * .5);
+}
+.menu {
+  margin-top: 10px;
+}
+
+.search.button {
+  flex-grow: .34;
+}
+
+#toolBox {
+  text-align: right;
+}
+
+#placeH {
+  text-align: center;
+  font-size: 1.5em;
+}
+
+#total sub:hover{
+  background-color: black;
+  color: white;
+}
+
+.btn {
+  padding: 2px 5px;
+}
+
+@media (width < 1136px){
+  .row.menu > .col {
+    flex-direction: column-reverse;
+    align-items: center;
+    min-width: max-content;
     text-align: center;
+    
   }
-  #search-box {
-    max-width: 200px;
+  .head {
+    margin-top: 10px;
+    margin-bottom: 5px;
   }
-
-  #num{
-    width: 65px;
-  }
-
-  /* .search {
-    float: left;
-    margin-left: 1%;
-  } */
   .container-fluid {
-    width: 75%;
-  }
-  .movies, .results {
-    height: 750px;
     width: 100%;
-    overflow: scroll;
-    scrollbar-width: none;
-    border: 1px solid black;
-    padding: 2px 10px;
-    background-color: rgb(245, 245, 220, 0.5);
-    border-radius: 5px;
-    /* margin-left: .5%; */
-    margin-right: .5%;
-    /* opacity: 50%; */
   }
-  .active {
-    background-color: rgba(127, 226, 243, 0.75) !important;
-    box-shadow: inset 0px -6px rgb(52, 168, 197);
+  .content {
+    padding: 0%;
+  }
+  .search {
+    text-align: center;
+    margin-bottom: 5px;
   }
   .msg {
-    height: fit-content;
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+  .row.content {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+  .movies, .results{
+    max-height: 80vh;
+    overflow: scroll;
     width: 100%;
-    text-align:center;
-    line-height: 2em;
-    background-color: #f5f5dc80;
-    /* opacity: 65%; */
-    border: 1px solid black;
-    margin-right: 1%;
-    margin-left: .5%;
+    flex: none;
   }
-  .msg p {
-    font-weight: 900;
-    opacity: 100%;
-    font-size: 1.5em;
+  .tabs-container {
+    justify-content: center;
   }
-  .movies p, .results p {
-    opacity: 100%;
-    cursor: pointer;
-    margin: 0px;
-    padding: 5px 0px 5px 10px;
-    text-transform: capitalize;
-  }
- 
-  .notFound {
-    /* background-color: white; */
-    font-weight: bold;
-    font-size: 1.5em;
-  }
-
-  .title {
-    background-color: none;
-    font-weight: bold;
-    font-size: 1em;
-    color: black;
-  }
-
-  .tabs-container, .tabs {
-    display: flex;
-  }
-
-  .tab {
-    border: 1px solid black;
-    background-color: rgb(245, 245, 220, 0.5);
-    display: inline-block;
-    padding: 5px 0px;
-    font-weight: bolder;
-    width: 100px;
-    text-align: center;
-    border-radius: 10px 10px 0px 0px;
-    min-width: 68px;
-    cursor: pointer;
-  }
-
-  .highlight {
-    background-color: black;
-    color: white;
-    font-size: 1.25em;
-    font-weight: normal;
-  }
-
-  .content {
-    padding-left: calc(var(--bs-gutter-x) * .5);
-    padding-right: calc(var(--bs-gutter-x) * .5);
-  }
-
   #toolBox {
-    text-align: right;
-  }
-
-  #placeH {
     text-align: center;
+  }
+  h1 {
     font-size: 1.5em;
+    margin: auto auto;
   }
-  
-  #total sub:hover{
-    background-color: black;
-    color: white;
-  }
+}
 
-  .btn {
-    padding: 2px 5px;
-  }
-
-  @media (width < 1136px){
-    .row.menu {
-      flex-direction: column;
-      align-items: center;
-      min-width: max-content;
-      text-align: center;
-      
-    }
-    .container-fluid {
-      width: 100%;
-    }
-    .content {
-      padding: 0%;
-    }
-    .search {
-      text-align: center;
-    }
-    .msg {
-      font-size: 12px;
-    }
-    .row.content {
-      flex-direction: column-reverse;
-      align-items: center;
-    }
-    .movies, .results{
-      max-height: 80vh;
-      overflow: scroll;
-      width: 100%;
-      flex: none;
-    }
-    .tabs-container {
-      justify-content: center;
-    }
-    #toolBox {
-      text-align: center;
-    }
-    h1 {
-      font-size: 1.5em;
-      margin: auto auto;
-    }
-  }
-  
 
