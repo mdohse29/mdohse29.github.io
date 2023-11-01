@@ -2,8 +2,10 @@
   axios.get("https://mdohse29.github.io/misc/data/archive.txt")
   .then(archive => {
     let movies = archive.data.split('\n');
+    let list = document.querySelector('.movies');
     if (movies.length > 0){
-      $('p[id="placeH"]').remove();
+      document.querySelector('p[id="placeH"').remove();
+      // $('p[id="placeH"]').remove();
     }
     for (a = 0; a < movies.length; a++){
       let formatted = formatter(movies[a]);
@@ -12,7 +14,12 @@
 
         // console.log(formatted.replace(/\[(\d\d\d\d)\].*/g, '($1)'));
         if (formatted){
-          $('.movies').append('<p class="title">' + formatted + '</p>');
+          let p = document.createElement('p');
+
+          p.classList.add('title');
+          p.setAttribute('tag', 'arch');
+          p.innerText = formatted;
+          list.appendChild(p);
         }else{
           console.log("Removing -> " + movies[a] + "EMPTY");
           movies.splice(a,1);
@@ -20,7 +27,18 @@
       
       // }
     }
-    $('.movies').append('<p id="total" class="sticky-bottom"><strong><sub>Total: ' + movies.length + '</sub></strong></p>');
+    let p = document.createElement('p');
+    let strong = document.createElement('strong');
+    let sub = document.createElement('sub');
+    p.setAttribute('id', 'total');
+    p.setAttribute('tag', 'all');
+    p.classList.add('sticky-bottom');
+
+    sub.innerText = 'Total: ' + movies.length;
+    strong.appendChild(sub);
+    p.appendChild(strong);
+    list.appendChild(p);
+
   })
   .catch(e => {
     console.log("Something is wrong\n", e);
