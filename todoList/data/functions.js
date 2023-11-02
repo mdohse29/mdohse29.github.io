@@ -17,6 +17,7 @@ document.querySelector('#submit').addEventListener('click', function(){
     }else{
         console.log("Empty Item. Nothing to see here.");
     }
+    document.querySelector('#item').focus();
 });
 
 document.querySelector('#item').addEventListener('keydown', function(event){

@@ -1,4 +1,6 @@
 p {
     cursor: pointer;
     font-size: 20px;
+    padding-left: 2%;
+    user-select: none;
 }
