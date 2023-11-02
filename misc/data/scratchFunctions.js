@@ -194,22 +194,6 @@ $(document).ready(function(){
         }, 700);
     }
 
-    if (previous.includes("toolBox.html")){
-        $('#toolBox').show();
-        stopProcessing();
-    }
-
-    // Set to clear user message after a certain number of days.
-    if (currentDate.getMonth() >= 10){
-        $('.msg > ul').empty();
-    }
-
-    if (document.querySelector('.msg').innerText.length > 0){
-        $('.msg').prepend('<h1>Update!</h1>');
-        $('.msg').append('<p style="text-align: right;">If an issue is found please report it here.<br/><a href="mailto:aaaabncggffyesoyicuhyz3u7u@imaginelearning.org.slack.com">BUG</a> &larr; Click to report an issue.</p>');
-    }else{
-        $('.msg').hide();
-    }
 
     let currentVal = $('select').val();
     $('#TextArea').addClass(currentVal);
@@ -222,11 +206,11 @@ $(document).ready(function(){
     //     location.reload();
     // });
 
-    $('#exspc').mousedown(function(){
+    $('#exspc, #clear').mousedown(function(){
         $(this).css('box-shadow', 'none');
     });
 
-    $('#exspc').mouseup(function(){
+    $('#exspc, #clear').mouseup(function(){
         $(this).css('box-shadow', '0px 0px 0px 1px darkgrey');
     });
 
@@ -269,7 +253,12 @@ $(document).ready(function(){
 
     $('.btn-close').click(function(){
         toggleSpclFtr("goodbye");
-    })
+    });
+
+    $('#clear').click(function(){
+        $('#TextArea').val('');
+        $('#TextArea').focus();
+    });
 
     $('#TextArea').on('input', function (){
         let text = $('#TextArea').val();
@@ -277,5 +266,23 @@ $(document).ready(function(){
     });
 
     $('#TextArea').on('paste', processText);
+
+    if (previous.includes("toolBox.html")){
+        $('#toolBox').show();
+        toggleSpclFtr('Admin');
+        stopProcessing();
+    }
+
+    // Set to clear user message after a certain number of days.
+    if (currentDate.getMonth() >= 10){
+        $('.msg > ul').empty();
+    }
+
+    if (document.querySelector('.msg').innerText.length > 0){
+        $('.msg').prepend('<h1>Update!</h1>');
+        $('.msg').append('<p style="text-align: right;">If an issue is found please report it here.<br/><a href="mailto:aaaabncggffyesoyicuhyz3u7u@imaginelearning.org.slack.com">BUG</a> &larr; Click to report an issue.</p>');
+    }else{
+        $('.msg').hide();
+    }
 
 });
