@@ -14,6 +14,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
         reset();
     });
 
+    // --------------------------------------------------------------------------
     $('#search-box').on('input', function () {
         let searchText = $('#search-box').val();
 
@@ -64,6 +65,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
 
         }
     });
+    // -----------------------------------------------------
 
     reset = function () {
         $('#search-box').val('');
