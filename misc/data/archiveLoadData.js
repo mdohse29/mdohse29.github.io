@@ -5,6 +5,7 @@ let loading = document.createElement('p');
 loading.setAttribute('id', 'placeH');
 loading.innerText = 'Loading ....';
 document.querySelector('.movies').appendChild(loading);
+
 const formatter = function (text){
     let format = text.replace(/(\(\d\d\d\d\)).*/g, '$1');
     format = format.replace(/\[(\d\d\d\d)\].*/g, '($1)');
@@ -12,6 +13,7 @@ const formatter = function (text){
     format = format.replace(/([\w\d])(\()/g, '$1 $2');
     return format.toLowerCase();
 }
+
 function collectList(movies, tag){
     for (let movie in movies){
         let formatted = formatter(movies[movie]);
