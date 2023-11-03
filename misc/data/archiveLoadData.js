@@ -1,5 +1,6 @@
 let masterList = [];
-const baseUrl = './data/';
+// const baseUrl = './data/';
+const baseUrl = 'https://mdohse29.github.io/misc/data/'
 
 let loading = document.createElement('p');
 loading.setAttribute('id', 'placeH');
@@ -24,13 +25,25 @@ function collectList(movies, tag){
             p.setAttribute('tag', tag);
             p.innerText = formatted;
 
-            masterList.push(p);
-            masterList = masterList.sort();
+            masterList.push({element: p, tag: tag});
+            
+            // masterList = sorter(masterList);
         }else{
             // console.log("Removing -> " + movies[movie] + "EMPTY");
             movies.splice(movie,1);
         }
     }
+}
+
+function sorter(array){
+    
+    array.sort((item1, item2) => {
+        if (item1.element.innerText > item2.element.innerText){
+            return 1;
+        }else{
+            return 0;
+        }
+    });
 }
 
 axios.get(baseUrl + "archive.txt")
@@ -47,15 +60,15 @@ axios.get(baseUrl + "archive.txt")
         .then(tv => {
             let tvList = tv.data.split('\n');
             collectList(tvList, 'tv');
+            sorter(masterList);
 
             if (masterList.length > 0){
                 document.querySelector('#placeH').remove();
-                // $('p[id="placeH"]').remove();
             }
 
             let movieList = document.querySelector('.movies');
             for (let i in masterList){
-                movieList.appendChild(masterList[i]);
+                movieList.appendChild(masterList[i].element);
             }
             let p = document.createElement('p');
             let strong = document.createElement('strong');

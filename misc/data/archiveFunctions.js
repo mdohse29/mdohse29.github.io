@@ -37,7 +37,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
             let titles = [];
 
             for (a = 0; a < elements.length; a ++) {
-                titles.push({title: elements[a].innerText, tag: $(elements[a]).attr('tag')});
+                titles.push({title: elements[a].element.innerText, tag: $(elements[a].element).attr('tag')});
             }
 
             $('.movies').parent().addClass('d-none');
@@ -67,7 +67,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
     });
     // -----------------------------------------------------
 
-    reset = function () {
+    function reset() {
         $('#search-box').val('');
         // $('#search-reset').removeAttr('onclick');
         $('.results').parent().addClass('d-none');
