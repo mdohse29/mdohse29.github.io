@@ -1,20 +1,25 @@
 body {
-  /* background-image: url('./data/lOOzu8wwrtEbQOvAdok4--2--o6phc.jpg'); */
   background-image: url('./Chicago-theatre-1920x1080-wallpaper.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size:cover;
+  background-color: #397a8e;
+  min-width: 430px;
   min-height: 100vh;
 }
+
 h1 {
   background-color: beige;
   opacity: 65%;
   max-width: 332px;
   text-align: center;
   padding: 0px 10px;
+  border-radius: 10px;
 }
+
 #search-box {
   max-width: 200px;
+  border-radius: 10px;
 }
 
 .search {
@@ -26,13 +31,10 @@ h1 {
   width: 65px;
 }
 
-/* .search {
-  float: left;
-  margin-left: 1%;
-} */
 .container-fluid {
   width: 75%;
 }
+
 .movies, .results {
   height: 750px;
   width: 100%;
@@ -41,15 +43,17 @@ h1 {
   border: 1px solid black;
   padding: 2px 10px;
   background-color: rgb(245, 245, 220, 0.5);
-  border-radius: 0px 0px 5px 5px;
+  border-radius: 0px 0px 10px 10px;
   /* margin-left: .5%; */
   margin-right: .5%;
   /* opacity: 50%; */
 }
+
 .active {
   background-color: rgba(127, 226, 243, 0.85) !important;
   box-shadow: inset 0px -6px 3px rgb(52, 168, 197);
 }
+
 .msg {
   height: fit-content;
   width: 100%;
@@ -58,12 +62,16 @@ h1 {
   background-color: #f5f5dc80;
   /* opacity: 65%; */
   border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px;
 }
+
 .msg p {
   font-weight: 900;
   opacity: 100%;
   font-size: 1.5em;
 }
+
 .movies p, .results p {
   opacity: 100%;
   cursor: pointer;
@@ -81,7 +89,7 @@ h1 {
 }
 
 .title {
-  background-color: none;
+  background-color: transparent;
   font-weight: bold;
   font-size: 1em;
   color: black;
@@ -121,6 +129,7 @@ h1 {
   padding-left: calc(var(--bs-gutter-x) * .5);
   padding-right: calc(var(--bs-gutter-x) * .5);
 }
+
 .menu {
   margin-top: 10px;
 }
@@ -155,40 +164,50 @@ h1 {
     text-align: center;
     
   }
+
   .head {
     margin-top: 10px;
     margin-bottom: 5px;
   }
+
   .container-fluid {
     width: 100%;
   }
+
   .content {
     padding: 0%;
   }
+
   .search {
     text-align: center;
     margin-bottom: 5px;
   }
+
   .msg {
     font-size: 12px;
     margin-bottom: 10px;
   }
+
   .row.content {
     flex-direction: column-reverse;
     align-items: center;
   }
+
   .movies, .results{
     max-height: 80vh;
     overflow: scroll;
     width: 100%;
     flex: none;
   }
+
   .tabs-container {
     justify-content: center;
   }
+
   #toolBox {
     text-align: center;
   }
+  
   h1 {
     font-size: 1.5em;
     margin: auto auto;
