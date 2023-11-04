@@ -1,5 +1,72 @@
 $(document).ready(function () { // Not sure why but I was looking at multiple events on one element, useful?
+    function reset() {
+
+        $('#search-box').val('');
+        $('.movies > p').remove();
+        $('#submit-reset').addClass('d-none');
+        $('.search').removeClass('button');
+
+        for (let movie of masterList){
+            $('.movies').append(filter(movie).element);
+        }
+
+        $('.movies').append('<p id="total" tag="count" class="sticky-bottom"><sub>Total: ' + masterList.length + '</sub></p>');
+
+    }
+
+    function filter(movieObject){
+        /*
+        Movie object example
+        {element: '<p>', tag: 'tag'}
+        */
+        let currentTab = $('.active').attr('tag');
+        if (currentTab != 'all' && currentTab != movieObject.tag){
+            $(movieObject.element).addClass('d-none');
+        }else{
+            $(movieObject.element).removeClass('d-none');
+        }
+        return movieObject;
+    }
+
+    function search(searchText){
+        if (searchText == "random select") {
+            $('.spcl').removeClass('d-none');
+        } else if (searchText == "goodbye") {
+            $('.spcl').addClass('d-none');
+        }
+
+        let found = false;
+
+        if ($('.notFound')) {
+            $('.notFound').remove();
+        }
+
+        if (searchText == "" || searchText == null) {
+            reset();
+        } else {
+            let movies = masterList;
+
+            $('.movies > p').remove();
+
+            for (let movie of movies) {
+                if (movie.element.innerText.toLowerCase().includes(searchText.toLowerCase())) {
+                    $('.movies').append(filter(movie).element);
+                    found = true;
+                }
+            }
+
+            if (! found) {
+                $('.movies').append('<p class="notFound">Sorry!<br/>Nothing was found that matched your keyword(s).<br/>Send me a request and I will see what I can do.</p>');
+            }
+
+            $('#submit-reset').removeClass('d-none');
+            $('.search').addClass('button');
+
+        }
+    }
+
     let previous = document.referrer;
+    
     if (previous.includes("toolBox.html")) {
         $('#toolBox').removeClass('d-none');
     }
@@ -18,69 +85,13 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
     $('#search-box').on('input', function () {
         let searchText = $('#search-box').val();
 
-        if (searchText == "random select") {
-            $('.spcl').removeClass('d-none');
-        } else if (searchText == "goodbye") {
-            $('.spcl').addClass('d-none');
-        }
-
-        let found = false;
-
-        if ($('.notFound')) {
-            $('.notFound').remove();
-        }
-
-        if (searchText == "" || searchText == null) {
-            reset();
-        } else {
-            let elements = masterList;
-            let titles = [];
-
-            for (a = 0; a < elements.length; a ++) {
-                titles.push({title: elements[a].element.innerText, tag: $(elements[a].element).attr('tag')});
-            }
-
-            $('.movies').parent().addClass('d-none');
-            $('.results').parent().removeClass('d-none');
-            $('.results > .title').remove();
-
-            for (a in titles) {
-                if (titles[a].title.toLowerCase().includes(searchText.toLowerCase())) {
-                    $('.results').append('<p class="title" tag="' + titles[a].tag + '">' + titles[a].title + '</p>');
-                    found = true;
-                }
-            }
-
-            if (! found) {
-                $('.results').append('<p class="notFound">Sorry!<br/>Nothing was found that matched your keyword(s).<br/>Send me a request and I will see what I can do.</p>');
-            }
-
-            $('#submit-reset').removeClass('d-none');
-            $('.search').addClass('button');
-
-            // $('#submit-search').text("Reset");
-            // $('#submit-search').attr('id', 'search-reset');
-            // $('#search-reset').attr('onclick', 'reset();');
-
-
-        }
+        search(searchText);
     });
     // -----------------------------------------------------
 
-    function reset() {
-        $('#search-box').val('');
-        // $('#search-reset').removeAttr('onclick');
-        $('.results').parent().addClass('d-none');
-        $('.movies').parent().removeClass('d-none');
-        $('.results > p').remove();
-        $('#submit-reset').addClass('d-none');
-        $('.search').removeClass('button');
-        // $('#search-reset').text("Submit");
-        // $('#search-reset').attr('id', 'submit-search');
-
-    }
 
     let tabHeight = $('.tabs').prop('scrollHeight');
+
     $('.msg').attr('style', 'margin-top: ' + tabHeight + 'px;');
     $('.tabs-container').attr('style', 'margin-top: ' + tabHeight + 'px;');
     
@@ -109,38 +120,34 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
     $('.tab').click(function(){
         $(this).parent().find('.active').removeClass('active');
         $(this).addClass('active');
-        let tag = $(this).attr('tag');
+
         let movies = $('p.title');
 
         for (let movie = 0; movie < movies.length; movie++){
             let movieTag = $(movies[movie]).attr('tag');
 
-            if (tag == "all" || tag == movieTag){
-                $(movies[movie]).removeClass('d-none');
-            }else{
-                $(movies[movie]).addClass('d-none');
-            }
+            filter({element: movies[movie], tag: movieTag});
 
         }
     });
 
     $('#rand').click(function () {
-        let elements = $('.movies > p.title');
+        let elements = masterList;
         let num = $('#num').val();
+
         if (! num) {
             num = 5;
         }
 
-        $('.movies').parent().addClass('d-none');
-        $('.results').parent().removeClass('d-none');
         if ($('.notFound')) {
             $('.notFound').remove();
         }
-        $('.results > .title').remove();
+
+        $('.movies > p').remove();
 
         for (let a = 0; a < num; a++) {
             let rand = Math.floor(Math.random() * (elements.length - 1));
-            $('.results').append(elements[rand]);
+            $('.movies').append(filter(elements[rand]).element);
         }
 
         $('#submit-reset').removeClass('d-none');
