@@ -4,7 +4,7 @@ body {
   background-position: center;
   background-size:cover;
   background-color: #397a8e;
-  min-width: 430px;
+  min-width: 400px;
   min-height: 100vh;
 }
 
@@ -168,6 +168,7 @@ h1 {
   .head {
     margin-top: 10px;
     margin-bottom: 5px;
+    font-size: 1.5em;
   }
 
   .container-fluid {
@@ -179,8 +180,7 @@ h1 {
   }
 
   .search {
-    text-align: center;
-    margin-bottom: 5px;
+    margin-left: 0px;
   }
 
   .msg {
