@@ -16,7 +16,7 @@ const drawers = {
                 hidden: true,
                 url: './misc/archivedMovies.html',
                 text: {
-                    main: 'Movie Archive',
+                    main: 'Full Movie List',
                     sub: '',
                     warn: false
                 }
