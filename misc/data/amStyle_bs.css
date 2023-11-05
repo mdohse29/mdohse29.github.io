@@ -33,6 +33,7 @@ h1 {
 
 .container-fluid {
   width: 75%;
+  padding-top: 15px;
 }
 
 .movies, .results {
@@ -130,11 +131,11 @@ h1 {
   padding-right: calc(var(--bs-gutter-x) * .5);
 }
 
-.menu {
+/* .menu {
   margin-top: 10px;
-}
+} */
 
-.search.button {
+.search.reset-btn {
   flex-grow: .34;
 }
 
