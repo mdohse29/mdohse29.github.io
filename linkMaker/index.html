@@ -12,7 +12,8 @@
     <div class="container">
         <div class="columns">
             <div class="column">
-                <h1 class="title has-text-centered">Link Maker 2.0</h1>
+                <h1 class="title has-text-centered is-2">Link Maker 2.0</h1>
+                <h2 class="subtitle has-text-centered">Currently only the "Media File Link" function works.</h2>
             </div>
         </div>
 
@@ -22,33 +23,39 @@
                     <div class="field">
                         <label class="label is-inline" for="type">Choose a type: </label>
                         <select class="select" name="type" id="mediaType">
-                            <option value="Animation">Animation</option>
-                            <option value="DLA">DLA</option>
-                            <option value="DOC">CDN Link</option>
+                            <option value="Animation" disabled>Animation</option>
+                            <option value="DLA" disabled>DLA</option>
+                            <option value="DOC">Media File Link</option>
                         </select>
                     </div>
-                    <div class="field">
+                    <div class="field ">
                         <label for="pffCheck" class="label is-inline">PFF File? </label>
                         <input class="checkbox" type="checkbox" id="pffCheck">
                     </div>
-                    <div class="field">
+                    <div class="field ">
                         <label class="label is-inline" for="text">Extra Text? </label>
                         <input class="checkbox" type="checkbox" id="text"/>
                     </div>
                     <div class="field">
-                        <input type="button" id="mediaselect" class="button mt-4 is-rounded is-info" value="Submit"/>
+                        <button id="mediaselect" class="button mt-4 is-rounded is-info">Submit</button>
                     </div>
                 </div>
 
                 <div class="box dnone" id="linkbuild">
-                    
                 </div>
                 <div class="box dnone" id="textarea">
+                    <div class="head">
+                        <button class="button is-small is-info is-light" id="showPreview">Preview</button>
+                        <h1 class="title has-text-centered">CDN Link</h1>
+                    </div>
                     
                 </div>
             </div>
-            <div class="column ">
-                <div class="box"></div>
+            <div class="column dnone" id="preview">
+                <div class="box">
+                    <button class="button close">X</button>
+                    <iframe src="" frameborder="0"></iframe>
+                </div>
             </div>
         </div>
     </div>
