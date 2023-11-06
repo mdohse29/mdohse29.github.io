@@ -61,12 +61,16 @@ document.querySelector('#mediaselect').addEventListener('click', () => {
         let textArea = document.querySelector('#textarea');
         let preview = document.querySelector('#preview');
 
-        preview.querySelector('iframe').src = '';
-        preview.classList.add('dnone');
+        if (!preview.getAttribute('class').includes('dnone')){
+            preview.querySelector('iframe').src = '';
+            preview.classList.add('dnone');
+        }
         linkBuild.innerHTML = '';
         linkBuild.classList.add('dnone');
-        textArea.querySelector('p').remove();
-        textArea.classList.add('dnone');
+        if (!textArea.getAttribute('class').includes('dnone')){
+            textArea.querySelector('p').remove();
+            textArea.classList.add('dnone');
+        }
 
         document.querySelector('#selectMenu').classList.remove('dnone');
         document.querySelector('#pffCheck').checked = false;
