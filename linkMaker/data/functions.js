@@ -129,7 +129,7 @@ document.querySelector('#mediaselect').addEventListener('click', () => {
     if (type == "DOC"){
         build.appendChild(generateInput('dataBasePath','Data Base Path (Unit UUID)','The UUID for the unit can be found in Cayman.'));
 
-        build.appendChild(generateInput('fileName', 'File', 'The file name for the file being linked to. Include the file extension (.jpg, .gif, .docx, etc.)'));
+        build.appendChild(generateInput('fileName', 'File Name (incl file ext)', 'The file name for the file being linked to. Include the file extension (.jpg, .gif, .docx, etc.)'));
     }
 
 
