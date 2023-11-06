@@ -28,7 +28,13 @@ document.querySelector('#item').addEventListener('keydown', function(event){
 
 function createItem(item){
     let p = document.createElement('p');
+    let check = document.createElement('i');
+    check.classList.add('dnone');
+    check.classList.add('fa-solid');
+    check.classList.add('fa-check');
+    check.classList.add('fa-beat');
     p.innerHTML = item;
+    p.appendChild(check);
     p.classList.add(['mb-2']);
     p.title = "Click to remove item.";
     
@@ -41,7 +47,11 @@ function createItem(item){
     })
 
     p.addEventListener('click', function(){
-        this.remove();
+        this.classList.add('has-background-success');
+        this.querySelector('.fa-check').classList.remove('dnone');
+        setTimeout(() => {
+            this.remove();
+        }, 1000);
     });
 
     return p;

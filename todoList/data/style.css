@@ -4,3 +4,11 @@ p {
     padding-left: 2%;
     user-select: none;
 }
+
+i.fa-check {
+    margin-left: 1em;
+}
+
+.dnone {
+    display: none !important;
+}

@@ -4,7 +4,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
         $('#search-box').val('');
         $('.movies > p').remove();
         $('#submit-reset').addClass('d-none');
-        $('.search').removeClass('button');
+        $('.search').removeClass('reset-btn');
 
         for (let movie of masterList){
             $('.movies').append(filter(movie).element);
@@ -60,7 +60,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
             }
 
             $('#submit-reset').removeClass('d-none');
-            $('.search').addClass('button');
+            $('.search').addClass('reset-btn');
 
         }
     }

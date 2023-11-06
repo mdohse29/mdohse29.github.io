@@ -1,0 +1,16 @@
+.container {
+    margin-top: 1em;
+}
+
+.dnone {
+    display: none;
+}
+
+p{
+    font-size: 1.25em;
+}
+
+iframe {
+    min-height: 600px;
+    width: 100%;
+}
