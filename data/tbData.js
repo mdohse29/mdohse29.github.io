@@ -23,7 +23,7 @@ const drawers = {
             },
             button3: {
                 hidden: false,
-                url: './linkMaker/link.html',
+                url: './linkMaker/',
                 text: {
                     main: 'The CDN Link Maker',
                     sub: '',
