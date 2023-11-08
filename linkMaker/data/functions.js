@@ -50,6 +50,8 @@ function resetEverything(){
     document.querySelector('#selectMenu').classList.remove('dnone');
     document.querySelector('#pffCheck').checked = false;
     document.querySelector('#text').checked = false;
+    document.querySelector('#mediaType').value = 'DOC';
+    toggleExtras();
 }
 
 function toggleExtras(){
@@ -60,6 +62,40 @@ function toggleExtras(){
     }else{
         document.querySelector('#pffCheck').parentElement.classList.remove('dnone');
         document.querySelector('#text').parentElement.classList.remove('dnone');
+    }
+}
+
+function animationLink(url){
+    let base = document.querySelector('#base').value;
+    let sourcePath = document.querySelector('#sourcePath').value;
+    let basePath = '';
+    let pff = '';
+    let topText = '';
+    let bottomText = '';
+
+    url.innerText = 'https://cdn.lti.glynlyon.com/interactives/chm/cdn_harness/cdn_harness.html?base=' + base + '&file=' + sourcePath;
+
+    if (document.querySelector('#pffCheck').checked){
+        pff = document.querySelector('#pffFile').value;
+        if (!pff.includes('.pff')){
+            pff += '.pff';
+        }
+        basePath = document.querySelector('#dataBasePath').value;
+        if (!basePath){
+            basePath = base;
+        }
+        url.innerText += '&dataBasePath=' + basePath + '&pff=' + pff;
+    }
+
+    if (document.querySelector('#text').checked){
+        topText = document.querySelector('#topText').value;
+        bottomText = document.querySelector('#bottomText').value;
+        if (topText){
+            url.innerText += '&topText=' + topText;
+        }
+        if (bottomText){
+            url.innerText += '&bottomText=' + bottomText;
+        }
     }
 }
 
@@ -93,8 +129,6 @@ function mediaLink(url){
     url.innerHTML = 'https://cdn.lti.glynlyon.com/media/' + dataBasePath + '/' + docType + '/' + fileName;
 }
 
-document.querySelector('#mediaType').value = 'DOC';
-toggleExtras();
 resetEverything();
 
 document.querySelector('#mediaselect').addEventListener('click', () => {
@@ -120,6 +154,7 @@ document.querySelector('#mediaselect').addEventListener('click', () => {
         let url = document.createElement('p');
 
         url.classList.add('has-text-centered');
+
         if (textArea.querySelector('p')){
             textArea.querySelector('p').remove();
         }
@@ -128,6 +163,10 @@ document.querySelector('#mediaselect').addEventListener('click', () => {
 
         if (mediaType == 'DOC'){
             mediaLink(url);
+        }else if (mediaType == 'DLA'){
+            // TBC
+        }else if (mediaType == 'Animation'){
+            animationLink(url);
         }
 
         if (url.innerHTML){
@@ -141,7 +180,9 @@ document.querySelector('#mediaselect').addEventListener('click', () => {
 
         build.appendChild(generateInput('fileName', 'File Name (incl file ext)', 'The file name for the file being linked to. Include the file extension (.jpg, .gif, .docx, etc.)'));
     }else if (type == "DLA"){
-        // TBC
+        build.appendChild(generateInput('source', 'Source Path', 'JS path for the DLA. Example: dla_example/js/dla_example.js'));
+
+        build.appendChild(generateInput('dlaFilename', 'DLA File Name', 'The file name for the dla file on AWS. (incl. extension)'));
     }else if (type == "Animation"){
         
         build.appendChild(generateInput('base', 'Base', 'If the animation is in the unit folder use the unit UUID. Otherwise use the base of the course code, for g_alg01_2016 you would enter alg01.'));
@@ -153,7 +194,11 @@ document.querySelector('#mediaselect').addEventListener('click', () => {
     let pff = document.querySelector('#pffCheck').checked;
     let exText = document.querySelector('#text').checked;
     if (pff){
-        build.appendChild(generateInput('dataBasePath','Data Base Path (Unit UUID)','The UUID for the unit can be found in Cayman.', 'If different from Base'));
+        if (type == "Animation"){
+            build.appendChild(generateInput('dataBasePath','Data Base Path (Unit UUID)','The UUID for the unit can be found in Cayman.', 'If different from Base'));
+        }else{
+            build.appendChild(generateInput('dataBasePath','Data Base Path (Unit UUID)','The UUID for the unit can be found in Cayman.'));
+        }
 
         build.appendChild(generateInput('pffFile', '.pff File Name', 'The file name fore the pff file, including the extension.', 'example.pff'));
     }
@@ -176,8 +221,9 @@ document.querySelector('.close').addEventListener('click', () => {
 document.querySelector('#showPreview').addEventListener('click', () => {
     let preview = document.querySelector('#preview');
     let url = document.querySelector('#textarea > p').innerText;
+
     preview.classList.remove('dnone');
     preview.querySelector('iframe').src = url;
-})
+});
 
 document.querySelector('#mediaType').addEventListener('change', toggleExtras);
