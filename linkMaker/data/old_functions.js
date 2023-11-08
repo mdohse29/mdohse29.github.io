@@ -69,13 +69,13 @@ $('#submit_course').click(function(){
     $('#textarea').css('visibility', 'visible');
     $('#textarea').empty();
     if (media == 'Animation'){
-    if ($('#pffCheck').is(':checked')){
-        $('#textarea').append('<p id="link">https://cdn.lti.glynlyon.com/interactives/chm/cdn_harness/cdn_harness.html?base=' + base + '&file=' + file + '&dataBasePath=' + dataBasePath + '&pff=' + pff + '</p>');
-    }else if (base.length > 10 && !$('#pffCheck').is(':checked')){
-        $('#textarea').append('<p id="link">https://cdn.lti.glynlyon.com/interactives/chm/cdn_harness/cdn_harness.html?base=' + base + '&file=' + file + '&dataBasePath=' + base + '</p>');
-    }else{
-        $('#textarea').append('<p id="link">https://cdn.lti.glynlyon.com/interactives/chm/cdn_harness/cdn_harness.html?base=' + base + '&file=' + file + '</p>');
-    }
+        if ($('#pffCheck').is(':checked')){
+            $('#textarea').append('<p id="link">https://cdn.lti.glynlyon.com/interactives/chm/cdn_harness/cdn_harness.html?base=' + base + '&file=' + file + '&dataBasePath=' + dataBasePath + '&pff=' + pff + '</p>');
+        }else if (base.length > 10 && !$('#pffCheck').is(':checked')){
+            $('#textarea').append('<p id="link">https://cdn.lti.glynlyon.com/interactives/chm/cdn_harness/cdn_harness.html?base=' + base + '&file=' + file + '&dataBasePath=' + base + '</p>');
+        }else{
+            $('#textarea').append('<p id="link">https://cdn.lti.glynlyon.com/interactives/chm/cdn_harness/cdn_harness.html?base=' + base + '&file=' + file + '</p>');
+        }
     }else if (media == 'DLA'){
     base = 'global';
     $('#textarea').append('<p id="link">https://cdn.lti.glynlyon.com/interactives/chm/cdn_harness/cdn_harness.html?base=' + base + '&file=' + file + '&dataBasePath=' + dataBasePath + '&dlaFile=' + dlaFile + '.dla</p>');

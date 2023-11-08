@@ -14,6 +14,20 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
 
     }
 
+    function updateTotal(){
+        let total = $('#total').find('sub');
+        let tag = $('.tab.active').attr('tag');
+        let movies = '';
+        if (tag == 'all'){
+            movies = masterList;
+        }else{
+            movies = $('p[tag="' + tag + '"]');
+        }
+
+        $(total).text('Total: ' + movies.length);
+
+    }
+
     function filter(movieObject){
         /*
         Movie object example
@@ -129,6 +143,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
             filter({element: movies[movie], tag: movieTag});
 
         }
+        updateTotal();
     });
 
     $('#rand').click(function () {
