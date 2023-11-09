@@ -20,8 +20,18 @@
 	</style>
 	<script>
 		$(document).ready(function(){
+			let time = 3000;
+			setTimeout(() => {
+				$('img').toggle("explode").delay(1000).fadeIn(400);
+				setTimeout(() => {
+				$('img').toggle("explode").delay(1000).fadeIn(400);
+				setTimeout(() => {
+				$('img').toggle("explode").delay(1000).fadeIn(400);
+			}, time);
+			}, time);
+			}, time);
 			$('img').click(function(){
-				$(this).toggle("explode").delay(1000).fadeIn(400);
+				$('img').toggle("explode").delay(1000).fadeIn(400);
 			});
 		});
 	</script>
