@@ -40,6 +40,40 @@ function generateInput(id, text, title, ph){
     return div;
 }
 
+function generateDropDown(id, labelText, title){
+    let sourcePaths = ['test1/js/test1.js','test2/js/test2.js'];
+    let options = [];
+    let select = document.createElement('select');
+    let div = document.createElement('div');
+    let label = document.createElement('label');
+
+    div.classList.add("field");
+
+    if (title){
+        div.title = title;
+    }
+
+    label.classList.add('label','is-inline');
+    label.setAttribute('for',id);
+    label.innerText = labelText + ': ';
+
+    select.setAttribute('name', id);
+    select.setAttribute('id',id);
+
+    for (let a in sourcePaths){
+        let option = document.createElement('option');
+
+        option.value = sourcePaths[a];
+        option.innerText = sourcePaths[a];
+        select.appendChild(option)
+    }
+
+    div.appendChild(label);
+    div.appendChild(select);
+    return div;
+
+}
+
 function resetEverything(){
     let linkBuild = document.querySelector('#linkbuild');
     let textArea = document.querySelector('#textarea');
@@ -145,6 +179,7 @@ function mediaSelect(){
         build.appendChild(generateInput('fileName', 'File Name (incl file ext)', 'The file name for the file being linked to. Include the file extension (.jpg, .gif, .docx, etc.)'));
     }else if (type == "DLA"){
         build.appendChild(generateInput('source', 'Source Path', 'JS path for the DLA. Example: dla_example/js/dla_example.js'));
+        // build.appendChild(generateDropDown('source', 'Source Path'));
 
         build.appendChild(generateInput('dataBasePath','Unit UUID','The UUID for the unit can be found in Cayman.'));
 
@@ -285,11 +320,13 @@ function dlaLink(url){
     }
 }
 
-let body = document.querySelector('body');
-let html = document.querySelector('html');
-body.style.height = html.scrollHeight + 'px';
 
 resetEverything();
+
+document.querySelector('#forTesting').addEventListener('click', () => {
+    document.querySelector('option[value="Animation"]').removeAttribute('disabled');
+    document.querySelector('option[value="DLA"]').removeAttribute('disabled');
+})
 
 document.querySelector('#mediaselect').addEventListener('click', mediaSelect);
 
