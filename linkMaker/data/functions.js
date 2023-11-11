@@ -44,7 +44,29 @@ function generateInput(id, text, title, ph){
 }
 
 function generateDropDown(id, labelText, title){
-    let sourcePaths = ['test1/js/test1.js','test2/js/test2.js'];
+    let sourcePaths = [
+        "dla_tiletrial/js/tiletrial.js",
+        "dla_dragdrop/js/dragdrop.js",
+        "dla_tictactoe/js/tictactoe.js",
+        "dla_textboxl/js/textboxl.js",
+        "dla_sbx/js/sbx.js",
+        "dla_speeddrill/js/speeddrill.js",
+        "dla_sorter/js/sorter.js",
+        "dla_slideshow/js/dla_slideshow.js",
+        "dla_puzzlematch/js/puzzlematch.js",
+        "dla_powerpopquiz/js/powerpopquiz.js",
+        "dla_popquiz/js/popquiz.js",
+        "dla_metalsquares/js/dla_metalsquares.js",
+        "dla_holeymoley/js/holeymoley.js",
+        "dla_farmerfrank/js/farmerfrank.js",
+        "dla_concentration/js/dla_concentration.js",
+        "dla_allright/js/allright.js",
+        "dla_feedback/js/feedback.js",
+        "dla_conjugatorchart/js/conjugatorchart.js",
+        "dla_flashcards/js/flashcards.js",
+        "dla_equationbuilder/js/equation_builder.js"
+    ];
+    sourcePaths = sourcePaths.sort();
     let divSelect = document.createElement('div');
     let select = document.createElement('select');
     let div = document.createElement('div');
