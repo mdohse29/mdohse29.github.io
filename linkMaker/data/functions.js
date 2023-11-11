@@ -1,4 +1,7 @@
 // PFF is not rendering in preview, might not be able to include
+// TODO: Find out if pff files actually work with DLAs in the harness
+// TODO: Collect the list of source paths for the DLA source drop down
+// TODO: Find an animation to test the animationLink builder
 function space(text){
     for(a = 0; a < text.length; a++){
     if (text[a] == " "){
