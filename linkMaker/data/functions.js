@@ -16,8 +16,8 @@ function generateInput(id, text, title, ph){
     let input = document.createElement('input');
 
     div.classList.add("field");
-    label.classList.add('label','is-inline');
-    input.classList.add('control');
+    label.classList.add('label','is-inline-block');
+    input.classList.add('control','input');
     input.type = 'text';
 
     if (title){
@@ -30,7 +30,7 @@ function generateInput(id, text, title, ph){
     }
 
     if (text){
-        label.innerText = text + ": ";
+        label.innerHTML = text + ":&nbsp;";
     }
 
     if (ph){
@@ -45,20 +45,21 @@ function generateInput(id, text, title, ph){
 
 function generateDropDown(id, labelText, title){
     let sourcePaths = ['test1/js/test1.js','test2/js/test2.js'];
-    let options = [];
+    let divSelect = document.createElement('div');
     let select = document.createElement('select');
     let div = document.createElement('div');
     let label = document.createElement('label');
 
+    divSelect.classList.add('select');
     div.classList.add("field");
 
     if (title){
         div.title = title;
     }
 
-    label.classList.add('label','is-inline');
+    label.classList.add('label','is-inline-block');
     label.setAttribute('for',id);
-    label.innerText = labelText + ': ';
+    label.innerHTML = labelText + ":&nbsp;";
 
     select.setAttribute('name', id);
     select.setAttribute('id',id);
@@ -71,8 +72,9 @@ function generateDropDown(id, labelText, title){
         select.appendChild(option)
     }
 
-    div.appendChild(label);
-    div.appendChild(select);
+    divSelect.appendChild(label);
+    divSelect.appendChild(select);
+    div.appendChild(divSelect);
     return div;
 
 }
@@ -134,10 +136,10 @@ function toggleExtras(){
 
         document.querySelector('#text').parentElement.classList.add('dnone');
 
-    }/*else if (value == "DLA"){
+    }else if (value == "DLA"){
         document.querySelector('#text').parentElement.classList.remove('dnone');
 
-    }*/else{
+    }else{
         document.querySelector('#pffCheck').parentElement.classList.remove('dnone');
 
         document.querySelector('#text').parentElement.classList.remove('dnone');
@@ -181,8 +183,8 @@ function mediaSelect(){
 
         build.appendChild(generateInput('fileName', 'File Name (incl file ext)', 'The file name for the file being linked to. Include the file extension (.jpg, .gif, .docx, etc.)'));
     }else if (type == "DLA"){
-        build.appendChild(generateInput('source', 'Source Path', 'JS path for the DLA. Example: dla_example/js/dla_example.js'));
-        // build.appendChild(generateDropDown('source', 'Source Path'));
+        // build.appendChild(generateInput('source', 'Source Path', 'JS path for the DLA. Example: dla_example/js/dla_example.js'));
+        build.appendChild(generateDropDown('source', 'Source Path'));
 
         build.appendChild(generateInput('dataBasePath','Unit UUID','The UUID for the unit can be found in Cayman.'));
 

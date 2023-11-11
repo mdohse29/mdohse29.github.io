@@ -11,6 +11,10 @@ iframe {
     width: 100%;
 }
 
+input {
+    width: auto !important;
+}
+
 .close, #showPreview {
     display: block;
     margin-left:auto;
@@ -22,4 +26,12 @@ iframe {
 
 .dnone {
     display: none;
+}
+
+.select select {
+    display: inline-block;
+}
+
+label {
+    vertical-align: bottom;
 }
