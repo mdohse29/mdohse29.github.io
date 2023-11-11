@@ -56,6 +56,10 @@ h1 {
 }
 
 .msg {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   height: fit-content;
   width: 100%;
   text-align:center;
@@ -69,7 +73,7 @@ h1 {
 
 .msg p {
   font-weight: 900;
-  opacity: 100%;
+  width: 75%;
   font-size: 1.5em;
 }
 
@@ -187,6 +191,10 @@ h1 {
   .msg {
     font-size: 12px;
     margin-bottom: 10px;
+  }
+
+  .msg > p {
+    width: 100%;
   }
 
   .row.content {

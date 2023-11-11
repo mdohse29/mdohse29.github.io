@@ -1,3 +1,12 @@
+// PFF is not rendering in preview, might not be able to include
+function space(text){
+    for(a = 0; a < text.length; a++){
+    if (text[a] == " "){
+        text = text.replace(' ', '%20');
+    }
+    }
+    return text;
+};
 function generateInput(id, text, title, ph){
     let div = document.createElement('div');
     let label = document.createElement('label');
@@ -54,15 +63,129 @@ function resetEverything(){
     toggleExtras();
 }
 
+function submitData(){
+    let textArea = document.querySelector('#textarea');
+    let mediaType = document.querySelector('#mediaType').value;
+    let url = document.createElement('p');
+
+    url.classList.add('has-text-centered');
+
+    if (textArea.querySelector('p')){
+        textArea.querySelector('p').remove();
+    }
+
+    textArea.classList.remove('dnone');
+
+    if (mediaType == 'DOC'){
+        mediaLink(url);
+    }else if (mediaType == 'DLA'){
+        dlaLink(url);
+    }else if (mediaType == 'Animation'){
+        animationLink(url);
+    }
+
+    if (url.innerHTML){
+        url.classList.add('has-background-success-light');
+        textArea.appendChild(url);
+    }
+}
+
 function toggleExtras(){
     let value = document.querySelector('#mediaType').value;
     if (value == "DOC"){
         document.querySelector('#pffCheck').parentElement.classList.add('dnone');
+
         document.querySelector('#text').parentElement.classList.add('dnone');
-    }else{
+
+    }/*else if (value == "DLA"){
+        document.querySelector('#text').parentElement.classList.remove('dnone');
+
+    }*/else{
         document.querySelector('#pffCheck').parentElement.classList.remove('dnone');
+
         document.querySelector('#text').parentElement.classList.remove('dnone');
     }
+}
+
+function showPreview(){
+    let preview = document.querySelector('#preview');
+    let url = document.querySelector('#textarea > p').innerText;
+
+    preview.classList.remove('dnone');
+    preview.querySelector('iframe').src = url;
+}
+
+function closePreview(){
+    document.querySelector('#preview').querySelector('iframe').src = '';
+    document.querySelector('#preview').classList.add('dnone');
+}
+
+function mediaSelect(){
+    document.querySelector('#selectMenu').classList.add('dnone');
+    let type = document.querySelector('#mediaType').value;
+    let build = document.querySelector('#linkbuild');
+    let submit = document.createElement('button');
+    let reset = document.createElement('button');
+
+    submit.classList.add('button', 'mt-4', 'is-rounded', 'is-info');
+    submit.id = 'submit';
+    submit.innerText = 'Submit';
+    reset.classList.add('button', 'mt-4', 'is-rounded', 'is-danger', 'ml-3');
+    reset.id = 'reset';
+    reset.innerText = 'Reset';
+    build.classList.remove('dnone');
+
+    reset.addEventListener('click', resetEverything);
+
+    submit.addEventListener('click', submitData);
+
+    if (type == "DOC"){
+        build.appendChild(generateInput('dataBasePath','Unit UUID','The UUID for the unit can be found in Cayman.'));
+
+        build.appendChild(generateInput('fileName', 'File Name (incl file ext)', 'The file name for the file being linked to. Include the file extension (.jpg, .gif, .docx, etc.)'));
+    }else if (type == "DLA"){
+        build.appendChild(generateInput('source', 'Source Path', 'JS path for the DLA. Example: dla_example/js/dla_example.js'));
+
+        build.appendChild(generateInput('dataBasePath','Unit UUID','The UUID for the unit can be found in Cayman.'));
+
+        build.appendChild(generateInput('dlaFilename', 'DLA File Name', 'The file name for the dla file on AWS. (incl. extension)'));
+    }else if (type == "Animation"){
+        
+        build.appendChild(generateInput('base', 'Base', 'If the animation is in the unit folder use the unit UUID. Otherwise use the base of the course code, for g_alg01_2016 you would enter alg01.'));
+
+        build.appendChild(generateInput('sourcePath', 'Source Path', 'The same as the source in CAT media reference.'));
+
+    }
+
+    let pff = document.querySelector('#pffCheck').checked;
+    let exText = document.querySelector('#text').checked;
+    if (pff){
+        if (type == "Animation"){
+            document.querySelector('#base').addEventListener('input', (e) => {
+                if (document.querySelector('#pffCheck').checked){
+                    let dbp = document.querySelector('#dataBasePath');
+
+                    if (e.target.value.length >= 15 && e.target.value.includes('-')){
+                        dbp.value = e.target.value;
+                        // dbp.setAttribute('disabled','disabled');
+                    }
+                }
+            });
+    
+            build.appendChild(generateInput('dataBasePath','Database Path (Unit UUID)','The UUID for the unit can be found in Cayman.', 'If different from Base'));
+        }
+
+        build.appendChild(generateInput('pffFile', '.pff File Name', 'The file name fore the pff file, including the extension.', 'example.pff'));
+    }
+
+    if (exText){
+        build.appendChild(generateInput('topText', 'Top Text', 'Text to display above the media.'));
+
+        build.appendChild(generateInput('bottomText', 'Bottom Text', 'Text to be displayed at the bottom of the media.'));
+    }
+
+    build.appendChild(submit);
+    build.appendChild(reset);
 }
 
 function animationLink(url){
@@ -81,7 +204,7 @@ function animationLink(url){
             pff += '.pff';
         }
         basePath = document.querySelector('#dataBasePath').value;
-        if (!basePath){
+        if (!basePath && (base.length > 15 && base.includes('-'))){
             basePath = base;
         }
         url.innerText += '&dataBasePath=' + basePath + '&pff=' + pff;
@@ -91,10 +214,10 @@ function animationLink(url){
         topText = document.querySelector('#topText').value;
         bottomText = document.querySelector('#bottomText').value;
         if (topText){
-            url.innerText += '&topText=' + topText;
+            url.innerText += '&topText=' + space(topText);
         }
         if (bottomText){
-            url.innerText += '&bottomText=' + bottomText;
+            url.innerText += '&bottomText=' + space(bottomText);
         }
     }
 }
@@ -129,101 +252,45 @@ function mediaLink(url){
     url.innerHTML = 'https://cdn.lti.glynlyon.com/media/' + dataBasePath + '/' + docType + '/' + fileName;
 }
 
+function dlaLink(url){
+    let source = document.querySelector('#source').value;
+    let dbp = document.querySelector('#dataBasePath').value;
+    let dlaFilename = document.querySelector('#dlaFilename').value;
+
+    if (!dlaFilename.includes('.dla')){
+        dlaFilename += '.dla';
+    }
+
+    url.innerHTML = 'https://cdn.lti.glynlyon.com/interactives/chm/cdn_harness/cdn_harness.html?base=global&file=' + source + '&dataBasePath=' + dbp + '&dlaFile=' + dlaFilename;
+
+    if (document.querySelector('#pffCheck').checked){
+        let pff = document.querySelector('#pffFile').value;
+        if (pff){
+            if (!pff.includes('.pff')){
+                pff += '.pff';
+            }
+            url.innerHTML += '&pff=' + pff;
+        }
+    }
+
+    if (document.querySelector('#text').checked){
+        let topText = document.querySelector('#topText').value;
+        let bottomText = document.querySelector('#bottomText').value;
+        if (topText){
+            url.innerHTML += '&topText=' + space(topText);
+        }
+        if (bottomText){
+            url.innerHTML += '&bottomText=' + space(bottomText);
+        }
+    }
+}
+
 resetEverything();
 
-document.querySelector('#mediaselect').addEventListener('click', () => {
-    document.querySelector('#selectMenu').classList.add('dnone');
-    let type = document.querySelector('#mediaType').value;
-    let build = document.querySelector('#linkbuild');
-    let submit = document.createElement('button');
-    let reset = document.createElement('button');
+document.querySelector('#mediaselect').addEventListener('click', mediaSelect);
 
-    submit.classList.add('button', 'mt-4', 'is-rounded', 'is-info');
-    submit.id = 'submit';
-    submit.innerText = 'Submit';
-    reset.classList.add('button', 'mt-4', 'is-rounded', 'is-danger', 'ml-3');
-    reset.id = 'reset';
-    reset.innerText = 'Reset';
-    build.classList.remove('dnone');
+document.querySelector('.close').addEventListener('click', closePreview);
 
-    reset.addEventListener('click', resetEverything);
-
-    submit.addEventListener('click', () => {
-        let textArea = document.querySelector('#textarea');
-        let mediaType = document.querySelector('#mediaType').value;
-        let url = document.createElement('p');
-
-        url.classList.add('has-text-centered');
-
-        if (textArea.querySelector('p')){
-            textArea.querySelector('p').remove();
-        }
-
-        textArea.classList.remove('dnone');
-
-        if (mediaType == 'DOC'){
-            mediaLink(url);
-        }else if (mediaType == 'DLA'){
-            // TBC
-        }else if (mediaType == 'Animation'){
-            animationLink(url);
-        }
-
-        if (url.innerHTML){
-            url.classList.add('has-background-success-light');
-            textArea.appendChild(url);
-        }
-    });
-
-    if (type == "DOC"){
-        build.appendChild(generateInput('dataBasePath','Unit UUID','The UUID for the unit can be found in Cayman.'));
-
-        build.appendChild(generateInput('fileName', 'File Name (incl file ext)', 'The file name for the file being linked to. Include the file extension (.jpg, .gif, .docx, etc.)'));
-    }else if (type == "DLA"){
-        build.appendChild(generateInput('source', 'Source Path', 'JS path for the DLA. Example: dla_example/js/dla_example.js'));
-
-        build.appendChild(generateInput('dlaFilename', 'DLA File Name', 'The file name for the dla file on AWS. (incl. extension)'));
-    }else if (type == "Animation"){
-        
-        build.appendChild(generateInput('base', 'Base', 'If the animation is in the unit folder use the unit UUID. Otherwise use the base of the course code, for g_alg01_2016 you would enter alg01.'));
-
-        build.appendChild(generateInput('sourcePath', 'Source Path', 'The same as the source in CAT media reference.'));
-
-    }
-
-    let pff = document.querySelector('#pffCheck').checked;
-    let exText = document.querySelector('#text').checked;
-    if (pff){
-        if (type == "Animation"){
-            build.appendChild(generateInput('dataBasePath','Data Base Path (Unit UUID)','The UUID for the unit can be found in Cayman.', 'If different from Base'));
-        }else{
-            build.appendChild(generateInput('dataBasePath','Data Base Path (Unit UUID)','The UUID for the unit can be found in Cayman.'));
-        }
-
-        build.appendChild(generateInput('pffFile', '.pff File Name', 'The file name fore the pff file, including the extension.', 'example.pff'));
-    }
-
-    if (exText){
-        build.appendChild(generateInput('topText', 'Top Text', 'Text to display above the media.'));
-
-        build.appendChild(generateInput('bottomText', 'Bottom Text', 'Text to be displayed at the bottom of the media.'));
-    }
-
-    build.appendChild(submit);
-    build.appendChild(reset);
-});
-
-document.querySelector('.close').addEventListener('click', () => {
-    document.querySelector('#preview').querySelector('iframe').src = '';
-    document.querySelector('#preview').classList.add('dnone');
-});
-
-document.querySelector('#showPreview').addEventListener('click', () => {
-    let preview = document.querySelector('#preview');
-    let url = document.querySelector('#textarea > p').innerText;
-
-    preview.classList.remove('dnone');
-    preview.querySelector('iframe').src = url;
-});
+document.querySelector('#showPreview').addEventListener('click', showPreview);
 
 document.querySelector('#mediaType').addEventListener('change', toggleExtras);
