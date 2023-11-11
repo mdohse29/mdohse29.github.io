@@ -285,6 +285,10 @@ function dlaLink(url){
     }
 }
 
+let body = document.querySelector('body');
+let html = document.querySelector('html');
+body.style.height = html.scrollHeight + 'px';
+
 resetEverything();
 
 document.querySelector('#mediaselect').addEventListener('click', mediaSelect);
