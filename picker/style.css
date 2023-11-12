@@ -123,9 +123,13 @@ sup {
     transition: font-size 500ms;
 }
 
-.xmas:hover {
+.xmas:hover, .santa:hover {
     font-size: 120%;
     cursor: pointer;
+}
+
+.listsanta {
+    list-style-image: url("./img/icons8-santa-48.png");
 }
 
 ul {
