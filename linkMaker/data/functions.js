@@ -1,4 +1,7 @@
 // PFF is not rendering in preview, might not be able to include
+// TODO: Find out if pff files actually work with DLAs in the harness
+// TODO: Collect the list of source paths for the DLA source drop down
+// TODO: Find an animation to test the animationLink builder
 function space(text){
     for(a = 0; a < text.length; a++){
     if (text[a] == " "){
@@ -6,15 +9,16 @@ function space(text){
     }
     }
     return text;
-};
+}
+
 function generateInput(id, text, title, ph){
     let div = document.createElement('div');
     let label = document.createElement('label');
     let input = document.createElement('input');
 
     div.classList.add("field");
-    label.classList.add('label','is-inline');
-    input.classList.add('control');
+    label.classList.add('label','is-inline-block');
+    input.classList.add('control','input');
     input.type = 'text';
 
     if (title){
@@ -27,7 +31,7 @@ function generateInput(id, text, title, ph){
     }
 
     if (text){
-        label.innerText = text + ": ";
+        label.innerHTML = text + ":&nbsp;";
     }
 
     if (ph){
@@ -38,6 +42,64 @@ function generateInput(id, text, title, ph){
     div.appendChild(input);
 
     return div;
+}
+
+function generateDropDown(id, labelText, title){
+    let sourcePaths = [
+        "dla_tiletrial/js/tiletrial.js",
+        "dla_dragdrop/js/dragdrop.js",
+        "dla_tictactoe/js/tictactoe.js",
+        "dla_textboxl/js/textboxl.js",
+        "dla_sbx/js/sbx.js",
+        "dla_speeddrill/js/speeddrill.js",
+        "dla_sorter/js/sorter.js",
+        "dla_slideshow/js/dla_slideshow.js",
+        "dla_puzzlematch/js/puzzlematch.js",
+        "dla_powerpopquiz/js/powerpopquiz.js",
+        "dla_popquiz/js/popquiz.js",
+        "dla_metalsquares/js/dla_metalsquares.js",
+        "dla_holeymoley/js/holeymoley.js",
+        "dla_farmerfrank/js/farmerfrank.js",
+        "dla_concentration/js/dla_concentration.js",
+        "dla_allright/js/allright.js",
+        "dla_feedback/js/feedback.js",
+        "dla_conjugatorchart/js/conjugatorchart.js",
+        "dla_flashcards/js/flashcards.js",
+        "dla_equationbuilder/js/equation_builder.js"
+    ];
+    sourcePaths = sourcePaths.sort();
+    let divSelect = document.createElement('div');
+    let select = document.createElement('select');
+    let div = document.createElement('div');
+    let label = document.createElement('label');
+
+    divSelect.classList.add('select');
+    div.classList.add("field");
+
+    if (title){
+        div.title = title;
+    }
+
+    label.classList.add('label','is-inline-block');
+    label.setAttribute('for',id);
+    label.innerHTML = labelText + ":&nbsp;";
+
+    select.setAttribute('name', id);
+    select.setAttribute('id',id);
+
+    for (let a in sourcePaths){
+        let option = document.createElement('option');
+
+        option.value = sourcePaths[a];
+        option.innerText = sourcePaths[a];
+        select.appendChild(option)
+    }
+
+    divSelect.appendChild(label);
+    divSelect.appendChild(select);
+    div.appendChild(divSelect);
+    return div;
+
 }
 
 function resetEverything(){
@@ -97,10 +159,10 @@ function toggleExtras(){
 
         document.querySelector('#text').parentElement.classList.add('dnone');
 
-    }/*else if (value == "DLA"){
+    }else if (value == "DLA"){
         document.querySelector('#text').parentElement.classList.remove('dnone');
 
-    }*/else{
+    }else{
         document.querySelector('#pffCheck').parentElement.classList.remove('dnone');
 
         document.querySelector('#text').parentElement.classList.remove('dnone');
@@ -144,7 +206,8 @@ function mediaSelect(){
 
         build.appendChild(generateInput('fileName', 'File Name (incl file ext)', 'The file name for the file being linked to. Include the file extension (.jpg, .gif, .docx, etc.)'));
     }else if (type == "DLA"){
-        build.appendChild(generateInput('source', 'Source Path', 'JS path for the DLA. Example: dla_example/js/dla_example.js'));
+        // build.appendChild(generateInput('source', 'Source Path', 'JS path for the DLA. Example: dla_example/js/dla_example.js'));
+        build.appendChild(generateDropDown('source', 'Source Path'));
 
         build.appendChild(generateInput('dataBasePath','Unit UUID','The UUID for the unit can be found in Cayman.'));
 
@@ -285,11 +348,13 @@ function dlaLink(url){
     }
 }
 
-let body = document.querySelector('body');
-let html = document.querySelector('html');
-body.style.height = html.scrollHeight + 'px';
 
 resetEverything();
+
+document.querySelector('#forTesting').addEventListener('click', () => {
+    document.querySelector('option[value="Animation"]').removeAttribute('disabled');
+    document.querySelector('option[value="DLA"]').removeAttribute('disabled');
+})
 
 document.querySelector('#mediaselect').addEventListener('click', mediaSelect);
 

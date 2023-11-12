@@ -1,4 +1,4 @@
-body {
+html {
     background-color: #e5f0f4;
 }
 
@@ -9,6 +9,14 @@ p{
 iframe {
     min-height: 600px;
     width: 100%;
+}
+
+input {
+    width: auto !important;
+}
+
+label {
+    vertical-align: bottom;
 }
 
 .close, #showPreview {
@@ -22,4 +30,8 @@ iframe {
 
 .dnone {
     display: none;
+}
+
+.select select {
+    display: inline-block;
 }
