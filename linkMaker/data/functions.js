@@ -9,7 +9,8 @@ function space(text){
     }
     }
     return text;
-};
+}
+
 function generateInput(id, text, title, ph){
     let div = document.createElement('div');
     let label = document.createElement('label');
