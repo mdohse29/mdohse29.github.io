@@ -110,11 +110,11 @@ sup {
 }
 
 #userItems,
-.listContent ul {
+.listContent ul, .tempListContent ul {
     max-width: 310px;
 }
 
-.listContent > li {
+.listContent li, .tempListContent li {
     font-weight: 900;
 }
 
