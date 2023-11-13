@@ -160,6 +160,8 @@ function toggleExtras(){
         document.querySelector('#text').parentElement.classList.add('dnone');
 
     }else if (value == "DLA"){
+        document.querySelector('#pffCheck').parentElement.classList.add('dnone');
+
         document.querySelector('#text').parentElement.classList.remove('dnone');
 
     }else{
