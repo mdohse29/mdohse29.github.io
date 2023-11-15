@@ -1,7 +1,7 @@
 // PFF is not rendering in preview, might not be able to include
 // TODO: Find out if pff files actually work with DLAs in the harness
-// TODO: Collect the list of source paths for the DLA source drop down
 // TODO: Find an animation to test the animationLink builder
+// TODO: add option to manually enter source path for DLA
 function space(text){
     for(a = 0; a < text.length; a++){
     if (text[a] == " "){
@@ -45,6 +45,7 @@ function generateInput(id, text, title, ph){
 }
 
 function generateDropDown(id, labelText, title){
+    // Add Manual option
     let sourcePaths = [
         "dla_tiletrial/js/tiletrial.js",
         "dla_dragdrop/js/dragdrop.js",
@@ -211,11 +212,13 @@ function mediaSelect(){
         build.appendChild(generateInput('fileName', 'File Name (incl file ext)', 'The file name for the file being linked to. Include the file extension (.jpg, .gif, .docx, etc.)'));
     }else if (type == "DLA"){
         // build.appendChild(generateInput('source', 'Source Path', 'JS path for the DLA. Example: dla_example/js/dla_example.js'));
+        // Add other option to manually enter path, then switch inputs
+
         build.appendChild(generateDropDown('source', 'Source Path'));
 
         build.appendChild(generateInput('dataBasePath','Unit UUID','The UUID for the unit can be found in Cayman.'));
 
-        build.appendChild(generateInput('dlaFilename', 'DLA File Name', 'The file name for the dla file on AWS. (incl. extension)'));
+        build.appendChild(generateInput('dlaFilename', 'DLA File Name', 'The file name for the dla file on AWS. (incl. extension)', 'some_filename.dla'));
     }else if (type == "Animation"){
         
         build.appendChild(generateInput('base', 'Base', 'If the animation is in the unit folder use the unit UUID. Otherwise use the base of the course code, for g_alg01_2016 you would enter alg01.'));
@@ -234,7 +237,6 @@ function mediaSelect(){
 
                     if (e.target.value.length >= 15 && e.target.value.includes('-')){
                         dbp.value = e.target.value;
-                        // dbp.setAttribute('disabled','disabled');
                     }
                 }
             });
@@ -354,11 +356,6 @@ function dlaLink(url){
 
 
 resetEverything();
-
-document.querySelector('#forTesting').addEventListener('click', () => {
-    document.querySelector('option[value="Animation"]').removeAttribute('disabled');
-    document.querySelector('option[value="DLA"]').removeAttribute('disabled');
-})
 
 document.querySelector('#mediaselect').addEventListener('click', mediaSelect);
 
