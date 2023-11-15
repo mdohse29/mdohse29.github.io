@@ -182,6 +182,8 @@ function showPreview(){
 function closePreview(){
     document.querySelector('#preview').querySelector('iframe').src = '';
     document.querySelector('#preview').classList.add('dnone');
+    // console.log(-(parseInt(history.length)));
+    // window.history.go(-(parseInt(history.length)));
 }
 
 function mediaSelect(){
