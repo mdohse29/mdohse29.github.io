@@ -274,9 +274,9 @@ $(document).ready(function(){
     }
 
     // Set to clear user message after a certain number of days.
-    if (currentDate.getMonth() >= 10){
-        $('.msg > ul').empty();
-    }
+    // if (currentDate.getMonth() >= 10){
+    //     $('.msg > ul').empty();
+    // }
 
     if (document.querySelector('.msg').innerText.length > 0){
         $('.msg').prepend('<h1>Update!</h1>');

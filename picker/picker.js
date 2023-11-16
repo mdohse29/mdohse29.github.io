@@ -22,7 +22,7 @@ $.get('./people.csv', function(data, status){
 		let bb = [];
 		for (b = 1; b < row.split(',').length; b++){
 			let col = row.split(',')[b];
-			if (col.length > 1 && col != ""){
+			if (col.length > 1 && col != "" && !col.includes('@')){
 				bb.push(col);
 			}
 		}
