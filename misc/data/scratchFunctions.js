@@ -23,6 +23,7 @@ $(document).ready(function(){
     }
 
     function popup(text, timeOut){
+        adjustPop();
         $('.popup > div').append('<p>' + text + '</p>');
         $('.popup').removeClass('dnone');
         setTimeout(() => {
@@ -92,6 +93,7 @@ $(document).ready(function(){
     }
 
     function processText(){
+        adjustPop();
         $('.popup > div').append('<p>Processing ...</p>');
         $('.popup').removeClass('dnone');
         /*
@@ -185,13 +187,26 @@ $(document).ready(function(){
                     console.log("Removing extra line at the end.")
                     text = text.substring(0, text.length - 1);
                 }
-                // alert("removing bullets");
+
                 navigator.clipboard.writeText(text.trim());
                 $('#TextArea').val(text.trim());
             // }
             $('.popup').addClass('dnone');
             $('.popup > div').empty();
         }, 700);
+    }
+
+    function adjustMsg(){
+        let adjust = $('div.options').prop('scrollHeight');
+        let msg = $('.msg');
+        msg.prop('style','margin-top: ' + (adjust + 6) + 'px;');
+    }
+
+    function adjustPop(){
+        let adjHeight = $('#TextArea').prop('scrollHeight');
+        let adjWidth = $('#TextArea').prop('scrollWidth');
+
+        $('.popup').prop('style', 'margin-top: ' + (adjHeight / 2.5) + 'px; margin-left: ' + (adjWidth / 2.5) + 'px;');
     }
 
 
@@ -278,11 +293,10 @@ $(document).ready(function(){
     //     $('.msg > ul').empty();
     // }
 
-    if (document.querySelector('.msg').innerText.length > 0){
+    if (document.querySelector('.msg > ul').innerText.length > 0){
         $('.msg').prepend('<h1>Update!</h1>');
-        $('.msg').append('<p style="text-align: right;">If an issue is found please report it here.<br/><a href="mailto:aaaabncggffyesoyicuhyz3u7u@imaginelearning.org.slack.com">BUG</a> &larr; Click to report an issue.</p>');
-    }else{
-        $('.msg').hide();
     }
+    $('.msg').append('<p style="text-align: right;">If an issue is found please report it here.<br/><a href="mailto:aaaabncggffyesoyicuhyz3u7u@imaginelearning.org.slack.com">BUG</a> &larr; Click to report an issue.</p>');
 
+    adjustMsg();
 });

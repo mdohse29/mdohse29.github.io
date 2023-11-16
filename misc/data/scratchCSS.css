@@ -34,11 +34,12 @@ div.presentation > p {
     font-weight: bold;
     background-color: whitesmoke;
     border-radius: 10px;
+    border: 1px solid black;
     user-select: none;
     z-index: 1;
 }
 .msg{
-    width: 80%;
+    /* width: 80%; */
     border: 1px solid black;
     height: fit-content;
     padding: 0px 10px;
@@ -56,7 +57,7 @@ div.presentation > p {
 .msgContainer {
     display: flex;
     justify-content: right;
-    width: 40%;
+    max-width: 40%;
 }
 .spclFtr{
     display: block;
@@ -101,9 +102,10 @@ div.presentation > p {
 
 #TextAreaContain {
     height: 95vh;
-    width: 50%;
+    max-width: 60%;
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
 }
 
 .search-replace {
