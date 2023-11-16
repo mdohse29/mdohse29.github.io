@@ -1,7 +1,20 @@
+function dupeCheck(item){
+    let currentList = document.querySelectorAll('#list > p');
+    if (currentList){
+        for (let element of currentList){
+                // console.log(element.innerText);
+            if (element.innerText == item){
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 document.querySelector('#submit').addEventListener('click', function(){
     let input = document.querySelector('#item');
     let item = input.value;
-    if (item){
+    if ((item) && (dupeCheck(item))){
         if (item.includes(',')){
             let items = item.split(',');
             for (let i of items){
@@ -13,10 +26,10 @@ document.querySelector('#submit').addEventListener('click', function(){
             console.log(item.trim());
         }
 
-        input.value = '';
     }else{
-        console.log("Empty Item. Nothing to see here.");
+        console.log("Empty or duplicate Item. Nothing Added.");
     }
+    input.value = '';
     document.querySelector('#item').focus();
 });
 
