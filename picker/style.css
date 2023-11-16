@@ -211,6 +211,9 @@ p {
     color:cyan;
 }
 
+button:disabled {
+    cursor: not-allowed;
+}
 
 @media (width < 1060px){
     body {
