@@ -296,7 +296,7 @@ $(document).ready(function(){
     if (document.querySelector('.msg > ul').innerText.length > 0){
         $('.msg').prepend('<h1>Update!</h1>');
     }
-    $('.msg').append('<p style="text-align: right;">If an issue is found please report it here.<br/><a href="mailto:aaaabncggffyesoyicuhyz3u7u@imaginelearning.org.slack.com">BUG</a> &larr; Click to report an issue.</p>');
+    $('.msg').append('<p style="text-align: right;font-weight: bold;">If an issue is found please report it here.<br/><a href="mailto:aaaabncggffyesoyicuhyz3u7u@imaginelearning.org.slack.com">BUG</a> &larr; Click to report an issue.</p>');
 
     adjustMsg();
 });
