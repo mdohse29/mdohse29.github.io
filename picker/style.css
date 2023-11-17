@@ -199,6 +199,16 @@ p {
     color: white;
 }
 
+.tmp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tmp > p {
+    margin: 0px;
+}
+
 #emptyList {
     color: black;
     font-size: 24px;
