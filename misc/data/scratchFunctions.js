@@ -24,6 +24,7 @@ $(document).ready(function(){
 
     function popup(text, timeOut){
         adjustPop();
+        $('.popup > div').empty();
         $('.popup > div').append('<p>' + text + '</p>');
         $('.popup').removeClass('dnone');
         setTimeout(() => {
@@ -71,10 +72,10 @@ $(document).ready(function(){
             let pat3 = new RegExp("\\B" + formattedText + "\\b", "g");
             let pat4 = new RegExp("\\B" + formattedText + "\\B", "g");
 
-            console.log(searchText.match(pat1));
-            console.log(searchText.match(pat2));
-            console.log(searchText.match(pat3));
-            console.log(searchText.match(pat4));
+            // console.log(searchText.match(pat1));
+            // console.log(searchText.match(pat2));
+            // console.log(searchText.match(pat3));
+            // console.log(searchText.match(pat4));
 
             if (searchText.match(pat1)){
                 return "\\b" + formattedText + "\\b";
