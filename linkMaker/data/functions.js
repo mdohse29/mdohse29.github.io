@@ -104,19 +104,19 @@ function generateDropDown(id, labelText, title){
 }
 
 function resetEverything(){
-    let linkBuild = document.querySelector('#linkbuild');
-    let textArea = document.querySelector('#textarea');
+    let linkData = document.querySelector('#linkData');
+    let linkBuild = document.querySelector('#linkBuild');
     let preview = document.querySelector('#preview');
 
     if (!preview.getAttribute('class').includes('dnone')){
         preview.querySelector('iframe').src = '';
         preview.classList.add('dnone');
     }
-    linkBuild.innerHTML = '';
-    linkBuild.classList.add('dnone');
-    if (!textArea.getAttribute('class').includes('dnone')){
-        textArea.querySelector('p').remove();
-        textArea.classList.add('dnone');
+    linkData.innerHTML = '';
+    linkData.classList.add('dnone');
+    if (!linkBuild.getAttribute('class').includes('dnone')){
+        linkBuild.querySelector('p').remove();
+        linkBuild.classList.add('dnone');
     }
 
     document.querySelector('#selectMenu').classList.remove('dnone');
@@ -127,17 +127,17 @@ function resetEverything(){
 }
 
 function submitData(){
-    let textArea = document.querySelector('#textarea');
+    let linkBuild = document.querySelector('#linkBuild');
     let mediaType = document.querySelector('#mediaType').value;
     let url = document.createElement('p');
 
     url.classList.add('has-text-centered');
 
-    if (textArea.querySelector('p')){
-        textArea.querySelector('p').remove();
+    if (linkBuild.querySelector('p')){
+        linkBuild.querySelector('p').remove();
     }
 
-    textArea.classList.remove('dnone');
+    linkBuild.classList.remove('dnone');
 
     if (mediaType == 'DOC'){
         mediaLink(url);
@@ -149,7 +149,7 @@ function submitData(){
 
     if (url.innerHTML){
         url.classList.add('has-background-success-light');
-        textArea.appendChild(url);
+        linkBuild.appendChild(url);
     }
 }
 
@@ -174,7 +174,7 @@ function toggleExtras(){
 
 function showPreview(){
     let preview = document.querySelector('#preview');
-    let url = document.querySelector('#textarea > p').innerText;
+    let url = document.querySelector('#linkBuild > p').innerText;
 
     preview.classList.remove('dnone');
     preview.querySelector('iframe').src = url;
@@ -190,7 +190,7 @@ function closePreview(){
 function mediaSelect(){
     document.querySelector('#selectMenu').classList.add('dnone');
     let type = document.querySelector('#mediaType').value;
-    let build = document.querySelector('#linkbuild');
+    let build = document.querySelector('#linkData');
     let submit = document.createElement('button');
     let reset = document.createElement('button');
 
