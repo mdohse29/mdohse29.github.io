@@ -80,6 +80,8 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
     }
 
     let previous = document.referrer;
+
+    $('#search-box').val('');
     
     if (previous.includes("toolBox.html")) {
         $('#toolBox').removeClass('d-none');
