@@ -14,6 +14,7 @@
             font-weight: bold;
             font-size: 1em;
             color: black;
+            text-transform: capitalize;
         }
         div.content.msg > p {
             font-size: small;
@@ -30,6 +31,8 @@
             padding-top: 5px;
             border: 1px solid black;
             overflow: scroll;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
             height: 72vh;
         }
         .movies > p.title {
@@ -42,6 +45,9 @@
             font-size: 1.35em;
             cursor: pointer;
             padding-left: 15px;
+        }
+        .movies::-webkit-scrollbar {
+            display: none;
         }
         .search {
             display: inline-flex;
