@@ -93,5 +93,6 @@ axios.get(baseUrl + "archive.txt")
     document.querySelector('#placeH').remove();
     loading.innerHTML = 'OOPS! Something Went Wrong!<br><br>Nothing to see here';
     document.querySelector('.movies').appendChild(loading);
+    document.querySelector('#search-box').setAttribute('disabled','disabled')
 });
 
