@@ -1,6 +1,6 @@
 let masterList = [];
-const baseUrl = './data/';
-// const baseUrl = 'https://mdohse29.github.io/misc/data/'
+// const baseUrl = './data/';
+const baseUrl = 'https://mdohse29.github.io/misc/data/'
 
 let loading = document.createElement('p');
 loading.setAttribute('id', 'placeH');
@@ -38,14 +38,15 @@ function collectList(movies, tag){
 }
 
 function sorter(array){
-    // The sorter is not working in Chrome for some reason
+    // The docs show to use 1, 0, or -1 but chrome does not recognize 0 as valid. Has to be 1 or -1.
     array.sort((item1, item2) => {
         if (item1.element.innerText > item2.element.innerText){
             return 1;
         }else{
-            return 0;
+            return -1;
         }
     });
+    // console.log(array);
 }
 
 axios.get(baseUrl + "archive.txt")
