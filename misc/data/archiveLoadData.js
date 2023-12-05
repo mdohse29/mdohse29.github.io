@@ -38,7 +38,7 @@ function collectList(movies, tag){
 }
 
 function sorter(array){
-    
+    // The sorter is not working in Chrome for some reason
     array.sort((item1, item2) => {
         if (item1.element.innerText > item2.element.innerText){
             return 1;
