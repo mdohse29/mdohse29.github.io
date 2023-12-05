@@ -104,10 +104,10 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
     // -----------------------------------------------------
 
 
-    let tabHeight = $('.tabs').prop('scrollHeight');
+    // let tabHeight = $('.tabs').prop('scrollHeight');
 
-    $('.msg').attr('style', 'margin-top: ' + tabHeight + 'px;');
-    $('.tabs-container').attr('style', 'margin-top: ' + tabHeight + 'px;');
+    // $('.msg').attr('style', 'margin-top: ' + tabHeight + 'px;');
+    // $('.tabs-container').attr('style', 'margin-top: ' + tabHeight + 'px;');
     
     $(document).on('mouseenter', 'p.title', function () {
         let text = '';

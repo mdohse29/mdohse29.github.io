@@ -15,38 +15,61 @@
             font-size: 1em;
             color: black;
         }
+        div.content.msg > p {
+            font-size: small;
+            margin: 0px;
+        }
+        div.content.msg > p:first-child{
+            padding-top: 5px;
+        }
         .active {
-        background-color: rgba(127, 226, 243, 0.85) !important;
-        box-shadow: inset 0px -6px 3px rgb(52, 168, 197);
+            background-color: rgba(127, 226, 243, 0.85) !important;
+            box-shadow: inset 0px -6px 3px rgb(52, 168, 197);
         }
         .movies {
+            padding-top: 5px;
             overflow: scroll;
             height: 75vh;
+        }
+        .movies > p.title {
+            margin: 0px;
+            padding: 10px 0px;
+        }
+        .movies > p.title:hover{
+            background-color: black;
+            color: white;
+            font-size: 1.35em;
+            cursor: pointer;
+            padding-left: 5px;
         }
         .search {
             display: inline-flex;
         }
         .tabs-container, .tabs {
-        display: flex;
+            display: flex;
         }
-
         .tabs {
-        width: 100%
+            width: 100%
         }
-
         .tab {
-        border: 1px solid black;
-        background-color: rgb(245, 245, 220, 0.5);
-        display: flex;
-        justify-content: center;
-        flex-grow: 1;
-        padding: 5px 0px;
-        font-weight: bolder;
-        width: 100px;
-        text-align: center;
-        border-radius: 10px 10px 0px 0px;
-        min-width: 68px;
-        cursor: pointer;
+            border: 1px solid black;
+            background-color: rgb(245, 245, 220, 0.5);
+            display: flex;
+            justify-content: center;
+            flex-grow: 1;
+            padding: 5px 0px;
+            font-weight: bolder;
+            width: 100px;
+            text-align: center;
+            border-radius: 10px 10px 0px 0px;
+            min-width: 68px;
+            cursor: pointer;
+        }
+        .sticky-bottom {
+            position: -webkit-sticky;
+            position: sticky;
+            bottom: 0;
+            z-index: 1020;
         }
         .d-none {
             display: none;
@@ -70,6 +93,10 @@
                     <div class="search">
                         <input type="text" name="q" class="input is-info" id="search-box" placeholder="Search Title Here">
                         <button class="button is-info ml-1 d-none" id="submit-reset">Reset</button>
+                    </div>
+                    <div class="content msg">
+                        <p>Here is the list of ALL the movies and tv shows currently on the server.</p>
+                        <p>If there is a movie in the archive, or a movie that I don't have, that you want added just let me know.</p>
                     </div>
                     <div class="content">
                         <div class="tabs-container">
