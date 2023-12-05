@@ -286,7 +286,7 @@ $(document).ready(function(){
     if (previous.includes("toolBox.html")){
         $('#toolBox').show();
         toggleSpclFtr('Admin');
-        stopProcessing();
+        // stopProcessing();
     }
 
     // Set to clear user message after a certain number of days.

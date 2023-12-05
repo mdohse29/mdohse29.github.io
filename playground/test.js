@@ -57,27 +57,29 @@
 //     }
 // });
 
-let testArray = [
-    {
-        text: "Something",
-        tag: "tag"
-    },
-    {
-        text: "Anything else",
-        tag: "tag"
-    }
-]
+// let testArray = [
+//     {
+//         text: "Something",
+//         tag: "tag"
+//     },
+//     {
+//         text: "Anything else",
+//         tag: "tag"
+//     }
+// ]
 
-function sorter(array){
+// function sorter(array){
     
-    console.log(array.sort((item1, item2) => {
-        if (item1.text > item2.text){
-            return 1;
-        }else{
-            return 0;
-        }
-    }));
+//     console.log(array.sort((item1, item2) => {
+//         if (item1.text > item2.text){
+//             return 1;
+//         }else{
+//             return 0;
+//         }
+//     }));
 
-}
+// }
 
-sorter(testArray);
+// sorter(testArray);
+
+// console.log(fetch("https://www.idrive.com/idrive/sh/sh?k=l5d7d9n9h4"))
