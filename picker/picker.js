@@ -136,7 +136,7 @@ function clearDisplay(){
 
 function amazonUrl(searchItem){
 	let convertText = searchItem.replaceAll(" ", "+").toLowerCase();
-	return "https://www.amazon.com/s?k=" + convertText;
+	return "https://www.google.com/search?q=" + convertText;
 }
 
 function viewList(){
@@ -152,7 +152,7 @@ function viewList(){
 			for (xy = 1; xy < peep.length; xy++){
 				let searchUrl = amazonUrl(peep[xy]);
 				if (peep[xy] != ""){
-					$('.build > ul').append("<li><a href=\"" + searchUrl + "\" target=\"_blank\" title=\"Click to search Amazon!\">" + peep[xy] + "</a></li>");
+					$('.build > ul').append("<li><a href=\"" + searchUrl + "\" target=\"_blank\" title=\"Click to search Google!\">" + peep[xy] + "</a></li>");
 				}
 			}
 			$(".build").removeClass("build");
