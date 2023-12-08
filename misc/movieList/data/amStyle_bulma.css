@@ -34,6 +34,7 @@ div.content.msg > p:first-child{
     font-size: 1.35em;
     cursor: pointer;
     padding-left: 15px;
+    border-radius: 10px;
 }
 .movies::-webkit-scrollbar {
     display: none;

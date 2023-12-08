@@ -14,7 +14,7 @@ const drawers = {
             },
             button2: {
                 hidden: true,
-                url: './misc/archivedMovies.html',
+                url: './misc/movieList/',
                 text: {
                     main: 'Full Movie List',
                     sub: '',
