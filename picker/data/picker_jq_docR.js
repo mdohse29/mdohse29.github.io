@@ -15,6 +15,8 @@ $(document).ready(function(){
 		$('#giftList').toggle('fade',function(){
 			
 			$('.view').removeAttr('disabled');
+// Uncomment when reactivating the picker
+
 			// if ($('.pick').attr('data-listcomplete') === 'false'){
 			// 	$('.pick').removeAttr('disabled');
 			// }
@@ -22,6 +24,8 @@ $(document).ready(function(){
 	});
 
 	$('.view').click(function(){
+
+		viewList();
 
 		if ($('#nameChoice').css('display') != "none"){
 			$('#nameChoice').css('display', 'none');
@@ -31,6 +35,15 @@ $(document).ready(function(){
 		}
 
 	});
+
+	$('.reset').click(function(){
+		reset();
+	});
+
+	$('.sel').click(function(){
+		picker();
+	})
+
 
 	// $('#select button').attr('disabled', 'disabled');
 	// $('#display').append("<p style=\"text-align: center\" id=\"erlmsg\">Ohh, sorry! It is a little early.<br/>Come back in September 2024, The List will be online.</p>");
