@@ -20,6 +20,7 @@ function generateInput(id, text, title, ph){
     label.classList.add('label','is-inline-block');
     input.classList.add('control','input');
     input.type = 'text';
+    input.autocomplete = "off";
 
     if (title){
         div.title = title;
