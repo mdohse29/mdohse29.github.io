@@ -9,7 +9,7 @@ var people = [];
 // Use this to test without local server.
 // https://mdohse29.github.io/picker/people.csv
 
-$.get('./people.csv', function(data, status){
+$.get('./data/people.csv', function(data, status){
   let aa = [];
   for (a = 1; a < data.length; a++){
 	let row = data.split('\n')[a];

@@ -19,7 +19,7 @@
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" crossorigin="anonymous"></script>
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./data/style.css">
 
   <title>Gift Picker</title>
 </head>
@@ -27,9 +27,9 @@
   <div class="presentation">
     <h1><sup>The</sup> Dohse's Gift Picker</h1>
     <div id="select">
-      <button disabled onclick="reset()" class="pick" data-listcomplete="false"><img src="./img/icons8-refresh-48.png"/> Try Again</button>
-      <button disabled onclick="picker()" class="pick" data-listcomplete="false"><img src="./img/icons8-person-raising-hand-48.png"/> Pick Someone</button>
-      <button onclick="viewList()" class="view"><img src="./img/icons8-list-48.png"/> THE LIST</button>
+      <button disabled class="pick reset" data-listcomplete="false"><img src="./img/icons8-refresh-48.png"/> Try Again</button>
+      <button disabled class="pick sel" data-listcomplete="false"><img src="./img/icons8-person-raising-hand-48.png"/> Pick Someone</button>
+      <button class="view"><img src="./img/icons8-list-48.png"/> THE LIST</button>
     </div>
     <div id="display">
       <div id="nameChoice" style="display: none;"></div>
@@ -59,7 +59,7 @@
       <p>Icons by <a target="_blank" href="https://icons8.com">Icons8</a></p>
     </div>
   </div>
-  <script src="picker.js"></script>
-  <script src="picker_jq_docR.js"></script>
+  <script src="./data/picker.js"></script>
+  <script src="./data/picker_jq_docR.js"></script>
 </body>
 </html>

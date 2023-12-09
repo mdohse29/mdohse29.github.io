@@ -6,7 +6,7 @@ html {
 
 body {
     /*background-image: url("./amy-shamblen-uYmf3FX2zHM-unsplash.jpg");*/
-    background-image: url("./img/artboard-studio-B40ztSGQTZY-unsplash.jpg");
+    background-image: url("../img/artboard-studio-B40ztSGQTZY-unsplash.jpg");
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
@@ -92,7 +92,7 @@ sup {
 
 #giftList {
     /*background-color: #f1a5a7;*/
-    background-image: url("./img/markus-spiske-5jeRBN4-ZLE-unsplash.jpg");
+    background-image: url("../img/markus-spiske-5jeRBN4-ZLE-unsplash.jpg");
     /* background-image: url("./giftListBackground.png"); */
     background-position: center;
     background-repeat: no-repeat;
@@ -119,7 +119,7 @@ sup {
 }
 
 .xmas {
-    list-style-image: url("./img/xmas.png");
+    list-style-image: url("../img/xmas.png");
     transition: font-size 500ms;
 }
 
@@ -129,7 +129,7 @@ sup {
 }
 
 .listsanta {
-    list-style-image: url("./img/icons8-santa-48.png");
+    list-style-image: url("../img/icons8-santa-48.png");
 }
 
 ul {
@@ -143,7 +143,7 @@ li {
 }
 
 #giftList ul ul {
-    list-style-image: url("./img/listIcon-gift.png");
+    list-style-image: url("../img/listIcon-gift.png");
     background-color: rgba(239, 235, 236, 0.6);
     display: inline-block;
 
