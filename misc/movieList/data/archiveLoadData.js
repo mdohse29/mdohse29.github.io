@@ -13,8 +13,9 @@ const formatter = function (text){
     format = format.replace(/ \[(\d\d\d\d)\].*/g, ' ($1)');
     format = format.replace(/\[(\d\d\d\d)\].*/g, ' ($1)');
     format = format.replace(/ (\b\d\d\d\d\b).*/, ' ($1)');
-    format = format.replace(/([\w\d])(\()/g, '$1 $2');
-    return format.toLowerCase();
+    // format = format.replace(/([\w\d])(\()/g, '$1 $2');
+    
+    return format;
 }
 
 function collectList(movies, tag){
@@ -48,6 +49,21 @@ function sorter(array){
     });
     // console.log(array);
 }
+
+// function testPromise(fileName){
+//     return new Promise(async function (resolve, reject) {
+//         let data = await fetch(baseUrl + fileName);
+//         if (data.ok){
+//             resolve((await data.text()).toString());
+//         }else{
+//             reject(data.status);
+//         }
+//     })
+// }
+
+// testPromise("archive.txt").then(resp => {
+//     console.log(resp);
+// });
 
 axios.get(baseUrl + "archive.txt")
 .then(archive => {

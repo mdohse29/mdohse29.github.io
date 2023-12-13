@@ -3,7 +3,7 @@ p.title {
     font-weight: bold;
     font-size: 1em;
     color: black;
-    text-transform: capitalize;
+    /* text-transform: capitalize; */
 }
 div.content.msg > p {
     font-size: small;
