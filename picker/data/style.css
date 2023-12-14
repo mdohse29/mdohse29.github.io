@@ -107,6 +107,13 @@ sup {
     z-index: 2;
     flex-direction: column;
     border-radius: 10px;
+    box-shadow: 3px 0px 23px 10px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+#giftList::-webkit-scrollbar {
+    display: none;
 }
 
 #userItems,
