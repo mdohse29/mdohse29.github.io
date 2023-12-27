@@ -45,8 +45,8 @@ $(document).ready(function(){
 	})
 
 
-	// $('#select button').attr('disabled', 'disabled');
-	// $('#display').append("<p style=\"text-align: center\" id=\"erlmsg\">Ohh, sorry! It is a little early.<br/>Come back in September 2024, The List will be online.</p>");
+	$('#select button').attr('disabled', 'disabled');
+	$('#display').append("<p style=\"text-align: center\" id=\"erlmsg\">Ohh, sorry!<br>Christmas is over and the picker is closed.<br>Come back next year (2024)!</p>");
 	// Comment out ^^^^^ to activate the picker
 
 	// $('button.list').removeAttr('disabled');
