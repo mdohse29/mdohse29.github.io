@@ -234,6 +234,10 @@ button:disabled {
     cursor: not-allowed;
 }
 
+.dnone {
+    display: none;
+}
+
 @media (width < 1060px){
     body {
         background-size: cover;
