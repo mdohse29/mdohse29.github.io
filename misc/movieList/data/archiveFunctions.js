@@ -2,6 +2,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
     function reset() {
 
         $('#search-box').val('');
+        $('#search-box').focus();
         $('.movies > p').remove();
         $('#submit-reset').addClass('d-none');
         $('.search').removeClass('reset-btn');
@@ -12,7 +13,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
 
         $('.movies').append('<p id="total" tag="count" class="sticky-bottom"><sub>Total: ' + masterList.length + '</sub></p>');
 
-    }
+    } 
 
     function updateTotal(){
         let total = $('#total').find('sub');
