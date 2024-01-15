@@ -179,7 +179,13 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
 
         $('#submit-reset').removeClass('d-none');
 
+        updateTotal();
+
     });
+
+    $('#num').on('change', function(){
+        $('#selected').text($('#num').val());
+    })
 
     $('#num').keydown(function (event) {
         event.preventDefault();
