@@ -84,3 +84,6 @@ div.content.msg > p:first-child{
 #total {
     text-align: right;
 }
+#num {
+    min-width: 125px;
+}
