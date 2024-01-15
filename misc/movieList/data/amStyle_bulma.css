@@ -16,6 +16,9 @@ div.content.msg > p:first-child{
     background-color: rgba(127, 226, 243, 0.85) !important;
     box-shadow: inset 0px -6px 3px rgb(52, 168, 197);
 }
+.box {
+    padding-bottom: 0px;
+}
 .movies {
     padding-top: 5px;
     border: 1px solid black;
@@ -77,4 +80,7 @@ div.content.msg > p:first-child{
 }
 #placeH, .notFound {
     text-align: center;
+}
+#total {
+    text-align: right;
 }

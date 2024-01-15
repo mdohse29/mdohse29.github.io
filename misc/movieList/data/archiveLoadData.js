@@ -91,6 +91,7 @@ axios.get(baseUrl + "archive.txt")
             }
 
             // Total Count
+            let totCon = document.querySelector('#totalTitles')
             let p = document.createElement('p');
             let strong = document.createElement('strong');
             let sub = document.createElement('sub');
@@ -102,7 +103,7 @@ axios.get(baseUrl + "archive.txt")
 
             strong.appendChild(sub);
             p.appendChild(strong);
-            movieList.appendChild(p);
+            totCon.appendChild(p);
             //-------------------------------------------------
         });
     });

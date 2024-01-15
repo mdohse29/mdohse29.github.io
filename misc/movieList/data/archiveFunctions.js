@@ -11,21 +11,29 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
             $('.movies').append(filter(movie).element);
         }
 
-        $('.movies').append('<p id="total" tag="count" class="sticky-bottom"><sub>Total: ' + masterList.length + '</sub></p>');
+        updateTotal();
 
     } 
 
     function updateTotal(){
+
         let total = $('#total').find('sub');
         let tag = $('.tab.active').attr('tag');
         let movies = '';
+        let counter = 0;
         if (tag == 'all'){
-            movies = masterList;
+            movies = $('p.title');
         }else{
             movies = $('p[tag="' + tag + '"]');
         }
 
-        $(total).text('Total: ' + movies.length);
+        for (let movie of movies){
+            if (!$(movie).hasClass('d-none')){
+                counter++;
+            }
+        }
+
+        $(total).text('Total: ' + counter);
 
     }
 
@@ -77,6 +85,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
             $('#submit-reset').removeClass('d-none');
             $('.search').addClass('reset-btn');
 
+            updateTotal();
         }
     }
 
