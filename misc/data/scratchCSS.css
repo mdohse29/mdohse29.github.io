@@ -24,12 +24,15 @@ div.presentation > p {
     margin:auto;
 }
 .popup {
+    height: auto;
+    width: 250px;
+}
+.popup, .info-popup {
     position: fixed;
     display: inline-block;
     margin-left: 13%;
     margin-top: 15%;
-    height: auto;
-    width: 250px;
+    max-width: 755px;
     text-align: center;
     font-weight: bold;
     background-color: whitesmoke;
@@ -37,6 +40,19 @@ div.presentation > p {
     border: 1px solid black;
     user-select: none;
     z-index: 1;
+}
+
+.info-popup {
+    text-align: left;
+    padding: 10px;
+    margin-left: 20%;
+    margin-top: 10%;
+}
+.info-popup > .presentation {
+    display:block;
+}
+.info-popup > .presentation > p {
+    margin-bottom: 10px;
 }
 .msg{
     /* width: 80%; */
@@ -130,7 +146,7 @@ div.presentation > p {
 .dnone {
     display: none;
 }
-li::marker {
+ul > li::marker {
     content: "NEW!";
     font-weight: bold;
     margin-right: 5px;

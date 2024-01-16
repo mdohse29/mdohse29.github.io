@@ -269,6 +269,15 @@ const drawers = {
                     sub: '',
                     warn: false
                 }
+            },
+            button4: {
+                hidden: false,
+                url: 'https://getbootstrap.com/docs/5.3/getting-started/introduction/',
+                text: {
+                    main: 'Bootstrap Docs',
+                    sub: '',
+                    warn: false
+                }
             }
         }
     }

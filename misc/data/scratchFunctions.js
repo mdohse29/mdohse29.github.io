@@ -22,16 +22,27 @@ $(document).ready(function(){
         $('#exspc').removeAttr('disabled');
     }
 
+    function closePopup(){
+        $('.popup').addClass('dnone');
+        $('.popup > div').empty();
+        $('#TextArea').focus();
+    }
+
     function popup(text, timeOut){
         adjustPop();
         $('.popup > div').empty();
         $('.popup > div').append('<p>' + text + '</p>');
         $('.popup').removeClass('dnone');
-        setTimeout(() => {
-            $('.popup').addClass('dnone');
-            $('.popup > div').empty();
-            $('#TextArea').focus();
-        }, timeOut);
+        if (timeOut){
+            setTimeout(() => {
+                closePopup();
+            }, timeOut);
+        }else{
+            $('.popup > div').append('<div style="text-align: right;display: block;"><button class="btn btn-close btn-dark btn-sm" id="info-close"></button></div>')
+            $('#info-close').click(function(){
+                closePopup();
+            });
+        }
     }
 
     function toggleSpclFtr(text){
@@ -267,10 +278,18 @@ $(document).ready(function(){
         startProcessing();
     });
 
-    $('.btn-close').click(function(){
+    $('#srch-close').click(function(){
         toggleSpclFtr("goodbye");
     });
 
+    $('#info').click(function(){
+        $('.info-popup').removeClass('dnone');
+    });
+
+    $('#info-close').click(function(){
+        $('.info-popup').addClass('dnone');
+    });
+    
     $('#clear').click(function(){
         $('#TextArea').val('');
         $('#TextArea').focus();
