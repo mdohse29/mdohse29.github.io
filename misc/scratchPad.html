@@ -71,12 +71,12 @@
         <div class="info-popup bg-info-subtle dnone">
             <div class="presentation">
                 <div style="text-align: right;display: block;"><button class="btn btn-close btn-dark btn-sm" id="info-close"></button></div>
-                <p>When you paste text into the text area of the Scratch Pad it will trigger the text validation functions. The validation checks for:</p>
+                <p>When you paste text into the text area of the Scratch Pad it will trigger the text validation functions. The validation does the following:</p>
                 <ol>
-                    <li>Foreign characters that have been identified</li>
-                    <li>List bullet characters at the beginning of the paragraph</li>
-                    <li>More than 1 space between words inside a paragraph</li>
-                    <li>Extra space between paragraphs</li>
+                    <li>Foreign characters are removed<br><sup>(Like hidden chars and other chars of different encoding)</sup></li>
+                    <li>List bullet characters at the beginning of the lines are removed</li>
+                    <li>More than 1 space in between words inside a paragraph are converted to a single space</li>
+                    <li>Empty lines between paragraphs are removed</li>
                 </ol>
                 <p>The validation continues to grow as new characters are discovered and added. If anyone finds anything the validation is NOT catching, please let me know so I can update the validation process.</p>
                 <p>The validation also checks for any HTML tags that might get copied over by mistake. This only alerts the user that there are html tags present, HTML tags are not removed automatically. There are cases where HTML tags might be necessary so it didn't make sense to automatically remove them.</p>
