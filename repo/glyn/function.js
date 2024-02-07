@@ -1,8 +1,8 @@
 $(document).ready(function(){
 
-  $('input').attr('disabled', 'disabled');
-  $('select').attr('disabled', 'disabled');
-  $('#spreadSheet').append('<h1 style="text-align: center;">If you are seeing this message contact <a href="mailto:michael.dohse@imaginelearning.com">michael.dohse@imaginelearning.com</a></h1>');
+  // $('input').attr('disabled', 'disabled');
+  // $('select').attr('disabled', 'disabled');
+  // $('#spreadSheet').append('<h1 style="text-align: center;">If you are seeing this message contact <a href="mailto:michael.dohse@imaginelearning.com">michael.dohse@imaginelearning.com</a></h1>');
 
   var item;
   if ($('#searchType').val() == 'course_code'){
