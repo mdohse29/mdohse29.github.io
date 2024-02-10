@@ -10,6 +10,7 @@ $(document).ready(function(){
         $('#stop').addClass('dnone');
         $('#start').removeClass('dnone');
         $('#exspc').attr('disabled', 'disabled');
+        $('#rmv-ol').attr('disabled', 'disabled');
     }
 
     function startProcessing(){
@@ -20,6 +21,7 @@ $(document).ready(function(){
         $('#start').addClass('dnone');
         $('#stop').removeClass('dnone');
         $('#exspc').removeAttr('disabled');
+        $('#rmv-ol').removeAttr('disabled');
     }
 
     function closePopup(){
@@ -51,6 +53,18 @@ $(document).ready(function(){
         }else if (text == "goodbye"){
             $('.spclFtr').addClass('dnone');
         }
+    }
+
+    function removeOlMarkers(text){
+        let singleDigit = [/^\d\W\s\b/gm, /^\d\d\W\s\b/gm, /^\w\W\s\b/gm, /^\w\w\W\s\b/gm]
+        let editedText = text;
+        for (let a in singleDigit){
+            console.log(singleDigit[a]);
+            if (editedText.match(singleDigit[a])){
+                editedText = editedText.replaceAll(new RegExp(singleDigit[a]), '');
+            }
+        }
+        return editedText;
     }
 
     function removeExtraLines(){
@@ -233,11 +247,11 @@ $(document).ready(function(){
     //     location.reload();
     // });
 
-    $('#exspc, #clear').mousedown(function(){
+    $('#exspc, #clear, #rmv-ol').mousedown(function(){
         $(this).css('box-shadow', 'none');
     });
 
-    $('#exspc, #clear').mouseup(function(){
+    $('#exspc, #clear, #rmv-ol').mouseup(function(){
         $(this).css('box-shadow', '0px 0px 0px 1px darkgrey');
     });
 
@@ -294,6 +308,11 @@ $(document).ready(function(){
         $('#TextArea').val('');
         $('#TextArea').focus();
     });
+
+    $('#rmv-ol').click(async function(){
+        let cleanText = await removeOlMarkers($('#TextArea').val());
+        $('#TextArea').val(cleanText);
+    })
 
     $('#TextArea').on('input', function (){
         let text = $('#TextArea').val();

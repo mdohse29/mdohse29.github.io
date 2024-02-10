@@ -23,6 +23,11 @@ div.popup > div.presentation {
 div.presentation > p {
     margin:auto;
 }
+
+button:disabled {
+    cursor: not-allowed;
+}
+
 .popup {
     height: auto;
     width: 250px;
