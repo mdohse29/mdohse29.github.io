@@ -48,7 +48,7 @@
                     <option class="yellow" value="yellow">Yellow</option>
                 </select>
                 <button class="btn btn-primary btn-sm ms-1 usr-btn" id="exspc" title="The empty space in front of the paragraphs">Remove Leading Space</button>
-                <!-- <button class="btn btn-primary btn-sm ms-1 usr-btn" id="rmv-ol" title="Remove OL markers">Remove OL Markers</button> -->
+                <button class="btn btn-primary btn-sm ms-1 usr-btn" id="rmv-ol" title="Remove OL markers">Remove OL Markers</button>
                 <button class="btn btn-primary btn-sm ms-1 usr-btn" id="clear" title="Clear scratch pad">Clear</button>
                 <button class="btn btn-sm ms-1" title="How this works" id="info"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
@@ -61,7 +61,7 @@
             <div class="msg rounded-2 bg-info-subtle">
                 <!-- just add a ul to list updates, if one isn't already present -->
                 <ul>
-                    
+                    <li>Remove OL Markers: When a ordered list is copied over and the list markers (example: 1. 2. 3., 1) 2) 3), I. II. III.) copy over with the text the <strong>Remove OL Markers</strong> should remove all instances of the markers.</li>
                 </ul>
             </div>
         </div>
@@ -77,6 +77,10 @@
                     <li>Foreign characters are removed<br><sup>(Like hidden chars and other chars of different encoding)</sup></li>
                     <li>Punctuation of different encoding gets converted to standard<br>For example, this double quote &#8221; will get changed to "</li>
                     <li>List bullet characters at the beginning of the lines are removed</li>
+                    <ol style="list-style-type: lower-alpha;">
+                        <li>Unordered list markers should be removed automatically</li>
+                        <li>Ordered list markers are only manually removed, for the moment, by clicking the <strong>Remove OL Markers</strong> button</li>
+                    </ol>
                     <li>More than 1 space in between words inside a paragraph are converted to a single space</li>
                     <li>Empty lines between paragraphs are removed</li>
                 </ol>
