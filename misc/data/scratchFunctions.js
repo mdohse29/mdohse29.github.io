@@ -174,7 +174,7 @@ $(document).ready(function(){
                 changed = true;
             }
 
-            regtest = /[\’]/gm;
+            regtest = /[\ߵ\’]/gm;
             if (text.match(regtest)){
                 console.log("Replacing odd characters");
                 text = text.replaceAll(regtest, "'");
