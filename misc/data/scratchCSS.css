@@ -54,6 +54,7 @@ button:disabled {
     padding: 10px;
     margin-left: 20%;
     margin-top: 5%;
+    scrollbar-width: none;
 }
 .info-popup > .presentation {
     display:block;
