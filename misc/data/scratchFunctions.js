@@ -64,6 +64,7 @@ $(document).ready(function(){
                 editedText = editedText.replaceAll(new RegExp(singleDigit[a]), '');
             }
         }
+        popup("Done!", 750);
         return editedText;
     }
 
@@ -75,7 +76,7 @@ $(document).ready(function(){
         }
         navigator.clipboard.writeText(text.join('\n').trim());
         $('#TextArea').val(text.join('\n').trim());
-        popup("Done!", 1000);
+        popup("Done!", 750);
     }
 
     function searchRegex(searchText){
