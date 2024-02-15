@@ -225,8 +225,7 @@ $(document).ready(function(){
 
     function adjustMsg(){
         let adjust = $('div.options').prop('scrollHeight');
-        let msg = $('.msg');
-        msg.prop('style','margin-top: ' + (adjust + 6) + 'px;');
+        $('.msg').prop('style','margin-top: ' + (adjust + 6) + 'px;');
     }
 
     function adjustPop(){
@@ -298,7 +297,12 @@ $(document).ready(function(){
     });
 
     $('#info').click(function(){
-        $('.info-popup').removeClass('dnone');
+        let pop = $('.info-popup');
+        if ($(pop).attr('class').includes('dnone')){
+            $(pop).removeClass('dnone');
+        }else{
+            $(pop).addClass('dnone');
+        }
     });
 
     $('#info-close').click(function(){
@@ -329,9 +333,10 @@ $(document).ready(function(){
     }
 
     // Set to clear user message after a certain number of days.
-    // if (currentDate.getMonth() >= 10){
-    //     $('.msg > ul').empty();
-    // }
+    if (currentDate.getMonth() >= 2){
+        $('.msg > ul').empty();
+    }
+
 
     if (document.querySelector('.msg > ul').innerText.length > 0){
         $('.msg').prepend('<h1>Update!</h1>');
