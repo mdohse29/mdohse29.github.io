@@ -28,6 +28,10 @@ button:disabled {
     cursor: not-allowed;
 }
 
+.switch {
+    display: inline-flex;
+    flex-direction: column;
+}
 .popup {
     height: auto;
     width: 250px;
