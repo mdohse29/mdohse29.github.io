@@ -68,6 +68,15 @@ $(document).ready(function(){
         return editedText;
     }
 
+    // function applicationFormat(x){
+    //     // need to add toggle for COSMOS or Other
+    //     // If toggle = COSMOS
+    //     return x.replaceAll('\n', '\n\n');
+    //     // else
+    //     return x
+
+    // }
+
     function removeExtraLines(){
         let regex = /^\s*[^\S]/g;
         let text = $('#TextArea').val().split('\n');
@@ -216,6 +225,7 @@ $(document).ready(function(){
                 }
 
                 navigator.clipboard.writeText(text.trim());
+                // text = text.replaceAll('\n', '\n\n');
                 $('#TextArea').val(text.trim());
             // }
             $('.popup').addClass('dnone');
