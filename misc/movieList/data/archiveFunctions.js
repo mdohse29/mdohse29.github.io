@@ -195,4 +195,10 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
         $('.spcl').addClass('d-none');
     });
 
+    $('html').keydown(function(event){
+        if (event.which == '27'){
+            reset();
+        }
+    })
+
 });
