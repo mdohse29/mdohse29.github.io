@@ -1,6 +1,6 @@
 let masterList = [];
-const baseUrl = './data/';
-// const baseUrl = 'https://mdohse29.github.io/misc/data/'
+// const baseUrl = './data/';
+const baseUrl = 'https://mdohse29.github.io/misc/movieList/data/'
 
 let loading = document.createElement('p');
 loading.setAttribute('id', 'placeH');
