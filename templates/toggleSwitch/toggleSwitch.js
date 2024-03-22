@@ -7,9 +7,10 @@ ts.addEventListener('click', () => {
     let pillMarg = ts.scrollWidth - (pill.scrollWidth + 4);
     if (pill.style.marginLeft < pillMarg){
         pill.style.marginLeft = pillMarg + 'px';
-        pill.style.backgroundColor = "red";
+        ts.style.backgroundColor = "var(--bs-success)";
     }else{
         pill.removeAttribute('style');
+        ts.removeAttribute('style');
     }
     
 });
