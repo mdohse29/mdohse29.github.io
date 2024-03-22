@@ -1,0 +1,18 @@
+.toggle-cont {
+    display: inline-flex;
+    width: 3em;
+    height: 15px;
+    background-color: var(--bs-secondary-color);
+}
+
+.toggle-pill {
+    width: 50%;
+    margin: 2px;
+    background-color: white;
+
+}
+
+.toggle-cont, .toggle-pill {
+    border: 1px solid black;
+    border-radius: 10px;
+}

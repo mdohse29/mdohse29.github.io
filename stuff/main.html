@@ -17,7 +17,14 @@
                     //     }
                     //     $('code').append('<pre>' + lines[a] + "</pre>");
                     // }
-                    $('code').append('<pre>' + data + "</pre>");
+                    let lines = data.split('\n');
+                    for (a = 0; a < lines.length; a++){
+                        if (lines[a] == ''){
+                            $('code').append("<pre>&nbsp;</pre>");
+                        }else{
+                    $('code').append('<pre>' + lines[a] + "</pre>");
+                        }
+                    }
                 }
             }, 'text');
         });
