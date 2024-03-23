@@ -28,6 +28,10 @@ button:disabled {
     cursor: not-allowed;
 }
 
+.tg-on {
+    background-color: var(--bs-secondary-color);
+}
+
 .switch {
     display: inline-flex;
     flex-direction: column;
