@@ -23,9 +23,13 @@ ts.addEventListener('click', () => {
     if (currentMarg < marg){
         // console.log(currentMarg);
         pill.style.setProperty('margin-left', marg + 'px');
-        ts.classList.add('tg-on');
+        setTimeout(() => {
+            ts.classList.add('tg-on');
+        }, 500);
     }else{
         pill.style.setProperty('margin-left','2px');
-        ts.classList.remove('tg-on');
+        setTimeout(() => {
+            ts.classList.remove('tg-on');
+        }, 500);
     }
 })
