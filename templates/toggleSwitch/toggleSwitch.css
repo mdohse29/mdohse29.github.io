@@ -5,14 +5,27 @@
     background-color: var(--bs-secondary-color);
 }
 
+.switch-container {
+    padding: 0px 5px;
+}
+
 .toggle-pill {
     width: 50%;
     margin: 2px;
     background-color: white;
+    transition: margin-left 500ms;
 
 }
 
 .toggle-cont, .toggle-pill {
     border: 1px solid black;
     border-radius: 10px;
+}
+
+.tg-on {
+    background-color: var(--bs-success);
+}
+
+.tg-off {
+    background-color: var(--bs-secondary-color);
 }
