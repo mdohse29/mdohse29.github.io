@@ -55,6 +55,10 @@ $(document).ready(function(){
         }
     }
 
+    function formatFilename(text){
+        return text.toLowerCase().replaceAll(' ', '_');
+    }
+
     function removeOlMarkers(text){
         let singleDigit = [/^\d\W\s\b/gm, /^\d\d\W\s\b/gm, /^\w\W\s\b/gm, /^\w\w\W\s\b/gm, /^\w\w\w\W\s\b/gm]
         let editedText = text;
@@ -336,6 +340,11 @@ $(document).ready(function(){
 
     $('#TextArea').on('paste', processText);
 
+    $('#ff').click(function(){
+        let currentText = $('#TextArea').val();
+        $('#TextArea').val(formatFilename(currentText));
+    })
+
     if (previous.includes("toolBox.html")){
         $('#toolBox').show();
         toggleSpclFtr('Admin');
@@ -346,7 +355,6 @@ $(document).ready(function(){
     if (currentDate.getMonth() >= 2){
         $('.msg > ul').empty();
     }
-
 
     if (document.querySelector('.msg > ul').innerText.length > 0){
         $('.msg').prepend('<h1>Update!</h1>');
