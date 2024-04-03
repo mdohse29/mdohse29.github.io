@@ -351,10 +351,10 @@ $(document).ready(function(){
         // stopProcessing();
     }
 
-    // Set to clear user message after a certain number of days.
-    if (currentDate.getMonth() >= 2){
-        $('.msg > ul').empty();
-    }
+    // Set to clear user message after a certain Month.
+    // if (currentDate.getMonth() >= 2){
+    //     $('.msg > ul').empty();
+    // }
 
     if (document.querySelector('.msg > ul').innerText.length > 0){
         $('.msg').prepend('<h1>Update!</h1>');

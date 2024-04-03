@@ -278,11 +278,16 @@ const drawers = {
                     sub: '',
                     warn: false
                 }
+            },
+            button5: {
+                hidden: false,
+                url: 'https://bulma.io/documentation/',
+                text: {
+                    main: 'Bulma Docs',
+                    sub: '',
+                    warn: false
+                }
             }
         }
     }
 }
-// $.get('./data/buttons.txt', function(data, status) {
-//     console.log(data);
-//     console.log(status);
-// })
