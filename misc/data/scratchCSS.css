@@ -1,3 +1,11 @@
+html {
+    background-color: white;
+}
+
+strong {
+    color: inherit;
+}
+
 textarea {
     width: 100%;
     height:inherit;
@@ -162,11 +170,19 @@ button:disabled {
 .dnone {
     display: none;
 }
+.close-btn {
+    text-align: right;
+    display: block;
+    background-color: inherit;
+}
 ul > li::marker {
     content: "NEW!";
     font-weight: bold;
     margin-right: 5px;
     
+}
+.info-popup > .presentation > ol > ol {
+    list-style-type: lower-alpha;
 }
 @media (width > 1152px){
     textarea {
