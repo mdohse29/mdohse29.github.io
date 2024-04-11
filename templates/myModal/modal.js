@@ -1,4 +1,4 @@
-document.querySelector('#info').addEventListener('click', () => {
+document.querySelector('.test').addEventListener('click', () => {
     document.querySelector('.md-modal').classList.remove('dnone');
 });
 

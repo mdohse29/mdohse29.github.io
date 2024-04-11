@@ -311,12 +311,13 @@ $(document).ready(function(){
     });
 
     $('#info').click(function(){
-        let pop = $('.info-popup');
-        if ($(pop).attr('class').includes('dnone')){
-            $(pop).removeClass('dnone');
-        }else{
-            $(pop).addClass('dnone');
-        }
+        // let pop = $('.info-popup');
+        // if ($(pop).attr('class').includes('dnone')){
+        //     $(pop).removeClass('dnone');
+        // }else{
+        //     $(pop).addClass('dnone');
+        // }
+        $('.md-modal').removeClass('dnone');
     });
 
     $('#info-close').click(function(){
@@ -343,7 +344,12 @@ $(document).ready(function(){
     $('#ff').click(function(){
         let currentText = $('#TextArea').val();
         $('#TextArea').val(formatFilename(currentText));
-    })
+    });
+
+    // Close the modal
+    $('.md-modal-background').click(function(){
+        $('.md-modal').addClass('dnone');
+    });
 
     if (previous.includes("toolBox.html")){
         $('#toolBox').show();
