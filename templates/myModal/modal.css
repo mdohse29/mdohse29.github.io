@@ -39,11 +39,8 @@
     z-index: 6;
 }
 
-.md-modal-close {
-    max-height: 32px;
-    text-align: center;
-    margin-right: 10px;
-    /* padding: 10px; */
+.md-modal-background > .btn-close {
+    margin: 20px 40px 0px 0px;
 }
 
 .dnone {
