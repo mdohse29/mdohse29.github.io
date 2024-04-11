@@ -1,0 +1,51 @@
+:root {
+    --md-modal-height: 100vh;
+}
+
+.md-modal {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    justify-content:center;
+    height: var(--md-modal-height);
+    top: 0px;
+    left: 0px;
+    z-index: 5;
+}
+
+.md-modal-background {
+    display: flex;
+    justify-content: right;
+    height: inherit;
+    width: inherit;
+    background-color: rgba(var(--bs-info-rgb), 0.2);
+    position: inherit;
+    z-index: inherit;
+}
+
+.md-modal-content { 
+    background-color: white;
+    padding: 10px 10px 0px 10px;
+    max-width: 600px;
+    max-height: 400px;
+    align-self: center;
+    position: relative;
+    border-radius: 15px;
+    overflow: scroll;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    
+    scroll-margin-block-start: 2px;
+    z-index: 6;
+}
+
+.md-modal-close {
+    max-height: 32px;
+    text-align: center;
+    margin-right: 10px;
+    /* padding: 10px; */
+}
+
+.dnone {
+    display: none;
+}
