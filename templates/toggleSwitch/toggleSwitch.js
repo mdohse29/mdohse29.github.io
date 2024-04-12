@@ -32,4 +32,12 @@ ts.addEventListener('click', () => {
             ts.classList.remove('tg-on');
         }, 500);
     }
-})
+});
+
+let labels = document.querySelectorAll('.switch-container > span');
+
+for (let label of labels){
+    label.addEventListener('click', () => {
+        document.querySelector('.toggle-cont').click();
+    });
+}

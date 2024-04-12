@@ -30,7 +30,7 @@
     max-height: 400px;
     align-self: center;
     position: relative;
-    border-radius: 15px;
+    /* border-radius: 15px; */
     overflow: scroll;
     overflow-x: hidden;
     scrollbar-width: thin;
