@@ -158,10 +158,12 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
         updateTotal();
     });
 
-    $('#rand').click(function () {
+    $('#rand').click(function () { 
         let elements = masterList;
+        let tag = $('.tab.active').attr('tag');
+        let alreadyFound = [];
         let num = $('#num').val();
-
+        
         if (! num) {
             num = 5;
         }
@@ -174,7 +176,21 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
 
         for (let a = 0; a < num; a++) {
             let rand = Math.floor(Math.random() * (elements.length - 1));
-            $('.movies').append(filter(elements[rand]).element);
+            if (tag == 'all'){
+                $('.movies').append(filter(elements[rand]).element);
+            }else{
+                if (elements[rand].tag == tag){
+                    if (alreadyFound.includes(elements[rand].element)){
+                        a--;
+                        continue;
+                    }else{
+                        $('.movies').append(filter(elements[rand]).element);
+                        alreadyFound.push(elements[rand].element)
+                    }
+                }else{
+                    a--;
+                }
+            }
         }
 
         $('#submit-reset').removeClass('d-none');
