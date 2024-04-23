@@ -46,7 +46,7 @@ const drawers = {
         title: 'Company Tools',
         buttons:{
             button1: {
-                hidden: false,
+                hidden: true,
                 url: 'https://ims-tools.owteam.com/',
                 text: {
                     main: 'IMS Tools',
