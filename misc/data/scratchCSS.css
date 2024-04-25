@@ -39,11 +39,9 @@ button:disabled {
 .tg-on {
     background-color: var(--bs-secondary-color);
 }
+/* ------------------------------ */
+/* Popup to be redone */
 
-.switch {
-    display: inline-flex;
-    flex-direction: column;
-}
 .popup {
     height: auto;
     width: 250px;
@@ -78,6 +76,8 @@ button:disabled {
 .info-popup > .presentation > p {
     margin-bottom: 10px;
 }
+/* -------------------------------------------- */
+
 .msg{
     /* width: 80%; */
     border: 1px solid black;
@@ -226,6 +226,20 @@ ul > li::marker {
 }
 .dnone {
     display: none;
+}
+
+.spinner-background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border-radius: 25%;
+    z-index: inherit;
+}
+.spinner-border {
+    z-index: inherit;
 }
 
 @media (width > 1152px){

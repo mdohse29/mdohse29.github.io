@@ -25,26 +25,35 @@ $(document).ready(function(){
     }
 
     function closePopup(){
-        $('.popup').addClass('dnone');
-        $('.popup > div').empty();
+        // $('.popup').addClass('dnone');
+        // $('.popup > div').empty();
+        $('.md-modal').addClass('dnone').removeAttr('style');
+        $('.md-modal-background').removeClass('dnone');
+        $('.md-modal-content').removeClass('dnone');
+        $('.spinner-background').remove();
         $('#TextArea').focus();
     }
 
     function popup(text, timeOut){
-        adjustPop();
-        $('.popup > div').empty();
-        $('.popup > div').append('<p>' + text + '</p>');
-        $('.popup').removeClass('dnone');
+        // adjustPop();
+        // $('.popup > div').empty();
+        // $('.popup > div').append('<p>' + text + '</p>');
+        // $('.popup').removeClass('dnone');
+        let width = $('textarea').prop('scrollWidth');
+        let height = $('textarea').prop('scrollHeight');
+        let marginTop = $('.options').prop('scrollHeight');
+        $('.md-modal').attr('style', 'width: ' + width + 'px; height: ' + height + 'px; margin-top: ' + marginTop + 'px;');
+        $('.md-modal-background').addClass('dnone');
+        $('.md-modal-content').addClass('dnone');
+        $('.md-modal').append('<div class="spinner-background">        <div class="spinner-border" role="status">            <span class="visually-hidden">Loading...</span>        </div>    </div>');
+        $('.md-modal').removeClass('dnone');
         if (timeOut){
             setTimeout(() => {
                 closePopup();
             }, timeOut);
-        }else{
-            $('.popup > div').append('<div style="text-align: right;display: block;"><button class="btn btn-close btn-dark btn-sm" id="info-close"></button></div>')
-            $('#info-close').click(function(){
-                closePopup();
-            });
-        }
+        }/*else{
+            $('md-modal-background').removeClass('dnone');
+        }*/
     }
 
     function toggleSpclFtr(text){
@@ -133,9 +142,7 @@ $(document).ready(function(){
     }
 
     function processText(){
-        adjustPop();
-        $('.popup > div').append('<p>Processing ...</p>');
-        $('.popup').removeClass('dnone');
+        popup();
         /*
         Possible regex for stripping html from the text
         cleanText = strInputCode.replace(/<\/?[^>]+(>|$)/g, ""); -- stack overflow
@@ -232,8 +239,7 @@ $(document).ready(function(){
                 // text = text.replaceAll('\n', '\n\n');
                 $('#TextArea').val(text.trim());
             // }
-            $('.popup').addClass('dnone');
-            $('.popup > div').empty();
+            closePopup();
         }, 700);
     }
 
@@ -317,7 +323,7 @@ $(document).ready(function(){
         // }else{
         //     $(pop).addClass('dnone');
         // }
-        $('.md-modal').removeClass('dnone');
+        $('body > .md-modal').removeClass('dnone');
     });
 
     $('#info-close').click(function(){
