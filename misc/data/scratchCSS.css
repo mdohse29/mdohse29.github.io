@@ -178,7 +178,13 @@ ul > li::marker {
     margin-right: 5px;
     
 }
-.md-modal > .md-modal-content > ol > ol {
+
+#temp {
+    text-align: center;
+    padding: 15px 20px 15px 20px;
+}
+
+.md-modal-content > .static > ol > ol {
     list-style-type: lower-alpha;
 }
 

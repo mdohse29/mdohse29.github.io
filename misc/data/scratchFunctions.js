@@ -6,7 +6,7 @@ $(document).ready(function(){
         $('#TextArea').off('paste', processText);
         $('#exspc').off('click');
 
-        popup("Processing has been disabled!", 1500);
+        popup("", 1500);
         $('#stop').addClass('dnone');
         $('#start').removeClass('dnone');
         $('#exspc').attr('disabled', 'disabled');
@@ -17,7 +17,7 @@ $(document).ready(function(){
         $('#TextArea').off('paste');
         $('#TextArea').on('paste', processText);
         $('#exspc').click(removeExtraLines);
-        popup("Processing has been enabled", 1500);
+        popup("", 1500);
         $('#start').addClass('dnone');
         $('#stop').removeClass('dnone');
         $('#exspc').removeAttr('disabled');
@@ -29,31 +29,39 @@ $(document).ready(function(){
         // $('.popup > div').empty();
         $('.md-modal').addClass('dnone').removeAttr('style');
         $('.md-modal-background').removeClass('dnone');
-        $('.md-modal-content').removeClass('dnone');
-        $('.spinner-background').remove();
+        if ($('.md-modal-content').hasClass('dnone')){
+            $('.md-modal-content').removeClass('dnone');
+            $('.spinner-background').remove();
+        }else{
+            $('.static').removeClass('dnone');
+            $('#temp').remove();
+        }
         $('#TextArea').focus();
     }
 
     function popup(text, timeOut){
-        // adjustPop();
-        // $('.popup > div').empty();
-        // $('.popup > div').append('<p>' + text + '</p>');
-        // $('.popup').removeClass('dnone');
+        // text should at least have empty quotes "" in order to keep the variables in the current order.
+        // popup("", 500) to set the spinner for 500 mls
+        // popup("text", 500) to set a popup with text message for 500 mls
+        // "" = null
         let width = $('textarea').prop('scrollWidth');
         let height = $('textarea').prop('scrollHeight');
         let marginTop = $('.options').prop('scrollHeight');
         $('.md-modal').attr('style', 'width: ' + width + 'px; height: ' + height + 'px; margin-top: ' + marginTop + 'px;');
         $('.md-modal-background').addClass('dnone');
-        $('.md-modal-content').addClass('dnone');
-        $('.md-modal').append('<div class="spinner-background">        <div class="spinner-border" role="status">            <span class="visually-hidden">Loading...</span>        </div>    </div>');
+        if (text){
+            $('.static').addClass('dnone');
+            $('.md-modal-content').append('<p id="temp">' + text + '</p>');
+        }else{
+            $('.md-modal-content').addClass('dnone');
+            $('.md-modal').append('<div class="spinner-background">        <div class="spinner-border" role="status">            <span class="visually-hidden">Loading...</span>        </div>    </div>');
+        }
         $('.md-modal').removeClass('dnone');
         if (timeOut){
             setTimeout(() => {
                 closePopup();
             }, timeOut);
-        }/*else{
-            $('md-modal-background').removeClass('dnone');
-        }*/
+        }
     }
 
     function toggleSpclFtr(text){
