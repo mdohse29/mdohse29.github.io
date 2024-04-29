@@ -33,6 +33,7 @@ $(document).ready(function(){
             $('.md-modal-content').removeClass('dnone');
             $('.spinner-background').remove();
         }else{
+            $('.md-modal-content').removeAttr('style');
             $('.static').removeClass('dnone');
             $('#temp').remove();
         }
@@ -51,6 +52,7 @@ $(document).ready(function(){
         $('.md-modal-background').addClass('dnone');
         if (text){
             $('.static').addClass('dnone');
+            $('.md-modal-content').attr('style', 'overflow: hidden;');
             $('.md-modal-content').append('<p id="temp">' + text + '</p>');
         }else{
             $('.md-modal-content').addClass('dnone');
