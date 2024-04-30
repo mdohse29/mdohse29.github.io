@@ -46,7 +46,17 @@ div.content.msg > p:first-child{
     display: inline-flex;
 }
 .spcl {
-    display: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 15px;
+}
+.md-modal-content {
+    padding: 10px;
+}
+.md-modal-small {
+    overflow: hidden;
+    border-radius: 20px;
 }
 .tabs-container, .tabs {
     display: flex;
@@ -86,4 +96,6 @@ div.content.msg > p:first-child{
 }
 #num {
     min-width: 125px;
+    max-width: fit-content;
+    margin-bottom: 10px;
 }
