@@ -53,7 +53,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
 
     function search(searchText){
         if (searchText == "random select") {
-            $('.spcl').removeClass('d-none');
+            $('.md-modal').removeClass('dnone');
         } else if (searchText == "goodbye") {
             $('.spcl').addClass('d-none');
         }
@@ -215,6 +215,14 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
         if (event.which == '27'){
             reset();
         }
-    })
+    });
+
+    $('.md-modal-background').click(function(){
+        $(this).parent().addClass('dnone');
+    });
+
+    $('.rando').click(function(){
+        $('.md-modal').removeClass('dnone');
+    });
 
 });
