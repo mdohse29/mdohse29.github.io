@@ -25,8 +25,6 @@ $(document).ready(function(){
     }
 
     function closePopup(){
-        // $('.popup').addClass('dnone');
-        // $('.popup > div').empty();
         $('.md-modal').addClass('dnone').removeAttr('style');
         $('.md-modal-background').removeClass('dnone');
         if ($('.md-modal-content').hasClass('dnone')){
