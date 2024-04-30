@@ -194,6 +194,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
         }
 
         $('#submit-reset').removeClass('d-none');
+        $('.md-modal-background').click();
 
         updateTotal();
 
