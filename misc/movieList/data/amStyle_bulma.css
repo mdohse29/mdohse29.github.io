@@ -88,6 +88,9 @@ div.content.msg > p:first-child{
 .d-none {
     display: none;
 }
+.heading {
+    margin-top: 10px;
+}
 #placeH, .notFound {
     text-align: center;
 }
