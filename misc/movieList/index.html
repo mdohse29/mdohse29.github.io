@@ -15,15 +15,6 @@
 </head>
 <body class="has-background-info-light">
     <div class="heading">
-        <!-- <div class="columns is-centered">
-            <div class="column is-2 is-inline-flex">
-                <div class="spcl d-none">
-                    <input type="range" class="input" name="num" id="num" min="5" max="15" value="5" autocomplete="off">
-                    <button class="button" id="rand"><span id="selected">5</span>&nbsp;Random</button>
-                    <button class="button is-danger is-outlined" id="close">X</button>
-                </div>
-            </div>
-        </div> -->
         <div class="columns is-centered">
             <div class="column is-half">
                 <div class="title">
@@ -73,9 +64,8 @@
         <div class="md-modal-content md-modal-small">
             <p style="text-align: center;">This will randomly pick from what is available depending on what tab you are currently on. Use the slider to change the number of picks.<br><sub>All - Picks from everything<br>Movies - will only pick from active movies</sub></p>
             <div class="spcl">
-                <input type="range" class="input" name="num" id="num" min="5" max="15" value="5" autocomplete="off">
-                <button class="button" id="rand">Pick&nbsp;<span id="selected">5</span>&nbsp;at Random</button>
-                <!-- <button class="button is-danger is-outlined" id="close">X</button> -->
+                <input type="range" step="5" class="input" name="num" id="num" min="5" max="15" value="5" autocomplete="off">
+                <button class="button is-success is-responsive" id="rand">Pick&nbsp;<span id="selected">5</span>&nbsp;at Random</button>
             </div>
         </div>
     </div>

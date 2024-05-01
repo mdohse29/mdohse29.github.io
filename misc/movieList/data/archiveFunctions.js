@@ -222,7 +222,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
         $(this).parent().addClass('dnone');
     });
 
-    $('.rando').click(function(){
+    $('.rando > button').click(function(){
         $('.md-modal').removeClass('dnone');
     });
 
