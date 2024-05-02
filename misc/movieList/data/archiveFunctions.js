@@ -236,4 +236,12 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
         openModal();
     });
 
+    $('.md-modal-background > .close-btn').on('mousedown', function(){
+        $(this).attr('style', 'border: 3px solid rgba(13, 110, 253, 0.25);');
+    });
+
+    $('.md-modal-background > .close-btn').on('mouseup', function(){
+        $(this).removeAttr('style');
+    })
+
 });
