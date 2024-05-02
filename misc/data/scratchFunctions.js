@@ -332,6 +332,7 @@ $(document).ready(function(){
         //     $(pop).addClass('dnone');
         // }
         $('body > .md-modal').removeClass('dnone');
+        $('body').attr('style', 'overflow: hidden;');
     });
 
     $('#info-close').click(function(){
@@ -363,6 +364,7 @@ $(document).ready(function(){
     // Close the modal
     $('.md-modal-background').click(function(){
         $('.md-modal').addClass('dnone');
+        $('body').removeAttr('style');
     });
 
     if (previous.includes("toolBox.html")){

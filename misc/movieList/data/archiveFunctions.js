@@ -37,6 +37,16 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
 
     }
 
+    function openModal(){
+        $('.md-modal').removeClass('dnone');
+        $('html').attr('style', 'overflow: hidden;');
+    }
+
+    function closeModal(){
+        $('.md-modal').addClass('dnone');
+        $('html').removeAttr('style');
+    }
+
     function filter(movieObject){
         /*
         Movie object example
@@ -53,9 +63,9 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
 
     function search(searchText){
         if (searchText == "random select") {
-            $('.md-modal').removeClass('dnone');
+            openModal();
         } else if (searchText == "goodbye") {
-            $('.spcl').addClass('d-none');
+            closeModal();
         }
 
         let found = false;
@@ -194,7 +204,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
         }
 
         $('#submit-reset').removeClass('d-none');
-        $('.md-modal-background').click();
+        closeModal();
 
         updateTotal();
 
@@ -219,11 +229,11 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
     });
 
     $('.md-modal-background').click(function(){
-        $(this).parent().addClass('dnone');
+        closeModal();
     });
 
     $('.rando > button').click(function(){
-        $('.md-modal').removeClass('dnone');
+        openModal();
     });
 
 });
