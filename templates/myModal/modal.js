@@ -7,3 +7,7 @@ document.querySelector('.md-modal-background').addEventListener('click', () => {
     document.querySelector('.md-modal').classList.add('dnone');
     document.querySelector('html').removeAttribute('style');
 });
+
+document.querySelector('.close-btn').addEventListener('click', () => {
+    this.setAttribute('style', 'border: 5px solid black;');
+})
