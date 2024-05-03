@@ -32,7 +32,7 @@ const drawers = {
             },
             button4: {
                 hidden: false,
-                url: './misc/scratchPad.html',
+                url: './misc/scratch/',
                 text: {
                     main: 'Scratch Pad for notes',
                     sub: '(Does not save)',
