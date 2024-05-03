@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- 
+        todo: 
+            * textContent and value for getting the text. Currently using value. I want to see if
+                it would be beneficial in any way to use textContent
+                *** No innerText is available in the textarea ***
+    
+    -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="./data/scratchCSS.css">
+    
+    <title>Scratch Pad</title>
+
+</head>
+<body>
+    <p id="toolBox" style="text-align:right; display: none;" class="me-3"><a href="../toolBox.html">Back to ToolBox</a></p>
+    <div class="spclFtr mt-2 ms-2 dnone">
+        <div class="dnone search-replace" draggable="true">
+            <div class="search">
+                <input type="text" name="search" id="search" placeholder="Search">
+                <input type="text" name="replace" id="replace" placeholder="Replace">
+                <button class="btn btn-outline-success" id="rep">Replace</button>
+            </div>
+            <div class="search-options d-block">
+                <input type="checkbox" name="word" id="word">
+                <label for="word">Strict (Whole Word)</label>
+            </div>
+        </div>
+        <button class="btn btn-outline-danger btn-sm" id="sandr">S&R</button>
+        <button class="btn btn-outline-danger btn-sm" id="stop">Disable Text Processing</button>
+        <button id="start" class="btn btn-outline-danger btn-sm dnone">Enable Text Processing</button>
+        <button class="btn btn-outline-danger btn-sm" id="ff">Format Filename</button>
+        <button class="btn btn-close btn-dark" id="srch-close"></button>
+    </div>
+    <div class="presentation mt-3 ms-2">
+        <div id="TextAreaContain">
+            <div class="options mb-2">
+                <select class="form-select-sm" name="color" id="color">
+                    <option class="dark" value="dark">Dark</option>
+                    <option class="green" value="green">Green</option>
+                    <option class="blue" value="blue">Blue</option>
+                    <option class="white" value="white">White</option>
+                    <option class="yellow" value="yellow">Yellow</option>
+                </select>
+                <button class="btn btn-primary btn-sm ms-1 usr-btn" id="exspc" title="The empty space in front of the paragraphs">Remove Leading Space</button>
+                <button class="btn btn-primary btn-sm ms-1 usr-btn" id="rmv-ol" title="Remove numbered OL markers">Remove OL Markers</button>
+                <button class="btn btn-primary btn-sm ms-1 usr-btn" id="clear" title="Clear scratch pad">Clear</button>
+                
+                <button class="btn btn-sm ms-1" title="How this works" id="info"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                  </svg></button>
+            </div>
+            <!-- <div class="switch-container">
+                <span>CAT</span>
+                <div class="toggle-cont">
+                    <div class="toggle-pill">
+    
+                    </div>
+                </div>
+                <span>COSMOS</span>
+            </div> -->
+            <textarea name="scratchPad" id="TextArea" max-width="50%" encoding="UTF-8" style="font-size: 14px;padding: 5px;" autofocus></textarea>
+        </div>
+        <div class="msgContainer me-3">
+            <div class="msg rounded-2 bg-info-subtle">
+                <!-- just add a ul to list updates, if one isn't already present -->
+                <ul>
+                </ul>
+            </div>
+        </div>
+        <!-- <div class="popup ">
+            <div class="presentation">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+            </div>
+        </div> -->
+    </div>
+    <div class="md-modal dnone">
+        <div class="md-modal-background"><button class="btn-close"></button></div>
+        <div class="md-modal-content">
+            <div class="static">
+                <p>When you paste text into the text area of the Scratch Pad it will trigger scripts to check the text to make sure it is okay to paste into the editor. It will perform several checks and corrects what is caught automatically and updates the text in the text area. Currently, the following actions are executed:</p>
+                <ol>
+                    <li>Foreign characters are removed<br><sup>(Like hidden chars and other chars of different encoding)</sup></li>
+                    <li>Punctuation of different encoding gets converted to standard<br>For example, this double quote &#8221; will get changed to "</li>
+                    <li>List bullet characters at the beginning of the lines are removed</li>
+                    <ol>
+                        <li>Unordered list markers should be removed automatically</li>
+                        <li>Ordered list markers are only manually removed, for the moment, by clicking the <strong>Remove OL Markers</strong> button</li>
+                    </ol>
+                    <li>More than 1 space in between words inside a paragraph are converted to a single space</li>
+                    <li>Empty lines between paragraphs are removed</li>
+                </ol>
+                <p>The validation continues to grow as new characters are discovered and added. If anyone finds anything the validation is NOT catching, please let me know so I can update the validation process.</p>
+                <p>The validation also checks for any HTML tags that might get copied over by mistake. This only alerts the user that there are html tags present, HTML tags are not removed automatically. There are cases where HTML tags might be necessary so it didn't make sense to automatically remove them.</p>
+                <p>The removing leading spaces button removes any extra space that is at the beginning of the paragraphs. Most often this occurs when copying a list. It just quickly removes the extra space so it doesn't accidentally get added in the content.</p>
+                <br>
+                <p>If there is anything you think might be a good feature to have that would help make this more efficient, please let me know. I am always open to suggestions.</p>
+            </div>
+        </div>
+    </div>
+    <script src="./data/spColorPick.js"></script>
+    <script src="./data/scratchFunctions.js"></script>
+</body>
+</html>
