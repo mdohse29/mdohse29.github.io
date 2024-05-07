@@ -373,6 +373,8 @@ $(document).ready(function(){
         // stopProcessing();
     }
 
+    $('textarea').focus();
+
     // Set to clear user message after a certain Month.
     // if (currentDate.getMonth() >= 2){
     //     $('.msg > ul').empty();
