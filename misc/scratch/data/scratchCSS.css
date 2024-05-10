@@ -212,6 +212,7 @@ ul > li::marker {
     background-color: rgba(var(--bs-info-rgb), 0.2);
     position: inherit;
     z-index: inherit;
+    cursor: pointer;
 }
 
 .md-modal-content { 
