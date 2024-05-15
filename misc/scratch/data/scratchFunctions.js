@@ -1,4 +1,6 @@
 $(document).ready(function(){
+    // Figure out a way to have a check clipboard button that
+    //     displays what someone currently has in the clipboard
     let previous = document.referrer;
     const currentDate = new Date();
 
