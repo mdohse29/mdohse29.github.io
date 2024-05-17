@@ -31,7 +31,7 @@
         <button class="btn btn-outline-danger btn-sm" id="ff">Format Filename</button>
         <button class="btn btn-close btn-dark" id="srch-close"></button>
     </div>
-    <div class="presentation mt-3 ms-2">
+    <div class="presentation mt-3 ms-2 me-2 mb-3">
         <div id="TextAreaContain">
             <div class="options mb-2">
                 <select class="form-select-sm" name="color" id="color">
@@ -44,7 +44,16 @@
                 <button class="btn btn-primary btn-sm ms-1 usr-btn" id="exspc" title="The empty space in front of the paragraphs">Remove Leading Space</button>
                 <button class="btn btn-primary btn-sm ms-1 usr-btn" id="rmv-ol" title="Remove numbered OL markers">Remove OL Markers</button>
                 <button class="btn btn-primary btn-sm ms-1 usr-btn" id="clear" title="Clear scratch pad">Clear</button>
-                
+                <div class="switch-container" title="This is temporary for COSMOS rubric entry.">
+                    <label>PDF Table Cell</label>
+                    <div class="toggle-cont">
+                        <div class="toggle-pill">
+        
+                        </div>
+                    </div>
+                </div>
+
+                <a class="btn btn-sml ms-1" title="Click to report an issue or suggestion." href="mailto:aaaabncggffyesoyicuhyz3u7u@imaginelearning.org.slack.com"><img width="32" height="32" src="./data/icons8-bug-64.png" alt="bug"/></a>
                 <button class="btn btn-sm ms-1" title="How this works" id="info"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
                     <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
@@ -61,13 +70,7 @@
             </div> -->
             <textarea name="scratchPad" id="TextArea" max-width="50%" encoding="UTF-8" style="font-size: 14px;padding: 5px;"></textarea>
         </div>
-        <div class="msgContainer me-3">
-            <div class="msg rounded-2 bg-info-subtle">
-                <!-- just add a ul to list updates, if one isn't already present -->
-                <ul>
-                </ul>
-            </div>
-        </div>
+        
     </div>
     <div class="md-modal dnone">
         <div class="md-modal-background"><button class="btn-close"></button></div>
@@ -93,6 +96,7 @@
             </div>
         </div>
     </div>
+    <script src="./data/spclFunctions.js"></script>
     <script src="./data/spColorPick.js"></script>
     <script src="./data/scratchFunctions.js"></script>
 </body>

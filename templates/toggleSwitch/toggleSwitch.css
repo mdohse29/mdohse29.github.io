@@ -6,6 +6,8 @@
 }
 
 .switch-container {
+    display: inline-flex;
+    align-items: baseline;
     padding: 0px 5px;
 }
 
