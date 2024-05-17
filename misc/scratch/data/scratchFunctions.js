@@ -48,7 +48,9 @@ $(document).ready(function(){
         let width = $('textarea').prop('scrollWidth');
         let height = $('textarea').prop('scrollHeight');
         let marginTop = $('.options').prop('scrollHeight');
-        $('.md-modal').attr('style', 'width: ' + width + 'px; height: ' + height + 'px; margin-top: ' + marginTop + 'px;');
+        let position = $('textarea').position();
+        
+        $('.md-modal').attr('style', 'width: ' + width + 'px; height: ' + height + 'px; top: ' + position.top + 'px; left: ' + position.left + 'px;');
         $('.md-modal-background').addClass('dnone');
         if (text){
             $('.static').addClass('dnone');
@@ -217,6 +219,17 @@ $(document).ready(function(){
                 text = text.replaceAll(regtest, '');
                 changed = true;
             }
+
+            if ($('div.toggle-cont').hasClass('tg-on')){
+                let oneStr = text.split('\n');
+                for (a = 0; a < oneStr.length; a++){
+                    if (a > 0){
+                        text += " " + oneStr[a];
+                    }else{
+                        text = oneStr[a];
+                    }
+                }
+            }
             
             regtest = /(\S)\s{2,}(\S)/gm;
             if (text.match(regtest)){
@@ -244,6 +257,7 @@ $(document).ready(function(){
                     console.log("Removing extra line at the end.")
                     text = text.substring(0, text.length - 1);
                 }
+
 
                 navigator.clipboard.writeText(text.trim());
                 // text = text.replaceAll('\n', '\n\n');
@@ -348,6 +362,7 @@ $(document).ready(function(){
 
     $('#rmv-ol').click(async function(){
         let cleanText = await removeOlMarkers($('#TextArea').val());
+        navigator.clipboard.writeText(cleanText);
         $('#TextArea').val(cleanText);
     })
 
@@ -382,10 +397,10 @@ $(document).ready(function(){
     //     $('.msg > ul').empty();
     // }
 
-    if (document.querySelector('.msg > ul').innerText.length > 0){
-        $('.msg').prepend('<h1>Update!</h1>');
-    }
-    $('.msg').append('<p style="text-align: right;font-weight: bold;">To submit an idea for improvement or<br>if an issue is found please report it here.<br/><a href="mailto:aaaabncggffyesoyicuhyz3u7u@imaginelearning.org.slack.com">BUG</a> &larr; Click to report an issue.</p>');
+    // if (document.querySelector('.msg > ul').innerText.length > 0){
+    //     $('.msg').prepend('<h1>Update!</h1>');
+    // }
+    // $('.msg').append('<p style="text-align: right;font-weight: bold;">To submit an idea for improvement or<br>if an issue is found please report it here.<br/><a href="mailto:aaaabncggffyesoyicuhyz3u7u@imaginelearning.org.slack.com">BUG</a> &larr; Click to report an issue.</p>');
 
     adjustMsg();
 });

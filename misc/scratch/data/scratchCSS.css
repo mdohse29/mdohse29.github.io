@@ -20,7 +20,7 @@ select {
 
 .presentation {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 div.popup > div.presentation {
     background-color: rgba(54, 235, 235, 0.25);
@@ -36,7 +36,53 @@ button:disabled {
     cursor: not-allowed;
 }
 
+label {
+    text-align: center;
+}
+
+a.btn {
+    padding: 0px;
+}
+
+.options {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.toggle-cont {
+    display: inline-flex;
+    width: 3em;
+    height: 15px;
+    background-color: var(--bs-secondary-color);
+}
+
+.switch-container {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 5px;
+}
+
+.toggle-pill {
+    width: 50%;
+    margin: 2px;
+    background-color: white;
+    transition: margin-left 200ms;
+
+}
+
+.toggle-cont, .toggle-pill {
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
 .tg-on {
+    background-color: var(--bs-success);
+}
+
+.tg-off {
     background-color: var(--bs-secondary-color);
 }
 /* ------------------------------ */
@@ -142,7 +188,7 @@ button:disabled {
 
 #TextAreaContain {
     height: 95vh;
-    max-width: 58%;
+    max-width: 75%;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -249,11 +295,8 @@ ul > li::marker {
     z-index: inherit;
 }
 
-@media (width > 1152px){
-    textarea {
-        width: 90%
+@media (width < 1152px){
+    #TextAreaContain {
+        max-width: 100%;
     }
-    /* .msg {
-        width: 50%;
-    } */
 }
