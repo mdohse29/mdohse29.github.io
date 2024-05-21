@@ -41,6 +41,11 @@ span.red {
     padding-top: 20px;
     padding-bottom: 20px;
 }
+
+.tile.click {
+    box-shadow: 0px 0px 5px 0px darkgrey;
+}
+
 .expand {
     display: block;
     justify-content: space-around;

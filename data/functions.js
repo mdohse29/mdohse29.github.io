@@ -35,14 +35,14 @@ const tiles = document.querySelectorAll('.tile');
 
 for (let tile of tiles){
     tile.addEventListener('mousedown', () => {
-        tile.style.boxShadow = '0px 0px 5px 0px darkgrey';
+        tile.classList.add('click');
     });
     tile.addEventListener('contextmenu', (e) => {
         e.preventDefault();
     });
     tile.addEventListener('mouseup', (e) => {
         const link = tile.getAttribute('url');
-        tile.removeAttribute('style');
+        tile.classList.remove('click');
         if (link){
             switch(e.button){
                 case 0:
