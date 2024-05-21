@@ -42,7 +42,7 @@ for (let tile of tiles){
     });
     tile.addEventListener('mouseup', (e) => {
         const link = tile.getAttribute('url');
-        tile.style.boxShadow = '0px 0px 5px 3px darkgrey';
+        tile.removeAttribute('style');
         if (link){
             switch(e.button){
                 case 0:
