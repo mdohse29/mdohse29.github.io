@@ -13,7 +13,7 @@
 </head>
 <body>
     <p id="toolBox" style="text-align:right; display: none;" class="me-3"><a href="../../toolBox.html">Back to ToolBox</a></p>
-    <div class="spclFtr mt-2 ms-2 dnone">
+    <div class="spclFtr m-2 dnone">
         <div class="dnone search-replace" draggable="true">
             <div class="search">
                 <input type="text" name="search" id="search" placeholder="Search">
@@ -31,7 +31,7 @@
         <button class="btn btn-outline-danger btn-sm" id="ff">Format Filename</button>
         <button class="btn btn-close btn-dark" id="srch-close"></button>
     </div>
-    <div class="presentation mt-3 ms-2 me-2 mb-3">
+    <div class="presentation my-3 mx-2">
         <div id="TextAreaContain">
             <div class="options mb-2">
                 <select class="form-select-sm" name="color" id="color">
@@ -45,7 +45,7 @@
                 <button class="btn btn-primary btn-sm ms-1 usr-btn" id="rmv-ol" title="Remove numbered OL markers">Remove OL Markers</button>
                 <button class="btn btn-primary btn-sm ms-1 usr-btn" id="clear" title="Clear scratch pad">Clear</button>
                 <div class="switch-container" title="Convert multiple lines of text into a single line. Check 'How This Works' info button for example.">
-                    <label>Fix Broken Lines</label>
+                    <label>Flatten Text</label>
                     <div class="toggle-cont">
                         <div class="toggle-pill">
         
@@ -87,7 +87,7 @@
                     </ol>
                     <li>More than 1 space in between words inside a paragraph are converted to a single space</li>
                     <li>Empty lines between paragraphs are removed</li>
-                    <li>When the <strong>Fix Broken Lines</strong> toggle is on, text that is pasted in the text area that has broken lines will be converted from multiple lines into a single line of text.<br>Example:<br><img class="img-fluid" src="./data/pdfExample.gif" style="max-width: 95%;" alt="Example of PDF Table Cell"></li>                </ol>
+                    <li>When the <strong>Flatten Text</strong> toggle is on, text that is pasted in the text area that has broken lines will be converted from multiple lines into a single line of text.<br>Example:<br><img class="img-fluid" src="./data/pdfExample.gif" style="max-width: 95%;" alt="Example of PDF Table Cell"></li>                </ol>
                 <p>The validation continues to grow as new characters are discovered and added. If anyone finds anything the validation is NOT catching, please let me know so I can update the validation process.</p>
                 <p>The validation also checks for any HTML tags that might get copied over by mistake. This only alerts the user that there are html tags present, HTML tags are not removed automatically. There are cases where HTML tags might be necessary so it didn't make sense to automatically remove them.</p>
                 <p>The removing leading spaces button removes any extra space that is at the beginning of the paragraphs. Most often this occurs when copying a list. It just quickly removes the extra space so it doesn't accidentally get added in the content.</p>
