@@ -47,7 +47,6 @@ $(document).ready(function(){
         // "" = null
         let width = $('textarea').prop('scrollWidth');
         let height = $('textarea').prop('scrollHeight');
-        let marginTop = $('.options').prop('scrollHeight');
         let position = $('textarea').position();
         
         $('.md-modal').attr('style', 'width: ' + width + 'px; height: ' + height + 'px; top: ' + position.top + 'px; left: ' + position.left + 'px;');
@@ -58,7 +57,7 @@ $(document).ready(function(){
             $('.md-modal-content').append('<p id="temp">' + text + '</p>');
         }else{
             $('.md-modal-content').addClass('dnone');
-            $('.md-modal').append('<div class="spinner-background">        <div class="spinner-border" role="status">            <span class="visually-hidden">Loading...</span>        </div>    </div>');
+            $('.md-modal').append('<div class="spinner-background"><div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div></div>');
         }
         $('.md-modal').removeClass('dnone');
         if (timeOut){
@@ -69,7 +68,8 @@ $(document).ready(function(){
     }
 
     function toggleSpclFtr(text){
-        if (text == "Admin"){
+
+        if (text == "Admin" && $('.spclFtr').length === 0){
             // $('.spclFtr').removeClass('dnone');
             $('body').prepend(crtad());
             $('body').prepend(mkrtnl());
@@ -79,7 +79,16 @@ $(document).ready(function(){
             });
             $('#sandr').click(function(){
                 $('.search-replace').removeClass('dnone');
+
+                let position = $('#TextArea').position();
+                let scWidth = $('#TextArea').prop('scrollWidth') / 2;
+                let scHeight = $('#TextArea').prop('scrollHeight') / 2;
+                let srScWidth = $('.search-replace').prop('scrollWidth') / 2;
+                let srScHeight = $('.search-replace').prop('scrollHeight') / 2;
+
+                $('.search-replace').attr('style', 'top: ' + (position.top + (scHeight - srScHeight)) + 'px; left: ' + (position.left + (scWidth - srScWidth)) + 'px;');
                 $('#search').focus();
+                
             });
         
             $('#rep').click(function(){
@@ -101,6 +110,7 @@ $(document).ready(function(){
                 $('#replace').val("");
                 $('#word').prop('checked', false);
                 $('.search-replace').addClass('dnone');
+                $('.search-replace').removeAttr('style');
                 $('#TextArea').focus();
             })
         

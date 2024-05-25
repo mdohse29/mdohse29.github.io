@@ -61,6 +61,8 @@ function crtad(){
 
     let btndiv2a = mkbtn('btn btn-outline-success', 'rep', 'Replace');
 
+    lbdiv2b1.innerText = ' Strict Search';
+    lbdiv2b1.setAttribute('for', 'word');
 
     div2a.appendChild(indiv2a1);
     div2a.appendChild(indiv2a2);
