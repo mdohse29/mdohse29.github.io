@@ -147,7 +147,9 @@ a.btn {
     max-width: 40%;
 }
 .spclFtr{
-    display: block;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .usr-btn {
@@ -185,6 +187,7 @@ a.btn {
 
 #toolBox {
     margin: 1px;
+    text-align: center;
 }
 
 #TextAreaContain {
