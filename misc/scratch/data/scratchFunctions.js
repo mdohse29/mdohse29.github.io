@@ -70,9 +70,55 @@ $(document).ready(function(){
 
     function toggleSpclFtr(text){
         if (text == "Admin"){
-            $('.spclFtr').removeClass('dnone');
+            // $('.spclFtr').removeClass('dnone');
+            $('body').prepend(crtad());
+            $('body').prepend(mkrtnl());
+            $('#ff').click(function(){
+                let currentText = $('#TextArea').val();
+                $('#TextArea').val(formatFilename(currentText));
+            });
+            $('#sandr').click(function(){
+                $('.search-replace').removeClass('dnone');
+                $('#search').focus();
+            });
+        
+            $('#rep').click(function(){
+                //Search and Replace
+                let text = $('#TextArea').val();
+                let search = $('#search').val();
+                let replace = $('#replace').val();
+                let strict = $('#word').is(':checked');
+                if (strict){
+                    let regex = searchRegex(search);
+                    // let regex = search;
+                    // console.log(regex);
+                    text = text.replaceAll(new RegExp(regex, "gm"), replace);
+                }else{
+                    text = text.replaceAll(search, replace);
+                }
+                $('#TextArea').val(text);
+                $('#search').val("");
+                $('#replace').val("");
+                $('#word').prop('checked', false);
+                $('.search-replace').addClass('dnone');
+                $('#TextArea').focus();
+            })
+        
+            $('#stop').click(function (){
+                stopProcessing();
+            });
+        
+            $('#start').click(function (){
+                startProcessing();
+            });
+        
+            $('#srch-close').click(function(){
+                toggleSpclFtr("goodbye");
+            });
         }else if (text == "goodbye"){
-            $('.spclFtr').addClass('dnone');
+            $('.spclFtr').remove();
+            $('#toolBox').remove();
+
         }
     }
 
@@ -301,45 +347,6 @@ $(document).ready(function(){
 
     $('#exspc').click(removeExtraLines);
 
-    $('#sandr').click(function(){
-        $('.search-replace').removeClass('dnone');
-        $('#search').focus();
-    });
-
-    $('#rep').click(function(){
-        //Search and Replace
-        let text = $('#TextArea').val();
-        let search = $('#search').val();
-        let replace = $('#replace').val();
-        let strict = $('#word').is(':checked');
-        if (strict){
-            let regex = searchRegex(search);
-            // let regex = search;
-            // console.log(regex);
-            text = text.replaceAll(new RegExp(regex, "gm"), replace);
-        }else{
-            text = text.replaceAll(search, replace);
-        }
-        $('#TextArea').val(text);
-        $('#search').val("");
-        $('#replace').val("");
-        $('#word').prop('checked', false);
-        $('.search-replace').addClass('dnone');
-        $('#TextArea').focus();
-    })
-
-    $('#stop').click(function (){
-        stopProcessing();
-    });
-
-    $('#start').click(function (){
-        startProcessing();
-    });
-
-    $('#srch-close').click(function(){
-        toggleSpclFtr("goodbye");
-    });
-
     $('#info').click(function(){
         // let pop = $('.info-popup');
         // if ($(pop).attr('class').includes('dnone')){
@@ -373,10 +380,6 @@ $(document).ready(function(){
 
     $('#TextArea').on('paste', processText);
 
-    $('#ff').click(function(){
-        let currentText = $('#TextArea').val();
-        $('#TextArea').val(formatFilename(currentText));
-    });
 
     // Close the modal
     $('.md-modal-background').click(function(){
@@ -385,7 +388,7 @@ $(document).ready(function(){
     });
 
     if (previous.includes("toolBox.html")){
-        $('#toolBox').show();
+        // $('#toolBox').show();
         toggleSpclFtr('Admin');
         // stopProcessing();
     }

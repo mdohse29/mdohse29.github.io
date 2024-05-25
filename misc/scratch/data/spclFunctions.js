@@ -1,18 +1,99 @@
-let ts = document.querySelector('.toggle-cont');
+function mkDiv(c){
+    let div = document.createElement('div');
+    let d = c.split(' ');
+    for (let e in d){
+        div.classList.add(d[e]);
+    }
 
-// ts.addEventListener('click', () => {
-//     let pill = ts.querySelector('.toggle-pill');
-//     let pillMarg = ts.scrollWidth - (pill.scrollWidth + 4);
-//     console.log(pillMarg)
-//     if (pill.style.marginLeft < pillMarg){
-//         pill.style.marginLeft = pillMarg + 'px';
-//         ts.style.backgroundColor = "var(--bs-success)";
-//     }else{
-//         pill.removeAttribute('style');
-//         ts.removeAttribute('style');
-//     }
-    
-// });
+    return div;
+}
+
+function mkinp(t, n, p){
+    let input = document.createElement('input');
+    input.type = t;
+    input.name = n;
+    input.id = n;
+    if (p){
+        input.placeholder = p;
+    }
+    return input;
+}
+
+function mkbtn(c, i, t){
+    let btn = document.createElement('button');
+    let d = c.split(' ');
+    for (let e in d){
+        btn.classList.add(d[e]);
+    }
+    btn.id = i;
+    if (t){
+        btn.innerText = t;
+    }
+
+    return btn;
+}
+
+function mkrtnl(){
+    let rtrnTB = document.createElement('p');
+    let TB = document.createElement('a');
+    TB.href = '../../toolBox.html';
+    TB.innerText = 'Return to ToolBox';
+    rtrnTB.id = 'toolBox';
+    rtrnTB.classList.add('me-3');
+    rtrnTB.appendChild(TB);
+
+    return rtrnTB;
+}
+
+function crtad(){
+    let disbchk = document.querySelectorAll('button');
+    let btnenbl = false;
+    let div1 = mkDiv('spclFtr m-2');
+    let div2 = mkDiv('dnone search-replace');
+    let div2a = mkDiv('search');
+    let div2b = mkDiv('search-options d-block');
+
+    let indiv2a1 = mkinp('text', 'search', 'Search');
+    let indiv2a2 = mkinp('text', 'replace', 'Replace');
+    let indiv2b1 = mkinp('checkbox', 'word');
+
+    let lbdiv2b1 = document.createElement('label');
+
+    let btndiv2a = mkbtn('btn btn-outline-success', 'rep', 'Replace');
+
+
+    div2a.appendChild(indiv2a1);
+    div2a.appendChild(indiv2a2);
+    div2a.appendChild(btndiv2a);
+    div2b.appendChild(indiv2b1);
+    div2b.appendChild(lbdiv2b1);
+    div2.appendChild(div2a);
+    div2.appendChild(div2b);
+    div1.appendChild(div2);
+    div1.appendChild(mkbtn('btn btn-outline-danger btn-sm', 'sandr', 'S&R'));
+
+    for (let btn of disbchk){
+        if (btn.disabled){
+            btnenbl = btn.disabled;
+            break;
+        }
+    }
+
+    if (btnenbl){
+        div1.appendChild(mkbtn('btn btn-outline-danger btn-sm dnone', 'stop', 'Disable Text Processing'));
+        div1.appendChild(mkbtn('btn btn-outline-danger btn-sm', 'start', 'Enable Text Processing'));
+    }else{
+        div1.appendChild(mkbtn('btn btn-outline-danger btn-sm', 'stop', 'Disable Text Processing'));
+        div1.appendChild(mkbtn('btn btn-outline-danger btn-sm dnone', 'start', 'Enable Text Processing'));
+    }
+
+    div1.appendChild(mkbtn('btn btn-outline-danger btn-sm', 'ff', 'Format Filename'));
+    div1.appendChild(mkbtn('btn btn-close btn-dark', 'srch-close'));
+
+    return div1;
+}
+
+let ts = document.querySelector('.toggle-cont');
 
 ts.addEventListener('click', () => {
     let pill = document.querySelector('.toggle-pill');
@@ -21,16 +102,11 @@ ts.addEventListener('click', () => {
     let currentMarg = pillStyle.marginLeft.replace('px','');
     
     if (currentMarg < marg){
-        // console.log(currentMarg);
         pill.style.setProperty('margin-left', marg + 'px');
-        // setTimeout(() => {
-            ts.classList.add('tg-on');
-        // }, 500);
+        ts.classList.add('tg-on');
     }else{
         pill.style.setProperty('margin-left','2px');
-        // setTimeout(() => {
-            ts.classList.remove('tg-on');
-        // }, 500);
+        ts.classList.remove('tg-on');
     }
 });
 
