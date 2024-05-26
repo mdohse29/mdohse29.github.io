@@ -15,6 +15,7 @@ function mkinp(t, n, p){
     input.id = n;
     if (p){
         input.placeholder = p;
+        input.classList.add('form-control');
     }
     return input;
 }
