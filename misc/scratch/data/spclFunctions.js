@@ -57,19 +57,25 @@ function crtad(){
     let indiv2a1 = mkinp('text', 'search', 'Search');
     let indiv2a2 = mkinp('text', 'replace', 'Replace');
     let indiv2b1 = mkinp('checkbox', 'word');
+    let indiv2b2 = mkinp('checkbox', 'regex');
 
     let lbdiv2b1 = document.createElement('label');
+    let lbdiv2b2 = document.createElement('label');
 
     let btndiv2a = mkbtn('btn btn-outline-success', 'rep', 'Replace');
 
     lbdiv2b1.innerText = ' Strict Search';
     lbdiv2b1.setAttribute('for', 'word');
+    lbdiv2b2.innerText = 'Regex';
+    lbdiv2b2.setAttribute('for', 'regex');
 
     div2a.appendChild(indiv2a1);
     div2a.appendChild(indiv2a2);
     div2a.appendChild(btndiv2a);
     div2b.appendChild(indiv2b1);
     div2b.appendChild(lbdiv2b1);
+    div2b.appendChild(indiv2b2);
+    div2b.appendChild(lbdiv2b2);
     div2.appendChild(div2a);
     div2.appendChild(div2b);
     div1.appendChild(div2);
