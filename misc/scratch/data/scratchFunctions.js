@@ -73,10 +73,12 @@ $(document).ready(function(){
             // $('.spclFtr').removeClass('dnone');
             $('body').prepend(crtad());
             $('body').prepend(mkrtnl());
+
             $('#ff').click(function(){
                 let currentText = $('#TextArea').val();
                 $('#TextArea').val(formatFilename(currentText));
             });
+
             $('#sandr').click(function(){
                 $('.search-replace').removeClass('dnone');
 
@@ -133,7 +135,7 @@ $(document).ready(function(){
     }
 
     function formatFilename(text){
-        return text.toLowerCase().replaceAll(' ', '_');
+        return text.toLowerCase().trim().replaceAll(' ', '_');
     }
 
     function removeOlMarkers(text){
