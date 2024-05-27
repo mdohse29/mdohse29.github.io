@@ -149,6 +149,7 @@ a.btn {
 .spclFtr{
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
 }
 
@@ -214,6 +215,9 @@ a.btn {
 .search > input {
     margin-left: 3px;
     margin-right: 3px;
+}
+.search-options > label {
+    margin: 0px 5px;
 }
 .close-btn {
     text-align: right;
