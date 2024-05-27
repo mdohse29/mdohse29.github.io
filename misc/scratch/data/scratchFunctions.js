@@ -87,8 +87,10 @@ $(document).ready(function(){
                 let scHeight = $('#TextArea').prop('scrollHeight') / 2;
                 let srScWidth = $('.search-replace').prop('scrollWidth') / 2;
                 let srScHeight = $('.search-replace').prop('scrollHeight') / 2;
+                let top = (position.top + (scHeight - srScHeight));
+                let left = (position.left + (scWidth - srScWidth))
 
-                $('.search-replace').attr('style', 'top: ' + (position.top + (scHeight - srScHeight)) + 'px; left: ' + (position.left + (scWidth - srScWidth)) + 'px;');
+                $('.search-replace').attr('style', 'top: ' + top + 'px; left: ' + left + 'px;');
                 $('#search').focus();
                 
             });
@@ -178,22 +180,18 @@ $(document).ready(function(){
         Further testing is needed.
         */
         // let spclCharCheck = new RegExp("([\[\]\.\,\\\/\!\@\#\$\%\^\&\*\(\)\_\-\=\+\<\>\{\}\"\?])", "g");
-        let spclCharCheck = new RegExp("([^A-Za-z0-9 \\w])", "g");
+
+        let spclCharCheck = new RegExp("([^A-Za-z0-9 \\w])", "g"); // create new function
         
-        if (searchText.match(spclCharCheck)){
+        if (searchText.match(spclCharCheck)){ // Delete
             
-            let formattedText = searchText.replace(spclCharCheck, '\\$1');
-            formattedText = formattedText.replaceAll("_", "\\_");
+            let formattedText = searchText.replace(spclCharCheck, '\\$1'); // new fun
+            formattedText = formattedText.replaceAll("_", "\\_"); // new fun
 
             let pat1 = new RegExp("\\b" + formattedText + "\\b", "g");
             let pat2 = new RegExp("\\b" + formattedText + "\\B", "g");
             let pat3 = new RegExp("\\B" + formattedText + "\\b", "g");
             let pat4 = new RegExp("\\B" + formattedText + "\\B", "g");
-
-            // console.log(searchText.match(pat1));
-            // console.log(searchText.match(pat2));
-            // console.log(searchText.match(pat3));
-            // console.log(searchText.match(pat4));
 
             if (searchText.match(pat1)){
                 return "\\b" + formattedText + "\\b";
@@ -205,10 +203,8 @@ $(document).ready(function(){
                 return "\\B" + formattedText + "\\B";
             }
             
-            // console.log("Special Char");
-            // searchText = searchText.replace(spclCharCheck, '\\$1');
-        }
-        return "\\b" + searchText + "\\b";
+        } //Delete
+        return "\\b" + searchText + "\\b"; // Get rid of this
     }
 
     function processText(){
