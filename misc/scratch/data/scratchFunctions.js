@@ -321,29 +321,20 @@ $(document).ready(function(){
         }, 700);
     }
 
-    function adjustMsg(){
-        let adjust = $('div.options').prop('scrollHeight');
-        $('.msg').prop('style','margin-top: ' + (adjust + 6) + 'px;');
-    }
-
-    function adjustPop(){
-        let adjHeight = $('#TextArea').prop('scrollHeight');
-        let adjWidth = $('#TextArea').prop('scrollWidth');
-
-        $('.popup').prop('style', 'margin-top: ' + (adjHeight / 2.5) + 'px; margin-left: ' + (adjWidth / 2.5) + 'px;');
-    }
-
-
+    // create color select and buttons for options
+    $('.options').prepend(
+        mkinp('select', 'color', '', 'form-select-sm', ['dark', 'green', 'blue', 'white', 'yellow', 'lavender']).input,
+        mkbtn('btn btn-primary btn-sm ms-1 usr-btn', 'exspc', 'Remove Leading Spaces', 'The empty space in front of the paragraphs'), 
+        mkbtn('btn btn-primary btn-sm ms-1 usr-btn', 'rmv-ol', 'Remove OL Markers', 'Remove numbered OL markers'),
+        mkbtn('btn btn-primary btn-sm ms-1 usr-btn', 'clear', 'Clear', 'Clear scratch pad')
+    );
+    // Set TA background
     let currentVal = $('select').val();
     $('#TextArea').addClass(currentVal);
-    
 
-    // $('option').click(function(){
-    //     let color = $(this).val();
-    //     $('#TextArea').addClass(currentVal);
-        
-    //     location.reload();
-    // });
+    colorPicker();
+
+    $('textarea').focus();
 
     $('#exspc, #clear, #rmv-ol').mousedown(function(){
         $(this).css('box-shadow', 'none');
@@ -356,12 +347,6 @@ $(document).ready(function(){
     $('#exspc').click(removeExtraLines);
 
     $('#info').click(function(){
-        // let pop = $('.info-popup');
-        // if ($(pop).attr('class').includes('dnone')){
-        //     $(pop).removeClass('dnone');
-        // }else{
-        //     $(pop).addClass('dnone');
-        // }
         $('body > .md-modal').removeClass('dnone');
         $('body').attr('style', 'overflow: hidden;');
     });
@@ -401,17 +386,4 @@ $(document).ready(function(){
         // stopProcessing();
     }
 
-    $('textarea').focus();
-
-    // Set to clear user message after a certain Month.
-    // if (currentDate.getMonth() >= 2){
-    //     $('.msg > ul').empty();
-    // }
-
-    // if (document.querySelector('.msg > ul').innerText.length > 0){
-    //     $('.msg').prepend('<h1>Update!</h1>');
-    // }
-    // $('.msg').append('<p style="text-align: right;font-weight: bold;">To submit an idea for improvement or<br>if an issue is found please report it here.<br/><a href="mailto:aaaabncggffyesoyicuhyz3u7u@imaginelearning.org.slack.com">BUG</a> &larr; Click to report an issue.</p>');
-
-    adjustMsg();
 });

@@ -17,6 +17,10 @@ select {
     max-width: 75px;
 }
 
+select > option {
+    text-transform: capitalize;
+}
+
 .presentation {
     display: flex;
     justify-content: center;
@@ -182,6 +186,11 @@ a.btn {
 }
 .yellow {
     background-color: #f2f224;
+    color: black;
+}
+
+.lavender {
+    background-color: #e6e6fa;
     color: black;
 }
 
