@@ -13,6 +13,7 @@ $(document).ready(function(){
         $('#start').removeClass('dnone');
         $('#exspc').attr('disabled', 'disabled');
         $('#rmv-ol').attr('disabled', 'disabled');
+        $('.switch-container').addClass('dnone');
     }
 
     function startProcessing(){
@@ -24,6 +25,7 @@ $(document).ready(function(){
         $('#stop').removeClass('dnone');
         $('#exspc').removeAttr('disabled');
         $('#rmv-ol').removeAttr('disabled');
+        $('.switch-container').removeClass('dnone');
     }
 
     function closePopup(){
