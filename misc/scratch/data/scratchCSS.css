@@ -17,6 +17,10 @@ select {
     max-width: 75px;
 }
 
+select > option {
+    text-transform: capitalize;
+}
+
 .presentation {
     display: flex;
     justify-content: center;
@@ -38,6 +42,7 @@ button:disabled {
 label {
     text-align: center;
     font-size: .75em;
+    cursor: pointer;
 }
 
 a.btn {
@@ -63,7 +68,6 @@ a.btn {
     flex-direction: column;
     align-items: center;
     padding: 0px 5px;
-    cursor: pointer;
 }
 
 .toggle-pill {
@@ -71,6 +75,7 @@ a.btn {
     margin: 2px;
     background-color: white;
     transition: margin-left 200ms;
+    cursor: pointer;
 }
 
 .toggle-cont, .toggle-pill {
@@ -185,6 +190,11 @@ a.btn {
     color: black;
 }
 
+.lavender {
+    background-color: #e6e6fa;
+    color: black;
+}
+
 #toolBox {
     margin: 1px;
     text-align: center;
@@ -210,6 +220,7 @@ a.btn {
 }
 .search {
     display: inherit;
+    align-items: center;
 }
 .search > input {
     margin-left: 3px;
@@ -228,11 +239,6 @@ ul > li::marker {
     font-weight: bold;
     margin-right: 5px;
     
-}
-
-#temp {
-    text-align: center;
-    padding: 15px 20px 15px 20px;
 }
 
 .md-modal-content > .static > ol > ol {

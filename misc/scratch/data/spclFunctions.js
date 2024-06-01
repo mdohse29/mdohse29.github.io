@@ -1,34 +1,55 @@
 function mkDiv(c){
     let div = document.createElement('div');
-    let d = c.split(' ');
-    for (let e in d){
-        div.classList.add(d[e]);
-    }
+    div.classList.add(...c.split(' '));
 
     return div;
 }
 
-function mkinp(t, n, p){
+function mkinp(t, n, p, c, o){
     let input = document.createElement('input');
+    let label = undefined;
     input.type = t;
     input.name = n;
     input.id = n;
-    if (p){
+    if (t === "text" && p){
         input.placeholder = p;
-        input.classList.add('form-control');
+        input.classList.add(...c.split(' '));
     }
-    return input;
+    if (t === 'checkbox'){
+        label = document.createElement('label');
+        label.innerText = p;
+        label.setAttribute('for', n);
+    }
+    
+    if (t === 'select' && typeof(o) == 'object'){
+        input = document.createElement(t);
+        input.classList.add(...c.split(' '));
+        input.id = n;
+        input.name = n;
+
+        for (let a in o){
+            let option = document.createElement('option');
+            option.classList.add(o[a].toLowerCase());
+            option.value = o[a].toLowerCase();
+            option.innerText = o[a][0].toUpperCase() + o[a].substring(1);
+            input.appendChild(option);
+        }
+    }
+
+    return {input:input, label:label};
 }
 
-function mkbtn(c, i, t){
+function mkbtn(c, i, t, tt){
     let btn = document.createElement('button');
-    let d = c.split(' ');
-    for (let e in d){
-        btn.classList.add(d[e]);
-    }
+
+    btn.classList.add(...c.split(' '));
     btn.id = i;
     if (t){
         btn.innerText = t;
+    }
+
+    if (tt){
+        btn.title = tt;
     }
 
     return btn;
@@ -54,28 +75,22 @@ function crtad(){
     let div2a = mkDiv('search');
     let div2b = mkDiv('search-options d-block');
 
-    let indiv2a1 = mkinp('text', 'search', 'Search');
-    let indiv2a2 = mkinp('text', 'replace', 'Replace');
-    let indiv2b1 = mkinp('checkbox', 'word');
-    let indiv2b2 = mkinp('checkbox', 'regex');
-
-    let lbdiv2b1 = document.createElement('label');
-    let lbdiv2b2 = document.createElement('label');
+    let indiv2a1 = mkinp('text', 'search', 'Search', 'form-control');
+    let indiv2a2 = mkinp('text', 'replace', 'Replace', 'form-control');
+    let indiv2b1 = mkinp('checkbox', 'word', 'Strict Search');
+    let indiv2b2 = mkinp('checkbox', 'regex', 'Regex');
 
     let btndiv2a = mkbtn('btn btn-outline-success', 'rep', 'Replace');
+    let btndiv2acls = mkbtn('btn btn-close btn-dark btn-lg mx-2', 'search-close');
 
-    lbdiv2b1.innerText = ' Strict Search';
-    lbdiv2b1.setAttribute('for', 'word');
-    lbdiv2b2.innerText = 'Regex';
-    lbdiv2b2.setAttribute('for', 'regex');
-
-    div2a.appendChild(indiv2a1);
-    div2a.appendChild(indiv2a2);
+    div2a.appendChild(indiv2a1.input);
+    div2a.appendChild(indiv2a2.input);
     div2a.appendChild(btndiv2a);
-    div2b.appendChild(indiv2b1);
-    div2b.appendChild(lbdiv2b1);
-    div2b.appendChild(indiv2b2);
-    div2b.appendChild(lbdiv2b2);
+    div2a.appendChild(btndiv2acls);
+    div2b.appendChild(indiv2b1.input);
+    div2b.appendChild(indiv2b1.label);
+    div2b.appendChild(indiv2b2.input);
+    div2b.appendChild(indiv2b2.label);
     div2.appendChild(div2a);
     div2.appendChild(div2b);
     div1.appendChild(div2);
@@ -97,32 +112,36 @@ function crtad(){
     }
 
     div1.appendChild(mkbtn('btn btn-outline-danger btn-sm', 'ff', 'Format Filename'));
-    div1.appendChild(mkbtn('btn btn-close btn-dark', 'srch-close'));
+    div1.appendChild(mkbtn('btn btn-close btn-dark', 'ad-close'));
 
     return div1;
 }
 
-let ts = document.querySelector('.toggle-cont');
+let toggles = document.querySelectorAll('.toggle-pill');
 
-ts.addEventListener('click', () => {
-    let pill = document.querySelector('.toggle-pill');
-    let pillStyle = window.getComputedStyle(pill);
-    let marg = ts.scrollWidth - (pill.scrollWidth + 4);
-    let currentMarg = pillStyle.marginLeft.replace('px','');
-    
-    if (currentMarg < marg){
-        pill.style.setProperty('margin-left', marg + 'px');
-        ts.classList.add('tg-on');
-    }else{
-        pill.style.setProperty('margin-left','2px');
-        ts.classList.remove('tg-on');
-    }
-});
-
+for(let ts of toggles){
+    ts.addEventListener('click', function(){
+        let pill = this;
+        let container = pill.parentElement;
+        let pillStyle = window.getComputedStyle(pill);
+        let marg = container.scrollWidth - (pill.scrollWidth + 4);
+        let currentMarg = pillStyle.marginLeft.replace('px','');
+        
+        if (currentMarg < marg){
+            pill.style.setProperty('margin-left', marg + 'px');
+            container.classList.add('tg-on');
+        }else{
+            pill.style.setProperty('margin-left','2px');
+            container.classList.remove('tg-on');
+        }
+        document.querySelector('textarea').focus();
+    });
+}
 let labels = document.querySelectorAll('.switch-container > label');
 
 for (let label of labels){
-    label.addEventListener('click', () => {
-        document.querySelector('.toggle-cont').click();
+    label.addEventListener('click', function(){
+        // document.querySelector('.toggle-pill').click();
+        this.parentElement.children[1].children[0].click();
     });
 }
