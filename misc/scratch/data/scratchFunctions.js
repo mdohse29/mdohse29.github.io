@@ -69,6 +69,14 @@ $(document).ready(function(){
         }
     }
 
+    function closeSearch(){
+        $('#search').val("");
+        $('#replace').val("");
+        $('#word').prop('checked', false);
+        $('.search-replace').addClass('dnone');
+        $('.search-replace').removeAttr('style');
+    }
+
     function toggleSpclFtr(text){
 
         if (text == "Admin" && $('.spclFtr').length === 0){
@@ -112,25 +120,24 @@ $(document).ready(function(){
                     text = text.replaceAll(search, replace);
                 }
                 $('#TextArea').val(text);
-                $('#search').val("");
-                $('#replace').val("");
-                $('#word').prop('checked', false);
-                $('.search-replace').addClass('dnone');
-                $('.search-replace').removeAttr('style');
-                $('#TextArea').focus();
+                // closeSearch();
+                // $('#TextArea').focus();
             })
         
-            $('#stop').click(function (){
+            $('#stop').click(function(){
                 stopProcessing();
             });
         
-            $('#start').click(function (){
+            $('#start').click(function(){
                 startProcessing();
             });
         
-            $('#srch-close').click(function(){
+            $('#ad-close').click(function(){
                 toggleSpclFtr("goodbye");
             });
+
+            $('#search-close').click(closeSearch);
+
         }else if (text == "goodbye"){
             $('.spclFtr').remove();
             $('#toolBox').remove();

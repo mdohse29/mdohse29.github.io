@@ -219,6 +219,7 @@ a.btn {
 }
 .search {
     display: inherit;
+    align-items: center;
 }
 .search > input {
     margin-left: 3px;

@@ -81,10 +81,12 @@ function crtad(){
     let indiv2b2 = mkinp('checkbox', 'regex', 'Regex');
 
     let btndiv2a = mkbtn('btn btn-outline-success', 'rep', 'Replace');
+    let btndiv2acls = mkbtn('btn btn-close btn-dark btn-lg mx-2', 'search-close');
 
     div2a.appendChild(indiv2a1.input);
     div2a.appendChild(indiv2a2.input);
     div2a.appendChild(btndiv2a);
+    div2a.appendChild(btndiv2acls);
     div2b.appendChild(indiv2b1.input);
     div2b.appendChild(indiv2b1.label);
     div2b.appendChild(indiv2b2.input);
@@ -110,7 +112,7 @@ function crtad(){
     }
 
     div1.appendChild(mkbtn('btn btn-outline-danger btn-sm', 'ff', 'Format Filename'));
-    div1.appendChild(mkbtn('btn btn-close btn-dark', 'srch-close'));
+    div1.appendChild(mkbtn('btn btn-close btn-dark', 'ad-close'));
 
     return div1;
 }
