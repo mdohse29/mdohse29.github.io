@@ -117,27 +117,31 @@ function crtad(){
     return div1;
 }
 
-let ts = document.querySelector('.toggle-cont');
+let toggles = document.querySelectorAll('.toggle-pill');
 
-ts.addEventListener('click', () => {
-    let pill = document.querySelector('.toggle-pill');
-    let pillStyle = window.getComputedStyle(pill);
-    let marg = ts.scrollWidth - (pill.scrollWidth + 4);
-    let currentMarg = pillStyle.marginLeft.replace('px','');
-    
-    if (currentMarg < marg){
-        pill.style.setProperty('margin-left', marg + 'px');
-        ts.classList.add('tg-on');
-    }else{
-        pill.style.setProperty('margin-left','2px');
-        ts.classList.remove('tg-on');
-    }
-});
-
+for(let ts of toggles){
+    ts.addEventListener('click', function(){
+        let pill = this;
+        let container = pill.parentElement;
+        let pillStyle = window.getComputedStyle(pill);
+        let marg = container.scrollWidth - (pill.scrollWidth + 4);
+        let currentMarg = pillStyle.marginLeft.replace('px','');
+        
+        if (currentMarg < marg){
+            pill.style.setProperty('margin-left', marg + 'px');
+            container.classList.add('tg-on');
+        }else{
+            pill.style.setProperty('margin-left','2px');
+            container.classList.remove('tg-on');
+        }
+        document.querySelector('textarea').focus();
+    });
+}
 let labels = document.querySelectorAll('.switch-container > label');
 
 for (let label of labels){
-    label.addEventListener('click', () => {
-        document.querySelector('.toggle-cont').click();
+    label.addEventListener('click', function(){
+        // document.querySelector('.toggle-pill').click();
+        this.parentElement.children[1].children[0].click();
     });
 }

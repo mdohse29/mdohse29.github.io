@@ -42,6 +42,7 @@ button:disabled {
 label {
     text-align: center;
     font-size: .75em;
+    cursor: pointer;
 }
 
 a.btn {
@@ -67,7 +68,6 @@ a.btn {
     flex-direction: column;
     align-items: center;
     padding: 0px 5px;
-    cursor: pointer;
 }
 
 .toggle-pill {
@@ -75,6 +75,7 @@ a.btn {
     margin: 2px;
     background-color: white;
     transition: margin-left 200ms;
+    cursor: pointer;
 }
 
 .toggle-cont, .toggle-pill {

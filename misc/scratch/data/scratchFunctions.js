@@ -75,6 +75,7 @@ $(document).ready(function(){
         $('#word').prop('checked', false);
         $('.search-replace').addClass('dnone');
         $('.search-replace').removeAttr('style');
+        $('textarea').focus();
     }
 
     function toggleSpclFtr(text){
@@ -121,7 +122,6 @@ $(document).ready(function(){
                 }
                 $('#TextArea').val(text);
                 // closeSearch();
-                // $('#TextArea').focus();
             })
         
             $('#stop').click(function(){
@@ -283,7 +283,7 @@ $(document).ready(function(){
                 changed = true;
             }
 
-            if ($('div.toggle-cont').hasClass('tg-on')){
+            if ($('#flat > .toggle-cont').hasClass('tg-on')){
                 let oneStr = text.split('\n');
                 for (a = 0; a < oneStr.length; a++){
                     if (a > 0){
