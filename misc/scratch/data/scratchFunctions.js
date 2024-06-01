@@ -13,7 +13,7 @@ $(document).ready(function(){
         $('#start').removeClass('dnone');
         $('#exspc').attr('disabled', 'disabled');
         $('#rmv-ol').attr('disabled', 'disabled');
-        $('.switch-container').addClass('dnone');
+        $('.switch-container#flat').addClass('dnone');
     }
 
     function startProcessing(){
@@ -25,7 +25,7 @@ $(document).ready(function(){
         $('#stop').removeClass('dnone');
         $('#exspc').removeAttr('disabled');
         $('#rmv-ol').removeAttr('disabled');
-        $('.switch-container').removeClass('dnone');
+        $('.switch-container#flat').removeClass('dnone');
     }
 
     function closePopup(){
@@ -316,14 +316,17 @@ $(document).ready(function(){
             // uncomment the if statement
             // remove the part checking for new line at the end and find the best spot for it
             // if (changed){
+                if ($('#dbl > .toggle-cont').hasClass('tg-on')){
+                    text = text.replaceAll('\n', '\n\n');
+                }
+
                 if (text.substring(text.length - 1) == "\n"){
                     console.log("Removing extra line at the end.")
                     text = text.substring(0, text.length - 1);
                 }
 
-
+                
                 navigator.clipboard.writeText(text.trim());
-                // text = text.replaceAll('\n', '\n\n');
                 $('#TextArea').val(text.trim());
             // }
             closePopup();
@@ -378,6 +381,10 @@ $(document).ready(function(){
     $('#TextArea').on('input', function (){
         let text = $('#TextArea').val();
         toggleSpclFtr(text);
+        // Remove after decision is made
+        if (text == "Testing"){
+            $('#dbl').removeClass('dnone');
+        }
     });
 
     $('#TextArea').on('paste', processText);
