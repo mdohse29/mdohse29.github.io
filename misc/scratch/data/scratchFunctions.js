@@ -316,14 +316,14 @@ $(document).ready(function(){
             // uncomment the if statement
             // remove the part checking for new line at the end and find the best spot for it
             // if (changed){
-                if ($('#dbl > .toggle-cont').hasClass('tg-on')){
-                    text = text.replaceAll('\n', '\n\n');
-                }
+            if ($('#dbl > .toggle-cont').hasClass('tg-on')){
+                text = text.replaceAll('\n', '\n\n');
+            }
 
-                if (text.substring(text.length - 1) == "\n"){
-                    console.log("Removing extra line at the end.")
-                    text = text.substring(0, text.length - 1);
-                }
+            if (text.substring(text.length - 1) == "\n"){
+                console.log("Removing extra line at the end.")
+                text = text.substring(0, text.length - 1);
+            }
 
                 
                 navigator.clipboard.writeText(text.trim());
