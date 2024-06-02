@@ -22,7 +22,7 @@
     width: 50%;
     margin: 2px;
     background-color: white;
-    transition: margin-left 500ms;
+    transition: margin-left 200ms;
     cursor: pointer;
 }
 
