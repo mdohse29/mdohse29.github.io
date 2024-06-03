@@ -11,14 +11,10 @@ for(let ts of toggles){
         if (currentMarg < marg){
             // console.log(currentMarg);
             pill.style.setProperty('margin-left', marg + 'px');
-            setTimeout(() => {
-                container.classList.add('tg-on');
-            }, 500);
+            container.classList.add('tg-on');
         }else{
             pill.style.setProperty('margin-left','2px');
-            setTimeout(() => {
-                container.classList.remove('tg-on');
-            }, 500);
+            container.classList.remove('tg-on');
         }
     });
 }

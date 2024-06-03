@@ -9,7 +9,7 @@ const drawers = {
                 text: {
                     main: 'Button Display Text',
                     sub: 'Optional Sub Text',
-                    warn: true
+                    warn: false
                 }
             }
         }
@@ -23,7 +23,7 @@ const drawers = {
                 url: '',
                 text: {
                     main: 'Button Display Text',
-                    sub: 'Optional Sub Text',
+                    sub: 'Optional Important Sub Text',
                     warn: true
                 }
             }
