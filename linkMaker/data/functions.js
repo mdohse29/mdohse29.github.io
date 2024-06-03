@@ -67,7 +67,10 @@ function generateDropDown(id, labelText, title){
         "dla_feedback/js/feedback.js",
         "dla_conjugatorchart/js/conjugatorchart.js",
         "dla_flashcards/js/flashcards.js",
-        "dla_equationbuilder/js/equation_builder.js"
+        "dla_equationbuilder/js/equation_builder.js",
+        "dla_whatcha_makin/js/watchmakin.js",
+        "dla_carnivalgame/js/carnivalgame.js"
+
     ];
     sourcePaths = sourcePaths.sort();
     let divSelect = document.createElement('div');
