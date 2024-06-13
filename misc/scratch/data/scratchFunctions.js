@@ -145,6 +145,10 @@ $(document).ready(function(){
         }
     }
 
+    function updateClipboard(text){
+        navigator.clipboard.writeText(text.trim())
+    }
+
     function formatFilename(text){
         return text.toLowerCase().trim().replaceAll(' ', '_');
     }
@@ -174,10 +178,12 @@ $(document).ready(function(){
     function removeExtraLines(){
         let regex = /^\s*[^\S]/g;
         let text = $('#TextArea').val().split('\n');
+
         for (let a in text){
             text[a] = text[a].replaceAll(regex, '');
         }
-        navigator.clipboard.writeText(text.join('\n').trim());
+
+        updateClipboard(text.join('\n'))
         $('#TextArea').val(text.join('\n').trim());
         popup("Done!", 750);
     }
@@ -248,16 +254,16 @@ $(document).ready(function(){
                 alert("HTML MARKERS HAVE BEEN DETECTED\n\nDOUBLE CHECK THE DOCUMENT FOR UNUSUAL FORMATTING");
             }
 
-            let regtest = /\b[o]\b\s/gm;
+            let regtest = /^[o]\b\s/gm;
             if (text.match(regtest)){
-                console.log("Removing bullets");
+                console.log("Removing bullets 1");
                 text = text.replaceAll(regtest, '');
                 changed = true;
             }
 
             regtest = /^[^a-zA-Z0-9\s,\.:\-–!?+><;"'=&@\/‘’”()\\≤©#$%\][}{~`]\s|^\s*[^a-zA-Z0-9\s,\.:\-–!?+><;"'=&@\/‘’”()\\≤©#$%\][}{~`]\s/gm;
             if (text.match(regtest)){
-                console.log("Removing bullets");
+                console.log("Removing bullets 2");
                 text = text.replaceAll(regtest, '');
                 changed = true;
             }
@@ -326,7 +332,7 @@ $(document).ready(function(){
             }
 
                 
-                navigator.clipboard.writeText(text.trim());
+                updateClipboard(text);
                 $('#TextArea').val(text.trim());
             // }
             closePopup();
@@ -374,7 +380,7 @@ $(document).ready(function(){
 
     $('#rmv-ol').click(async function(){
         let cleanText = await removeOlMarkers($('#TextArea').val());
-        navigator.clipboard.writeText(cleanText);
+        updateClipboard(cleanText);
         $('#TextArea').val(cleanText);
     })
 
