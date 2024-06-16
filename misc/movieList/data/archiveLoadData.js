@@ -1,6 +1,6 @@
 let masterList = [];
-// const baseUrl = './data/';
-const baseUrl = 'https://mdohse29.github.io/misc/movieList/data/'
+const baseUrl = './data/';
+// const baseUrl = 'https://mdohse29.github.io/misc/movieList/data/'
 
 let loading = document.createElement('p');
 loading.setAttribute('id', 'placeH');
@@ -50,67 +50,103 @@ function sorter(array){
     // console.log(array);
 }
 
-// function testPromise(fileName){
-//     return new Promise(async function (resolve, reject) {
-//         let data = await fetch(baseUrl + fileName);
-//         if (data.ok){
-//             resolve((await data.text()).toString());
-//         }else{
-//             reject(data.status);
-//         }
-//     })
-// }
+async function createMovieList(){
+    // Executes from archiveFunctions.js
+    let arch;
+    let active;
+    let tv;
 
-// testPromise("archive.txt").then(resp => {
-//     console.log(resp);
-// });
+    try{
+        arch = await axios.get(baseUrl + "archive.txt");
+        active = await axios.get(baseUrl + "active.txt");
+        tv = await axios.get(baseUrl + "tvshows.txt");
+    }catch(e){
+        document.querySelector('#placeH').remove();
+        loading.innerHTML = 'OOPS! Something Went Wrong!<br><br>Nothing to see here';
+        document.querySelector('.movies').appendChild(loading);
+        document.querySelector('#search-box').setAttribute('disabled','disabled')
+    }
+    
+    collectList(arch.data.split('\n'), 'arch');
+    collectList(active.data.split('\n'), 'mov');
+    collectList(tv.data.split('\n'), 'tv');
+    sorter(masterList);
 
-axios.get(baseUrl + "archive.txt")
-.then(archive => {
-    let archList = archive.data.split('\n');
-    collectList(archList, 'arch');
-}).then(() => {
-    axios.get(baseUrl + "active.txt")
-    .then(active => {
-        let activeList = active.data.split('\n');
-        collectList(activeList, 'mov');
-    }).then(() => {
-        axios.get(baseUrl + "tvshows.txt")
-        .then(tv => {
-            let tvList = tv.data.split('\n');
-            collectList(tvList, 'tv');
-            sorter(masterList);
+    if (masterList.length > 0){
+        document.querySelector('#placeH').remove();
+    }
 
-            if (masterList.length > 0){
-                document.querySelector('#placeH').remove();
-            }
+    let movieList = document.querySelector('.movies');
+    for (let i in masterList){
+        movieList.appendChild(masterList[i].element);
+    }
 
-            let movieList = document.querySelector('.movies');
-            for (let i in masterList){
-                movieList.appendChild(masterList[i].element);
-            }
+    // Total Count
+    let totCon = document.querySelector('#totalTitles')
+    let p = document.createElement('p');
+    let strong = document.createElement('strong');
+    let sub = document.createElement('sub');
+    
+    p.setAttribute('id', 'total');
+    p.setAttribute('tag', 'count');
+    p.classList.add('sticky-bottom');
+    sub.innerText = 'Total: ' + masterList.length;
+    // -------------------------------------------------------------
 
-            // Total Count
-            let totCon = document.querySelector('#totalTitles')
-            let p = document.createElement('p');
-            let strong = document.createElement('strong');
-            let sub = document.createElement('sub');
+    strong.appendChild(sub);
+    p.appendChild(strong);
+    totCon.appendChild(p);
+}
+
+// createMovieList();
+
+
+// axios.get(baseUrl + "archive.txt")
+// .then(archive => {
+//     let archList = archive.data.split('\n');
+//     collectList(archList, 'arch');
+// }).then(() => {
+//     axios.get(baseUrl + "active.txt")
+//     .then(active => {
+//         let activeList = active.data.split('\n');
+//         collectList(activeList, 'mov');
+//     }).then(() => {
+//         axios.get(baseUrl + "tvshows.txt")
+//         .then(tv => {
+//             let tvList = tv.data.split('\n');
+//             collectList(tvList, 'tv');
+//             sorter(masterList);
+
+//             if (masterList.length > 0){
+//                 document.querySelector('#placeH').remove();
+//             }
+
+//             let movieList = document.querySelector('.movies');
+//             for (let i in masterList){
+//                 movieList.appendChild(masterList[i].element);
+//             }
+
+//             // Total Count
+//             let totCon = document.querySelector('#totalTitles')
+//             let p = document.createElement('p');
+//             let strong = document.createElement('strong');
+//             let sub = document.createElement('sub');
             
-            p.setAttribute('id', 'total');
-            p.setAttribute('tag', 'count');
-            p.classList.add('sticky-bottom');
-            sub.innerText = 'Total: ' + masterList.length;
+//             p.setAttribute('id', 'total');
+//             p.setAttribute('tag', 'count');
+//             p.classList.add('sticky-bottom');
+//             sub.innerText = 'Total: ' + masterList.length;
 
-            strong.appendChild(sub);
-            p.appendChild(strong);
-            totCon.appendChild(p);
-            //-------------------------------------------------
-        });
-    });
-}).catch(error => {
-    document.querySelector('#placeH').remove();
-    loading.innerHTML = 'OOPS! Something Went Wrong!<br><br>Nothing to see here';
-    document.querySelector('.movies').appendChild(loading);
-    document.querySelector('#search-box').setAttribute('disabled','disabled')
-});
+//             strong.appendChild(sub);
+//             p.appendChild(strong);
+//             totCon.appendChild(p);
+//             //-------------------------------------------------
+//         });
+//     });
+// }).catch(error => {
+//     document.querySelector('#placeH').remove();
+//     loading.innerHTML = 'OOPS! Something Went Wrong!<br><br>Nothing to see here';
+//     document.querySelector('.movies').appendChild(loading);
+//     document.querySelector('#search-box').setAttribute('disabled','disabled')
+// });
 
