@@ -1,4 +1,6 @@
 $(document).ready(function () { // Not sure why but I was looking at multiple events on one element, useful?
+    createMovieList(); // Creates the list from text files in ./data/ folder
+
     function reset() {
 
         $('#search-box').val('');
