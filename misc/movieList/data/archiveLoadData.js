@@ -60,42 +60,43 @@ async function createMovieList(){
         arch = await axios.get(baseUrl + "archive.txt");
         active = await axios.get(baseUrl + "active.txt");
         tv = await axios.get(baseUrl + "tvshows.txt");
+    
+        collectList(arch.data.split('\n'), 'arch');
+        collectList(active.data.split('\n'), 'mov');
+        collectList(tv.data.split('\n'), 'tv');
+        sorter(masterList);
+
+        if (masterList.length > 0){
+            document.querySelector('#placeH').remove();
+        }
+
+        let movieList = document.querySelector('.movies');
+        for (let i in masterList){
+            movieList.appendChild(masterList[i].element);
+        }
+
+        // Total Count
+        let totCon = document.querySelector('#totalTitles')
+        let p = document.createElement('p');
+        let strong = document.createElement('strong');
+        let sub = document.createElement('sub');
+        
+        p.setAttribute('id', 'total');
+        p.setAttribute('tag', 'count');
+        p.classList.add('sticky-bottom');
+        sub.innerText = 'Total: ' + masterList.length;
+        // -------------------------------------------------------------
+
+        strong.appendChild(sub);
+        p.appendChild(strong);
+        totCon.appendChild(p);
     }catch(e){
         document.querySelector('#placeH').remove();
         loading.innerHTML = 'OOPS! Something Went Wrong!<br><br>Nothing to see here';
         document.querySelector('.movies').appendChild(loading);
-        document.querySelector('#search-box').setAttribute('disabled','disabled')
+        document.querySelector('#search-box').setAttribute('disabled','disabled');
+        throw e;
     }
-    
-    collectList(arch.data.split('\n'), 'arch');
-    collectList(active.data.split('\n'), 'mov');
-    collectList(tv.data.split('\n'), 'tv');
-    sorter(masterList);
-
-    if (masterList.length > 0){
-        document.querySelector('#placeH').remove();
-    }
-
-    let movieList = document.querySelector('.movies');
-    for (let i in masterList){
-        movieList.appendChild(masterList[i].element);
-    }
-
-    // Total Count
-    let totCon = document.querySelector('#totalTitles')
-    let p = document.createElement('p');
-    let strong = document.createElement('strong');
-    let sub = document.createElement('sub');
-    
-    p.setAttribute('id', 'total');
-    p.setAttribute('tag', 'count');
-    p.classList.add('sticky-bottom');
-    sub.innerText = 'Total: ' + masterList.length;
-    // -------------------------------------------------------------
-
-    strong.appendChild(sub);
-    p.appendChild(strong);
-    totCon.appendChild(p);
 }
 
 // createMovieList();
