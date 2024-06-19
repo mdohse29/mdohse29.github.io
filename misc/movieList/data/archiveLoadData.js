@@ -52,9 +52,7 @@ function sorter(array){
 
 async function createMovieList(){
     // Executes from archiveFunctions.js
-    let arch;
-    let active;
-    let tv;
+    let arch, active, tv;
 
     try{
         arch = await axios.get(baseUrl + "archive.txt");
