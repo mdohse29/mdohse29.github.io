@@ -69,7 +69,8 @@ function generateDropDown(id, labelText, title){
         "dla_flashcards/js/flashcards.js",
         "dla_equationbuilder/js/equation_builder.js",
         "dla_whatcha_makin/js/watchmakin.js",
-        "dla_carnivalgame/js/carnivalgame.js"
+        "dla_carnivalgame/js/carnivalgame.js",
+        "periodic_table/js/periodictable.js"
 
     ];
     sourcePaths = sourcePaths.sort();
@@ -330,11 +331,11 @@ function dlaLink(url){
     let dbp = document.querySelector('#dataBasePath').value;
     let dlaFilename = document.querySelector('#dlaFilename').value;
 
-    if (!dlaFilename.includes('.dla')){
+    if (dlaFilename && !dlaFilename.includes('.dla')){
         dlaFilename += '.dla';
     }
 
-    url.innerHTML = 'https://cdn.lti.glynlyon.com/interactives/chm/cdn_harness/cdn_harness.html?base=global&file=' + source + '&dataBasePath=' + dbp + '&dlaFile=' + dlaFilename;
+    url.innerHTML = 'https://cdn.lti.glynlyon.com/interactives/chm/cdn_harness/cdn_harness.html?base=global&file=' + source + ((dbp) ? '&dataBasePath=' + dbp:'') + ((dlaFilename) ? '&dlaFile=' + dlaFilename : '');
 
     if (document.querySelector('#pffCheck').checked){
         let pff = document.querySelector('#pffFile').value;
