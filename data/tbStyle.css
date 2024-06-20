@@ -37,7 +37,7 @@ span.red {
     margin-left: 17.5%;
     border: 1px dashed black;
     border-top: none;
-    border-radius: 5px;
+    border-radius: 0px 0px 5px 5px;
     padding-top: 20px;
     padding-bottom: 20px;
 }
