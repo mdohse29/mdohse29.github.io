@@ -71,10 +71,13 @@ for (let ex of expand){
                 if (openDrawer != null){
                     openDrawer.classList.remove('selected');
                     openDrawer.style.maxHeight = null;
+                    openDrawer.parentElement.querySelector('.expand').removeAttribute('style');
                 }
                 drawer.style.maxHeight = drawer.scrollHeight + 'px';
+                this.style.borderRadius = '5px 5px 0px 0px';
             }else{
                 drawer.style.maxHeight = null;
+                this.removeAttribute('style');
 
             }
             drawer.classList.toggle('selected');
