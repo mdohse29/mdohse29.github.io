@@ -299,18 +299,16 @@ function animationLink(url){
 function mediaLink(url){
     let fileType = '';
     let docType = '';
-    let dataBasePath = document.querySelector('#dataBasePath').value;
-    let fileName = document.querySelector('#fileName').value;
+    let dataBasePath = ((document.querySelector('#dataBasePath').value) ? document.querySelector('#dataBasePath').value : 'null');
+    let fileName = ((document.querySelector('#fileName').value) ? document.querySelector('#fileName').value : 'null');
+    let preview = document.querySelector('#showPreview');
 
-    if (!dataBasePath){
-        dataBasePath = 'null';
+    if (fileName == 'null' || dataBasePath == 'null'){
         url.classList.add('has-background-danger');
-    }
-    if (!fileName){
-        fileName = 'null';
-        url.classList.add('has-background-danger');
+        preview.setAttribute('disabled', 'disabled');
     }else{
         fileType = fileName.substring(fileName.lastIndexOf('.') + 1);
+        preview.removeAttribute('disabled');
     }
 
     if (fileType == 'mp4' || fileType == 'webm' || fileType == 'flv'){
