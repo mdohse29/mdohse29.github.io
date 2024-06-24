@@ -53,15 +53,27 @@ function sorter(array){
 async function createMovieList(){
     // Executes from archiveFunctions.js
     let arch, active, tv;
-
+    
     try{
-        arch = await axios.get(baseUrl + "archive.txt");
-        active = await axios.get(baseUrl + "active.txt");
-        tv = await axios.get(baseUrl + "tvshows.txt");
+        // Using AXIOS
+        const config = {headers: { Accept: 'plain/text' }}
+        arch = await axios.get(baseUrl + "archive.txt", config);
+        active = await axios.get(baseUrl + "active.txt", config);
+        tv = await axios.get(baseUrl + "tvshows.txt", config);
     
         collectList(arch.data.split('\n'), 'arch');
         collectList(active.data.split('\n'), 'mov');
         collectList(tv.data.split('\n'), 'tv');
+
+        //Using FETCH
+        // arch = await fetch(baseUrl + 'archive.txt');
+        // active = await fetch(baseUrl + 'active.txt');
+        // tv = await fetch(baseUrl + 'tvshows.txt');
+
+        // collectList((await arch.text()).split('\n'), 'arch');
+        // collectList((await active.text()).split('\n'), 'mov');
+        // collectList((await tv.text()).split('\n'), 'tv');
+
         sorter(masterList);
 
         if (masterList.length > 0){
@@ -93,7 +105,9 @@ async function createMovieList(){
         loading.innerHTML = 'OOPS! Something Went Wrong!<br><br>Nothing to see here';
         document.querySelector('.movies').appendChild(loading);
         document.querySelector('#search-box').setAttribute('disabled','disabled');
-        throw e;
+        document.querySelector('.rando > button').setAttribute('disabled', 'disabled');
+        // throw e;
+        console.log(e.code, e.message, e.config);
     }
 }
 

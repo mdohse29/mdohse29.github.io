@@ -117,6 +117,7 @@ function resetEverything(){
         preview.querySelector('iframe').src = '';
         preview.classList.add('dnone');
     }
+
     linkData.innerHTML = '';
     linkData.classList.add('dnone');
     if (!linkBuild.getAttribute('class').includes('dnone')){
@@ -128,6 +129,8 @@ function resetEverything(){
     document.querySelector('#pffCheck').checked = false;
     document.querySelector('#text').checked = false;
     document.querySelector('#mediaType').value = 'DOC';
+    document.querySelector('#showPreview').removeAttribute('disabled');
+    
     toggleExtras();
 }
 
