@@ -56,9 +56,10 @@ async function createMovieList(){
     
     try{
         // Using AXIOS
-        arch = await axios.get(baseUrl + "archive.txt");
-        active = await axios.get(baseUrl + "active.txt");
-        tv = await axios.get(baseUrl + "tvshows.txt");
+        const config = {headers: { Accept: 'plain/text' }}
+        arch = await axios.get(baseUrl + "archive.txt", config);
+        active = await axios.get(baseUrl + "active.txt", config);
+        tv = await axios.get(baseUrl + "tvshows.txt", config);
     
         collectList(arch.data.split('\n'), 'arch');
         collectList(active.data.split('\n'), 'mov');
