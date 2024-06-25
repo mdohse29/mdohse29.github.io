@@ -287,6 +287,15 @@ const drawers = {
                     sub: '',
                     warn: false
                 }
+            },
+            button6: {
+                hidden: false,
+                url: 'https://nodejs.org/docs/latest-v18.x/api/index.html',
+                text: {
+                    main: 'NodeJS Docs',
+                    sub: '',
+                    warn: false
+                }
             }
         }
     }
