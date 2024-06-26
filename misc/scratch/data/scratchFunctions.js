@@ -344,7 +344,8 @@ $(document).ready(function(){
         mkinp('select', 'color', '', 'form-select-sm', ['dark', 'green', 'blue', 'white', 'yellow', 'lavender']).input,
         mkbtn('btn btn-primary btn-sm ms-1 usr-btn', 'exspc', 'Remove Leading Spaces', 'The empty space in front of the paragraphs'), 
         mkbtn('btn btn-primary btn-sm ms-1 usr-btn', 'rmv-ol', 'Remove OL Markers', 'Remove numbered OL markers'),
-        mkbtn('btn btn-primary btn-sm ms-1 usr-btn', 'clear', 'Clear', 'Clear scratch pad')
+        mkbtn('btn btn-primary btn-sm ms-1 usr-btn', 'clear', 'Clear', 'Clear scratch pad'),
+        mkbtn('btn btn-primary btn-sm ms-1 usr-btn', 'ex', 'Fix URL') // Remove this button when done updating URLS
     );
     // Set TA background
     let currentVal = $('select').val();
@@ -400,6 +401,23 @@ $(document).ready(function(){
     $('.md-modal-background').click(function(){
         $('.md-modal').addClass('dnone');
         $('body').removeAttr('style');
+    });
+
+    $('#ex').click(function(){
+        let text = $('textarea').val().toLowerCase();
+        text = text.replaceAll('algebraone', 'algebraone_ex');
+        text = text.replaceAll('.html', '_ex.html');
+        let test = text.split('\n');
+        console.log(test)
+        if (test.length > 1){
+            if (test[0] === test[1]){
+                popup('It Matches!', 1000);
+            }else{
+                popup('The URL\'s are not a match', 1000);
+            }
+        }
+        $('textarea').val(text);
+        $('textarea').focus();
     });
 
     if (previous.includes("toolBox.html")){
