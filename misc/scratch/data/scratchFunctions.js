@@ -340,12 +340,12 @@ $(document).ready(function(){
     }
 
     // create color select and buttons for options
+    // mkbtn('btn btn-primary btn-sm ms-1 usr-btn', 'ex', 'Fix URL') Add this below to add the button for fixing urls
     $('.options').prepend(
         mkinp('select', 'color', '', 'form-select-sm', ['dark', 'green', 'blue', 'white', 'yellow', 'lavender']).input,
         mkbtn('btn btn-primary btn-sm ms-1 usr-btn', 'exspc', 'Remove Leading Spaces', 'The empty space in front of the paragraphs'), 
         mkbtn('btn btn-primary btn-sm ms-1 usr-btn', 'rmv-ol', 'Remove OL Markers', 'Remove numbered OL markers'),
-        mkbtn('btn btn-primary btn-sm ms-1 usr-btn', 'clear', 'Clear', 'Clear scratch pad'),
-        mkbtn('btn btn-primary btn-sm ms-1 usr-btn', 'ex', 'Fix URL') // Remove this button when done updating URLS
+        mkbtn('btn btn-primary btn-sm ms-1 usr-btn', 'clear', 'Clear', 'Clear scratch pad')
     );
     // Set TA background
     let currentVal = $('select').val();
@@ -404,16 +404,16 @@ $(document).ready(function(){
     });
 
     $('#ex').click(function(){
-        let text = $('textarea').val().toLowerCase();
-        text = text.replaceAll('algebraone', 'algebraone_ex');
+        let text = $('textarea').val();
+        text = text.replaceAll(/((?:algebraOne|algebraone))/gm, '$1_ex');
         text = text.replaceAll('.html', '_ex.html');
         let test = text.split('\n');
-        console.log(test)
         if (test.length > 1){
-            if (test[0] === test[1]){
-                popup('It Matches!', 1000);
+            if (test[0].toLowerCase() === test[1].toLowerCase()){
+                popup('It Matches!', 700);
             }else{
-                popup('The URL\'s are not a match', 1000);
+                popup('The URL\'s are not a match', 1500);
+                text = '';
             }
         }
         $('textarea').val(text);
