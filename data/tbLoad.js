@@ -19,7 +19,7 @@ for (let drawer in drawers){
     let tilesContainer = document.createElement('div');
     tilesContainer.classList.add('tilesContainer');
     if (drawers[drawer].hidden){
-        tilesContainer.classList.add('flk');
+        tilesContainer.classList.add('flk', 'dnone');
     }
 
     let expand = document.createElement('div');
@@ -39,7 +39,7 @@ for (let drawer in drawers){
         let tile = document.createElement('div');
         tile.classList.add('tile');
         if (buttons[button].hidden){
-            tile.classList.add('flk');
+            tile.classList.add('flk', 'dnone');
         }
         tile.setAttribute('url', buttons[button].url);
 

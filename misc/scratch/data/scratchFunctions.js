@@ -157,7 +157,7 @@ $(document).ready(function(){
         let singleDigit = [/^\d\W\s\b/gm, /^\d\d\W\s\b/gm, /^\w\W\s\b/gm, /^\w\w\W\s\b/gm, /^\w\w\w\W\s\b/gm]
         let editedText = text;
         for (let a in singleDigit){
-            console.log(singleDigit[a]);
+            // console.log(singleDigit[a]);
             if (editedText.match(singleDigit[a])){
                 editedText = editedText.replaceAll(new RegExp(singleDigit[a]), '');
             }
@@ -165,15 +165,6 @@ $(document).ready(function(){
         popup("Done!", 750);
         return editedText;
     }
-
-    // function applicationFormat(x){
-    //     // need to add toggle for COSMOS or Other
-    //     // If toggle = COSMOS
-    //     return x.replaceAll('\n', '\n\n');
-    //     // else
-    //     return x
-
-    // }
 
     function removeExtraLines(){
         let regex = /^\s*[^\S]/g;
@@ -340,12 +331,21 @@ $(document).ready(function(){
     }
 
     // create color select and buttons for options
+    // mkbtn('btn btn-primary btn-sm ms-1 usr-btn', 'ex', 'Fix URL') Add this below to add the button for fixing urls
     $('.options').prepend(
         mkinp('select', 'color', '', 'form-select-sm', ['dark', 'green', 'blue', 'white', 'yellow', 'lavender']).input,
         mkbtn('btn btn-primary btn-sm ms-1 usr-btn', 'exspc', 'Remove Leading Spaces', 'The empty space in front of the paragraphs'), 
         mkbtn('btn btn-primary btn-sm ms-1 usr-btn', 'rmv-ol', 'Remove OL Markers', 'Remove numbered OL markers'),
-        mkbtn('btn btn-primary btn-sm ms-1 usr-btn', 'clear', 'Clear', 'Clear scratch pad')
+        mkbtn('btn btn-primary btn-sm ms-1 usr-btn', 'clear', 'Clear', 'Clear scratch pad'),
+        // mkbtn('btn btn-primary btn-sm ms-1 usr-btn', 'ex', 'Fix URL'),
+        createToggle('flat', 'Flatten Text', 'Convert multiple lines of text into a single line. Check \'How This Works\' info button for example.'),
+        createToggle('dbl', 'Paragraph Spacing', 'Adds space between lines.', 'dnone'),
+        mkLnk('btn btn-sml ms-1', 'Click to report an issue or suggestion.', 'mailto:aaaabncggffyesoyicuhyz3u7u@imaginelearning.org.slack.com', '<img width="32" height="32" src="./data/icons8-bug-64.png" alt="bug"/>'),
+        mkbtn('btn btn-sm ms-1', 'info', '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/></svg>', 'How this works')
     );
+
+    setToggleListeners();
+
     // Set TA background
     let currentVal = $('select').val();
     $('#TextArea').addClass(currentVal);
@@ -400,6 +400,23 @@ $(document).ready(function(){
     $('.md-modal-background').click(function(){
         $('.md-modal').addClass('dnone');
         $('body').removeAttr('style');
+    });
+
+    $('#ex').click(function(){
+        let text = $('textarea').val();
+        text = text.replaceAll(/((?:algebraOne|algebraone))/gm, '$1_ex');
+        text = text.replaceAll('.html', '_ex.html');
+        let test = text.split('\n');
+        if (test.length > 1){
+            if (test[0].toLowerCase() === test[1].toLowerCase()){
+                popup('It Matches!', 700);
+            }else{
+                popup('The URL\'s are not a match', 1500);
+                text = '';
+            }
+        }
+        $('textarea').val(text);
+        $('textarea').focus();
     });
 
     if (previous.includes("toolBox.html")){

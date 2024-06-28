@@ -78,7 +78,7 @@ const drawers = {
                 text: {
                     main:'Cayman Production',
                     sub:'OLD Retiring',
-                    warn:true
+                    warn: true
                 }
             },
             button5: {
@@ -120,79 +120,79 @@ const drawers = {
         }
     },
     drawer5 : {
-        hidden:true,
+        hidden: true,
         title:'Company Platforms',
         buttons:{
             button1 : {
-                hidden:false,
+                hidden: false,
                 url:'http://45sandbox.education2020.com/',
                 text:{
                     main:'CW 4.5 SandBox',
                     sub:'Courseware',
-                    warn:false
+                    warn: false
                 }
             },
             button2 : {
-                hidden:false,
+                hidden: false,
                 url:'https://auth.qa.edgenuity.com/Login/',
                 text:{
                     main:'CW QA',
                     sub:'Courseware',
-                    warn:false
+                    warn: false
                 }
             },
             button3:{
-                hidden:false,
+                hidden: false,
                 url:'https://auth.edgenuity.com/Login/Login/',
                 text:{
                     main:'CW Production',
                     sub:'Courseware',
-                    warn:false
+                    warn: false
                 }
             },
             button4 : {
-                hidden:false,
+                hidden: false,
                 url:'https://curric-stage.owschools.com/owsoo/login/auth',
                 text:{
                     main:'OW Curric Stage',
                     sub:'Odysseyware',
-                    warn:false
+                    warn: false
                 }
             },
             button5 : {
-                hidden:false,
+                hidden: false,
                 url:'https://curric-stage.sooschools.com/owsoo/login/auth',
                 text:{
                     main:'AOP Curric Stage',
                     sub:'Alpha Omega',
-                    warn:false
+                    warn: false
                 }
             },
             button6 : {
-                hidden:true,
+                hidden: true,
                 url:'https://consumer-lms.cns-staging-shard-monarch.il-consumer.com/',
                 text:{
                     main:'Monarch Stage',
                     sub:'Consumer',
-                    warn:false
+                    warn: false
                 }
             },
             button7 : {
-                hidden:true,
+                hidden: true,
                 url:'https://consumer-lms.cns-staging-shard-calvert.il-consumer.com/',
                 text:{
                     main:'Calvert Stage',
                     sub:'Consumer',
-                    warn:false
+                    warn: false
                 }
             },
             button8 : {
-                hidden:false,
+                hidden: false,
                 url:'https://testapp.imaginelearning.com/?dev',
                 text:{
                     main:'Imagine Learning',
                     sub:'Legacy IL Test App',
-                    warn:false
+                    warn: false
                 }
             }
         }

@@ -1,7 +1,7 @@
 const flk = document.querySelectorAll('.flk');
 
 if (flk.length <= 0){
-    document.querySelector('#magic').style.display = 'none'
+    document.querySelector('#magic').classList.add('dnone');
 }
 
 const magic = document.querySelector('#magic');
@@ -9,16 +9,17 @@ const magic = document.querySelector('#magic');
 magic.addEventListener('click', () => {
     if (flk.length > 0){
         for (let i of flk){
-            if (i.style.display === 'none' || i.style.display === ''){
-                if (i.classList.contains('msg')){
-                    i.style.display = 'grid';
-                }else if(i.classList.contains('tilesContainer')){
-                    i.style.display = 'block';
-                }else{
-                    i.style.display = 'flex';
-                }
+            if (i.classList.contains('dnone')){
+                // if (i.classList.contains('msg')){
+                //     i.style.display = 'grid';
+                // }else if(i.classList.contains('tilesContainer')){
+                //     i.style.display = 'block';
+                // }else{
+                //     i.style.display = 'flex';
+                // }
+                i.classList.remove('dnone');
             }else{
-                i.style.display = 'none';
+                i.classList.add('dnone');
             }
         }
     }
