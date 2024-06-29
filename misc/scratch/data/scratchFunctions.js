@@ -56,10 +56,10 @@ $(document).ready(function(){
         if (text){
             $('.static').addClass('dnone');
             $('.md-modal-content').attr('style', 'overflow: hidden;');
-            $('.md-modal-content').append('<p id="temp">' + text + '</p>');
+            $('.md-modal-content').append(mkP({id:'temp', inner:text}));
         }else{
             $('.md-modal-content').addClass('dnone');
-            $('.md-modal').append('<div class="spinner-background"><div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div></div>');
+            $('.md-modal').append(crtSpin());
         }
         $('.md-modal').removeClass('dnone');
         if (timeOut){
@@ -428,7 +428,7 @@ $(document).ready(function(){
         // stopProcessing();
     }
     try{
-    colorPicker();
+        colorPicker();
     }catch(e){
         console.log(e);
         $('textarea').addClass('dark');
