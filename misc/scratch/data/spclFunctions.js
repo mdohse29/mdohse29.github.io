@@ -1,13 +1,17 @@
-function mkDiv(attr){
+function mkDiv(attr = {}){
     let div = document.createElement('div');
     for (let a in attr){
-        div.setAttribute(a, attr[a]);
+        if (a.includes('inner')){
+            div.innerHTML = attr[a];
+        }else{
+            div.setAttribute(a, attr[a]);
+        }
     }
 
     return div;
 }
 
-function mkLnk(attr){
+function mkLnk(attr = {}){
     let a = document.createElement('a');
     
     for (let at in attr){

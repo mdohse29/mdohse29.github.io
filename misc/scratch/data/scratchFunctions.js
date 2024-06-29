@@ -8,7 +8,7 @@ $(document).ready(function(){
         $('#TextArea').off('paste', processText);
         $('#exspc').off('click');
 
-        popup("", 1500);
+        popup('', 1500);
         $('#stop').addClass('dnone');
         $('#start').removeClass('dnone');
         $('#exspc').attr('disabled', 'disabled');
@@ -20,7 +20,7 @@ $(document).ready(function(){
         $('#TextArea').off('paste');
         $('#TextArea').on('paste', processText);
         $('#exspc').click(removeExtraLines);
-        popup("", 1500);
+        popup('', 1500);
         $('#start').addClass('dnone');
         $('#stop').removeClass('dnone');
         $('#exspc').removeAttr('disabled');
@@ -80,7 +80,7 @@ $(document).ready(function(){
 
     function toggleSpclFtr(text){
 
-        if (text == "Admin" && $('.spclFtr').length === 0){
+        if (text == 'Admin' && $('.spclFtr').length === 0){
             // $('.spclFtr').removeClass('dnone');
             $('body').prepend(crtad());
             $('body').prepend(mkrtnl());
