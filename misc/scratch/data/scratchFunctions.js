@@ -333,15 +333,15 @@ $(document).ready(function(){
     // create color select and buttons for options
     // mkbtn('btn btn-primary btn-sm ms-1 usr-btn', 'ex', 'Fix URL') Add this below to add the button for fixing urls
     $('.options').prepend(
-        mkinp('select', 'color', '', 'form-select-sm', ['dark', 'green', 'blue', 'white', 'yellow', 'lavender']).input,
-        mkbtn('btn btn-primary btn-sm ms-1 usr-btn', 'exspc', 'Remove Leading Spaces', 'The empty space in front of the paragraphs'), 
-        mkbtn('btn btn-primary btn-sm ms-1 usr-btn', 'rmv-ol', 'Remove OL Markers', 'Remove numbered OL markers'),
-        mkbtn('btn btn-primary btn-sm ms-1 usr-btn', 'clear', 'Clear', 'Clear scratch pad'),
-        // mkbtn('btn btn-primary btn-sm ms-1 usr-btn', 'ex', 'Fix URL'),
-        createToggle('flat', 'Flatten Text', 'Convert multiple lines of text into a single line. Check \'How This Works\' info button for example.'),
-        createToggle('dbl', 'Paragraph Spacing', 'Adds space between lines.', 'dnone'),
-        mkLnk('btn btn-sml ms-1', 'Click to report an issue or suggestion.', 'mailto:aaaabncggffyesoyicuhyz3u7u@imaginelearning.org.slack.com', '<img width="32" height="32" src="./data/icons8-bug-64.png" alt="bug"/>'),
-        mkbtn('btn btn-sm ms-1', 'info', '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/></svg>', 'How this works')
+        mkinp({type:'select', name:'color', class:'form-select-sm', options:[{value:'dark'},{value:'green'},{value:'blue'},{value:'white'},{value:'yellow'}]}).input,
+        mkbtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'exspc', inner:'Remove Leading Spaces', title:'The empty space in front of the paragraphs'}),
+        mkbtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'rmv-ol', inner:'Remove OL Markers', title:'Remove numbered OL markers'}),
+        mkbtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'clear', inner:'Clear', title:'Clear scratch pad'}),
+        // mkbtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'ex', inner:'Fix URL'}),
+        createToggle({id:'flat', label:'Flatten Text', title:'Convert multiple lines of text into a single line. Check \'How This Works\' info button for example.'}),
+        createToggle({id:'dbl', label:'Paragraph Spacing', title:'Adds space between lines.', class:'dnone'}),
+        mkLnk({class:'btn btn-sml ms-1', title:'Click to report an issue or suggestion.', href:'mailto:aaaabncggffyesoyicuhyz3u7u@imaginelearning.org.slack.com', inner:'<img width="32" height="32" src="./data/icons8-bug-64.png" alt="bug"/>'}),
+        mkbtn({class:'btn btn-sm ms-1', id:'info', inner:'<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/></svg>', title:'How this works'})
     );
 
     setToggleListeners();
@@ -350,16 +350,19 @@ $(document).ready(function(){
     let currentVal = $('select').val();
     $('#TextArea').addClass(currentVal);
 
-    colorPicker();
 
     $('textarea').focus();
 
-    $('#exspc, #clear, #rmv-ol').mousedown(function(){
-        $(this).css('box-shadow', 'none');
+    $('.options > button').mousedown(function(){
+        if (!$(this).attr('id').includes('info')){
+            $(this).removeClass('btn-shadow');
+        }
     });
 
-    $('#exspc, #clear, #rmv-ol').mouseup(function(){
-        $(this).css('box-shadow', '0px 0px 0px 1px darkgrey');
+    $('.options > button').mouseup(function(){
+        if (!$(this).attr('id').includes('info')){
+            $(this).addClass('btn-shadow');
+        }
     });
 
     $('#exspc').click(removeExtraLines);
@@ -423,6 +426,12 @@ $(document).ready(function(){
         // $('#toolBox').show();
         toggleSpclFtr('Admin');
         // stopProcessing();
+    }
+    try{
+    colorPicker();
+    }catch(e){
+        console.log(e);
+        $('textarea').addClass('dark');
     }
 
 });
