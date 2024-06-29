@@ -21,7 +21,7 @@ function mkLnk(attr){
     return a;
 }
 
-function mklable(attr = {}){
+function mkLabel(attr = {}){
     let label = document.createElement('label');
 
     for (let a in attr){
@@ -89,7 +89,7 @@ function mkinp(attr = {}){
             }
 
             if (attr.label){
-                elements.label = mklable({for:attr.name, inner:attr.label});
+                elements.label = mkLabel({for:attr.name, inner:attr.label});
             }
             
             break;
@@ -175,7 +175,7 @@ function crtad(){
 
 function createToggle(attr = {}){
     let container = mkDiv({id:attr.id, class: 'switch-container ' + attr.class, title:attr.title});
-    let label = mklable({inner:(attr.label) ? attr.label : ''});
+    let label = mkLabel({inner:(attr.label) ? attr.label : ''});
     let togCont = mkDiv({class:'toggle-cont'});
     let pill = mkDiv({class:'toggle-pill'});
 
