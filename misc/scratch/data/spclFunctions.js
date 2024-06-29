@@ -1,75 +1,112 @@
-function mkDiv(c){
+function mkDiv(attr){
     let div = document.createElement('div');
-    div.classList.add(...c.split(' '));
+    for (let a in attr){
+        div.setAttribute(a, attr[a]);
+    }
 
     return div;
 }
 
-function mkLnk(c = '', tt = '', href, inner = null, target = null){
+function mkLnk(attr){
     let a = document.createElement('a');
-    let classes = (c) ? c.split(' ') : [];
-
-    for (let c in classes){
-        a.classList.add(c);
-    }
-
-    a.title = tt;
-    a.href = href;
     
-    if(target){
-        a.target = target;
+    for (let at in attr){
+        if (at.includes('inner')){
+            a.innerHTML = attr[at];
+        }else{
+            a.setAttribute(at, attr[at]);
+        }
     }
-    
-    a.innerHTML = inner;
 
     return a;
 }
 
-function mkinp(t, n, p, c, o){
-    let input = document.createElement('input');
-    let label = undefined;
-    input.type = t;
-    input.name = n;
-    input.id = n;
-    if (t === "text" && p){
-        input.placeholder = p;
-        input.classList.add(...c.split(' '));
-    }
-    if (t === 'checkbox'){
-        label = document.createElement('label');
-        label.innerText = p;
-        label.setAttribute('for', n);
-    }
-    
-    if (t === 'select' && typeof(o) == 'object'){
-        input = document.createElement(t);
-        input.classList.add(...c.split(' '));
-        input.id = n;
-        input.name = n;
+function mkLabel(attr = {}){
+    let label = document.createElement('label');
 
-        for (let a in o){
-            let option = document.createElement('option');
-            option.classList.add(o[a].toLowerCase());
-            option.value = o[a].toLowerCase();
-            option.innerText = o[a][0].toUpperCase() + o[a].substring(1);
-            input.appendChild(option);
+    for (let a in attr){
+        if (a.includes('inner')){
+            label.innerText = attr[a];
+        }else{
+            label.setAttribute(a, attr[a]);
         }
     }
 
-    return {input:input, label:label};
+    return label;
 }
 
-function mkbtn(c, i, t, tt){
-    let btn = document.createElement('button');
-
-    btn.classList.add(...c.split(' '));
-    btn.id = i;
-    if (t){
-        btn.innerHTML = t;
+function mkOpt(attr = {}){
+    let option = document.createElement('option');
+    if (!attr.value){
+        throw Error('A value key must be set\nmkOpt({value:\'some value\'})\n\nCurrent Keys: {' + Object.keys(attr) + '}');
+    }
+    if (Object.keys(attr).length > 1){
+        for (let a in attr){
+            if (a.includes('inner')){
+                option.innerText = attr[a];
+            }else{
+                option.setAttribute(a, attr[a]);
+            }
+        }
+    }else{
+        option.value = attr.value;
+        option.innerText = attr.value[0].toUpperCase() + attr.value.substring(1);
+        option.classList.add(attr.value);
     }
 
-    if (tt){
-        btn.title = tt;
+    return option;
+}
+
+function mkinp(attr = {}){
+    let elements = {};
+    if (!attr.type){
+        throw Error("A type value must be defined.\n\nCurrent Keys: {" + Object.keys(attr) + "}");
+    }
+    switch(attr.type){
+        case 'select':
+            elements.input = document.createElement(attr.type);
+            for (let at in attr){
+                if (!at.includes('option')){
+                    elements.input.setAttribute(at, attr[at]);
+                }
+            }
+
+            for (let a in attr.options){
+                elements.input.appendChild(mkOpt(attr.options[a]));
+            }
+            break;
+        default:
+            elements.input = document.createElement('input');
+            if (!attr.id && attr.name){
+                attr.id = attr.name;
+            }else if (!attr.name && attr.id){
+                attr.name = attr.id;
+            }else if (!attr.id && !attr.name){
+                throw Error("A name or id key should be set\n{name:''} or {id:''}\n\nCurrent Keys: {" + Object.keys(attr) + "}");
+            }
+            for (let a in attr){
+                elements.input.setAttribute(a, attr[a]);
+            }
+
+            if (attr.label){
+                elements.label = mkLabel({for:attr.name, inner:attr.label});
+            }
+            
+            break;
+    }
+
+    return elements;
+}
+
+function mkbtn(attr = {}){
+    let btn = document.createElement('button');
+//c, i, t, tt
+    for (let a in attr){
+        if (a.includes('inner')){
+            btn.innerHTML = attr[a];
+        }else{
+            btn.setAttribute(a, attr[a]);
+        }
     }
 
     return btn;
@@ -77,9 +114,7 @@ function mkbtn(c, i, t, tt){
 
 function mkrtnl(){
     let rtrnTB = document.createElement('p');
-    let TB = document.createElement('a');
-    TB.href = '../../toolBox.html';
-    TB.innerText = 'Return to ToolBox';
+    let TB = mkLnk({href:'../../toolBox.html', innerText:'Return to ToolBox'});
     rtrnTB.id = 'toolBox';
     rtrnTB.classList.add('me-3');
     rtrnTB.appendChild(TB);
@@ -90,18 +125,19 @@ function mkrtnl(){
 function crtad(){
     let disbchk = document.querySelectorAll('button');
     let btnenbl = false;
-    let div1 = mkDiv('spclFtr m-2');
-    let div2 = mkDiv('dnone search-replace');
-    let div2a = mkDiv('search');
-    let div2b = mkDiv('search-options d-block');
 
-    let indiv2a1 = mkinp('text', 'search', 'Search', 'form-control');
-    let indiv2a2 = mkinp('text', 'replace', 'Replace', 'form-control');
-    let indiv2b1 = mkinp('checkbox', 'word', 'Strict Search');
-    let indiv2b2 = mkinp('checkbox', 'regex', 'Regex');
+    let div1 = mkDiv({class:'spclFtr m-2'});
+    let div2 = mkDiv({class:'dnone search-replace'});
+    let div2a = mkDiv({class:'search'});
+    let div2b = mkDiv({class:'search-options d-block'});
 
-    let btndiv2a = mkbtn('btn btn-outline-success', 'rep', 'Replace');
-    let btndiv2acls = mkbtn('btn btn-close btn-dark btn-lg mx-2', 'search-close');
+    let indiv2a1 = mkinp({type:'text', name:'search', placeholder:'Search', class:'form-control'});
+    let indiv2a2 = mkinp({type:'text', name:'replace', placeholder:'Replace', class:'form-control'});
+    let indiv2b1 = mkinp({type:'checkbox', name:'word', label:'Strict Search'});
+    let indiv2b2 = mkinp({type:'checkbox', name:'regex', label:'Regex'});
+
+    let btndiv2a = mkbtn({class:'btn btn-outline-success', id:'rep', inner:'Replace'});
+    let btndiv2acls = mkbtn({class:'btn btn-close btn-dark btn-lg mx-2', id:'search-close'});
 
     div2a.appendChild(indiv2a1.input);
     div2a.appendChild(indiv2a2.input);
@@ -114,7 +150,7 @@ function crtad(){
     div2.appendChild(div2a);
     div2.appendChild(div2b);
     div1.appendChild(div2);
-    div1.appendChild(mkbtn('btn btn-outline-danger btn-sm', 'sandr', 'S&R'));
+    div1.appendChild(mkbtn({class:'btn btn-outline-danger btn-sm', id:'sandr', inner:'S&R'}));
 
     for (let btn of disbchk){
         if (btn.disabled){
@@ -124,38 +160,24 @@ function crtad(){
     }
 
     if (btnenbl){
-        div1.appendChild(mkbtn('btn btn-outline-danger btn-sm dnone', 'stop', 'Disable Text Processing'));
-        div1.appendChild(mkbtn('btn btn-outline-danger btn-sm', 'start', 'Enable Text Processing'));
+        div1.appendChild(mkbtn({class:'btn btn-outline-danger btn-sm dnone', id:'stop', inner:'Disable Text Processing'}));
+        div1.appendChild(mkbtn({class:'btn btn-outline-danger btn-sm', id:'start', inner:'Enable Text Processing'}));
     }else{
-        div1.appendChild(mkbtn('btn btn-outline-danger btn-sm', 'stop', 'Disable Text Processing'));
-        div1.appendChild(mkbtn('btn btn-outline-danger btn-sm dnone', 'start', 'Enable Text Processing'));
+        div1.appendChild(mkbtn({class:'btn btn-outline-danger btn-sm', id:'stop', inner:'Disable Text Processing'}));
+        div1.appendChild(mkbtn({class:'btn btn-outline-danger btn-sm dnone', id:'start', inner:'Enable Text Processing'}));
     }
 
-    div1.appendChild(mkbtn('btn btn-outline-danger btn-sm', 'ff', 'Format Filename'));
-    div1.appendChild(mkbtn('btn btn-close btn-dark', 'ad-close'));
+    div1.appendChild(mkbtn({class:'btn btn-outline-danger btn-sm', id:'ff', inner:'Format Filename'}));
+    div1.appendChild(mkbtn({class:'btn btn-close btn-dark', id:'ad-close'}));
 
     return div1;
 }
 
-function createToggle(i, t, title, c){
-    let container = document.createElement('div');
-    let label = document.createElement('label');
-    let togCont = document.createElement('div');
-    let pill = document.createElement('div');
-    let classes = (c) ? c.split(' ') : [];
-
-    pill.classList.add('toggle-pill');
-    togCont.classList.add('toggle-cont');
-    label.innerText = t;
-    container.id = i
-    container.classList.add('switch-container');
-    for (let i in classes){
-        container.classList.add(classes[i]);
-    }
-
-    if (title){
-        container.title = title;
-    }
+function createToggle(attr = {}){
+    let container = mkDiv({id:attr.id, class: 'switch-container ' + attr.class, title:attr.title});
+    let label = mkLabel({inner:(attr.label) ? attr.label : ''});
+    let togCont = mkDiv({class:'toggle-cont'});
+    let pill = mkDiv({class:'toggle-pill'});
 
     togCont.appendChild(pill);
     container.appendChild(label);
