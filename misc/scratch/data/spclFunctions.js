@@ -1,13 +1,43 @@
-function mkDiv(attr){
+function mkDiv(attr = {}){
     let div = document.createElement('div');
     for (let a in attr){
-        div.setAttribute(a, attr[a]);
+        if (a.includes('inner')){
+            div.innerHTML = attr[a];
+        }else{
+            div.setAttribute(a, attr[a]);
+        }
     }
 
     return div;
 }
 
-function mkLnk(attr){
+function mkSpan(attr = {}){
+    let span = document.createElement('span');
+    for (let a in attr){
+        if (a.includes('inner')){
+            span.innerHTML = attr[a];
+        }else{
+            span.setAttribute(a, attr[a]);
+        }
+    }
+
+    return span;
+}
+
+function mkP(attr = {}){
+    let p = document.createElement('p');
+    for (let a in attr){
+        if (a.includes('inner')){
+            p.innerHTML = attr[a];
+        }else{
+            p.setAttribute(a, attr[a]);
+        }
+    }
+
+    return p;
+}
+
+function mkLnk(attr = {}){
     let a = document.createElement('a');
     
     for (let at in attr){
@@ -174,7 +204,7 @@ function crtad(){
 }
 
 function createToggle(attr = {}){
-    let container = mkDiv({id:attr.id, class: 'switch-container ' + attr.class, title:attr.title});
+    let container = mkDiv({id:attr.id, class: ((attr.class) ? 'switch-container ' + attr.class : 'switch-container'), title:attr.title});
     let label = mkLabel({inner:(attr.label) ? attr.label : ''});
     let togCont = mkDiv({class:'toggle-cont'});
     let pill = mkDiv({class:'toggle-pill'});
@@ -184,6 +214,16 @@ function createToggle(attr = {}){
     container.appendChild(togCont);
 
     return container;
+}
+
+function crtSpin(){
+    let spinner = mkDiv({class:'spinner-background'});
+    let inDiv = mkDiv({class:'spinner-border', role:'status'});
+    let span = mkSpan({class:'visually-hidden', inner:'Loading...'});
+    inDiv.appendChild(span);
+    spinner.appendChild(inDiv);
+
+    return spinner;
 }
 
 function setToggleListeners(){
