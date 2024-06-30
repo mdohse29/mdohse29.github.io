@@ -25,7 +25,7 @@ function mkSpan(attr = {}){
 }
 
 function mkP(attr = {}){
-    let p = document.createElement('span');
+    let p = document.createElement('p');
     for (let a in attr){
         if (a.includes('inner')){
             p.innerHTML = attr[a];

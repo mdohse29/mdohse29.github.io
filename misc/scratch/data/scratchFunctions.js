@@ -8,7 +8,7 @@ $(document).ready(function(){
         $('#TextArea').off('paste', processText);
         $('#exspc').off('click');
 
-        popup('', 1500);
+        popup({timeOut:1500});
         $('#stop').addClass('dnone');
         $('#start').removeClass('dnone');
         $('#exspc').attr('disabled', 'disabled');
@@ -20,7 +20,7 @@ $(document).ready(function(){
         $('#TextArea').off('paste');
         $('#TextArea').on('paste', processText);
         $('#exspc').click(removeExtraLines);
-        popup('', 1500);
+        popup({timeOut:1500});
         $('#start').addClass('dnone');
         $('#stop').removeClass('dnone');
         $('#exspc').removeAttr('disabled');
@@ -42,7 +42,7 @@ $(document).ready(function(){
         $('#TextArea').focus();
     }
 
-    function popup(text, timeOut){
+    function popup(prop = {}){
         // text should at least have empty quotes "" in order to keep the variables in the current order.
         // popup("", 500) to set the spinner for 500 mls
         // popup("text", 500) to set a popup with text message for 500 mls
@@ -53,19 +53,22 @@ $(document).ready(function(){
         
         $('.md-modal').attr('style', 'width: ' + width + 'px; height: ' + height + 'px; top: ' + position.top + 'px; left: ' + position.left + 'px;');
         $('.md-modal-background').addClass('dnone');
-        if (text){
+        if (prop.text){
             $('.static').addClass('dnone');
             $('.md-modal-content').attr('style', 'overflow: hidden;');
-            $('.md-modal-content').append(mkP({id:'temp', inner:text}));
+            $('.md-modal-content').append(mkP({id:'temp', inner:prop.text}));
+            if (!prop.timeOut){
+                $('.md-modal-background').removeClass('dnone');
+            }
         }else{
             $('.md-modal-content').addClass('dnone');
             $('.md-modal').append(crtSpin());
         }
         $('.md-modal').removeClass('dnone');
-        if (timeOut){
+        if (prop.timeOut){
             setTimeout(() => {
                 closePopup();
-            }, timeOut);
+            }, prop.timeOut);
         }
     }
 
@@ -162,7 +165,7 @@ $(document).ready(function(){
                 editedText = editedText.replaceAll(new RegExp(singleDigit[a]), '');
             }
         }
-        popup("Done!", 750);
+        popup({text:"Done!", timeOut:750});
         return editedText;
     }
 
@@ -176,7 +179,7 @@ $(document).ready(function(){
 
         updateClipboard(text.join('\n'))
         $('#TextArea').val(text.join('\n').trim());
-        popup("Done!", 750);
+        popup({text:"Done!", timeOut:750});
     }
 
     function searchRegex(searchText){
@@ -401,8 +404,7 @@ $(document).ready(function(){
 
     // Close the modal
     $('.md-modal-background').click(function(){
-        $('.md-modal').addClass('dnone');
-        $('body').removeAttr('style');
+        closePopup();
     });
 
     $('#ex').click(function(){
@@ -412,9 +414,9 @@ $(document).ready(function(){
         let test = text.split('\n');
         if (test.length > 1){
             if (test[0].toLowerCase() === test[1].toLowerCase()){
-                popup('It Matches!', 700);
+                popup({text:'The URLs Match!', timeOut:700});
             }else{
-                popup('The URL\'s are not a match', 1500);
+                popup({text:'The URL\'s are not a match', timeOut:1500});
                 text = '';
             }
         }
