@@ -1,10 +1,8 @@
 let masterList = [];
-const baseUrl = './data/';
-// const baseUrl = 'https://mdohse29.github.io/misc/movieList/data/'
+// const baseUrl = './data/';
+const baseUrl = 'https://mdohse29.github.io/misc/movieList/data/'
 
-let loading = document.createElement('p');
-loading.setAttribute('id', 'placeH');
-loading.innerText = 'Loading ....';
+let loading = mkP({id:'placeH', inner:'Loading...'});
 document.querySelector('.movies').appendChild(loading);
 
 const formatter = function (text){
@@ -22,13 +20,8 @@ function collectList(movies, tag){
     for (let movie in movies){
         let formatted = formatter(movies[movie]);
         if (formatted){
-            let p = document.createElement('p');
 
-            p.classList.add('title');
-            p.setAttribute('tag', tag);
-            p.innerText = formatted;
-
-            masterList.push({element: p, tag: tag});
+            masterList.push({element: mkP({class:'title', tag:tag, inner:formatted}), tag: tag});
             
             // masterList = sorter(masterList);
         }else{
@@ -87,27 +80,17 @@ async function createMovieList(){
 
         // Total Count
         let totCon = document.querySelector('#totalTitles')
-        let p = document.createElement('p');
-        let strong = document.createElement('strong');
-        let sub = document.createElement('sub');
         
-        p.setAttribute('id', 'total');
-        p.setAttribute('tag', 'count');
-        p.classList.add('sticky-bottom');
-        sub.innerText = 'Total: ' + masterList.length;
-        // -------------------------------------------------------------
+        totCon.appendChild(nestElem([mkP({id:'total', tag:'count', class:'sticky-bottom'}), mkElem({elemType:'strong'}), mkElem({elemType:'sub', inner:'Total: ' + masterList.length})]));
 
-        strong.appendChild(sub);
-        p.appendChild(strong);
-        totCon.appendChild(p);
     }catch(e){
+        console.log(e.code, e.message, e.config);
         document.querySelector('#placeH').remove();
         loading.innerHTML = 'OOPS! Something Went Wrong!<br><br>Nothing to see here';
         document.querySelector('.movies').appendChild(loading);
         document.querySelector('#search-box').setAttribute('disabled','disabled');
         document.querySelector('.rando > button').setAttribute('disabled', 'disabled');
         // throw e;
-        console.log(e.code, e.message, e.config);
     }
 }
 
