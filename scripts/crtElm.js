@@ -1,71 +1,34 @@
 function mkDiv(attr = {}){
-    let div = document.createElement('div');
-    for (let a in attr){
-        if (a.includes('inner')){
-            div.innerHTML = attr[a];
-        }else{
-            div.setAttribute(a, attr[a]);
-        }
-    }
-
-    return div;
+    attr.elemType = 'div';
+    return mkElem(attr);
 }
 
 function mkSpan(attr = {}){
-    let span = document.createElement('span');
-    for (let a in attr){
-        if (a.includes('inner')){
-            span.innerHTML = attr[a];
-        }else{
-            span.setAttribute(a, attr[a]);
-        }
-    }
-
-    return span;
+    attr.elemType = 'span';
+    return mkElem(attr);
 }
 
 function mkP(attr = {}){
-    let p = document.createElement('p');
-    for (let a in attr){
-        if (a.includes('inner')){
-            p.innerHTML = attr[a];
-        }else{
-            p.setAttribute(a, attr[a]);
-        }
-    }
-
-    return p;
+    attr.elemType = 'p';
+    return mkElem(attr);
 }
 
 function mkLnk(attr = {}){
-    let a = document.createElement('a');
-    
-    for (let at in attr){
-        if (at.includes('inner')){
-            a.innerHTML = attr[at];
-        }else{
-            a.setAttribute(at, attr[at]);
-        }
-    }
-
-    return a;
+    attr.elemType = 'a';
+    return mkElem(attr);
 }
 
 function mkLabel(attr = {}){
-    let label = document.createElement('label');
-
-    for (let a in attr){
-        if (a.includes('inner')){
-            label.innerText = attr[a];
-        }else{
-            label.setAttribute(a, attr[a]);
-        }
-    }
-
-    return label;
+    attr.elemType = 'label';
+    return mkElem(attr);
 }
 
-function mkOpt(attr = {}){
+function mkbtn(attr = {}){
+    attr.elemType = 'button'
+    return mkElem(attr);
+}
+
+function mkOpt(attr = {value:''}){
     let option = document.createElement('option');
     if (!attr.value){
         throw Error('A value key must be set\nmkOpt({value:\'some value\'})\n\nCurrent Keys: {' + Object.keys(attr) + '}');
@@ -75,7 +38,9 @@ function mkOpt(attr = {}){
             if (a.includes('inner')){
                 option.innerText = attr[a];
             }else{
-                option.setAttribute(a, attr[a]);
+                if (attr[a]){
+                    option.setAttribute(a, attr[a]);
+                }
             }
         }
     }else{
@@ -87,17 +52,19 @@ function mkOpt(attr = {}){
     return option;
 }
 
-function mkinp(attr = {}){
+function mkinp(attr = {type:'', id:''}){
     let elements = {};
     if (!attr.type){
-        throw Error("A type value must be defined.\n\nCurrent Keys: {" + Object.keys(attr) + "}");
+        throw Error("A type type must be defined.\n\nCurrent Keys: {" + Object.keys(attr) + "}");
     }
     switch(attr.type){
         case 'select':
             elements.input = document.createElement(attr.type);
             for (let at in attr){
                 if (!at.includes('option')){
-                    elements.input.setAttribute(at, attr[at]);
+                    if (attr[at]){
+                        elements.input.setAttribute(at, attr[at]);
+                    }
                 }
             }
 
@@ -115,14 +82,18 @@ function mkinp(attr = {}){
                 throw Error("A name or id key should be set\n{name:''} or {id:''}\n\nCurrent Keys: {" + Object.keys(attr) + "}");
             }
             for (let a in attr){
-                elements.input.setAttribute(a, attr[a]);
+                if (attr[a]){
+                    elements.input.setAttribute(a, attr[a]);
+                }
             }
 
             if (attr.label){
                 elements.label = mkLabel({for:attr.id, inner:attr.label});
                 if (attr.labelOpt){
                     for (let b in attr.labelOpt){
-                        elements.label.setAttribute(b, attr.labelOpt[b]);
+                        if (attr.labelOpt[b]){
+                            elements.label.setAttribute(b, attr.labelOpt[b]);
+                        }
                     }
                 }
             }
@@ -133,18 +104,26 @@ function mkinp(attr = {}){
     return elements;
 }
 
-function mkbtn(attr = {}){
-    let btn = document.createElement('button');
-//c, i, t, tt
+function mkHead(attr = {hType:'', inner:''}){
+    if (!(attr.inner && attr.hType)){
+        throw new Error("The inner and hType keys are required\nmkHead({hType:'h1', inner:'Text to be displayed'})");
+    }
+
+    let header = document.createElement(attr.hType);
+
     for (let a in attr){
         if (a.includes('inner')){
-            btn.innerHTML = attr[a];
+            header.innerHTML = attr[a];
         }else{
-            btn.setAttribute(a, attr[a]);
+            if (!a.includes('hType')){
+                if (attr[a]){
+                    header.setAttribute(a, attr[a]);
+                }
+            }
         }
     }
 
-    return btn;
+    return header;
 }
 
 function createToggle(attr = {}){
@@ -170,6 +149,39 @@ function crtSpin(){
     return spinner;
 }
 
+function nestElem(elemArry = []){
+    for (let a = elemArry.length-2; a >= 0; a--){
+        if (Object.keys(elemArry[a+1]).length > 0){
+            for (let b in elemArry[a+1]){
+                elemArry[a].appendChild(elemArry[a+1][b]);
+            }
+        }else{
+            elemArry[a].appendChild(elemArry[a+1]);
+        }
+    }
+
+    return elemArry[0];
+}
+
+function mkElem(attr = {elemType:''}){
+    if (!attr.elemType){
+        throw new Error('You must specify what type of element to create\nmkElem({elemType:\'\'})');
+    }
+    let element = document.createElement(attr.elemType);
+
+    for (let a in attr){
+        if (a.includes('inner')){
+            element.innerHTML = attr[a];
+        }else{
+            if (attr[a] && !a.includes('elemType')){
+                element.setAttribute(a, attr[a]);
+            }
+        }
+    }
+
+    return element;
+}
+
 function setToggleListeners(){
     let toggles = document.querySelectorAll('.toggle-pill');
 
@@ -188,7 +200,6 @@ function setToggleListeners(){
                 pill.style.setProperty('margin-left','2px');
                 container.classList.remove('tg-on');
             }
-            document.querySelector('textarea').focus();
         });
     }
     let labels = document.querySelectorAll('.switch-container > label');

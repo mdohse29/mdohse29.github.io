@@ -30,13 +30,6 @@
             1:mkP({inner:"Here is the list of ALL the movies and tv shows currently on the server."}),
             2:mkP({inner:"If there is a movie in the archive, or a movie that I don't have, that you want added just let me know."})
         }
-    ])
-
-    let presentation = nestElem([
-        mkDiv({class:'presentation'}),
-        mkDiv({class:'columns is-centered'}),
-        mkDiv({class:'column is-half'}),
-        mkDiv({class:'box'})
     ]);
 
     let tabs = nestElem([
@@ -55,7 +48,7 @@
         {
             1:tabs,
             2:mkDiv({class:'movies has-background-info-light'}),
-            3:mkDiv({class:'totalTitles'})
+            3:mkDiv({id:'totalTitles'})
         }
     ]);
 
@@ -80,10 +73,21 @@
                 }
             ])
         }
-    ])
+    ]);
+
+    let presentation = nestElem([
+        mkDiv({class:'presentation'}),
+        mkDiv({class:'columns is-centered'}),
+        mkDiv({class:'column is-half'}),
+        mkDiv({class:'box'}),
+        {
+            1:rando,
+            2:search,
+            3:contentMsg,
+            4:content
+        }
+    ]);
 
     body.append(header, presentation, modal);
-
-    body.querySelector('.box').append(rando, search, contentMsg, content);
     
 // }
