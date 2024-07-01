@@ -140,6 +140,7 @@ function createToggle(attr = {}){
 }
 
 function crtSpin(){
+    // MUST be using Bootstrap css
     let spinner = mkDiv({class:'spinner-background'});
     let inDiv = mkDiv({class:'spinner-border', role:'status'});
     let span = mkSpan({class:'visually-hidden', inner:'Loading...'});
