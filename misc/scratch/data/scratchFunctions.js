@@ -11,8 +11,10 @@ $(document).ready(function(){
         popup({timeOut:1500});
         $('#stop').addClass('dnone');
         $('#start').removeClass('dnone');
-        $('#exspc').attr('disabled', 'disabled');
-        $('#rmv-ol').attr('disabled', 'disabled');
+        // $('#exspc').attr('disabled', 'disabled');
+        // $('#rmv-ol').attr('disabled', 'disabled');
+        $('#exspc').addClass('dnone');
+        $('#rmv-ol').addClass('dnone');
         $('.switch-container#flat').addClass('dnone');
     }
 
@@ -23,8 +25,8 @@ $(document).ready(function(){
         popup({timeOut:1500});
         $('#start').addClass('dnone');
         $('#stop').removeClass('dnone');
-        $('#exspc').removeAttr('disabled');
-        $('#rmv-ol').removeAttr('disabled');
+        $('#exspc').removeClass('dnone');
+        $('#rmv-ol').removeClass('dnone');
         $('.switch-container#flat').removeClass('dnone');
     }
 
