@@ -20,7 +20,7 @@
             mkDiv({class:'columns is-centered'}),
             mkDiv({class:'column is-half'}),
             mkDiv({class:'title'}),
-            mkHead({class:'has-text-centered', inner:'Full Movie List', hType:'h1', style:'text-align: center;'})
+            mkHead({inner:'Full Movie List', hType:'h1'})
         ]
     );
 
