@@ -39,8 +39,8 @@ function crtad(){
     div1.appendChild(mkbtn({class:'btn btn-outline-danger btn-sm', id:'sandr', inner:'S&R'}));
 
     for (let btn of disbchk){
-        if (btn.disabled){
-            btnenbl = btn.disabled;
+        if (btn.classList.contains('dnone') || btn.disabled){
+            btnenbl = true;
             break;
         }
     }
