@@ -91,7 +91,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
             }
 
             if (! found) {
-                $('.movies').append('<p class="notFound">Sorry!<br/>Nothing was found that matched your keyword(s).<br/>Send me a request and I will see what I can do.</p>');
+                $('.movies').append(mkP({class:'notFound', inner:'Sorry!<br/>Nothing was found that matched your keyword(s).<br/>Send me a request and I will see what I can do.'}));
             }
 
             $('#submit-reset').removeClass('d-none');
@@ -139,13 +139,13 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
         let tag = $(this).attr('tag');
         switch(tag){
             case 'mov':
-                $(this).append('<span id="location"> - Active Movie</span>');
+                $(this).append(mkSpan({id:'location', inner:' - Active Movie'}));
                 break;
             case 'tv':
-                $(this).append('<span id="location"> - TV</span>');
+                $(this).append(mkSpan({id:'location', inner:' - TV Show'}));
                 break;
             case 'arch':
-                $(this).append('<span id="location"> - Archived Movie</span>');
+                $(this).append(mkSpan({id:'location', inner:' - Archived Movie'}));
                 break;
         }
 
