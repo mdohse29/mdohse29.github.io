@@ -1,11 +1,8 @@
 function mkrtnl(){
-    let rtrnTB = document.createElement('p');
-    let TB = mkLnk({href:'../../toolBox.html', innerText:'Return to ToolBox'});
-    rtrnTB.id = 'toolBox';
-    rtrnTB.classList.add('me-3');
-    rtrnTB.appendChild(TB);
-
-    return rtrnTB;
+    return nestElem([
+        mkP({class:'me-3', id:'toolBox'}),
+        mkLnk({href:'../../toolBox.html', innerText:'Return to ToolBox'})
+    ]);
 }
 
 function crtad(){
