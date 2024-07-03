@@ -314,7 +314,6 @@ $(document).ready(function(){
             // If issues arise from replacing the text when no changes were made 
             // uncomment the if statement
             // remove the part checking for new line at the end and find the best spot for it
-            // if (changed){
             if ($('#dbl > .toggle-cont').hasClass('tg-on')){
                 text = text.replaceAll('\n', '\n\n');
             }
@@ -324,10 +323,10 @@ $(document).ready(function(){
                 text = text.substring(0, text.length - 1);
             }
 
-                
-                updateClipboard(text);
-                $('#TextArea').val(text.trim());
-            // }
+            updateClipboard(text);
+
+            $('#TextArea').val(text.trim());
+            
             closePopup();
         }, 700);
     }
