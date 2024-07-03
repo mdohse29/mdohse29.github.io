@@ -220,10 +220,6 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
         event.preventDefault();
     });
 
-    $('#close').click(function (){
-        $('.spcl').addClass('d-none');
-    });
-
     $('html').keydown(function(event){
         if (event.which == '27'){
             reset();
