@@ -1,6 +1,6 @@
 let masterList = [];
-// const baseUrl = './data/';
-const baseUrl = 'https://mdohse29.github.io/misc/movieList/data/'
+const baseUrl = './data/';
+// const baseUrl = 'https://mdohse29.github.io/misc/movieList/data/'
 
 let loading = mkP({id:'placeH', inner:'Loading...'});
 document.querySelector('.movies').appendChild(loading);
@@ -23,10 +23,10 @@ function collectList(movies, tag){
 
             masterList.push({element: mkP({class:'title', tag:tag, inner:formatted}), tag: tag});
             
-            // masterList = sorter(masterList);
         }else{
-            // console.log("Removing -> " + movies[movie] + "EMPTY");
+
             movies.splice(movie,1);
+
         }
     }
 }
@@ -40,7 +40,6 @@ function sorter(array){
             return -1;
         }
     });
-    // console.log(array);
 }
 
 async function createMovieList(){
@@ -93,56 +92,4 @@ async function createMovieList(){
         // throw e;
     }
 }
-
-// createMovieList();
-
-
-// axios.get(baseUrl + "archive.txt")
-// .then(archive => {
-//     let archList = archive.data.split('\n');
-//     collectList(archList, 'arch');
-// }).then(() => {
-//     axios.get(baseUrl + "active.txt")
-//     .then(active => {
-//         let activeList = active.data.split('\n');
-//         collectList(activeList, 'mov');
-//     }).then(() => {
-//         axios.get(baseUrl + "tvshows.txt")
-//         .then(tv => {
-//             let tvList = tv.data.split('\n');
-//             collectList(tvList, 'tv');
-//             sorter(masterList);
-
-//             if (masterList.length > 0){
-//                 document.querySelector('#placeH').remove();
-//             }
-
-//             let movieList = document.querySelector('.movies');
-//             for (let i in masterList){
-//                 movieList.appendChild(masterList[i].element);
-//             }
-
-//             // Total Count
-//             let totCon = document.querySelector('#totalTitles')
-//             let p = document.createElement('p');
-//             let strong = document.createElement('strong');
-//             let sub = document.createElement('sub');
-            
-//             p.setAttribute('id', 'total');
-//             p.setAttribute('tag', 'count');
-//             p.classList.add('sticky-bottom');
-//             sub.innerText = 'Total: ' + masterList.length;
-
-//             strong.appendChild(sub);
-//             p.appendChild(strong);
-//             totCon.appendChild(p);
-//             //-------------------------------------------------
-//         });
-//     });
-// }).catch(error => {
-//     document.querySelector('#placeH').remove();
-//     loading.innerHTML = 'OOPS! Something Went Wrong!<br><br>Nothing to see here';
-//     document.querySelector('.movies').appendChild(loading);
-//     document.querySelector('#search-box').setAttribute('disabled','disabled')
-// });
 

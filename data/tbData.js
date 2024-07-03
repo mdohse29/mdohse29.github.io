@@ -296,6 +296,15 @@ const drawers = {
                     sub: '',
                     warn: false
                 }
+            },
+            button7: {
+                hidden: false,
+                url: 'https://dev.to',
+                text: {
+                    main: 'DEV',
+                    sub: '(dev.to)',
+                    warn: false
+                }
             }
         }
     }
