@@ -64,7 +64,7 @@
                 {
                     1:mkP({style:'text-align: center;', inner:'This will randomly pick from what is available depending on what tab you are currently on. Use the slider to change the number of picks.<br><sub>All - Picks from everything<br>Movies - will only pick from active movies</sub>'}),
                     2:nestElem([
-                        mkDiv({class:'spcl'}),
+                        mkDiv({class:'rand-cont'}),
                         {
                             1:mkinp({type:'range', step:'5', class:'input', name:'num', id:'num', min:'5', max:'15', value:'5', autocomplete:'off'}).input,
                             2:mkbtn({class:'button is-success is-responsive', id:'rand', inner:'Pick&nbsp;<span id="selected">5</span>&nbsp;at Random'})
