@@ -1,6 +1,6 @@
 let masterList = [];
-const baseUrl = './data/';
-// const baseUrl = 'https://mdohse29.github.io/misc/movieList/data/'
+// const baseUrl = './data/';
+const baseUrl = 'https://mdohse29.github.io/misc/movieList/data/'
 
 let loading = mkP({id:'placeH', inner:'Loading...'});
 document.querySelector('.movies').appendChild(loading);
