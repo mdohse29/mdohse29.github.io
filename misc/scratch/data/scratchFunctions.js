@@ -418,6 +418,7 @@ $(document).ready(function(){
 
         ta.removeClass(currentColor);
         ta.addClass(color);
+        ta.focus();
     });
 
     $('#ex').click(function(){
