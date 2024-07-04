@@ -341,7 +341,7 @@ $(document).ready(function(){
                 1:nestElem([
                     mkDiv({class:'options mb-2'}),
                     {
-                        1:mkinp({type:'select', name:'color', class:'form-select-sm', options:[{value:'dark'},{value:'green'},{value:'blue'},{value:'white'},{value:'yellow'}]}).input,
+                        1:mkinp({type:'select', id:'color', name:'color', class:'form-select-sm', options:[{value:'dark'},{value:'green'},{value:'blue'},{value:'white'},{value:'yellow'}]}).input,
                         2:mkbtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'exspc', inner:'Remove Leading Spaces', title:'The empty space in front of the paragraphs'}),
                         3:mkbtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'rmv-ol', inner:'Remove OL Markers', title:'Remove numbered OL markers'}),
                         4:mkbtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'clear', inner:'Clear', title:'Clear scratch pad'}),
@@ -411,7 +411,7 @@ $(document).ready(function(){
     $('.md-modal-background').click(closePopup);
 
 
-    $('select').on('input', function(){
+    $('#color').on('input', function(){
         let color = $(this).val();
         let ta = $('textarea');
         let currentColor = ta.attr('class');
