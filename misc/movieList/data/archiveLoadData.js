@@ -17,11 +17,20 @@ const formatter = function (text){
 }
 
 function collectList(movies, tag){
+    let collection = [];
     for (let movie in movies){
         let formatted = formatter(movies[movie]);
         if (formatted){
 
-            masterList.push({element: mkP({class:'title', tag:tag, inner:formatted}), tag: tag});
+            collection.push(
+                {
+                    element: nestElem([
+                            mkDiv(),
+                            mkP({class:'title', tag:tag, inner:formatted})
+                        ]),
+                    tag: tag
+                }
+            );
             
         }else{
 
@@ -29,6 +38,8 @@ function collectList(movies, tag){
 
         }
     }
+
+    return collection;
 }
 
 function sorter(array){
@@ -53,9 +64,11 @@ async function createMovieList(){
         active = await axios.get(baseUrl + "active.txt", config);
         tv = await axios.get(baseUrl + "tvshows.txt", config);
     
-        collectList(arch.data.split('\n'), 'arch');
-        collectList(active.data.split('\n'), 'mov');
-        collectList(tv.data.split('\n'), 'tv');
+        masterList = masterList.concat(
+            collectList(arch.data.split('\n'), 'arch'),
+            collectList(active.data.split('\n'), 'mov'),
+            collectList(tv.data.split('\n'), 'tv')
+        );
 
         //Using FETCH
         // arch = await fetch(baseUrl + 'archive.txt');

@@ -58,7 +58,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
         if (currentTab != 'all' && currentTab != movieObject.tag){
             $(movieObject.element).addClass('d-none');
         }else{
-            $(movieObject.element).removeClass('d-none');
+            $(movieObject.element).removeAttr('class');
         }
         return movieObject;
     }
@@ -81,10 +81,11 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
         } else {
             let movies = masterList;
 
-            $('.movies > p').remove();
+            $('.movies > div').remove();
 
             for (let movie of movies) {
-                if (movie.element.innerText.toLowerCase().includes(searchText.toLowerCase())) {
+                let movTitle = movie.element.querySelector('p.title').innerText;
+                if (movTitle.toLowerCase().includes(searchText.toLowerCase())) {
                     $('.movies').append(filter(movie).element);
                     found = true;
                 }
@@ -133,36 +134,44 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
     // $('.msg').attr('style', 'margin-top: ' + tabHeight + 'px;');
     // $('.tabs-container').attr('style', 'margin-top: ' + tabHeight + 'px;');
     
-    $(document).on('mouseenter', 'p.title', function () {
+    $(document).on('mouseenter', '.movies > div', function () {
         let text = '';
         $(this).addClass('highlight');
-        let tag = $(this).attr('tag');
+        let tag = $(this).find('p.title').attr('tag');
         switch(tag){
             case 'mov':
-                $(this).append(mkSpan({id:'location', inner:' - Active Movie'}));
+                $(this).find('p.title').append(mkSpan({id:'location', inner:' - Active Movie'}));
+                // $(this).append(mkbtn({class:'button is-ghost is-responsive', id:'moreInfo', inner:'More Information'}));
                 break;
             case 'tv':
-                $(this).append(mkSpan({id:'location', inner:' - TV Show'}));
+                $(this).find('p.title').append(mkSpan({id:'location', inner:' - TV Show'}));
                 break;
             case 'arch':
-                $(this).append(mkSpan({id:'location', inner:' - Archived Movie'}));
+                $(this).find('p.title').append(mkSpan({id:'location', inner:' - Archived Movie'}));
+                // $(this).append(mkP({id:'moreInfo', inner:'<sup><a href="#">More Information</a></sup>'}))
                 break;
         }
 
+        $('#moreInfo').click(function(){
+            let text = $(this).parent().find('p.title').attr('tag');
+            alert(text);
+        })
+
     });
-    $(document).on('mouseleave', 'p.title', function () {
-        $(this).removeClass('highlight');
+    $(document).on('mouseleave', 'div.highlight', function () {
+        $(this).removeAttr('class');
         $(this).find('#location').remove();
+        $(this).find('#moreInfo').remove();
     });
 
     $('.tab').click(function(){
         $(this).parent().find('.active').removeClass('active');
         $(this).addClass('active');
 
-        let movies = $('p.title');
+        let movies = $('.movies > div');
 
         for (let movie = 0; movie < movies.length; movie++){
-            let movieTag = $(movies[movie]).attr('tag');
+            let movieTag = $(movies[movie]).find('p.title').attr('tag');
 
             filter({element: movies[movie], tag: movieTag});
 
@@ -184,7 +193,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
             $('.notFound').remove();
         }
 
-        $('.movies > p').remove();
+        $('.movies > div').remove();
 
         for (let a = 0; a < num; a++) {
             let rand = Math.floor(Math.random() * (elements.length - 1));

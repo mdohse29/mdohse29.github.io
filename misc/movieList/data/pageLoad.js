@@ -52,7 +52,7 @@ let content = nestElem([
 ]);
 
 let modal = nestElem([
-    mkDiv({class:'md-modal dnone'}),
+    mkDiv({class:'md-modal dnone', id:'randGen'}),
     {
         1:nestElem([
             mkDiv({class:'md-modal-background'}),
