@@ -56,12 +56,19 @@ $(document).ready(function(){
         if (prop.text){
             $('.static').addClass('dnone');
             $('.md-modal-content').attr('style', 'overflow: hidden;');
+            
+            if ($('#temp')){
+                $('#temp').remove();
+            }
             $('.md-modal-content').append(mkP({id:'temp', inner:prop.text}));
             if (!prop.timeOut){
                 $('.md-modal-background').removeClass('dnone');
             }
         }else{
             $('.md-modal-content').addClass('dnone');
+            if ($('.spinner-background')){
+                $('.spinner-background').remove();
+            }
             $('.md-modal').append(crtSpin());
         }
         $('.md-modal').removeClass('dnone');
