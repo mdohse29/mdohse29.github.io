@@ -1,13 +1,13 @@
 body {
     background-color: rgb(239, 245, 251);
 }
-p.title {
+/* p.title {
     background-color: transparent;
     font-weight: bold;
     font-size: 1em;
     color: black;
-    /* text-transform: capitalize; */
-}
+    text-transform: capitalize;
+} */
 div.content.msg > p {
     font-size: small;
     margin: 0px;
@@ -30,13 +30,24 @@ div.content.msg > p:first-child{
     scrollbar-width: none;
     height: 70vh;
 }
-.movies > p.title {
+.movies > div > p.title {
+    background-color: transparent;
+    font-weight: bold;
+    font-size: 1em;
+    color: black;
     margin: 0px;
     padding: 10px;
 }
-.movies > p.title.highlight{
+/* #moreInfo {
+    margin-left: 10px;
+} */
+
+div.highlight > p {
+    color: white !important;
+}
+
+.movies > div.highlight {
     background-color: black;
-    color: white;
     font-size: 1.35em;
     cursor: pointer;
     padding-left: 15px;
@@ -60,6 +71,20 @@ div.content.msg > p:first-child{
 .md-modal-small {
     overflow: hidden;
     border-radius: 20px;
+}
+.md-modal-large {
+    background-color: #ececec;
+    max-width: 90%;
+    width: 90vh;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid grey;
+    border-radius: 15px;
+    scrollbar-width: none;
+}
+#info > div > .close-btn {
+    margin: 0px;
+    align-self: flex-end;
 }
 .tabs-container, .tabs {
     display: flex;

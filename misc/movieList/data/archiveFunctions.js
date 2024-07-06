@@ -40,6 +40,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
     }
 
     function openModal(){
+        $('html').animate({scrollTop:0}, 'fast');
         $('.md-modal').removeClass('dnone');
         $('html').attr('style', 'overflow: hidden;');
     }
@@ -58,7 +59,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
         if (currentTab != 'all' && currentTab != movieObject.tag){
             $(movieObject.element).addClass('d-none');
         }else{
-            $(movieObject.element).removeClass('d-none');
+            $(movieObject.element).removeAttr('class');
         }
         return movieObject;
     }
@@ -81,10 +82,11 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
         } else {
             let movies = masterList;
 
-            $('.movies > p').remove();
+            $('.movies > div').remove();
 
             for (let movie of movies) {
-                if (movie.element.innerText.toLowerCase().includes(searchText.toLowerCase())) {
+                let movTitle = movie.element.querySelector('p.title').innerText;
+                if (movTitle.toLowerCase().includes(searchText.toLowerCase())) {
                     $('.movies').append(filter(movie).element);
                     found = true;
                 }
@@ -133,36 +135,82 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
     // $('.msg').attr('style', 'margin-top: ' + tabHeight + 'px;');
     // $('.tabs-container').attr('style', 'margin-top: ' + tabHeight + 'px;');
     
-    $(document).on('mouseenter', 'p.title', function () {
-        let text = '';
+    $(document).on('mouseenter', '.movies > div', function () {
         $(this).addClass('highlight');
-        let tag = $(this).attr('tag');
+
+        let text = '';
+        let currentTab = $('.tab.active').attr('tag');
+
+        let moreInfo = nestElem([
+            mkDiv({id:'moreInfo'}),
+            mkLnk({class:'button is-ghost is-responsive', id:'getInfo', inner:'More Information'})
+        ]);
+        let tag = $(this).find('p.title').attr('tag');
+
         switch(tag){
             case 'mov':
-                $(this).append(mkSpan({id:'location', inner:' - Active Movie'}));
+                if (currentTab == 'all')
+                    $(this).find('p.title').append(mkSpan({id:'location', inner:' - Active Movie'}));
+                $(this).append(moreInfo);
                 break;
             case 'tv':
-                $(this).append(mkSpan({id:'location', inner:' - TV Show'}));
+                if (currentTab == 'all')
+                    $(this).find('p.title').append(mkSpan({id:'location', inner:' - TV Show'}));
                 break;
             case 'arch':
-                $(this).append(mkSpan({id:'location', inner:' - Archived Movie'}));
+                if (currentTab == 'all')
+                    $(this).find('p.title').append(mkSpan({id:'location', inner:' - Archived Movie'}));
+                $(this).append(moreInfo);
                 break;
         }
 
+        $('#getInfo').click(function(){
+            let title = $($(this).parents()[1]).find('p.title');
+            let text = $(title).attr('data-title');
+            
+            $('body').append(nestElem([
+                mkDiv({class:'md-modal', id:'info'}),
+                mkDiv({class:'md-modal-content md-modal-large'}),
+                {
+                    1:mkbtn({class:'button close-btn', title:'Close'}),
+                    2:nestElem([
+                        mkDiv({class:'card'}),
+                        {
+                            1:nestElem([
+                                mkDiv({class:'card-header'}),
+                                mkDiv({class:'card-header-title', inner:text})
+                                // mkHead({hType:'h1', inner:text})
+                            ]),
+                            2:nestElem([
+                                mkDiv({class:'card-content'}),
+                                mkDiv({class:'content'}),
+                                mkP({inner:'Something here'})
+                            ])
+                        }
+                    ])
+                }
+            ]))
+
+            $('#info > div > .close-btn').click(function(){
+                $('#info').remove();
+            })
+        })
+
     });
-    $(document).on('mouseleave', 'p.title', function () {
-        $(this).removeClass('highlight');
+    $(document).on('mouseleave', 'div.highlight', function () {
+        $(this).removeAttr('class');
         $(this).find('#location').remove();
+        $(this).find('#moreInfo').remove();
     });
 
     $('.tab').click(function(){
         $(this).parent().find('.active').removeClass('active');
         $(this).addClass('active');
 
-        let movies = $('p.title');
+        let movies = $('.movies > div');
 
         for (let movie = 0; movie < movies.length; movie++){
-            let movieTag = $(movies[movie]).attr('tag');
+            let movieTag = $(movies[movie]).find('p.title').attr('tag');
 
             filter({element: movies[movie], tag: movieTag});
 
@@ -184,7 +232,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
             $('.notFound').remove();
         }
 
-        $('.movies > p').remove();
+        $('.movies > div').remove();
 
         for (let a = 0; a < num; a++) {
             let rand = Math.floor(Math.random() * (elements.length - 1));

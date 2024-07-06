@@ -38,7 +38,7 @@
     z-index: 6;
 }
 
-.md-modal-background > .close-btn {
+div > .close-btn {
     box-sizing: content-box;
     margin: 20px 40px 0px 0px;
     background-color: white;
