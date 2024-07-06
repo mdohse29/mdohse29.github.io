@@ -40,6 +40,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
     }
 
     function openModal(){
+        $('html').animate({scrollTop:0}, 'fast');
         $('.md-modal').removeClass('dnone');
         $('html').attr('style', 'overflow: hidden;');
     }

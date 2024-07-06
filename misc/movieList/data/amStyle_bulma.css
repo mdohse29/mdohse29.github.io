@@ -73,10 +73,14 @@ div.highlight > p {
     border-radius: 20px;
 }
 .md-modal-large {
+    background-color: #ececec;
     max-width: 90%;
     width: 90vh;
     display: flex;
     flex-direction: column;
+    border: 1px solid grey;
+    border-radius: 15px;
+    scrollbar-width: none;
 }
 #info > div > .close-btn {
     margin: 0px;
