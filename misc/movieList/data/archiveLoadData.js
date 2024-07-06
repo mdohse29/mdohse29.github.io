@@ -22,12 +22,16 @@ function collectList(movies, tag){
     for (let movie in movies){
         let formatted = formatter(movies[movie]);
         if (formatted){
+            let hasYear = formatted.match(/\(\d\d\d\d\)/);
+            let title = ((hasYear) ? formatted.replace(/ \(\d\d\d\d\)/, '') : formatted);
+            let year = ((hasYear) ? formatted.replace(/.*\((\d\d\d\d)\)/, '$1') : '');
+            // console.log((year) ? year : 'Nothing here');
 
             collection.push(
                 {
                     element: nestElem([
                             mkDiv(),
-                            mkP({class:'title', 'data-title':formatted, tag:tag, inner:formatted})
+                            mkP({class:'title', 'data-year':((year) ? year : ''), 'data-title':title, tag:tag, inner:formatted})
                         ]),
                     tag: tag
                 }
@@ -54,10 +58,10 @@ function sorter(array){
     });
 }
 
-async function getMovieInfo(title){
-    let year = title.replace(/.*\((\d\d\d\d)\)/, '$1');
-    title = title.replace(/ \(\d\d\d\d\)/, '');
-    title = title.toLowerCase().replace(' ', '+');
+async function getMovieInfo(title, year){
+    // let year = title.replace(/.*\((\d\d\d\d)\)/, '$1');
+    // title = title.replace(/ \(\d\d\d\d\)/, '');
+    title = title.toLowerCase().replaceAll(' ', '+');
     title = '&t=' + title;
     let info = await axios.get('https://www.omdbapi.com/?apikey=c8757c03' + title + ((year) ? '&y=' + year:''));
     // console.log(info)
