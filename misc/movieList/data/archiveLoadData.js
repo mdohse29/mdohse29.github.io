@@ -1,6 +1,7 @@
 let masterList = [];
 // const baseUrl = './data/';
 const baseUrl = 'https://mdohse29.github.io/misc/movieList/data/'
+const infoUrl = 'http://www.omdbapi.com/?apikey=c8757c03'
 
 let loading = mkP({id:'placeH', inner:'Loading...'});
 document.querySelector('.movies').appendChild(loading);
@@ -51,6 +52,16 @@ function sorter(array){
             return -1;
         }
     });
+}
+
+async function getMovieInfo(title){
+    let year = title.replace(/.*\((\d\d\d\d)\)/, '$1');
+    title = title.replace(/ \(\d\d\d\d\)/, '');
+    title = title.toLowerCase().replace(' ', '+');
+    title = '&t=' + title;
+    let info = await axios.get('http://www.omdbapi.com/?apikey=c8757c03' + title + ((year) ? '&y=' + year:''));
+    // console.log(info)
+    return info.data;
 }
 
 async function createMovieList(){
