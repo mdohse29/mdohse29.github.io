@@ -59,7 +59,7 @@ async function getMovieInfo(title){
     title = title.replace(/ \(\d\d\d\d\)/, '');
     title = title.toLowerCase().replace(' ', '+');
     title = '&t=' + title;
-    let info = await axios.get('http://www.omdbapi.com/?apikey=c8757c03' + title + ((year) ? '&y=' + year:''));
+    let info = await axios.get('https://www.omdbapi.com/?apikey=c8757c03' + title + ((year) ? '&y=' + year:''));
     // console.log(info)
     return info.data;
 }
