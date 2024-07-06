@@ -165,8 +165,9 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
         }
 
         $('#getInfo').click(function(){
-            let title = $($(this).parents()[1]).find('p.title');
-            let text = $(title).attr('data-title');
+            let p = $($(this).parents()[1]).find('p.title');
+            let title = $(p).attr('data-title');
+            let year = $(p).attr('data-year');
             
             $('body').append(nestElem([
                 mkDiv({class:'md-modal', id:'info'}),
@@ -178,7 +179,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
                         {
                             1:nestElem([
                                 mkDiv({class:'card-header'}),
-                                mkDiv({class:'card-header-title', inner:text})
+                                mkDiv({class:'card-header-title', inner:title + ((year) ? ' - (' + year + ')' : '')})
                                 // mkHead({hType:'h1', inner:text})
                             ]),
                             2:nestElem([
@@ -191,7 +192,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
                 }
             ]))
 
-            getMovieInfo(text).then((info)=>{
+            getMovieInfo(title, year).then((info)=>{
                 $($('#load').parents()[1]).remove();
                 if(info.Plot){
                     $('#info .card').append(nestElem([
