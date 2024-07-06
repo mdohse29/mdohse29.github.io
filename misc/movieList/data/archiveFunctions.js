@@ -135,26 +135,64 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
     // $('.tabs-container').attr('style', 'margin-top: ' + tabHeight + 'px;');
     
     $(document).on('mouseenter', '.movies > div', function () {
-        let text = '';
         $(this).addClass('highlight');
+
+        let text = '';
+        let currentTab = $('.tab.active').attr('tag');
+
+        let moreInfo = nestElem([
+            mkDiv({id:'moreInfo'}),
+            mkLnk({class:'button is-ghost is-responsive', id:'getInfo', inner:'More Information'})
+        ]);
         let tag = $(this).find('p.title').attr('tag');
+
         switch(tag){
             case 'mov':
-                $(this).find('p.title').append(mkSpan({id:'location', inner:' - Active Movie'}));
-                // $(this).append(mkbtn({class:'button is-ghost is-responsive', id:'moreInfo', inner:'More Information'}));
+                if (currentTab == 'all')
+                    $(this).find('p.title').append(mkSpan({id:'location', inner:' - Active Movie'}));
+                $(this).append(moreInfo);
                 break;
             case 'tv':
-                $(this).find('p.title').append(mkSpan({id:'location', inner:' - TV Show'}));
+                if (currentTab == 'all')
+                    $(this).find('p.title').append(mkSpan({id:'location', inner:' - TV Show'}));
                 break;
             case 'arch':
-                $(this).find('p.title').append(mkSpan({id:'location', inner:' - Archived Movie'}));
-                // $(this).append(mkP({id:'moreInfo', inner:'<sup><a href="#">More Information</a></sup>'}))
+                if (currentTab == 'all')
+                    $(this).find('p.title').append(mkSpan({id:'location', inner:' - Archived Movie'}));
+                $(this).append(moreInfo);
                 break;
         }
 
-        $('#moreInfo').click(function(){
-            let text = $(this).parent().find('p.title').attr('tag');
-            alert(text);
+        $('#getInfo').click(function(){
+            let title = $($(this).parents()[1]).find('p.title');
+            let text = $(title).attr('data-title');
+            
+            $('body').append(nestElem([
+                mkDiv({class:'md-modal', id:'info'}),
+                mkDiv({class:'md-modal-content md-modal-large'}),
+                {
+                    1:mkbtn({class:'button close-btn', title:'Close'}),
+                    2:nestElem([
+                        mkDiv({class:'card'}),
+                        {
+                            1:nestElem([
+                                mkDiv({class:'card-header'}),
+                                mkDiv({class:'card-header-title', inner:text})
+                                // mkHead({hType:'h1', inner:text})
+                            ]),
+                            2:nestElem([
+                                mkDiv({class:'card-content'}),
+                                mkDiv({class:'content'}),
+                                mkP({inner:'Something here'})
+                            ])
+                        }
+                    ])
+                }
+            ]))
+
+            $('#info > div > .close-btn').click(function(){
+                $('#info').remove();
+            })
         })
 
     });

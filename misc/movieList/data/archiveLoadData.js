@@ -26,7 +26,7 @@ function collectList(movies, tag){
                 {
                     element: nestElem([
                             mkDiv(),
-                            mkP({class:'title', tag:tag, inner:formatted})
+                            mkP({class:'title', 'data-title':formatted, tag:tag, inner:formatted})
                         ]),
                     tag: tag
                 }

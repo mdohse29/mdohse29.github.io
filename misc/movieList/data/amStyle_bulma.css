@@ -72,6 +72,16 @@ div.highlight > p {
     overflow: hidden;
     border-radius: 20px;
 }
+.md-modal-large {
+    max-width: 90%;
+    width: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+#info > div > .close-btn {
+    margin: 0px;
+    align-self: flex-end;
+}
 .tabs-container, .tabs {
     display: flex;
 }
