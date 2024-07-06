@@ -172,7 +172,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
                 mkDiv({class:'md-modal', id:'info'}),
                 mkDiv({class:'md-modal-content md-modal-large'}),
                 {
-                    1:mkbtn({class:'button close-btn', title:'Close'}),
+                    1:mkbtn({class:'button close-btn sticky-top', title:'Close'}),
                     2:nestElem([
                         mkDiv({class:'card'}),
                         {
@@ -184,12 +184,42 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
                             2:nestElem([
                                 mkDiv({class:'card-content'}),
                                 mkDiv({class:'content'}),
-                                mkP({inner:'Something here'})
+                                mkP({inner:'Loading...', id:'load'})
                             ])
                         }
                     ])
                 }
             ]))
+
+            getMovieInfo(text).then((info)=>{
+                $($('#load').parents()[1]).remove();
+                if(info.Plot){
+                    $('#info .card').append(nestElem([
+                        mkDiv({class:'card-content'}),
+                        {
+                            1:nestElem([
+                                mkDiv({class:'card-image', style:'float:left'}),
+                                mkElem({elemType:'figure', class:'media-left'}),
+                                mkElem({elemType:'img', src:info.Poster, alt:'Movie Poster', class:'has-ratio'})
+                            ]),
+                            2:nestElem([
+                                mkDiv({class:'content'}),
+                                mkP({inner:info.Plot})
+                            ])
+                        }
+                    ]));
+                }else{
+                    $('#info .card').append(
+                        nestElem([
+                            mkDiv({class:'card-content'}),
+                            mkDiv({class:'content'}),
+                            mkP({inner:'Sorry, no content was found at this time.'})
+                        ])
+                    )
+                }
+            }).catch(error => {
+                console.log(error);
+            });
 
             $('#info > div > .close-btn').click(function(){
                 $('#info').remove();

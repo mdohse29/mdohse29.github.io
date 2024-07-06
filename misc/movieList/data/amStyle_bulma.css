@@ -74,13 +74,17 @@ div.highlight > p {
 }
 .md-modal-large {
     background-color: #ececec;
-    max-width: 90%;
-    width: 90vh;
+    max-width: 50%;
+    /* width: 90vh; */
+    max-height: fit-content;
     display: flex;
     flex-direction: column;
     border: 1px solid grey;
     border-radius: 15px;
     scrollbar-width: none;
+}
+.card-content {
+    display: flex;
 }
 #info > div > .close-btn {
     margin: 0px;
@@ -130,4 +134,14 @@ div.highlight > p {
     min-width: 125px;
     max-width: fit-content;
     margin-bottom: 10px;
+}
+
+@media (width < 769px){
+    .md-modal-large {
+        max-width: 95%;
+    }
+    .card-content {
+        flex-direction:column;
+        text-align: center;
+    }
 }
