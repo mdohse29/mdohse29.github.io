@@ -201,7 +201,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
                             1:nestElem([
                                 mkDiv({class:'card-image', style:'float:left'}),
                                 mkElem({elemType:'figure', class:'media-left'}),
-                                mkElem({elemType:'img', src:info.Poster, alt:'Movie Poster', class:'has-ratio'})
+                                mkElem({elemType:'img', src:info.Poster, alt:'Movie poster for \"' + info.Title + '\" was not found', class:'has-ratio'})
                             ]),
                             2:nestElem([
                                 mkDiv({class:'content'}),
