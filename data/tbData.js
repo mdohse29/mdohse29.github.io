@@ -1,8 +1,8 @@
 const drawers = {
-    drawer1 : {
+    drawer1: {
         hidden: false,
         title: 'Home Made Tools',
-        buttons:{
+        buttons: {
             button1: {
                 hidden: true,
                 url: './repo/glyn/repo_lookup.htm',
@@ -32,11 +32,11 @@ const drawers = {
             },
             button5: {
                 hidden: true,
-                url:'https://cdn.lti.glynlyon.com/media/43010bf5-de09-4dfe-879d-da7e4e791ccb/misc/scratchPad.html',
-                text:{
-                    main:'CDN Scratch Pad',
-                    sub:'Routed through the GL CDN',
-                    warn:true
+                url: 'https://cdn.lti.glynlyon.com/media/43010bf5-de09-4dfe-879d-da7e4e791ccb/misc/scratchPad.html',
+                text: {
+                    main: 'CDN Scratch Pad',
+                    sub: 'Routed through the GL CDN',
+                    warn: true
                 }
             },
             button4: {
@@ -50,10 +50,10 @@ const drawers = {
             }
         }
     },
-    drawer2 : {
+    drawer2: {
         hidden: false,
         title: 'Company Tools',
-        buttons:{
+        buttons: {
             button1: {
                 hidden: true,
                 url: 'https://ims-tools.owteam.com/',
@@ -85,8 +85,8 @@ const drawers = {
                 hidden: true,
                 url: 'https://curriculum-management.owteam.com/',
                 text: {
-                    main:'Cayman Production',
-                    sub:'OLD Retiring',
+                    main: 'Cayman Production',
+                    sub: 'OLD Retiring',
                     warn: true
                 }
             },
@@ -128,88 +128,88 @@ const drawers = {
             }
         }
     },
-    drawer5 : {
+    drawer5: {
         hidden: true,
-        title:'Company Platforms',
-        buttons:{
-            button1 : {
+        title: 'Company Platforms',
+        buttons: {
+            button1: {
                 hidden: false,
-                url:'http://45sandbox.education2020.com/',
-                text:{
-                    main:'CW 4.5 SandBox',
-                    sub:'Courseware',
+                url: 'http://45sandbox.education2020.com/',
+                text: {
+                    main: 'CW 4.5 SandBox',
+                    sub: 'Courseware',
                     warn: false
                 }
             },
-            button2 : {
+            button2: {
                 hidden: false,
-                url:'https://auth.qa.edgenuity.com/Login/',
-                text:{
-                    main:'CW QA',
-                    sub:'Courseware',
+                url: 'https://auth.qa.edgenuity.com/Login/',
+                text: {
+                    main: 'CW QA',
+                    sub: 'Courseware',
                     warn: false
                 }
             },
-            button3:{
+            button3: {
                 hidden: false,
-                url:'https://auth.edgenuity.com/Login/Login/',
-                text:{
-                    main:'CW Production',
-                    sub:'Courseware',
+                url: 'https://auth.edgenuity.com/Login/Login/',
+                text: {
+                    main: 'CW Production',
+                    sub: 'Courseware',
                     warn: false
                 }
             },
-            button4 : {
+            button4: {
                 hidden: false,
-                url:'https://curric-stage.owschools.com/owsoo/login/auth',
-                text:{
-                    main:'OW Curric Stage',
-                    sub:'Odysseyware',
+                url: 'https://curric-stage.owschools.com/owsoo/login/auth',
+                text: {
+                    main: 'OW Curric Stage',
+                    sub: 'Odysseyware',
                     warn: false
                 }
             },
-            button5 : {
+            button5: {
                 hidden: false,
-                url:'https://curric-stage.sooschools.com/owsoo/login/auth',
-                text:{
-                    main:'AOP Curric Stage',
-                    sub:'Alpha Omega',
+                url: 'https://curric-stage.sooschools.com/owsoo/login/auth',
+                text: {
+                    main: 'AOP Curric Stage',
+                    sub: 'Alpha Omega',
                     warn: false
                 }
             },
-            button6 : {
+            button6: {
                 hidden: true,
-                url:'https://consumer-lms.cns-staging-shard-monarch.il-consumer.com/',
-                text:{
-                    main:'Monarch Stage',
-                    sub:'Consumer',
+                url: 'https://consumer-lms.cns-staging-shard-monarch.il-consumer.com/',
+                text: {
+                    main: 'Monarch Stage',
+                    sub: 'Consumer',
                     warn: false
                 }
             },
-            button7 : {
+            button7: {
                 hidden: true,
-                url:'https://consumer-lms.cns-staging-shard-calvert.il-consumer.com/',
-                text:{
-                    main:'Calvert Stage',
-                    sub:'Consumer',
+                url: 'https://consumer-lms.cns-staging-shard-calvert.il-consumer.com/',
+                text: {
+                    main: 'Calvert Stage',
+                    sub: 'Consumer',
                     warn: false
                 }
             },
-            button8 : {
+            button8: {
                 hidden: false,
-                url:'https://testapp.imaginelearning.com/?dev',
-                text:{
-                    main:'Imagine Learning',
-                    sub:'Legacy IL Test App',
+                url: 'https://testapp.imaginelearning.com/?dev',
+                text: {
+                    main: 'Imagine Learning',
+                    sub: 'Legacy IL Test App',
                     warn: false
                 }
             }
         }
     },
-    drawer3 : {
+    drawer3: {
         hidden: false,
         title: 'Import HTML Courses',
-        buttons:{
+        buttons: {
             button1: {
                 hidden: false,
                 url: 'http://sandbox.education2020.com/questionimporter/',
@@ -248,10 +248,10 @@ const drawers = {
             }
         }
     },
-    drawer4 : {
+    drawer4: {
         hidden: false,
         title: 'Other Stuff',
-        buttons:{
+        buttons: {
             button1: {
                 hidden: false,
                 url: 'https://www.guidgenerator.com/online-guid-generator.aspx',
