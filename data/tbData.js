@@ -30,6 +30,15 @@ const drawers = {
                     warn: false
                 }
             },
+            button5: {
+                hidden: true,
+                url:'https://cdn.lti.glynlyon.com/media/43010bf5-de09-4dfe-879d-da7e4e791ccb/misc/scratchPad.html',
+                text:{
+                    main:'CDN Scratch Pad',
+                    sub:'Routed through the GL CDN',
+                    warn:true
+                }
+            },
             button4: {
                 hidden: false,
                 url: './misc/scratch/',
