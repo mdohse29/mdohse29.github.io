@@ -311,7 +311,8 @@ $(document).ready(function(){
                 changed = true;
             }
 
-            regtest = /[​	]/gm; // invisible chars: U+000b, U+200b
+            // Not sure what this is (	) or why I added it. 
+            regtest = /[​]/gm; // invisible chars: U+000b, U+200b
             if (text.match(regtest)){
                 console.log("Removing odd invisible character");
                 text = text.replaceAll(regtest, '');
