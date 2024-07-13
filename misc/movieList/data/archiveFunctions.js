@@ -168,6 +168,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
             let p = $($(this).parents()[1]).find('p.title');
             let title = $(p).attr('data-title');
             let year = $(p).attr('data-year');
+            let tag = $(p).attr('tag');
             
             $('body').append(nestElem([
                 mkDiv({class:'md-modal', id:'info'}),
@@ -179,7 +180,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
                         {
                             1:nestElem([
                                 mkDiv({class:'card-header'}),
-                                mkDiv({class:'card-header-title', inner:title + ((year) ? ' - (' + year + ')' : '')})
+                                mkDiv({class:'card-header-title', inner:title + ((year) ? ' - (' + year + ')' : '') + ((tag === 'arch') ? '<span style="margin-left: auto;color: red"><sub>Archived</sub></span>' : '')})
                                 // mkHead({hType:'h1', inner:text})
                             ]),
                             2:nestElem([

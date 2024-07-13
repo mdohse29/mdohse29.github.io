@@ -1,27 +1,29 @@
 body {
     background-color: rgb(239, 245, 251);
 }
-/* p.title {
-    background-color: transparent;
-    font-weight: bold;
-    font-size: 1em;
-    color: black;
-    text-transform: capitalize;
-} */
+
 div.content.msg > p {
     font-size: small;
     margin: 0px;
 }
+
 div.content.msg > p:first-child{
     padding-top: 5px;
 }
+
+figure > img {
+    min-width: 150px;
+}
+
 .active {
     background-color: rgba(127, 226, 243, 0.85) !important;
     box-shadow: inset 0px -6px 3px rgb(52, 168, 197);
 }
+
 .box {
     padding-bottom: 0px;
 }
+
 .movies {
     padding-top: 5px;
     border: 1px solid black;
@@ -30,6 +32,7 @@ div.content.msg > p:first-child{
     scrollbar-width: none;
     height: 70vh;
 }
+
 .movies > div > p.title {
     background-color: transparent;
     font-weight: bold;
@@ -38,9 +41,6 @@ div.content.msg > p:first-child{
     margin: 0px;
     padding: 10px;
 }
-/* #moreInfo {
-    margin-left: 10px;
-} */
 
 div.highlight > p {
     color: white !important;
@@ -53,25 +53,31 @@ div.highlight > p {
     padding-left: 15px;
     border-radius: 10px;
 }
+
 .movies::-webkit-scrollbar {
     display: none;
 }
+
 .search {
     display: inline-flex;
 }
+
 .rand-cont {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 15px;
 }
+
 .md-modal-content {
     padding: 10px;
 }
+
 .md-modal-small {
     overflow: hidden;
     border-radius: 20px;
 }
+
 .md-modal-large {
     background-color: #ececec;
     max-width: 50%;
@@ -83,19 +89,24 @@ div.highlight > p {
     border-radius: 15px;
     scrollbar-width: none;
 }
+
 .card-content {
     display: flex;
 }
+
 #info > div > .close-btn {
     margin: 0px;
     align-self: flex-end;
 }
+
 .tabs-container, .tabs {
     display: flex;
 }
+
 .tabs {
     width: 100%
 }
+
 .tab {
     border: 1px solid black;
     border-bottom: none;
@@ -111,35 +122,44 @@ div.highlight > p {
     min-width: 68px;
     cursor: pointer;
 }
+
 .sticky-bottom {
     position: -webkit-sticky;
     position: sticky;
     bottom: 0;
     z-index: 1020;
 }
+
 .d-none {
     display: none;
 }
+
 .heading {
     margin-top: 10px;
     text-align: center;
 }
+
 #placeH, .notFound {
     text-align: center;
 }
+
 #total {
     text-align: right;
 }
+
 #num {
     min-width: 125px;
     max-width: fit-content;
     margin-bottom: 10px;
 }
 
-@media (width < 769px){
+@media (width < 1000px){
     .md-modal-large {
         max-width: 95%;
     }
+}
+
+@media (width < 769px){
     .card-content {
         flex-direction:column;
         text-align: center;
