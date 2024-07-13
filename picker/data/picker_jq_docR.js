@@ -15,8 +15,8 @@ $(document).ready(function(){
 		$('#giftList').toggle('fade',function(){
 			
 			$('.view').removeAttr('disabled');
-// Uncomment when reactivating the picker
 
+			// Uncomment when reactivating the picker
 			// if ($('.pick').attr('data-listcomplete') === 'false'){
 			// 	$('.pick').removeAttr('disabled');
 			// }
@@ -45,15 +45,15 @@ $(document).ready(function(){
 	})
 
 
-	$('#select button').attr('disabled', 'disabled');
-	$('#display').append("<p style=\"text-align: center\" id=\"erlmsg\">Ohh, sorry!<br>Christmas is over and the picker is closed.<br>Come back next year (2024)!</p>");
+	// $('#select button').attr('disabled', 'disabled');
+	// $('#display').append("<p style=\"text-align: center\" id=\"erlmsg\">Ohh, sorry!<br>Christmas is over and the picker is closed.<br>Come back next year (2024)!</p>");
 	// Comment out ^^^^^ to activate the picker
 
 	// $('button.list').removeAttr('disabled');
 	//// Activate list button only ^^^^^^
 	
 	// if ((currentMonth == 11 && currentDay <= 22) || (currentMonth > 7 && currentMonth < 11)){
-	// 	$('button').removeAttr('disabled');
+		// $('button').removeAttr('disabled');
 		
 	// 	$('#erlmsg').remove();
 		// setTimeout(function(){
