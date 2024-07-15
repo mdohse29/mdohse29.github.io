@@ -239,7 +239,7 @@ const drawers = {
             },
             button4: {
                 hidden: false,
-                url: 'http://cmt.education2020.com/CMT/',
+                url: 'http://cmt.education2020.com/CMT-V45/',
                 text: {
                     main: 'CW CMT',
                     sub: 'Content Management Tool',
