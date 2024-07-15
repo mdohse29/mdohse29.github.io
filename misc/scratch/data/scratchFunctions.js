@@ -163,7 +163,7 @@ $(document).ready(function(){
     }
 
     function removeOlMarkers(text){
-        let singleDigit = [/^ *[A-Z]{1,4}[).] *\b/gm, /^ *[a-z]{1,4}[).] *\b/gm, /^ *[0-9]{1,4}[).] *\b/gm]
+        let singleDigit = [/^[ \t]*[A-Z]{1,4}[).][ \t]*\b/gm, /^[ \t]*[a-z]{1,4}[).][ \t]*\b/gm, /^[ \t]*[0-9]{1,4}[).][ \t]*\b/gm]
         let editedText = text;
         for (let a in singleDigit){
             // console.log(singleDigit[a]);
