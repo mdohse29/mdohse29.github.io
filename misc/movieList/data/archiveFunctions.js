@@ -50,17 +50,36 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
         $('html').removeAttr('style');
     }
 
+    function isFilterEmpty(){
+        let movies = $('.movies > div');
+        let isEmpty = true;
+        for (let movie of movies){
+            if (!$(movie).hasClass('dnone')){
+                isEmpty = false;
+                break;
+            }
+        }
+
+        if (isEmpty){
+            if ($('.notFound').length === 0){
+                $('.movies').append(mkP({id:'empty', inner:'No Filtered Results', style:'text-align: center;'}));
+            }
+        }
+    }
+
     function filter(movieObject){
         /*
         Movie object example
         {element: '<p>', tag: 'tag'}
         */
+
         let currentTab = $('.active').attr('tag');
         if (currentTab != 'all' && currentTab != movieObject.tag){
-            $(movieObject.element).addClass('d-none');
+            $(movieObject.element).addClass('dnone');
         }else{
             $(movieObject.element).removeAttr('class');
         }
+
         return movieObject;
     }
 
@@ -236,6 +255,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
     });
 
     $('.tab').click(function(){
+        $('#empty').remove();
         $(this).parent().find('.active').removeClass('active');
         $(this).addClass('active');
 
@@ -247,6 +267,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
             filter({element: movies[movie], tag: movieTag});
 
         }
+        isFilterEmpty();
         updateTotal();
     });
 
