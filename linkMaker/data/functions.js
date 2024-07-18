@@ -113,9 +113,12 @@ function resetEverything(){
     let linkBuild = document.querySelector('#linkBuild');
     let preview = document.querySelector('#preview');
 
-    if (!preview.getAttribute('class').includes('dnone')){
-        preview.querySelector('iframe').src = '';
-        preview.classList.add('dnone');
+    // if (!preview.getAttribute('class').includes('dnone')){
+    //     preview.querySelector('iframe').src = '';
+    //     preview.classList.add('dnone');
+    // }
+    if (preview){
+        closePreview();
     }
 
     linkData.innerHTML = '';
@@ -181,18 +184,23 @@ function toggleExtras(){
 }
 
 function showPreview(){
-    let preview = document.querySelector('#preview');
     let url = document.querySelector('#linkBuild > p').innerText;
+    let preview = nestElem([
+        mkDiv({class:'column', id:'preview'}),
+        mkDiv({class:'box'}),
+        {
+            1: mkbtn({class:'button close', title:'Close Preview', inner:'X'}),
+            2: mkElem({elemType:'iframe', src:url})
+        }
+    ]);
 
-    preview.classList.remove('dnone');
-    preview.querySelector('iframe').src = url;
+    document.querySelector('.container > .columns:last-child').appendChild(preview);
+    document.querySelector('.close').addEventListener('click', closePreview);
+
 }
 
 function closePreview(){
-    document.querySelector('#preview').querySelector('iframe').src = '';
-    document.querySelector('#preview').classList.add('dnone');
-    // console.log(-(parseInt(history.length)));
-    // window.history.go(-(parseInt(history.length)));
+    document.querySelector('#preview').remove();
 }
 
 function mediaSelect(){
@@ -364,8 +372,6 @@ function dlaLink(url){
 resetEverything();
 
 document.querySelector('#mediaselect').addEventListener('click', mediaSelect);
-
-document.querySelector('.close').addEventListener('click', closePreview);
 
 document.querySelector('#showPreview').addEventListener('click', showPreview);
 
