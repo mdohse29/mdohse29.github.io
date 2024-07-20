@@ -75,9 +75,13 @@ a.btn {
     text-align: center;
     font-size: .75em;
     cursor: pointer;
+    padding-bottom: 3px;
     user-select: none;
 }
 
+.switch, #lock {
+    display: inline-flex;
+}
 .toggle-pill {
     width: 50%;
     margin: 2px;

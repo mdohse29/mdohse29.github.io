@@ -127,16 +127,17 @@ function mkHead(attr = {hType:'', inner:''}){
 }
 
 function createToggle(attr = {}){
-    let container = mkDiv({id:attr.id, class: ((attr.class) ? 'switch-container ' + attr.class : 'switch-container'), title:attr.title, isLocked:attr.isLocked});
-    let label = mkLabel({inner:(attr.label) ? attr.label : ''});
-    let togCont = mkDiv({class:'toggle-cont'});
-    let pill = mkDiv({class:'toggle-pill'});
-
-    togCont.appendChild(pill);
-    container.appendChild(label);
-    container.appendChild(togCont);
-
-    return container;
+    return nestElem([
+        mkDiv({id:attr.id, class: ((attr.class) ? 'switch-container ' + attr.class : 'switch-container'), title:attr.title, isLocked:attr.isLocked}),
+        {
+            1:mkLabel({inner:(attr.label) ? attr.label : ''}),
+            2:nestElem([
+                mkDiv({class:'switch'}),
+                mkDiv({class:'toggle-cont'}),
+                mkDiv({class:'toggle-pill'})
+            ])
+        }
+    ])
 }
 
 function crtSpin(){
@@ -190,7 +191,7 @@ function setToggleListeners(){
         ts.addEventListener('click', function(e){
             let pill = this;
             let container = pill.parentElement;
-            let switchContainer = container.parentElement;
+            let switchContainer = container.parentElement.parentElement;
             let marg = container.scrollWidth - (pill.scrollWidth + 4);
             let isLocked = switchContainer.getAttribute('isLocked');
             
@@ -245,7 +246,7 @@ function setToggleListeners(){
                 
                 switchContainer.setAttribute('isLocked', 'true');
                 switchContainer.querySelector('.toggle-cont').style.backgroundColor = 'red';
-                this.parentElement.children[1].children[0].click();
+                this.parentElement.children[1].children[0].children[0].click();
 
             }else if (e.ctrlKey && isLocked == 'true'){
 
@@ -254,7 +255,7 @@ function setToggleListeners(){
 
             }else if(!e.ctrlKey || (e.ctrlKey && !switchContainer.hasAttribute('isLocked'))){
 
-                this.parentElement.children[1].children[0].click();
+                this.parentElement.children[1].children[0].children[0].click();
 
             }
         });
