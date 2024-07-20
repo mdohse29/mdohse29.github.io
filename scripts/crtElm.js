@@ -127,7 +127,7 @@ function mkHead(attr = {hType:'', inner:''}){
 }
 
 function createToggle(attr = {}){
-    let container = mkDiv({id:attr.id, class: ((attr.class) ? 'switch-container ' + attr.class : 'switch-container'), title:attr.title});
+    let container = mkDiv({id:attr.id, class: ((attr.class) ? 'switch-container ' + attr.class : 'switch-container'), title:attr.title, isLocked:attr.isLocked});
     let label = mkLabel({inner:(attr.label) ? attr.label : ''});
     let togCont = mkDiv({class:'toggle-cont'});
     let pill = mkDiv({class:'toggle-pill'});
@@ -187,28 +187,76 @@ function setToggleListeners(){
     let toggles = document.querySelectorAll('.toggle-pill');
 
     for(let ts of toggles){
-        ts.addEventListener('click', function(){
+        ts.addEventListener('click', function(e){
             let pill = this;
             let container = pill.parentElement;
-            let pillStyle = window.getComputedStyle(pill);
+            let switchContainer = container.parentElement;
             let marg = container.scrollWidth - (pill.scrollWidth + 4);
-            let currentMarg = pillStyle.marginLeft.replace('px','');
+            let isLocked = switchContainer.getAttribute('isLocked');
             
-            if (currentMarg < marg){
+            if (!container.classList.contains('tg-on')){
+
                 pill.style.setProperty('margin-left', marg + 'px');
                 container.classList.add('tg-on');
+
+                if (e.ctrlKey && isLocked == 'false'){
+
+                    switchContainer.setAttribute('isLocked', 'true');
+                    container.style.backgroundColor = 'red';
+
+                }
+
             }else{
-                pill.style.setProperty('margin-left','2px');
-                container.classList.remove('tg-on');
+                if (!switchContainer.hasAttribute('isLocked') || isLocked == 'false'){
+
+                    if (e.ctrlKey && isLocked == 'false'){
+
+                        switchContainer.setAttribute('isLocked', 'true');
+                        container.style.backgroundColor = 'red';
+
+                    }else{
+
+                        pill.style.setProperty('margin-left','2px');
+                        container.classList.remove('tg-on');
+
+                    }
+                }else{
+
+                    if (e.ctrlKey){
+
+                        container.removeAttribute('style');
+                        switchContainer.setAttribute('isLocked', 'false');
+
+                    }
+                }
             }
         });
     }
     let labels = document.querySelectorAll('.switch-container > label');
 
     for (let label of labels){
-        label.addEventListener('click', function(){
-            // document.querySelector('.toggle-pill').click();
-            this.parentElement.children[1].children[0].click();
+
+        label.addEventListener('click', function(e){
+
+            let switchContainer = this.parentElement;
+            let isLocked = switchContainer.getAttribute('isLocked');
+            
+            if(e.ctrlKey && isLocked == 'false'){
+                
+                switchContainer.setAttribute('isLocked', 'true');
+                switchContainer.querySelector('.toggle-cont').style.backgroundColor = 'red';
+                this.parentElement.children[1].children[0].click();
+
+            }else if (e.ctrlKey && isLocked == 'true'){
+
+                switchContainer.querySelector('.toggle-cont').removeAttribute('style');
+                switchContainer.setAttribute('isLocked', 'false');
+
+            }else if(!e.ctrlKey || (e.ctrlKey && !switchContainer.hasAttribute('isLocked'))){
+
+                this.parentElement.children[1].children[0].click();
+
+            }
         });
     }
 }
