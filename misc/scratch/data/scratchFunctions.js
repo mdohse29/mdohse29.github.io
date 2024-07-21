@@ -154,6 +154,8 @@ $(document).ready(function(){
         }
     }
 
+    // Update Clipboard with trimmed text
+
     function updateClipboard(text){
         navigator.clipboard.writeText(text.trim())
     }
