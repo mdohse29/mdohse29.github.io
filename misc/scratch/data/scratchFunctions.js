@@ -296,7 +296,7 @@ $(document).ready(function(){
                 changed = true;
             }
 
-            if ($('#flat > .toggle-cont').hasClass('tg-on')){
+            if ($('#flat .toggle-cont').hasClass('tg-on')){
                 let oneStr = text.split('\n');
                 for (a = 0; a < oneStr.length; a++){
                     if (a > 0){
