@@ -155,7 +155,7 @@ $(document).ready(function(){
     }
 
     function updateClipboard(text){
-        // navigator.clipboard.writeText(text.trim())
+        navigator.clipboard.writeText(text.trim())
     }
 
     function formatFilename(text){
