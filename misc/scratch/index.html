@@ -15,9 +15,11 @@
 <body>
     <div class="md-modal dnone">
         <div class="md-modal-background"><button class="btn-close"></button></div>
+        <div class="md-modal-header">
+            <h2 class="h2">How This Works</h2>
+        </div>
         <div class="md-modal-content">
             <div class="static">
-                <h3>How This Works</h3>
                 <p>When you paste text into the text area of the Scratch Pad it will trigger scripts to check the text to make sure it is okay to paste into the editor. It will perform several checks and corrects what is caught automatically and updates the text in the text area. Currently, the following actions are executed:</p>
                 <ol>
                     <li>Foreign characters are removed<br><sup>(Like hidden chars and other chars of different encoding)</sup></li>
@@ -33,10 +35,9 @@
                 <p>The validation continues to grow as new characters are discovered and added. If anyone finds anything the validation is NOT catching, please let me know so I can update the validation process.</p>
                 <p>The validation also checks for any HTML tags that might get copied over by mistake. This only alerts the user that there are html tags present, HTML tags are not removed automatically. There are cases where HTML tags might be necessary so it didn't make sense to automatically remove them.</p>
                 <p>The removing leading spaces button removes any extra space that is at the beginning of the paragraphs. Most often this occurs when copying a list. It just quickly removes the extra space so it doesn't accidentally get added in the content.</p>
-                <br>
-                <p>If there is anything you think might be a good feature to have that would help make this more efficient, please let me know. I am always open to suggestions.</p>
             </div>
         </div>
+        <div class="md-modal-footer"></div>
     </div>
     <script src="./data/scratchFunctions.js"></script>
 </body>
