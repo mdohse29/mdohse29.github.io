@@ -32,7 +32,7 @@ $(document).ready(function(){
         $('.md-modal').addClass('dnone').removeAttr('style');
         $('.md-modal-background').removeClass('dnone');
         if ($('.md-modal-content').hasClass('dnone')){
-            $('.md-modal-content').removeClass('dnone');
+            $('.md-modal-content, .md-modal-header, .md-modal-footer').removeClass('dnone');
             $('.spinner-background').remove();
         }else{
             $('.md-modal-content').removeAttr('style');
@@ -65,7 +65,7 @@ $(document).ready(function(){
                 $('.md-modal-background').removeClass('dnone');
             }
         }else{
-            $('.md-modal-content').addClass('dnone');
+            $('.md-modal-content, .md-modal-header, .md-modal-footer').addClass('dnone');
             if ($('.spinner-background')){
                 $('.spinner-background').remove();
             }
@@ -155,7 +155,7 @@ $(document).ready(function(){
     }
 
     function updateClipboard(text){
-        navigator.clipboard.writeText(text.trim())
+        // navigator.clipboard.writeText(text.trim())
     }
 
     function formatFilename(text){
@@ -327,7 +327,7 @@ $(document).ready(function(){
             // If issues arise from replacing the text when no changes were made 
             // uncomment the if statement
             // remove the part checking for new line at the end and find the best spot for it
-            if ($('#dbl > .toggle-cont').hasClass('tg-on')){
+            if ($('#dbl .toggle-cont').hasClass('tg-on')){
                 text = text.replaceAll('\n', '\n\n');
                 $('#dbl .toggle-pill').click();
             }
@@ -345,7 +345,7 @@ $(document).ready(function(){
         }, 700);
     }
 
-    function lockMessage(elem){
+    function toggleLockImg(elem){
         let parent = $(elem).parents('.switch-container');
         let isLocked = $(parent).attr('isLocked');
         let hasMessage = $(parent).find('#lock');
@@ -355,7 +355,7 @@ $(document).ready(function(){
             $(parent).find('.switch').append(
                 nestElem([
                     mkElem({elemType:'span', id:'lock'}),
-                    mkElem({elemType:'img', src:'./data/Web/icons8-lock-16.png', alt:'LOCK', width:'16px', height:'16px'})
+                    mkElem({elemType:'img', src:'./data/Web/lock.png', alt:'LOCK', width:'16px', height:'16px'})
                 ])
             );
 
@@ -381,7 +381,7 @@ $(document).ready(function(){
                         // 5:mkbtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'ex', inner:'Fix URL'}),
                         6:createToggle({id:'flat', label:'Flatten Text', title:'Convert multiple lines of text into a single line. Check \'How This Works\' info button for example.'}),
                         7:createToggle({id:'dbl', label:'Paragraph Spacing', title:'Adds space between lines.', class:'dnone', isLocked:'false'}),
-                        8:mkLnk({class:'btn btn-sml ms-1', title:'Click to report an issue or suggestion.', href:'mailto:aaaabncggffyesoyicuhyz3u7u@imaginelearning.org.slack.com', inner:'<img width="32" height="32" src="./data/icons8-bug-64.png" alt="bug"/>'}),
+                        8:mkLnk({class:'btn btn-sml ms-1', title:'Click to report an issue or suggestion.', href:'mailto:aaaabncggffyesoyicuhyz3u7u@imaginelearning.org.slack.com', inner:'<img width="32" height="32" src="./data/Web/bug.png" alt="bug"/>'}),
                         9:mkbtn({class:'btn btn-sm ms-1', id:'info', inner:'<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/></svg>', title:'How this works'})
                     }
                 ]),
@@ -472,7 +472,7 @@ $(document).ready(function(){
     });
 
     $('.toggle-pill, .switch-container > label').click(function(){
-        lockMessage($(this));
+        toggleLockImg($(this));
         $('textarea').focus();
     });
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <script src="../../scripts/crtElm.js"></script>
-    <link rel="icon" type="image/png" sizes="16x16" href="./data/Web/icons8-note-pad-flat-16.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./data/Web/note-pad.png">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,21 +20,32 @@
         </div>
         <div class="md-modal-content">
             <div class="static">
-                <p>When you paste text into the text area of the Scratch Pad it will trigger scripts to check the text to make sure it is okay to paste into the editor. It will perform several checks and corrects what is caught automatically and updates the text in the text area. Currently, the following actions are executed:</p>
+                <p>When text is pasted into the text area of the Scratch Pad, scripts are triggered to ensure the text is appropriate for the editor. The following checks and corrections are available or automatically performed:</p>
                 <ol>
-                    <li>Foreign characters are removed<br><sup>(Like hidden chars and other chars of different encoding)</sup></li>
-                    <li>Punctuation of different encoding gets converted to standard<br>For example, this double quote &#8221; will get changed to "</li>
-                    <li>List bullet characters at the beginning of the lines are removed</li>
+                    <li>Foreign characters, such as hidden or differently encoded characters, are removed.</li>
+                    <li>Non-standard punctuation is converted to standard forms. For instance, the double quote " is changed to ".</li>
+                    <li>List bullet characters at the beginning of lines are removed:</li>
                     <ol>
-                        <li>Unordered list markers should be removed automatically</li>
-                        <li>Ordered list markers are only manually removed, for the moment, by clicking the <strong>Remove OL Markers</strong> button</li>
+                        <li>Unordered list markers are removed automatically.</li>
+                        <li>Ordered list markers can be removed manually by clicking the "Remove OL Markers" button.</li>
                     </ol>
-                    <li>More than 1 space in between words inside a paragraph are converted to a single space</li>
-                    <li>Empty lines between paragraphs are removed</li>
-                    <li>When the <strong>Flatten Text</strong> toggle is on, text that is pasted in the text area that has broken lines will be converted from multiple lines into a single line of text.<br>Example:<br><img class="img-fluid" src="./data/pdfExample.gif" style="max-width: 95%;" alt="Example of PDF Table Cell"></li>                </ol>
-                <p>The validation continues to grow as new characters are discovered and added. If anyone finds anything the validation is NOT catching, please let me know so I can update the validation process.</p>
-                <p>The validation also checks for any HTML tags that might get copied over by mistake. This only alerts the user that there are html tags present, HTML tags are not removed automatically. There are cases where HTML tags might be necessary so it didn't make sense to automatically remove them.</p>
-                <p>The removing leading spaces button removes any extra space that is at the beginning of the paragraphs. Most often this occurs when copying a list. It just quickly removes the extra space so it doesn't accidentally get added in the content.</p>
+                    <li>Multiple spaces between words within a paragraph are converted to a single space.</li>
+                    <li>Empty lines between paragraphs are removed.</li>
+                    <li>The "Remove Leading Spaces" button removes any extra spaces at the beginning of paragraphs, which often occur when copying a list. This feature ensures that no unintended spaces are included in the content.</li>
+                    <li>The "Remove OL Markers" button removes alphanumeric list markers that can be inadvertently copied when transferring an ordered list. This includes list markers such as 1), 1., a., and a).<br>By using this feature, you can quickly clean up your text, ensuring that no extraneous list markers are pasted into the content.</li>
+                    <li>"Flatten Text" toggle &dash; When activated, pasted text with broken lines will be converted into a single line.<br>For Example:<br><img class="img-fluid" src="./data/Web/pdfExample.gif" style="max-width: 95%;" alt="Example of PDF Table Cell"></li>
+                    <li class="dnone"> "Paragraph Spacing" toggle &dash; When activated, this toggle adds an extra space between paragraphs pasted into the text area, ensuring clear and consistent paragraph separation.<br>Key functionalities include:</li>
+                    <ul class="dnone">
+                        <li>Automatic Deactivation: The toggle automatically turns off after a single use, preventing unintended formatting changes.</li>
+                    </ul>
+                    <img class="img-fluid dnone" src="./data/Web/dblSpc_single.gif" style="max-width: 95%;" alt="Example of the 'Paragraph Spacing' toggle - Single Use">
+                    <ul class="dnone">
+                        <li>Lock-In Feature: For extended use, hold the Ctrl key while clicking the toggle to lock it in the active state, allowing continuous paragraph spacing adjustments without interruption.</li>
+                    </ul>
+                    <img class="img-fluid dnone" src="./data/Web/dblSpc_locked.gif" style="max-width: 95%;" alt="Example of the 'Paragraph Spacing' toggle - Continuous Use">
+                </ol>
+                <p>The validation process continues to evolve as new characters are discovered and added. If you encounter any issues that the validation does not address, please inform me so I can update the validation process accordingly.</p>
+                <p>The validation also checks for any HTML tags that might be mistakenly copied. While it alerts the user to the presence of HTML tags, it does not remove them automatically, as there are instances where HTML tags may be necessary.</p>
             </div>
         </div>
         <div class="md-modal-footer"></div>
