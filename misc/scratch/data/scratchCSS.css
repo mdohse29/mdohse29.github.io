@@ -249,10 +249,15 @@ a.btn {
     display: block;
     background-color: inherit;
 }
-ul > li::marker {
+/* ul > li::marker {
     content: "NEW!";
     font-weight: bold;
     margin-right: 5px;
+    
+} */
+
+ul > li {
+    list-style-type: disc;
     
 }
 
