@@ -272,6 +272,7 @@ ul > li::marker {
 .md-modal {
     display: flex;
     position: absolute;
+    flex-direction: column;
     width: 100%;
     justify-content: center;
     align-items: center;
@@ -292,22 +293,38 @@ ul > li::marker {
     cursor: pointer;
 }
 
-.md-modal-content { 
+.md-modal-content, .md-modal-header, .md-modal-footer {
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: white;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
+    position: relative;
     padding: 10px 10px 0px 10px;
-    max-width: 600px;
-    max-height: 400px;
+    max-width: 860px;
+    z-index: 6;
+}
+
+.md-modal-header, .md-modal-footer {
+    width:inherit;
+}
+
+.md-modal-header {
+    border-radius: 15px 15px 0px 0px;
+}
+.md-modal-footer {
+    border-radius: 0px 0px 15px 15px;
+    min-height: 22px;
+}
+
+.md-modal-content {
+    max-height: 470px;
     min-width: 250px;
     min-height: 250px;
-    position: relative;
     overflow: scroll;
     overflow-x: hidden;
     scrollbar-width: thin;
-    z-index: 6;
+    font-size: 1.15rem;
 }
 
 .md-modal-background > .btn-close {

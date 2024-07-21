@@ -36,7 +36,7 @@ $(document).ready(function(){
             $('.spinner-background').remove();
         }else{
             $('.md-modal-content').removeAttr('style');
-            $('.static').removeClass('dnone');
+            $('.static, .md-modal-header, .md-modal-footer').removeClass('dnone');
             $('#temp').remove();
         }
         $('#TextArea').focus();
@@ -54,7 +54,7 @@ $(document).ready(function(){
         $('.md-modal').attr('style', 'width: ' + width + 'px; height: ' + height + 'px; top: ' + position.top + 'px; left: ' + position.left + 'px;');
         $('.md-modal-background').addClass('dnone');
         if (prop.text){
-            $('.static').addClass('dnone');
+            $('.static, .md-modal-header, .md-modal-footer').addClass('dnone');
             $('.md-modal-content').attr('style', 'overflow: hidden;');
             
             if ($('#temp')){
@@ -349,17 +349,16 @@ $(document).ready(function(){
         let parent = $(elem).parents('.switch-container');
         let isLocked = $(parent).attr('isLocked');
         let hasMessage = $(parent).find('#lock');
-        // console.log(parent[0].children.splice(1, 0, mkElem({elemType:'br'})));
+
         if (hasMessage.length == 0 && isLocked == 'true'){
+
             $(parent).find('.switch').append(
                 nestElem([
-                    mkElem({elemType:'span', id:'lock', style:'float:right;'}),
-                    {
-                        // 1:mkElem({elemType:'br'}),
-                        2:mkElem({elemType:'img', src:'./data/Web/icons8-lock-16.png', alt:'LOCK', width:'16px', height:'16px'})
-                    }
+                    mkElem({elemType:'span', id:'lock'}),
+                    mkElem({elemType:'img', src:'./data/Web/icons8-lock-16.png', alt:'LOCK', width:'16px', height:'16px'})
                 ])
-            )
+            );
+
         }else if (hasMessage.length > 0 && isLocked == 'false'){
             $('#lock').remove();
         }
