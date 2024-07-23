@@ -372,7 +372,7 @@ $(document).ready(function(){
                 1:nestElem([
                     mkDiv({class:'options mb-2'}),
                     {
-                        1:mkinp({type:'select', id:'color', name:'color', class:'form-select-sm', options:[{value:'dark'},{value:'green'},{value:'blue'},{value:'white'},{value:'yellow'}]}).input,
+                        1:mkinp({type:'select', id:'color', name:'color', class:'form-select-sm', options:[{value:'dark', isColor:true},{value:'green', isColor:true},{value:'blue', isColor:true},{value:'white', isColor:true},{value:'yellow', isColor:true}]}).input,
                         2:mkbtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'exspc', inner:'Remove Leading Spaces', title:'The empty space in front of the paragraphs'}),
                         3:mkbtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'rmv-ol', inner:'Remove OL Markers', title:'Remove numbered OL markers'}),
                         4:mkbtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'clear', inner:'Clear', title:'Clear scratch pad'}),
