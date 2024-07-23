@@ -133,13 +133,9 @@ $(document).ready(function(){
                 // closeSearch();
             })
         
-            $('#stop').click(function(){
-                stopProcessing();
-            });
+            $('#stop').click(stopProcessing);
         
-            $('#start').click(function(){
-                startProcessing();
-            });
+            $('#start').click(startProcessing);
         
             $('#ad-close').click(function(){
                 toggleSpclFtr("goodbye");
