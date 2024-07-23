@@ -274,6 +274,10 @@ ul > li {
     max-width: inherit;
 }
 
+.static > ol img {
+    padding: 10px 0px 10px 0px;
+}
+
 .md-modal {
     display: flex;
     position: absolute;

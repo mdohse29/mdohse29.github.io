@@ -184,6 +184,9 @@ function toggleExtras(){
 }
 
 function showPreview(){
+    if (document.querySelector('#preview')){
+        closePreview();
+    }
     let url = document.querySelector('#linkBuild > p').innerText;
     let preview = nestElem([
         mkDiv({class:'column', id:'preview'}),
