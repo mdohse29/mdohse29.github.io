@@ -17,7 +17,7 @@ let exText = mkinp({
     }
 });
 
-document.querySelector('body').appendChild(nestElem([
+document.querySelector('body').prepend(nestElem([
     mkDiv({class:'container'}),
     {
         1:nestElem([
