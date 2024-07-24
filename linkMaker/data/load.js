@@ -17,13 +17,13 @@ let exText = mkinp({
     }
 });
 
-document.querySelector('body').appendChild(nestElem([
+document.querySelector('body').prepend(nestElem([
     mkDiv({class:'container'}),
     {
         1:nestElem([
             mkDiv({class:'columns'}),
             mkDiv({class:'column'}),
-            mkHead({hType:'h1', class:'title has-text-centered is-2', inner:'Link Maker 2.0'})
+            mkHead({hType:'h1', class:'title has-text-centered is-2', inner:'CDN Link Maker'})
         ]),
         2:nestElem([
             mkDiv({class:'columns'}),
