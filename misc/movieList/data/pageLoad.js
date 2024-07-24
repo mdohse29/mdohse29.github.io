@@ -8,7 +8,7 @@ let rando = nestElem([
 let search = nestElem([
     mkDiv({class:'search'}),
     {
-        1:mkinp({type:'text', name:'q', class:'input is-info', id:'search-box', placeholder:'Search Title Here', autocomplete:'off'}).input,
+        1:mkinp({type:'text', name:'q', class:'input is-info', id:'search-box', placeholder:'Search Title Here', autocomplete:'off'}),
         2:mkbtn({class:'button is-info ml-1 d-none', id:'submit-reset', inner:'Reset'})
     }
 ]);
@@ -65,7 +65,7 @@ let modal = nestElem([
                 2:nestElem([
                     mkDiv({class:'rand-cont'}),
                     {
-                        1:mkinp({type:'range', step:'5', class:'input', name:'num', id:'num', min:'5', max:'15', value:'5', autocomplete:'off'}).input,
+                        1:mkinp({type:'range', step:'5', class:'input', name:'num', id:'num', min:'5', max:'15', value:'5', autocomplete:'off'}),
                         2:mkbtn({class:'button is-success is-responsive', id:'rand', inner:'Pick&nbsp;<span id="selected">5</span>&nbsp;at Random'})
                     }
                 ])

@@ -11,55 +11,8 @@
     <title>Link Maker 2.0</title>
 </head>
 <body>
-    <div class="container">
-        <div class="columns">
-            <div class="column">
-                <h1 class="title has-text-centered is-2">Link Maker 2<span id="forTesting">.</span>0</h1>
-                <h2 class="subtitle has-text-centered">&nbsp;</h2>
-            </div>
-        </div>
-
-        <div class="columns">
-            <div class="column">
-                <div class="box" id="selectMenu">
-                    <div class="field">
-                        <div class="select">
-                            <label class="label is-inline-block" for="type">Choose a type: </label>
-                            <select name="type" id="mediaType">
-                                <option value="DOC" title="aka CDN Link">Media File Link</option>
-                                <option value="Animation" disabled>Animation</option>
-                                <option value="DLA" >DLA</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="field " title="Does this have a transcript/CC?">
-                        <label for="pffCheck" class="label is-inline">PFF File? </label>
-                        <input class="checkbox" type="checkbox" id="pffCheck">
-                    </div>
-                    <div class="field " title="Extra text will appear above or below the media.">
-                        <label class="label is-inline" for="text">Extra Text? </label>
-                        <input class="checkbox" type="checkbox" id="text"/>
-                    </div>
-                    <div class="field">
-                        <button id="mediaselect" class="button mt-4 is-rounded is-info">Submit</button>
-                    </div>
-                </div>
-
-                <div class="box dnone" id="linkData">
-                </div>
-                <div class="box dnone" id="linkBuild">
-                    <div class="head">
-                        <button class="button is-small is-info is-light" id="showPreview">Preview</button>
-                        <h1 class="title has-text-centered">CDN Link</h1>
-                    </div>
-                    
-                </div>
-                <div class="box">
-                    <textarea placeholder="Area to keep notes" name="notes" id="notes" class="textarea" cols="30" rows="5"></textarea>
-                </div>
-            </div>
-        </div>
-    </div>
+    
+    <script src="./data/load.js"></script>
     <script src="./data/functions.js"></script>
     <!-- <script src="./data/jq_functions.js"></script> -->
 </body>

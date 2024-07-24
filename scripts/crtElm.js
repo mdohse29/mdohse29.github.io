@@ -33,7 +33,11 @@ function mkOpt(attr = {value:''}){
     if (!attr.value){
         throw Error('A value key must be set\nmkOpt({value:\'some value\'})\n\nCurrent Keys: {' + Object.keys(attr) + '}');
     }
-    if (Object.keys(attr).length > 1){
+    if (attr.isColor){
+        option.value = attr.value;
+        option.innerText = attr.value[0].toUpperCase() + attr.value.substring(1);
+        option.classList.add(attr.value);
+    }else if (Object.keys(attr).length > 1){
         for (let a in attr){
             if (a.includes('inner')){
                 option.innerText = attr[a];
@@ -44,9 +48,8 @@ function mkOpt(attr = {value:''}){
             }
         }
     }else{
-        option.value = attr.value;
-        option.innerText = attr.value[0].toUpperCase() + attr.value.substring(1);
-        option.classList.add(attr.value);
+        option.value = attr.value.toLowerCase();
+        option.innerText = attr.value;
     }
 
     return option;
@@ -101,7 +104,7 @@ function mkinp(attr = {type:'', id:''}){
             break;
     }
 
-    return elements;
+    return (elements.label) ? elements : elements.input;
 }
 
 function mkHead(attr = {hType:'', inner:''}){

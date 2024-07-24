@@ -12,99 +12,57 @@ function space(text){
 }
 
 function generateInput(id, text, title, ph){
-    let div = document.createElement('div');
-    let label = document.createElement('label');
-    let input = document.createElement('input');
-
-    div.classList.add("field");
-    label.classList.add('label','is-inline-block');
-    input.classList.add('control','input');
-    input.type = 'text';
-    input.autocomplete = "off";
-
-    if (title){
-        div.title = title;
-    }
-
-    if (id){
-        label.setAttribute('for', id);
-        input.id = id;
-    }
-
-    if (text){
-        label.innerHTML = text + ":&nbsp;";
-    }
-
-    if (ph){
-        input.placeholder = ph;
-    }
-
-    div.appendChild(label);
-    div.appendChild(input);
+    let inputAndLabel = mkinp({type:'text', class:'control input', autocomplete:'off', id:((id) ? id:''), placeholder:((ph) ? ph:''), label:((text) ? text + ':&nbsp;':''), labelOpt:{class:'label is-inline-block'}});
+    let div = nestElem([
+        mkDiv({class:'field', title:((title) ? title : '')}),
+        {
+            1:inputAndLabel.label,
+            2:inputAndLabel.input
+        }
+    ])
 
     return div;
 }
 
 function generateDropDown(id, labelText, title){
-    // Add Manual option
-    let sourcePaths = [
-        "dla_tiletrial/js/tiletrial.js",
-        "dla_dragdrop/js/dragdrop.js",
-        "dla_tictactoe/js/tictactoe.js",
-        "dla_textboxl/js/textboxl.js",
-        "dla_sbx/js/sbx.js",
-        "dla_speeddrill/js/speeddrill.js",
-        "dla_sorter/js/sorter.js",
-        "dla_slideshow/js/dla_slideshow.js",
-        "dla_puzzlematch/js/puzzlematch.js",
-        "dla_powerpopquiz/js/powerpopquiz.js",
-        "dla_popquiz/js/popquiz.js",
-        "dla_metalsquares/js/dla_metalsquares.js",
-        "dla_holeymoley/js/holeymoley.js",
-        "dla_farmerfrank/js/farmerfrank.js",
-        "dla_concentration/js/dla_concentration.js",
-        "dla_allright/js/allright.js",
-        "dla_feedback/js/feedback.js",
-        "dla_conjugatorchart/js/conjugatorchart.js",
-        "dla_flashcards/js/flashcards.js",
-        "dla_equationbuilder/js/equation_builder.js",
-        "dla_whatcha_makin/js/watchmakin.js",
-        "dla_carnivalgame/js/carnivalgame.js",
-        "periodic_table/js/periodictable.js"
-
-    ];
-    sourcePaths = sourcePaths.sort();
-    let divSelect = document.createElement('div');
-    let select = document.createElement('select');
-    let div = document.createElement('div');
-    let label = document.createElement('label');
-
-    divSelect.classList.add('select');
-    div.classList.add("field");
-
-    if (title){
-        div.title = title;
-    }
-
-    label.classList.add('label','is-inline-block');
-    label.setAttribute('for',id);
-    label.innerHTML = labelText + ":&nbsp;";
-
-    select.setAttribute('name', id);
-    select.setAttribute('id',id);
-
-    for (let a in sourcePaths){
-        let option = document.createElement('option');
-
-        option.value = sourcePaths[a];
-        option.innerText = sourcePaths[a];
-        select.appendChild(option)
-    }
-
-    divSelect.appendChild(label);
-    divSelect.appendChild(select);
-    div.appendChild(divSelect);
-    return div;
+    
+    return nestElem([
+        mkDiv({class:'field', title:((title) ? title:'')}),
+        mkDiv({class:'select'}),
+        {
+            1:mkLabel({for:id, class:'label is-inline-block', inner:labelText + ':&nbsp;'}),
+            2:mkinp({
+                type:'select', 
+                id:id,
+                name:id,
+                options:[
+                    {value:"dla_tiletrial/js/tiletrial.js"},
+                    {value:"dla_dragdrop/js/dragdrop.js"},
+                    {value:"dla_tictactoe/js/tictactoe.js"},
+                    {value:"dla_textboxl/js/textboxl.js"},
+                    {value:"dla_sbx/js/sbx.js"},
+                    {value:"dla_speeddrill/js/speeddrill.js"},
+                    {value:"dla_sorter/js/sorter.js"},
+                    {value:"dla_slideshow/js/dla_slideshow.js"},
+                    {value:"dla_puzzlematch/js/puzzlematch.js"},
+                    {value:"dla_powerpopquiz/js/powerpopquiz.js"},
+                    {value:"dla_popquiz/js/popquiz.js"},
+                    {value:"dla_metalsquares/js/dla_metalsquares.js"},
+                    {value:"dla_holeymoley/js/holeymoley.js"},
+                    {value:"dla_farmerfrank/js/farmerfrank.js"},
+                    {value:"dla_concentration/js/dla_concentration.js"},
+                    {value:"dla_allright/js/allright.js"},
+                    {value:"dla_feedback/js/feedback.js"},
+                    {value:"dla_conjugatorchart/js/conjugatorchart.js"},
+                    {value:"dla_flashcards/js/flashcards.js"},
+                    {value:"dla_equationbuilder/js/equation_builder.js"},
+                    {value:"dla_whatcha_makin/js/watchmakin.js"},
+                    {value:"dla_carnivalgame/js/carnivalgame.js"},
+                    {value:"periodic_table/js/periodictable.js"}
+                ]
+            })
+        }
+    ]);
 
 }
 
@@ -210,15 +168,9 @@ function mediaSelect(){
     document.querySelector('#selectMenu').classList.add('dnone');
     let type = document.querySelector('#mediaType').value;
     let build = document.querySelector('#linkData');
-    let submit = document.createElement('button');
-    let reset = document.createElement('button');
+    let submit = mkbtn({class:'button mt-4 is-rounded is-info', id:'submit', inner:'Submit'});
+    let reset = mkbtn({class:'button mt-4 is-rounded is-danger ml-3', id:'reset', inner:'Reset'});
 
-    submit.classList.add('button', 'mt-4', 'is-rounded', 'is-info');
-    submit.id = 'submit';
-    submit.innerText = 'Submit';
-    reset.classList.add('button', 'mt-4', 'is-rounded', 'is-danger', 'ml-3');
-    reset.id = 'reset';
-    reset.innerText = 'Reset';
     build.classList.remove('dnone');
 
     reset.addEventListener('click', resetEverything);
