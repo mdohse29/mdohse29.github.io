@@ -150,7 +150,7 @@ function showPreview(){
         mkDiv({class:'column', id:'preview'}),
         mkDiv({class:'box'}),
         {
-            1: mkbtn({class:'button close', title:'Close Preview', inner:'X'}),
+            1: mkbtn({class:'button close is-info is-outlined', title:'Close Preview', inner:'X'}),
             2: mkElem({elemType:'iframe', src:url})
         }
     ]);
