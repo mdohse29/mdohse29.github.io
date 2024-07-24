@@ -11,6 +11,8 @@ function crtad(){
 
     let disbchk = document.querySelectorAll('button');
     let btnenbl = false;
+    let strictSearch = mkinp({type:'checkbox', name:'word', label:'Strict Search', labelOpt:{class:'awesome'}});
+    let regex = mkinp({type:'checkbox', name:'regex', label:'Regex'});
 
     for (let btn of disbchk){
         if (btn.classList.contains('dnone') || btn.disabled){
@@ -28,8 +30,8 @@ function crtad(){
                     1:nestElem([
                         mkDiv({class:'search'}),
                         {
-                            1:mkinp({type:'text', name:'search', placeholder:'Search', class:'form-control'}).input,
-                            2:mkinp({type:'text', name:'replace', placeholder:'Replace', class:'form-control'}).input,
+                            1:mkinp({type:'text', name:'search', placeholder:'Search', class:'form-control'}),
+                            2:mkinp({type:'text', name:'replace', placeholder:'Replace', class:'form-control'}),
                             3:mkbtn({class:'btn btn-outline-success', id:'rep', inner:'Replace'}),
                             4:mkbtn({class:'btn btn-close btn-dark btn-lg mx-2', id:'search-close'})
                         }
@@ -37,10 +39,10 @@ function crtad(){
                     2:nestElem([
                         mkDiv({class:'search-options d-block'}),
                         {
-                            1:mkinp({type:'checkbox', name:'word', label:'Strict Search', labelOpt:{class:'awesome'}}).input,
-                            2:mkinp({type:'checkbox', name:'word', label:'Strict Search', labelOpt:{class:'awesome'}}).label,
-                            3:mkinp({type:'checkbox', name:'regex', label:'Regex'}).input,
-                            4:mkinp({type:'checkbox', name:'regex', label:'Regex'}).label
+                            1:strictSearch.input,
+                            2:strictSearch.label,
+                            3:regex.input,
+                            4:regex.label
                         }
                     ])
                 }

@@ -104,7 +104,7 @@ function mkinp(attr = {type:'', id:''}){
             break;
     }
 
-    return elements;
+    return (elements.label) ? elements : elements.input;
 }
 
 function mkHead(attr = {hType:'', inner:''}){

@@ -60,7 +60,7 @@ function generateDropDown(id, labelText, title){
                     {value:"dla_carnivalgame/js/carnivalgame.js"},
                     {value:"periodic_table/js/periodictable.js"}
                 ]
-            }).input
+            })
         }
     ]);
 
