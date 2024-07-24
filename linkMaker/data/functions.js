@@ -156,11 +156,13 @@ function showPreview(){
     ]);
 
     document.querySelector('.container > .columns:last-child').appendChild(preview);
+    document.querySelector('.container > .columns:last-child > .column').classList.add('is-half');
     document.querySelector('.close').addEventListener('click', closePreview);
 
 }
 
 function closePreview(){
+    document.querySelector('.container > .columns:last-child > .column').classList.remove('is-half');
     document.querySelector('#preview').remove();
 }
 
