@@ -5,7 +5,7 @@ html {
 p{
     font-size: 1.25em;
     overflow-x: scroll;
-    scrollbar-width: thin;
+    scrollbar-width: none;
 }
 
 iframe {
