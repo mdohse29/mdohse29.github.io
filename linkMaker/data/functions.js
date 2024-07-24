@@ -25,6 +25,38 @@ function generateInput(id, text, title, ph){
 }
 
 function generateDropDown(id, labelText, title){
+    let dlaPaths = [
+        {value:"dla_tiletrial/js/tiletrial.js"},
+        {value:"dla_dragdrop/js/dragdrop.js"},
+        {value:"dla_tictactoe/js/tictactoe.js"},
+        {value:"dla_textboxl/js/textboxl.js"},
+        {value:"dla_sbx/js/sbx.js"},
+        {value:"dla_speeddrill/js/speeddrill.js"},
+        {value:"dla_sorter/js/sorter.js"},
+        {value:"dla_slideshow/js/dla_slideshow.js"},
+        {value:"dla_puzzlematch/js/puzzlematch.js"},
+        {value:"dla_powerpopquiz/js/powerpopquiz.js"},
+        {value:"dla_popquiz/js/popquiz.js"},
+        {value:"dla_metalsquares/js/dla_metalsquares.js"},
+        {value:"dla_holeymoley/js/holeymoley.js"},
+        {value:"dla_farmerfrank/js/farmerfrank.js"},
+        {value:"dla_concentration/js/dla_concentration.js"},
+        {value:"dla_allright/js/allright.js"},
+        {value:"dla_feedback/js/feedback.js"},
+        {value:"dla_conjugatorchart/js/conjugatorchart.js"},
+        {value:"dla_flashcards/js/flashcards.js"},
+        {value:"dla_equationbuilder/js/equation_builder.js"},
+        {value:"dla_whatcha_makin/js/watchmakin.js"},
+        {value:"dla_carnivalgame/js/carnivalgame.js"},
+        {value:"periodic_table/js/periodictable.js"}
+    ]
+    dlaPaths = dlaPaths.sort((obj1, obj2) => {
+        if(obj1.value > obj2.value){
+            return 1;
+        }else{
+            return -1;
+        }
+    })
     
     return nestElem([
         mkDiv({class:'field', title:((title) ? title:'')}),
@@ -35,31 +67,7 @@ function generateDropDown(id, labelText, title){
                 type:'select', 
                 id:id,
                 name:id,
-                options:[
-                    {value:"dla_tiletrial/js/tiletrial.js"},
-                    {value:"dla_dragdrop/js/dragdrop.js"},
-                    {value:"dla_tictactoe/js/tictactoe.js"},
-                    {value:"dla_textboxl/js/textboxl.js"},
-                    {value:"dla_sbx/js/sbx.js"},
-                    {value:"dla_speeddrill/js/speeddrill.js"},
-                    {value:"dla_sorter/js/sorter.js"},
-                    {value:"dla_slideshow/js/dla_slideshow.js"},
-                    {value:"dla_puzzlematch/js/puzzlematch.js"},
-                    {value:"dla_powerpopquiz/js/powerpopquiz.js"},
-                    {value:"dla_popquiz/js/popquiz.js"},
-                    {value:"dla_metalsquares/js/dla_metalsquares.js"},
-                    {value:"dla_holeymoley/js/holeymoley.js"},
-                    {value:"dla_farmerfrank/js/farmerfrank.js"},
-                    {value:"dla_concentration/js/dla_concentration.js"},
-                    {value:"dla_allright/js/allright.js"},
-                    {value:"dla_feedback/js/feedback.js"},
-                    {value:"dla_conjugatorchart/js/conjugatorchart.js"},
-                    {value:"dla_flashcards/js/flashcards.js"},
-                    {value:"dla_equationbuilder/js/equation_builder.js"},
-                    {value:"dla_whatcha_makin/js/watchmakin.js"},
-                    {value:"dla_carnivalgame/js/carnivalgame.js"},
-                    {value:"periodic_table/js/periodictable.js"}
-                ]
+                options:dlaPaths
             })
         }
     ]);
