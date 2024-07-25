@@ -80,7 +80,7 @@ document.querySelector('body').prepend(nestElem([
                     mkDiv({class:'box dnone', id:'linkBuild'}),
                     mkDiv({class:'head'}),
                     {
-                        1:mkbtn({class:'button is-small is-info is-light', id:'showPreview', inner:'Preview'}),
+                        1:mkbtn({class:'button is-small is-info is-light is-outlined', id:'showPreview', inner:'Preview'}),
                         2:mkHead({hType:'h1', class:'title has-text-centered', inner:'CDN Link'})
                     }
                 ]),
