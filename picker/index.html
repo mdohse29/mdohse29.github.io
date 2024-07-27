@@ -4,10 +4,10 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script type="text/javascript">
-      let previous = document.referrer;
-      if (!(previous.includes("mdohse29"))){
-        document.location.replace("../construction.html");
-      }
+      // let previous = document.referrer;
+      // if (!(previous.includes("mdohse29"))){
+      //   document.location.replace("../construction.html");
+      // }
   </script>
   <link type="image/png" sizes="32x32" rel="icon" href="./Web/favicon-32x32.png">
   <link rel="preload" as="image" href="./img/artboard-studio-B40ztSGQTZY-unsplash.jpg">
@@ -19,6 +19,7 @@
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" crossorigin="anonymous"></script>
 
+  <script src="./data/picker.js"></script>
   <link rel="stylesheet" href="./data/style.css">
 
   <title>Gift Picker</title>
@@ -27,8 +28,8 @@
   <div class="presentation">
     <h1><sup>The</sup> Dohse's Gift Picker</h1>
     <div id="select">
-      <button disabled class="pick reset" data-listcomplete="false"><img src="./img/icons8-refresh-48.png"/> Try Again</button>
-      <button disabled class="pick sel" data-listcomplete="false"><img src="./img/icons8-person-raising-hand-48.png"/> Pick Someone</button>
+      <button class="pick reset" data-listcomplete="false"><img src="./img/icons8-refresh-48.png"/> Try Again</button>
+      <button class="pick sel" data-listcomplete="false"><img src="./img/icons8-person-raising-hand-48.png"/> Pick Someone</button>
       <button class="view"><img src="./img/icons8-list-48.png"/> THE LIST</button>
     </div>
     <div id="display">
@@ -36,7 +37,7 @@
       <div id="userGiftList" style="display: none;"></div>
       <div id="giftList" style="display: none;">
         <div class="nav">
-          <button id="btn-close">Close</button><button disabled id="btn-add-lst">Submit your list</button>
+          <button id="btn-close">Close</button><button id="btn-add-lst">Submit your list</button>
         </div>
         <p class="lst-note">ATTENTION:<br>Gift-ers - There is a $75 cap per person this year. The gift(s) you buy should not exceed $75 in total, excluding shipping and taxes. This does not mean everyone must spend $75, just no going over.<br><br><!--Gift-ies - Remember that the lists are mostly to help give ideas of what you might want for Christmas. In the end it is up to the Gift-er to decided what you are going to get.<br><br>If anything should need to be changed or added just let me know.<br><br><span class="spcl">* Click on a list item to search Amazon for that item.</span>-->The list items in this list are linked to Google for easy searching. Just click an item to search for it.<br><span class="spcl">** If anything needs to be updated or changed just let me know. <a href="mailto:mdohse29@gmail.com">mdohse29@gmail.com</a> **</span></p>
         <p id="emptyList">There isn't anything in the list yet.<br>Submit your list to be the first.</p>
@@ -59,7 +60,6 @@
       <p>Icons by <a target="_blank" href="https://icons8.com">Icons8</a></p>
     </div>
   </div>
-  <!-- <script src="./data/picker.js"></script> -->
   <script src="./data/picker_jq_docR.js"></script>
 </body>
 </html>
