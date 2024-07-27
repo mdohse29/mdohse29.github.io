@@ -40,6 +40,13 @@ $.get('./data/people.csv', function(data, status){
 	ideaList.push(aa[c]);
 	people.push(aa[c][0]);
   }
+  if (people.length <= 0){
+	let btns = document.querySelectorAll('.pick');
+	btns.forEach(btn => {
+		btn.setAttribute('disabled', 'disabled');
+		btn.setAttribute('data-listcomplete', 'true');
+	});
+  }
 }, "text");
 
 var userListItems;
