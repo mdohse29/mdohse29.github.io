@@ -60,7 +60,7 @@ $(document).ready(function(){
             if ($('#temp')){
                 $('#temp').remove();
             }
-            $('.md-modal-content').append(mkP({id:'temp', inner:prop.text}));
+            $('.md-modal-content').append(mkP({id:'temp', inner:prop.text, class:((prop.class) ? prop.class : '')}));
             if (!prop.timeOut){
                 $('.md-modal-background').removeClass('dnone');
             }
