@@ -281,8 +281,9 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
             num = 5;
         }
 
-        if ($('.notFound')) {
+        if ($('.notFound') || $('#empty')) {
             $('.notFound').remove();
+            $('#empty').remove();
         }
 
         $('.movies > div').remove();

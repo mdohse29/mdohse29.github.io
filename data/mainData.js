@@ -4,7 +4,7 @@ const drawers = {
         title: 'Silly Things I Made',
         buttons:{
             button1: {
-                hidden: false,
+                hidden: true,
                 url: './picker/',
                 text: {
                     main: 'Gift Picker',
