@@ -1,0 +1,112 @@
+*{
+    z-index: 1;
+    scrollbar-width: thin;
+}
+
+iframe {
+    border: 1px solid black;
+}
+
+div.frame-cover {
+    display: flex;
+    background-color: transparent;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    transition: background-color 550ms ease-in;
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+}
+
+div.frame-cover:hover {
+    background-color: rgba(0,0,0,.5);
+}
+
+.col-6 {
+    min-width: 460px;
+}
+
+.frame-info {
+    margin-bottom: 0px;
+}
+
+.dnone {
+    display: none;
+}
+
+.header {
+    background: linear-gradient(180deg, rgb(72, 72, 75),rgb(0,0,0), rgb(72, 72, 75) 90%);
+    color: white;
+}
+
+.footer {
+    background: linear-gradient(180deg, rgb(72, 72, 75),rgb(0,0,0), rgb(72, 72, 75));
+    bottom: 0 !important;
+}
+
+.card.active {
+    position: fixed;
+    top: 0;
+    left: 5vw;
+    width: 90vw;
+    height: 95vh;
+    margin-top: 1%;
+    scrollbar-width: none;
+    overflow:scroll;
+    /* opacity: 0; */
+
+    .frame-cover {
+        z-index: 1;
+    }
+
+    iframe {
+        margin-bottom: 1%;
+    }
+}
+
+.card.active, .card.active * {
+    z-index: 2000;
+}
+
+.card.active .card-body {
+    flex: none;
+}
+
+.drawer {
+    margin-bottom: 5px;
+}
+
+.drawer > p {
+    padding: 0px 10px 5px 20px;
+    margin-bottom: 0px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    max-height: 15em;
+}
+
+.drawer > h5 {
+    cursor: pointer;
+    user-select: none;
+}
+
+.ratio {
+    aspect-ratio: 1/.5;
+}
+
+.row:last-child{
+    margin-bottom: 1%;
+}
+
+.btn-close {
+    float: right;
+    color: white;
+    border: 2px solid var(--bs-danger);
+}
+
+@media (width < 1300px){
+    .ratio {
+        aspect-ratio: 1/.75;
+    }
+}
