@@ -95,10 +95,6 @@ div.frame-cover:hover {
     aspect-ratio: 1/.5;
 }
 
-.row:last-child{
-    margin-bottom: 1%;
-}
-
 .btn-close {
     float: right;
     color: white;
