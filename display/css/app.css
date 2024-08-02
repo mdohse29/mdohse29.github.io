@@ -1,5 +1,4 @@
 *{
-    z-index: 1;
     scrollbar-width: thin;
 }
 
@@ -43,7 +42,6 @@ div.frame-cover:hover {
 
 .footer {
     background: linear-gradient(180deg, rgb(72, 72, 75),rgb(0,0,0), rgb(72, 72, 75));
-    bottom: 0 !important;
 }
 
 .card.active {
