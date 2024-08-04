@@ -89,7 +89,7 @@ document.body.prepend(
                                 mkDiv({class:'drawer border-bottom'}),
                                 {
                                     1:mkHead({hType:'h5', class:'h5', inner:'Extra Details'}),
-                                    2:mkP({class:'border-start border-end border-bottom dnone', isexpanded:'false', inner:'The bug and info icons are from Icons 8. I decided to make my own modal and toggle switch for this, instead of using something from Bootstrap. Nothing super fancy, but it works.'})
+                                    2:mkP({class:'border-start border-end border-bottom dnone', isexpanded:'false', inner:'The bug, lock, and info icons are from Icons 8. I decided to make my own modal and toggle switch for this, instead of using something from Bootstrap. Nothing super fancy, but it works. This one probably gets fiddled with the most since it is currently being used by people in my office. A bug will come up or a request made for something to be added. More requests than bugs 😉'})
                                 }
                             ])
                         }
