@@ -82,14 +82,14 @@ document.body.prepend(
                                 mkDiv({class:'drawer border-bottom'}),
                                 {
                                     1:mkHead({hType:'h5', class:'h5', inner:'Assets Used'}),
-                                    2:mkP({class:'border-start border-end border-bottom dnone', isexpanded:'false', inner:'<strong>Styling</strong><br>Bootstrap - for buttons and basic layout<br>Custom CSS - for everything else<br><br><strong>Scripting</strong><br>Javascript - for logic and creating elements<br>JQuery - for functionality<br>RegEX - for some of the text validating functions'})
+                                    2:mkP({class:'border-start border-end border-bottom dnone', isexpanded:'false', inner:'<strong>Styling</strong><br>Bootstrap - for buttons and basic layout<br>Custom CSS - for everything else<br>Icons 8 @ <a href="https://icons8.com" target="_blank">https://icons8.com</a> - for the icons used<br><br><strong>Scripting</strong><br>Javascript - for logic and creating elements<br>JQuery - for functionality<br>RegEX - for some of the text validating functions'})
                                 }
                             ]),
                             3:nestElem([
                                 mkDiv({class:'drawer border-bottom'}),
                                 {
                                     1:mkHead({hType:'h5', class:'h5', inner:'Extra Details'}),
-                                    2:mkP({class:'border-start border-end border-bottom dnone', isexpanded:'false', inner:'I decided to make my own modal and toggle switch for this, instead of using something from Bootstrap. Nothing super fancy, but it works.'})
+                                    2:mkP({class:'border-start border-end border-bottom dnone', isexpanded:'false', inner:'The bug and info icons are from Icons 8. I decided to make my own modal and toggle switch for this, instead of using something from Bootstrap. Nothing super fancy, but it works.'})
                                 }
                             ])
                         }
@@ -129,7 +129,7 @@ document.body.prepend(
                                 mkDiv({class:'drawer border-bottom'}),
                                 {
                                     1:mkHead({hType:'h5', class:'h5', inner:'Purpose'}),
-                                    2:mkP({class:'border-start border-end border-bottom dnone', isexpanded:'false', inner:'The title kind of says it all, I made this to have a complete and searchable list of my movies on my media server. I can always see what is currently available to watch in my app, but wanted to be able to see what is on my archive too. Basically I couldn\'t sleep one weekend and whipped this out. Pretty simplistic, but I had fun making it. Comes in handy when I want to see what I want to swap out. I also added a little randomizer just for fun. I mean, why not? Great for when I really don\'t want to spend and hour going through everything.Unfortunately, not too useful for anyone who doesn\'t have access to my media server, but seemed like it was worth adding here.'})
+                                    2:mkP({class:'border-start border-end border-bottom dnone', isexpanded:'false', inner:'The title kind of says it all, I made this to have a complete and searchable list of my movies on my media server. I can always see what is currently available to watch in my app, but wanted to be able to see what is on my archive too. Basically I couldn\'t sleep one weekend and whipped this out. Pretty simplistic, but I had fun making it. Comes in handy when I want to see what I want to swap out. I also added a little randomizer just for fun. I mean, why not? Great for when I really don\'t want to spend and hour going through everything. Unfortunately, not too useful for anyone who doesn\'t have access to my media server, but seemed like it was worth adding here.'})
                                 }
                             ]),
                             2:nestElem([
