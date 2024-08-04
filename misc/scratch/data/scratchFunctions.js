@@ -301,6 +301,7 @@ $(document).ready(function(){
                         text = oneStr[a];
                     }
                 }
+                // $('.toggle-pill').click() // Reset the toggle after single use
             }
             
             regtest = /(\S)\s{2,}(\S)/gm;
