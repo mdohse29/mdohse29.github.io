@@ -22,7 +22,7 @@ const drawers = {
                 }
             },
             button3: {
-                hidden: false,
+                hidden: true,
                 url: './misc/scratch/',
                 text: {
                     main: 'Scratch Pad for notes',
@@ -35,6 +35,15 @@ const drawers = {
                 url: './templates/',
                 text: {
                     main: 'Templates I Made',
+                    sub: '',
+                    warn: false
+                }
+            },
+            button5: {
+                hidden: false,
+                url: './display/',
+                text: {
+                    main: 'Page Gallery',
                     sub: '',
                     warn: false
                 }
