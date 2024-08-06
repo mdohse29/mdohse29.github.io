@@ -40,7 +40,13 @@ document.body.prepend(
             1:nestElem([
                 mkDiv({class:'row mt-4 justify-content-center'}),
                 mkDiv({class:'col col-lg-6'}),
-                mkP({inner:'Welcome to the gallery. I am trying to think of something to put here. Any ideas?'})
+                {
+                    1:mkP({inner:'Welcome to the gallery.'}),
+                    2:mkP({inner:'This is just some of the things I have done. At the moment I am just displaying some of the simple pages I have made, nothing really fancy. Currently I am taking a web development course online, so hopefully I will have something that might better display my skills in the future.'}),
+                    3:mkP({inner:'I tend to mostly focus on the javascript, or functionality, more then I do the style of the pages I have made so far. I do use some css frameworks for some of the basic setup. All the Javascript or Jquery used in my pages is 100% me. I generally do not use any of the Javascript that comes with the frameworks because I want to learn how to do it my self. Plus I just really like writing javascript, among other languages.'}),
+                    4:mkP({inner:'Below I just have some basic detail about the page, and then a frame which will expand when engaged so the page can be interacted with.'}),
+                    99:mkElem({elemType:'hr'})
+                }
             ]),
             2:nestElem([
                 mkDiv({class:'row mt-5 align-items-center justify-content-center'}),

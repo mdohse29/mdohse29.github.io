@@ -47,6 +47,15 @@ const drawers = {
                     sub: '(Does not save)',
                     warn: true
                 }
+            },
+            button6: {
+                hidden: true,
+                url: './display/',
+                text: {
+                    main: 'Page Gallery',
+                    sub: '',
+                    warn: false
+                }
             }
         }
     },

@@ -81,7 +81,7 @@ div.frame-cover:hover {
     margin-bottom: 0px;
     overflow-y: auto;
     scrollbar-width: thin;
-    max-height: 15em;
+    max-height: 14em;
 }
 
 .drawer > h5 {
