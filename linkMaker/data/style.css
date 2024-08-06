@@ -26,6 +26,10 @@ label {
     margin-left:auto;
 }
 
+.close {
+    margin-bottom: 20px;
+}
+
 .container {
     margin-top: 1em;
 }
