@@ -28,6 +28,8 @@
  *                  
  * 
  */
+let browserInfo = navigator.userAgent;
+
 document.body.prepend(
     nestElem([
         mkDiv({class:'container-fluid'}),
@@ -213,7 +215,7 @@ document.body.prepend(
                     ])
                 }
             ]),*/
-            5:mkDiv({class:'row pt-3 pb-4 mb-0 mt-5 sticky-bottom footer'})
+            5:mkDiv({class:'row pt-3 pb-4 mb-0 mt-5 ' + ((!browserInfo.includes('Mobile')) ? 'sticky-bottom' : '') + ' footer'})
         }
     ])
 );
