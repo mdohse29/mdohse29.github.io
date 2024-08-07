@@ -43,10 +43,10 @@ document.body.prepend(
                 mkDiv({class:'row mt-4 justify-content-center'}),
                 mkDiv({class:'col col-lg-6'}),
                 {
-                    1:mkP({inner:'Welcome to the gallery.'}),
-                    2:mkP({inner:'This is just some of the things I have done. At the moment I am just displaying some of the simple pages I have made, nothing really fancy. Currently I am taking a web development course online, so hopefully I will have something that might better display my skills in the future.'}),
-                    3:mkP({inner:'I tend to mostly focus on the javascript, or functionality, more then I do the style of the pages I have made so far. I do use some css frameworks for some of the basic setup. All the Javascript or Jquery used in my pages is 100% me. I generally do not use any of the Javascript that comes with the frameworks because I want to learn how to do it my self. Plus I just really like writing javascript, among other languages.'}),
-                    4:mkP({inner:'Below I just have some basic detail about the page, and then a frame which will expand when engaged so the page can be interacted with.'}),
+                    1:mkP({inner:'Welcome to the Gallery'}),
+                    2:mkP({inner:'This showcases some of my work, featuring simple web pages I have developed. While these examples may not be particularly elaborate, they represent some of my current capabilities as I continue to refine my skills. I am currently enrolled in an online web development course, and I look forward to creating more sophisticated projects in the future.'}),
+                    3:mkP({inner:'My primary focus is on JavaScript and functionality, rather than design. Although I incorporate CSS frameworks for basic layout and styling, all JavaScript and jQuery used in my pages is entirely my own work. I prefer to write my own JavaScript code, as it allows me to learn and understand the intricacies of the language better. Additionally, I have a passion for writing JavaScript, among other programming languages.'}),
+                    4:mkP({inner:'Below, you\'ll find a brief description of each page, with an interactive frame that expands for a more detailed view and interaction.'}),
                     99:mkElem({elemType:'hr'})
                 }
             ]),
@@ -90,14 +90,14 @@ document.body.prepend(
                                 mkDiv({class:'drawer border-bottom'}),
                                 {
                                     1:mkHead({hType:'h5', class:'h5', inner:'Assets Used'}),
-                                    2:mkP({class:'border-start border-end border-bottom dnone', isexpanded:'false', inner:'<strong>Styling</strong><br>Bootstrap - for buttons and basic layout<br>Custom CSS - for everything else<br>Icons 8 @ <a href="https://icons8.com" target="_blank">https://icons8.com</a> - for the icons used<br><br><strong>Scripting</strong><br>Javascript - for logic and creating elements<br>JQuery - for functionality<br>RegEX - for some of the text validating functions'})
+                                    2:mkP({class:'border-start border-end border-bottom dnone', isexpanded:'false', inner:'<strong>Styling</strong><br>Bootstrap - for buttons and basic layout<br>Custom CSS - for everything else<br>Icons 8 @ <a href="https://icons8.com" target="_blank">https://icons8.com</a> - for the bug, info, and lock icons<br><br><strong>Scripting</strong><br>Javascript - for logic and creating elements<br>JQuery - for functionality<br>RegEX - for some of the text validating functions'})
                                 }
                             ]),
                             3:nestElem([
                                 mkDiv({class:'drawer border-bottom'}),
                                 {
                                     1:mkHead({hType:'h5', class:'h5', inner:'Extra Details'}),
-                                    2:mkP({class:'border-start border-end border-bottom dnone', isexpanded:'false', inner:'The bug, lock, and info icons are from Icons 8. I decided to make my own modal and toggle switch for this, instead of using something from Bootstrap. Nothing super fancy, but it works. This one probably gets fiddled with the most since it is currently being used by people in my office. A bug will come up or a request made for something to be added. More requests than bugs 😉'})
+                                    2:mkP({class:'border-start border-end border-bottom dnone', isexpanded:'false', inner:'I decided to make my own modal and toggle switch for this, instead of using something from Bootstrap. Nothing super fancy, but it works. This one probably gets fiddled with the most since it is currently being used by people in my office. A bug will come up or a request made for something to be added. More requests than bugs <span style="font-size: 25px;">😉</span>'})
                                 }
                             ])
                         }
