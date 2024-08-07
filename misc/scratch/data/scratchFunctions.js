@@ -391,7 +391,7 @@ $(document).ready(function(){
 
     setToggleListeners();
 
-    $('textarea').focus();
+    // $('textarea').focus();
 
     $('.options > button').mousedown(function(){
         if (!$(this).attr('id').includes('info')){
