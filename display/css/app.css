@@ -46,7 +46,7 @@ div.frame-cover:hover {
 
 .card.active {
     position: fixed;
-    top: 0;
+    top: 0px;
     left: 5vw;
     width: 90vw;
     height: 95vh;
@@ -97,6 +97,13 @@ div.frame-cover:hover {
     float: right;
     color: white;
     border: 2px solid var(--bs-danger);
+}
+
+@media (width < 550px){
+    .card.active {
+        width: 95%;
+        left: 0px;
+    }
 }
 
 @media (width < 1300px){
