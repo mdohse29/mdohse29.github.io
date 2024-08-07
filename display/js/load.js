@@ -68,7 +68,7 @@ document.body.prepend(
                                     mkDiv({class:'ratio'}),
                                     {
                                         1:mkDiv({class:'frame-cover'}),
-                                        2:mkElem({elemType:'iframe', scrolling:'no', src:'https://mdohse29.github.io/misc/scratch/'}) // IFRAME
+                                        2:mkElem({elemType:'iframe', scrolling:'no', src:'../misc/scratch/'}) // IFRAME
                                     }
                                 ])
                             ])
@@ -122,7 +122,7 @@ document.body.prepend(
                                     mkDiv({class:'ratio'}),
                                     {
                                         1:mkDiv({class:'frame-cover '}),
-                                        2:mkElem({elemType:'iframe', scrolling:'no', src:'https://mdohse29.github.io/misc/movieList/'}) // IFRAME
+                                        2:mkElem({elemType:'iframe', scrolling:'no', src:'../misc/movieList/'}) // IFRAME
                                     }
                                 ])
                             ])
@@ -179,7 +179,7 @@ document.body.prepend(
                                     mkDiv({class:'ratio'}),
                                     {
                                         1:mkDiv({class:'frame-cover '}),
-                                        2:mkElem({elemType:'iframe', scrolling:'no', src:'https://mdohse29.github.io/picker/'}) // IFRAME
+                                        2:mkElem({elemType:'iframe', scrolling:'no', src:'../picker/'}) // IFRAME
                                     }
                                 ])
                             ])
