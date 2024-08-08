@@ -122,8 +122,8 @@ const drawers = {
                 url: 'http://sandbox.education2020.com/curriculum/',
                 text: {
                     main: '{N}ternal Tools',
-                    sub: '',
-                    warn: false
+                    sub: 'Best in FireFox',
+                    warn: true
                 }
             },
             button8: {
