@@ -55,7 +55,7 @@ document.body.prepend(
                 {
                     1:nestElem([
                         mkDiv({class:'col-6 col-lg-4 text-center col-content'}),
-                        mkDiv({class:'card shadow'}),
+                        mkDiv({class:'card' + ((browserInfo.includes('Mobile')) ? '' : ' shadow')}),
                         {
                             1:nestElem([
                                 mkDiv({class:'card-body pb-0'}),
@@ -109,7 +109,7 @@ document.body.prepend(
                 {
                     1:nestElem([
                         mkDiv({class:'col-6 col-lg-4 text-center col-content'}),
-                        mkDiv({class:'card shadow'}),
+                        mkDiv({class:'card' + ((browserInfo.includes('Mobile')) ? '' : ' shadow')}),
                         {
                             1:nestElem([
                                 mkDiv({class:'card-body pb-0'}),
@@ -163,7 +163,7 @@ document.body.prepend(
                 {
                     1:nestElem([
                         mkDiv({class:'col-6 col-lg-4 text-center col-content'}),
-                        mkDiv({class:'card shadow'}),
+                        mkDiv({class:'card' + ((browserInfo.includes('Mobile')) ? '' : ' shadow')}),
                         {
                             1:nestElem([
                                 mkDiv({class:'card-body pb-0'}),
