@@ -81,7 +81,14 @@ document.querySelector('#item').addEventListener('input', function(){
         });
 
         if (itemText){
-            alert(itemText.substring(0, itemText.length - 1))
+            // alert(itemText.substring(0, itemText.length - 1))
+            navigator.clipboard.writeText(itemText.substring(0, itemText.length - 1));
+            this.classList.add('is-success');
+            this.value = 'Export Complete!';
+            setTimeout(() => {
+                this.value = '';
+                this.classList.remove('is-success')
+            }, 1000);
         }
     }
     
