@@ -137,9 +137,9 @@ window.onload = function(){
 
     drawers.forEach(drawer => {
         
-        let test = drawer.querySelector('p').getAttribute('isexpanded');
+        let isExpended = drawer.querySelector('p').getAttribute('isexpanded');
 
-        drawer.querySelector('h5').prepend(mkElem({elemType:'i', class:'bi ' + ((test === 'true') ? 'bi-caret-down' : 'bi-caret-right')}))
+        drawer.querySelector('h5').prepend(mkElem({elemType:'i', class:'bi ' + ((isExpended === 'true') ? 'bi-caret-down' : 'bi-caret-right')}))
         drawer.querySelector('h5').addEventListener('click', function(){
 
             let content = drawer.querySelector('p');

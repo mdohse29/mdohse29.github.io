@@ -99,10 +99,14 @@ div.frame-cover:hover {
     border: 2px solid var(--bs-danger);
 }
 
-@media (width < 550px){
+@media (width < 931px){
     .card.active {
         width: 95%;
         left: 0px;
+    }
+
+    .card:not(.card.active) {
+        margin-bottom: 1%;
     }
 }
 
