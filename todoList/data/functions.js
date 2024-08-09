@@ -11,34 +11,6 @@ function dupeCheck(item){
     return true;
 }
 
-document.querySelector('#submit').addEventListener('click', function(){
-    let input = document.querySelector('#item');
-    let item = input.value;
-    if ((item) && (dupeCheck(item))){
-        if (item.includes(',')){
-            let items = item.split(',');
-            for (let i of items){
-                document.querySelector('#list').appendChild(createItem(i.trim()));
-                console.log(i.trim());
-            }
-        }else{
-            document.querySelector('#list').appendChild(createItem(item));
-            console.log(item.trim());
-        }
-
-    }else{
-        console.log("Empty or duplicate Item. Nothing Added.");
-    }
-    input.value = '';
-    document.querySelector('#item').focus();
-});
-
-document.querySelector('#item').addEventListener('keydown', function(event){
-    if (event.keyCode === 13){
-        document.querySelector('#submit').click();
-    }
-});
-
 function createItem(item){
     let p = document.createElement('p');
     let check = document.createElement('i');
@@ -70,4 +42,54 @@ function createItem(item){
     return p;
 }
 
+document.querySelector('#submit').addEventListener('click', function(){
+    let input = document.querySelector('#item');
+    let item = input.value;
+    if ((item) && (dupeCheck(item))){
+        if (item.includes(',')){
+            let items = item.split(',');
+            for (let i of items){
+                document.querySelector('#list').appendChild(createItem(i.trim()));
+                console.log(i.trim());
+            }
+        }else{
+            document.querySelector('#list').appendChild(createItem(item));
+            console.log(item.trim());
+        }
 
+    }else{
+        console.log("Empty or duplicate Item. Nothing Added.");
+    }
+    input.value = '';
+    document.querySelector('#item').focus();
+});
+
+document.querySelector('#item').addEventListener('keydown', function(event){
+    if (event.keyCode === 13){
+        document.querySelector('#submit').click();
+    }
+});
+
+document.querySelector('#item').addEventListener('input', function(){
+    
+    if (this.value === 'export'){
+        let items = document.querySelector('#list').querySelectorAll('p');
+        let itemText = '';
+
+        items.forEach(item => {
+            itemText += item.innerText + ',';
+        });
+
+        if (itemText){
+            // alert(itemText.substring(0, itemText.length - 1))
+            navigator.clipboard.writeText(itemText.substring(0, itemText.length - 1));
+            this.classList.add('is-success');
+            this.value = 'Export Complete!';
+            setTimeout(() => {
+                this.value = '';
+                this.classList.remove('is-success')
+            }, 1000);
+        }
+    }
+    
+})
