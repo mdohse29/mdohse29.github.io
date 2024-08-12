@@ -5,6 +5,10 @@ p {
     user-select: none;
 }
 
+hr {
+    margin: 0px;
+}
+
 i.fa-check {
     margin-left: 1em;
 }
