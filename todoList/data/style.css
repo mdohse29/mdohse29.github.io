@@ -5,16 +5,11 @@ hr {
 #listItem {
     cursor: pointer;
     font-size: 20px;
-    /* padding-left: 2%; */
     border-bottom: 1px solid lightgray;
     user-select: none;
 }
 
-i.fa-check {
-    margin-left: 1em;
-}
-
-i.fa-caret-right {
+i.fa-caret-right, i.fa-check {
     margin-right: 1%;
     margin-left: 1%;
 }

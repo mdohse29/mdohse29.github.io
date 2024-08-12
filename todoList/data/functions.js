@@ -26,7 +26,7 @@ function createItem(item){
     marker.classList.add('fa-solid', 'fa-caret-right')
     p.innerHTML = item;
     p.prepend(marker);
-    p.appendChild(check);
+    // p.appendChild(check);
     p.classList.add(['mb-2']);
     p.title = "Click to remove item.";
     p.id = 'listItem';
@@ -41,8 +41,11 @@ function createItem(item){
     })
 
     p.addEventListener('click', function(){
+        let icon = this.querySelector('.fa-caret-right');
+
         this.classList.add('has-background-success-light');
-        this.querySelector('.fa-check').classList.remove('dnone');
+        icon.classList.remove('fa-caret-right')
+        icon.classList.add('fa-check', 'fa-beat');
         setTimeout(() => {
             this.remove();
             setCookie();
