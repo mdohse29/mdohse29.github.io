@@ -20,15 +20,17 @@ function createItem(item){
 
     let p = document.createElement('p');
     let check = document.createElement('i');
+    let marker = document.createElement('i');
 
-    check.classList.add('dnone');
-    check.classList.add('fa-solid');
-    check.classList.add('fa-check');
-    check.classList.add('fa-beat');
+    check.classList.add('fa-solid', 'fa-check', 'fa-beat', 'dnone');
+    marker.classList.add('fa-solid', 'fa-caret-right')
     p.innerHTML = item;
+    p.prepend(marker);
     p.appendChild(check);
     p.classList.add(['mb-2']);
     p.title = "Click to remove item.";
+    p.id = 'listItem';
+
     
     p.addEventListener('mouseenter', function(){
         this.classList.add('has-background-link-light');
@@ -39,7 +41,7 @@ function createItem(item){
     })
 
     p.addEventListener('click', function(){
-        this.classList.add('has-background-success');
+        this.classList.add('has-background-success-light');
         this.querySelector('.fa-check').classList.remove('dnone');
         setTimeout(() => {
             this.remove();
@@ -70,7 +72,7 @@ function getCookie(){
 
 function setCookie(){
 
-    let items = document.querySelector('#list').querySelectorAll('p');
+    let items = document.querySelector('#list').querySelectorAll('#listItem'); // ptag ref
     let itemText = '';
 
     items.forEach(item => {
@@ -79,11 +81,11 @@ function setCookie(){
 
     if (itemText){
 
-        document.cookie = 'list=' + itemText.substring(0, itemText.length - 1) + ';max-age=31536000;samesite=none;secure'
+        document.cookie = 'list=' + itemText.substring(0, itemText.length - 1) + ';max-age=31536000;samesite=none;secure';
 
     }else{
 
-        document.cookie = 'list=;max-age=0;samesite=none;secure'
+        document.cookie = 'list=;max-age=0;samesite=none;secure';
 
     }
 }
