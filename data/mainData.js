@@ -13,7 +13,7 @@ const drawers = {
                 }
             },
             button2: {
-                hidden: false,
+                hidden: true,
                 url: './misc/movieList/',
                 text: {
                     main: 'Full Movie List',
