@@ -1,19 +1,26 @@
 function dupeCheck(item){
+
     let currentList = document.querySelectorAll('#list > p');
+
     if (currentList){
+
         for (let element of currentList){
-                // console.log(element.innerText);
+
             if (element.innerText == item){
                 return false;
             }
+
         }
+
     }
     return true;
 }
 
 function createItem(item){
+
     let p = document.createElement('p');
     let check = document.createElement('i');
+
     check.classList.add('dnone');
     check.classList.add('fa-solid');
     check.classList.add('fa-check');
@@ -36,6 +43,7 @@ function createItem(item){
         this.querySelector('.fa-check').classList.remove('dnone');
         setTimeout(() => {
             this.remove();
+            setCookie();
         }, 1000);
     });
 
@@ -43,36 +51,53 @@ function createItem(item){
 }
 
 document.querySelector('#submit').addEventListener('click', function(){
+
     let input = document.querySelector('#item');
     let item = input.value;
+
     if ((item) && (dupeCheck(item))){
+
         if (item.includes(',')){
+
             let items = item.split(',');
+
             for (let i of items){
+
                 document.querySelector('#list').appendChild(createItem(i.trim()));
                 console.log(i.trim());
+
             }
+
         }else{
+
             document.querySelector('#list').appendChild(createItem(item));
             console.log(item.trim());
+
         }
 
     }else{
+
         console.log("Empty or duplicate Item. Nothing Added.");
+
     }
+
     input.value = '';
+    setCookie();
     document.querySelector('#item').focus();
 });
 
 document.querySelector('#item').addEventListener('keydown', function(event){
+
     if (event.keyCode === 13){
         document.querySelector('#submit').click();
     }
+
 });
 
 document.querySelector('#item').addEventListener('input', function(){
     
     if (this.value === 'export'){
+
         let items = document.querySelector('#list').querySelectorAll('p');
         let itemText = '';
 
@@ -81,8 +106,12 @@ document.querySelector('#item').addEventListener('input', function(){
         });
 
         if (itemText){
+
             // alert(itemText.substring(0, itemText.length - 1))
             navigator.clipboard.writeText(itemText.substring(0, itemText.length - 1));
+            // document.cookie = 'list=' + itemText.substring(0, itemText.length - 1) + ';max-age=31536000;'
+            // console.log(getCookie());
+
             let submit = document.querySelector('#submit');
 
             submit.setAttribute('disabled', 'disabled');
@@ -93,7 +122,63 @@ document.querySelector('#item').addEventListener('input', function(){
                 this.classList.remove('is-success');
                 submit.removeAttribute('disabled');
             }, 1000);
+
+        }else{
+
+            document.cookie = 'list=';
+            console.log(getCookie());
+
         }
+
     }
     
-})
+});
+
+function getCookie(){
+
+    let data = document.cookie;
+
+    data = data.split(';');
+
+    for (let cookie in data){
+
+        let cookieData = data[cookie].split('=');
+
+        if (cookieData[0] === 'list'){
+            return cookieData[1];
+        }
+
+    }
+
+}
+
+function setCookie(){
+
+    let items = document.querySelector('#list').querySelectorAll('p');
+    let itemText = '';
+
+    items.forEach(item => {
+        itemText += item.innerText + ',';
+    });
+
+    if (itemText){
+
+        document.cookie = 'list=' + itemText.substring(0, itemText.length - 1) + ';max-age=31536000;'
+
+    }else{
+
+        document.cookie = 'list=';
+
+    }
+}
+
+window.onload = function(){
+
+    let cookie = getCookie();
+
+    if (cookie){
+        document.querySelector('#item').value = cookie;
+        document.querySelector('#submit').click();
+    }
+}
+
