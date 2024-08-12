@@ -12,3 +12,13 @@ i.fa-check {
 .dnone {
     display: none !important;
 }
+
+#item {
+    width: 40%;
+}
+
+@media (width < 770px){
+    #item {
+        width: 100%;
+    }
+}

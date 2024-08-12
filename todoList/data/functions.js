@@ -56,6 +56,7 @@ document.querySelector('#submit').addEventListener('click', function(){
     let item = input.value;
 
     if ((item) && (dupeCheck(item))){
+        input.classList.remove('is-danger');
 
         if (item.includes(',')){
 
@@ -64,25 +65,26 @@ document.querySelector('#submit').addEventListener('click', function(){
             for (let i of items){
 
                 document.querySelector('#list').appendChild(createItem(i.trim()));
-                console.log(i.trim());
+                // console.log(i.trim());
 
             }
 
         }else{
 
             document.querySelector('#list').appendChild(createItem(item));
-            console.log(item.trim());
+            // console.log(item.trim());
 
         }
 
+        setCookie();
     }else{
 
+        input.classList.add('is-danger')
         console.log("Empty or duplicate Item. Nothing Added.");
 
     }
 
     input.value = '';
-    setCookie();
     document.querySelector('#item').focus();
 });
 
