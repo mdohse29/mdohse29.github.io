@@ -5,10 +5,24 @@ p {
     user-select: none;
 }
 
+hr {
+    margin: 0px;
+}
+
 i.fa-check {
     margin-left: 1em;
 }
 
 .dnone {
     display: none !important;
+}
+
+#item {
+    width: 40%;
+}
+
+@media (width < 770px){
+    #item {
+        width: 100%;
+    }
 }

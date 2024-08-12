@@ -50,12 +50,51 @@ function createItem(item){
     return p;
 }
 
+function getCookie(){
+
+    let data = document.cookie;
+
+    data = data.split(';');
+
+    for (let cookie in data){
+
+        let cookieData = data[cookie].split('=');
+
+        if (cookieData[0] === 'list'){
+            return cookieData[1];
+        }
+
+    }
+
+}
+
+function setCookie(){
+
+    let items = document.querySelector('#list').querySelectorAll('p');
+    let itemText = '';
+
+    items.forEach(item => {
+        itemText += item.innerText + ',';
+    });
+
+    if (itemText){
+
+        document.cookie = 'list=' + itemText.substring(0, itemText.length - 1) + ';max-age=31536000;samesite=none;secure'
+
+    }else{
+
+        document.cookie = 'list=;max-age=0;samesite=none;secure'
+
+    }
+}
+
 document.querySelector('#submit').addEventListener('click', function(){
 
     let input = document.querySelector('#item');
     let item = input.value;
 
     if ((item) && (dupeCheck(item))){
+        input.classList.remove('is-danger');
 
         if (item.includes(',')){
 
@@ -64,25 +103,26 @@ document.querySelector('#submit').addEventListener('click', function(){
             for (let i of items){
 
                 document.querySelector('#list').appendChild(createItem(i.trim()));
-                console.log(i.trim());
+                // console.log(i.trim());
 
             }
 
         }else{
 
             document.querySelector('#list').appendChild(createItem(item));
-            console.log(item.trim());
+            // console.log(item.trim());
 
         }
 
+        setCookie();
     }else{
 
+        input.classList.add('is-danger')
         console.log("Empty or duplicate Item. Nothing Added.");
 
     }
 
     input.value = '';
-    setCookie();
     document.querySelector('#item').focus();
 });
 
@@ -133,44 +173,6 @@ document.querySelector('#item').addEventListener('input', function(){
     }
     
 });
-
-function getCookie(){
-
-    let data = document.cookie;
-
-    data = data.split(';');
-
-    for (let cookie in data){
-
-        let cookieData = data[cookie].split('=');
-
-        if (cookieData[0] === 'list'){
-            return cookieData[1];
-        }
-
-    }
-
-}
-
-function setCookie(){
-
-    let items = document.querySelector('#list').querySelectorAll('p');
-    let itemText = '';
-
-    items.forEach(item => {
-        itemText += item.innerText + ',';
-    });
-
-    if (itemText){
-
-        document.cookie = 'list=' + itemText.substring(0, itemText.length - 1) + ';max-age=31536000;'
-
-    }else{
-
-        document.cookie = 'list=';
-
-    }
-}
 
 window.onload = function(){
 
