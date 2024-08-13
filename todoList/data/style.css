@@ -1,5 +1,14 @@
+html {
+    background-color: rgba(116, 177, 248, .5);
+    scrollbar-width: none;
+}
+
 hr {
     margin: 0px;
+}
+
+.has-background-success {
+    background-color: rgba(72,199,142,.50) !important;
 }
 
 #listItem {
