@@ -19,14 +19,12 @@ function dupeCheck(item){
 function createItem(item){
 
     let p = document.createElement('p');
-    let check = document.createElement('i');
     let marker = document.createElement('i');
 
-    check.classList.add('fa-solid', 'fa-check', 'fa-beat', 'dnone');
-    marker.classList.add('fa-solid', 'fa-caret-right')
+    marker.classList.add('fa-solid', 'fa-caret-right');
+    marker.setAttribute('aria-hidden', 'false');
     p.innerHTML = item;
     p.prepend(marker);
-    // p.appendChild(check);
     p.classList.add(['mb-2']);
     p.title = "Click to remove item.";
     p.id = 'listItem';
@@ -84,7 +82,7 @@ function setCookie(){
 
     if (itemText){
 
-        document.cookie = 'list=' + itemText.substring(0, itemText.length - 1) + ';max-age=31536000;samesite=none;secure';
+        document.cookie = 'list=' + itemText.substring(0, itemText.length - 1) + ';max-age=31536000';
 
     }else{
 
