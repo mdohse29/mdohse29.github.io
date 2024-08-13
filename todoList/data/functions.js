@@ -23,7 +23,7 @@ function createItem(item){
 
     marker.classList.add('fa-solid', 'fa-caret-right');
     marker.setAttribute('aria-hidden', 'false');
-    p.innerHTML = item;
+    p.innerHTML = item.substring(0, 1).toUpperCase() + item.substring(1);
     p.prepend(marker);
     p.classList.add(['mb-2']);
     p.title = "Click to remove item.";
