@@ -43,7 +43,7 @@ function createItem(item){
     p.addEventListener('click', function(){
         let icon = this.querySelector('.fa-caret-right');
 
-        this.classList.add('has-background-success-light');
+        // this.classList.add('has-background-success');
         icon.classList.remove('fa-caret-right')
         icon.classList.add('fa-check', 'fa-beat');
         setTimeout(() => {
