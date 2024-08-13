@@ -82,7 +82,7 @@ function setCookie(){
 
     if (itemText){
 
-        document.cookie = 'list=' + itemText.substring(0, itemText.length - 1) + ';max-age=31536000';
+        document.cookie = 'list=' + itemText.substring(0, itemText.length - 1) + ';max-age=31536000;samesite=none;secure';
 
     }else{
 
