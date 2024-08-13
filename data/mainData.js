@@ -47,6 +47,15 @@ const drawers = {
                     sub: '',
                     warn: false
                 }
+            },
+            button6: {
+                hidden: false,
+                url: './todoList/',
+                text: {
+                    main: 'Todo List',
+                    sub: 'Temp Save w/ Cookie',
+                    warn: true
+                }
             }
         }
     }
