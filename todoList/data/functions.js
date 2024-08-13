@@ -6,14 +6,14 @@ function dupeCheck(item){
 
         for (let element of currentList){
 
-            if (element.innerText == item){
-                return false;
+            if (element.innerText.toLowerCase() == item.toLowerCase()){
+                return true;
             }
 
         }
 
     }
-    return true;
+    return false;
 }
 
 function createItem(item){
@@ -96,7 +96,7 @@ document.querySelector('#submit').addEventListener('click', function(){
     let input = document.querySelector('#item');
     let item = input.value;
 
-    if ((item) && (dupeCheck(item))){
+    if ((item) && (!dupeCheck(item))){
         input.classList.remove('is-danger');
 
         if (item.includes(',')){
@@ -105,19 +105,22 @@ document.querySelector('#submit').addEventListener('click', function(){
 
             for (let i of items){
 
-                document.querySelector('#list').appendChild(createItem(i.trim()));
-                // console.log(i.trim());
+                if (!dupeCheck(i.trim())){
+                    document.querySelector('#list').appendChild(createItem(i.trim()));
+                    // console.log(i.trim());
+                    setCookie();
+                }
 
             }
 
         }else{
 
-            document.querySelector('#list').appendChild(createItem(item));
+            document.querySelector('#list').appendChild(createItem(item.trim()));
+            setCookie();
             // console.log(item.trim());
 
         }
 
-        setCookie();
     }else{
 
         input.classList.add('is-danger')
