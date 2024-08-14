@@ -16,13 +16,13 @@ function dupeCheck(item){
     return false;
 }
 
-function createItem(item){
-
+function createItem(item, hasSub = false){
+    // Pass the hasSub boolean to determine what element to create
     let p = document.createElement('p');
     let marker = document.createElement('i');
 
-    marker.classList.add('fa-solid', 'fa-caret-right');
-    marker.setAttribute('aria-hidden', 'false');
+    marker.classList.add('bi', 'bi-caret-right-fill');
+    // marker.setAttribute('aria-hidden', 'false');
     p.innerHTML = item.substring(0, 1).toUpperCase() + item.substring(1);
     p.prepend(marker);
     p.classList.add(['mb-2']);
@@ -39,11 +39,11 @@ function createItem(item){
     })
 
     p.addEventListener('click', function(){
-        let icon = this.querySelector('.fa-caret-right');
+        let icon = this.querySelector('.bi-caret-right-fill');
 
         // this.classList.add('has-background-success');
-        icon.classList.remove('fa-caret-right')
-        icon.classList.add('fa-check', 'fa-beat');
+        icon.classList.remove('bi-caret-right-fill')
+        icon.classList.add('bi-check-circle-fill', 'has-text-success');
         setTimeout(() => {
             this.remove();
             setCookie();
@@ -54,6 +54,7 @@ function createItem(item){
 }
 
 function getCookie(){
+    // TODO: this needs to be altered for sub-lists
 
     let data = document.cookie;
 
@@ -93,7 +94,7 @@ function setCookie(){
 
 document.querySelector('#submit').addEventListener('click', function(){
 
-    let input = document.querySelector('#item');
+    let input = document.querySelector('#item'); // Pass the element instead of text to make this more universal 2x button 1 listener
     let item = input.value;
 
     if ((item) && (!dupeCheck(item))){
@@ -131,6 +132,8 @@ document.querySelector('#submit').addEventListener('click', function(){
     input.value = '';
     document.querySelector('#item').focus();
 });
+
+// Make listener for #addSub. Should create sub-list items, example commented out in index
 
 document.querySelector('#item').addEventListener('keydown', function(event){
 

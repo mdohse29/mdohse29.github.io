@@ -72,15 +72,6 @@ const drawers = {
         hidden: false,
         title: 'Company Tools',
         buttons: {
-            button1: {
-                hidden: true,
-                url: 'https://ims-tools.owteam.com/',
-                text: {
-                    main: 'IMS Tools',
-                    sub: '(IL VPN Required)',
-                    warn: true
-                }
-            },
             button2: {
                 hidden: false,
                 url: 'http://learn.bluejacks.edgenuity.com/login/',
@@ -97,15 +88,6 @@ const drawers = {
                     main: 'Cayman Production',
                     sub: 'NEW',
                     warn: false
-                }
-            },
-            button4: {
-                hidden: true,
-                url: 'https://curriculum-management.owteam.com/',
-                text: {
-                    main: 'Cayman Production',
-                    sub: 'OLD Retiring',
-                    warn: true
                 }
             },
             button5: {
@@ -244,15 +226,6 @@ const drawers = {
                     main: 'CW CUT',
                     sub: 'Curriculum Upload Tool',
                     warn: false
-                }
-            },
-            button3: {
-                hidden: true,
-                url: 'http://tools.education2020.com/CMT/',
-                text: {
-                    main: 'CW CMT',
-                    sub: 'OLD<br>Content Management Tool',
-                    warn: true
                 }
             },
             button4: {

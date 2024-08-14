@@ -14,13 +14,25 @@ hr {
 #listItem {
     cursor: pointer;
     font-size: 20px;
+    padding-left: 8px;
     border-bottom: 1px solid lightgray;
     user-select: none;
 }
 
-i.fa-caret-right, i.fa-check {
-    margin-right: 1%;
-    margin-left: 1%;
+#listSubItem {
+    display: block;
+    cursor: pointer;
+    margin-left: 16px;
+    font-size: 16px;
+    user-select: none;
+}
+
+i.bi-check-circle-fill {
+    color: var(--bulma-success);
+}
+
+i.bi-caret-right-fill, i.bi-check-circle-fill {
+    margin-right: 5px;
 }
 
 .main-bg {
