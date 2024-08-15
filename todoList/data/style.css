@@ -69,4 +69,7 @@ i.bi-caret-right-fill, i.bi-check-circle-fill {
     #item {
         width: 100%;
     }
+    .options {
+        left: 25px !important;
+    }
 }
