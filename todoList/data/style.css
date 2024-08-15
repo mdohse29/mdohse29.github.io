@@ -43,7 +43,13 @@ i.bi-caret-right-fill, i.bi-check-circle-fill {
     position: fixed;
     top: 0px;
     left: 0px;
+    border-radius: 15px;
     z-index: 1000;
+}
+
+.options .card, .options .card-footer {
+    border-radius: inherit;
+    background-color:rgb(3, 5, 28);
 }
 
 .options button {
@@ -62,5 +68,8 @@ i.bi-caret-right-fill, i.bi-check-circle-fill {
 @media (width < 770px){
     #item {
         width: 100%;
+    }
+    .options {
+        left: 25px !important;
     }
 }
