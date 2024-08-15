@@ -39,6 +39,18 @@ i.bi-caret-right-fill, i.bi-check-circle-fill {
     background: linear-gradient(.25turn, rgb(116, 210, 248), rgb(248, 116, 210), rgb(210, 248, 116));
 }
 
+.options {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 1000;
+}
+
+.options button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 .dnone {
     display: none !important;
 }

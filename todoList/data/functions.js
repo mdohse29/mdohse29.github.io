@@ -1,4 +1,4 @@
-let parent
+let parentItem = null;
 
 function dupeCheck(item){
 
@@ -56,25 +56,39 @@ function createItem(item, isSub = false){
 
         elem.addEventListener('click', function(event){
             
-            let icon;
+            if (event.target.tagName === 'P' || (event.target.tagName === 'I' && event.target.parentElement.tagName === 'P')){
 
-            if (event.target.tagName == 'I'){
-                icon = event.target.parentElement.querySelector('i');
+                parentItem = ((event.target.tagName === 'P') ? event.target : event.target.parentElement);
+                openOptions(event);
+
             }else{
-                icon = event.target.querySelector('i');
-            }
 
-            // this.classList.add('has-background-success');
-            icon.classList.remove('bi-caret-right-fill')
-            icon.classList.add('bi-check-circle-fill', 'has-text-success');
-            setTimeout(() => {
-                icon.parentElement.remove();
-                setCookie();
-            }, 1000);
+                removeItem(event.target);
+
+            }
+            
         });
     }
 
     return elem;
+}
+
+function removeItem(elem){
+    let icon;
+
+    if (elem.tagName == 'I'){
+        icon = elem.parentElement.querySelector('i');
+    }else{
+        icon = elem.querySelector('i');
+    }
+
+    // this.classList.add('has-background-success');
+    icon.classList.remove('bi-caret-right-fill')
+    icon.classList.add('bi-check-circle-fill', 'has-text-success');
+    setTimeout(() => {
+        icon.parentElement.remove();
+        setCookie();
+    }, 1000);
 }
 
 function getCookie(){
@@ -116,45 +130,108 @@ function setCookie(){
     }
 }
 
-document.querySelector('#addItem').addEventListener('click', function(){
+function closeOptions(){
+    let options = document.querySelector('.options');
+    options.classList.add('dnone');
+    options.removeAttribute('style');
+}
 
-    let input = document.querySelector('#item'); // Pass the element instead of text to make this more universal 2x button 1 listener
-    let item = input.value;
+function openOptions(clickEvent){
+    let options = document.querySelector('.options');
+    options.classList.remove('dnone');
+    options.setAttribute('style', 'top: ' + (clickEvent.y) + 'px; left: ' + (clickEvent.x) + 'px;');
+}
 
-    if ((item) && (!dupeCheck(item))){
-        input.classList.remove('is-danger');
+let buttons = document.querySelectorAll('#addItem, #addSub');
 
-        if (item.includes(',')){
+buttons.forEach(button => {
+    
+    if (button.id === 'addItem'){
+        button.addEventListener('click', function(){
+            let input = document.querySelector('#item');
+            let item = input.value;
 
-            let items = item.split(',');
+            if ((item) && (!dupeCheck(item))){
+                // input.classList.remove('is-danger');
 
-            for (let i of items){
+                if (item.includes(',')){
 
-                if (!dupeCheck(i.trim())){
-                    document.querySelector('#list').appendChild(createItem(i.trim()));
-                    // console.log(i.trim());
+                    let items = item.split(',');
+
+                    for (let i of items){
+
+                        if (!dupeCheck(i.trim())){
+
+                            document.querySelector('#list').appendChild(createItem(i.trim()));
+                            setCookie();
+
+                        }
+
+                    }
+
+                }else{
+
+                    document.querySelector('#list').appendChild(createItem(item.trim()));
                     setCookie();
+
                 }
+
+            }else{
+
+                input.classList.add('is-danger')
+                console.log("Empty or duplicate Item. Nothing Added.");
 
             }
 
-        }else{
+            input.value = '';
+            document.querySelector('#item').focus();
 
-            document.querySelector('#list').appendChild(createItem(item.trim()));
-            setCookie();
-            // console.log(item.trim());
-
-        }
-
+        })
     }else{
+        button.addEventListener('click', function(){
+            let input = document.querySelector('#item');
+            let item = input.value;
 
-        input.classList.add('is-danger')
-        console.log("Empty or duplicate Item. Nothing Added.");
+            if ((item) && (!dupeCheck(item))){
+                // input.classList.remove('is-danger');
 
+                if (item.includes(',')){
+
+                    let items = item.split(',');
+
+                    for (let i of items){
+
+                        if (!dupeCheck(i.trim())){
+
+                            parentItem.appendChild(createItem(i.trim(), true));
+                            setCookie();
+
+                        }
+
+                    }
+
+                }else{
+
+                    parentItem.appendChild(createItem(item.trim(), true));
+                    setCookie();
+
+                }
+
+            }else{
+
+                input.classList.add('is-danger')
+                console.log("Empty or duplicate Item. Nothing Added.");
+
+            }
+
+            input.value = '';
+            document.querySelector('#item').focus();
+            document.querySelector('#addItem').classList.remove('dnone');
+            document.querySelector('#addSub').classList.add('dnone');
+        });
     }
+    
 
-    input.value = '';
-    document.querySelector('#item').focus();
 });
 
 // Make listener for #addSub. Should create sub-list items, example commented out in index
@@ -162,12 +239,18 @@ document.querySelector('#addItem').addEventListener('click', function(){
 document.querySelector('#item').addEventListener('keydown', function(event){
 
     if (event.keyCode === 13){
-        document.querySelector('#addItem').click();
+        let buttons = document.querySelectorAll('#addItem, #addSub');
+        if (buttons[0].classList.contains('dnone')){
+            buttons[1].click();
+        }else{
+            buttons[0].click();
+        }
     }
 
 });
 
 document.querySelector('#item').addEventListener('input', function(){
+    document.querySelector('#item').classList.remove('is-danger');
     
     if (this.value === 'export'){
 
@@ -206,6 +289,20 @@ document.querySelector('#item').addEventListener('input', function(){
     }
     
 });
+
+document.querySelector('#cancel').addEventListener('click', closeOptions);
+
+document.querySelector('#rmv').addEventListener('click', function(){
+    closeOptions();
+    removeItem(parentItem);
+});
+
+document.querySelector('#crtSub').addEventListener('click', function(){
+    closeOptions();
+    document.querySelector('#addItem').classList.add('dnone');
+    document.querySelector('#addSub').classList.remove('dnone');
+    document.querySelector('#item').focus();
+})
 
 window.onload = function(){
 

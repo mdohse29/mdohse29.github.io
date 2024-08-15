@@ -18,16 +18,26 @@
                     </div>
                     <div class="card-content is-flex is-justify-content-space-between">
                         <input type="text" name="Item" id="item" class="input is-inline" placeholder="e.g. Laundry or Laundry, Dishes, Yard work" title="Multiple items at once should be separated with a comma ," autocomplete="off">
-                        <div>
+                        <div class="listBtn">
                             <button class="button ml-2 is-rounded is-info is-outlined" id="addItem">Add Item</button>
                             <button class="button ml-2 is-rounded is-info is-outlined dnone" id="addSub">Add Sub Item</button>
                         </div>
                     </div>
                     <hr>
                     <div class="card-content" id="list">
-                        <p id="listItem"><i class="bi bi-caret-right-fill"></i>ipsum dolor sit amet consectetur adipisicing elit<span id="listSubItem"><i class="bi bi-caret-right-fill"></i>Fugit itaque maxime consequuntur molestiae</span><span id="listSubItem"><i class="bi bi-caret-right-fill"></i>Fugit itaque maxime consequuntur molestiae</span></p>
+                        <!-- <p id="listItem"><i class="bi bi-caret-right-fill"></i>ipsum dolor sit amet consectetur adipisicing elit<span id="listSubItem"><i class="bi bi-caret-right-fill"></i>Fugit itaque maxime consequuntur molestiae</span><span id="listSubItem"><i class="bi bi-caret-right-fill"></i>Fugit itaque maxime consequuntur molestiae</span></p> -->
                     </div>
                     <div class="card-footer pb-4 pt-4 main-bg"></div>
+                </div>
+            </div>
+        </div>
+        <div class="options dnone">
+            <div class="card">
+                
+                <div class="card-footer">
+                    <button class="button ml-2 mr-2 is-rounded is-success is-outlined" id="rmv">Complete</button>
+                    <button class="button ml-2 mr-2 is-rounded is-info is-outlined" id="crtSub">Sub List</button>
+                    <button class="button ml-2 mr-2 is-rounded is-danger is-outlined" id="cancel">Cancel</button>
                 </div>
             </div>
         </div>
