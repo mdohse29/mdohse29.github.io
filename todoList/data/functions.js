@@ -38,9 +38,8 @@ function createItem(item, isSub = false){
     elem.innerHTML = item.substring(0, 1).toUpperCase() + item.substring(1);
     elem.prepend(marker);
 
-    if (!isSub)
-
-    elem.title = "Click to remove item.";
+    
+    elem.title = ((isSub) ? "Click to remove item." : "Click For Options");
     elem.id = ((isSub) ? 'listSubItem' : 'listItem');
 
     if (!isSub){
