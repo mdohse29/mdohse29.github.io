@@ -1,3 +1,5 @@
+let parent
+
 function dupeCheck(item){
 
     let currentList = document.querySelectorAll('#list > p');
@@ -6,8 +8,18 @@ function dupeCheck(item){
 
         for (let element of currentList){
 
-            if (element.innerText.toLowerCase() == item.toLowerCase()){
-                return true;
+            if(element.children.length > 1){
+                let items = element.innerText.split('\n');
+
+                for (let i of items){
+                    if (i.toLowerCase() === item.toLowerCase()){
+                        return true;
+                    }
+                }
+            }else{
+                if (element.innerText.toLowerCase() === item.toLowerCase()){
+                    return true;
+                }
             }
 
         }
@@ -16,41 +28,53 @@ function dupeCheck(item){
     return false;
 }
 
-function createItem(item, hasSub = false){
+function createItem(item, isSub = false){
     // Pass the hasSub boolean to determine what element to create
-    let p = document.createElement('p');
+    let elem = document.createElement(((isSub) ? 'span' : 'p'));
     let marker = document.createElement('i');
 
     marker.classList.add('bi', 'bi-caret-right-fill');
     // marker.setAttribute('aria-hidden', 'false');
-    p.innerHTML = item.substring(0, 1).toUpperCase() + item.substring(1);
-    p.prepend(marker);
-    p.classList.add(['mb-2']);
-    p.title = "Click to remove item.";
-    p.id = 'listItem';
+    elem.innerHTML = item.substring(0, 1).toUpperCase() + item.substring(1);
+    elem.prepend(marker);
 
-    
-    p.addEventListener('mouseenter', function(){
-        this.classList.add('has-background-link-light');
-    });
+    if (!isSub)
 
-    p.addEventListener('mouseleave', function(){
-        this.classList.remove('has-background-link-light');
-    })
+    elem.title = "Click to remove item.";
+    elem.id = ((isSub) ? 'listSubItem' : 'listItem');
 
-    p.addEventListener('click', function(){
-        let icon = this.querySelector('.bi-caret-right-fill');
+    if (!isSub){
+        elem.classList.add(['mb-2']);
 
-        // this.classList.add('has-background-success');
-        icon.classList.remove('bi-caret-right-fill')
-        icon.classList.add('bi-check-circle-fill', 'has-text-success');
-        setTimeout(() => {
-            this.remove();
-            setCookie();
-        }, 1000);
-    });
+        elem.addEventListener('mouseenter', function(){
+            this.classList.add('has-background-link-light');
+        });
 
-    return p;
+        elem.addEventListener('mouseleave', function(){
+            this.classList.remove('has-background-link-light');
+        })
+
+        elem.addEventListener('click', function(event){
+            
+            let icon;
+
+            if (event.target.tagName == 'I'){
+                icon = event.target.parentElement.querySelector('i');
+            }else{
+                icon = event.target.querySelector('i');
+            }
+
+            // this.classList.add('has-background-success');
+            icon.classList.remove('bi-caret-right-fill')
+            icon.classList.add('bi-check-circle-fill', 'has-text-success');
+            setTimeout(() => {
+                icon.parentElement.remove();
+                setCookie();
+            }, 1000);
+        });
+    }
+
+    return elem;
 }
 
 function getCookie(){
@@ -78,7 +102,7 @@ function setCookie(){
     let itemText = '';
 
     items.forEach(item => {
-        itemText += item.innerText + ',';
+        itemText += item.innerText.replaceAll('\n', '|') + ',';
     });
 
     if (itemText){
@@ -92,7 +116,7 @@ function setCookie(){
     }
 }
 
-document.querySelector('#submit').addEventListener('click', function(){
+document.querySelector('#addItem').addEventListener('click', function(){
 
     let input = document.querySelector('#item'); // Pass the element instead of text to make this more universal 2x button 1 listener
     let item = input.value;
@@ -138,7 +162,7 @@ document.querySelector('#submit').addEventListener('click', function(){
 document.querySelector('#item').addEventListener('keydown', function(event){
 
     if (event.keyCode === 13){
-        document.querySelector('#submit').click();
+        document.querySelector('#addItem').click();
     }
 
 });
@@ -151,7 +175,7 @@ document.querySelector('#item').addEventListener('input', function(){
         let itemText = '';
 
         items.forEach(item => {
-            itemText += item.innerText + ',';
+            itemText += item.innerText.replaceAll('\n', '|') + ',';
         });
 
         if (itemText){
@@ -161,7 +185,7 @@ document.querySelector('#item').addEventListener('input', function(){
             // document.cookie = 'list=' + itemText.substring(0, itemText.length - 1) + ';max-age=31536000;'
             // console.log(getCookie());
 
-            let submit = document.querySelector('#submit');
+            let submit = document.querySelector('#addItem');
 
             submit.setAttribute('disabled', 'disabled');
             this.classList.add('is-success');
@@ -188,8 +212,21 @@ window.onload = function(){
     let cookie = getCookie();
 
     if (cookie){
-        document.querySelector('#item').value = cookie;
-        document.querySelector('#submit').click();
+        cookie = cookie.split(',');
+
+        cookie.forEach(item => {
+            if (item.includes('|')){
+                let subItems = item.slice(item.indexOf('|')+1).split('|');
+                let p = createItem(item.substring(0, item.indexOf('|')));
+                subItems.forEach(sub => {
+                    p.appendChild(createItem(sub, true));
+                });
+
+                document.querySelector('#list').appendChild(p);
+            }else{
+                document.querySelector('#list').appendChild(createItem(item));
+            }
+        })
     }
 }
 
