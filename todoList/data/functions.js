@@ -9,32 +9,42 @@ function dupeCheck(item){
         for (let element of currentList){
 
             if(element.children.length > 1){
+
                 let items = element.innerText.split('\n');
 
                 for (let i of items){
+
                     if (i.toLowerCase() === item.toLowerCase()){
+
                         return true;
+
                     }
+
                 }
+
             }else{
+
                 if (element.innerText.toLowerCase() === item.toLowerCase()){
+
                     return true;
+
                 }
+
             }
 
         }
 
     }
+
     return false;
 }
 
 function createItem(item, isSub = false){
-    // Pass the hasSub boolean to determine what element to create
+
     let elem = document.createElement(((isSub) ? 'span' : 'p'));
     let marker = document.createElement('i');
 
     marker.classList.add('bi', 'bi-caret-right-fill');
-    // marker.setAttribute('aria-hidden', 'false');
     elem.innerHTML = item.substring(0, 1).toUpperCase() + item.substring(1);
     elem.prepend(marker);
 
@@ -46,11 +56,14 @@ function createItem(item, isSub = false){
         elem.classList.add(['mb-2']);
 
         elem.addEventListener('mouseover', function(){
+
             let bgCheck = document.querySelectorAll('i.has-background-item');
+
             if (bgCheck)
                 bgCheck.forEach(bg => {
                     bg.classList.remove('has-background-item')
-                })
+                });
+
             this.querySelector('i').classList.add('has-background-item');
         });
 
@@ -72,44 +85,51 @@ function createItem(item, isSub = false){
             }
             
         });
+
     }else{
         elem.addEventListener('mouseover', function(){
+
             let bgCheck = document.querySelectorAll('span.has-background-item');
+
             if (bgCheck)
                 bgCheck.forEach(bg => {
                     bg.classList.remove('has-background-item')
-                })
+                });
+
             this.classList.add('has-background-item');
         });
 
         elem.addEventListener('mouseleave', function(){
+
             this.classList.remove('has-background-item');
+
         })
     }
 
     return elem;
+
 }
 
 function removeItem(elem){
-    let icon;
+    let icon = elem;
 
-    if (elem.tagName == 'I'){
-        icon = elem.parentElement.querySelector('i');
-    }else{
+    if (icon.tagName != 'I'){
+
         icon = elem.querySelector('i');
+
     }
 
-    // this.classList.add('has-background-success');
     icon.classList.remove('bi-caret-right-fill')
     icon.classList.add('bi-check-circle-fill', 'has-text-success');
+
     setTimeout(() => {
         icon.parentElement.remove();
         setCookie();
     }, 1000);
+
 }
 
 function getCookie(){
-    // TODO: this needs to be altered for sub-lists
 
     let data = document.cookie;
 
@@ -133,7 +153,9 @@ function setCookie(){
     let itemText = '';
 
     items.forEach(item => {
+
         itemText += item.innerText.replaceAll('\n', '|') + ',';
+
     });
 
     if (itemText){
@@ -145,18 +167,25 @@ function setCookie(){
         document.cookie = 'list=;max-age=0;samesite=none;secure';
 
     }
+
 }
 
 function closeOptions(){
+
     let options = document.querySelector('.options');
+
     options.classList.add('dnone');
     options.removeAttribute('style');
+
 }
 
 function openOptions(clickEvent){
+
     let options = document.querySelector('.options');
+
     options.classList.remove('dnone');
-    options.setAttribute('style', 'top: ' + (clickEvent.y) + 'px; left: ' + (clickEvent.x) + 'px;');
+    options.setAttribute('style', 'top: ' + (clickEvent.y - 30) + 'px; left: ' + (clickEvent.x - 27) + 'px;');
+
 }
 
 let buttons = document.querySelectorAll('#addItem, #addSub');
@@ -169,7 +198,6 @@ buttons.forEach(button => {
             let item = input.value;
 
             if ((item) && (!dupeCheck(item))){
-                // input.classList.remove('is-danger');
 
                 if (item.includes(',')){
 
@@ -210,7 +238,6 @@ buttons.forEach(button => {
             let item = input.value;
 
             if ((item) && (!dupeCheck(item))){
-                // input.classList.remove('is-danger');
 
                 if (item.includes(',')){
 
@@ -244,31 +271,41 @@ buttons.forEach(button => {
             input.value = '';
             document.querySelector('#item').focus();
             if (!input.classList.contains('is-danger')){
+
                 document.querySelector('#addItem').classList.remove('dnone');
                 document.querySelector('#addSub').classList.add('dnone');
+
             }
+
         });
+
     }
     
 
 });
 
-// Make listener for #addSub. Should create sub-list items, example commented out in index
-
 document.querySelector('#item').addEventListener('keydown', function(event){
 
     if (event.keyCode === 13){
+
         let buttons = document.querySelectorAll('#addItem, #addSub');
+
         if (buttons[0].classList.contains('dnone')){
+
             buttons[1].click();
+
         }else{
+
             buttons[0].click();
+
         }
+
     }
 
 });
 
 document.querySelector('#item').addEventListener('input', function(){
+
     document.querySelector('#item').classList.remove('is-danger');
     
     if (this.value === 'export'){
@@ -277,7 +314,9 @@ document.querySelector('#item').addEventListener('input', function(){
         let itemText = '';
 
         items.forEach(item => {
+
             itemText += item.innerText.replaceAll('\n', '|') + ',';
+
         });
 
         if (itemText){
@@ -292,6 +331,7 @@ document.querySelector('#item').addEventListener('input', function(){
             submit.setAttribute('disabled', 'disabled');
             this.classList.add('is-success');
             this.value = 'Export Complete!';
+
             setTimeout(() => {
                 this.value = '';
                 this.classList.remove('is-success');
@@ -312,37 +352,53 @@ document.querySelector('#item').addEventListener('input', function(){
 document.querySelector('#cancel').addEventListener('click', closeOptions);
 
 document.querySelector('#rmv').addEventListener('click', function(){
+
     closeOptions();
     removeItem(parentItem);
+
 });
 
 document.querySelector('#crtSub').addEventListener('click', function(){
+
     closeOptions();
     document.querySelector('#addItem').classList.add('dnone');
     document.querySelector('#addSub').classList.remove('dnone');
     document.querySelector('#item').focus();
-})
+
+});
 
 window.onload = function(){
 
     let cookie = getCookie();
 
     if (cookie){
+        
         cookie = cookie.split(',');
 
         cookie.forEach(item => {
+
             if (item.includes('|')){
+
                 let subItems = item.slice(item.indexOf('|')+1).split('|');
                 let p = createItem(item.substring(0, item.indexOf('|')));
+
                 subItems.forEach(sub => {
+
                     p.appendChild(createItem(sub, true));
+
                 });
 
                 document.querySelector('#list').appendChild(p);
+
             }else{
+
                 document.querySelector('#list').appendChild(createItem(item));
+
             }
-        })
+
+        });
+
     }
+
 }
 
