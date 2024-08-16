@@ -57,6 +57,19 @@ i.bi-caret-right-fill, i.bi-check-circle-fill {
     margin-bottom: 20px;
 }
 
+.has-background-item {
+    background-color: rgba(116, 210, 248, .2);
+}
+
+.has-background-subitem {
+    background-color: rgba(248, 116, 210, .2);
+}
+
+.shadow {
+    box-shadow: 15px 0px 0px grey;
+    font-size: larger;
+}
+
 .dnone {
     display: none !important;
 }

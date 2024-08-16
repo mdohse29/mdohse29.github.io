@@ -46,11 +46,11 @@ function createItem(item, isSub = false){
         elem.classList.add(['mb-2']);
 
         elem.addEventListener('mouseenter', function(){
-            this.classList.add('has-background-link-light');
+            this.querySelector('i').classList.add('has-background-item');
         });
 
         elem.addEventListener('mouseleave', function(){
-            this.classList.remove('has-background-link-light');
+            this.querySelector('i').classList.remove('has-background-item');
         })
 
         elem.addEventListener('click', function(event){
@@ -67,6 +67,14 @@ function createItem(item, isSub = false){
             }
             
         });
+    }else{
+        elem.addEventListener('mouseenter', function(){
+            this.classList.add('has-background-item');
+        });
+
+        elem.addEventListener('mouseleave', function(){
+            this.classList.remove('has-background-item');
+        })
     }
 
     return elem;
