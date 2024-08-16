@@ -158,7 +158,7 @@ document.body.prepend(
                     ])
                 }
             ]),
-            /*4:nestElem([
+            4:nestElem([
                 mkDiv({class:'row mt-5 align-items-center justify-content-center'}),
                 {
                     1:nestElem([
@@ -169,8 +169,8 @@ document.body.prepend(
                                 mkDiv({class:'card-body pb-0'}),
                                 mkDiv({class:'card-title'}),
                                 {
-                                    1:mkHead({hType:'h3', class:'h3', inner:'The Gift Picker'}), // Title
-                                    2:mkP({class:'frame-info dnone', inner:'This page is quite old and is going to get redone soon. Just FYI'})
+                                    1:mkHead({hType:'h3', class:'h3', inner:'ToDo List'})/*, // Title
+                                    2:mkP({class:'frame-info dnone', inner:'This page is quite old and is going to get redone soon. Just FYI'})*/
                                 }
                             ]),
                             2:nestElem([
@@ -179,7 +179,7 @@ document.body.prepend(
                                     mkDiv({class:'ratio'}),
                                     {
                                         1:mkDiv({class:'frame-cover '}),
-                                        2:mkElem({elemType:'iframe', scrolling:'no', src:'../picker/'}) // IFRAME
+                                        2:mkElem({elemType:'iframe', scrolling:'no', src:'../todoList/'}) // IFRAME
                                     }
                                 ])
                             ])
@@ -214,7 +214,7 @@ document.body.prepend(
                         }
                     ])
                 }
-            ]),*/
+            ]),
             5:mkDiv({class:'row pt-3 pb-4 mb-0 mt-5 ' + ((!browserInfo.includes('Mobile')) ? 'sticky-bottom' : '') + ' footer'})
         }
     ])

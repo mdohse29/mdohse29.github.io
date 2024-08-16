@@ -45,7 +45,12 @@ function createItem(item, isSub = false){
     if (!isSub){
         elem.classList.add(['mb-2']);
 
-        elem.addEventListener('mouseenter', function(){
+        elem.addEventListener('mouseover', function(){
+            let bgCheck = document.querySelectorAll('i.has-background-item');
+            if (bgCheck)
+                bgCheck.forEach(bg => {
+                    bg.classList.remove('has-background-item')
+                })
             this.querySelector('i').classList.add('has-background-item');
         });
 
@@ -68,7 +73,12 @@ function createItem(item, isSub = false){
             
         });
     }else{
-        elem.addEventListener('mouseenter', function(){
+        elem.addEventListener('mouseover', function(){
+            let bgCheck = document.querySelectorAll('span.has-background-item');
+            if (bgCheck)
+                bgCheck.forEach(bg => {
+                    bg.classList.remove('has-background-item')
+                })
             this.classList.add('has-background-item');
         });
 
@@ -226,15 +236,17 @@ buttons.forEach(button => {
 
             }else{
 
-                input.classList.add('is-danger')
+                input.classList.add('is-danger');
                 console.log("Empty or duplicate Item. Nothing Added.");
 
             }
 
             input.value = '';
             document.querySelector('#item').focus();
-            document.querySelector('#addItem').classList.remove('dnone');
-            document.querySelector('#addSub').classList.add('dnone');
+            if (!input.classList.contains('is-danger')){
+                document.querySelector('#addItem').classList.remove('dnone');
+                document.querySelector('#addSub').classList.add('dnone');
+            }
         });
     }
     
