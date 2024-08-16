@@ -193,7 +193,9 @@ let buttons = document.querySelectorAll('#addItem, #addSub');
 buttons.forEach(button => {
     
     if (button.id === 'addItem'){
+
         button.addEventListener('click', function(){
+
             let input = document.querySelector('#item');
             let item = input.value;
 
@@ -231,9 +233,12 @@ buttons.forEach(button => {
             input.value = '';
             document.querySelector('#item').focus();
 
-        })
+        });
+
     }else{
+
         button.addEventListener('click', function(){
+            
             let input = document.querySelector('#item');
             let item = input.value;
 
