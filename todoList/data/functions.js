@@ -184,7 +184,7 @@ function openOptions(clickEvent){
     let options = document.querySelector('.options');
 
     options.classList.remove('dnone');
-    options.setAttribute('style', 'top: ' + (clickEvent.y) + 'px; left: ' + (clickEvent.x) + 'px;');
+    options.setAttribute('style', 'top: ' + (clickEvent.y - 30) + 'px; left: ' + (clickEvent.x - 27) + 'px;');
 
 }
 
@@ -399,6 +399,6 @@ window.onload = function(){
         });
 
     }
-    
+
 }
 
