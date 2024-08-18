@@ -7,16 +7,29 @@ hr {
     margin: 0px;
 }
 
+h4.h4 {
+    font-size: 1.5em;
+}
+
 .has-background-success {
     background-color: rgba(72,199,142,.50) !important;
 }
 
-#listItem {
+#listItem, #doneSubs {
     cursor: pointer;
     font-size: 20px;
     padding-left: 8px;
     border-bottom: 1px solid lightgray;
     user-select: none;
+}
+
+#doneSubs {
+    border: 0px;
+}
+
+#done p {
+    text-decoration: line-through;
+    color: rgb(148, 148, 148);
 }
 
 #listSubItem {
@@ -47,7 +60,7 @@ i.bi-caret-right-fill, i.bi-check-circle-fill {
     z-index: 1000;
 }
 
-.options .card, .options .card-footer {
+.options .card, .options .card-content {
     border-radius: inherit;
     background-color:rgb(3, 5, 28);
 }
@@ -58,7 +71,7 @@ i.bi-caret-right-fill, i.bi-check-circle-fill {
 }
 
 .has-background-item {
-    background-color: rgba(116, 210, 248, .2);
+    background-color: rgba(253, 249, 4, 0.45);
 }
 
 .has-background-subitem {
