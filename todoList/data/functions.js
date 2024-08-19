@@ -217,13 +217,16 @@ function doneContainer(){
     let container = document.createElement('div');
     let head = document.createElement('h4');
     let phForSubs = document.createElement('p');
+    let icon = document.createElement('i');
 
     container.classList.add('card-content', 'pt-0');
     container.id = 'done';
     head.classList.add('h4');
     head.innerText = "Done!";
+    icon.classList.add('bi','bi-check-circle-fill','has-text-success');
     phForSubs.id = 'doneSubs';
 
+    head.prepend(icon);
     container.appendChild(head);
     container.appendChild(phForSubs);
 
