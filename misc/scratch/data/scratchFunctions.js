@@ -99,6 +99,10 @@ $(document).ready(function(){
                 $('#TextArea').val(formatFilename(currentText));
             });
 
+            $('#tgDblSpc').click(function(){
+                $('#dbl').toggleClass('dnone');
+            });
+
             $('#sandr').click(function(){
                 $('.search-replace').removeClass('dnone');
 
