@@ -1,7 +1,7 @@
 const drawers = {
     drawer1: {
         hidden: false,
-        title: 'Home Made Tools',
+        title: 'My Tools',
         buttons: {
             button1: {
                 hidden: true,
