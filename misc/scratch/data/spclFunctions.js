@@ -47,12 +47,12 @@ function crtad(){
                     ])
                 }
             ]),
-            1:mkbtn({class:'btn btn-outline-danger btn-sm', id:'tgDblSpc', inner:'Toggle DblSpc'}),
             2:mkbtn({class:'btn btn-outline-danger btn-sm', id:'sandr', inner:'S&R'}),
             3:mkbtn({class:'btn btn-outline-danger btn-sm' + ((btnenbl) ? ' dnone' : ''), id:'stop', inner:'Disable Text Processing'}),
             4:mkbtn({class:'btn btn-outline-danger btn-sm' + ((btnenbl) ? '' : ' dnone'), id:'start', inner:'Enable Text Processing'}),
             5:mkbtn({class:'btn btn-outline-danger btn-sm', id:'ff', inner:'Format Filename'}),
-            6:mkbtn({class:'btn btn-close btn-dark', id:'ad-close'})
+            6:mkbtn({class:'btn btn-outline-danger btn-sm', id:'tgDblSpc', inner:'Toggle DblSpc'}),
+            20:mkbtn({class:'btn btn-close btn-dark', id:'ad-close'})
         }
     ]);
     
