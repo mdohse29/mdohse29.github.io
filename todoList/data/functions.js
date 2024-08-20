@@ -101,7 +101,7 @@ function setAllCaret(elem){
     let icons = elem.querySelectorAll('i');
 
     icons.forEach(icon => {
-        icon.classList.replace('bi-check-circle-fill', 'bi-caret-right-fill');
+        icon.classList.replace('bi-check-circle-fill', 'bi-card-checklist');
         icon.classList.remove('has-text-success');
     });
 }
@@ -110,7 +110,7 @@ function setAllCheck(elem, isDone = false){
     let icons = elem.querySelectorAll('i');
 
     icons.forEach(icon => {
-        icon.classList.replace('bi-caret-right-fill', 'bi-check-circle-fill');
+        icon.classList.replace('bi-card-checklist', 'bi-check-circle-fill');
         if (isDone){
             icon.classList.remove('has-text-success');
         }else{
@@ -209,7 +209,7 @@ function createItem(item, data = {isSub:false, pid:NaN}){
             inner:item.substring(0, 1).toUpperCase() + item.substring(1)
         }
     );
-    let marker = mkElem({elemType:'i', class:'bi bi-caret-right-fill'});
+    let marker = mkElem({elemType:'i', class:'bi bi-card-checklist'});
 
     elem.prepend(marker);
 
@@ -400,7 +400,7 @@ function openOptions(clickEvent){
 
     }else if (target.id === 'listSubItem'){
 
-        console.log(target.parentElement.parentElement);
+        // console.log(target.parentElement.parentElement);
         if (target.parentElement.parentElement.id === 'done'){
 
             options.querySelector('#undo').classList.remove('dnone');
@@ -409,6 +409,8 @@ function openOptions(clickEvent){
 
         }else if (target.parentElement.parentElement.id === 'list'){
 
+            options.querySelector('#undo').classList.add('dnone');
+            options.querySelector('#tadone').classList.remove('dnone');
             options.querySelector('#crtSub').classList.add('dnone');
 
         }
