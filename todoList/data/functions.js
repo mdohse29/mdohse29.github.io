@@ -1,4 +1,4 @@
-let parentItem = null;
+let targetElement = null;
 
 function dupeCheck(item){
 
@@ -77,16 +77,9 @@ function mlSubItem(){
 
 function clkListItem(event){
             
-    if (event.target.tagName === 'P' || (event.target.tagName === 'I' && event.target.parentElement.tagName === 'P')){
+    targetElement = ((event.target.tagName === 'I') ? event.target.parentElement : event.target);
 
-        parentItem = ((event.target.tagName === 'P') ? event.target : event.target.parentElement);
-        openOptions(event);
-
-    }else{
-
-        removeItem(event.target);
-
-    }
+    openOptions(event);
     
 }
 
@@ -98,27 +91,31 @@ function changeTitle(elem){
 
     }else{
 
-        switch(elem.id){
-
-            case 'listItem':
-                
-                elem.title = 'Click for Options';
-                break;
-
-            case 'listSubItem':
-
-                elem.title = 'Click to remove item.'
-                break;
-
-        }
+        elem.title = 'Click for Options'
 
     }
 
 }
 
+function setAllCaret(elem){
+    let icons = elem.querySelectorAll('i');
+
+    icons.forEach(icon => {
+        icon.classList.replace('bi-check-circle-fill', 'bi-caret-right-fill');
+    });
+}
+
+function setAllCheck(elem){
+    let icons = elem.querySelectorAll('i');
+
+    icons.forEach(icon => {
+        icon.classList.replace('bi-caret-right-fill', 'bi-check-circle-fill');
+    });
+}
+
 function clkUndoItem(){
 
-    let elem = (this.tagName === 'I') ? this.parentElement : this;
+    let elem = targetElement;
     let isSub = (elem.id === 'listSubItem');
 
     if (isSub){
@@ -128,9 +125,9 @@ function clkUndoItem(){
         elem.querySelector('i').classList.remove('has-text-success', 'bi-check-circle-fill');
         elem.querySelector('i').classList.add('bi-caret-right-fill');
         elem.classList.remove('has-background-item');
-        elem.removeEventListener('click', clkUndoItem);
+        elem.removeEventListener('click', clkListItem);
 
-        changeTitle(elem);
+            changeTitle(elem);
 
         if (parent){
 
@@ -138,10 +135,20 @@ function clkUndoItem(){
             setCookie();
 
         }else{
+            // To undo a single item without the parent remove the following
+            // elem = elem.parentElement; // remove
+
+            // setAllCaret(elem); // remove
+            // changeTitle(elem); // remove
+
+            // elem.querySelectorAll('#listSubItem').forEach(child => { //remove
+            //     changeTitle(child);
+            // });
 
             elem.remove();
 
-            document.querySelector('#list').appendChild(createItem(elem.innerText));
+            document.querySelector('#list').appendChild(createItem(elem.innerText)); // uncomment
+            // document.querySelector('#list').appendChild(elem); // remove
             setCookie();
 
         }
@@ -153,7 +160,7 @@ function clkUndoItem(){
 
         children.forEach(child => {
             changeTitle(child);
-        })
+        });
 
         icons.forEach(icon => {
 
@@ -174,6 +181,8 @@ function clkUndoItem(){
 
     }
 
+    closeOptions();
+
     let checkDone = document.querySelector('#done');
 
     if (checkDone && checkDone.querySelectorAll('#listItem, #listSubItem').length === 0)
@@ -188,7 +197,7 @@ function createItem(item, data = {isSub:false, pid:NaN}){
 
     marker.classList.add('bi', 'bi-caret-right-fill');
     elem.innerHTML = item.substring(0, 1).toUpperCase() + item.substring(1);
-    elem.title = ((data.isSub) ? "Click to remove item." : "Click For Options");
+    elem.title = 'Click for Options';
     elem.id = ((data.isSub) ? 'listSubItem' : 'listItem');
 
     elem.prepend(marker);
@@ -255,8 +264,8 @@ function moveElement(elem){
 
         elem.querySelector('i').classList.remove('has-background-item', 'has-text-success');
 
-        elem.removeEventListener('click', clkListItem);
-        elem.addEventListener('click', clkUndoItem);
+        // elem.removeEventListener('click', clkListItem);
+        // elem.addEventListener('click', clkUndoItem);
 
         if (doneChildren.length){
 
@@ -264,7 +273,7 @@ function moveElement(elem){
 
                 if (child.getAttribute('pid') === elem.getAttribute('pid')){
 
-                    child.removeEventListener('click', clkUndoItem);
+                    child.removeEventListener('click', clkListItem);
                     child.remove();
                     elem.appendChild(child);
                 }
@@ -283,7 +292,7 @@ function moveElement(elem){
 
         elem.querySelector('i').classList.remove('has-text-success');
 
-        elem.addEventListener('click', clkUndoItem);
+        elem.addEventListener('click', clkListItem);
         document.querySelector('#doneSubs').appendChild(elem);
 
     }
@@ -364,14 +373,52 @@ function closeOptions(){
     options.classList.add('dnone');
     options.removeAttribute('style');
 
+    options.querySelector('#undo').classList.add('dnone');
+    options.querySelector('#rmv').classList.remove('dnone');
+    options.querySelector('#crtSub').classList.remove('dnone');
+
 }
 
 function openOptions(clickEvent){
 
     let options = document.querySelector('.options');
+    let target = clickEvent.target;
 
     options.classList.remove('dnone');
     options.setAttribute('style', 'top: ' + (clickEvent.y - 30) + 'px; left: ' + (clickEvent.x - 27) + 'px;');
+
+    if (target.tagName === 'I'){
+
+        target = target.parentElement;
+
+    }
+
+    if (target.id === 'listItem'){
+
+        if (target.parentElement.id === 'done'){
+
+            options.querySelector('#undo').classList.remove('dnone');
+            options.querySelector('#rmv').classList.add('dnone');
+            options.querySelector('#crtSub').classList.add('dnone');
+
+        }
+
+    }else if (target.id === 'listSubItem'){
+
+        console.log(target.parentElement.parentElement);
+        if (target.parentElement.parentElement.id === 'done'){
+
+            options.querySelector('#undo').classList.remove('dnone');
+            options.querySelector('#rmv').classList.add('dnone');
+            options.querySelector('#crtSub').classList.add('dnone');
+
+        }else if (target.parentElement.parentElement.id === 'list'){
+
+            options.querySelector('#crtSub').classList.add('dnone');
+
+        }
+
+    }
 
 }
 
@@ -390,7 +437,7 @@ function addSub(){
 
                 if (!dupeCheck(i.trim())){
 
-                    parentItem.appendChild(createItem(i.trim(), {isSub:true, pid:parentItem.getAttribute('pid')}));
+                    targetElement.appendChild(createItem(i.trim(), {isSub:true, pid:targetElement.getAttribute('pid')}));
                     setCookie();
 
                 }
@@ -399,7 +446,7 @@ function addSub(){
 
         }else{
 
-            parentItem.appendChild(createItem(item.trim(), {isSub:true, pid:parentItem.getAttribute('pid')}));
+            targetElement.appendChild(createItem(item.trim(), {isSub:true, pid:targetElement.getAttribute('pid')}));
             setCookie();
 
         }
@@ -510,7 +557,7 @@ function exportListStr(){
 function complete(){
 
     closeOptions();
-    removeItem(parentItem);
+    removeItem(targetElement);
 
 }
 
@@ -567,6 +614,8 @@ document.querySelector('#cancel').addEventListener('click', closeOptions);
 document.querySelector('#rmv').addEventListener('click', complete);
 
 document.querySelector('#crtSub').addEventListener('click', toggleSubButton);
+
+document.querySelector('#undo').addEventListener('click', clkUndoItem);
 
 window.onload = function(){
 
