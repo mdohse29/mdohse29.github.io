@@ -158,63 +158,63 @@ document.body.prepend(
                     ])
                 }
             ]),
-            // 4:nestElem([
-            //     mkDiv({class:'row mt-5 align-items-center justify-content-center'}),
-            //     {
-            //         1:nestElem([
-            //             mkDiv({class:'col-6 col-lg-4 text-center col-content'}),
-            //             mkDiv({class:'card' + ((browserInfo.includes('Mobile')) ? '' : ' shadow')}),
-            //             {
-            //                 1:nestElem([
-            //                     mkDiv({class:'card-body pb-0'}),
-            //                     mkDiv({class:'card-title'}),
-            //                     {
-            //                         1:mkHead({hType:'h3', class:'h3', inner:'ToDo List'})/*, // Title
-            //                         2:mkP({class:'frame-info dnone', inner:'This page is quite old and is going to get redone soon. Just FYI'})*/
-            //                     }
-            //                 ]),
-            //                 2:nestElem([
-            //                     mkDiv({class:'card-body'}),
-            //                     nestElem([
-            //                         mkDiv({class:'ratio'}),
-            //                         {
-            //                             1:mkDiv({class:'frame-cover '}),
-            //                             2:mkElem({elemType:'iframe', scrolling:'no', src:'../todoList/'}) // IFRAME
-            //                         }
-            //                     ])
-            //                 ])
-            //             }
+            4:nestElem([
+                mkDiv({class:'row mt-5 align-items-center justify-content-center'}),
+                {
+                    1:nestElem([
+                        mkDiv({class:'col-6 col-lg-4 text-center col-content'}),
+                        mkDiv({class:'card' + ((browserInfo.includes('Mobile')) ? '' : ' shadow')}),
+                        {
+                            1:nestElem([
+                                mkDiv({class:'card-body pb-0'}),
+                                mkDiv({class:'card-title'}),
+                                {
+                                    1:mkHead({hType:'h3', class:'h3', inner:'ToDo List'})/*, // Title
+                                    2:mkP({class:'frame-info dnone', inner:'This page is quite old and is going to get redone soon. Just FYI'})*/
+                                }
+                            ]),
+                            2:nestElem([
+                                mkDiv({class:'card-body'}),
+                                nestElem([
+                                    mkDiv({class:'ratio'}),
+                                    {
+                                        1:mkDiv({class:'frame-cover '}),
+                                        2:mkElem({elemType:'iframe', scrolling:'no', src:'../todoList/'}) // IFRAME
+                                    }
+                                ])
+                            ])
+                        }
 
-            //         ]),
-            //         2:nestElem([
-            //             mkDiv({class:'col-6 col-lg-4 col-content align-self-start'}),
-            //             mkDiv({class:'container description'}),
-            //             {
-            //                 1:nestElem([
-            //                     mkDiv({class:'drawer border-bottom'}),
-            //                     {
-            //                         1:mkHead({hType:'h5', class:'h5', inner:'Purpose/Description'}),
-            //                         2:mkP({class:'border-start border-end border-bottom dnone', isexpanded:'false', inner:'This page originally started as a simple to-do list project I created during an HTML class. Initially, it allowed users to add items to the list—nothing particularly special. However, one weekend, I decided to enhance its functionality.<br><br>The page now uses cookies for local storage, enabling the list to be saved between sessions, due to not having access to a database at the moment.<br><br>Users can add items and mark them as completed. Once an item is completed, it moves to the "Done" area, where it can be undone by clicking on it. Please note that completed items are not permanently saved; the "Done" area resets once the browser is closed or refreshed, and the items can no longer be undone.<br><br>Additionally, the page supports the creation of sub-lists, allowing users to break down tasks into smaller steps or mini-tasks, which can also be marked as completed.'})
-            //                     }
-            //                 ]),
-            //                 2:nestElem([
-            //                     mkDiv({class:'drawer border-bottom'}),
-            //                     {
-            //                         1:mkHead({hType:'h5', class:'h5', inner:'Assets Used'}),
-            //                         2:mkP({class:'border-start border-end border-bottom dnone', isexpanded:'false', inner:'Something Here'})
-            //                     }
-            //                 ]),
-            //                 3:nestElem([
-            //                     mkDiv({class:'drawer border-bottom'}),
-            //                     {
-            //                         1:mkHead({hType:'h5', class:'h5', inner:'Extra Details'}),
-            //                         2:mkP({class:'border-start border-end border-bottom dnone', isexpanded:'false', inner:'Something Here'})
-            //                     }
-            //                 ])
-            //             }
-            //         ])
-            //     }
-            // ]),
+                    ]),
+                    2:nestElem([
+                        mkDiv({class:'col-6 col-lg-4 col-content align-self-start'}),
+                        mkDiv({class:'container description'}),
+                        {
+                            1:nestElem([
+                                mkDiv({class:'drawer border-bottom'}),
+                                {
+                                    1:mkHead({hType:'h5', class:'h5', inner:'Purpose/Description'}),
+                                    2:mkP({class:'border-start border-end border-bottom dnone', isexpanded:'false', inner:'This page originally started as a simple to-do list project I created during an HTML class. Initially, it allowed users to add items to the list—nothing particularly special. However, one weekend, I decided to enhance its functionality.<br><br>The page now uses cookies for local storage, enabling the list to be saved between sessions, due to not having access to a database at the moment.<br><br>Users can add items and mark them as completed. Once an item is completed, it moves to the "Done" area, where it can be undone by clicking on it and selecting "Undo". Please note that completed items are not permanently saved; the "Done" area resets once the browser is closed or refreshed, and the items can no longer be undone.<br><br>Additionally, the page supports the creation of sub-lists, allowing users to break down tasks into smaller steps or mini-tasks, which can also be marked as completed.'})
+                                }
+                            ]),
+                            2:nestElem([
+                                mkDiv({class:'drawer border-bottom'}),
+                                {
+                                    1:mkHead({hType:'h5', class:'h5', inner:'Assets Used'}),
+                                    2:mkP({class:'border-start border-end border-bottom dnone', isexpanded:'false', inner:'<strong>Styling</strong><br>Bulma CSS - for basic layout and styling<br>Bootstrap Icons - for the icons being used<br>Custom CSS - for the personal touch<br><br><strong>Scripting</strong><br>Javascript - for creating elements and functionality'})
+                                }
+                            ]),
+                            3:nestElem([
+                                mkDiv({class:'drawer border-bottom'}),
+                                {
+                                    1:mkHead({hType:'h5', class:'h5', inner:'Extra Details'}),
+                                    2:mkP({class:'border-start border-end border-bottom dnone', isexpanded:'false', inner:'I didn\'t expect it, but I learned quite a bit while working on this project. I explored the Crypto interface, which I used to generate unique IDs for the list items, and also got a refresher on using cookies on the client side. Though I had worked with cookies before, it had been a long time, so revisiting this was a valuable experience. <br><br> What started as a way to pass the time turned into a surprisingly enjoyable project. Initially, I was just bored and looking for something to do, but enhancing the functionality of this to-do list has made it a tool I now use daily. Despite the abundance of to-do list apps available, I\'ve grown fond of the simplicity of my own creation—though I might be a bit biased!'})
+                                }
+                            ])
+                        }
+                    ])
+                }
+            ]),
             5:mkDiv({class:'row pt-3 pb-4 mb-0 mt-5 ' + ((!browserInfo.includes('Mobile')) ? 'sticky-bottom' : '') + ' footer'})
         }
     ])
