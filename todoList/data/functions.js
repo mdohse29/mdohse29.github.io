@@ -102,14 +102,20 @@ function setAllCaret(elem){
 
     icons.forEach(icon => {
         icon.classList.replace('bi-check-circle-fill', 'bi-caret-right-fill');
+        icon.classList.remove('has-text-success');
     });
 }
 
-function setAllCheck(elem){
+function setAllCheck(elem, isDone = false){
     let icons = elem.querySelectorAll('i');
 
     icons.forEach(icon => {
         icon.classList.replace('bi-caret-right-fill', 'bi-check-circle-fill');
+        if (isDone){
+            icon.classList.remove('has-text-success');
+        }else{
+            icon.classList.add('has-text-success');
+        }
     });
 }
 
@@ -122,8 +128,8 @@ function clkUndoItem(){
 
         let parent = document.querySelector('#list p[pid="' + elem.getAttribute('pid') + '"]');
 
-        elem.querySelector('i').classList.remove('has-text-success', 'bi-check-circle-fill');
-        elem.querySelector('i').classList.add('bi-caret-right-fill');
+        setAllCaret(elem);
+
         elem.classList.remove('has-background-item');
         elem.removeEventListener('click', clkListItem);
 
@@ -164,11 +170,12 @@ function clkUndoItem(){
 
         icons.forEach(icon => {
 
-            icon.classList.remove('has-text-success', 'bi-check-circle-fill', 'has-background-item');
-            icon.classList.add('bi-caret-right-fill');
+            icon.classList.remove('has-background-item');
             icon.parentElement.classList.remove('has-background-item');
 
         });
+
+        setAllCaret(elem);
 
         elem.remove();
         elem.removeEventListener('click', clkUndoItem);
@@ -186,33 +193,34 @@ function clkUndoItem(){
     let checkDone = document.querySelector('#done');
 
     if (checkDone && checkDone.querySelectorAll('#listItem, #listSubItem').length === 0)
-        document.querySelector('#done').remove();
+        checkDone.remove();
 
 }
 
 function createItem(item, data = {isSub:false, pid:NaN}){
 
-    let elem = document.createElement(((data.isSub) ? 'span' : 'p'));
-    let marker = document.createElement('i');
-
-    marker.classList.add('bi', 'bi-caret-right-fill');
-    elem.innerHTML = item.substring(0, 1).toUpperCase() + item.substring(1);
-    elem.title = 'Click for Options';
-    elem.id = ((data.isSub) ? 'listSubItem' : 'listItem');
+    let elem = mkElem(
+        {
+            elemType:((data.isSub) ? 'span' : 'p'),
+            class:((data.isSub) ? '' : 'mb-2'),
+            title:'Click for Options', 
+            id:((data.isSub) ? 'listSubItem' : 'listItem'),
+            pid:((data.isSub) ? data.pid : crypto.randomUUID()),
+            inner:item.substring(0, 1).toUpperCase() + item.substring(1)
+        }
+    );
+    let marker = mkElem({elemType:'i', class:'bi bi-caret-right-fill'});
 
     elem.prepend(marker);
 
     if (!data.isSub){
 
-        elem.setAttribute('pid', crypto.randomUUID());
-        elem.classList.add(['mb-2']);
         elem.addEventListener('mouseover', moListItem);
         elem.addEventListener('mouseleave', mlLitsItem)
         elem.addEventListener('click', clkListItem);
 
     }else{
 
-        elem.setAttribute('pid', data.pid);
         elem.addEventListener('mouseover', moSubItem);
         elem.addEventListener('mouseleave', mlSubItem);
     }
@@ -223,23 +231,13 @@ function createItem(item, data = {isSub:false, pid:NaN}){
 
 function doneContainer(){
 
-    let container = document.createElement('div');
-    let head = document.createElement('h4');
-    let phForSubs = document.createElement('p');
-    let icon = document.createElement('i');
-
-    container.classList.add('card-content', 'pt-0');
-    container.id = 'done';
-    head.classList.add('h4');
-    head.innerText = "Done!";
-    icon.classList.add('bi','bi-check-circle-fill','has-text-success');
-    phForSubs.id = 'doneSubs';
-
-    head.prepend(icon);
-    container.appendChild(head);
-    container.appendChild(phForSubs);
-
-    return container;
+    return nestElem([
+        mkDiv({class:'card-content pt-0', id:'done'}),
+        {
+            1:mkHead({hType:'h4', class:'h4', inner:'<i class="bi bi-check-circle-fill has-text-success"></i>Done!'}),
+            2:mkP({id:'doneSubs'})
+        }
+    ]);
 
 }
 
@@ -254,9 +252,7 @@ function moveElement(elem){
             children.forEach(child => {
                 
                 changeTitle(child);
-
-                child.querySelector('i').classList.remove('bi-caret-right-fill');
-                child.querySelector('i').classList.add('bi-check-circle-fill');
+                setAllCheck(child, true);
 
             });
 
@@ -299,27 +295,22 @@ function moveElement(elem){
 }
 
 function removeItem(elem){
-    let icon = elem;
-
-    if (icon.tagName != 'I'){
-
-        icon = elem.querySelector('i');
-
+    
+    if (elem.tagName === 'I'){
+        elem = elem.parentElement;
     }
 
-    icon.classList.remove('bi-caret-right-fill')
-    icon.classList.add('bi-check-circle-fill', 'has-text-success');
+    setAllCheck(elem);
 
     setTimeout(() => {
-        let parent = icon.parentElement;
 
         if (!document.querySelector('#done')){
             let sib = document.querySelector('.card > .card-footer');
             sib.insertAdjacentElement('beforebegin', doneContainer());
         }
 
-        parent.remove();
-        moveElement(parent);
+        elem.remove();
+        moveElement(elem);
         setCookie();
     }, 1000);
 
@@ -343,7 +334,7 @@ function getCookie(){
 
 }
 
-function setCookie(){
+function setCookie(cookieName = 'list'){
 
     let items = document.querySelector('#list').querySelectorAll('#listItem'); // ptag ref
     let itemText = '';
@@ -356,11 +347,11 @@ function setCookie(){
 
     if (itemText){
 
-        document.cookie = 'list=' + itemText.substring(0, itemText.length - 1) + ';max-age=31536000;samesite=none;secure';
+        document.cookie = cookieName + '=' + itemText.substring(0, itemText.length - 1) + ';max-age=31536000;samesite=none;secure';
 
     }else{
 
-        document.cookie = 'list=;max-age=0;samesite=none;secure';
+        document.cookie = cookieName + '=;max-age=0;samesite=none;secure';
 
     }
 
@@ -374,7 +365,7 @@ function closeOptions(){
     options.removeAttribute('style');
 
     options.querySelector('#undo').classList.add('dnone');
-    options.querySelector('#rmv').classList.remove('dnone');
+    options.querySelector('#tadone').classList.remove('dnone');
     options.querySelector('#crtSub').classList.remove('dnone');
 
 }
@@ -398,7 +389,7 @@ function openOptions(clickEvent){
         if (target.parentElement.id === 'done'){
 
             options.querySelector('#undo').classList.remove('dnone');
-            options.querySelector('#rmv').classList.add('dnone');
+            options.querySelector('#tadone').classList.add('dnone');
             options.querySelector('#crtSub').classList.add('dnone');
 
         }
@@ -409,7 +400,7 @@ function openOptions(clickEvent){
         if (target.parentElement.parentElement.id === 'done'){
 
             options.querySelector('#undo').classList.remove('dnone');
-            options.querySelector('#rmv').classList.add('dnone');
+            options.querySelector('#tadone').classList.add('dnone');
             options.querySelector('#crtSub').classList.add('dnone');
 
         }else if (target.parentElement.parentElement.id === 'list'){
@@ -532,6 +523,8 @@ function exportListStr(){
             // console.log(getCookie());
 
             let submit = document.querySelector('#addItem');
+            if (submit.classList.contains('dnone'))
+                submit = document.querySelector('#addSub');
 
             submit.setAttribute('disabled', 'disabled');
             this.classList.add('is-success');
@@ -611,7 +604,7 @@ document.querySelector('#item').addEventListener('input', exportListStr);
 
 document.querySelector('#cancel').addEventListener('click', closeOptions);
 
-document.querySelector('#rmv').addEventListener('click', complete);
+document.querySelector('#tadone').addEventListener('click', complete);
 
 document.querySelector('#crtSub').addEventListener('click', toggleSubButton);
 
@@ -651,4 +644,3 @@ window.onload = function(){
     }
 
 }
-
