@@ -392,6 +392,10 @@ function openOptions(clickEvent){
             options.querySelector('#tadone').classList.add('dnone');
             options.querySelector('#crtSub').classList.add('dnone');
 
+        }else if (target.parentElement.id === 'list'){
+            options.querySelector('#undo').classList.add('dnone');
+            options.querySelector('#tadone').classList.remove('dnone');
+            options.querySelector('#crtSub').classList.remove('dnone');
         }
 
     }else if (target.id === 'listSubItem'){
