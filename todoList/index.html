@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToDo List</title>
+    <script src="../scripts/crtElm.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="./data/style.css">
@@ -25,7 +26,6 @@
                     </div>
                     <hr>
                     <div class="card-content" id="list">
-                        <!-- <p id="listItem"><i class="bi bi-caret-right-fill"></i>ipsum dolor sit amet consectetur adipisicing elit<span id="listSubItem"><i class="bi bi-caret-right-fill"></i>Fugit itaque maxime consequuntur molestiae</span><span id="listSubItem"><i class="bi bi-caret-right-fill"></i>Fugit itaque maxime consequuntur molestiae</span></p> -->
                     </div>
                     <hr>
                     <div class="card-footer pb-4 pt-4 main-bg"></div>
@@ -34,9 +34,8 @@
         </div>
         <div class="options dnone">
             <div class="card">
-                
                 <div class="card-content p-0">
-                    <button class="button is-small ml-2 mr-2 is-rounded is-success is-outlined" title="Mark todo item done." id="rmv"><i class="bi bi-check-circle"></i>&nbsp;Complete</button>
+                    <button class="button is-small ml-2 mr-2 is-rounded is-success is-outlined" title="Mark todo item done." id="tadone"><i class="bi bi-check-circle"></i>&nbsp;Complete</button>
                     <button class="button is-small ml-2 mr-2 is-rounded is-link is-outlined" title="Add a sub list" id="crtSub"><i class="bi bi-plus-circle-dotted"></i>&nbsp;Sub Item</button>
                     <button class="button is-small ml-2 mr-2 is-rounded is-warning is-outlined dnone" title="Add list item back" id="undo"><i class="bi bi-arrow-counterclockwise"></i>&nbsp;Undo</button>
                     <button class="button is-small ml-2 mr-2 is-rounded is-danger is-outlined" id="cancel"><i class="bi bi-x-circle"></i>&nbsp;Cancel</button>
