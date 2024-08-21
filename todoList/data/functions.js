@@ -1,3 +1,6 @@
+/** TODO: add the ability to add a list with sub items from input
+ * Add size limit warning for cookie storage 3000b + Warn that the list needs to be reduced max=4000
+ */
 let targetElement = null;
 
 function dupeCheck(item){
