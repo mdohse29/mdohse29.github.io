@@ -101,7 +101,7 @@ function setAllCaret(elem){
     let icons = elem.querySelectorAll('i');
 
     icons.forEach(icon => {
-        icon.classList.replace('bi-check-circle-fill', 'bi-caret-right-fill');
+        icon.classList.replace('bi-check-circle-fill', ((icon.parentElement.id === 'listSubItem') ? 'bi-caret-right' : 'bi-caret-right-fill'));
         icon.classList.remove('has-text-success');
     });
 }
@@ -110,7 +110,7 @@ function setAllCheck(elem, isDone = false){
     let icons = elem.querySelectorAll('i');
 
     icons.forEach(icon => {
-        icon.classList.replace('bi-caret-right-fill', 'bi-check-circle-fill');
+        icon.classList.replace(((icon.parentElement.id === 'listSubItem') ? 'bi-caret-right' : 'bi-caret-right-fill'), 'bi-check-circle-fill');
         if (isDone){
             icon.classList.remove('has-text-success');
         }else{
@@ -209,7 +209,7 @@ function createItem(item, data = {isSub:false, pid:NaN}){
             inner:item.substring(0, 1).toUpperCase() + item.substring(1)
         }
     );
-    let marker = mkElem({elemType:'i', class:'bi bi-caret-right-fill'});
+    let marker = mkElem({elemType:'i', class:'bi ' + ((data.isSub) ? 'bi-caret-right' : 'bi-caret-right-fill')});
 
     elem.prepend(marker);
 
