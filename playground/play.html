@@ -1,14 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="../scripts/crtElm.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Testing Stuff</title>
-    <link rel="stylesheet" href="../templates/toggleSwitch/toggleSwitch.css">
+    <title>ToDo List</title>
+    <script src="../scripts/crtElm.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../todoList/data/style.css">
 </head>
 <body>
-    <script src="./data.js"></script>
-    
+    <div class="container mt-5 ">
+        <div class="columns is-centered">
+            <div class="column is-two-thirds">
+               <div class="card">
+                    <div class="card-header main-bg">
+                        <div class="card-header-title is-justify-content-center is-size-2">ToDo List</div>
+                    </div>
+                    <div class="card-content is-flex is-justify-content-space-between">
+                        <input type="text" name="Item" id="item" class="input is-inline" placeholder="e.g. Laundry or Laundry, Dishes, Yard work" title="Multiple items at once should be separated with a comma ," autocomplete="off">
+                        <div class="listBtn">
+                            <button class="button ml-2 is-rounded is-info is-outlined" id="addItem">Add Item</button>
+                            <button class="button ml-2 is-rounded is-link is-outlined dnone" id="addSub">Add Sub Item</button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="card-content" id="list">
+                        <p id="listItem"><i class="bi bi-card-checklist"></i>Something here <span id="listSubItem"><i class="bi bi-card-checklist"></i>Something here</span></p>
+                        <p id="listItem"><i class="bi bi-caret-right-fill"></i>Something here <span id="listSubItem"><i class="bi bi-caret-right-fill"></i>Something here</span></p>
+                        <p id="listItem"><i class="bi bi-circle"></i>Something here <span id="listSubItem"><i class="bi bi-circle"></i>Something here</span></p>
+                        <p id="listItem"><i class="bi bi-list-check"></i>Something here <span id="listSubItem"><i class="bi bi-list-check"></i>Something here</span></p>
+                        <p id="listItem"><i class="bi bi-arrow-right-circle"></i>Something here <span id="listSubItem"><i class="bi bi-arrow-right-circle"></i>Something here</span></p>
+                    </div>
+                    <hr>
+                    <div class="card-footer pb-4 pt-4 main-bg"></div>
+                </div>
+            </div>
+        </div>
+        <div class="options dnone">
+            <div class="card">
+                <div class="card-content p-0">
+                    <button class="button is-small ml-2 mr-2 is-rounded is-success is-outlined" title="Mark todo item done." id="tadone"><i class="bi bi-check-circle"></i>&nbsp;Complete</button>
+                    <button class="button is-small ml-2 mr-2 is-rounded is-link is-outlined" title="Add a sub list" id="crtSub"><i class="bi bi-plus-circle-dotted"></i>&nbsp;Sub Item</button>
+                    <button class="button is-small ml-2 mr-2 is-rounded is-warning is-outlined dnone" title="Add list item back" id="undo"><i class="bi bi-arrow-counterclockwise"></i>&nbsp;Undo</button>
+                    <button class="button is-small ml-2 mr-2 is-rounded is-danger is-outlined" id="cancel"><i class="bi bi-x-circle"></i>&nbsp;Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../todoList/data/functions.js"></script>
 </body>
 </html>

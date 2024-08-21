@@ -44,7 +44,7 @@ i.bi-check-circle-fill {
     color: var(--bulma-success);
 }
 
-i.bi-card-checklist, i.bi-check-circle-fill {
+i.bi {
     margin-right: 5px;
 }
 
