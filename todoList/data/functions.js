@@ -42,6 +42,16 @@ function dupeCheck(item){
     return false;
 }
 
+function resetListBtn(){
+    document.querySelectorAll('.listBtn button').forEach(btn => {
+        if (btn.id === 'addItem'){
+            btn.classList.remove('dnone');
+        }else{
+            btn.classList.add('dnone');
+        }
+    })
+}
+
 function moListItem(){
 
     let bgCheck = document.querySelectorAll('i.has-background-item');
@@ -79,6 +89,9 @@ function mlSubItem(){
 }
 
 function clkListItem(event){
+    resetListBtn();
+
+    document.querySelector('#item').value = '';
             
     targetElement = ((event.target.tagName === 'I') ? event.target.parentElement : event.target);
 
@@ -86,40 +99,37 @@ function clkListItem(event){
     
 }
 
-function changeTitle(elem){
+function clkEdit(){
 
-    if (!elem.title.includes('Click to Undo')){
+    let input = document.querySelector('#item');
+    let icon = targetElement.querySelector('i');
+    let subItems = targetElement.querySelectorAll('#listSubItem');
+    let text = getItemText(targetElement);
+    let newText = input.value.trim();
 
-        elem.title = 'Click to Undo';
+    if (newText && !dupeCheck(newText)){
+        text = text.replace(text, newText);
+        text = text.replace(text.substring(0, 1), text.substring(0, 1).toUpperCase());
+        targetElement.innerText = text;
+        targetElement.prepend(icon);
 
+        subItems.forEach(item => {
+            targetElement.appendChild(item);
+        });
+
+        document.querySelector('#editItem').classList.add('dnone');
+        document.querySelector('#addItem').classList.remove('dnone');
+        input.value = '';
+
+        setCookie();
     }else{
 
-        elem.title = 'Click for Options'
+        input.classList.add('is-danger');
+        input.value = text;
+        input.focus();
 
     }
 
-}
-
-function setAllCaret(elem){
-    let icons = elem.querySelectorAll('i');
-
-    icons.forEach(icon => {
-        icon.classList.replace('bi-check-circle-fill', ((icon.parentElement.id === 'listSubItem') ? 'bi-caret-right' : 'bi-caret-right-fill'));
-        icon.classList.remove('has-text-success');
-    });
-}
-
-function setAllCheck(elem, isDone = false){
-    let icons = elem.querySelectorAll('i');
-
-    icons.forEach(icon => {
-        icon.classList.replace(((icon.parentElement.id === 'listSubItem') ? 'bi-caret-right' : 'bi-caret-right-fill'), 'bi-check-circle-fill');
-        if (isDone){
-            icon.classList.remove('has-text-success');
-        }else{
-            icon.classList.add('has-text-success');
-        }
-    });
 }
 
 function clkUndoItem(){
@@ -197,6 +207,72 @@ function clkUndoItem(){
 
     if (checkDone && checkDone.querySelectorAll('#listItem, #listSubItem').length === 0)
         checkDone.remove();
+
+}
+
+function editItem(){
+
+    closeOptions();
+
+    document.querySelector('#item').value = getItemText(targetElement);
+    document.querySelector('#item').focus();
+    document.querySelector('#editItem').classList.remove('dnone');
+    document.querySelector('#addItem').classList.add('dnone');
+    
+}
+
+function changeTitle(elem){
+
+    if (!elem.title.includes('Click to Undo')){
+
+        elem.title = 'Click to Undo';
+
+    }else{
+
+        elem.title = 'Click for Options'
+
+    }
+
+}
+
+function getItemText(elem){
+
+    return ((elem.id === 'listItem' && elem.innerText.includes('\n')) ? elem.innerText.substring(0, elem.innerText.indexOf('\n')) : elem.innerText);
+
+}
+
+function setAllCaret(elem){
+
+    let icons = elem.querySelectorAll('i');
+
+    icons.forEach(icon => {
+
+        icon.classList.replace('bi-check-circle-fill', ((icon.parentElement.id === 'listSubItem') ? 'bi-caret-right' : 'bi-caret-right-fill'));
+        icon.classList.remove('has-text-success');
+
+    });
+
+}
+
+function setAllCheck(elem, isDone = false){
+
+    let icons = elem.querySelectorAll('i');
+
+    icons.forEach(icon => {
+
+        icon.classList.replace(((icon.parentElement.id === 'listSubItem') ? 'bi-caret-right' : 'bi-caret-right-fill'), 'bi-check-circle-fill');
+
+        if (isDone){
+
+            icon.classList.remove('has-text-success');
+
+        }else{
+
+            icon.classList.add('has-text-success');
+
+        }
+
+    });
 
 }
 
@@ -394,11 +470,13 @@ function openOptions(clickEvent){
             options.querySelector('#undo').classList.remove('dnone');
             options.querySelector('#tadone').classList.add('dnone');
             options.querySelector('#crtSub').classList.add('dnone');
+            options.querySelector('#edit').classList.add('dnone');
 
         }else if (target.parentElement.id === 'list'){
             options.querySelector('#undo').classList.add('dnone');
             options.querySelector('#tadone').classList.remove('dnone');
             options.querySelector('#crtSub').classList.remove('dnone');
+            options.querySelector('#edit').classList.remove('dnone');
         }
 
     }else if (target.id === 'listSubItem'){
@@ -409,11 +487,13 @@ function openOptions(clickEvent){
             options.querySelector('#undo').classList.remove('dnone');
             options.querySelector('#tadone').classList.add('dnone');
             options.querySelector('#crtSub').classList.add('dnone');
+            options.querySelector('#edit').classList.add('dnone');
 
         }else if (target.parentElement.parentElement.id === 'list'){
 
             options.querySelector('#undo').classList.add('dnone');
             options.querySelector('#tadone').classList.remove('dnone');
+            options.querySelector('#edit').classList.remove('dnone');
             options.querySelector('#crtSub').classList.add('dnone');
 
         }
@@ -593,18 +673,25 @@ document.querySelector('#item').addEventListener('keydown', function(event){
 
     if (event.keyCode === 13){
 
-        let buttons = document.querySelectorAll('#addItem, #addSub');
+        let buttons = document.querySelectorAll('.listBtn button');
 
-        if (buttons[0].classList.contains('dnone')){
+        buttons.forEach(btn => {
 
-            buttons[1].click();
+;            if (!btn.classList.contains('dnone')){
 
-        }else{
+                btn.click();
+                return;
 
-            buttons[0].click();
+            }
 
-        }
+        });
 
+    }else if (event.keyCode === 27){
+
+        document.querySelector('#item').value = '';
+        document.querySelector('#item').classList.remove('is-danger');
+
+        resetListBtn();
     }
 
 });
@@ -618,6 +705,10 @@ document.querySelector('#tadone').addEventListener('click', complete);
 document.querySelector('#crtSub').addEventListener('click', toggleSubButton);
 
 document.querySelector('#undo').addEventListener('click', clkUndoItem);
+
+document.querySelector('#editItem').addEventListener('click', clkEdit);
+
+document.querySelector('#edit').addEventListener('click', editItem);
 
 window.onload = function(){
 
