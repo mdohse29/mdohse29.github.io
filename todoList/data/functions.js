@@ -42,14 +42,62 @@ function dupeCheck(item){
     return false;
 }
 
-function resetListBtn(){
-    document.querySelectorAll('.listBtn button').forEach(btn => {
-        if (btn.id === 'addItem'){
-            btn.classList.remove('dnone');
-        }else{
-            btn.classList.add('dnone');
+function errorMsg(message){
+    let currentMsg = document.querySelector('article.is-danger');
+
+    if (currentMsg){
+        currentMsg.remove();
+    }
+
+    document.querySelector('body').prepend(nestElem([
+        mkElem({elemType:'article', class:'message is-small is-danger'}),
+        {
+            1:nestElem([
+                mkDiv({class:'message-header is-justify-content-end'}),
+                mkbtn({class:'delete'})
+            ]),
+            2:mkDiv({class:'message-body', inner:message})
         }
-    })
+    ]));
+
+    document.querySelector('.delete').addEventListener('click', removeMsg);
+
+    document.querySelector('#item').classList.add('is-danger');
+
+    setTimeout(removeMsg, 8000);
+
+}
+
+function removeMsg(){
+
+    let currentMsg = document.querySelector('article.is-danger');
+
+    if (currentMsg){
+
+        currentMsg.remove();
+
+    }
+
+    document.querySelector('#item').focus();
+
+}
+
+function resetListBtn(){
+
+    document.querySelectorAll('.listBtn button').forEach(btn => {
+
+        if (btn.id === 'addItem'){
+
+            btn.classList.remove('dnone');
+
+        }else{
+
+            btn.classList.add('dnone');
+
+        }
+
+    });
+
 }
 
 function moListItem(){
@@ -58,7 +106,7 @@ function moListItem(){
 
     if (bgCheck)
         bgCheck.forEach(bg => {
-            bg.classList.remove('has-background-item')
+            bg.classList.remove('has-background-item');
         });
 
     this.querySelector('i').classList.add('has-background-item');
@@ -124,7 +172,7 @@ function clkEdit(){
         setCookie();
     }else{
 
-        input.classList.add('is-danger');
+        errorMsg('Press ESC on your keyboard to cancel.<br><br>Empty items or duplicate items are not accepted. Check you entry and try again.');
         input.value = text;
         input.focus();
 
@@ -533,7 +581,7 @@ function addSub(){
 
     }else{
 
-        input.classList.add('is-danger');
+        errorMsg('Press ESC on your keyboard to cancel.<br><br>Empty items or duplicate items are not accepted. Check you entry and try again.');
         console.log("Empty or duplicate Item. Nothing Added.");
 
     }
@@ -580,7 +628,7 @@ function addItem(){
 
     }else{
 
-        input.classList.add('is-danger')
+        errorMsg('Empty list items or duplicated items are not accepted.');
         console.log("Empty or duplicate Item. Nothing Added.");
 
     }
@@ -592,6 +640,7 @@ function addItem(){
 
 function exportListStr(){
 
+    removeMsg();
     document.querySelector('#item').classList.remove('is-danger');
     
     if (this.value === 'export'){
@@ -690,6 +739,7 @@ document.querySelector('#item').addEventListener('keydown', function(event){
 
         document.querySelector('#item').value = '';
         document.querySelector('#item').classList.remove('is-danger');
+        removeMsg();
 
         resetListBtn();
     }
