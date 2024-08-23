@@ -42,7 +42,7 @@ function dupeCheck(item){
     return false;
 }
 
-function errorMsg(message){
+function errorMsg(message = 'Empty items or duplicate items are not accepted. Check your entry and try again.'){
     let currentMsg = document.querySelector('article.is-danger');
 
     if (currentMsg){
@@ -60,11 +60,14 @@ function errorMsg(message){
         }
     ]));
 
+    let newMessage = document.querySelector('article.message');
+
     document.querySelector('.delete').addEventListener('click', removeMsg);
 
+    newMessage.setAttribute('style', 'left: calc(100% - ' + (newMessage.scrollWidth + 25) + 'px);');
     document.querySelector('#item').classList.add('is-danger');
 
-    setTimeout(removeMsg, 8000);
+    setTimeout(removeMsg, 5000);
 
 }
 
@@ -83,6 +86,10 @@ function removeMsg(){
 }
 
 function resetListBtn(){
+
+    document.querySelector('#item').classList.remove('is-danger');
+
+    removeMsg();
 
     document.querySelectorAll('.listBtn button').forEach(btn => {
 
@@ -172,7 +179,7 @@ function clkEdit(){
         setCookie();
     }else{
 
-        errorMsg('Press ESC on your keyboard to cancel.<br><br>Empty items or duplicate items are not accepted. Check you entry and try again.');
+        errorMsg();
         input.value = text;
         input.focus();
 
@@ -581,7 +588,7 @@ function addSub(){
 
     }else{
 
-        errorMsg('Press ESC on your keyboard to cancel.<br><br>Empty items or duplicate items are not accepted. Check you entry and try again.');
+        errorMsg();
         console.log("Empty or duplicate Item. Nothing Added.");
 
     }
@@ -628,7 +635,7 @@ function addItem(){
 
     }else{
 
-        errorMsg('Empty list items or duplicated items are not accepted.');
+        errorMsg();
         console.log("Empty or duplicate Item. Nothing Added.");
 
     }

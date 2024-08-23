@@ -13,9 +13,9 @@ h4.h4 {
 
 article.message.is-danger {
     position: absolute;
-    left: 25px;
+    left: calc(100% - 22vw);
     user-select: none;
-    max-width: 20vw;
+    width: 20vw;
     z-index: 2000;
 }
 
@@ -119,7 +119,7 @@ i.bi {
 
     article.message {
         bottom: 0;
-        max-width: 89vw !important;
+        width: 89vw !important;
     }
     
 }
