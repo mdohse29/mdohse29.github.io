@@ -11,6 +11,18 @@ h4.h4 {
     font-size: 1.5em;
 }
 
+article.message.is-danger {
+    position: absolute;
+    left: calc(100% - 22vw);
+    user-select: none;
+    width: 20vw;
+    z-index: 2000;
+}
+
+.delete {
+    cursor: pointer;
+}
+
 .has-background-success {
     background-color: rgba(72,199,142,.50) !important;
 }
@@ -103,6 +115,11 @@ i.bi {
         display: flex !important;
         justify-content: center !important;
         flex-wrap: wrap;
+    }
+
+    article.message {
+        bottom: 0;
+        width: 89vw !important;
     }
     
 }
