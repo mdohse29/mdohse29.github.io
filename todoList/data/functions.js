@@ -43,13 +43,17 @@ function dupeCheck(item){
     return false;
 }
 
-function errorMsg(message = 'Empty items or duplicate items are not accepted. Check your entry and try again.'){
-    let currentMsg = document.querySelector('article.is-danger');
-
+function rmvTimeout(){
     if (errorTimeoutID){
         clearTimeout(errorTimeoutID);
         errorTimeoutID = NaN;
     }
+}
+
+function errorMsg(message = 'Empty items or duplicate items are not accepted. Check your entry and try again.'){
+    let currentMsg = document.querySelector('article.is-danger');
+
+    rmvTimeout();
 
     if (currentMsg){
         currentMsg.remove();
@@ -79,10 +83,8 @@ function errorMsg(message = 'Empty items or duplicate items are not accepted. Ch
 }
 
 function manRmvMsg(){
-    if (errorTimeoutID){
-        clearTimeout(errorTimeoutID);
-        errorTimeoutID = NaN;
-    }
+
+    rmvTimeout();
 
     this.addEventListener('mouseleave', removeMsg);
 
@@ -94,6 +96,7 @@ function removeMsg(){
 
     if (currentMsg){
 
+        rmvTimeout();
         currentMsg.remove();
 
     }
