@@ -2,6 +2,7 @@
  * Add size limit warning for cookie storage 3000b + Warn that the list needs to be reduced max=4000
  */
 let targetElement = null;
+let errorTimeoutID = NaN;
 
 function dupeCheck(item){
 
@@ -45,6 +46,11 @@ function dupeCheck(item){
 function errorMsg(message = 'Empty items or duplicate items are not accepted. Check your entry and try again.'){
     let currentMsg = document.querySelector('article.is-danger');
 
+    if (errorTimeoutID){
+        clearTimeout(errorTimeoutID);
+        errorTimeoutID = NaN;
+    }
+
     if (currentMsg){
         currentMsg.remove();
     }
@@ -63,11 +69,22 @@ function errorMsg(message = 'Empty items or duplicate items are not accepted. Ch
     let newMessage = document.querySelector('article.message');
 
     document.querySelector('.delete').addEventListener('click', removeMsg);
+    newMessage.addEventListener('mouseenter', manRmvMsg);
 
     newMessage.setAttribute('style', 'left: calc(100% - ' + (newMessage.scrollWidth + 25) + 'px);');
     document.querySelector('#item').classList.add('is-danger');
 
-    setTimeout(removeMsg, 5000);
+    errorTimeoutID = setTimeout(removeMsg, 5000);
+
+}
+
+function manRmvMsg(){
+    if (errorTimeoutID){
+        clearTimeout(errorTimeoutID);
+        errorTimeoutID = NaN;
+    }
+
+    this.addEventListener('mouseleave', removeMsg);
 
 }
 
