@@ -178,7 +178,7 @@ function mediaSelect(){
     document.querySelector('#selectMenu').classList.add('dnone');
     let type = document.querySelector('#mediaType').value;
     let build = document.querySelector('#linkData');
-    let submit = mkbtn({class:'button mt-4 is-rounded is-info', id:'submit', inner:'Submit'});
+    let submit = mkbtn({class:'button mt-4 is-rounded is-info', id:'submit', inner:'Generate URL'});
     let reset = mkbtn({class:'button mt-4 is-rounded is-danger ml-3', id:'reset', inner:'Reset'});
 
     build.classList.remove('dnone');

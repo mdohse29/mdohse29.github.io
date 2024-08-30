@@ -24,6 +24,12 @@ function dupeCheck(item){
 
                     }
 
+                    if ((targetElement && (element !== targetElement))){
+                        
+                        break;
+                        
+                    }
+
                 }
 
             }else{
@@ -197,6 +203,8 @@ function clkEdit(){
         input.value = '';
 
         setCookie();
+
+        targetElement = null;
     }else{
 
         errorMsg();
@@ -282,6 +290,8 @@ function clkUndoItem(){
 
     if (checkDone && checkDone.querySelectorAll('#listItem, #listSubItem').length === 0)
         checkDone.remove();
+
+    targetElement = null;
 
 }
 
@@ -620,6 +630,8 @@ function addSub(){
         document.querySelector('#addItem').classList.remove('dnone');
         document.querySelector('#addSub').classList.add('dnone');
 
+        targetElement = null;
+
     }
 
 }
@@ -716,6 +728,8 @@ function complete(){
 
     closeOptions();
     removeItem(targetElement);
+
+    targetElement = null;
 
 }
 
