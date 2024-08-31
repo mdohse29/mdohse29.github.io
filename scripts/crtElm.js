@@ -112,21 +112,10 @@ function mkHead(attr = {hType:'', inner:''}){
         throw new Error("The inner and hType keys are required\nmkHead({hType:'h1', inner:'Text to be displayed'})");
     }
 
-    let header = document.createElement(attr.hType);
+    attr.elemType = attr.hType;
+    delete attr.hType;
 
-    for (let a in attr){
-        if (a.includes('inner')){
-            header.innerHTML = attr[a];
-        }else{
-            if (!a.includes('hType')){
-                if (attr[a]){
-                    header.setAttribute(a, attr[a]);
-                }
-            }
-        }
-    }
-
-    return header;
+    return mkElem(attr);
 }
 
 function createToggle(attr = {}){
@@ -177,6 +166,12 @@ function mkElem(attr = {elemType:''}){
     for (let a in attr){
         if (a.includes('inner')){
             element.innerHTML = attr[a];
+        }else if(a.includes('listeners')){
+            if (attr[a].length){
+                for (let l of attr[a]){
+                    element.addEventListener(l.type, l.execute);
+                }
+            }
         }else{
             if (attr[a] && !a.includes('elemType')){
                 element.setAttribute(a, attr[a]);

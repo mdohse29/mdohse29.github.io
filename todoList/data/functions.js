@@ -50,10 +50,14 @@ function dupeCheck(item){
 }
 
 function rmvTimeout(){
+
     if (errorTimeoutID){
+
         clearTimeout(errorTimeoutID);
         errorTimeoutID = NaN;
+
     }
+
 }
 
 function errorMsg(message = 'Empty items or duplicate items are not accepted. Check your entry and try again.'){
@@ -62,24 +66,27 @@ function errorMsg(message = 'Empty items or duplicate items are not accepted. Ch
     rmvTimeout();
 
     if (currentMsg){
+
         currentMsg.remove();
+
     }
 
     document.querySelector('body').prepend(nestElem([
-        mkElem({elemType:'article', class:'message is-small is-danger'}),
+
+        mkElem({elemType:'article', class:'message is-small is-danger', listeners:[{type:'mouseenter', execute:manRmvMsg}]}),
         {
+
             1:nestElem([
                 mkDiv({class:'message-header is-justify-content-end'}),
-                mkbtn({class:'delete'})
+                mkbtn({class:'delete', listeners:[{type:'click', execute:removeMsg}]})
             ]),
             2:mkDiv({class:'message-body', inner:message})
+
         }
+
     ]));
 
     let newMessage = document.querySelector('article.message');
-
-    document.querySelector('.delete').addEventListener('click', removeMsg);
-    newMessage.addEventListener('mouseenter', manRmvMsg);
 
     newMessage.setAttribute('style', 'left: calc(100% - ' + (newMessage.scrollWidth + 25) + 'px);');
     document.querySelector('#item').classList.add('is-danger');
@@ -104,10 +111,11 @@ function removeMsg(){
 
         rmvTimeout();
         currentMsg.remove();
+        
+        document.querySelector('#item').focus();
 
     }
 
-    document.querySelector('#item').focus();
 
 }
 
@@ -370,24 +378,34 @@ function createItem(item, data = {isSub:false, pid:NaN}){
             title:'Click for Options', 
             id:((data.isSub) ? 'listSubItem' : 'listItem'),
             pid:((data.isSub) ? data.pid : crypto.randomUUID()),
-            inner:item.substring(0, 1).toUpperCase() + item.substring(1)
+            inner:item.substring(0, 1).toUpperCase() + item.substring(1),
+            listeners:((data.isSub) ? [
+                {
+                    type:'mouseover',
+                    execute:moSubItem
+                },
+                {
+                    type:'mouseleave',
+                    execute:mlSubItem
+                }
+            ]:[
+                {
+                    type:'mouseover',
+                    execute:moListItem
+                },
+                {
+                    type:'mouseleave',
+                    execute:mlLitsItem
+                },
+                {
+                    type:'click',
+                    execute:clkListItem
+                }
+            ])
         }
     );
-    let marker = mkElem({elemType:'i', class:'bi ' + ((data.isSub) ? 'bi-caret-right' : 'bi-caret-right-fill')});
 
-    elem.prepend(marker);
-
-    if (!data.isSub){
-
-        elem.addEventListener('mouseover', moListItem);
-        elem.addEventListener('mouseleave', mlLitsItem)
-        elem.addEventListener('click', clkListItem);
-
-    }else{
-
-        elem.addEventListener('mouseover', moSubItem);
-        elem.addEventListener('mouseleave', mlSubItem);
-    }
+    elem.prepend(mkElem({elemType:'i', class:'bi ' + ((data.isSub) ? 'bi-caret-right' : 'bi-caret-right-fill')}));
 
     return elem;
 
@@ -469,8 +487,7 @@ function removeItem(elem){
     setTimeout(() => {
 
         if (!document.querySelector('#done')){
-            let sib = document.querySelector('.card > .card-footer');
-            sib.insertAdjacentElement('beforebegin', doneContainer());
+            document.querySelector('#list-container').appendChild(doneContainer());
         }
 
         elem.remove();
