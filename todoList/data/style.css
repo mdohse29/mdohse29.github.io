@@ -27,6 +27,12 @@ article.message.is-danger {
     background-color: rgba(72,199,142,.50) !important;
 }
 
+#list {
+    max-height: 72vh;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
 #listItem, #doneSubs {
     cursor: pointer;
     font-size: 20px;
