@@ -27,7 +27,7 @@ article.message.is-danger {
     background-color: rgba(72,199,142,.50) !important;
 }
 
-#list {
+#list-container {
     max-height: 72vh;
     overflow-y: scroll;
     scrollbar-width: none;
