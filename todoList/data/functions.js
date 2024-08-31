@@ -104,10 +104,11 @@ function removeMsg(){
 
         rmvTimeout();
         currentMsg.remove();
+        
+        document.querySelector('#item').focus();
 
     }
 
-    document.querySelector('#item').focus();
 
 }
 
