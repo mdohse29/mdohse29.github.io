@@ -197,6 +197,7 @@ function clkEdit(){
     let newText = input.value.trim();
 
     if (newText && !dupeCheck(newText)){
+
         text = text.replace(text, newText);
         text = text.replace(text.substring(0, 1), text.substring(0, 1).toUpperCase());
         targetElement.innerText = text;
@@ -213,6 +214,7 @@ function clkEdit(){
         setCookie();
 
         targetElement = null;
+
     }else{
 
         errorMsg();
@@ -245,20 +247,11 @@ function clkUndoItem(){
             setCookie();
 
         }else{
-            // To undo a single item without the parent remove the following
-            // elem = elem.parentElement; // remove
-
-            // setAllCaret(elem); // remove
-            // changeTitle(elem); // remove
-
-            // elem.querySelectorAll('#listSubItem').forEach(child => { //remove
-            //     changeTitle(child);
-            // });
 
             elem.remove();
 
-            document.querySelector('#list').appendChild(createItem(elem.innerText)); // uncomment
-            // document.querySelector('#list').appendChild(elem); // remove
+            document.querySelector('#list').appendChild(createItem(elem.innerText));
+
             setCookie();
 
         }
@@ -303,15 +296,32 @@ function clkUndoItem(){
 
 }
 
-function editItem(){
+function toggleLstBtn(event){
+
+    let target = event.target;
+
+    if (target.tagName === 'I'){
+        target = target.parentElement;
+    }
 
     closeOptions();
 
-    document.querySelector('#item').value = getItemText(targetElement);
-    document.querySelector('#item').focus();
-    document.querySelector('#editItem').classList.remove('dnone');
-    document.querySelector('#addItem').classList.add('dnone');
+    if (target.id === 'edit'){
+
+        document.querySelector('#item').value = getItemText(targetElement);
+        document.querySelector('#editItem').classList.remove('dnone');
+        document.querySelector('#addSub').classList.add('dnone');
+
+    }else if (target.id === 'crtSub'){
+
+        document.querySelector('#addSub').classList.remove('dnone');
+        document.querySelector('#editItem').classList.add('dnone');
+
+    }
     
+    document.querySelector('#addItem').classList.add('dnone');
+    document.querySelector('#item').focus();
+
 }
 
 function changeTitle(elem){
@@ -530,6 +540,12 @@ function setCookie(cookieName = 'list'){
 
         document.cookie = cookieName + '=' + itemText.substring(0, itemText.length - 1) + ';max-age=31536000;samesite=none;secure';
 
+        if (document.cookie.length > 3000){
+
+            errorMsg('Please start completing items on the list.<br><br>There is < 1000 bytes of storage left.');
+
+        }
+
     }else{
 
         document.cookie = cookieName + '=;max-age=0;samesite=none;secure';
@@ -542,63 +558,63 @@ function closeOptions(){
 
     let options = document.querySelector('.options');
 
-    options.classList.add('dnone');
-    options.removeAttribute('style');
-
-    options.querySelector('#undo').classList.add('dnone');
-    options.querySelector('#tadone').classList.remove('dnone');
-    options.querySelector('#crtSub').classList.remove('dnone');
+    options.remove();
 
 }
 
 function openOptions(clickEvent){
 
-    let options = document.querySelector('.options');
-    let target = clickEvent.target;
+    let container = document.querySelector('.container');
 
-    options.classList.remove('dnone');
-    options.setAttribute('style', 'top: ' + (clickEvent.y - 30) + 'px; left: ' + (clickEvent.x - 27) + 'px;');
-
-    if (target.tagName === 'I'){
-
-        target = target.parentElement;
-
+    if (container.querySelector('.options')){
+        closeOptions();
     }
+    
+    if ((targetElement.id === 'listItem' && targetElement.parentElement.id === 'done') ||
+    (targetElement.id === 'listSubItem' && targetElement.parentElement.parentElement.id === 'done')){
 
-    if (target.id === 'listItem'){
+        container.appendChild(nestElem([
 
-        if (target.parentElement.id === 'done'){
+            mkDiv({class:'options', style:'top: ' + (clickEvent.y - 30) + 'px; left: ' + (clickEvent.x - 27) + 'px;'}),
+            mkDiv({class:'card'}),
+            mkDiv({class:'card-content p-0'}),
+            {
+                1:mkbtn({class:'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', title:'Add list item back', id:'undo', inner:'<i class="bi bi-arrow-counterclockwise"></i>&nbsp;Undo', listeners:[{type:'click', execute:clkUndoItem}]}),
+                2:mkbtn({class:'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', id:'cancel', inner:'<i class="bi bi-x-circle"></i>&nbsp;Cancel', listeners:[{type:'click', execute:closeOptions}]})
+            }
 
-            options.querySelector('#undo').classList.remove('dnone');
-            options.querySelector('#tadone').classList.add('dnone');
-            options.querySelector('#crtSub').classList.add('dnone');
-            options.querySelector('#edit').classList.add('dnone');
+        ]));
 
-        }else if (target.parentElement.id === 'list'){
-            options.querySelector('#undo').classList.add('dnone');
-            options.querySelector('#tadone').classList.remove('dnone');
-            options.querySelector('#crtSub').classList.remove('dnone');
-            options.querySelector('#edit').classList.remove('dnone');
-        }
+    }else if (targetElement.id === 'listSubItem'){
 
-    }else if (target.id === 'listSubItem'){
+        container.appendChild(nestElem([
 
-        // console.log(target.parentElement.parentElement);
-        if (target.parentElement.parentElement.id === 'done'){
+            mkDiv({class:'options', style:'top: ' + (clickEvent.y - 30) + 'px; left: ' + (clickEvent.x - 27) + 'px;'}),
+            mkDiv({class:'card'}),
+            mkDiv({class:'card-content p-0'}),
+            {
+                1:mkbtn({class:'button is-small ml-2 mr-2 is-rounded is-success is-outlined', title:'Mark to-do item done', id:'tadone', inner:'<i class="bi bi-check-circle"></i>&nbsp;Complete', listeners:[{type:'click', execute:complete}]}),
+                2:mkbtn({class:'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', title:'Edit list item', id:'edit', inner:'<i class="bi bi-pencil"></i>&nbsp;Edit', listeners:[{type:'click', execute:toggleLstBtn}]}),
+                3:mkbtn({class:'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', id:'cancel', inner:'<i class="bi bi-x-circle"></i>&nbsp;Cancel', listeners:[{type:'click', execute:closeOptions}]})
+            }
 
-            options.querySelector('#undo').classList.remove('dnone');
-            options.querySelector('#tadone').classList.add('dnone');
-            options.querySelector('#crtSub').classList.add('dnone');
-            options.querySelector('#edit').classList.add('dnone');
+        ]));
 
-        }else if (target.parentElement.parentElement.id === 'list'){
+    }else{
 
-            options.querySelector('#undo').classList.add('dnone');
-            options.querySelector('#tadone').classList.remove('dnone');
-            options.querySelector('#edit').classList.remove('dnone');
-            options.querySelector('#crtSub').classList.add('dnone');
+        container.appendChild(nestElem([
 
-        }
+            mkDiv({class:'options', style:'top: ' + (clickEvent.y - 30) + 'px; left: ' + (clickEvent.x - 27) + 'px;'}),
+            mkDiv({class:'card'}),
+            mkDiv({class:'card-content p-0'}),
+            {
+                1:mkbtn({class:'button is-small ml-2 mr-2 is-rounded is-success is-outlined', title:'Mark to-do item done', id:'tadone', inner:'<i class="bi bi-check-circle"></i>&nbsp;Complete', listeners:[{type:'click', execute:complete}]}),
+                2:mkbtn({class:'button is-small ml-2 mr-2 is-rounded is-link is-outlined', title:'Create a sub list item', id:'crtSub', inner:'<i class="bi bi-plus-circle-dotted"></i>&nbsp;Sub Item', listeners:[{type:'click', execute:toggleLstBtn}]}),
+                3:mkbtn({class:'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', title:'Edit list item', id:'edit', inner:'<i class="bi bi-pencil"></i>&nbsp;Edit', listeners:[{type:'click', execute:toggleLstBtn}]}),
+                4:mkbtn({class:'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', id:'cancel', inner:'<i class="bi bi-x-circle"></i>&nbsp;Cancel', listeners:[{type:'click', execute:closeOptions}]})
+            }
+
+        ]));
 
     }
 
@@ -741,42 +757,7 @@ function exportListStr(){
     
 }
 
-function complete(){
-
-    closeOptions();
-    removeItem(targetElement);
-
-    targetElement = null;
-
-}
-
-function toggleSubButton(){
-
-    closeOptions();
-    document.querySelector('#addItem').classList.add('dnone');
-    document.querySelector('#addSub').classList.remove('dnone');
-    document.querySelector('#item').focus();
-
-}
-
-let buttons = document.querySelectorAll('#addItem, #addSub');
-
-buttons.forEach(button => {
-    
-    if (button.id === 'addItem'){
-
-        button.addEventListener('click', addItem);
-
-    }else{
-
-        button.addEventListener('click', addSub);
-
-    }
-    
-
-});
-
-document.querySelector('#item').addEventListener('keydown', function(event){
+function inputKeyActions(event){
 
     if (event.keyCode === 13){
 
@@ -802,21 +783,40 @@ document.querySelector('#item').addEventListener('keydown', function(event){
         resetListBtn();
     }
 
+}
+
+function complete(){
+
+    closeOptions();
+    removeItem(targetElement);
+
+    targetElement = null;
+
+}
+
+let buttons = document.querySelectorAll('#addItem, #addSub');
+
+buttons.forEach(button => {
+    
+    if (button.id === 'addItem'){
+
+        button.addEventListener('click', addItem);
+
+    }else{
+
+        button.addEventListener('click', addSub);
+
+    }
+    
+
 });
+
+document.querySelector('#item').addEventListener('keydown', inputKeyActions);
 
 document.querySelector('#item').addEventListener('input', exportListStr);
 
-document.querySelector('#cancel').addEventListener('click', closeOptions);
-
-document.querySelector('#tadone').addEventListener('click', complete);
-
-document.querySelector('#crtSub').addEventListener('click', toggleSubButton);
-
-document.querySelector('#undo').addEventListener('click', clkUndoItem);
-
 document.querySelector('#editItem').addEventListener('click', clkEdit);
 
-document.querySelector('#edit').addEventListener('click', editItem);
 
 window.onload = function(){
 
