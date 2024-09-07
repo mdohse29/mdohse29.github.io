@@ -452,9 +452,6 @@ function moveElement(elem){
 
         elem.querySelector('i').classList.remove('has-background-item', 'has-text-success');
 
-        // elem.removeEventListener('click', clkListItem);
-        // elem.addEventListener('click', clkUndoItem);
-
         if (doneChildren.length){
 
             doneChildren.forEach(child => {
@@ -793,30 +790,6 @@ function complete(){
     targetElement = null;
 
 }
-
-let buttons = document.querySelectorAll('#addItem, #addSub');
-
-buttons.forEach(button => {
-    
-    if (button.id === 'addItem'){
-
-        button.addEventListener('click', addItem);
-
-    }else{
-
-        button.addEventListener('click', addSub);
-
-    }
-    
-
-});
-
-document.querySelector('#item').addEventListener('keydown', inputKeyActions);
-
-document.querySelector('#item').addEventListener('input', exportListStr);
-
-document.querySelector('#editItem').addEventListener('click', clkEdit);
-
 
 window.onload = function(){
 
