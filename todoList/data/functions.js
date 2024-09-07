@@ -794,28 +794,28 @@ function complete(){
 
 }
 
-let buttons = document.querySelectorAll('#addItem, #addSub');
+// let buttons = document.querySelectorAll('#addItem, #addSub');
 
-buttons.forEach(button => {
+// buttons.forEach(button => {
     
-    if (button.id === 'addItem'){
+//     if (button.id === 'addItem'){
 
-        button.addEventListener('click', addItem);
+//         button.addEventListener('click', addItem);
 
-    }else{
+//     }else{
 
-        button.addEventListener('click', addSub);
+//         button.addEventListener('click', addSub);
 
-    }
+//     }
     
 
-});
+// });
 
-document.querySelector('#item').addEventListener('keydown', inputKeyActions);
+// document.querySelector('#item').addEventListener('keydown', inputKeyActions);
 
-document.querySelector('#item').addEventListener('input', exportListStr);
+// document.querySelector('#item').addEventListener('input', exportListStr);
 
-document.querySelector('#editItem').addEventListener('click', clkEdit);
+// document.querySelector('#editItem').addEventListener('click', clkEdit);
 
 
 window.onload = function(){
