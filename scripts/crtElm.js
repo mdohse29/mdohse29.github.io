@@ -64,7 +64,7 @@ function mkinp(attr = {type:'', id:''}){
         case 'select':
             elements.input = document.createElement(attr.type);
             for (let at in attr){
-                if (!at.includes('option') && !at.includes('listeners') && !at.includes('label') && !at.includes('labelopt')){
+                if (!at.match(/options|listeners|label/)){
                     if (attr[at]){
                         elements.input.setAttribute(at, attr[at]);
                     }
@@ -85,7 +85,7 @@ function mkinp(attr = {type:'', id:''}){
                 throw Error("A name or id key should be set\n{name:''} or {id:''}\n\nCurrent Keys: {" + Object.keys(attr) + "}");
             }
             for (let a in attr){
-                if (!a.includes('label') && !a.includes('labelopt') && !a.includes('listeners') && attr[a]){
+                if (!a.match(/options|listeners|label/) && attr[a]){
                     elements.input.setAttribute(a, attr[a]);
                 }
             }
