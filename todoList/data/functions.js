@@ -1,6 +1,3 @@
-/** TODO: add the ability to add a list with sub items from input - basically, import the exported list
- * Add size limit warning for cookie storage 3000b + Warn that the list needs to be reduced max=4000
- */
 let targetElement = null;
 let errorTimeoutID = NaN;
 
@@ -735,7 +732,7 @@ function exportListStr(){
 
             submit.setAttribute('disabled', 'disabled');
             this.classList.add('is-success');
-            this.value = 'Export Complete!';
+            this.value = 'Exported to Clipboard!';
 
             setTimeout(() => {
                 this.value = '';
