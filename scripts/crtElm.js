@@ -62,12 +62,10 @@ function mkinp(attr = {type:'', id:''}){
     }
     switch(attr.type){
         case 'select':
-            elements.input = document.createElement(attr.type);
+            elements.input = mkElem({elemType:attr.type});
             for (let at in attr){
-                if (!at.match(/options|listeners|label/)){
-                    if (attr[at]){
+                if (!at.match(/options|listeners|label/) && attr[at]){
                         elements.input.setAttribute(at, attr[at]);
-                    }
                 }
             }
 
@@ -76,7 +74,7 @@ function mkinp(attr = {type:'', id:''}){
             }
             break;
         default:
-            elements.input = document.createElement('input');
+            elements.input = mkElem({elemType:'input'});
             if (!attr.id && attr.name){
                 attr.id = attr.name;
             }else if (!attr.name && attr.id){
