@@ -228,6 +228,15 @@ const drawers = {
                     warn: false
                 }
             },
+            button3:{
+                hidden: true,
+                url: 'http://cmt.education2020.com/CMT/PublishCourse',
+                text: {
+                    main: 'CW CMT',
+                    sub: 'For Production',
+                    warn: true
+                }
+            },
             button4: {
                 hidden: false,
                 url: 'http://cmt.education2020.com/CMT-V45/',
