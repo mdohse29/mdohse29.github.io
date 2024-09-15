@@ -87,19 +87,19 @@ function mkinp(attr = {type:'', id:''}){
                     elements.input.setAttribute(a, attr[a]);
                 }
             }
-
-            if (attr.label){
-                elements.label = mkLabel({for:attr.id, inner:attr.label});
-                if (attr.labelOpt){
-                    for (let b in attr.labelOpt){
-                        if (attr.labelOpt[b]){
-                            elements.label.setAttribute(b, attr.labelOpt[b]);
-                        }
-                    }
-                }
-            }
             
             break;
+    }
+
+    if (attr.label){
+        elements.label = mkLabel({for:attr.id, inner:attr.label});
+        if (attr.labelOpt){
+            for (let b in attr.labelOpt){
+                if (attr.labelOpt[b]){
+                    elements.label.setAttribute(b, attr.labelOpt[b]);
+                }
+            }
+        }
     }
 
     if (attr.listeners){
