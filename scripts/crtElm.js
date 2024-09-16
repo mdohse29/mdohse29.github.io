@@ -29,7 +29,7 @@ function mkbtn(attr = {}){
 }
 
 function mkOpt(attr = {value:''}){
-    let option = document.createElement('option');
+    let option = mkElem({elemType:'option'});
     if (!attr.value){
         throw Error('A value key must be set\nmkOpt({value:\'some value\'})\n\nCurrent Keys: {' + Object.keys(attr) + '}');
     }
@@ -59,6 +59,8 @@ function mkinp(attr = {type:'', id:''}){
     let elements = {};
     if (!attr.type){
         throw Error("A type type must be defined.\n\nCurrent Keys: {" + Object.keys(attr) + "}");
+    }else if (!attr.id && attr.label){
+        throw Error("\n*******************\nA id attribute should be set if using a label so the label can be properly associated to the element.\n*******************\n")
     }
     switch(attr.type){
         case 'select':
@@ -87,19 +89,19 @@ function mkinp(attr = {type:'', id:''}){
                     elements.input.setAttribute(a, attr[a]);
                 }
             }
-
-            if (attr.label){
-                elements.label = mkLabel({for:attr.id, inner:attr.label});
-                if (attr.labelOpt){
-                    for (let b in attr.labelOpt){
-                        if (attr.labelOpt[b]){
-                            elements.label.setAttribute(b, attr.labelOpt[b]);
-                        }
-                    }
-                }
-            }
             
             break;
+    }
+
+    if (attr.label){
+        elements.label = mkLabel({for:attr.id, inner:attr.label});
+        if (attr.labelOpt){
+            for (let b in attr.labelOpt){
+                if (attr.labelOpt[b]){
+                    elements.label.setAttribute(b, attr.labelOpt[b]);
+                }
+            }
+        }
     }
 
     if (attr.listeners){
