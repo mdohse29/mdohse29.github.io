@@ -29,7 +29,7 @@ function mkbtn(attr = {}){
 }
 
 function mkOpt(attr = {value:''}){
-    let option = document.createElement('option');
+    let option = mkElem({elemType:'option'});
     if (!attr.value){
         throw Error('A value key must be set\nmkOpt({value:\'some value\'})\n\nCurrent Keys: {' + Object.keys(attr) + '}');
     }
@@ -59,6 +59,8 @@ function mkinp(attr = {type:'', id:''}){
     let elements = {};
     if (!attr.type){
         throw Error("A type type must be defined.\n\nCurrent Keys: {" + Object.keys(attr) + "}");
+    }else if (!attr.id && attr.label){
+        throw Error("\n*******************\nA id attribute should be set if using a label so the label can be properly associated to the element.\n*******************\n")
     }
     switch(attr.type){
         case 'select':
