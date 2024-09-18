@@ -60,7 +60,7 @@ function mkinp(attr = {type:'', id:''}){
     if (!attr.type){
         throw Error("A type type must be defined.\n\nCurrent Keys: {" + Object.keys(attr) + "}");
     }else if (!attr.id && attr.label){
-        throw Error("\n*******************\nA id attribute should be set if using a label so the label can be properly associated to the element.\n*******************\n")
+        throw Error("\n*******************\nThe id attribute should be set if using a label so the label can be properly associated to the element.\n*******************\n")
     }
     switch(attr.type){
         case 'select':
