@@ -11,8 +11,8 @@ function crtad(){
 
     let disbchk = document.querySelectorAll('button');
     let btnenbl = false;
-    let strictSearch = mkinp({type:'checkbox', name:'word', label:'Strict Search', labelOpt:{class:'awesome'}});
-    let regex = mkinp({type:'checkbox', name:'regex', label:'Regex'});
+    let strictSearch = mkinp({type:'checkbox', id:'word', label:'Strict Search', labelOpt:{class:'awesome'}});
+    let regex = mkinp({type:'checkbox', id:'regex', label:'Regex'});
 
     for (let btn of disbchk){
         if (btn.classList.contains('dnone') || btn.disabled){

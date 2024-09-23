@@ -77,15 +77,11 @@ function mkinp(attr = {type:'', id:''}){
             break;
         default:
             elements.input = mkElem({elemType:'input'});
-            if (!attr.id && attr.name){
-                attr.id = attr.name;
-            }else if (!attr.name && attr.id){
-                attr.name = attr.id;
-            }else if (!attr.id && !attr.name){
-                throw Error("A name or id key should be set\n{name:''} or {id:''}\n\nCurrent Keys: {" + Object.keys(attr) + "}");
-            }
+            
             for (let a in attr){
-                if (!a.match(/options|listeners|label/) && attr[a]){
+                if (a.includes('inner')){
+                    elements.input.innerHTML = attr[a];
+                }else if (!a.match(/options|listeners|label/) && attr[a]){
                     elements.input.setAttribute(a, attr[a]);
                 }
             }
