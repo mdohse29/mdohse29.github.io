@@ -92,7 +92,8 @@ $(document).ready(function(){
 
         if (text == 'Admin' && $('.spclFtr').length === 0){
             $('body').prepend(crtad());
-            $('body').prepend(mkrtnl());
+            // if (previous.includes('toolBox'))
+            //     $('body').prepend(mkrtnl());
 
             $('#ff').click(function(){
                 let currentText = $('#TextArea').val();
@@ -479,7 +480,7 @@ $(document).ready(function(){
         $('textarea').focus();
     });
 
-    if (previous.includes("toolBox.html")){
+    if (previous.includes("toolBox")){
         toggleSpclFtr('Admin');
     }
 

@@ -30,12 +30,12 @@ function crtad(){
                     1:nestElem([
                         mkDiv({class:'search'}),
                         {
-                            1:mkinp({type:'text', id:'search', placeholder:'Search', class:'form-control'}),
-                            2:mkinp({type:'text', id:'replace', placeholder:'Replace', class:'form-control'}),
+                            1:mkinp({type:'text', id:'search', placeholder:'Search', class:'form-control', autocomplete:'off'}),
+                            2:mkinp({type:'text', id:'replace', placeholder:'Replace', class:'form-control', autocomplete:'off'}),
                             3:mkbtn({class:'btn btn-outline-success', id:'rep', inner:'Replace'}),
                             4:mkbtn({class:'btn btn-close btn-dark btn-lg mx-2', id:'search-close'})
                         }
-                    ]),
+                    ])/*,
                     2:nestElem([
                         mkDiv({class:'search-options d-block'}),
                         {
@@ -44,7 +44,7 @@ function crtad(){
                             3:regex.input,
                             4:regex.label
                         }
-                    ])
+                    ])*/
                 }
             ]),
             2:mkbtn({class:'btn btn-outline-danger btn-sm', id:'sandr', inner:'S&R'}),
