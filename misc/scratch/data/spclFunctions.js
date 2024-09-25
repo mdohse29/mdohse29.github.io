@@ -30,8 +30,8 @@ function crtad(){
                     1:nestElem([
                         mkDiv({class:'search'}),
                         {
-                            1:mkinp({type:'text', name:'search', placeholder:'Search', class:'form-control'}),
-                            2:mkinp({type:'text', name:'replace', placeholder:'Replace', class:'form-control'}),
+                            1:mkinp({type:'text', id:'search', placeholder:'Search', class:'form-control'}),
+                            2:mkinp({type:'text', id:'replace', placeholder:'Replace', class:'form-control'}),
                             3:mkbtn({class:'btn btn-outline-success', id:'rep', inner:'Replace'}),
                             4:mkbtn({class:'btn btn-close btn-dark btn-lg mx-2', id:'search-close'})
                         }
