@@ -47,7 +47,7 @@ function crtad(){
                     ])*/
                 }
             ]),
-            2:mkbtn({class:'btn btn-outline-danger btn-sm', id:'sandr', inner:'S&R'}),
+            2:mkbtn({class:'btn btn-outline-danger btn-sm', id:'sandr', inner:'S&R', title:'Still a work in progress...'}),
             3:mkbtn({class:'btn btn-outline-danger btn-sm' + ((btnenbl) ? ' dnone' : ''), id:'stop', inner:'Disable Text Processing'}),
             4:mkbtn({class:'btn btn-outline-danger btn-sm' + ((btnenbl) ? '' : ' dnone'), id:'start', inner:'Enable Text Processing'}),
             5:mkbtn({class:'btn btn-outline-danger btn-sm', id:'ff', inner:'Format Filename'}),
