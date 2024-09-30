@@ -193,14 +193,14 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
                 mkDiv({class:'md-modal', id:'info'}),
                 mkDiv({class:'md-modal-content md-modal-large'}),
                 {
-                    1:mkbtn({class:'button close-btn sticky-top', title:'Close'}),
+                    1:mkBtn({class:'button close-btn sticky-top', title:'Close'}),
                     2:nestElem([
                         mkDiv({class:'card'}),
                         {
                             1:nestElem([
                                 mkDiv({class:'card-header'}),
                                 mkDiv({class:'card-header-title', inner:title + ((year) ? ' - (' + year + ')' : '') + ((tag === 'arch') ? '<span style="margin-left: auto;color: red"><sub>Archived</sub></span>' : '')})
-                                // mkHead({hType:'h1', inner:text})
+                                // mkElem({elemType:'h1', inner:text})
                             ]),
                             2:nestElem([
                                 mkDiv({class:'card-content'}),

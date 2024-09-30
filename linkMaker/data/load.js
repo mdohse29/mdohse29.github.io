@@ -1,4 +1,4 @@
-let pffCheck = mkinp({
+let pffCheck = mkInp({
     type:'checkbox',
     class:'checkbox',
     id:'pffCheck',
@@ -7,7 +7,7 @@ let pffCheck = mkinp({
         class:'label is-inline'
     }
 });
-let exText = mkinp({
+let exText = mkInp({
     type:'checkbox',
     class:'checkbox',
     id:'text',
@@ -23,7 +23,7 @@ document.querySelector('body').prepend(nestElem([
         1:nestElem([
             mkDiv({class:'columns'}),
             mkDiv({class:'column'}),
-            mkHead({hType:'h1', class:'title has-text-centered is-2', inner:'CDN Link Maker'})
+            mkElem({elemType:'h1', class:'title has-text-centered is-2', inner:'CDN Link Maker'})
         ]),
         2:nestElem([
             mkDiv({class:'columns'}),
@@ -37,7 +37,7 @@ document.querySelector('body').prepend(nestElem([
                             mkDiv({class:'select'}),
                             {
                                 1:mkLabel({class:'label is-inline-block', for:'mediaType', inner:'Choose a type:&nbsp;'}),
-                                2:mkinp({type:'select', id:'mediaType', options:[
+                                2:mkInp({type:'select', id:'mediaType', options:[
                                     {
                                         value:'DOC',
                                         title:'aka CDN Link',
@@ -72,7 +72,7 @@ document.querySelector('body').prepend(nestElem([
                         ]),
                         4:nestElem([
                             mkDiv({class:'field'}),
-                            mkbtn({class:'button mt-4 is-rounded is-info', id:'mediaselect', inner:'Submit'})
+                            mkBtn({class:'button mt-4 is-rounded is-info', id:'mediaselect', inner:'Submit'})
                         ])
                     }
                 ]),
@@ -81,8 +81,8 @@ document.querySelector('body').prepend(nestElem([
                     mkDiv({class:'box dnone', id:'linkBuild'}),
                     mkDiv({class:'head'}),
                     {
-                        1:mkbtn({class:'button is-small is-info is-light is-outlined', id:'showPreview', inner:'Preview'}),
-                        2:mkHead({hType:'h1', class:'title has-text-centered', inner:'CDN Link'})
+                        1:mkBtn({class:'button is-small is-info is-light is-outlined', id:'showPreview', inner:'Preview'}),
+                        2:mkElem({elemType:'h1', class:'title has-text-centered', inner:'CDN Link'})
                     }
                 ]),
                 4:nestElem([

@@ -3,14 +3,14 @@
 
     let rando = nestElem([
         mkDiv({class:'rando mb-2'}),
-        mkbtn({class:'button is-small is-info is-rounded is-responsive', inner:'Random'}),
+        mkBtn({class:'button is-small is-info is-rounded is-responsive', inner:'Random'}),
     ]);
 
     let search = nestElem([
         mkDiv({class:'search'}),
         {
-            1:mkinp({type:'text', name:'q', class:'input is-info', id:'search-box', placeholder:'Search Title Here', autocomplete:'off'}).input,
-            2:mkbtn({class:'button is-info ml-1 d-none', id:'submit-reset', inner:'Reset'})
+            1:mkInp({type:'text', name:'q', class:'input is-info', id:'search-box', placeholder:'Search Title Here', autocomplete:'off'}).input,
+            2:mkBtn({class:'button is-info ml-1 d-none', id:'submit-reset', inner:'Reset'})
         }
     ]);
 
@@ -64,7 +64,7 @@
         {
             1:nestElem([
                 mkDiv({class:'md-modal-background'}),
-                mkbtn({class:'close-btn'})
+                mkBtn({class:'close-btn'})
             ]),
             2:nestElem([
                 mkDiv({class:'md-modal-content md-modal-small'}),
@@ -73,8 +73,8 @@
                     2:nestElem([
                         mkDiv({class:'spcl'}),
                         {
-                            1:mkinp({type:'range', step:'5', class:'input', name:'num', id:'num', min:'5', max:'15', value:'5', autocomplete:'off'}).input,
-                            2:mkbtn({class:'button is-success is-responsive', id:'rand', inner:'Pick&nbsp;<span id="selected">5</span>&nbsp;at Random'})
+                            1:mkInp({type:'range', step:'5', class:'input', name:'num', id:'num', min:'5', max:'15', value:'5', autocomplete:'off'}).input,
+                            2:mkBtn({class:'button is-success is-responsive', id:'rand', inner:'Pick&nbsp;<span id="selected">5</span>&nbsp;at Random'})
                         }
                     ])
                 }

@@ -2,6 +2,10 @@
     scrollbar-width: thin;
 }
 
+h1, h3 {
+    user-select: none;
+}
+
 iframe {
     border: 1px solid black;
 }
