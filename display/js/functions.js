@@ -9,7 +9,7 @@ window.onload = function(){
             document.querySelector('html').style = 'overflow: hidden;';
 
             let parent = this.parentElement.parentElement.parentElement;
-            let btnClose = mkbtn({class:'btn btn-close btn-outline-danger'});
+            let btnClose = mkBtn({class:'btn btn-close btn-outline-danger'});
             let currentHeight = $(parent).height();
             
             parent.classList.add('active');
@@ -121,7 +121,7 @@ window.onload = function(){
 
         cover.addEventListener('mouseenter', function(){
 
-            this.appendChild(mkbtn({class:'btn btn-info', id:'submit', inner:'Click to Engage'}));
+            this.appendChild(mkBtn({class:'btn btn-info', id:'submit', inner:'Click to Engage'}));
 
         });
 

@@ -75,7 +75,7 @@ function errorMsg(message = 'Empty items or duplicate items are not accepted. Ch
 
             1:nestElem([
                 mkDiv({class:'message-header is-justify-content-end'}),
-                mkbtn({class:'delete', listeners:[{type:'click', execute:removeMsg}]})
+                mkBtn({class:'delete', listeners:[{type:'click', execute:removeMsg}]})
             ]),
             2:mkDiv({class:'message-body', inner:message})
 
@@ -423,7 +423,7 @@ function doneContainer(){
     return nestElem([
         mkDiv({class:'card-content pt-0', id:'done'}),
         {
-            1:mkHead({hType:'h4', class:'h4', inner:'<i class="bi bi-check-circle-fill has-text-success"></i>Done!'}),
+            1:mkElem({elemType:'h4', class:'h4', inner:'<i class="bi bi-check-circle-fill has-text-success"></i>Done!'}),
             2:mkP({id:'doneSubs'})
         }
     ]);
@@ -573,8 +573,8 @@ function openOptions(clickEvent){
             mkDiv({class:'card'}),
             mkDiv({class:'card-content p-0'}),
             {
-                1:mkbtn({class:'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', title:'Add list item back', id:'undo', inner:'<i class="bi bi-arrow-counterclockwise"></i>&nbsp;Undo', listeners:[{type:'click', execute:clkUndoItem}]}),
-                2:mkbtn({class:'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', id:'cancel', inner:'<i class="bi bi-x-circle"></i>&nbsp;Cancel', listeners:[{type:'click', execute:closeOptions}]})
+                1:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', title:'Add list item back', id:'undo', inner:'<i class="bi bi-arrow-counterclockwise"></i>&nbsp;Undo', listeners:[{type:'click', execute:clkUndoItem}]}),
+                2:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', id:'cancel', inner:'<i class="bi bi-x-circle"></i>&nbsp;Cancel', listeners:[{type:'click', execute:closeOptions}]})
             }
 
         ]));
@@ -587,9 +587,9 @@ function openOptions(clickEvent){
             mkDiv({class:'card'}),
             mkDiv({class:'card-content p-0'}),
             {
-                1:mkbtn({class:'button is-small ml-2 mr-2 is-rounded is-success is-outlined', title:'Mark to-do item done', id:'tadone', inner:'<i class="bi bi-check-circle"></i>&nbsp;Complete', listeners:[{type:'click', execute:complete}]}),
-                2:mkbtn({class:'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', title:'Edit list item', id:'edit', inner:'<i class="bi bi-pencil"></i>&nbsp;Edit', listeners:[{type:'click', execute:toggleLstBtn}]}),
-                3:mkbtn({class:'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', id:'cancel', inner:'<i class="bi bi-x-circle"></i>&nbsp;Cancel', listeners:[{type:'click', execute:closeOptions}]})
+                1:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-success is-outlined', title:'Mark to-do item done', id:'tadone', inner:'<i class="bi bi-check-circle"></i>&nbsp;Complete', listeners:[{type:'click', execute:complete}]}),
+                2:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', title:'Edit list item', id:'edit', inner:'<i class="bi bi-pencil"></i>&nbsp;Edit', listeners:[{type:'click', execute:toggleLstBtn}]}),
+                3:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', id:'cancel', inner:'<i class="bi bi-x-circle"></i>&nbsp;Cancel', listeners:[{type:'click', execute:closeOptions}]})
             }
 
         ]));
@@ -602,10 +602,10 @@ function openOptions(clickEvent){
             mkDiv({class:'card'}),
             mkDiv({class:'card-content p-0'}),
             {
-                1:mkbtn({class:'button is-small ml-2 mr-2 is-rounded is-success is-outlined', title:'Mark to-do item done', id:'tadone', inner:'<i class="bi bi-check-circle"></i>&nbsp;Complete', listeners:[{type:'click', execute:complete}]}),
-                2:mkbtn({class:'button is-small ml-2 mr-2 is-rounded is-link is-outlined', title:'Create a sub list item', id:'crtSub', inner:'<i class="bi bi-plus-circle-dotted"></i>&nbsp;Sub Item', listeners:[{type:'click', execute:toggleLstBtn}]}),
-                3:mkbtn({class:'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', title:'Edit list item', id:'edit', inner:'<i class="bi bi-pencil"></i>&nbsp;Edit', listeners:[{type:'click', execute:toggleLstBtn}]}),
-                4:mkbtn({class:'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', id:'cancel', inner:'<i class="bi bi-x-circle"></i>&nbsp;Cancel', listeners:[{type:'click', execute:closeOptions}]})
+                1:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-success is-outlined', title:'Mark to-do item done', id:'tadone', inner:'<i class="bi bi-check-circle"></i>&nbsp;Complete', listeners:[{type:'click', execute:complete}]}),
+                2:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-link is-outlined', title:'Create a sub list item', id:'crtSub', inner:'<i class="bi bi-plus-circle-dotted"></i>&nbsp;Sub Item', listeners:[{type:'click', execute:toggleLstBtn}]}),
+                3:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', title:'Edit list item', id:'edit', inner:'<i class="bi bi-pencil"></i>&nbsp;Edit', listeners:[{type:'click', execute:toggleLstBtn}]}),
+                4:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', id:'cancel', inner:'<i class="bi bi-x-circle"></i>&nbsp;Cancel', listeners:[{type:'click', execute:closeOptions}]})
             }
 
         ]));

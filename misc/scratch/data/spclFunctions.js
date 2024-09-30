@@ -11,8 +11,8 @@ function crtad(){
 
     let disbchk = document.querySelectorAll('button');
     let btnenbl = false;
-    let strictSearch = mkinp({type:'checkbox', id:'word', label:'Strict Search', labelOpt:{class:'awesome'}});
-    let regex = mkinp({type:'checkbox', id:'regex', label:'Regex'});
+    let strictSearch = mkInp({type:'checkbox', id:'word', label:'Strict Search', labelOpt:{class:'awesome'}});
+    let regex = mkInp({type:'checkbox', id:'regex', label:'Regex'});
 
     for (let btn of disbchk){
         if (btn.classList.contains('dnone') || btn.disabled){
@@ -30,10 +30,10 @@ function crtad(){
                     1:nestElem([
                         mkDiv({class:'search'}),
                         {
-                            1:mkinp({type:'text', id:'search', placeholder:'Search', class:'form-control', autocomplete:'off'}),
-                            2:mkinp({type:'text', id:'replace', placeholder:'Replace', class:'form-control', autocomplete:'off'}),
-                            3:mkbtn({class:'btn btn-outline-success', id:'rep', inner:'Replace'}),
-                            4:mkbtn({class:'btn btn-close btn-dark btn-lg mx-2', id:'search-close'})
+                            1:mkInp({type:'text', id:'search', placeholder:'Search', class:'form-control', autocomplete:'off'}),
+                            2:mkInp({type:'text', id:'replace', placeholder:'Replace', class:'form-control', autocomplete:'off'}),
+                            3:mkBtn({class:'btn btn-outline-success', id:'rep', inner:'Replace'}),
+                            4:mkBtn({class:'btn btn-close btn-dark btn-lg mx-2', id:'search-close'})
                         }
                     ])/*,
                     2:nestElem([
@@ -47,12 +47,12 @@ function crtad(){
                     ])*/
                 }
             ]),
-            2:mkbtn({class:'btn btn-outline-danger btn-sm', id:'sandr', inner:'S&R', title:'Still a work in progress...'}),
-            3:mkbtn({class:'btn btn-outline-danger btn-sm' + ((btnenbl) ? ' dnone' : ''), id:'stop', inner:'Disable Text Processing'}),
-            4:mkbtn({class:'btn btn-outline-danger btn-sm' + ((btnenbl) ? '' : ' dnone'), id:'start', inner:'Enable Text Processing'}),
-            5:mkbtn({class:'btn btn-outline-danger btn-sm', id:'ff', inner:'Format Filename'}),
-            6:mkbtn({class:'btn btn-outline-danger btn-sm', id:'tgDblSpc', inner:'Toggle DblSpc'}),
-            20:mkbtn({class:'btn btn-close btn-dark', id:'ad-close'})
+            2:mkBtn({class:'btn btn-outline-danger btn-sm', id:'sandr', inner:'S&R', title:'Still a work in progress...'}),
+            3:mkBtn({class:'btn btn-outline-danger btn-sm' + ((btnenbl) ? ' dnone' : ''), id:'stop', inner:'Disable Text Processing'}),
+            4:mkBtn({class:'btn btn-outline-danger btn-sm' + ((btnenbl) ? '' : ' dnone'), id:'start', inner:'Enable Text Processing'}),
+            5:mkBtn({class:'btn btn-outline-danger btn-sm', id:'ff', inner:'Format Filename'}),
+            6:mkBtn({class:'btn btn-outline-danger btn-sm', id:'tgDblSpc', inner:'Toggle DblSpc'}),
+            20:mkBtn({class:'btn btn-close btn-dark', id:'ad-close'})
         }
     ]);
     

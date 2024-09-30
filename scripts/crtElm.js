@@ -23,7 +23,7 @@ function mkLabel(attr = {}){
     return mkElem(attr);
 }
 
-function mkbtn(attr = {}){
+function mkBtn(attr = {}){
     attr.elemType = 'button'
     return mkElem(attr);
 }
@@ -55,7 +55,7 @@ function mkOpt(attr = {value:''}){
     return option;
 }
 
-function mkinp(attr = {type:'', id:''}){
+function mkInp(attr = {type:'', id:''}){
     let elements = {};
     if (!attr.type){
         throw Error("A type type must be defined.\n\nCurrent Keys: {" + Object.keys(attr) + "}");
@@ -109,16 +109,19 @@ function mkinp(attr = {type:'', id:''}){
     return (elements.label) ? elements : elements.input;
 }
 
-function mkHead(attr = {hType:'', inner:''}){
-    if (!(attr.inner && attr.hType)){
-        throw new Error("The inner and hType keys are required\nmkHead({hType:'h1', inner:'Text to be displayed'})");
-    }
+// function mkHead(attr = {hType:'', inner:''}){
+// // Just using mkElem moving forward instances 
+// // are still in place so this must remain for the moment
 
-    attr.elemType = attr.hType;
-    delete attr.hType;
+//     if (!(attr.inner && attr.hType)){
+//         throw new Error("The inner and hType keys are required\nmkElem({elemType:'h1', inner:'Text to be displayed'})");
+//     }
 
-    return mkElem(attr);
-}
+//     attr.elemType = attr.hType;
+//     delete attr.hType;
+
+//     return mkElem(attr);
+// }
 
 function createToggle(attr = {id:'',title:'',label:'',isLocked:false}){
     return nestElem([

@@ -12,7 +12,7 @@ function space(text){
 }
 
 function generateInput(id, text, title, ph){
-    let inputAndLabel = mkinp({type:'text', class:'control input', autocomplete:'off', id:((id) ? id:''), placeholder:((ph) ? ph:''), label:((text) ? text + ':&nbsp;':''), labelOpt:{class:'label is-inline-block'}});
+    let inputAndLabel = mkInp({type:'text', class:'control input', autocomplete:'off', id:((id) ? id:''), placeholder:((ph) ? ph:''), label:((text) ? text + ':&nbsp;':''), labelOpt:{class:'label is-inline-block'}});
     let div = nestElem([
         mkDiv({class:'field', title:((title) ? title : '')}),
         {
@@ -63,7 +63,7 @@ function generateDropDown(id, labelText, title){
         mkDiv({class:'select'}),
         {
             1:mkLabel({for:id, class:'label is-inline-block', inner:labelText + ':&nbsp;'}),
-            2:mkinp({
+            2:mkInp({
                 type:'select', 
                 id:id,
                 name:id,
@@ -158,7 +158,7 @@ function showPreview(){
         mkDiv({class:'column', id:'preview'}),
         mkDiv({class:'box'}),
         {
-            1: mkbtn({class:'button close is-info is-outlined', title:'Close Preview', inner:'X'}),
+            1: mkBtn({class:'button close is-info is-outlined', title:'Close Preview', inner:'X'}),
             2: mkElem({elemType:'iframe', src:url})
         }
     ]);
@@ -178,8 +178,8 @@ function mediaSelect(){
     document.querySelector('#selectMenu').classList.add('dnone');
     let type = document.querySelector('#mediaType').value;
     let build = document.querySelector('#linkData');
-    let submit = mkbtn({class:'button mt-4 is-rounded is-info', id:'submit', inner:'Generate URL'});
-    let reset = mkbtn({class:'button mt-4 is-rounded is-danger ml-3', id:'reset', inner:'Reset'});
+    let submit = mkBtn({class:'button mt-4 is-rounded is-info', id:'submit', inner:'Generate URL'});
+    let reset = mkBtn({class:'button mt-4 is-rounded is-danger ml-3', id:'reset', inner:'Reset'});
 
     build.classList.remove('dnone');
 
