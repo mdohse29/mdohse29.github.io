@@ -385,7 +385,7 @@ function createItem(item, data = {isSub:false, pid:NaN}){
             title:'Click for Options', 
             id:((data.isSub) ? 'listSubItem' : 'listItem'),
             pid:((data.isSub) ? data.pid : crypto.randomUUID()),
-            inner:(item.includes('http')) ? item : item.substring(0, 1).toUpperCase() + item.substring(1),
+            inner:(item.toLowerCase().includes('http')) ? item.toLowerCase() : item.substring(0, 1).toUpperCase() + item.substring(1),
             listeners:((data.isSub) ? [
                 {
                     type:'mouseover',
