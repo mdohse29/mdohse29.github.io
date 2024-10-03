@@ -247,7 +247,7 @@ function clkUndoItem(){
 
             elem.remove();
 
-            document.querySelector('#list').appendChild(createItem(elem.innerText));
+            document.querySelector('#list').prepend(createItem(elem.innerText));
 
             setCookie();
 
@@ -277,7 +277,7 @@ function clkUndoItem(){
 
         changeTitle(elem);
 
-        document.querySelector('#list').appendChild(elem);
+        document.querySelector('#list').prepend(elem);
         setCookie();
 
     }
@@ -674,7 +674,7 @@ function addItem(){
 
             let items = item.split(',');
 
-            for (let i of items){
+            for (let i of items.reverse()){
 
                 if (i && !dupeCheck(i.trim())){
 
