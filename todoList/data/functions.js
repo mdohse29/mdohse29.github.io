@@ -678,7 +678,7 @@ function addItem(){
 
                 if (i && !dupeCheck(i.trim())){
 
-                    document.querySelector('#list').appendChild(createItem(i.trim()));
+                    document.querySelector('#list').prepend(createItem(i.trim()));
                     setCookie();
 
                 }
@@ -687,7 +687,7 @@ function addItem(){
 
         }else{
 
-            document.querySelector('#list').appendChild(createItem(item.trim()));
+            document.querySelector('#list').prepend(createItem(item.trim()));
             setCookie();
 
         }
