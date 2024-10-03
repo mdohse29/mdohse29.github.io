@@ -71,8 +71,8 @@ function mkInp(attr = {type:'', id:''}){
                 }
             }
 
-            for (let a in attr.options){
-                elements.input.appendChild(mkOpt(attr.options[a]));
+            for (let opt of attr.options){
+                elements.input.appendChild(mkOpt(opt));
             }
             break;
         default:
@@ -124,6 +124,7 @@ function mkInp(attr = {type:'', id:''}){
 // }
 
 function createToggle(attr = {id:'',title:'',label:'',isLocked:false}){
+    // css location mdohse29.github.io/templates/toggleSwitch/toggleSwitch.css
     return nestElem([
         mkDiv({id:attr.id, class: ((attr.class) ? 'switch-container ' + attr.class : 'switch-container'), title:attr.title, isLocked:attr.isLocked}),
         {
@@ -139,13 +140,13 @@ function createToggle(attr = {id:'',title:'',label:'',isLocked:false}){
 
 function crtSpin(){
     // MUST be using Bootstrap css
-    let spinner = mkDiv({class:'spinner-background'});
-    let inDiv = mkDiv({class:'spinner-border', role:'status'});
-    let span = mkSpan({class:'visually-hidden', inner:'Loading...'});
-    inDiv.appendChild(span);
-    spinner.appendChild(inDiv);
 
-    return spinner;
+    return nestElem([
+        mkDiv({class:'spinner-background'}),
+        mkDiv({class:'spinner-border', role:'status'}),
+        mkSpan({class:'visually-hidden', inner:'Loading...'})
+    ]);
+
 }
 
 function nestElem(elemArry = []){
