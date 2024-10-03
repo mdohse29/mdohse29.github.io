@@ -247,7 +247,7 @@ function clkUndoItem(){
 
             elem.remove();
 
-            document.querySelector('#list').appendChild(createItem(elem.innerText));
+            document.querySelector('#list').prepend(createItem(elem.innerText));
 
             setCookie();
 
@@ -277,7 +277,7 @@ function clkUndoItem(){
 
         changeTitle(elem);
 
-        document.querySelector('#list').appendChild(elem);
+        document.querySelector('#list').prepend(elem);
         setCookie();
 
     }
@@ -627,7 +627,7 @@ function addSub(){
 
             for (let i of items){
 
-                if (!dupeCheck(i.trim())){
+                if (i && !dupeCheck(i.trim())){
 
                     targetElement.appendChild(createItem(i.trim(), {isSub:true, pid:targetElement.getAttribute('pid')}));
                     setCookie();
@@ -674,11 +674,11 @@ function addItem(){
 
             let items = item.split(',');
 
-            for (let i of items){
+            for (let i of items.reverse()){
 
-                if (!dupeCheck(i.trim())){
+                if (i && !dupeCheck(i.trim())){
 
-                    document.querySelector('#list').appendChild(createItem(i.trim()));
+                    document.querySelector('#list').prepend(createItem(i.trim()));
                     setCookie();
 
                 }
@@ -687,7 +687,7 @@ function addItem(){
 
         }else{
 
-            document.querySelector('#list').appendChild(createItem(item.trim()));
+            document.querySelector('#list').prepend(createItem(item.trim()));
             setCookie();
 
         }

@@ -46,6 +46,10 @@ a.btn {
     padding: 0px;
 }
 
+#ad-close { 
+    margin-left: 5px;
+}
+
 .static > h3 {
     text-align: center;
 }

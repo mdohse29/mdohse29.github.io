@@ -160,17 +160,18 @@ window.onload = function(){
                     duration: 500,
                     start: function(){
 
-                        let fillCheck = $(this).parent().find('i').attr('class');
+                        let icon = $(this).parent().find('i');
+                        let fillCheck = $(icon).attr('class');
 
                         if (fillCheck.includes('-fill')){
 
-                            $(this).parent().find('i').addClass('bi-caret-right-fill');
-                            $(this).parent().find('i').removeClass('bi-caret-down-fill');
+                            $(icon).addClass('bi-caret-right-fill');
+                            $(icon).removeClass('bi-caret-down-fill');
 
                         }else{
 
-                            $(this).parent().find('i').addClass('bi-caret-right');
-                            $(this).parent().find('i').removeClass('bi-caret-down');
+                            $(icon).addClass('bi-caret-right');
+                            $(icon).removeClass('bi-caret-down');
 
                         }
 
@@ -192,17 +193,18 @@ window.onload = function(){
                     duration: 500,
                     start: function(){
 
-                        let fillCheck = $(this).parent().find('i').attr('class');
+                        let icon = $(this).parent().find('i');
+                        let fillCheck = $(icon).attr('class');
 
                         if (fillCheck.includes('-fill')){
 
-                            $(this).parent().find('i').removeClass('bi-caret-right-fill');
-                            $(this).parent().find('i').addClass('bi-caret-down-fill');
+                            $(icon).removeClass('bi-caret-right-fill');
+                            $(icon).addClass('bi-caret-down-fill');
 
                         }else{
 
-                            $(this).parent().find('i').removeClass('bi-caret-right');
-                            $(this).parent().find('i').addClass('bi-caret-down');
+                            $(icon).removeClass('bi-caret-right');
+                            $(icon).addClass('bi-caret-down');
 
                         }
                         
