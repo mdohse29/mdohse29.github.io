@@ -627,7 +627,7 @@ function addSub(){
 
             for (let i of items){
 
-                if (!dupeCheck(i.trim())){
+                if (i && !dupeCheck(i.trim())){
 
                     targetElement.appendChild(createItem(i.trim(), {isSub:true, pid:targetElement.getAttribute('pid')}));
                     setCookie();
@@ -676,7 +676,7 @@ function addItem(){
 
             for (let i of items){
 
-                if (!dupeCheck(i.trim())){
+                if (i && !dupeCheck(i.trim())){
 
                     document.querySelector('#list').appendChild(createItem(i.trim()));
                     setCookie();
