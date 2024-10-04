@@ -250,8 +250,8 @@ function animationLink(url){
 
     if (document.querySelector('#pffCheck').checked){
         pff = document.querySelector('#pffFile').value;
-        if (!pff.includes('.pff')){
-            pff += '.pff';
+        if (pff.includes('.pff')){
+            pff = pff.replace('.pff', '');
         }
         basePath = document.querySelector('#dataBasePath').value;
         if (!basePath && (base.length > 15 && base.includes('-'))){
