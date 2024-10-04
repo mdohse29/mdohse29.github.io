@@ -1,0 +1,6 @@
+*** Stored in the global interactives directory
+agr_fps
+anm_whats_in_a_nutritional_label/js/anm_whats_in_a_nutritional_label.js
+*** for pff ***
+di_inverse_variation_graphs
+c5ca7852-c58a-4ccb-841c-51548ab65f10

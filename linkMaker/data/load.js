@@ -45,9 +45,7 @@ document.querySelector('body').prepend(nestElem([
                                     },
                                     {
                                         value:'Animation',
-                                        disabled:'disabled',
-                                        inner:'Animation',
-                                        title:'Disabled for the moment.'
+                                        inner:'Animation'
                                     },
                                     {
                                         value:'DLA',
