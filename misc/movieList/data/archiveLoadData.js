@@ -11,7 +11,9 @@ const formatter = function (text){
     format = format.replace(/(\(\d\d\d\d\)).*/g, '$1');
     format = format.replace(/ \[(\d\d\d\d)\].*/g, ' ($1)');
     format = format.replace(/\[(\d\d\d\d)\].*/g, ' ($1)');
-    format = format.replace(/ (\b\d\d\d\d\b).*/, ' ($1)');
+    if (!format.match(/\(\d\d\d\d\)/)){
+        format = format.replace(/ (\b\d\d\d\d\b).*/, ' ($1)');
+    }
     // format = format.replace(/([\w\d])(\()/g, '$1 $2');
     
     return format;

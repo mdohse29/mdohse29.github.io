@@ -77,7 +77,7 @@ function errorMsg(message = 'Empty items or duplicate items are not accepted. Ch
                 mkDiv({class:'message-header is-justify-content-end'}),
                 mkBtn({class:'delete', listeners:[{type:'click', execute:removeMsg}]})
             ]),
-            2:mkDiv({class:'message-body', inner:message})
+            2:mkDiv({class:'message-body is-flex is-justify-content-center', inner:message})
 
         }
 
@@ -214,7 +214,7 @@ function clkEdit(){
 
     }else{
 
-        errorMsg();
+        errorMsg('No change was made.<br>To cancel, press ESC.');
         input.value = text;
         input.focus();
 
