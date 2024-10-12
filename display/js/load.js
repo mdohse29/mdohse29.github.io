@@ -22,7 +22,7 @@
  *              div.container.description
  *                  .drawer.border-bottom
  *                      h5.h5 - "Header for drawer"
- *                      p.border-start.border-end.border-bottom.dnone - "description-of-frame"
+ *                      p.border-start.border-end.border-bottom.dnone - "Content body for drawer"
  *              ||
  *                  "description-of-frame"
  *                  
