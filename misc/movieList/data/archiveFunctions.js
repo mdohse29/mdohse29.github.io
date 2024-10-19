@@ -214,7 +214,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
 
             getMovieInfo(title, year).then((info)=>{
                 $($('#load').parents()[1]).remove();
-                if(info.Plot){
+                if(info.Plot && info.Plot != 'N/A'){
                     $('#info .card').append(nestElem([
                         mkDiv({class:'card-content'}),
                         {
@@ -225,10 +225,22 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
                             ]),
                             2:nestElem([
                                 mkDiv({class:'content'}),
-                                mkP({inner:info.Plot})
+                                {
+                                    1: nestElem([
+                                        mkP(),
+                                        mkElem({elemType:'sub', inner:`Staring: ${info.Actors}`})
+                                    ]),
+                                    2: mkP({inner:info.Plot})
+                                }
                             ])
                         }
-                    ]));
+                    ]), mkDiv({class:'card-footer'}));
+                    // Write something to add the critic ratings to footer
+                    // Must check that ratings exist
+                    // Must determine which rating is which, maybe with a switch
+                    // Not all requests have all 3 ratings, assuming there are only 3
+                    // Known ratings: IMDB, Rotten Tomatoes, "Metacritic?"
+                    // So far the order seems consistent, but not positive.
                 }else{
                     $('#info .card').append(
                         nestElem([
