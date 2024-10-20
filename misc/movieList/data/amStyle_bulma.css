@@ -13,7 +13,7 @@ div.content.msg > p:first-child{
 }
 
 figure > img {
-    min-width: 150px;
+    min-width: 235px;
 }
 
 .active {
@@ -81,7 +81,7 @@ div.highlight > p {
 
 .md-modal-large {
     background-color: #ececec;
-    max-width: 50%;
+    max-width: 715px;
     /* width: 90vh; */
     max-height: fit-content;
     display: flex;
@@ -138,6 +138,14 @@ div.highlight > p {
 .heading {
     margin-top: 10px;
     text-align: center;
+}
+
+#ratings {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    font-size: smaller;
+    user-select: none;
 }
 
 #placeH, .notFound {
