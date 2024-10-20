@@ -396,10 +396,6 @@ $(document).ready(function(){
         ])
     );
 
-    setToggleListeners();
-
-    // $('textarea').focus();
-
     $('.options > button').mousedown(function(){
         if (!$(this).attr('id').includes('info')){
             $(this).removeClass('btn-shadow');
@@ -477,7 +473,7 @@ $(document).ready(function(){
         $('textarea').focus();
     });
 
-    $('.toggle-pill, .switch-container > label').click(function(){
+    $('.toggle-cont, .switch-container > label').click(function(){
         toggleLockImg($(this));
         $('textarea').focus();
     });
