@@ -14,18 +14,20 @@ $(document).ready(function(){
         $('#exspc').addClass('dnone');
         $('#rmv-ol').addClass('dnone');
         $('.switch-container#flat').addClass('dnone');
+        $('.switch-container#dbl').addClass('dnone');
     }
 
     function startProcessing(){
         $('#TextArea').off('paste');
         $('#TextArea').on('paste', processText);
-        $('#exspc').click(removeExtraLines);
+        // $('#exspc').click(removeExtraLines);
         popup({timeOut:1500});
         $('#start').addClass('dnone');
         $('#stop').removeClass('dnone');
         $('#exspc').removeClass('dnone');
         $('#rmv-ol').removeClass('dnone');
         $('.switch-container#flat').removeClass('dnone');
+        $('.switch-container#dbl').removeClass('dnone');
     }
 
     function closePopup(){
@@ -384,7 +386,7 @@ $(document).ready(function(){
                         4:mkBtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'clear', inner:'Clear', title:'Clear scratch pad'}),
                         // 5:mkBtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'ex', inner:'Fix URL'}),
                         6:createToggle({id:'flat', label:'Flatten Text', title:'Convert multiple lines of text into a single line. Check \'How This Works\' info button for example.'}),
-                        7:createToggle({id:'dbl', label:'Paragraph Spacing', title:'Adds space between lines.', class:'dnone', isLocked:'false'}),
+                        7:createToggle({id:'dbl', label:'Paragraph Spacing', title:'Adds space between lines. Click Info button for more info', isLocked:'false'}),
                         8:mkLnk({class:'btn btn-sml ms-1', title:'Click to report an issue or suggestion.', href:'mailto:aaaabncggffyesoyicuhyz3u7u@imaginelearning.org.slack.com', inner:'<img width="32" height="32" src="./data/Web/bug.png" alt="bug"/>'}),
                         9:mkBtn({class:'btn btn-sm ms-1', id:'info', inner:'<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/></svg>', title:'How this works'})
                     }
@@ -436,9 +438,9 @@ $(document).ready(function(){
         let text = $('#TextArea').val();
         toggleSpclFtr(text);
         // Remove after decision is made
-        if (text == "Testing"){
-            $('#dbl').removeClass('dnone');
-        }
+        // if (text == "Testing"){
+        //     $('#dbl').removeClass('dnone');
+        // }
     });
 
     $('#TextArea').on('paste', processText);
