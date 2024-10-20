@@ -234,13 +234,21 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
                                 }
                             ])
                         }
-                    ]), mkDiv({class:'card-footer'}));
-                    // Write something to add the critic ratings to footer
-                    // Must check that ratings exist
-                    // Must determine which rating is which, maybe with a switch
-                    // Not all requests have all 3 ratings, assuming there are only 3
-                    // Known ratings: IMDB, Rotten Tomatoes, "Metacritic?"
-                    // So far the order seems consistent, but not positive.
+                    ]), nestElem([
+                        mkDiv({class:'card-footer'}),
+                        mkP({id:'ratings'})
+                    ]));
+
+                    if (info.Ratings.length){
+
+                        info.Ratings.forEach((rating) => {
+
+                            document.querySelector('#ratings').append(mkElem({elemType:'span', inner:`${((rating.Source === 'Internet Movie Database') ? 'IMDb' : rating.Source)} - ${rating.Value}`}));
+
+                        });
+
+                    }
+                    
                 }else{
                     $('#info .card').append(
                         nestElem([
