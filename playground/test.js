@@ -84,13 +84,15 @@
 
 // console.log(fetch("https://www.idrive.com/idrive/sh/sh?k=l5d7d9n9h4"))
 // let file = require('../misc/data/Aliens.Vs..Predator.Requiem.2007.720p.BluRay.x264.AAC-[YTS.MX].nfo');
-let xml = require('xml2js');
-let fs = require('fs');
+// let xml = require('xml2js');
+// let fs = require('fs');
 
-let file = fs.readFileSync('../misc/data/Aliens.Vs..Predator.Requiem.2007.720p.BluRay.x264.AAC-[YTS.MX].nfo', (error, data) => {
-    // console.log(data);
-})
+// let file = fs.readFileSync('../misc/data/Aliens.Vs..Predator.Requiem.2007.720p.BluRay.x264.AAC-[YTS.MX].nfo', (error, data) => {
+//     // console.log(data);
+// })
 
-xml.parseString(file, (err, data) => {
-    console.log(data.movie.title[0]);
-})
+// xml.parseString(file, (err, data) => {
+//     console.log(data.movie.title[0]);
+// })
+let input = mkInp({type:'select', id: 'select', class: 'select', options:[{value: '1', inner:'Option 1'}, {value: '2', inner:'Option 2'}], label: 'Select Something'});
+document.querySelector('body').append(input.label, input.input);

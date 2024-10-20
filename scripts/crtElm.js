@@ -58,7 +58,7 @@ function mkOpt(attr = {value:''}){
 function mkInp(attr = {type:'', id:''}){
     let elements = {};
     if (!attr.type){
-        throw Error("A type type must be defined.\n\nCurrent Keys: {" + Object.keys(attr) + "}");
+        throw Error("A input type must be defined.\n\nExample: {type: 'text'}\n\nCurrent Keys: {" + Object.keys(attr) + "}");
     }else if (!attr.id && attr.label){
         throw Error("\n*******************\nThe id attribute should be set if using a label so the label can be properly associated to the element.\n*******************\n")
     }
@@ -92,15 +92,15 @@ function mkInp(attr = {type:'', id:''}){
     if (attr.label){
         
         if (attr.labelOpt){
-            // for (let b in attr.labelOpt){
-            //     if (attr.labelOpt[b]){
-            //         elements.label.setAttribute(b, attr.labelOpt[b]);
-            //     }
-            // }
+
             elements.label = mkLabel({for:attr.id, inner:attr.label, ...attr.labelOpt});
+
         }else{
+
             elements.label = mkLabel({for:attr.id, inner:attr.label});
+
         }
+
     }
 
     if (attr.listeners){
@@ -112,29 +112,83 @@ function mkInp(attr = {type:'', id:''}){
     return (elements.label) ? elements : elements.input;
 }
 
-// function mkHead(attr = {hType:'', inner:''}){
-// // Just using mkElem moving forward instances 
-// // are still in place so this must remain for the moment
+function tgPillListen (e){
+    let pill = this.querySelector('.toggle-pill');
+    let container = this;
+    let switchContainer = container.parentElement.parentElement;
+    let marg = container.scrollWidth - (pill.scrollWidth + 4);
+    let isLocked = switchContainer.getAttribute('isLocked');
+    
+    if (!container.classList.contains('tg-on')){
 
-//     if (!(attr.inner && attr.hType)){
-//         throw new Error("The inner and hType keys are required\nmkElem({elemType:'h1', inner:'Text to be displayed'})");
-//     }
+        pill.style.setProperty('margin-left', marg + 'px');
+        container.classList.add('tg-on');
 
-//     attr.elemType = attr.hType;
-//     delete attr.hType;
+        if (e.ctrlKey && isLocked == 'false'){
 
-//     return mkElem(attr);
-// }
+            switchContainer.setAttribute('isLocked', 'true');
+            container.style.backgroundColor = 'red';
+
+        }
+
+    }else{
+        if (!switchContainer.hasAttribute('isLocked') || isLocked == 'false'){
+
+            if (e.ctrlKey && isLocked == 'false'){
+
+                switchContainer.setAttribute('isLocked', 'true');
+                container.style.backgroundColor = 'red';
+
+            }else{
+
+                pill.style.setProperty('margin-left','2px');
+                container.classList.remove('tg-on');
+
+            }
+        }else{
+
+            if (e.ctrlKey){
+
+                container.removeAttribute('style');
+                switchContainer.setAttribute('isLocked', 'false');
+
+            }
+        }
+    }
+}
+
+function tgLblListen(e){
+
+    let switchContainer = this.parentElement;
+    let isLocked = switchContainer.getAttribute('isLocked');
+    
+    if(e.ctrlKey && isLocked == 'false'){
+        
+        switchContainer.setAttribute('isLocked', 'true');
+        switchContainer.querySelector('.toggle-cont').style.backgroundColor = 'red';
+        this.parentElement.children[1].children[0].children[0].click();
+
+    }else if (e.ctrlKey && isLocked == 'true'){
+
+        switchContainer.querySelector('.toggle-cont').removeAttribute('style');
+        switchContainer.setAttribute('isLocked', 'false');
+
+    }else if(!e.ctrlKey || (e.ctrlKey && !switchContainer.hasAttribute('isLocked'))){
+
+        this.parentElement.children[1].children[0].children[0].click();
+
+    }
+}
 
 function createToggle(attr = {id:'',title:'',label:'',isLocked:false}){
     // css location mdohse29.github.io/templates/toggleSwitch/toggleSwitch.css
     return nestElem([
         mkDiv({id:attr.id, class: ((attr.class) ? 'switch-container ' + attr.class : 'switch-container'), title:attr.title, isLocked:attr.isLocked}),
         {
-            1:mkLabel({inner:(attr.label) ? attr.label : ''}),
+            1:mkLabel({inner:(attr.label) ? attr.label : '', listeners: [{type:'click', execute: tgLblListen}]}),
             2:nestElem([
                 mkDiv({class:'switch'}),
-                mkDiv({class:'toggle-cont'}),
+                mkDiv({class:'toggle-cont', listeners:[{type:'click', execute: tgPillListen}]}),
                 mkDiv({class:'toggle-pill'})
             ])
         }
@@ -189,82 +243,4 @@ function mkElem(attr = {elemType:''}){
     }
 
     return element;
-}
-
-function setToggleListeners(){
-    let toggles = document.querySelectorAll('.toggle-pill');
-
-    for(let ts of toggles){
-        ts.addEventListener('click', function(e){
-            let pill = this;
-            let container = pill.parentElement;
-            let switchContainer = container.parentElement.parentElement;
-            let marg = container.scrollWidth - (pill.scrollWidth + 4);
-            let isLocked = switchContainer.getAttribute('isLocked');
-            
-            if (!container.classList.contains('tg-on')){
-
-                pill.style.setProperty('margin-left', marg + 'px');
-                container.classList.add('tg-on');
-
-                if (e.ctrlKey && isLocked == 'false'){
-
-                    switchContainer.setAttribute('isLocked', 'true');
-                    container.style.backgroundColor = 'red';
-
-                }
-
-            }else{
-                if (!switchContainer.hasAttribute('isLocked') || isLocked == 'false'){
-
-                    if (e.ctrlKey && isLocked == 'false'){
-
-                        switchContainer.setAttribute('isLocked', 'true');
-                        container.style.backgroundColor = 'red';
-
-                    }else{
-
-                        pill.style.setProperty('margin-left','2px');
-                        container.classList.remove('tg-on');
-
-                    }
-                }else{
-
-                    if (e.ctrlKey){
-
-                        container.removeAttribute('style');
-                        switchContainer.setAttribute('isLocked', 'false');
-
-                    }
-                }
-            }
-        });
-    }
-    let labels = document.querySelectorAll('.switch-container > label');
-
-    for (let label of labels){
-
-        label.addEventListener('click', function(e){
-
-            let switchContainer = this.parentElement;
-            let isLocked = switchContainer.getAttribute('isLocked');
-            
-            if(e.ctrlKey && isLocked == 'false'){
-                
-                switchContainer.setAttribute('isLocked', 'true');
-                switchContainer.querySelector('.toggle-cont').style.backgroundColor = 'red';
-                this.parentElement.children[1].children[0].children[0].click();
-
-            }else if (e.ctrlKey && isLocked == 'true'){
-
-                switchContainer.querySelector('.toggle-cont').removeAttribute('style');
-                switchContainer.setAttribute('isLocked', 'false');
-
-            }else if(!e.ctrlKey || (e.ctrlKey && !switchContainer.hasAttribute('isLocked'))){
-
-                this.parentElement.children[1].children[0].children[0].click();
-
-            }
-        });
-    }
 }
