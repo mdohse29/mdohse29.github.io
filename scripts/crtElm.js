@@ -90,13 +90,16 @@ function mkInp(attr = {type:'', id:''}){
     }
 
     if (attr.label){
-        elements.label = mkLabel({for:attr.id, inner:attr.label});
+        
         if (attr.labelOpt){
-            for (let b in attr.labelOpt){
-                if (attr.labelOpt[b]){
-                    elements.label.setAttribute(b, attr.labelOpt[b]);
-                }
-            }
+            // for (let b in attr.labelOpt){
+            //     if (attr.labelOpt[b]){
+            //         elements.label.setAttribute(b, attr.labelOpt[b]);
+            //     }
+            // }
+            elements.label = mkLabel({for:attr.id, inner:attr.label, ...attr.labelOpt});
+        }else{
+            elements.label = mkLabel({for:attr.id, inner:attr.label});
         }
     }
 
