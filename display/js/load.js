@@ -215,7 +215,10 @@ document.body.prepend(
                     ])
                 }
             ]),
-            5:mkDiv({class:'row pt-3 pb-4 mb-0 mt-5 ' + ((!browserInfo.includes('Mobile')) ? 'sticky-bottom' : '') + ' footer'})
+            5:nestElem([
+                mkDiv({class:'row pt-2 pb-3 mb-0 mt-5 ' + ((!browserInfo.includes('Mobile')) ? 'sticky-bottom' : '') + ' footer'}),
+                mkSpan({inner: 'Created By: MR D', style: 'font-size: 8px;color: transparent;'})
+            ])
         }
     ])
 );
