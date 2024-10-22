@@ -314,6 +314,15 @@ const drawers = {
                     sub: '(dev.to)',
                     warn: false
                 }
+            },
+            button8: {
+                hidden: false,
+                url: 'https://playwright.dev/',
+                text: {
+                    main: 'Playwright Automation',
+                    sub: '',
+                    warn: false
+                }
             }
         }
     }
