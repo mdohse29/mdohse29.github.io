@@ -7,33 +7,65 @@ function dupeCheck(item){
 
     if (currentList){
 
-        for (let element of currentList){
+        let pid = null;
 
-            if(element.children.length > 1){
+        if (targetElement){
 
-                let items = element.innerText.split('\n');
+            pid = targetElement.getAttribute('pid');
 
-                for (let i of items){
+        }
 
-                    if (i.toLowerCase() === item.toLowerCase()){
+        if (pid && (targetElement.id === 'listSubItem' || getActiveBtn().id === 'addSub')){
+
+            console.log(getActiveBtn());
+
+                for (let element of currentList){
+
+                    if (getItemText(element).toLowerCase() === item.toLowerCase()){
 
                         return true;
 
-                    }
+                    }else if(element.getAttribute('pid') === pid && element.children.length > 1){
 
-                    if ((targetElement && (element !== targetElement))){
-                        
-                        break;
-                        
+                        let children = element.querySelectorAll('#listSubItem');
+
+                        for (let i of children){
+
+                            if (getItemText(i).toLowerCase() === item.toLowerCase()){
+
+                                return true;
+
+                            }
+
+                        }
+
                     }
 
                 }
 
-            }else{
+        }else{
 
-                if (element.innerText.toLowerCase() === item.toLowerCase()){
+            for (let element of currentList){
+
+                if (getItemText(element).toLowerCase() === item.toLowerCase()){
 
                     return true;
+
+                }
+
+                if (element.children.length > 1){
+
+                    let children = element.querySelectorAll('#listSubItem');
+
+                    for (let i of children){
+
+                        if (getItemText(i).toLowerCase() === item.toLowerCase()){
+
+                            return true;
+
+                        }
+
+                    }
 
                 }
 
@@ -57,7 +89,8 @@ function rmvTimeout(){
 
 }
 
-function errorMsg(message = 'Empty items or duplicate items are not accepted. Check your entry and try again.'){
+function errorMsg(message = 'Empty items or duplicate items are not accepted.<br>Check your entry and try again.'){
+    
     let currentMsg = document.querySelector('article.is-danger');
 
     rmvTimeout();
@@ -77,7 +110,10 @@ function errorMsg(message = 'Empty items or duplicate items are not accepted. Ch
                 mkDiv({class:'message-header is-justify-content-end'}),
                 mkBtn({class:'delete', listeners:[{type:'click', execute:removeMsg}]})
             ]),
-            2:mkDiv({class:'message-body is-flex is-justify-content-center', inner:message})
+            2:nestElem([
+                mkDiv({class:'message-body is-flex is-justify-content-center', style: 'text-align: center;'}),
+                mkP({inner:message})
+            ])
 
         }
 
@@ -113,6 +149,18 @@ function removeMsg(){
 
     }
 
+
+}
+
+function getActiveBtn(){
+
+    let buttons = document.querySelector('.listBtn').querySelectorAll('button');
+
+    for (let btn of buttons){
+        if (!btn.classList.contains('dnone')){
+            return btn;
+        }
+    }
 
 }
 
@@ -214,7 +262,11 @@ function clkEdit(){
 
     }else{
 
-        errorMsg('No change was made.<br>To cancel, press ESC.');
+        if (!newText){
+            errorMsg('Empty items are not accepted.<br>If you want to remove the item,<br>just click complete in the options.')
+        }else if (dupeCheck(newText)){
+            errorMsg('No Change Was Made!<br>Press ESC to clear,<br>or select another list item and select cancel.');
+        }
         input.value = text;
         input.focus();
 
