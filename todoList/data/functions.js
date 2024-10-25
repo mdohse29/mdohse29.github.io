@@ -17,8 +17,6 @@ function dupeCheck(item){
 
         if (pid && (targetElement.id === 'listSubItem' || getActiveBtn().id === 'addSub')){
 
-            console.log(getActiveBtn());
-
                 for (let element of currentList){
 
                     if (getItemText(element).toLowerCase() === item.toLowerCase()){
@@ -145,8 +143,6 @@ function removeMsg(){
         rmvTimeout();
         currentMsg.remove();
         
-        document.querySelector('#item').focus();
-
     }
 
 
@@ -279,59 +275,83 @@ function clkUndoItem(){
     let elem = targetElement;
     let isSub = (elem.id === 'listSubItem');
 
-    if (isSub){
+    if (dupeCheck(elem.innerText)){
+        errorMsg("A duplicate item is detected in the current list.<br>Undo was not successful!");
+        elem.style.border = '2px solid red';
+        setTimeout(() => {
+            elem.removeAttribute('style');
+        }, 1500);
+    }else{
 
-        let parent = document.querySelector('#list p[pid="' + elem.getAttribute('pid') + '"]');
+        if (isSub){
 
-        setAllCaret(elem);
+            let parent = document.querySelector('#list p[pid="' + elem.getAttribute('pid') + '"]');
 
-        elem.classList.remove('has-background-item');
-        elem.removeEventListener('click', clkListItem);
+            if (parent){
+                setAllCaret(elem);
 
-            changeTitle(elem);
+                elem.classList.remove('has-background-item');
+                elem.removeEventListener('click', clkListItem);
+    
+                changeTitle(elem);
 
-        if (parent){
+                parent.appendChild(elem);
+                setCookie();
 
-            parent.appendChild(elem);
-            setCookie();
+            }else{
+
+                targetElement = null;
+                if (dupeCheck(elem.innerText)){
+                    errorMsg("A duplicate item is detected in the current list.<br>Undo was not successful!");
+                    elem.style.border = '2px solid red';
+                    setTimeout(() => {
+                        elem.removeAttribute('style');
+                    }, 1500);
+                }else{
+                    setAllCaret(elem);
+
+                    elem.classList.remove('has-background-item');
+                    elem.removeEventListener('click', clkListItem);
+
+                    changeTitle(elem);
+                    
+                    elem.remove();
+
+                    document.querySelector('#list').prepend(createItem(elem.innerText));
+
+                    setCookie();
+                }
+
+            }
 
         }else{
 
+            let icons = elem.querySelectorAll('i');
+            let children = elem.querySelectorAll('#listSubItem');
+
+            children.forEach(child => {
+                changeTitle(child);
+            });
+
+            icons.forEach(icon => {
+
+                icon.classList.remove('has-background-item');
+                icon.parentElement.classList.remove('has-background-item');
+
+            });
+
+            setAllCaret(elem);
+
             elem.remove();
+            elem.removeEventListener('click', clkUndoItem);
+            elem.addEventListener('click', clkListItem);
 
-            document.querySelector('#list').prepend(createItem(elem.innerText));
+            changeTitle(elem);
 
+            document.querySelector('#list').prepend(elem);
             setCookie();
 
         }
-
-    }else{
-
-        let icons = elem.querySelectorAll('i');
-        let children = elem.querySelectorAll('#listSubItem');
-
-        children.forEach(child => {
-            changeTitle(child);
-        });
-
-        icons.forEach(icon => {
-
-            icon.classList.remove('has-background-item');
-            icon.parentElement.classList.remove('has-background-item');
-
-        });
-
-        setAllCaret(elem);
-
-        elem.remove();
-        elem.removeEventListener('click', clkUndoItem);
-        elem.addEventListener('click', clkListItem);
-
-        changeTitle(elem);
-
-        document.querySelector('#list').prepend(elem);
-        setCookie();
-
     }
 
     closeOptions();
