@@ -10,7 +10,7 @@ iframe {
     border: 1px solid black;
 }
 
-div.frame-cover {
+div.frame-cover, div.frame-cover.mobile {
     display: flex;
     background-color: transparent;
     justify-content: center;
@@ -25,6 +25,11 @@ div.frame-cover {
 
 div.frame-cover:hover {
     background-color: rgba(0,0,0,.5);
+}
+
+div.frame-cover.mobile {
+    background-color: rgba(0,0,0,.5);
+    transition: none;
 }
 
 .col-6 {

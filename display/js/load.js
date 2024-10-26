@@ -67,7 +67,7 @@ document.body.prepend(
                                 nestElem([
                                     mkDiv({class:'ratio'}),
                                     {
-                                        1:mkDiv({class:'frame-cover'}),
+                                        1:mkDiv({class:`frame-cover${((browserInfo.includes('Mobile')) ? ' mobile' : '')}`}),
                                         2:mkElem({elemType:'iframe', scrolling:'no', src:'../misc/scratch/'}) // IFRAME
                                     }
                                 ])
@@ -121,7 +121,7 @@ document.body.prepend(
                                 nestElem([
                                     mkDiv({class:'ratio'}),
                                     {
-                                        1:mkDiv({class:'frame-cover '}),
+                                        1:mkDiv({class:`frame-cover${((browserInfo.includes('Mobile')) ? ' mobile' : '')}`}),
                                         2:mkElem({elemType:'iframe', scrolling:'no', src:'../misc/movieList/'}) // IFRAME
                                     }
                                 ])
@@ -178,7 +178,7 @@ document.body.prepend(
                                 nestElem([
                                     mkDiv({class:'ratio'}),
                                     {
-                                        1:mkDiv({class:'frame-cover '}),
+                                        1:mkDiv({class:`frame-cover${((browserInfo.includes('Mobile')) ? ' mobile' : '')}`}),
                                         2:mkElem({elemType:'iframe', scrolling:'no', src:'../todoList/'}) // IFRAME
                                     }
                                 ])
