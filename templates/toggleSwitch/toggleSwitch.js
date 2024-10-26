@@ -27,3 +27,5 @@ for (let label of labels){
         this.parentElement.children[1].children[0].click();
     });
 }
+
+document.querySelector('.presentation').appendChild(createToggle({id: 'test3', label: 'Test 3', isLocked: 'false'}))
