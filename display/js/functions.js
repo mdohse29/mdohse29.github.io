@@ -118,18 +118,24 @@ window.onload = function(){
     let frameCovers = document.querySelectorAll('.frame-cover');
 
     frameCovers.forEach(cover => {
+        //background-color: rgba(0,0,0,.5);
 
-        cover.addEventListener('mouseenter', function(){
+        if (cover.classList.contains('mobile')){
+            cover.appendChild(mkBtn({class:'btn btn-info', id:'submit', inner:'Click to Engage'}));
+        }else{
 
-            this.appendChild(mkBtn({class:'btn btn-info', id:'submit', inner:'Click to Engage'}));
+            cover.addEventListener('mouseenter', function(){
 
-        });
+                this.appendChild(mkBtn({class:'btn btn-info', id:'submit', inner:'Click to Engage'}));
 
-        cover.addEventListener('mouseleave', function(){
+            });
 
-            this.querySelector('#submit').remove();
+            cover.addEventListener('mouseleave', function(){
 
-        });
+                this.querySelector('#submit').remove();
+
+            });
+        }
 
     });
 
