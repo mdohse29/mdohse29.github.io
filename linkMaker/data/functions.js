@@ -48,7 +48,8 @@ function generateDropDown(id, labelText, title){
         {inner: 'dla_equationbuilder', value:"dla_equationbuilder/js/equation_builder.js"},
         {inner: 'dla_whatcha_makin', value:"dla_whatcha_makin/js/watchmakin.js"},
         {inner: 'dla_carnivalgame', value:"dla_carnivalgame/js/carnivalgame.js"},
-        {inner: 'periodic_table', value:"periodic_table/js/periodictable.js"}
+        {inner: 'periodic_table', value:"periodic_table/js/periodictable.js"},
+        {inner: 'dla_spellingbee', value: "dla_spellingbee/js/spellingbee.js"}
     ]
     dlaPaths = dlaPaths.sort((obj1, obj2) => {
         if(obj1.value > obj2.value){
