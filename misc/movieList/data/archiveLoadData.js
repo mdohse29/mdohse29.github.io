@@ -105,6 +105,7 @@ async function createMovieList(){
 
         let movieList = document.querySelector('.movies');
         for (let i in masterList){
+            // if (!masterList[i].element.innerText.match(/^.*\(\d\d\d\d\)/))
             movieList.appendChild(masterList[i].element);
         }
 
