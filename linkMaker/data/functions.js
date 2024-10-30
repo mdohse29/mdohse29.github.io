@@ -198,6 +198,18 @@ function mediaSelect(){
 
         build.appendChild(generateDropDown('source', 'Source Path'));
 
+        document.querySelector('#source').addEventListener('input', function () {
+            if (this.value.includes('periodic_table')){
+                document.querySelectorAll('#dataBasePath, #dlaFilename').forEach( elem => {
+                    elem.setAttribute('disabled', 'disabled');
+                })
+            }else{
+                document.querySelectorAll('#dataBasePath, #dlaFilename').forEach( elem => {
+                    elem.removeAttribute('disabled');
+                })
+            }
+        })
+
         build.appendChild(generateInput('dataBasePath','Unit UUID','The UUID for the unit can be found in Cayman.'));
 
         build.appendChild(generateInput('dlaFilename', 'DLA File Name', 'The file name for the dla file on AWS. (incl. extension)', 'some_filename.dla'));
