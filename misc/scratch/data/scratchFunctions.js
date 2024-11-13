@@ -384,7 +384,7 @@ $(document).ready(function(){
                         2:mkBtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'exspc', inner:'Remove Leading Spaces', title:'The empty space in front of the paragraphs'}),
                         3:mkBtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'rmv-ol', inner:'Remove OL Markers', title:'Remove numbered OL markers'}),
                         4:mkBtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'clear', inner:'Clear', title:'Clear scratch pad'}),
-                        // 5:mkBtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'ex', inner:'Fix URL'}),
+                        5:mkBtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'ff', inner:'Format Filename', title:'Formats file names by lowercasing the text and adding underscores to replace spaces.', listeners: [{type:'click', execute:function(){ let currentText = $('#TextArea').val(); $('#TextArea').val(formatFilename(currentText)); }}]}),
                         6:createToggle({id:'flat', label:'Flatten Text', title:'Convert multiple lines of text into a single line. Check \'How This Works\' info button for example.'}),
                         7:createToggle({id:'dbl', label:'Paragraph Spacing', title:'Adds space between lines. Click Info button for more info', isLocked:'false'}),
                         8:mkLnk({class:'btn btn-sml ms-1', title:'Click to report an issue or suggestion.', href:'mailto:aaaabncggffyesoyicuhyz3u7u@imaginelearning.org.slack.com', inner:'<img width="32" height="32" src="./data/Web/bug.png" alt="bug"/>'}),
