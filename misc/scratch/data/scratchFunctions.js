@@ -167,12 +167,12 @@ $(document).ready(function(){
         let formatted = [];
         let lines = text.split('\n');
         let regex = /^(.*?)\s{1,}(\.(?:mp4|\w{3,4}))$/;
-        for (let txt of lines){
-            if (txt.match(regex)){
-                txt = txt.replace(regex, '$1$2');
+        for (let fn of lines){
+            if (fn.match(regex)){
+                fn = fn.replace(regex, '$1$2');
             }
 
-            formatted.push(txt.toLowerCase().trim().replaceAll(/[ -]/g, '_').replaceAll(/_{2,}/g, '_'));
+            formatted.push(fn.toLowerCase().trim().replaceAll(/[ -]/g, '_').replaceAll(/_{2,}/g, '_').replace(/_(\..*?)$/, '$1'));
 
         }
         return formatted.join('\n');
