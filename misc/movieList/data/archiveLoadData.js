@@ -14,7 +14,6 @@ const formatter = function (text){
     if (!format.match(/\(\d\d\d\d\)/)){
         format = format.replace(/ (\b\d\d\d\d\b).*/, ' ($1)');
     }
-    // format = format.replace(/([\w\d])(\()/g, '$1 $2');
     
     return format;
 }
@@ -27,7 +26,6 @@ function collectList(movies, tag){
             let hasYear = formatted.match(/\(\d\d\d\d\)/);
             let title = ((hasYear) ? formatted.replace(/ \(\d\d\d\d\)/, '') : formatted);
             let year = ((hasYear) ? formatted.replace(/.*\((\d\d\d\d)\)/, '$1') : '');
-            // console.log((year) ? year : 'Nothing here');
 
             collection.push(
                 {
@@ -61,13 +59,10 @@ function sorter(array){
 }
 
 async function getMovieInfo(title, year){
-    // let year = title.replace(/.*\((\d\d\d\d)\)/, '$1');
-    // title = title.replace(/ \(\d\d\d\d\)/, '');
     title = title.toLowerCase().replaceAll(' ', '+');
     title = title.replaceAll('&', '%26');
     title = '&t=' + title;
-    let info = await axios.get('https://www.omdbapi.com/?apikey=c8757c03' + title + ((year) ? '&y=' + year:''));
-    // console.log(info)
+    let info = await axios.get(infoUrl + title + ((year) ? '&y=' + year:''));
     return info.data;
 }
 
@@ -88,15 +83,6 @@ async function createMovieList(){
             collectList(tv.data.split('\n'), 'tv')
         );
 
-        //Using FETCH
-        // arch = await fetch(baseUrl + 'archive.txt');
-        // active = await fetch(baseUrl + 'active.txt');
-        // tv = await fetch(baseUrl + 'tvshows.txt');
-
-        // collectList((await arch.text()).split('\n'), 'arch');
-        // collectList((await active.text()).split('\n'), 'mov');
-        // collectList((await tv.text()).split('\n'), 'tv');
-
         sorter(masterList);
 
         if (masterList.length > 0){
@@ -105,7 +91,6 @@ async function createMovieList(){
 
         let movieList = document.querySelector('.movies');
         for (let i in masterList){
-            // if (!masterList[i].element.innerText.match(/^.*\(\d\d\d\d\)/))
             movieList.appendChild(masterList[i].element);
         }
 
@@ -121,7 +106,6 @@ async function createMovieList(){
         document.querySelector('.movies').appendChild(loading);
         document.querySelector('#search-box').setAttribute('disabled','disabled');
         document.querySelector('.rando > button').setAttribute('disabled', 'disabled');
-        // throw e;
     }
 }
 

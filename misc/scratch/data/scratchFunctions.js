@@ -164,7 +164,18 @@ $(document).ready(function(){
     }
 
     function formatFilename(text){
-        return text.toLowerCase().trim().replaceAll(' ', '_');
+        let formatted = [];
+        let lines = text.split('\n');
+        let regex = /^(.*?)\s{1,}(\.(?:mp4|\w{3,4}))$/;
+        for (let fn of lines){
+            if (fn.match(regex)){
+                fn = fn.replace(regex, '$1$2');
+            }
+
+            formatted.push(fn.toLowerCase().trim().replaceAll(/[ -]/g, '_').replaceAll(/_{2,}/g, '_').replace(/_(\..*?)$/, '$1'));
+
+        }
+        return formatted.join('\n');
     }
 
     function removeOlMarkers(text){
@@ -383,8 +394,8 @@ $(document).ready(function(){
                         1:mkInp({type:'select', id:'color', name:'color', class:'form-select-sm', options:[{value:'dark', isColor:true},{value:'green', isColor:true},{value:'blue', isColor:true},{value:'white', isColor:true},{value:'yellow', isColor:true}]}),
                         2:mkBtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'exspc', inner:'Remove Leading Spaces', title:'The empty space in front of the paragraphs'}),
                         3:mkBtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'rmv-ol', inner:'Remove OL Markers', title:'Remove numbered OL markers'}),
-                        4:mkBtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'clear', inner:'Clear', title:'Clear scratch pad'}),
-                        5:mkBtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'ff', inner:'Format Filename', title:'Formats file names by lowercasing the text and adding underscores to replace spaces.', listeners: [{type:'click', execute:function(){ let currentText = $('#TextArea').val(); $('#TextArea').val(formatFilename(currentText)); }}]}),
+                        4:mkBtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'ff', inner:'Format Filename', title:'Formats file names by lowercasing the text and adding underscores to replace spaces.', listeners: [{type:'click', execute:function(){ let currentText = $('#TextArea').val(); $('#TextArea').val(formatFilename(currentText)); }}]}),
+                        5:mkBtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'clear', inner:'Clear', title:'Clear scratch pad'}),
                         6:createToggle({id:'flat', label:'Flatten Text', title:'Convert multiple lines of text into a single line. Check \'How This Works\' info button for example.'}),
                         7:createToggle({id:'dbl', label:'Paragraph Spacing', title:'Adds space between lines. Click Info button for more info', isLocked:'false'}),
                         8:mkLnk({class:'btn btn-sml ms-1', title:'Click to report an issue or suggestion.', href:'mailto:aaaabncggffyesoyicuhyz3u7u@imaginelearning.org.slack.com', inner:'<img width="32" height="32" src="./data/Web/bug.png" alt="bug"/>'}),
