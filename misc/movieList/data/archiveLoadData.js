@@ -1,7 +1,7 @@
 let masterList = [];
 // const baseUrl = './data/';
 const baseUrl = 'https://mdohse29.github.io/misc/movieList/data/'
-const infoUrl = 'http://www.omdbapi.com/?apikey=c8757c03'
+const infoUrl = 'https://www.omdbapi.com/?apikey=c8757c03'
 
 let loading = mkP({id:'placeH', inner:'Loading...'});
 document.querySelector('.movies').appendChild(loading);
