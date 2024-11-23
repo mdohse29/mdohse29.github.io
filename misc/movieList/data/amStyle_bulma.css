@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(239, 245, 251);
+    background-color: rgba(0,0,0,.25);
     min-height: 100vh;
 }
 
@@ -14,6 +14,11 @@ div.content.msg > p:first-child{
 
 figure > img {
     min-width: 235px;
+}
+
+.title > h1 {
+    text-shadow: 8px 3px 3px gray;
+    font-size: 2em;
 }
 
 .active {
@@ -166,11 +171,19 @@ div.highlight > p {
     .md-modal-large {
         max-width: 95%;
     }
+
+    .title > h1 {
+        font-size: 1em;
+    }
 }
 
 @media (width < 769px){
     .card-content {
         flex-direction:column;
         text-align: center;
+    }
+
+    .title > h1 {
+        font-size: 1.5em;
     }
 }
