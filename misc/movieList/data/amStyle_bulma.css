@@ -36,7 +36,7 @@ figure > img {
     overflow: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
-    height: 70vh;
+    max-height: 60vh;
 }
 
 .movies > div > p.title {
