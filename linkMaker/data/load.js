@@ -51,18 +51,18 @@ document.querySelector('body').prepend(nestElem([
                                         value:'DLA',
                                         inner:'DLA'
                                     }
-                                ]})
+                                ], listeners:[{type:'change', execute:toggleExtras}]})
                             }
                         ]),
                         2:nestElem([
-                            mkDiv({class:'field', title:'Does this have a transcript/CC?'}),
+                            mkDiv({class:'field dnone', title:'Does this have a transcript/CC?'}),
                             {
                                 1:pffCheck.label,
                                 2:pffCheck.input
                             }
                         ]),
                         3:nestElem([
-                            mkDiv({class:'field', title:'Extra text will appear above or below the media.'}),
+                            mkDiv({class:'field dnone', title:'Extra text will appear above or below the media.'}),
                             {
                                 1:exText.label,
                                 2:exText.input
@@ -70,7 +70,7 @@ document.querySelector('body').prepend(nestElem([
                         ]),
                         4:nestElem([
                             mkDiv({class:'field'}),
-                            mkBtn({class:'button mt-4 is-rounded is-info', id:'mediaselect', inner:'Submit'})
+                            mkBtn({class:'button mt-4 is-rounded is-info', id:'mediaselect', inner:'Submit', listeners:[{type:'click',execute:mediaSelect}]})
                         ])
                     }
                 ]),
@@ -79,7 +79,7 @@ document.querySelector('body').prepend(nestElem([
                     mkDiv({class:'box dnone', id:'linkBuild'}),
                     mkDiv({class:'head'}),
                     {
-                        1:mkBtn({class:'button is-small is-info is-light is-outlined', id:'showPreview', inner:'Preview'}),
+                        1:mkBtn({class:'button is-small is-info is-light is-outlined', id:'showPreview', inner:'Preview', listeners:[{type:'click',execute:showPreview}]}),
                         2:mkElem({elemType:'h1', class:'title has-text-centered', inner:'CDN Link'})
                     }
                 ]),

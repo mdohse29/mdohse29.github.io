@@ -90,6 +90,7 @@ div.frame-cover.mobile {
     margin-bottom: 0px;
     overflow-y: auto;
     scrollbar-width: thin;
+    line-height: 1.25em;
     max-height: 14em;
 }
 

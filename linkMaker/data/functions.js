@@ -347,10 +347,10 @@ function dlaLink(url){
 }
 
 
-resetEverything();
+// resetEverything();
 
-document.querySelector('#mediaselect').addEventListener('click', mediaSelect);
+// document.querySelector('#mediaselect').addEventListener('click', mediaSelect);
 
-document.querySelector('#showPreview').addEventListener('click', showPreview);
+// document.querySelector('#showPreview').addEventListener('click', showPreview);
 
-document.querySelector('#mediaType').addEventListener('change', toggleExtras);
+// document.querySelector('#mediaType').addEventListener('change', toggleExtras);
