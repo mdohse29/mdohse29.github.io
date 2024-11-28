@@ -604,7 +604,7 @@ function setCookie(cookieName = 'list'){
 
     if (itemText){
 
-        document.cookie = cookieName + '=' + itemText.substring(0, itemText.length - 1) + ';max-age=31536000;samesite=none;secure';
+        document.cookie = `${cookieName}=${itemText.substring(0, itemText.length - 1)};max-age=31536000;samesite=none;secure`
 
         if (document.cookie.length > 3000){
 
