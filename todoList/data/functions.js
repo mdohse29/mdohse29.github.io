@@ -99,7 +99,7 @@ function errorMsg(message = 'Empty items or duplicate items are not accepted.<br
 
     }
 
-    document.querySelector('body').prepend(nestElem([
+    document.querySelector('.card-header.main-bg').prepend(nestElem([
 
         mkElem({elemType:'article', class:'message is-small is-danger', listeners:[{type:'mouseenter', execute:manRmvMsg}]}),
         {
@@ -117,9 +117,6 @@ function errorMsg(message = 'Empty items or duplicate items are not accepted.<br
 
     ]));
 
-    let newMessage = document.querySelector('article.message');
-
-    newMessage.setAttribute('style', 'left: calc(100% - ' + (newMessage.scrollWidth + 25) + 'px);');
     document.querySelector('#item').classList.add('is-danger');
 
     errorTimeoutID = setTimeout(removeMsg, 5000);
