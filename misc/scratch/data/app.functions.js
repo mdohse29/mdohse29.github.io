@@ -12,19 +12,21 @@ $(document).ready(function(){
         $('#stop').addClass('dnone');
         $('#start').removeClass('dnone');
         $('#exspc').addClass('dnone');
+        $('#ff').addClass('dnone');
         $('#rmv-ol').addClass('dnone');
         $('.switch-container#flat').addClass('dnone');
         $('.switch-container#dbl').addClass('dnone');
     }
 
     function startProcessing(){
-        $('#TextArea').off('paste');
+        // $('#TextArea').off('paste');
         $('#TextArea').on('paste', processText);
-        // $('#exspc').click(removeExtraLines);
+        $('#exspc').click(removeExtraLines);
         popup({timeOut:1500});
         $('#start').addClass('dnone');
         $('#stop').removeClass('dnone');
         $('#exspc').removeClass('dnone');
+        $('#ff').removeClass('dnone');
         $('#rmv-ol').removeClass('dnone');
         $('.switch-container#flat').removeClass('dnone');
         $('.switch-container#dbl').removeClass('dnone');
