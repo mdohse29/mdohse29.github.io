@@ -99,14 +99,14 @@ $(document).ready(function(){
             // if (previous.includes('toolBox'))
             //     $('body').prepend(mkrtnl());
 
-            $('#ff').click(function(){
-                let currentText = $('#TextArea').val();
-                $('#TextArea').val(formatFilename(currentText));
-            });
+            // $('#ff').click(function(){
+            //     let currentText = $('#TextArea').val();
+            //     $('#TextArea').val(formatFilename(currentText));
+            // });
 
-            $('#tgDblSpc').click(function(){
-                $('#dbl').toggleClass('dnone');
-            });
+            // $('#tgDblSpc').click(function(){
+            //     $('#dbl').toggleClass('dnone');
+            // });
 
             $('#sandr').click(function(){
                 $('.search-replace').removeClass('dnone');
