@@ -94,5 +94,34 @@
 // xml.parseString(file, (err, data) => {
 //     console.log(data.movie.title[0]);
 // })
-let input = mkInp({type:'select', id: 'select', class: 'select', options:[{value: '1', inner:'Option 1'}, {value: '2', inner:'Option 2'}], label: 'Select Something'});
-document.querySelector('body').append(input.label, input.input);
+
+let test = mkBtn({inner:'Testing', listeners:[
+    {
+        type:'click',
+        execute: async function(){
+            let joke = await getRandomJoke();
+            console.log(joke);
+            console.log(joke.setup);
+        }
+    },
+    {
+        type:'mouseenter',
+        execute: function(){
+            this.title = 'Howdy';
+        }
+    },
+    {
+        type:'mouseleave',
+        execute: function(){
+            this.title = '';
+        }
+    },
+    {
+        type:'click',
+        execute: function(){
+            window.alert('check');
+        }
+    }
+]});
+
+document.body.append(test)

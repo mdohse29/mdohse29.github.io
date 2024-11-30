@@ -13,9 +13,9 @@ h4.h4 {
 
 article.message.is-danger {
     position: absolute;
-    left: calc(100% - 22vw);
+    width: 100%;
+    top: 0;
     user-select: none;
-    width: 20vw;
     z-index: 2000;
 }
 
@@ -122,11 +122,6 @@ i.bi {
         display: flex !important;
         justify-content: center !important;
         flex-wrap: wrap;
-    }
-
-    article.message {
-        bottom: 0;
-        width: 89vw !important;
     }
     
 }
