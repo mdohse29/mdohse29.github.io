@@ -166,6 +166,11 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
         ]);
         let tag = $(this).find('p.title').attr('tag');
 
+        if ($('#moreInfo') || $('#location')){
+            $('#moreInfo').remove();
+            $('#location').remove();
+        }
+
         switch(tag){
             case 'mov':
                 if (currentTab == 'all')
