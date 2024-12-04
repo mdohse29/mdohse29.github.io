@@ -59,10 +59,12 @@ function sorter(array){
 }
 
 async function getMovieInfo(title, year){
+    const config = {headers: { Accept: 'application/json', 'Content-Type': 'application/json; charset=utf-8', 'Access-Control-Allow-Origin': null }}
+
     title = title.toLowerCase().replaceAll(' ', '+');
     title = title.replaceAll('&', '%26');
     title = '&t=' + title;
-    let info = await axios.get(infoUrl + title + ((year) ? '&y=' + year:''));
+    let info = await axios.get(infoUrl + title + ((year) ? '&y=' + year:''), config);
     return info.data;
 }
 
@@ -72,7 +74,7 @@ async function createMovieList(){
     
     try{
         // Using AXIOS
-        const config = {headers: { Accept: 'plain/text' }}
+        const config = {headers: { Accept: 'plain/text', 'Content-Type': 'text/html', 'Access-Control-Allow-Origin': null }}
         arch = await axios.get(baseUrl + "archive.txt", config);
         active = await axios.get(baseUrl + "active.txt", config);
         tv = await axios.get(baseUrl + "tvshows.txt", config);
