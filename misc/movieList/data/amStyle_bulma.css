@@ -3,6 +3,10 @@ body {
     min-height: 100vh;
 }
 
+html {
+    scrollbar-width: thin;
+}
+
 div.content.msg > p {
     font-size: small;
     margin: 0px;
