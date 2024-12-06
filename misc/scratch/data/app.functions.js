@@ -393,7 +393,7 @@ $(document).ready(function(){
                 1:nestElem([
                     mkDiv({class:'options mb-2'}),
                     {
-                        1:mkInp({type:'select', id:'color', name:'color', class:'form-select-sm', options:[{value:'dark', isColor:true},{value:'green', isColor:true},{value:'blue', isColor:true},{value:'white', isColor:true},{value:'yellow', isColor:true}]}),
+                        1:mkInp({type:'select', id:'color', name:'color', class:'form-select-sm', options:[{value:'dark', isColor:true},{value:'green', isColor:true},{value:'lavender', isColor: true},{value:'blue', isColor:true},{value:'white', isColor:true},{value:'yellow', isColor:true}]}),
                         2:mkBtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'exspc', inner:'Remove Leading Spaces', title:'The empty space in front of the paragraphs'}),
                         3:mkBtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'rmv-ol', inner:'Remove OL Markers', title:'Remove numbered OL markers'}),
                         4:mkBtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'ff', inner:'Format Filename', title:'Formats file names by lowercasing the text and adding underscores to replace spaces.', listeners: [{type:'click', execute:function(){ let currentText = $('#TextArea').val(); $('#TextArea').val(formatFilename(currentText)); }}]}),
