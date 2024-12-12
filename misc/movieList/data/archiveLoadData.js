@@ -4,7 +4,11 @@ const baseUrl = 'https://mdohse29.github.io/misc/movieList/data/'
 const infoUrl = 'https://www.omdbapi.com/?apikey=c8757c03'
 
 let loading = mkP({id:'placeH', inner:'Loading...'});
-document.querySelector('.movies').appendChild(loading);
+// document.querySelector('.movies').appendChild(loading);
+nestElem([
+    document.querySelector('.movies'),
+    loading
+])
 
 const formatter = function (text){
     let format = text.replaceAll('.', ' ');
@@ -93,19 +97,20 @@ async function createMovieList(){
 
         let movieList = document.querySelector('.movies');
         for (let i in masterList){
-            movieList.appendChild(masterList[i].element);
+            // movieList.appendChild(masterList[i].element);
+            nestElem([movieList, masterList[i].element]);
         }
 
         // Total Count
-        let totCon = document.querySelector('#totalTitles')
+        // let totCon = document.querySelector('#totalTitles')
         
-        totCon.appendChild(nestElem([mkP({id:'total', tag:'count', class:'sticky-bottom'}), mkElem({elemType:'strong'}), mkElem({elemType:'sub', inner:'Total: ' + masterList.length})]));
+        nestElem([document.querySelector('#totalTitles'),mkP({id:'total', tag:'count', class:'sticky-bottom'}), mkElem({elemType:'strong'}), mkElem({elemType:'sub', inner:'Total: ' + masterList.length})]);
 
     }catch(e){
         console.log(e.code, e.message, e.config);
         document.querySelector('#placeH').remove();
         loading.innerHTML = 'OOPS! Something Went Wrong!<br><br>Nothing to see here';
-        document.querySelector('.movies').appendChild(loading);
+        nestElem([document.querySelector('.movies'),loading]);
         document.querySelector('#search-box').setAttribute('disabled','disabled');
         document.querySelector('.rando > button').setAttribute('disabled', 'disabled');
     }

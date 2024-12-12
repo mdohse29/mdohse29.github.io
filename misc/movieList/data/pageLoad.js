@@ -1,4 +1,4 @@
-let body = document.querySelector('body');
+// let body = document.querySelector('body');
 
 let rando = nestElem([
     mkDiv({class:'rando mb-2'}),
@@ -87,4 +87,11 @@ let presentation = nestElem([
     }
 ]);
 
-body.prepend(header, presentation, modal);
+nestElem([
+    document.body,
+    {
+        1:header,
+        2:presentation,
+        3:modal
+    }
+])
