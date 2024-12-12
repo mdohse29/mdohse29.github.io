@@ -61,7 +61,7 @@ let modal = nestElem([
         2:nestElem([
             mkDiv({class:'md-modal-content md-modal-small'}),
             {
-                1:mkP({style:'text-align: center;', inner:'This will randomly pick from what is available depending on what tab you are currently on. Use the slider to change the number of picks.<br><sub>All - Picks from everything<br>Movies - will only pick from active movies</sub>'}),
+                1:mkP({class:'has-text-centered', inner:'This will randomly pick from what is available depending on what tab you are currently on. Use the slider to change the number of picks.<br><sub>All - Picks from everything<br>Movies - will only pick from active movies</sub>'}),
                 2:nestElem([
                     mkDiv({class:'rand-cont'}),
                     {
