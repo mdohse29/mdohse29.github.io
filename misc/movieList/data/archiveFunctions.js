@@ -10,7 +10,10 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
         $('.search').removeClass('reset-btn');
 
         for (let movie of masterList){
-            $('.movies').append(filter(movie).element);
+            nestElem([
+                $('.movies')[0],
+                filter(movie).element
+            ]);
         }
 
         updateTotal();
@@ -62,7 +65,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
 
         if (isEmpty){
             if ($('.notFound').length === 0){
-                $('.movies').append(mkP({id:'empty', inner:'No Filtered Results', style:'text-align: center;'}));
+                nestElem([$('.movies')[0],mkP({id:'empty', inner:'No Filtered Results', style:'text-align: center;'})])
             }
         }
     }
@@ -106,13 +109,13 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
             for (let movie of movies) {
                 let movTitle = movie.element.querySelector('p.title').innerText;
                 if (movTitle.toLowerCase().includes(searchText.toLowerCase())) {
-                    $('.movies').append(filter(movie).element);
+                    nestElem([$('.movies')[0],filter(movie).element]);
                     found = true;
                 }
             }
 
-            if (! found) {
-                $('.movies').append(mkP({class:'notFound', inner:'Sorry!<br/>Nothing was found that matched your keyword(s).<br/>Send me a request and I will see what I can do.'}));
+            if (!found) {
+                nestElem([$('.movies')[0],mkP({class:'notFound', inner:'Sorry!<br/>Nothing was found that matched your keyword(s).<br/>Send me a request and I will see what I can do.'})])
             }
 
             $('#submit-reset').removeClass('d-none');
@@ -174,17 +177,17 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
         switch(tag){
             case 'mov':
                 if (currentTab == 'all')
-                    $(this).find('p.title').append(mkSpan({id:'location', inner:' - Active Movie'}));
-                $(this).append(moreInfo);
+                    nestElem([$(this).find('p.title')[0],mkSpan({id:'location', inner:' - Active Movie'})]);
+                nestElem([$(this)[0],moreInfo]);
                 break;
             case 'tv':
                 if (currentTab == 'all')
-                    $(this).find('p.title').append(mkSpan({id:'location', inner:' - TV Show'}));
+                    nestElem([$(this).find('p.title')[0],mkSpan({id:'location', inner:' - TV Show'})]);
                 break;
             case 'arch':
                 if (currentTab == 'all')
-                    $(this).find('p.title').append(mkSpan({id:'location', inner:' - Archived Movie'}));
-                $(this).append(moreInfo);
+                    nestElem([$(this).find('p.title')[0],mkSpan({id:'location', inner:' - Archived Movie'})]);
+                nestElem([$(this)[0],moreInfo]);
                 break;
         }
 
@@ -194,7 +197,8 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
             let year = $(p).attr('data-year');
             let tag = $(p).attr('tag');
             
-            $('body').append(nestElem([
+            nestElem([
+                $('body')[0],
                 mkDiv({class:'md-modal', id:'info'}),
                 mkDiv({class:'md-modal-content md-modal-large'}),
                 {
@@ -215,53 +219,58 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
                         }
                     ])
                 }
-            ]))
+            ])
 
             getMovieInfo(title, year).then((info)=>{
                 $($('#load').parents()[1]).remove();
                 if(info.Plot && info.Plot != 'N/A'){
-                    $('#info .card').append(nestElem([
-                        mkDiv({class:'card-content'}),
+                    nestElem([
+                        $('#info .card')[0],
                         {
-                            1:nestElem([
-                                mkDiv({class:'card-image', style:'float:left'}),
-                                mkElem({elemType:'figure', class:'media-left'}),
-                                mkElem({elemType:'img', src:info.Poster, alt:'Movie poster for \"' + info.Title + '\" was not found', class:'has-ratio'})
-                            ]),
+                            1:nestElem([mkDiv({class:'card-content'}),
+                            {
+                                1:nestElem([
+                                    mkDiv({class:'card-image', style:'float:left'}),
+                                    mkElem({elemType:'figure', class:'media-left'}),
+                                    mkElem({elemType:'img', src:info.Poster, alt:'Movie poster for \"' + info.Title + '\" was not found', class:'has-ratio'})
+                                ]),
+                                2:nestElem([
+                                    mkDiv({class:'content'}),
+                                    {
+                                        1: nestElem([
+                                            mkP(),
+                                            mkElem({elemType:'sub', inner:`Staring: ${info.Actors}`})
+                                        ]),
+                                        2: mkP({inner:info.Plot})
+                                    }
+                                ])
+                            }]),
                             2:nestElem([
-                                mkDiv({class:'content'}),
-                                {
-                                    1: nestElem([
-                                        mkP(),
-                                        mkElem({elemType:'sub', inner:`Staring: ${info.Actors}`})
-                                    ]),
-                                    2: mkP({inner:info.Plot})
-                                }
+                                mkDiv({class:'card-footer'}),
+                                mkP({id:'ratings'})
                             ])
                         }
-                    ]), nestElem([
-                        mkDiv({class:'card-footer'}),
-                        mkP({id:'ratings'})
-                    ]));
+                    ]);
 
                     if (info.Ratings.length){
 
                         info.Ratings.forEach((rating) => {
 
-                            document.querySelector('#ratings').append(mkElem({elemType:'span', inner:`${((rating.Source === 'Internet Movie Database') ? 'IMDb' : rating.Source)} - ${rating.Value}`}));
+                            nestElem([$('#ratings')[0],mkElem({elemType:'span', inner:`${((rating.Source === 'Internet Movie Database') ? 'IMDb' : rating.Source)} - ${rating.Value}`})]);
 
                         });
 
                     }
                     
                 }else{
-                    $('#info .card').append(
-                        nestElem([
-                            mkDiv({class:'card-content'}),
-                            mkDiv({class:'content'}),
-                            mkP({inner:'Sorry, no content was found at this time.'})
-                        ])
-                    )
+
+                    nestElem([
+                        $('#info .card')[0],
+                        mkDiv({class:'card-content'}),
+                        mkDiv({class:'content'}),
+                        mkP({inner:'Sorry, no content was found at this time.'})
+                    ]);
+
                 }
             }).catch(error => {
                 console.log(error);
@@ -316,15 +325,15 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
         for (let a = 0; a < num; a++) {
             let rand = Math.floor(Math.random() * (elements.length - 1));
             if (tag == 'all'){
-                $('.movies').append(filter(elements[rand]).element);
+                nestElem([$('.movies')[0],filter(elements[rand]).element]);
             }else{
                 if (elements[rand].tag == tag){
                     if (alreadyFound.includes(elements[rand].element)){
                         a--;
                         continue;
                     }else{
-                        $('.movies').append(filter(elements[rand]).element);
-                        alreadyFound.push(elements[rand].element)
+                        nestElem([$('.movies')[0],filter(elements[rand]).element]);
+                        alreadyFound.push(elements[rand].element);
                     }
                 }else{
                     a--;
