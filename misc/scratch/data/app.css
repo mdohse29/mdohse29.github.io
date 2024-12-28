@@ -51,6 +51,10 @@ a.btn {
     margin-left: 5px;
 }
 
+.bi-info-circle {
+    font-size: 1.35em;
+}
+
 .static > h3 {
     text-align: center;
 }
