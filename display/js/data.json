@@ -1,0 +1,29 @@
+[
+    {
+        "title":"The Scratchpad",
+        "url":"../misc/scratch/",
+        "details":[
+            "This tool was developed to address the need for pasting clean text from a Word document into a content management application. At my workplace, our content team frequently transfers content authored in Word into the CMT. Unfortunately, this process often introduces hidden characters and unwanted formatting from the Word document.<br><br>To mitigate these issues, I created this solution to reduce the likelihood of unwanted entities being pasted into the CMT. The tool automatically runs the text through several checks to ensure that no hidden entities or formatting errors are present before the text is entered into the CMT. This simple yet effective tool has significantly reduced the amount of post-entry work required to find, fix, and replace unwanted formatting and entities.",
+            "<strong>Styling</strong><br>Bootstrap - for buttons and basic layout<br>Custom CSS - for everything else<br>Icons 8 @ <a href=\"https://icons8.com\" target=\"_blank\">https://icons8.com</a> - for the bug, info, and lock icons<br><br><strong>Scripting</strong><br>Javascript - for logic and creating elements<br>JQuery - for functionality<br>RegEX - for some of the text validating functions",
+            "I decided to make my own modal and toggle switch for this, instead of using something from Bootstrap. Nothing super fancy, but it works. This one probably gets fiddled with the most since it is currently being used by people in my office. A bug will come up or a request made for something to be added. More requests than bugs <span style=\"font-size: 25px;\">😉</span>"
+        ]
+    },
+    {
+        "title":"Movie List",
+        "url":"../misc/movieList/",
+        "details":[
+            "The title speaks for itself&mdash;I created this tool to have a complete and searchable list of movies on my media server. While my app allows me to see what's currently available to watch, I also wanted a way to view the contents of my archive.<br><br>One weekend, when I couldn't sleep, I decided to build this tool. It's fairly simple, but I enjoyed the process. It's especially useful when I'm deciding what to swap out from the server. I also added a randomizer feature for those times when I don't want to spend an hour deciding what to watch—because why not? While this tool is primarily useful for those with access to my media server, I thought it was worth showcasing here.",
+            "<strong>Style</strong><br>Bulma CSS - for the buttons, inputs, and general layout<br>Custom CSS - to get things just right<br><br><strong>Scripting</strong><br>Javascript - for loading the page<br>OMDb API @ <a href=\"http://www.omdbapi.com\" target=\"_blank\">www.omdbapi.com</a> - for the movie data<br>Axios - for retrieving list data and movie data<br>JQuery - for the functionality",
+            "The lists automatically get updated via script run on my media server that updates github. I recently added some movie data to the list, thanks to OMDb API. Just a movie poster and a summary. You gotta enjoy the little things. I decided to make my own tabs instead of using something from Bulma. Again, simple but effective. In the end I am probably more about making something function properly over how pretty it is."
+        ]
+    },
+    {
+        "title":"ToDo List",
+        "url":"../todoList/",
+        "details":[
+            "This page originally started as a simple to-do list project I created during an HTML class. Initially, it allowed users to add items to the list—nothing particularly special. However, one weekend, I decided to enhance its functionality.<br><br>The page now uses cookies for local storage, enabling the list to be saved between sessions, due to not having access to a database at the moment.<br><br>Users can add items and mark them as completed. Once an item is completed, it moves to the \"Done\" area, where it can be undone by clicking on it and selecting \"Undo\". Please note that completed items are not permanently saved; the \"Done\" area resets once the browser is closed or refreshed, and the items can no longer be undone.<br><br>Additionally, the page supports the creation of sub-lists, allowing users to break down tasks into smaller steps or mini-tasks, which can also be marked as completed.",
+            "<strong>Styling</strong><br>Bulma CSS - for basic layout and styling<br>Bootstrap Icons - for the icons being used<br>Custom CSS - for the personal touch<br><br><strong>Scripting</strong><br>Javascript - for creating elements and functionality",
+            "I didn't expect it, but I learned quite a bit while working on this project. I explored the Crypto interface, which I used to generate unique IDs for the list items, and also got a refresher on using cookies on the client side. Though I had worked with cookies before, it had been a long time, so revisiting this was a valuable experience. <br><br> What started as a way to pass the time turned into a surprisingly enjoyable project. Initially, I was just bored and looking for something to do, but enhancing the functionality of this to-do list has made it a tool I now use daily. Despite the abundance of to-do list apps available, I've grown fond of the simplicity of my own creation—though I might be a bit biased!"
+        ]
+    }
+]
