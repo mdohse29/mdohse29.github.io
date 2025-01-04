@@ -30,7 +30,7 @@
  */
 async function getData(){
     let data = await (await fetch('./js/data.json')).json();
-    console.log(data)
+    // console.log(data)
     if (data.length){
         return await data;
     }
@@ -69,6 +69,7 @@ getData().then(data => {
             2:greeting
         }
     ]);
+
     for (let d of data){
         nestElem([
             container,
@@ -90,7 +91,7 @@ getData().then(data => {
                                     mkDiv({class:'ratio'}),
                                     {
                                         1:mkDiv({class:`frame-cover${((browserInfo.includes('Mobile')) ? ' mobile' : '')}`, listeners:[{type:'click', execute: coverClk}, {type:'mouseenter', execute: coverMe}, {type:'mouseleave', execute: coverMl}]}),
-                                        2:mkElem({elemType:'iframe', scrolling:'no', src:d.url}) // IFRAME
+                                        2:mkElem({elemType:'iframe', scrolling:'no', src:d.url, loading:'lazy', sandbox:'allow-scripts allow-same-origin'}) // IFRAME
                                     }
                                 ])
                             ])

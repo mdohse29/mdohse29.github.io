@@ -35,10 +35,10 @@ let tabs = nestElem([
     mkDiv({class:'tabs-container'}),
     mkDiv({class:'tabs'}),
     {
-        1:mkDiv({class:'tab has-background-info-light active', tag:'all', inner:'All'}),
-        2:mkDiv({class:'tab has-background-info-light', tag:'mov', inner:'Movies'}),
-        3:mkDiv({class:'tab has-background-info-light', tag:'tv', inner:'Shows'}),
-        4:mkDiv({class:'tab has-background-info-light', tag:'arch', inner:'Archive'})
+        1:mkDiv({class:'tab has-background-info-light active', tabindex:'1', title:'All active movies, archived movies, and tv shows.', tag:'all', inner:'All'}),
+        2:mkDiv({class:'tab has-background-info-light', tabindex:'1', title:'All active movies available to watch on the server.', tag:'mov', inner:'Movies'}),
+        3:mkDiv({class:'tab has-background-info-light', tabindex:'1', title:'All tv shows. Not all tv shows are active on the server.', tag:'tv', inner:'Shows'}),
+        4:mkDiv({class:'tab has-background-info-light', tabindex:'1', title:'All archived movies that are available for request to be active.', tag:'arch', inner:'Archive'})
     }
 ]);
 

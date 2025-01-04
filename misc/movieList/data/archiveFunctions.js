@@ -54,18 +54,16 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
     }
 
     function isFilterEmpty(){
-        let movies = $('.movies > div');
-        let isEmpty = true;
-        for (let movie of movies){
-            if (!$(movie).hasClass('dnone')){
-                isEmpty = false;
-                break;
-            }
+
+        if ($('#empty').length){
+            $('#empty').remove();
         }
 
-        if (isEmpty){
-            if ($('.notFound').length === 0){
-                nestElem([$('.movies')[0],mkP({id:'empty', inner:'No Filtered Results', style:'text-align: center;'})])
+        let currentTab = $('.tabs').find('.active').attr('tag');
+
+        if (currentTab !== 'all' && !$('.movies').find(`p[tag="${currentTab}"]`).length){
+            if (!$('.notFound').length){
+                nestElem([$('.movies')[0],mkP({id:'empty', inner:'No Filtered Results', style:'text-align: center;'})]);
             }
         }
     }
@@ -121,6 +119,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
             $('#submit-reset').removeClass('d-none');
             $('.search').addClass('reset-btn');
 
+            isFilterEmpty();
             updateTotal();
         }
     }
@@ -289,7 +288,6 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
     });
 
     $('.tab').click(function(){
-        $('#empty').remove();
         $(this).parent().find('.active').removeClass('active');
         $(this).addClass('active');
 
@@ -305,7 +303,8 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
         updateTotal();
     });
 
-    $('#rand').click(function () { 
+    $('#rand').click(function () {
+        reset();
         let elements = masterList;
         let tag = $('.tab.active').attr('tag');
         let alreadyFound = [];
@@ -313,11 +312,6 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
         
         if (! num) {
             num = 5;
-        }
-
-        if ($('.notFound') || $('#empty')) {
-            $('.notFound').remove();
-            $('#empty').remove();
         }
 
         $('.movies > div').remove();
@@ -343,7 +337,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
 
         $('#submit-reset').removeClass('d-none');
         closeModal();
-
+        isFilterEmpty();
         updateTotal();
 
     });
