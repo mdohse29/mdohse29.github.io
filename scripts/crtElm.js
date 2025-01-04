@@ -228,7 +228,13 @@ function mkElem(attr = {elemType:''}){
 
     for (let a in attr){
         if (a.includes('inner')){
+            // "pptIcon" is for prepending an icon in an element with text, like a header
+            // "pptIcon" should be an element
+            // Alternatively the html code for the icon could be included with the inner content
             element.innerHTML = attr[a];
+            if (attr.pptIcon){
+                element.prepend(attr.pptIcon)
+            }
         }else if(a.includes('listeners')){
             if (attr[a].length){
                 for (let l of attr[a]){
@@ -236,7 +242,7 @@ function mkElem(attr = {elemType:''}){
                 }
             }
         }else{
-            if (attr[a] && !a.includes('elemType')){
+            if (attr[a] && !a.includes('elemType') && !a.includes('pptIcon')){
                 element.setAttribute(a, attr[a]);
             }
         }
