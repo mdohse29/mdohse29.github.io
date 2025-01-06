@@ -44,18 +44,33 @@ getData().then(data => {
     let header = nestElem([
         mkDiv({class:'row pt-3 pb-3 sticky-top header'}),
         mkDiv({class:'col text-center'}),
-        mkElem({elemType:'h1', class:'h1', inner:'Page Gallery'})
+        mkElem({elemType:'h1', class:'h1', inner:data.title})
     ]);
     let greeting = nestElem([
         mkDiv({class:'row mt-4 justify-content-center'}),
-        mkDiv({class:'col col-lg-6'}),
-        {
-            1:mkP({inner:'Welcome to the Gallery'}),
-            2:mkP({inner:'This showcases some of my work, featuring simple web pages I have developed. While these examples may not be particularly elaborate, they represent some of my current capabilities as I continue to refine my skills. I am currently enrolled in an online web development course, and I look forward to creating more sophisticated projects in the future.'}),
-            3:mkP({inner:'My primary focus is on JavaScript and functionality, rather than design. Although I incorporate CSS frameworks for basic layout and styling, all JavaScript and jQuery used in my pages is entirely my own work. I prefer to write my own JavaScript code, as it allows me to learn and understand the intricacies of the language better. Additionally, I have a passion for writing JavaScript, among other programming languages.'}),
-            4:mkP({inner:'Below, you\'ll find a brief description of each page, with an interactive frame that expands for a more detailed view and interaction.'}),
-            99:mkElem({elemType:'hr'})
-        }
+        nestElem([ 
+            nestElem([
+                mkDiv({class:'col col-lg-6'}),
+                data.greeting.map(d => {
+                    let settings = [];
+                    if (d.attr != undefined){
+                        settings = d.attr;
+                        delete d.attr;
+                    }
+                    let key = Object.keys(d)[0];
+                    return mkElem({elemType:key, inner:d[key], ...settings});
+                })
+            ]),
+            mkElem({elemType:'hr'})
+        ])
+        // mkDiv({class:'col col-lg-6'}),
+        // {
+        //     1:mkP({inner:'Welcome to the Gallery'}),
+        //     2:mkP({inner:'This showcases some of my work, featuring simple web pages I have developed. While these examples may not be particularly elaborate, they represent some of my current capabilities as I continue to refine my skills. I am currently enrolled in an online web development course, and I look forward to creating more sophisticated projects in the future.'}),
+        //     3:mkP({inner:'My primary focus is on JavaScript and functionality, rather than design. Although I incorporate CSS frameworks for basic layout and styling, all JavaScript and jQuery used in my pages is entirely my own work. I prefer to write my own JavaScript code, as it allows me to learn and understand the intricacies of the language better. Additionally, I have a passion for writing JavaScript, among other programming languages.'}),
+        //     4:mkP({inner:'Below, you\'ll find a brief description of each page, with an interactive frame that expands for a more detailed view and interaction.'}),
+        //     99:mkElem({elemType:'hr'})
+        // }
     ]);
     let footer = nestElem([
         mkDiv({class:'row pt-2 pb-3 mb-0 mt-5 ' + ((!browserInfo.includes('Mobile')) ? 'sticky-bottom' : '') + ' footer'}),
@@ -70,7 +85,7 @@ getData().then(data => {
         }
     ]);
 
-    for (let d of data){
+    for (let d of data.demos){
         nestElem([
             container,
             nestElem([

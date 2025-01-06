@@ -128,19 +128,45 @@ document.body.append(test);
 
 let test2 = [
     {
-        text:'test1'
+        p:'test1',
+        attr: {
+            class:'button'
+        }
     },
     {
-        text:'test2'
+        p:'test2'
     },
     {
-        text:'test3'
+        h1:'test3'
     }
 ]
 
+// let testContainer = nestElem([
+//     mkDiv({class:'testing'}),
+//     test2.map(t => {
+//         let settings = [];
+//         if (t.attr != undefined){
+//             settings = t.attr;
+//             delete t.attr;
+//         }
+//         let key = Object.keys(t)[0];
+//         return mkElem({elemType:key, inner:t[key], ...settings});
+//     })
+// ]);
 let testContainer = nestElem([
-    mkDiv({class:'testing'}),
-    test2.map(t => {return mkP({inner:t.text})})
-]);
+    nestElem([
+        mkDiv({class:'testing'}),
+        test2.map(t => {
+            let settings = [];
+            if (t.attr != undefined){
+                settings = t.attr;
+                delete t.attr;
+            }
+            let key = Object.keys(t)[0];
+            return mkElem({elemType:key, inner:t[key], ...settings});
+        })
+    ]),
+    mkElem({elemType:'hr'})
+])
 console.log(Array.isArray(test2[0]))
 document.body.append(testContainer)
