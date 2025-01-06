@@ -29,10 +29,10 @@
  * 
  */
 async function getData(){
-    let data = await (await fetch('./js/data.json')).json();
+    let data = await fetch('./js/data.json');
     // console.log(data)
-    if (data.length){
-        return await data;
+    if (data.ok){
+        return await data.json();
     }
     return null;
 }
