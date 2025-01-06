@@ -124,4 +124,23 @@ let test = mkBtn({inner:'Testing', listeners:[
     }
 ]});
 
-document.body.append(test)
+document.body.append(test);
+
+let test2 = [
+    {
+        text:'test1'
+    },
+    {
+        text:'test2'
+    },
+    {
+        text:'test3'
+    }
+]
+
+let testContainer = nestElem([
+    mkDiv({class:'testing'}),
+    test2.map(t => {return mkP({inner:t.text})})
+]);
+console.log(Array.isArray(test2[0]))
+document.body.append(testContainer)
