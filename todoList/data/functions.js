@@ -1,5 +1,7 @@
 let targetElement = null;
 let errorTimeoutID = NaN;
+const frameCheck = window.top === window.self;
+console.log(frameCheck)
 
 function dupeCheck(item){
 
@@ -572,47 +574,51 @@ function removeItem(elem){
 
 function getCookie(){
 
-    let data = document.cookie;
+    if (frameCheck){
+        let data = document.cookie;
 
-    data = data.split(';');
+        data = data.split(';');
 
-    for (let cookie in data){
+        for (let cookie in data){
 
-        let cookieData = data[cookie].split('=');
+            let cookieData = data[cookie].split('=');
 
-        if (cookieData[0] === 'list'){
-            return cookieData[1];
+            if (cookieData[0] === 'list'){
+                return cookieData[1];
+            }
+
         }
-
     }
 
 }
 
 function setCookie(cookieName = 'list'){
 
-    let items = document.querySelector('#list').querySelectorAll('#listItem'); // ptag ref
-    let itemText = '';
+    if (frameCheck){
+        let items = document.querySelector('#list').querySelectorAll('#listItem'); // ptag ref
+        let itemText = '';
 
-    items.forEach(item => {
+        items.forEach(item => {
 
-        itemText += item.innerText.replaceAll('\n', '|') + ',';
+            itemText += item.innerText.replaceAll('\n', '|') + ',';
 
-    });
+        });
 
-    if (itemText){
+        if (itemText){
 
-        document.cookie = `${cookieName}=${itemText.substring(0, itemText.length - 1)};max-age=31536000;samesite=none;secure`
+            document.cookie = `${cookieName}=${itemText.substring(0, itemText.length - 1)};max-age=31536000;samesite=none;secure`
 
-        if (document.cookie.length > 3000){
+            if (document.cookie.length > 3000){
 
-            errorMsg('Please start completing items on the list.<br><br>There is < 1000 bytes of storage left.');
+                errorMsg('Please start completing items on the list.<br><br>There is < 1000 bytes of storage left.');
+
+            }
+
+        }else{
+
+            document.cookie = cookieName + '=;max-age=0;samesite=none;secure';
 
         }
-
-    }else{
-
-        document.cookie = cookieName + '=;max-age=0;samesite=none;secure';
-
     }
 
 }

@@ -111,7 +111,7 @@ getData().then(data => {
                                     mkDiv({class:'ratio'}),
                                     {
                                         1:mkDiv({class:`frame-cover${((browserInfo.includes('Mobile')) ? ' mobile' : '')}`, listeners:[{type:'click', execute: coverClk}, {type:'mouseenter', execute: coverMe}, {type:'mouseleave', execute: coverMl}]}),
-                                        2:mkElem({elemType:'iframe', scrolling:'no', src:d.url, loading:'lazy', sandbox:'allow-scripts allow-same-origin'}) // IFRAME
+                                        2:mkElem({elemType:'iframe', scrolling:'no', src:d.url, loading:'lazy', sandbox:'allow-scripts'}) // IFRAME
                                     }
                                 ])
                             ])
