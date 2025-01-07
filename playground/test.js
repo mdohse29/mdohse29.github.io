@@ -124,4 +124,49 @@ let test = mkBtn({inner:'Testing', listeners:[
     }
 ]});
 
-document.body.append(test)
+document.body.append(test);
+
+let test2 = [
+    {
+        p:'test1',
+        attr: {
+            class:'button'
+        }
+    },
+    {
+        p:'test2'
+    },
+    {
+        h1:'test3'
+    }
+]
+
+// let testContainer = nestElem([
+//     mkDiv({class:'testing'}),
+//     test2.map(t => {
+//         let settings = [];
+//         if (t.attr != undefined){
+//             settings = t.attr;
+//             delete t.attr;
+//         }
+//         let key = Object.keys(t)[0];
+//         return mkElem({elemType:key, inner:t[key], ...settings});
+//     })
+// ]);
+let testContainer = nestElem([
+    nestElem([
+        mkDiv({class:'testing'}),
+        test2.map(t => {
+            let settings = [];
+            if (t.attr != undefined){
+                settings = t.attr;
+                delete t.attr;
+            }
+            let key = Object.keys(t)[0];
+            return mkElem({elemType:key, inner:t[key], ...settings});
+        })
+    ]),
+    mkElem({elemType:'hr'})
+])
+console.log(Array.isArray(test2[0]))
+document.body.append(testContainer)
