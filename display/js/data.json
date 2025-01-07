@@ -1,18 +1,10 @@
 {
     "title":"Page Gallery",
     "greeting":[
-        {
-            "p":"Welcome to the Gallery"
-        },
-        {
-            "P":"This showcases some of my work, featuring simple web pages I have developed. While these examples may not be particularly elaborate, they represent some of my current capabilities as I continue to refine my skills. I am currently enrolled in an online web development course, and I look forward to creating more sophisticated projects in the future."
-        },
-        {
-            "P":"My primary focus is on JavaScript and functionality, rather than design. Although I incorporate CSS frameworks for basic layout and styling, all JavaScript and jQuery used in my pages is entirely my own work. I prefer to write my own JavaScript code, as it allows me to learn and understand the intricacies of the language better. Additionally, I have a passion for writing JavaScript, among other programming languages."
-        },
-        {
-            "P":"Below, you'll find a brief description of each page, with an interactive frame that expands for a more detailed view and interaction."
-        }
+        "Welcome to the Gallery!",
+        "This showcases some of my work, featuring simple web pages I have developed. While these examples may not be particularly elaborate, they represent some of my current capabilities as I continue to refine my skills. I am currently enrolled in an online web development course, and I look forward to creating more sophisticated projects in the future.",
+        "My primary focus is on JavaScript and functionality, rather than design. Although I incorporate CSS frameworks for basic layout and styling, all JavaScript and jQuery used in my pages is entirely my own work. I prefer to write my own JavaScript code, as it allows me to learn and understand the intricacies of the language better. Additionally, I have a passion for writing JavaScript, among other programming languages.",
+        "Below, you'll find a brief description of each page, with an interactive frame that expands for a more detailed view and interaction."
     ],
     "demos": [
         {
