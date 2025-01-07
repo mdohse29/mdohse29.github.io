@@ -1,7 +1,6 @@
 let targetElement = null;
 let errorTimeoutID = NaN;
 const frameCheck = window.top === window.self;
-console.log(frameCheck)
 
 function dupeCheck(item){
 
