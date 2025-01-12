@@ -153,7 +153,7 @@ getData().then(data => {
     nestElem([
         container,
         mkDiv({class:'row pt-2 pb-3 mb-0 mt-5 ' + ((!browserInfo.includes('Mobile')) ? 'sticky-bottom' : '') + ' footer'}),
-        mkSpan({inner: 'Created By: MR D', style: 'font-size: 8px;color: transparent;'})
+        mrd(true)
     ]);
 
     document.body.prepend(container);
