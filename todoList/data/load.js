@@ -1,4 +1,4 @@
-document.querySelector('body').prepend(nestElem([
+document.body.prepend(nestElem([
     mkDiv({class:'container mt-5'}),
     mkDiv({class:'columns is-centered'}),
     mkDiv({class:'column is-two-thirds'}),
@@ -33,3 +33,4 @@ document.querySelector('body').prepend(nestElem([
         5:mkDiv({class:'card-footer pb-4 pt-4 main-bg'})
     }
 ]));
+mrd();

@@ -250,3 +250,10 @@ function mkElem(attr = {elemType:''}){
 
     return element;
 }
+
+function mrd(rtn = false){
+    if (rtn){
+        return mkSpan({inner: 'Created By: MR D', style: 'font-size: 8px;color: transparent;'});
+    }
+    document.body.append(mkSpan({inner: 'Created By: MR D', style: 'font-size: 8px;color: transparent;'}));
+}
