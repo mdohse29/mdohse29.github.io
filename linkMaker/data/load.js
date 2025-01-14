@@ -17,7 +17,7 @@ let exText = mkInp({
     }
 });
 
-document.querySelector('body').prepend(nestElem([
+document.body.prepend(nestElem([
     mkDiv({class:'container'}),
     {
         1:nestElem([
@@ -90,4 +90,5 @@ document.querySelector('body').prepend(nestElem([
             }
         ])
     }
-]))
+]));
+mrd();
