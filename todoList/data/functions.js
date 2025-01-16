@@ -622,6 +622,15 @@ function setCookie(cookieName = 'list'){
 
 }
 
+function optMo(event){
+    let text = event.target.getAttribute('aria-description');
+    event.target.insertAdjacentElement('beforebegin', mkElem({elemType:'span', class:'btn-popover', inner:text}));
+}
+
+function optMl(event){
+    event.target.parentElement.querySelector('span').remove();
+}
+
 function closeOptions(){
 
     let options = document.querySelector('.options');
@@ -630,7 +639,7 @@ function closeOptions(){
 
 }
 
-function openOptions(clickEvent){
+function openOptions(event){
 
     let container = document.querySelector('.container');
 
@@ -643,12 +652,12 @@ function openOptions(clickEvent){
 
         container.appendChild(nestElem([
 
-            mkDiv({class:'options', style:'top: ' + (clickEvent.y - 30) + 'px; left: ' + (clickEvent.x - 27) + 'px;'}),
+            mkDiv({class:'options', style:'top: ' + (event.y - 30) + 'px; left: ' + (event.x - 27) + 'px;'}),
             mkDiv({class:'card'}),
             mkDiv({class:'card-content p-0'}),
             {
-                1:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', title:'Undo', id:'undo', inner:'<i class="bi bi-arrow-counterclockwise"></i>', listeners:[{type:'click', execute:clkUndoItem}]}),
-                2:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', id:'cancel', inner:'<i class="bi bi-x-circle"></i>', listeners:[{type:'click', execute:closeOptions}]})
+                1:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', 'aria-description':'Restore List Item', id:'undo', inner:'<i class="bi bi-arrow-counterclockwise"></i>', listeners:[{type:'click', execute:clkUndoItem}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
+                2:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', 'aria-description':'Close Options', id:'cancel', inner:'<i class="bi bi-x-circle"></i>', listeners:[{type:'click', execute:closeOptions}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]})
             }
 
         ]));
@@ -657,13 +666,13 @@ function openOptions(clickEvent){
 
         container.appendChild(nestElem([
 
-            mkDiv({class:'options', style:'top: ' + (clickEvent.y - 30) + 'px; left: ' + (clickEvent.x - 27) + 'px;'}),
+            mkDiv({class:'options', style:'top: ' + (event.y - 30) + 'px; left: ' + (event.x - 27) + 'px;'}),
             mkDiv({class:'card'}),
             mkDiv({class:'card-content p-0'}),
             {
-                1:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-success is-outlined', title:'Mark to-do item done', id:'tadone', inner:'<i class="bi bi-check-circle"></i>', listeners:[{type:'click', execute:complete}]}),
-                2:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', title:'Edit list item', id:'edit', inner:'<i class="bi bi-pencil"></i>', listeners:[{type:'click', execute:toggleLstBtn}]}),
-                3:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', id:'cancel', inner:'<i class="bi bi-x-circle"></i>', listeners:[{type:'click', execute:closeOptions}]})
+                1:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-success is-outlined', 'aria-description':'Mark Item Complete', id:'tadone', inner:'<i class="bi bi-check-circle"></i>', listeners:[{type:'click', execute:complete}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
+                2:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', 'aria-description':'Edit List Item', id:'edit', inner:'<i class="bi bi-pencil"></i>', listeners:[{type:'click', execute:toggleLstBtn}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
+                3:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', 'aria-description':'Close Options', id:'cancel', inner:'<i class="bi bi-x-circle"></i>', listeners:[{type:'click', execute:closeOptions}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]})
             }
 
         ]));
@@ -672,14 +681,14 @@ function openOptions(clickEvent){
 
         container.appendChild(nestElem([
 
-            mkDiv({class:'options', style:'top: ' + (clickEvent.y - 30) + 'px; left: ' + (clickEvent.x - 27) + 'px;'}),
+            mkDiv({class:'options', style:'top: ' + (event.y - 30) + 'px; left: ' + (event.x - 27) + 'px;'}),
             mkDiv({class:'card'}),
             mkDiv({class:'card-content p-0'}),
             {
-                1:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-success is-outlined', title:'Mark to-do item done', id:'tadone', inner:'<i class="bi bi-check-circle"></i>', listeners:[{type:'click', execute:complete}]}),
-                2:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-link is-outlined', title:'Create a sub list item', id:'crtSub', inner:'<i class="bi bi-plus-circle-dotted"></i>', listeners:[{type:'click', execute:toggleLstBtn}]}),
-                3:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', title:'Edit list item', id:'edit', inner:'<i class="bi bi-pencil"></i>', listeners:[{type:'click', execute:toggleLstBtn}]}),
-                4:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', id:'cancel', inner:'<i class="bi bi-x-circle"></i>', listeners:[{type:'click', execute:closeOptions}]})
+                1:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-success is-outlined', 'aria-description':'Mark Item Complete', id:'tadone', inner:'<i class="bi bi-check-circle"></i>', listeners:[{type:'click', execute:complete},{type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
+                2:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-link is-outlined', 'aria-description':'Create A Sub-List Item', id:'crtSub', inner:'<i class="bi bi-plus-circle-dotted"></i>', listeners:[{type:'click', execute:toggleLstBtn}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
+                3:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', 'aria-description':'Edit List Item', id:'edit', inner:'<i class="bi bi-pencil"></i>', listeners:[{type:'click', execute:toggleLstBtn}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
+                4:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', 'aria-description':'Close Options', id:'cancel', inner:'<i class="bi bi-x-circle"></i>', listeners:[{type:'click', execute:closeOptions}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]})
             }
 
         ]));
