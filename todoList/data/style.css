@@ -19,6 +19,19 @@ article.message.is-danger {
     z-index: 2000;
 }
 
+.btn-popover {
+    display: inline-flex;
+    width:max-content;
+    padding: 10px;
+    font-size: 10px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 15px;
+    position: absolute;
+    top: -20px;
+    z-index: 1100;
+}
+
 .delete {
     cursor: pointer;
 }
@@ -79,6 +92,12 @@ i.bi {
     z-index: 1000;
 }
 
+.options .card-content {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
 .options .card, .options .card-content {
     border-radius: inherit;
     background-color:rgb(3, 5, 28);
@@ -117,11 +136,6 @@ i.bi {
     .options {
         left: 25px !important;
         max-width: 260px;
-    }
-    .options .card-content {
-        display: flex !important;
-        justify-content: center !important;
-        flex-wrap: wrap;
     }
     
 }
