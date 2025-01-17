@@ -624,7 +624,7 @@ function setCookie(cookieName = 'list'){
 
 function optMo(event){
     let text = event.target.getAttribute('aria-description');
-    event.target.insertAdjacentElement('beforebegin', mkElem({elemType:'span', class:'btn-popover', inner:text}));
+    event.target.parentElement.appendChild(mkElem({elemType:'span', class:'btn-popover', inner:text}));
 }
 
 function optMl(event){
