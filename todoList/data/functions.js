@@ -363,6 +363,12 @@ function clkUndoItem(){
 
 }
 
+function clkCopyItem(){
+    navigator.clipboard.writeText(getItemText(targetElement));
+    closeOptions();
+    targetElement = null;
+}
+
 function toggleLstBtn(event){
 
     let target = event.target;
@@ -672,7 +678,8 @@ function openOptions(event){
             {
                 1:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-success is-outlined', 'aria-description':'Mark Item Complete', id:'tadone', inner:'<i class="bi bi-check-circle"></i>', listeners:[{type:'click', execute:complete}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
                 2:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', 'aria-description':'Edit List Item', id:'edit', inner:'<i class="bi bi-pencil"></i>', listeners:[{type:'click', execute:toggleLstBtn}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
-                3:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', 'aria-description':'Close Options', id:'cancel', inner:'<i class="bi bi-x-circle"></i>', listeners:[{type:'click', execute:closeOptions}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]})
+                3:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-info is-outlined', 'aria-description':'Copy Item', id:'copy', inner:'<i class="bi bi-copy"></i>', listeners:[{type:'click', execute:clkCopyItem}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
+                4:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', 'aria-description':'Close Options', id:'cancel', inner:'<i class="bi bi-x-circle"></i>', listeners:[{type:'click', execute:closeOptions}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]})
             }
 
         ]));
@@ -688,7 +695,8 @@ function openOptions(event){
                 1:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-success is-outlined', 'aria-description':'Mark Item Complete', id:'tadone', inner:'<i class="bi bi-check-circle"></i>', listeners:[{type:'click', execute:complete},{type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
                 2:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-link is-outlined', 'aria-description':'Create A Sub-List Item', id:'crtSub', inner:'<i class="bi bi-plus-circle-dotted"></i>', listeners:[{type:'click', execute:toggleLstBtn}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
                 3:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', 'aria-description':'Edit List Item', id:'edit', inner:'<i class="bi bi-pencil"></i>', listeners:[{type:'click', execute:toggleLstBtn}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
-                4:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', 'aria-description':'Close Options', id:'cancel', inner:'<i class="bi bi-x-circle"></i>', listeners:[{type:'click', execute:closeOptions}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]})
+                4:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-info is-outlined', 'aria-description':'Copy Item', id:'copy', inner:'<i class="bi bi-copy"></i>', listeners:[{type:'click', execute:clkCopyItem}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
+                5:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', 'aria-description':'Close Options', id:'cancel', inner:'<i class="bi bi-x-circle"></i>', listeners:[{type:'click', execute:closeOptions}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]})
             }
 
         ]));
