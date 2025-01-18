@@ -1,5 +1,6 @@
 let targetElement = null;
 let errorTimeoutID = NaN;
+let listVar = 'list';
 const frameCheck = window.top === window.self;
 
 function dupeCheck(item){
@@ -577,18 +578,20 @@ function removeItem(elem){
 
 }
 
-function getCookie(){
-
+function getCookie(cn){
+    if (cn){
+        listVar = cn;
+    }
     if (frameCheck){
         let data = document.cookie;
 
-        data = data.split(';');
+        data = data.split('; ');
 
         for (let cookie in data){
 
             let cookieData = data[cookie].split('=');
 
-            if (cookieData[0] === 'list'){
+            if (cookieData[0] === listVar){
                 return cookieData[1];
             }
 
@@ -597,7 +600,7 @@ function getCookie(){
 
 }
 
-function setCookie(cookieName = 'list'){
+function setCookie(cn){
 
     if (frameCheck){
         let items = document.querySelector('#list').querySelectorAll('#listItem'); // ptag ref
@@ -611,7 +614,7 @@ function setCookie(cookieName = 'list'){
 
         if (itemText){
 
-            document.cookie = `${cookieName}=${itemText.substring(0, itemText.length - 1)};max-age=31536000;samesite=none;secure`
+            document.cookie = `${(cn) ? cn : listVar}=${itemText.substring(0, itemText.length - 1)}; max-age=31536000; samesite=none; secure`
 
             if (document.cookie.length > 3000){
 
@@ -621,7 +624,7 @@ function setCookie(cookieName = 'list'){
 
         }else{
 
-            document.cookie = cookieName + '=;max-age=0;samesite=none;secure';
+            document.cookie = listVar + '=; max-age=0; samesite=none; secure';
 
         }
     }
@@ -646,62 +649,32 @@ function closeOptions(){
 }
 
 function openOptions(event){
-
-    let container = document.querySelector('.container');
-
-    if (container.querySelector('.options')){
+    if (document.querySelector('.options')){
         closeOptions();
     }
-    
-    if ((targetElement.id === 'listItem' && targetElement.parentElement.id === 'done') ||
-    (targetElement.id === 'listSubItem' && targetElement.parentElement.parentElement.id === 'done')){
 
-        container.appendChild(nestElem([
-
-            mkDiv({class:'options', style:'top: ' + (event.y - 30) + 'px; left: ' + (event.x - 27) + 'px;'}),
-            mkDiv({class:'card'}),
-            mkDiv({class:'card-content p-0'}),
-            {
-                1:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', 'aria-description':'Restore List Item', id:'undo', inner:'<i class="bi bi-arrow-counterclockwise"></i>', listeners:[{type:'click', execute:clkUndoItem}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
-                2:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', 'aria-description':'Close Options', id:'cancel', inner:'<i class="bi bi-x-circle"></i>', listeners:[{type:'click', execute:closeOptions}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]})
-            }
-
-        ]));
-
-    }else if (targetElement.id === 'listSubItem'){
-
-        container.appendChild(nestElem([
-
-            mkDiv({class:'options', style:'top: ' + (event.y - 30) + 'px; left: ' + (event.x - 27) + 'px;'}),
-            mkDiv({class:'card'}),
-            mkDiv({class:'card-content p-0'}),
-            {
-                1:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-success is-outlined', 'aria-description':'Mark Item Complete', id:'tadone', inner:'<i class="bi bi-check-circle"></i>', listeners:[{type:'click', execute:complete}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
-                2:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', 'aria-description':'Edit List Item', id:'edit', inner:'<i class="bi bi-pencil"></i>', listeners:[{type:'click', execute:toggleLstBtn}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
-                3:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-info is-outlined', 'aria-description':'Copy Item', id:'copy', inner:'<i class="bi bi-copy"></i>', listeners:[{type:'click', execute:clkCopyItem}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
-                4:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', 'aria-description':'Close Options', id:'cancel', inner:'<i class="bi bi-x-circle"></i>', listeners:[{type:'click', execute:closeOptions}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]})
-            }
-
-        ]));
-
-    }else{
-
-        container.appendChild(nestElem([
-
-            mkDiv({class:'options', style:'top: ' + (event.y - 30) + 'px; left: ' + (event.x - 27) + 'px;'}),
-            mkDiv({class:'card'}),
-            mkDiv({class:'card-content p-0'}),
-            {
-                1:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-success is-outlined', 'aria-description':'Mark Item Complete', id:'tadone', inner:'<i class="bi bi-check-circle"></i>', listeners:[{type:'click', execute:complete},{type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
-                2:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-link is-outlined', 'aria-description':'Create A Sub-List Item', id:'crtSub', inner:'<i class="bi bi-plus-circle-dotted"></i>', listeners:[{type:'click', execute:toggleLstBtn}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
-                3:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', 'aria-description':'Edit List Item', id:'edit', inner:'<i class="bi bi-pencil"></i>', listeners:[{type:'click', execute:toggleLstBtn}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
-                4:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-info is-outlined', 'aria-description':'Copy Item', id:'copy', inner:'<i class="bi bi-copy"></i>', listeners:[{type:'click', execute:clkCopyItem}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
-                5:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', 'aria-description':'Close Options', id:'cancel', inner:'<i class="bi bi-x-circle"></i>', listeners:[{type:'click', execute:closeOptions}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]})
-            }
-
-        ]));
-
+    const opts = {
+        b1:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-success is-outlined', 'aria-description':'Mark Item Complete', id:'tadone', inner:'<i class="bi bi-check-circle"></i>', listeners:[{type:'click', execute:complete},{type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
+        b2:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-link is-outlined', 'aria-description':'Create A Sub-List Item', id:'crtSub', inner:'<i class="bi bi-plus-circle-dotted"></i>', listeners:[{type:'click', execute:toggleLstBtn}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
+        b3:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', 'aria-description':'Edit List Item', id:'edit', inner:'<i class="bi bi-pencil"></i>', listeners:[{type:'click', execute:toggleLstBtn}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
+        b4:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-info is-outlined', 'aria-description':'Copy Item', id:'copy', inner:'<i class="bi bi-copy"></i>', listeners:[{type:'click', execute:clkCopyItem}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
+        b5:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', 'aria-description':'Restore List Item', id:'undo', inner:'<i class="bi bi-arrow-counterclockwise"></i>', listeners:[{type:'click', execute:clkUndoItem}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
+        b6:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', 'aria-description':'Close Options', id:'cancel', inner:'<i class="bi bi-x-circle"></i>', listeners:[{type:'click', execute:closeOptions}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]})
     }
+
+    nestElem([
+        document.querySelector('.container'),
+        mkDiv({class:'options', style:'top: ' + (event.y - 30) + 'px; left: ' + (event.x - 27) + 'px;'}),
+        mkDiv({class:'card'}),
+        mkDiv({class:'card-content p-0'}),
+        (targetElement.parentElement.id === 'done'||targetElement.parentElement.parentElement.id === 'done')?
+            [opts.b5,opts.b6]
+            :
+            (targetElement.id === 'listSubItem')?
+                [opts.b1,opts.b3,opts.b4,opts.b6]
+                :
+                [opts.b1,opts.b2,opts.b3,opts.b4,opts.b6]
+    ]);
 
 }
 
@@ -795,21 +768,27 @@ function addItem(){
 
 }
 
+function listToString(){
+    let items = document.querySelector('#list').querySelectorAll('p');
+    let text = '';
+
+    items.forEach(item => {
+
+        text += item.innerText.replaceAll('\n', '|') + ',';
+
+    });
+
+    return text;
+}
+
 function exportListStr(){
 
     removeMsg();
     document.querySelector('#item').classList.remove('is-danger');
     
-    if (this.value === 'export'){
+    if (this.value === ':export'){
 
-        let items = document.querySelector('#list').querySelectorAll('p');
-        let itemText = '';
-
-        items.forEach(item => {
-
-            itemText += item.innerText.replaceAll('\n', '|') + ',';
-
-        });
+        let itemText = listToString();
 
         if (itemText){
 
@@ -817,9 +796,7 @@ function exportListStr(){
             navigator.clipboard.writeText(itemText.substring(0, itemText.length - 1));
             // console.log(getCookie());
 
-            let submit = document.querySelector('#addItem');
-            if (submit.classList.contains('dnone'))
-                submit = document.querySelector('#addSub');
+            let submit = (document.querySelector('#addItem').classList.contains('dnone')) ? document.querySelector('#addSub') : document.querySelector('#addItem');
 
             submit.setAttribute('disabled', 'disabled');
             this.classList.add('is-success');
@@ -838,6 +815,20 @@ function exportListStr(){
 
         }
 
+    }else if (this.value === ':list'){
+        let allCookies = document.cookie.split('; ');
+        let nosave = true;
+        allCookies.forEach(ck => {
+            let key = ck.split('=')[0];
+            if (key){
+                console.log(key);
+                nosave = false;
+            }
+        });
+        if (nosave){
+            console.log("No saved lists found");
+        }
+        this.value = '';
     }
     
 }
@@ -846,18 +837,48 @@ function inputKeyActions(event){
 
     if (event.keyCode === 13){
 
-        let buttons = document.querySelectorAll('.listBtn button');
-
-        buttons.forEach(btn => {
-
-;            if (!btn.classList.contains('dnone')){
-
-                btn.click();
-                return;
-
+        if (this.value.match(/^:[a-z]*:.*/)){
+            let sn = this.value.split(':');
+            sn.shift();
+            switch (sn[0]){
+                case 'save':
+                    // Save list to specified cookie name :*:cookie_name
+                    setCookie(sn[1]); // Save Current list to new cookie
+                    clearList(); // clear the current list after creating new one
+                    setCookie(); // reset current cookie
+                    break;
+                case 'load':
+                    // Load specific cookie
+                    clearList();
+                    loadList(getCookie(sn[1]));
+                    break;
+                case 'list':
+                    // List all cookies
+                    // Doesn't make sense to have this here is the is no data following :list:
+                    // Leaving for now to see hwo I like having it in the export function
+                    let allCookies = document.cookie.split('; ');
+                    allCookies.forEach(ck => {
+                        let key = ck.split('=')[0];
+                        if (key)
+                        console.log(key);
+                    })
+                    break;
             }
+            this.value = '';
+        }else{
+            let buttons = document.querySelectorAll('.listBtn button');
 
-        });
+            buttons.forEach(btn => {
+
+                if (!btn.classList.contains('dnone')){
+
+                    btn.click();
+                    return;
+
+                }
+
+            });
+        }
 
     }else if (event.keyCode === 27){
 
@@ -879,10 +900,15 @@ function complete(){
 
 }
 
-window.onload = function(){
+function clearList(){
+    document.querySelectorAll('#listItem').forEach(it => {
+        it.remove();
+    });
+    if (document.getElementById('done'))
+        document.getElementById('done').remove();
+}
 
-    let cookie = getCookie();
-
+function loadList(cookie){
     if (cookie){
         
         cookie = cookie.split(',');
@@ -911,5 +937,10 @@ window.onload = function(){
         });
 
     }
+}
+
+window.onload = function(){
+
+    loadList(getCookie());
 
 }
