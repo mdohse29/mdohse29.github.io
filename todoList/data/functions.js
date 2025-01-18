@@ -651,12 +651,12 @@ function openOptions(event){
     }
 
     const opts = {
-        1:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-success is-outlined', 'aria-description':'Mark Item Complete', id:'tadone', inner:'<i class="bi bi-check-circle"></i>', listeners:[{type:'click', execute:complete},{type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
-        2:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-link is-outlined', 'aria-description':'Create A Sub-List Item', id:'crtSub', inner:'<i class="bi bi-plus-circle-dotted"></i>', listeners:[{type:'click', execute:toggleLstBtn}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
-        3:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', 'aria-description':'Edit List Item', id:'edit', inner:'<i class="bi bi-pencil"></i>', listeners:[{type:'click', execute:toggleLstBtn}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
-        4:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-info is-outlined', 'aria-description':'Copy Item', id:'copy', inner:'<i class="bi bi-copy"></i>', listeners:[{type:'click', execute:clkCopyItem}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
-        5:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', 'aria-description':'Restore List Item', id:'undo', inner:'<i class="bi bi-arrow-counterclockwise"></i>', listeners:[{type:'click', execute:clkUndoItem}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
-        6:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', 'aria-description':'Close Options', id:'cancel', inner:'<i class="bi bi-x-circle"></i>', listeners:[{type:'click', execute:closeOptions}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]})
+        b1:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-success is-outlined', 'aria-description':'Mark Item Complete', id:'tadone', inner:'<i class="bi bi-check-circle"></i>', listeners:[{type:'click', execute:complete},{type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
+        b2:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-link is-outlined', 'aria-description':'Create A Sub-List Item', id:'crtSub', inner:'<i class="bi bi-plus-circle-dotted"></i>', listeners:[{type:'click', execute:toggleLstBtn}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
+        b3:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', 'aria-description':'Edit List Item', id:'edit', inner:'<i class="bi bi-pencil"></i>', listeners:[{type:'click', execute:toggleLstBtn}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
+        b4:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-info is-outlined', 'aria-description':'Copy Item', id:'copy', inner:'<i class="bi bi-copy"></i>', listeners:[{type:'click', execute:clkCopyItem}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
+        b5:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', 'aria-description':'Restore List Item', id:'undo', inner:'<i class="bi bi-arrow-counterclockwise"></i>', listeners:[{type:'click', execute:clkUndoItem}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
+        b6:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', 'aria-description':'Close Options', id:'cancel', inner:'<i class="bi bi-x-circle"></i>', listeners:[{type:'click', execute:closeOptions}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]})
     }
 
     nestElem([
@@ -665,12 +665,12 @@ function openOptions(event){
         mkDiv({class:'card'}),
         mkDiv({class:'card-content p-0'}),
         (targetElement.parentElement.id === 'done'||targetElement.parentElement.parentElement.id === 'done')?
-            [opts[5],opts[6]]
+            [opts.b5,opts.b6]
             :
             (targetElement.id === 'listSubItem')?
-                [opts[1],opts[3],opts[4],opts[6]]
+                [opts.b1,opts.b3,opts.b4,opts.b6]
                 :
-                [opts[1],opts[2],opts[3],opts[4],opts[6]]
+                [opts.b1,opts.b2,opts.b3,opts.b4,opts.b6]
     ]);
 
 }
