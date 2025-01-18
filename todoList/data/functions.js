@@ -91,7 +91,7 @@ function rmvTimeout(){
 
 function errorMsg(message = 'Empty items or duplicate items are not accepted.<br>Check your entry and try again.'){
     
-    let currentMsg = document.querySelector('article.is-danger');
+    let currentMsg = document.querySelector('article.message');
 
     rmvTimeout();
 
@@ -135,7 +135,7 @@ function manRmvMsg(){
 
 function removeMsg(){
 
-    let currentMsg = document.querySelector('article.is-danger');
+    let currentMsg = document.querySelector('article.message');
 
     if (currentMsg){
 
@@ -781,7 +781,7 @@ function listToString(){
     return text;
 }
 
-function exportListStr(){
+function inputActions(){
 
     removeMsg();
     document.querySelector('#item').classList.remove('is-danger');
@@ -818,15 +818,40 @@ function exportListStr(){
     }else if (this.value === ':list'){
         let allCookies = document.cookie.split('; ');
         let nosave = true;
+
+
+        let alert = nestElem([
+
+            mkElem({elemType:'article', class:'message is-small is-info'}),
+            {
+    
+                1:nestElem([
+                    mkDiv({class:'message-header is-justify-content-end'}),
+                    mkBtn({class:'delete', listeners:[{type:'click', execute:removeMsg}]})
+                ]),
+                2:nestElem([
+                    mkDiv({class:'message-body is-flex is-flex-direction-column is-align-content-center', id:'info', style: 'text-align: center;'}),
+                    mkP({inner:"Current Saved Lists", style:"font-weight: bold;text-decoration: underline;"})
+                ])
+    
+            }
+    
+        ])
+        document.body.prepend(alert);
+
         allCookies.forEach(ck => {
             let key = ck.split('=')[0];
             if (key){
                 console.log(key);
+                document.querySelector('#info').append(mkP({inner:key}));
                 nosave = false;
             }
         });
         if (nosave){
             console.log("No saved lists found");
+            document.querySelector('.message-body').append(mkP({class:'has-text-danger',inner:'No saved lists were found'}));
+            rmvTimeout();
+            errorTimeoutID = setTimeout(removeMsg, 2000);
         }
         this.value = '';
     }
