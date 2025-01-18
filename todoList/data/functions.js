@@ -1,5 +1,6 @@
 let targetElement = null;
 let errorTimeoutID = NaN;
+let listVar = 'list';
 const frameCheck = window.top === window.self;
 
 function dupeCheck(item){
@@ -577,18 +578,20 @@ function removeItem(elem){
 
 }
 
-function getCookie(){
-
+function getCookie(cn){
+    if (cn){
+        listVar = cn;
+    }
     if (frameCheck){
         let data = document.cookie;
 
-        data = data.split(';');
+        data = data.split('; ');
 
         for (let cookie in data){
 
             let cookieData = data[cookie].split('=');
 
-            if (cookieData[0] === 'list'){
+            if (cookieData[0] === listVar){
                 return cookieData[1];
             }
 
@@ -597,7 +600,7 @@ function getCookie(){
 
 }
 
-function setCookie(cookieName = 'list'){
+function setCookie(cn){
 
     if (frameCheck){
         let items = document.querySelector('#list').querySelectorAll('#listItem'); // ptag ref
@@ -611,7 +614,7 @@ function setCookie(cookieName = 'list'){
 
         if (itemText){
 
-            document.cookie = `${cookieName}=${itemText.substring(0, itemText.length - 1)};max-age=31536000;samesite=none;secure`
+            document.cookie = `${(cn) ? cn : listVar}=${itemText.substring(0, itemText.length - 1)}; max-age=31536000; samesite=none; secure`
 
             if (document.cookie.length > 3000){
 
@@ -621,7 +624,7 @@ function setCookie(cookieName = 'list'){
 
         }else{
 
-            document.cookie = cookieName + '=;max-age=0;samesite=none;secure';
+            document.cookie = listVar + '=; max-age=0; samesite=none; secure';
 
         }
     }
@@ -812,6 +815,20 @@ function exportListStr(){
 
         }
 
+    }else if (this.value === ':list'){
+        let allCookies = document.cookie.split('; ');
+        let nosave = true;
+        allCookies.forEach(ck => {
+            let key = ck.split('=')[0];
+            if (key){
+                console.log(key);
+                nosave = false;
+            }
+        });
+        if (nosave){
+            console.log("No saved lists found");
+        }
+        this.value = '';
     }
     
 }
@@ -826,15 +843,28 @@ function inputKeyActions(event){
             switch (sn[0]){
                 case 'save':
                     // Save list to specified cookie name :*:cookie_name
-                    alert("Fucking Yeah\n" + sn[1]);
+                    setCookie(sn[1]); // Save Current list to new cookie
+                    clearList(); // clear the current list after creating new one
+                    setCookie(); // reset current cookie
                     break;
                 case 'load':
                     // Load specific cookie
+                    clearList();
+                    loadList(getCookie(sn[1]));
                     break;
                 case 'list':
                     // List all cookies
+                    // Doesn't make sense to have this here is the is no data following :list:
+                    // Leaving for now to see hwo I like having it in the export function
+                    let allCookies = document.cookie.split('; ');
+                    allCookies.forEach(ck => {
+                        let key = ck.split('=')[0];
+                        if (key)
+                        console.log(key);
+                    })
                     break;
             }
+            this.value = '';
         }else{
             let buttons = document.querySelectorAll('.listBtn button');
 
@@ -870,10 +900,15 @@ function complete(){
 
 }
 
-window.onload = function(){
+function clearList(){
+    document.querySelectorAll('#listItem').forEach(it => {
+        it.remove();
+    });
+    if (document.getElementById('done'))
+        document.getElementById('done').remove();
+}
 
-    let cookie = getCookie();
-
+function loadList(cookie){
     if (cookie){
         
         cookie = cookie.split(',');
@@ -902,5 +937,10 @@ window.onload = function(){
         });
 
     }
+}
+
+window.onload = function(){
+
+    loadList(getCookie());
 
 }
