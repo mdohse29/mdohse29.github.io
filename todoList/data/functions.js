@@ -765,21 +765,27 @@ function addItem(){
 
 }
 
+function listToString(){
+    let items = document.querySelector('#list').querySelectorAll('p');
+    let text = '';
+
+    items.forEach(item => {
+
+        text += item.innerText.replaceAll('\n', '|') + ',';
+
+    });
+
+    return text;
+}
+
 function exportListStr(){
 
     removeMsg();
     document.querySelector('#item').classList.remove('is-danger');
     
-    if (this.value === 'export'){
+    if (this.value === ':export'){
 
-        let items = document.querySelector('#list').querySelectorAll('p');
-        let itemText = '';
-
-        items.forEach(item => {
-
-            itemText += item.innerText.replaceAll('\n', '|') + ',';
-
-        });
+        let itemText = listToString();
 
         if (itemText){
 
@@ -787,9 +793,7 @@ function exportListStr(){
             navigator.clipboard.writeText(itemText.substring(0, itemText.length - 1));
             // console.log(getCookie());
 
-            let submit = document.querySelector('#addItem');
-            if (submit.classList.contains('dnone'))
-                submit = document.querySelector('#addSub');
+            let submit = (document.querySelector('#addItem').classList.contains('dnone')) ? document.querySelector('#addSub') : document.querySelector('#addItem');
 
             submit.setAttribute('disabled', 'disabled');
             this.classList.add('is-success');
@@ -816,18 +820,35 @@ function inputKeyActions(event){
 
     if (event.keyCode === 13){
 
-        let buttons = document.querySelectorAll('.listBtn button');
-
-        buttons.forEach(btn => {
-
-;            if (!btn.classList.contains('dnone')){
-
-                btn.click();
-                return;
-
+        if (this.value.match(/^:[a-z]*:.*/)){
+            let sn = this.value.split(':');
+            sn.shift();
+            switch (sn[0]){
+                case 'save':
+                    // Save list to specified cookie name :*:cookie_name
+                    alert("Fucking Yeah\n" + sn[1]);
+                    break;
+                case 'load':
+                    // Load specific cookie
+                    break;
+                case 'list':
+                    // List all cookies
+                    break;
             }
+        }else{
+            let buttons = document.querySelectorAll('.listBtn button');
 
-        });
+            buttons.forEach(btn => {
+
+                if (!btn.classList.contains('dnone')){
+
+                    btn.click();
+                    return;
+
+                }
+
+            });
+        }
 
     }else if (event.keyCode === 27){
 
