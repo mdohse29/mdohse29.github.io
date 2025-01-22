@@ -13,8 +13,9 @@ h4.h4 {
 
 article.message {
     position: absolute;
-    width: 100%;
+    width: 25%;
     top: 0;
+    left: 38%;
     user-select: none;
     z-index: 2000;
 }
@@ -138,6 +139,10 @@ i.bi {
     .options {
         left: 25px !important;
         max-width: 130px;
+    }
+    article.message {
+        width: 100%;
+        left: 0;
     }
     
 }
