@@ -843,7 +843,7 @@ function inputActions(){
             let key = ck.split('=')[0];
             if (key){
                 console.log(key);
-                document.querySelector('#info').append(mkP({inner:key}));
+                document.querySelector('#info').append(mkP({inner:(listVar === key) ? `<span style="color:red;">*</span> ${key} <span style="color:red;">*</span>`:key}));
                 nosave = false;
             }
         });
