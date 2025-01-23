@@ -75,12 +75,12 @@ article.message {
     user-select: none;
 }
 
-i.bi-check-circle-fill {
-    color: var(--bulma-success);
+#listItem i.bi, #done i.bi {
+    margin-right: 5px;
 }
 
-i.bi {
-    margin-right: 5px;
+i.bi-check-circle-fill {
+    color: var(--bulma-success);
 }
 
 .main-bg {
