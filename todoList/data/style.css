@@ -19,7 +19,7 @@ article.message {
     z-index: 2000;
 }
 
-article.is-info {
+#cookieList {
     width: 42%;
     left: 29%;
 }
@@ -137,7 +137,7 @@ i.bi-check-circle-fill {
 }
 
 @media (width < 1408px){
-    article.is-info {
+    #cookieList {
         width: 50%;
         left: 25%;
     }
@@ -151,7 +151,7 @@ i.bi-check-circle-fill {
         left: 25px !important;
         max-width: 130px;
     }
-    article.is-info {
+    #cookieList {
         width: 100%;
         left: 0;
     }
