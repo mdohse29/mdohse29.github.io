@@ -236,7 +236,7 @@ function clkEdit(){
     let text = getItemText(targetElement);
     let newText = input.value.trim();
 
-    if (newText && !dupeCheck(newText)){
+    if (newText && !dupeCheck(newText) && !(newText.includes(';'))){
 
         text = text.replace(text, newText);
         text = text.replace(text.substring(0, 1), text.substring(0, 1).toUpperCase());
@@ -258,9 +258,11 @@ function clkEdit(){
     }else{
 
         if (!newText){
-            errorMsg('Empty items are not accepted.<br>If you want to remove the item,<br>just click complete in the options.')
+            errorMsg('Empty items are not accepted.<br>If you want to remove the item,<br>just click complete in the options.');
         }else if (dupeCheck(newText)){
             errorMsg('No Change Was Made!<br>Press ESC to clear,<br>or select another list item and select cancel.');
+        }else if (newText.includes(';')){
+            errorMsg('ERROR: Semi colons ";" are not allowed.');
         }
         input.value = text;
         input.focus();
@@ -683,7 +685,7 @@ function addSub(){
     let input = document.querySelector('#item');
     let item = input.value;
 
-    if ((item) && (!dupeCheck(item))){
+    if ((item) && (!dupeCheck(item)) && !(item.includes(';'))){
 
         if (item.includes(',')){
 
@@ -708,9 +710,12 @@ function addSub(){
         }
 
     }else{
-
-        errorMsg();
-        console.log("Empty or duplicate Item. Nothing Added.");
+        if (item.includes(';')){
+            errorMsg('ERROR: Semi colons ";" are not allowed.');
+        }else{
+            errorMsg();
+        }
+        console.log("Something went wrong while adding a sub-list item.");
 
     }
 
@@ -732,7 +737,7 @@ function addItem(){
     let input = document.querySelector('#item');
     let item = input.value;
 
-    if ((item) && (!dupeCheck(item))){
+    if ((item) && (!dupeCheck(item)) && !(item.includes(';'))){
 
         if (item.includes(',')){
 
@@ -757,9 +762,12 @@ function addItem(){
         }
 
     }else{
-
-        errorMsg();
-        console.log("Empty or duplicate Item. Nothing Added.");
+        if (item.includes(';')){
+            errorMsg('ERROR: Semi colons ";" are not allowed.');
+        }else{
+            errorMsg();
+        }
+        console.log("Something went wrong while adding an item.");
 
     }
 
