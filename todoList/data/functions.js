@@ -89,7 +89,7 @@ function rmvTimeout(){
 
 }
 
-function errorMsg(message = 'Empty items or duplicate items are not accepted.<br>Check your entry and try again.'){
+function errorMsg(message = 'Empty items or duplicate items are not accepted.<br>Check your entry and try again.', type = 'danger'){
     
     let currentMsg = document.querySelector('article.message');
 
@@ -103,7 +103,7 @@ function errorMsg(message = 'Empty items or duplicate items are not accepted.<br
 
     document.querySelector('.card-header.main-bg').prepend(nestElem([
 
-        mkElem({elemType:'article', class:'message is-small is-danger', listeners:[{type:'mouseenter', execute:manRmvMsg}]}),
+        mkElem({elemType:'article', class:`message is-small is-${type}`, listeners:[{type:'mouseenter', execute:manRmvMsg}]}),
         {
 
             1:nestElem([
@@ -680,100 +680,44 @@ function openOptions(event){
 
 }
 
-function addSub(){
-            
-    let input = document.querySelector('#item');
-    let item = input.value;
-
-    if ((item) && (!dupeCheck(item)) && !(item.includes(';'))){
-
-        if (item.includes(',')){
-
-            let items = item.split(',');
-
-            for (let i of items){
-
-                if (i && !dupeCheck(i.trim())){
-
-                    targetElement.appendChild(createItem(i.trim(), {isSub:true, pid:targetElement.getAttribute('pid')}));
-                    setCookie();
-
-                }
-
-            }
-
-        }else{
-
-            targetElement.appendChild(createItem(item.trim(), {isSub:true, pid:targetElement.getAttribute('pid')}));
-            setCookie();
-
-        }
-
-    }else{
-        if (item.includes(';')){
-            errorMsg('ERROR: Semi colons ";" are not allowed.');
-        }else{
-            errorMsg();
-        }
-        console.log("Something went wrong while adding a sub-list item.");
-
-    }
-
-    input.value = '';
-    document.querySelector('#item').focus();
-    if (!input.classList.contains('is-danger')){
-
-        document.querySelector('#addItem').classList.remove('dnone');
-        document.querySelector('#addSub').classList.add('dnone');
-
-        targetElement = null;
-
-    }
-
-}
-
 function addItem(){
-
     let input = document.querySelector('#item');
     let item = input.value;
+    let list = document.querySelector('#list');
+    const exclude = /[;]/g
 
-    if ((item) && (!dupeCheck(item)) && !(item.includes(';'))){
-
-        if (item.includes(',')){
-
-            let items = item.split(',');
-
-            for (let i of items.reverse()){
-
-                if (i && !dupeCheck(i.trim())){
-
-                    document.querySelector('#list').prepend(createItem(i.trim()));
+    if ((item) && !(item.match(exclude))){
+        if (this.id === 'addSub' && targetElement){
+            // sub list items
+            item.split(',').forEach(i => {
+                if (!dupeCheck(i.trim())){
+                    targetElement.append(createItem(i.trim(), {isSub:true, pid:targetElement.getAttribute('pid')}));
                     setCookie();
-
                 }
-
-            }
-
+            });
         }else{
-
-            document.querySelector('#list').prepend(createItem(item.trim()));
-            setCookie();
-
+            // regular item
+            item.split(',').reverse().forEach(i => {
+                if (!dupeCheck(i.trim())){
+                    list.prepend(createItem(i.trim()));
+                    setCookie();
+                }
+            });
         }
-
     }else{
-        if (item.includes(';')){
+        if (item.match(exclude)){
             errorMsg('ERROR: Semi colons ";" are not allowed.');
         }else{
-            errorMsg();
+            errorMsg('No value was entered, so no item was created.', 'info');
         }
-        console.log("Something went wrong while adding an item.");
-
     }
 
     input.value = '';
-    document.querySelector('#item').focus();
-
+    input.focus();
+    if (!input.classList.contains('is-danger')){
+        resetListBtn();
+        targetElement = null;
+    }
 }
 
 function listToString(){
@@ -830,7 +774,7 @@ function inputActions(){
 
         let alert = nestElem([
 
-            mkElem({elemType:'article', class:'message is-small is-info'}),
+            mkElem({elemType:'article', id:'cookieList', class:'message is-small is-info'}),
             {
     
                 1:nestElem([
@@ -884,17 +828,6 @@ function inputKeyActions(event){
                     // Load specific cookie
                     clearList();
                     loadList(getCookie(sn[1]));
-                    break;
-                case 'list':
-                    // List all cookies
-                    // Doesn't make sense to have this here is the is no data following :list:
-                    // Leaving for now to see hwo I like having it in the export function
-                    let allCookies = document.cookie.split('; ');
-                    allCookies.forEach(ck => {
-                        let key = ck.split('=')[0];
-                        if (key)
-                        console.log(key);
-                    })
                     break;
             }
             this.value = '';
