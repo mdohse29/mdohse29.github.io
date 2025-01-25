@@ -89,7 +89,7 @@ function rmvTimeout(){
 
 }
 
-function errorMsg(message = 'Empty items or duplicate items are not accepted.<br>Check your entry and try again.', type = 'danger'){
+function errorMsg(message = 'Empty items or duplicate items are not accepted.<br>Check your entry and try again.', type = 'danger', to = 5000){
     
     let currentMsg = document.querySelector('article.message');
 
@@ -121,7 +121,7 @@ function errorMsg(message = 'Empty items or duplicate items are not accepted.<br
 
     document.querySelector('#item').classList.add('is-danger');
 
-    errorTimeoutID = setTimeout(removeMsg, 5000);
+    errorTimeoutID = setTimeout(removeMsg, to);
 
 }
 
@@ -738,11 +738,9 @@ function inputActions(){
 
         if (itemText){
 
-            // alert(itemText.substring(0, itemText.length - 1))
             navigator.clipboard.writeText(itemText.substring(0, itemText.length - 1));
-            // console.log(getCookie());
-
-            let submit = (document.querySelector('#addItem').classList.contains('dnone')) ? document.querySelector('#addSub') : document.querySelector('#addItem');
+            
+            let submit = getActiveBtn();
 
             submit.setAttribute('disabled', 'disabled');
             this.classList.add('is-success');
@@ -756,8 +754,8 @@ function inputActions(){
 
         }else{
 
-            document.cookie = 'list=';
-            console.log(getCookie());
+            errorMsg('Nothing to Export!', 'info', 2000);
+            this.value = '';
 
         }
 
