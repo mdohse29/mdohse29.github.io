@@ -1,37 +1,22 @@
-function addItem(){
-    let input = document.querySelector('#item');
-    let item = input.value;
-    let list = document.querySelector('#list');
-    const exclude = /[;]/g
-
-    if ((item) && !(item.match(exclude))){
-        if (this.id === 'addSub' && targetElement){
-            // sub list items
-            item.split(',').forEach(i => {
-                if (!dupeCheck(i.trim())){
-                    targetElement.append(createItem(i.trim(), {isSub:true, pid:targetElement.getAttribute('pid')}));
-                }
-            });
-        }else{
-            // regular item
-            item.split(',').reverse().forEach(i => {
-                if (!dupeCheck(i.trim())){
-                    list.prepend(createItem(i.trim()));
-                }
-            });
-        }
-    }else{
-        if (item.match(exclude)){
-            errorMsg('ERROR: Semi colons ";" are not allowed.');
-        }else{
-            errorMsg('No value was entered, so no item was created.', 'info');
-        }
+function moListItem(e){
+    let element = e.target;
+    if (element.tagName === 'I'){
+        element = element.parentElement;
     }
+    if (element.id === 'listItem'){
+        //reset all main item icons
+        document.querySelectorAll('i.has-background-item').forEach(elm => {
+            elm.classList.remove('has-background-item');
+        });
 
-    input.value = '';
-    input.focus();
-    if (!input.classList.contains('is-danger')){
-        resetListBtn();
-        targetElement = null;
+        element.children[0].classList.add('has-background-item');
+    }else if (element.id === 'listSubItem'){
+        //reset all subitems
+        document.querySelectorAll('span.has-background-item').forEach(elm => {
+            elm.classList.remove('has-background-item');
+        });
+
+        element.classList.add('has-background-item');
     }
 }
+

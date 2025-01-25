@@ -136,6 +136,10 @@ i.bi-check-circle-fill {
     width: 40%;
 }
 
+#doneSubs > #listSubItem:hover {
+    background-color: rgba(253, 249, 4, 0.45);
+}
+
 @media (width < 1408px){
     #cookieList {
         width: 50%;
