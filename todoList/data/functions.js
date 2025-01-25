@@ -181,28 +181,26 @@ function resetListBtn(){
 
 }
 
-function moListItem(){
-
-    let bgCheck = document.querySelectorAll('i.has-background-item');
-
-    if (bgCheck)
-        bgCheck.forEach(bg => {
-            bg.classList.remove('has-background-item');
+function moListItem(e){
+    let element = e.target;
+    if (element.tagName === 'I'){
+        element = element.parentElement;
+    }
+    if (element.id === 'listItem'){
+        //reset all main item icons
+        document.querySelectorAll('i.has-background-item').forEach(elm => {
+            elm.classList.remove('has-background-item');
         });
 
-    this.querySelector('i').classList.add('has-background-item');
-}
-
-function moSubItem(){
-
-    let bgCheck = document.querySelectorAll('span.has-background-item');
-
-    if (bgCheck)
-        bgCheck.forEach(bg => {
-            bg.classList.remove('has-background-item')
+        element.children[0].classList.add('has-background-item');
+    }else if (element.id === 'listSubItem'){
+        //reset all subitems | makes sure they don't stick
+        document.querySelectorAll('span.has-background-item').forEach(elm => {
+            elm.classList.remove('has-background-item');
         });
 
-    this.classList.add('has-background-item');
+        element.classList.add('has-background-item');
+    }
 }
 
 function mlLitsItem(){
@@ -466,10 +464,6 @@ function createItem(item, data = {isSub:false, pid:NaN}){
             pid:((data.isSub) ? data.pid : crypto.randomUUID()),
             inner:(item.toLowerCase().includes('http')) ? item.toLowerCase() : item.substring(0, 1).toUpperCase() + item.substring(1),
             listeners:((data.isSub) ? [
-                {
-                    type:'mouseover',
-                    execute:moSubItem
-                },
                 {
                     type:'mouseleave',
                     execute:mlSubItem
