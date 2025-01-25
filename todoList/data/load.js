@@ -11,7 +11,7 @@ document.body.prepend(nestElem([
         2:nestElem([
             mkDiv({class:'card-content is-flex is-justify-content-space-between'}),
             {
-                1:mkInp({type:'text', id:'item', class:'input is-inline', placeholder:'e.g. Laundry or Laundry, Dishes, Yard work', title:'Multiple items at once should be separated with a comma ,', autocomplete:'off', listeners:[{type:'input', execute:inputActions}, {type:'keydown', execute:inputKeyActions}]}),
+                1:mkInp({type:'text', id:'item', spellcheck:'true', class:'input is-inline', placeholder:'e.g. Laundry or Laundry, Dishes, Yard work', title:'Multiple items at once should be separated with a comma ,', autocomplete:'off', listeners:[{type:'input', execute:inputActions}, {type:'keydown', execute:inputKeyActions}]}),
                 2:nestElem([
                     mkDiv({class:'listBtn'}),
                     {
