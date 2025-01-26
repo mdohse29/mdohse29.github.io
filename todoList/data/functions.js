@@ -89,7 +89,7 @@ function rmvTimeout(){
 
 }
 
-function errorMsg(message = 'Empty items or duplicate items are not accepted.<br>Check your entry and try again.', type = 'danger'){
+function errorMsg(message = 'Empty items or duplicate items are not accepted.<br>Check your entry and try again.', type = 'danger', to = 5000){
     
     let currentMsg = document.querySelector('article.message');
 
@@ -121,7 +121,7 @@ function errorMsg(message = 'Empty items or duplicate items are not accepted.<br
 
     document.querySelector('#item').classList.add('is-danger');
 
-    errorTimeoutID = setTimeout(removeMsg, 5000);
+    errorTimeoutID = setTimeout(removeMsg, to);
 
 }
 
@@ -679,7 +679,6 @@ function addItem(){
     let item = input.value;
     let list = document.querySelector('#list');
     const exclude = /[;]/g
-
     if ((item) && !(item.match(exclude))){
         if (this.id === 'addSub' && targetElement){
             // sub list items
@@ -730,7 +729,7 @@ function listToString(){
 function inputActions(){
 
     removeMsg();
-    document.querySelector('#item').classList.remove('is-danger');
+    this.classList.remove('is-danger');
     
     if (this.value === ':export'){
 
@@ -738,11 +737,9 @@ function inputActions(){
 
         if (itemText){
 
-            // alert(itemText.substring(0, itemText.length - 1))
             navigator.clipboard.writeText(itemText.substring(0, itemText.length - 1));
-            // console.log(getCookie());
-
-            let submit = (document.querySelector('#addItem').classList.contains('dnone')) ? document.querySelector('#addSub') : document.querySelector('#addItem');
+            
+            let submit = getActiveBtn();
 
             submit.setAttribute('disabled', 'disabled');
             this.classList.add('is-success');
@@ -756,8 +753,8 @@ function inputActions(){
 
         }else{
 
-            document.cookie = 'list=';
-            console.log(getCookie());
+            errorMsg('Nothing to Export!', 'info', 2000);
+            this.value = '';
 
         }
 
@@ -806,7 +803,7 @@ function inputActions(){
 
 function inputKeyActions(event){
 
-    if (event.keyCode === 13){
+    if (event.keyCode === 13){ // Enter
 
         if (this.value.match(/^:[a-z]*:.*/)){
             let sn = this.value.split(':');
@@ -840,7 +837,7 @@ function inputKeyActions(event){
             });
         }
 
-    }else if (event.keyCode === 27){
+    }else if (event.keyCode === 27){ // ESC
 
         document.querySelector('#item').value = '';
         document.querySelector('#item').classList.remove('is-danger');
