@@ -95,78 +95,88 @@
 //     console.log(data.movie.title[0]);
 // })
 
-let test = mkBtn({inner:'Testing', listeners:[
-    {
-        type:'click',
-        execute: async function(){
-            let joke = await getRandomJoke();
-            console.log(joke);
-            console.log(joke.setup);
-        }
-    },
-    {
-        type:'mouseenter',
-        execute: function(){
-            this.title = 'Howdy';
-        }
-    },
-    {
-        type:'mouseleave',
-        execute: function(){
-            this.title = '';
-        }
-    },
-    {
-        type:'click',
-        execute: function(){
-            window.alert('check');
-        }
-    }
-]});
-
-document.body.append(test);
-
-let test2 = [
-    {
-        p:'test1',
-        attr: {
-            class:'button'
-        }
-    },
-    {
-        p:'test2'
-    },
-    {
-        h1:'test3'
-    }
-]
-
-// let testContainer = nestElem([
-//     mkDiv({class:'testing'}),
-//     test2.map(t => {
-//         let settings = [];
-//         if (t.attr != undefined){
-//             settings = t.attr;
-//             delete t.attr;
+// let test = mkBtn({inner:'Testing', listeners:[
+//     {
+//         type:'click',
+//         execute: async function(){
+//             let joke = await getRandomJoke();
+//             console.log(joke);
+//             console.log(joke.setup);
 //         }
-//         let key = Object.keys(t)[0];
-//         return mkElem({elemType:key, inner:t[key], ...settings});
-//     })
-// ]);
-let testContainer = nestElem([
-    nestElem([
-        mkDiv({class:'testing'}),
-        test2.map(t => {
-            let settings = [];
-            if (t.attr != undefined){
-                settings = t.attr;
-                delete t.attr;
-            }
-            let key = Object.keys(t)[0];
-            return mkElem({elemType:key, inner:t[key], ...settings});
-        })
-    ]),
-    mkElem({elemType:'hr'})
-])
-console.log(Array.isArray(test2[0]))
-document.body.append(testContainer)
+//     },
+//     {
+//         type:'mouseenter',
+//         execute: function(){
+//             this.title = 'Howdy';
+//         }
+//     },
+//     {
+//         type:'mouseleave',
+//         execute: function(){
+//             this.title = '';
+//         }
+//     },
+//     {
+//         type:'click',
+//         execute: function(){
+//             window.alert('check');
+//         }
+//     }
+// ]});
+
+// document.body.append(test);
+
+// let test2 = [
+//     {
+//         p:'test1',
+//         attr: {
+//             class:'button'
+//         }
+//     },
+//     {
+//         p:'test2'
+//     },
+//     {
+//         h1:'test3'
+//     }
+// ]
+
+// // let testContainer = nestElem([
+// //     mkDiv({class:'testing'}),
+// //     test2.map(t => {
+// //         let settings = [];
+// //         if (t.attr != undefined){
+// //             settings = t.attr;
+// //             delete t.attr;
+// //         }
+// //         let key = Object.keys(t)[0];
+// //         return mkElem({elemType:key, inner:t[key], ...settings});
+// //     })
+// // ]);
+// let testContainer = nestElem([
+//     nestElem([
+//         mkDiv({class:'testing'}),
+//         test2.map(t => {
+//             let settings = [];
+//             if (t.attr != undefined){
+//                 settings = t.attr;
+//                 delete t.attr;
+//             }
+//             let key = Object.keys(t)[0];
+//             return mkElem({elemType:key, inner:t[key], ...settings});
+//         })
+//     ]),
+//     mkElem({elemType:'hr'})
+// ])
+// console.log(Array.isArray(test2[0]))
+// document.body.append(testContainer)
+
+document.querySelector('button').addEventListener('click', function(){
+    this.innerText = (this.innerText === 'Play') ? 'Pause':'Play';
+    
+    document.querySelectorAll('.ball').forEach(ball => {
+        let style = window.getComputedStyle(document.querySelector(`#${ball.id}`));
+        ball.style = `left: ${style.left}; bottom: ${style.bottom};`
+        ball.classList.toggle(`${ball.id}-right`);
+    });
+})
