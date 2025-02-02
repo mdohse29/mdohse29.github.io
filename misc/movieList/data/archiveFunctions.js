@@ -181,7 +181,11 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
                 break;
             case 'tv':
                 if (currentTab == 'all')
-                    nestElem([$(this).find('p.title')[0],mkSpan({id:'location', inner:' - TV Show'})]);
+                    nestElem([$(this).find('p.title')[0],mkSpan({id:'location', inner:' - Active TV Show'})]);
+                break;
+            case 'tvarch':
+                if (currentTab == 'all')
+                    nestElem([$(this).find('p.title')[0],mkSpan({id:'location', inner:' - Archived TV Show'})]);
                 break;
             case 'arch':
                 if (currentTab == 'all')

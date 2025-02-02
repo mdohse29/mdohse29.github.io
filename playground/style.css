@@ -1,6 +1,6 @@
 .container {
     display: block;
-    position: absolute;
+    position: relative;
     width: 800px;
     height: 600px;
     margin-top: 20px;
@@ -16,13 +16,50 @@
 }
 
 #ball1{
-    background-color: green;
+    background-color: blue;
     left: 0;
     bottom: 0;
+}
+
+.ball1-right {
+    animation: ball1 1s linear infinite alternate none;
 }
 
 #ball2{
     background-color: blue;
     left: 0;
     bottom: 0;
+}
+
+.ball2-right {
+    animation: ball2 500ms linear infinite alternate none;
+}
+
+@keyframes ball1 {
+    0% {
+        left: 0;
+        bottom: 0;
+    }
+    50% {
+        left: 75px;
+        bottom: 300px;
+        background-color: green;
+    }
+    100% {
+        left: 748px;
+        bottom: 548px;
+        background-color: yellow;
+    }
+}
+@keyframes ball2 {
+    from {
+        left: 0;
+        bottom: 0;
+    }
+    to {
+        left: 50px;
+        bottom: 100px;
+        background-color: pink;
+        border-radius: 0;
+    }
 }

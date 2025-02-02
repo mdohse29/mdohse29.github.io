@@ -74,7 +74,7 @@ async function getMovieInfo(title, year){
 
 async function createMovieList(){
     // Executes from archiveFunctions.js
-    let arch, active, tv;
+    let arch, active, tv, tvArch;
     
     try{
         // Using AXIOS
@@ -82,11 +82,13 @@ async function createMovieList(){
         arch = await axios.get(baseUrl + "archive.txt", config);
         active = await axios.get(baseUrl + "active.txt", config);
         tv = await axios.get(baseUrl + "tvshows.txt", config);
+        // tvArch = await axios.get(baseUrl + "tvarchshows.txt", config);
     
         masterList = masterList.concat(
             collectList(arch.data.split('\n'), 'arch'),
             collectList(active.data.split('\n'), 'mov'),
             collectList(tv.data.split('\n'), 'tv')
+            // Add tvArch here
         );
 
         sorter(masterList);
@@ -97,13 +99,10 @@ async function createMovieList(){
 
         let movieList = document.querySelector('.movies');
         for (let i in masterList){
-            // movieList.appendChild(masterList[i].element);
             nestElem([movieList, masterList[i].element]);
         }
 
-        // Total Count
-        // let totCon = document.querySelector('#totalTitles')
-        
+                
         nestElem([document.querySelector('#totalTitles'),mkP({id:'total', tag:'count', class:'sticky-bottom'}), mkElem({elemType:'strong'}), mkElem({elemType:'sub', inner:'Total: ' + masterList.length})]);
 
     }catch(e){
