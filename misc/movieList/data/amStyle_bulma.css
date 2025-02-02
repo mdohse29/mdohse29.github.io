@@ -123,11 +123,13 @@ div.highlight > p {
     /* background-color: rgb(245, 245, 220, 0.5); */
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-grow: 1;
     padding: 5px 0px;
     font-weight: bolder;
     width: 100px;
     text-align: center;
+    text-wrap: balance;
     border-radius: 10px 10px 0px 0px;
     min-width: 68px;
     cursor: pointer;
