@@ -899,5 +899,6 @@ function loadList(cookie){
 window.onload = function(){
 
     loadList(getCookie());
+    document.querySelector('#item').focus();
 
 }
