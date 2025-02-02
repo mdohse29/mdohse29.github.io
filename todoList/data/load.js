@@ -22,13 +22,9 @@ document.body.prepend(nestElem([
                 ])
             }
         ]),
-        3:mkElem({elemType:'hr'}),
         4:nestElem([
             mkDiv({id:'list-container'}),
-            {
-                1:mkDiv({class:'card-content', id:'list'}),
-                2:mkElem({elemType:'hr'})
-            }
+            mkDiv({class:'card-content', id:'list'})
         ]),
         5:mkDiv({class:'card-footer pb-4 pt-4 main-bg'})
     }
