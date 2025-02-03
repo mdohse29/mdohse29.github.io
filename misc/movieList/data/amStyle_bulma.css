@@ -64,6 +64,11 @@ div.highlight > p {
     border-radius: 10px;
 }
 
+div.highlight > p[tag*="tv"]{
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+}
+
 .movies::-webkit-scrollbar {
     display: none;
 }
