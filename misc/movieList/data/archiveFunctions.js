@@ -85,12 +85,7 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
     }
 
     function search(searchText){
-        if (searchText == "random select") {
-            openModal();
-        } else if (searchText == "goodbye") {
-            closeModal();
-        }
-
+        
         let found = false;
 
         if ($('.notFound')) {
@@ -150,12 +145,6 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
     });
     // -----------------------------------------------------
 
-
-    // let tabHeight = $('.tabs').prop('scrollHeight');
-
-    // $('.msg').attr('style', 'margin-top: ' + tabHeight + 'px;');
-    // $('.tabs-container').attr('style', 'margin-top: ' + tabHeight + 'px;');
-    
     $(document).on('mouseenter', '.movies > div', function () {
         $(this).addClass('highlight');
 
