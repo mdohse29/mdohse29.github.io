@@ -82,7 +82,7 @@ async function createMovieList(){
         arch = await axios.get(baseUrl + "archive.txt", config);
         active = await axios.get(baseUrl + "active.txt", config);
         tv = await axios.get(baseUrl + "tvshows.txt", config);
-        tvArch = await axios.get(baseUrl + "tvarchshows.txt", config);
+        tvArch = await axios.get(baseUrl + "tvarch.txt", config);
     
         masterList = masterList.concat(
             collectList(arch.data.split('\n'), 'arch'),

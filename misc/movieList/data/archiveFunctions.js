@@ -298,11 +298,18 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
 
     $('#rand').click(function () {
         reset();
-        let elements = masterList;
         let tag = $('.tab.active').attr('tag');
         let alreadyFound = [];
         let num = $('#num').val();
-        
+        let elements = masterList.filter((elm) => {
+            if (tag === 'all'){
+                return elm;
+            }else{
+                if (elm.tag === tag){
+                    return elm;
+                }
+            }
+        })
         if (! num) {
             num = 5;
         }
@@ -311,20 +318,13 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
 
         for (let a = 0; a < num; a++) {
             let rand = Math.floor(Math.random() * (elements.length - 1));
-            if (tag == 'all'){
-                nestElem([$('.movies')[0],filter(elements[rand]).element]);
+            
+            if (alreadyFound.includes(elements[rand].element)){
+                a--;
+                continue;
             }else{
-                if (elements[rand].tag == tag){
-                    if (alreadyFound.includes(elements[rand].element)){
-                        a--;
-                        continue;
-                    }else{
-                        nestElem([$('.movies')[0],filter(elements[rand]).element]);
-                        alreadyFound.push(elements[rand].element);
-                    }
-                }else{
-                    a--;
-                }
+                nestElem([$('.movies')[0],filter(elements[rand]).element]);
+                alreadyFound.push(elements[rand].element);
             }
         }
 
