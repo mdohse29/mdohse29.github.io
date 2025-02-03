@@ -4,7 +4,7 @@ const baseUrl = 'https://mdohse29.github.io/misc/movieList/data/'
 const infoUrl = 'https://www.omdbapi.com/?apikey=c8757c03'
 
 let loading = mkP({id:'placeH', inner:'Loading...'});
-// document.querySelector('.movies').appendChild(loading);
+
 nestElem([
     document.querySelector('.movies'),
     loading
@@ -82,13 +82,13 @@ async function createMovieList(){
         arch = await axios.get(baseUrl + "archive.txt", config);
         active = await axios.get(baseUrl + "active.txt", config);
         tv = await axios.get(baseUrl + "tvshows.txt", config);
-        // tvArch = await axios.get(baseUrl + "tvarchshows.txt", config);
+        tvArch = await axios.get(baseUrl + "tvarchshows.txt", config);
     
         masterList = masterList.concat(
             collectList(arch.data.split('\n'), 'arch'),
             collectList(active.data.split('\n'), 'mov'),
-            collectList(tv.data.split('\n'), 'tv')
-            // Add tvArch here
+            collectList(tv.data.split('\n'), 'tv'),
+            collectList(tvArch.data.split('\n'), 'tvarch')
         );
 
         sorter(masterList);
