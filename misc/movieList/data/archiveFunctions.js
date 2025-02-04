@@ -43,14 +43,40 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
     }
 
     function openModal(){
+        let ct = $('div.tab.active').attr('tag');
+        let filtered = masterList.filter((elm) => {
+            if (ct === 'all'){
+                return elm;
+            }else{
+                if (elm.tag === ct){
+                    return elm;
+                }
+            }
+        });
+
+        $('#num, #rand').removeAttr('disabled');
+
+        if (filtered.length <= 5){
+            $('#rand, #num').attr('disabled', 'disabled')
+        }else if (filtered.length <= 10){
+            $('#num').attr('max', '5');
+        }else if (filtered.length <= 15){
+            $('#num').attr('max', '10');
+        }else{
+            $('#num').attr('max', '15');
+        }
+
         $('html').animate({scrollTop:0}, 'fast');
         $('.md-modal').removeClass('dnone');
         $('html').attr('style', 'overflow: hidden;');
+        filtered = null;
     }
 
     function closeModal(){
         $('.md-modal').addClass('dnone');
         $('html').removeAttr('style');
+        $('#num').val('5');
+        $('#selected').text('5');
     }
 
     function isFilterEmpty(){
@@ -349,13 +375,9 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
         }
     });
 
-    $('.md-modal-background').click(function(){
-        closeModal();
-    });
+    $('.md-modal-background').click(closeModal);
 
-    $('.rando > button').click(function(){
-        openModal();
-    });
+    $('.rando > button').click(openModal);
 
 
 });
