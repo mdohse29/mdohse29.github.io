@@ -144,6 +144,11 @@ i.bi-check-circle-fill {
     background-color: rgba(253, 249, 4, 0.45);
 }
 
+.fade-out {
+    opacity: 0;
+    transition: 350ms ease-out;
+}
+
 @media (width < 1408px){
     #cookieList {
         width: 50%;

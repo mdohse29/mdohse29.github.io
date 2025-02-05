@@ -1,5 +1,6 @@
 let targetElement = null;
 let errorTimeoutID = NaN;
+let toID = NaN;
 let listVar = 'default';
 const frameCheck = window.top === window.self;
 
@@ -640,8 +641,16 @@ function closeOptions(){
 
     let options = document.querySelector('.options');
 
-    if (options)
-        options.remove();
+    if (options){
+        options.classList.add('fade-out');
+        if(toID){
+            clearTimeout(toID);
+            toID = NaN;
+        }
+        toID = setTimeout(function (){
+            options.remove();
+        }, 350);
+    }
 
 }
 
@@ -900,6 +909,7 @@ function loadList(cookie){
 window.onload = function(){
 
     loadList(getCookie());
-    document.querySelector('#item').focus();
+    if (frameCheck)
+        document.querySelector('#item').focus();
 
 }
