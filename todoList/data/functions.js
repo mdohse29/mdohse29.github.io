@@ -642,14 +642,21 @@ function closeOptions(){
     let options = document.querySelector('.options');
 
     if (options){
-        options.classList.add('fade-out');
-        if(toID){
-            clearTimeout(toID);
-            toID = NaN;
-        }
-        toID = setTimeout(function (){
+        options.addEventListener('animationend', () => {
             options.remove();
-        }, 350);
+        });
+        options.querySelectorAll('button').forEach(btn => {
+            btn.setAttribute('disabled', 'disabled');
+        });
+        options.classList.replace('fade-in','fade-out');
+        // if(toID){
+        //     clearTimeout(toID);
+        //     toID = NaN;
+        // }
+        // toID = setTimeout(function (){
+        //     options.remove();
+        // }, 325);
+
     }
 
 }
@@ -682,6 +689,8 @@ function openOptions(event){
                 [opts.b1,opts.b2,opts.b3,opts.b4,opts.b6]
     ]);
 
+    document.querySelector('.options').classList.add('fade-in')
+
 }
 
 function addItem(){
@@ -696,6 +705,8 @@ function addItem(){
                 if (!dupeCheck(i.trim())){
                     targetElement.append(createItem(i.trim(), {isSub:true, pid:targetElement.getAttribute('pid')}));
                     setCookie();
+                }else{
+                    errorMsg(`"${i}" is already present<br>Duplicate items are not accepted`)
                 }
             });
         }else{
@@ -704,6 +715,8 @@ function addItem(){
                 if (!dupeCheck(i.trim())){
                     list.prepend(createItem(i.trim()));
                     setCookie();
+                }else{
+                    errorMsg(`"${i}" is already present<br>Duplicate items are not accepted`)
                 }
             });
         }

@@ -119,6 +119,10 @@ i.bi-check-circle-fill {
     margin-bottom: 20px;
 }
 
+.options button:disabled {
+    cursor: pointer;
+}
+
 .has-background-item {
     background-color: rgba(253, 249, 4, 0.45);
 }
@@ -145,8 +149,29 @@ i.bi-check-circle-fill {
 }
 
 .fade-out {
-    opacity: 0;
-    transition: 350ms ease-out;
+    animation: fade-out 350ms ease-out;
+}
+
+.fade-in {
+    animation: fade-in 350ms ease-in;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
 }
 
 @media (width < 1408px){
