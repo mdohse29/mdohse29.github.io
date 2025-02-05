@@ -1,5 +1,6 @@
 let targetElement = null;
 let errorTimeoutID = NaN;
+let toID = NaN;
 let listVar = 'default';
 const frameCheck = window.top === window.self;
 
@@ -640,7 +641,16 @@ function closeOptions(){
 
     let options = document.querySelector('.options');
 
-    options.remove();
+    if (options){
+        options.classList.add('fade-out');
+        if(toID){
+            clearTimeout(toID);
+            toID = NaN;
+        }
+        toID = setTimeout(function (){
+            options.remove();
+        }, 350);
+    }
 
 }
 
@@ -655,12 +665,12 @@ function openOptions(event){
         b3:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', 'aria-description':'Edit List Item', id:'edit', inner:'<i class="bi bi-pencil"></i>', listeners:[{type:'click', execute:toggleLstBtn}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
         b4:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-info is-outlined', 'aria-description':'Copy Item', id:'copy', inner:'<i class="bi bi-copy"></i>', listeners:[{type:'click', execute:clkCopyItem}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
         b5:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', 'aria-description':'Restore List Item', id:'undo', inner:'<i class="bi bi-arrow-counterclockwise"></i>', listeners:[{type:'click', execute:clkUndoItem}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]}),
-        b6:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', 'aria-description':'Close Options', id:'cancel', inner:'<i class="bi bi-x-circle"></i>', listeners:[{type:'click', execute:closeOptions}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]})
+        b6:mkBtn({class:'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', 'aria-description':'Close Options', id:'cancel', inner:'<i class="bi bi-x-circle"></i>', listeners:[{type:'click', execute:()=>{closeOptions();targetElement=null;}}, {type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}]})
     }
 
     nestElem([
-        document.querySelector('.container'),
-        mkDiv({class:'options', style:'top: ' + (event.y - 30) + 'px; left: ' + (event.x - 27) + 'px;'}),
+        document.querySelector('.card'),
+        mkDiv({class:'options', style:'top: ' + (event.y - 30) + 'px; left: ' + (event.x - 27) + 'px;', listeners:[{type:'mouseleave', execute:() => {closeOptions();targetElement=null;}}]}),
         mkDiv({class:'card'}),
         mkDiv({class:'card-content p-0'}),
         (targetElement.parentElement.id === 'done'||targetElement.parentElement.parentElement.id === 'done')?
@@ -899,6 +909,7 @@ function loadList(cookie){
 window.onload = function(){
 
     loadList(getCookie());
-    document.querySelector('#item').focus();
+    if (frameCheck)
+        document.querySelector('#item').focus();
 
 }
