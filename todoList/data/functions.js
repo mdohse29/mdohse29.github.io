@@ -1,3 +1,4 @@
+const UA = navigator.userAgent;
 let targetElement = null;
 let errorTimeoutID = NaN;
 let toID = NaN;
@@ -462,6 +463,7 @@ function createItem(item, data = {isSub:false, pid:NaN}){
             class:((data.isSub) ? '' : 'mb-2'),
             title:'Click for Options', 
             id:((data.isSub) ? 'listSubItem' : 'listItem'),
+            // pid:((data.isSub) ? data.pid : (Math.floor(Math.random() * 10) + 1)), // testing
             pid:((data.isSub) ? data.pid : crypto.randomUUID()),
             inner:(item.toLowerCase().includes('http')) ? item.toLowerCase() : item.substring(0, 1).toUpperCase() + item.substring(1),
             listeners:((data.isSub) ? [
@@ -642,21 +644,13 @@ function closeOptions(){
     let options = document.querySelector('.options');
 
     if (options){
-        options.addEventListener('animationend', () => {
-            options.remove();
+        options.addEventListener('animationend', function() {
+            this.remove();
         });
         options.querySelectorAll('button').forEach(btn => {
             btn.setAttribute('disabled', 'disabled');
         });
         options.classList.replace('fade-in','fade-out');
-        // if(toID){
-        //     clearTimeout(toID);
-        //     toID = NaN;
-        // }
-        // toID = setTimeout(function (){
-        //     options.remove();
-        // }, 325);
-
     }
 
 }
@@ -677,7 +671,7 @@ function openOptions(event){
 
     nestElem([
         document.querySelector('.card'),
-        mkDiv({class:'options', style:'top: ' + (event.y - 30) + 'px; left: ' + (event.x - 27) + 'px;', listeners:[{type:'mouseleave', execute:() => {closeOptions();targetElement=null;}}]}),
+        mkDiv({class:'options fade-in', style:'top: ' + (event.y - 30) + 'px; left: ' + (event.x - 27) + 'px;', listeners:[{type:'mouseleave', execute:() => {closeOptions();targetElement=null;}}]}),
         mkDiv({class:'card'}),
         mkDiv({class:'card-content p-0'}),
         (targetElement.parentElement.id === 'done'||targetElement.parentElement.parentElement.id === 'done')?
@@ -689,7 +683,7 @@ function openOptions(event){
                 [opts.b1,opts.b2,opts.b3,opts.b4,opts.b6]
     ]);
 
-    document.querySelector('.options').classList.add('fade-in')
+    // document.querySelector('.options').classList.add('fade-in')
 
 }
 
