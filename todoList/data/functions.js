@@ -813,7 +813,12 @@ function inputActions(){
             rmvTimeout();
             errorTimeoutID = setTimeout(removeMsg, 2000);
         }
-        this.value = '';
+        if (allCookies.length > 1){
+            this.value = ':load:';
+        }else{
+            this.value = '';
+        }
+        this.focus();
     }
     
 }
