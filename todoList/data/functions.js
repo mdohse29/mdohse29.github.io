@@ -613,7 +613,7 @@ function setCookie(cn){
 
         if (itemText){
 
-            document.cookie = `${(cn) ? cn : listVar}=${itemText.substring(0, itemText.length - 1)}; max-age=31536000; samesite=none; secure`
+            document.cookie = `${(cn) ? cn : listVar}=${itemText.substring(0, itemText.length - 1)}; max-age=31536000; samesite=strict; secure`
 
             if (document.cookie.length > 3000){
 
@@ -623,7 +623,7 @@ function setCookie(cn){
 
         }else{
 
-            document.cookie = listVar + '=; max-age=0; samesite=none; secure';
+            document.cookie = listVar + '=; max-age=0; samesite=strict; secure';
 
         }
     }
