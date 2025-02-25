@@ -615,7 +615,7 @@ function setCookie(cn){
 
             document.cookie = `${(cn) ? cn : listVar}=${itemText.substring(0, itemText.length - 1)}; max-age=31536000; samesite=strict; secure`
 
-            if (document.cookie.length > 3000){
+            if (itemText.length > 3000){
 
                 errorMsg('Please start completing items on the list.<br><br>There is < 1000 bytes of storage left.');
 
