@@ -383,7 +383,23 @@ $(document).ready(function(){
         }
     }
 
+    function frag(){
+        let lines = $('#TextArea').val().split('\n');
+        let clean = [];
+        lines.forEach(li=>{
+            if (li[0].match(/[A-Z]/)){
+                li = `${li[0].toLowerCase()}${li.substring(1)}`;
+            }
+            if (li[li.length - 1].trim().match(/[.?!]$/)){
+                li = li.substring(0, li.length - 1);
+            }
+            clean.push(li);
+        })
 
+        if (clean.length){
+            $('#TextArea').val(clean.join('\n'));
+        }
+    }
 
     $('body').prepend(
         nestElem([
@@ -397,11 +413,12 @@ $(document).ready(function(){
                         2:mkBtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'exspc', inner:'Remove Leading Spaces', title:'The empty space in front of the paragraphs'}),
                         3:mkBtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'rmv-ol', inner:'Remove OL Markers', title:'Remove numbered OL markers'}),
                         4:mkBtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'ff', inner:'Format Filename', title:'Formats file names by lowercasing the text and adding underscores to replace spaces.', listeners: [{type:'click', execute:function(){ let currentText = $('#TextArea').val(); $('#TextArea').val(formatFilename(currentText)); }}]}),
-                        5:mkBtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'clear', inner:'Clear', title:'Clear scratch pad'}),
-                        6:createToggle({id:'flat', label:'Flatten Text', title:'Convert multiple lines of text into a single line. Check \'How This Works\' info button for example.'}),
-                        7:createToggle({id:'dbl', label:'Paragraph Spacing', title:'Adds space between lines. Click Info button for more info', isLocked:'false'}),
+                        5:mkBtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'frag', inner:'Fix Fragments', listeners:[{type:'click', execute:frag}]}),
+                        7:mkBtn({class:'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id:'clear', inner:'Clear', title:'Clear scratch pad'}),
+                        8:createToggle({id:'flat', label:'Flatten Text', title:'Convert multiple lines of text into a single line. Check \'How This Works\' info button for example.'}),
+                        9:createToggle({id:'dbl', label:'Paragraph Spacing', title:'Adds space between lines. Click Info button for more info', isLocked:'false'}),
                         // 8:mkLnk({class:'btn btn-sml ms-1', title:'Click to report an issue or suggestion.', href:'mailto:aaaabncggffyesoyicuhyz3u7u@imaginelearning.org.slack.com', inner:'<i class="bi bi-bug"></i>'}),
-                        9:mkBtn({class:'btn btn-sm ms-1', id:'info', inner:'<i class="bi bi-info-circle"></i>', title:'How this works'})
+                        10:mkBtn({class:'btn btn-sm ms-1', id:'info', inner:'<i class="bi bi-info-circle"></i>', title:'How this works'})
                     }
                 ]),
                 2:mkElem({elemType:'textarea', name:'scratchPad', class:'dark', id:'TextArea', encoding:'UTF-8'})
