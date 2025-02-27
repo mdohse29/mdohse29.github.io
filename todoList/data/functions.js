@@ -835,11 +835,13 @@ function inputKeyActions(event){
                     // Save list to specified cookie name :*:cookie_name
                     setCookie(sn[1]); // Save Current list to new cookie
                     clearList(); // clear the current list after creating new one
+                    resetListBtn();
                     setCookie(); // reset current cookie
                     break;
                 case 'load':
                     // Load specific cookie
                     clearList();
+                    resetListBtn();
                     loadList(getCookie(sn[1]));
                     break;
             }
