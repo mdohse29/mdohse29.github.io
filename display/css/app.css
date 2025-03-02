@@ -33,7 +33,7 @@ div.frame-cover.mobile {
 }
 
 .col-6 {
-    min-width: 460px;
+    min-width: 400px;
 }
 
 .frame-info {
@@ -109,9 +109,15 @@ div.frame-cover.mobile {
     border: 2px solid var(--bs-danger);
 }
 
+@media (width < 800px){
+    .description {
+        padding-top: 15px;
+    }
+}
+
 @media (width < 931px){
     .card.active {
-        width: 95%;
+        width: 100%;
         left: 0px;
     }
 
