@@ -197,8 +197,12 @@ a.btn {
     border-radius: 5px;
 }
 
-.btn-shadow {
+.options > button:not(button[id="info"]) {
     box-shadow: 0px 0px 4px 2px darkgrey;
+}
+
+.options > button:not(button[id="info"]):active {
+    box-shadow: none;
 }
 
 .dark {
