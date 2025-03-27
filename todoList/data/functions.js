@@ -327,19 +327,21 @@ function clkUndoItem(){
 
         }else{
 
-            let icons = elem.querySelectorAll('i');
+            // let icons = elem.querySelectorAll('i');
             let children = elem.querySelectorAll('#listSubItem');
 
             children.forEach(child => {
                 changeTitle(child);
+                child.classList.remove('has-background-item');
+                child.children[0].classList.remove('has-background-item');
             });
 
-            icons.forEach(icon => {
+            // icons.forEach(icon => {
 
-                icon.classList.remove('has-background-item');
-                icon.parentElement.classList.remove('has-background-item');
+            //     icon.classList.remove('has-background-item');
+            //     icon.parentElement.classList.remove('has-background-item');
 
-            });
+            // });
 
             setAllCaret(elem);
 
