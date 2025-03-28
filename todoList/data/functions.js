@@ -207,7 +207,7 @@ function moListItem(e){
 
 function mlLitsItem(){
 
-    this.querySelector('i').classList.remove('has-background-item');
+    this.children[0].classList.remove('has-background-item');
 
 }
 
@@ -231,8 +231,8 @@ function clkListItem(event){
 function clkEdit(){
 
     let input = document.querySelector('#item');
-    let icon = targetElement.querySelector('i');
-    let subItems = targetElement.querySelectorAll('#listSubItem');
+    let icon = targetElement.children[0];
+    let subItems = [...targetElement.children].filter(f=>{if(f.id==='listSubItem')return f});
     let text = getItemText(targetElement);
     let newText = input.value.trim();
 
@@ -509,7 +509,7 @@ function moveElement(elem){
     if (elem.id === 'listItem'){
 
         let doneChildren = document.querySelectorAll('#doneSubs #listSubItem');
-        let children = elem.querySelectorAll('#listSubItem');
+        let children = [...elem.children].filter(f=>{if(f.id==='listSubItem')return f});
 
         if (children.length){
 
@@ -522,7 +522,7 @@ function moveElement(elem){
 
         }
 
-        elem.querySelector('i').classList.remove('has-background-item', 'has-text-success');
+        elem.children[0].classList.remove('has-background-item', 'has-text-success');
 
         if (doneChildren.length){
 
@@ -547,7 +547,7 @@ function moveElement(elem){
 
         changeTitle(elem);
 
-        elem.querySelector('i').classList.remove('has-text-success');
+        elem.children[0].classList.remove('has-text-success');
         elem.classList.remove('has-background-item')
 
         elem.addEventListener('click', clkListItem);
@@ -602,7 +602,8 @@ function getCookie(cn){
 function setCookie(cn){
 
     if (frameCheck){
-        let items = document.querySelector('#list').querySelectorAll('#listItem'); // ptag ref
+        // let items = document.querySelector('#list').querySelectorAll('#listItem'); // ptag ref
+        let items = [...document.getElementById('list').children].filter(f=>{if(f.id==='listItem')return f});
         let itemText = '';
 
         items.forEach(item => {
@@ -689,7 +690,7 @@ function openOptions(event){
 
 function addItem(){
     let input = document.querySelector('#item');
-    let item = input.value;
+    let item = input.value.trim();
     let list = document.querySelector('#list');
     const exclude = /[;]/g
     if ((item) && !(item.match(exclude))){
@@ -917,6 +918,15 @@ function loadList(cookie){
 
         });
 
+    }
+}
+
+window.TESTING = {
+    setTest : function (){
+        document.getElementById('item').value = 'test1|test2|test3,test4|test2|test3';
+        document.getElementById('addItem').click();
+
+        setTimeout(()=>{location.reload();}, 500);
     }
 }
 
