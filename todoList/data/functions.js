@@ -274,81 +274,88 @@ function clkEdit(){
 }
 
 function clkUndoItem(){
+    const elem = targetElement;
+    try{
+        switch(elem.id){
+            case 'listSubItem':
+                // something here
+                switch(elem.parentElement.id){
+                    case 'doneSubs':
+                        // something here
+                        const parent = document.querySelector(`#list > p[pid="${elem.attributes.pid.value}"]`);
+                        if (dupeCheck(elem.innerText.trim())){
+                            throw Error();
+                        }else{
+                            setAllCaret(elem);
 
-    let elem = targetElement;
-    let isSub = (elem.id === 'listSubItem');
+                            elem.classList.remove('has-background-item');
+                            elem.removeEventListener('click', clkListItem);
+                
+                            changeTitle(elem);
+            
+                            parent.appendChild(elem);
+                            setCookie();
+                        }
+                        break;
+                    default:
+                        //something here
+                        targetElement = null;
+                        if (dupeCheck(elem.innerText.trim())){
+                            throw Error();
+                        }else{
+                            elem.remove();
+                            document.getElementById('list').prepend(createItem(elem.innerText.trim()));
+                            setCookie();
+                        }
+                        break;
+                }
+                break;
+            case 'listItem':
+                // something here
+                if (elem.children.length > 1){
+                    // has sub list items
+                    let children = [...elem.children];
+                    children.shift();
+                    targetElement = null;
+                    if (dupeCheck(getItemText(elem))){
+                        throw Error();
+                    }else{
+                        for (let ch of children){
+                            targetElement = ch;
+                            if (dupeCheck(getItemText(ch))){
+                                throw Error();
+                            }
+                            changeTitle(ch);
+                        }
+                        elem.remove();
+                        setAllCaret(elem);
+                        elem.removeEventListener('click', clkUndoItem);
+                        elem.addEventListener('click', clkListItem);
+            
+                        changeTitle(elem);
+                        document.getElementById('list').prepend(elem);
 
-    if (dupeCheck(elem.innerText)){
+                        setCookie();
+                    }
+                }else{
+                    // no sub list items
+                    targetElement = null;
+                    if (dupeCheck(elem.innerText.trim())){
+                        throw Error();
+                    }else{
+                        elem.remove();
+                        document.getElementById('list').prepend(createItem(elem.innerText.trim()));
+                        setCookie();
+                    }
+                }
+                break;
+        }
+    }catch(err){
         errorMsg("A duplicate item is detected in the current list.<br>Undo was not successful!");
         elem.style.border = '2px solid red';
         setTimeout(() => {
             elem.removeAttribute('style');
         }, 1500);
-    }else{
-
-        if (isSub){
-
-            let parent = document.querySelector(`#list p[pid="${elem.attributes.pid.value}"]`);
-
-            if (parent){
-                setAllCaret(elem);
-
-                elem.classList.remove('has-background-item');
-                elem.removeEventListener('click', clkListItem);
-    
-                changeTitle(elem);
-
-                parent.appendChild(elem);
-                setCookie();
-
-            }else{
-
-                targetElement = null;
-                if (dupeCheck(elem.innerText)){
-                    errorMsg("A duplicate item is detected in the current list.<br>Undo was not successful!");
-                    elem.style.border = '2px solid red';
-                    setTimeout(() => {
-                        elem.removeAttribute('style');
-                    }, 1500);
-                }else{
-                    setAllCaret(elem);
-
-                    elem.classList.remove('has-background-item');
-                    elem.removeEventListener('click', clkListItem);
-
-                    changeTitle(elem);
-                    
-                    elem.remove();
-
-                    document.querySelector('#list').prepend(createItem(elem.innerText));
-
-                    setCookie();
-                }
-
-            }
-
-        }else{
-
-            let children = elem.querySelectorAll('#listSubItem');
-
-            children.forEach(child => {
-                changeTitle(child);
-                child.classList.remove('has-background-item');
-                child.children[0].classList.remove('has-background-item');
-            });
-
-            setAllCaret(elem);
-
-            elem.remove();
-            elem.removeEventListener('click', clkUndoItem);
-            elem.addEventListener('click', clkListItem);
-
-            changeTitle(elem);
-
-            document.querySelector('#list').prepend(elem);
-            setCookie();
-
-        }
     }
 
     closeOptions();
@@ -359,7 +366,6 @@ function clkUndoItem(){
         checkDone.remove();
 
     targetElement = null;
-
 }
 
 function clkCopyItem(){
@@ -545,6 +551,7 @@ function moveElement(elem){
         changeTitle(elem);
 
         elem.querySelector('i').classList.remove('has-text-success');
+        elem.classList.remove('has-background-item')
 
         elem.addEventListener('click', clkListItem);
         document.querySelector('#doneSubs').appendChild(elem);
