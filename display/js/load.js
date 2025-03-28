@@ -111,7 +111,7 @@ getData().then(data => {
                                     mkDiv({class:'ratio'}),
                                     {
                                         1:mkDiv({class:`frame-cover${((browserInfo.includes('Mobile')) ? ' mobile' : '')}`, listeners:[{type:'click', execute: coverClk}, {type:'mouseenter', execute: coverMe}, {type:'mouseleave', execute: coverMl}]}),
-                                        2:mkElem({elemType:'iframe', scrolling:'no', src:d.url, loading:'lazy'}) // IFRAME
+                                        2:mkElem({elemType:'iframe', scrolling:'no', src:d.url, loading:'lazy', tabindex:'-1'}) // IFRAME
                                     }
                                 ])
                             ])
@@ -123,21 +123,21 @@ getData().then(data => {
                         mkDiv({class:'container description'}),
                         {
                             1:nestElem([
-                                mkDiv({class:'drawer border-bottom'}),
+                                mkDiv({class:'drawer border-bottom', tabindex:'0'}),
                                 {
                                     1:mkElem({elemType:'h5', class:'h5', inner:'Purpose/Description', pptIcon:mkElem({elemType:'i', class:'bi bi-caret-right'}), listeners:[{type:'click', execute:drawerClk}, {type:'mouseenter', execute: drawerMe}, {type:'mouseleave', execute:drawerMl}]}),
                                     2:mkP({class:'border-start border-end border-bottom dnone', isexpanded:'false', inner:d.details[0]})
                                 }
                             ]),
                             2:nestElem([
-                                mkDiv({class:'drawer border-bottom'}),
+                                mkDiv({class:'drawer border-bottom', tabindex:'0'}),
                                 {
                                     1:mkElem({elemType:'h5', class:'h5', inner:'Assets Used', pptIcon:mkElem({elemType:'i', class:'bi bi-caret-right'}), listeners:[{type:'click', execute:drawerClk}, {type:'mouseenter', execute: drawerMe}, {type:'mouseleave', execute:drawerMl}]}),
                                     2:mkP({class:'border-start border-end border-bottom dnone', isexpanded:'false', inner:d.details[1]})
                                 }
                             ]),
                             3:nestElem([
-                                mkDiv({class:'drawer border-bottom'}),
+                                mkDiv({class:'drawer border-bottom', tabindex:'0'}),
                                 {
                                     1:mkElem({elemType:'h5', class:'h5', inner:'Extra Details', pptIcon:mkElem({elemType:'i', class:'bi bi-caret-right'}), listeners:[{type:'click', execute:drawerClk}, {type:'mouseenter', execute: drawerMe}, {type:'mouseleave', execute:drawerMl}]}),
                                     2:mkP({class:'border-start border-end border-bottom dnone', isexpanded:'false', inner:d.details[2]})
