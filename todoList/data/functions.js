@@ -29,8 +29,7 @@ function dupeCheck(item){
 
                     }else if(element.attributes.pid.value === pid && element.children.length > 1){
 
-                        let children = [...element.children];
-                        children.shift();
+                        let children = [...element.children].filter((f)=>{if(f.id === 'listSubItem'){return f;}});
 
                         for (let i of children){
 
@@ -58,8 +57,7 @@ function dupeCheck(item){
 
                 if (element.children.length > 1){
 
-                    let children = [...element.children];
-                    children.shift();
+                    let children = [...element.children].filter((f)=>{if(f.id === 'listSubItem'){return f;}});
 
                     for (let i of children){
 
@@ -314,8 +312,7 @@ function clkUndoItem(){
                 // something here
                 if (elem.children.length > 1){
                     // has sub list items
-                    let children = [...elem.children];
-                    children.shift();
+                    let children = [...elem.children].filter((m)=>{if(m.id==='listSubItem'){return m};});
                     targetElement = null;
                     if (dupeCheck(getItemText(elem))){
                         throw Error();
