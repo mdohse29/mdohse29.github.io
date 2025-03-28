@@ -15,7 +15,7 @@ function dupeCheck(item){
 
         if (targetElement){
 
-            pid = targetElement.getAttribute('pid');
+            pid = targetElement.attributes.pid.value;
 
         }
 
@@ -27,9 +27,10 @@ function dupeCheck(item){
 
                         return true;
 
-                    }else if(element.getAttribute('pid') === pid && element.children.length > 1){
+                    }else if(element.attributes.pid.value === pid && element.children.length > 1){
 
-                        let children = element.querySelectorAll('#listSubItem');
+                        let children = [...element.children];
+                        children.shift();
 
                         for (let i of children){
 
@@ -57,7 +58,8 @@ function dupeCheck(item){
 
                 if (element.children.length > 1){
 
-                    let children = element.querySelectorAll('#listSubItem');
+                    let children = [...element.children];
+                    children.shift();
 
                     for (let i of children){
 
@@ -286,7 +288,7 @@ function clkUndoItem(){
 
         if (isSub){
 
-            let parent = document.querySelector('#list p[pid="' + elem.getAttribute('pid') + '"]');
+            let parent = document.querySelector(`#list p[pid="${elem.attributes.pid.value}"]`);
 
             if (parent){
                 setAllCaret(elem);
@@ -327,7 +329,6 @@ function clkUndoItem(){
 
         }else{
 
-            // let icons = elem.querySelectorAll('i');
             let children = elem.querySelectorAll('#listSubItem');
 
             children.forEach(child => {
@@ -335,13 +336,6 @@ function clkUndoItem(){
                 child.classList.remove('has-background-item');
                 child.children[0].classList.remove('has-background-item');
             });
-
-            // icons.forEach(icon => {
-
-            //     icon.classList.remove('has-background-item');
-            //     icon.parentElement.classList.remove('has-background-item');
-
-            // });
 
             setAllCaret(elem);
 
@@ -531,7 +525,7 @@ function moveElement(elem){
 
             doneChildren.forEach(child => {
 
-                if (child.getAttribute('pid') === elem.getAttribute('pid')){
+                if (child.attributes.pid.value === elem.attributes.pid.value){
 
                     child.removeEventListener('click', clkListItem);
                     child.remove();
@@ -633,7 +627,7 @@ function setCookie(cn){
 }
 
 function optMo(event){
-    let text = event.target.getAttribute('aria-description');
+    let text = event.target.attributes['aria-description'].value;
     event.target.parentElement.appendChild(mkElem({elemType:'span', class:'btn-popover', inner:text}));
 }
 
@@ -699,7 +693,7 @@ function addItem(){
             // sub list items
             item.split(',').forEach(i => {
                 if (!dupeCheck(i.trim())){
-                    targetElement.append(createItem(i.trim(), {isSub:true, pid:targetElement.getAttribute('pid')}));
+                    targetElement.append(createItem(i.trim(), {isSub:true, pid:targetElement.attributes.pid.value}));
                     setCookie();
                 }else{
                     errorMsg(`"${i}" is already present<br>Duplicate items are not accepted`)
@@ -905,7 +899,7 @@ function loadList(cookie){
 
                 subItems.forEach(sub => {
 
-                    p.appendChild(createItem(sub, {isSub:true, pid:p.getAttribute('pid')}));
+                    p.appendChild(createItem(sub, {isSub:true, pid:p.attributes.pid.value}));
 
                 });
 
