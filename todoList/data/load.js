@@ -6,7 +6,10 @@ document.body.prepend(nestElem([
     {
         1:nestElem([
             mkDiv({class:'card-header main-bg'}),
-            mkDiv({class:'card-header-title is-justify-content-center is-size-2', inner:'ToDo List'})
+            [
+                mkDiv({class:'card-header-title is-justify-content-center is-size-2', inner:'ToDo List'}),
+                mkBtn({id:'settings', class:'button ml-2 is-small is-rounded', inner:'<i class="bi bi-gear"></i>'})
+            ]
         ]),
         2:nestElem([
             mkDiv({class:'card-content is-flex is-justify-content-space-between'}),

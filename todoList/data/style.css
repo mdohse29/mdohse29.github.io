@@ -156,6 +156,17 @@ i.bi-check-circle-fill {
     animation: fade-in 350ms ease-in;
 }
 
+#settings {
+    padding: 8px;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+}
+
+#settings > i.bi-gear::before{
+    font-weight: 900;
+}
+
 @keyframes fade-in {
     from {
         opacity: 0;
