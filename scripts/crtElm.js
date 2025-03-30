@@ -35,12 +35,12 @@ function mkOpt(attr = {value:''}){
     }
     if (attr.isColor){
         option.value = attr.value;
-        option.innerText = attr.value[0].toUpperCase() + attr.value.substring(1);
+        option.innerHTML = attr.value[0].toUpperCase() + attr.value.substring(1);
         option.classList.add(attr.value);
     }else if (Object.keys(attr).length > 1){
         for (let a in attr){
             if (a.includes('inner')){
-                option.innerText = attr[a];
+                option.innerHTML = attr[a];
             }else{
                 if (attr[a]){
                     option.setAttribute(a, attr[a]);
@@ -49,7 +49,7 @@ function mkOpt(attr = {value:''}){
         }
     }else{
         option.value = attr.value.toLowerCase();
-        option.innerText = attr.value;
+        option.innerHTML = attr.value;
     }
 
     return option;
@@ -66,14 +66,15 @@ function mkInp(attr = {type:'', id:''}){
         case 'select':
             elements.input = mkElem({elemType:attr.type});
             for (let at in attr){
-                if (!at.match(/options|listeners|label/) && attr[at]){
+                if (!at.match(/options|listeners|label|type/) && attr[at]){
                         elements.input.setAttribute(at, attr[at]);
                 }
             }
 
-            for (let opt of attr.options){
-                elements.input.appendChild(mkOpt(opt));
-            }
+            if (attr.options)
+                for (let opt of attr.options){
+                    elements.input.appendChild(mkOpt(opt));
+                }
             break;
         default:
             elements.input = mkElem({elemType:'input'});
@@ -208,7 +209,7 @@ function crtSpin(){
 
 function nestElem(elemArry = []){
     for (let a = elemArry.length-2; a >= 0; a--){
-        if (Object.keys(elemArry[a+1]).length > 0){
+        if (Object.keys(elemArry[a+1]).length > 0 && elemArry[a+1].tagName !== 'SELECT'){
             for (let b in elemArry[a+1]){
                 elemArry[a].appendChild(elemArry[a+1][b]);
             }
