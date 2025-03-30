@@ -937,39 +937,47 @@ function openSettings() {
             nestElem([
                 mkDiv({ class: 'menu-container p-4 fade-in-slow' }),
                 [
-                    nestElem([
-                        mkElem({ elemType: 'fieldset' }),
-                        [
-                            mkElem({ elemType: 'legend', inner: 'Select Icon', class: 'is-size-7' }),
-                            nestElem([
-                                mkDiv({ class: 'control' }),
-                                [
-                                    mkInp({ type: 'radio', id: 'arrow', name: 'icon', value: 'arrow', checked: 'true' }),
-                                    mkLabel({ for: 'arrow', inner: '<i class="bi bi-caret-right-fill"></i>' })
-                                ]
-                            ]),
-                            nestElem([
-                                mkDiv({ class: 'control' }),
-                                [
-                                    mkInp({ type: 'radio', id: 'dot', name: 'icon', value: 'dot' }),
-                                    mkLabel({ for: 'dot', inner: '<i class="bi bi-dot"></i>' })
-                                ]
-                            ])
-                        ]
-                    ]),
+                    // nestElem([
+                    //     mkElem({ elemType: 'fieldset' }),
+                    //     [
+                    //         mkElem({ elemType: 'legend', inner: 'Select Icon', class: 'is-size-7' }),
+                    //         nestElem([
+                    //             mkDiv({ class: 'control' }),
+                    //             [
+                    //                 mkInp({ type: 'radio', id: 'arrow', name: 'icon', value: 'arrow', checked: 'true' }),
+                    //                 mkLabel({ for: 'arrow', inner: '<i class="bi bi-caret-right-fill"></i>' })
+                    //             ]
+                    //         ]),
+                    //         nestElem([
+                    //             mkDiv({ class: 'control' }),
+                    //             [
+                    //                 mkInp({ type: 'radio', id: 'dot', name: 'icon', value: 'dot' }),
+                    //                 mkLabel({ for: 'dot', inner: '<i class="bi bi-circle-fill"></i>' })
+                    //             ]
+                    //         ]),
+                    //         nestElem([
+                    //             mkDiv({ class: 'control' }),
+                    //             [
+                    //                 mkInp({ type: 'radio', id: 'diamond', name: 'icon', value: 'diamond' }),
+                    //                 mkLabel({ for: 'diamond', inner: '<i class="bi bi-diamond-fill"></i>' })
+                    //             ]
+                    //         ])
+                    //     ]
+                    // ]),
                     nestElem([
                         mkElem({ elemType: 'fieldset' }),
                         [
                             mkElem({ elemType: 'legend', inner: 'Background Color', class: 'is-size-7' }),
                             nestElem([
                                 mkDiv({ class: 'control' }),
-                                mkInp({ type: 'color', id: 'color', listeners: [{ type: 'change', execute: function (e) { document.children[0].setAttribute('style', `background-color: ${e.target.value} !important;`) } }] })
+                                mkInp({ type: 'color', id: 'color', value: `${(!document.children[0].backgroundColor) ? `#03051c` : `${document.children[0].backgroundColor}`}`, listeners: [{ type: 'input', execute: function (e) { document.children[0].style.backgroundColor = e.target.value; document.children[0].backgroundColor = e.target.value } }] })
                             ])
                         ]
                     ])
                 ]
             ])
         );
+
     } else {
         let menu = this.nextElementSibling;
         menu.addEventListener('animationend', function () {
