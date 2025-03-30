@@ -281,8 +281,8 @@ function clkUndoItem() {
                     case 'doneSubs':
                         // something here
                         const parent = document.querySelector(`#list > p[pid="${elem.attributes.pid.value}"]`);
-                        if (dupeCheck(elem.innerText.trim())) {
-                            throw Error();
+                        if (dupeCheck(getItemText(elem))) {
+                            throw Error(`The sub item "${getItemText(elem)}"<br>is already set as another main item<br>or a sub item of the same sub list`);
                         } else {
                             setAllCaret(elem);
 
@@ -298,11 +298,11 @@ function clkUndoItem() {
                     default:
                         //something here
                         targetElement = null;
-                        if (dupeCheck(elem.innerText.trim())) {
-                            throw Error();
+                        if (dupeCheck(getItemText(elem))) {
+                            throw Error(`The sub item "${getItemText(elem)}"<br>is already set as another main item or sub item in the list`);
                         } else {
                             elem.remove();
-                            document.getElementById('list').prepend(createItem(elem.innerText.trim()));
+                            document.getElementById('list').prepend(createItem(getItemText(elem)));
                             setCookie();
                         }
                         break;
@@ -315,12 +315,12 @@ function clkUndoItem() {
                     let children = [...elem.children].filter((m) => { if (m.id === 'listSubItem') { return m }; });
                     targetElement = null;
                     if (dupeCheck(getItemText(elem))) {
-                        throw Error();
+                        throw Error(`The item "${getItemText(elem)}"<br>is already set as another main item or sub item in the list`);
                     } else {
                         for (let ch of children) {
                             targetElement = ch;
                             if (dupeCheck(getItemText(ch))) {
-                                throw Error();
+                                throw Error(`The sub item "${getItemText(ch)}"<br>is already set as another main item in the list`);
                             }
                             changeTitle(ch);
                         }
@@ -337,18 +337,18 @@ function clkUndoItem() {
                 } else {
                     // no sub list items
                     targetElement = null;
-                    if (dupeCheck(elem.innerText.trim())) {
-                        throw Error();
+                    if (dupeCheck(getItemText(elem))) {
+                        throw Error(`The item "${getItemText(elem)}"<br>is already set as another item or sub item`);
                     } else {
                         elem.remove();
-                        document.getElementById('list').prepend(createItem(elem.innerText.trim()));
+                        document.getElementById('list').prepend(createItem(getItemText(elem)));
                         setCookie();
                     }
                 }
                 break;
         }
     } catch (err) {
-        errorMsg("A duplicate item is detected in the current list.<br>Undo was not successful!");
+        errorMsg(`${err.message}<br><br>Undo was not Successful`);
         elem.style.border = '2px solid red';
         setTimeout(() => {
             elem.removeAttribute('style');
