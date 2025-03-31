@@ -923,47 +923,19 @@ function loadList(cookie) {
 
 function openSettings() {
     this.classList.add('has-background-info', 'has-text-white')
-    function me() {
-        this.addEventListener('mouseleave', function () {
-            this.addEventListener('animationend', function () {
-                this.remove();
-            });
-            this.classList.replace('fade-in-slow', 'fade-out-slow');
-        })
-    }
-
+    
     if (this.parentElement.children.length === 1) {
         this.parentElement.append(
             nestElem([
-                mkDiv({ class: 'menu-container p-4 fade-in-slow' }),
+                mkDiv({ class: 'menu-container p-4 fade-in-slow'}),
                 [
-                    // nestElem([
-                    //     mkElem({ elemType: 'fieldset' }),
-                    //     [
-                    //         mkElem({ elemType: 'legend', inner: 'Select Icon', class: 'is-size-7' }),
-                    //         nestElem([
-                    //             mkDiv({ class: 'control' }),
-                    //             [
-                    //                 mkInp({ type: 'radio', id: 'arrow', name: 'icon', value: 'arrow', checked: 'true' }),
-                    //                 mkLabel({ for: 'arrow', inner: '<i class="bi bi-caret-right-fill"></i>' })
-                    //             ]
-                    //         ]),
-                    //         nestElem([
-                    //             mkDiv({ class: 'control' }),
-                    //             [
-                    //                 mkInp({ type: 'radio', id: 'dot', name: 'icon', value: 'dot' }),
-                    //                 mkLabel({ for: 'dot', inner: '<i class="bi bi-circle-fill"></i>' })
-                    //             ]
-                    //         ]),
-                    //         nestElem([
-                    //             mkDiv({ class: 'control' }),
-                    //             [
-                    //                 mkInp({ type: 'radio', id: 'diamond', name: 'icon', value: 'diamond' }),
-                    //                 mkLabel({ for: 'diamond', inner: '<i class="bi bi-diamond-fill"></i>' })
-                    //             ]
-                    //         ])
-                    //     ]
-                    // ]),
+                    nestElem([
+                        mkElem({ elemType: 'fieldset' }),
+                        [
+                            mkElem({ elemType: 'legend', inner: 'Show Lists off/on', class: 'is-size-7' }),
+                            createToggle({id:'show-list', title:'Show all saved lists'})
+                        ]
+                    ]),
                     nestElem([
                         mkElem({ elemType: 'fieldset' }),
                         [
