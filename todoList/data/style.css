@@ -195,6 +195,7 @@ i.bi-check-circle-fill {
 
 .menu-container fieldset {
     border-bottom: 1px solid black;
+    text-align: center;
     padding-bottom: .5rem;
     vertical-align: middle;
     width: 100%;
@@ -205,6 +206,9 @@ i.bi-check-circle-fill {
 }
 
 .menu-container fieldset>legend {
+    font-weight: bold;
+    margin-right:auto;
+    margin-left: auto;
     margin-bottom: 5px;
 }
 
