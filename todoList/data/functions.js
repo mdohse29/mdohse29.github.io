@@ -91,7 +91,7 @@ function rmvTimeout() {
 
 }
 
-function errorMsg(message = 'Empty items or duplicate items are not accepted.<br>Check your entry and try again.', type = 'danger', to = 5000) {
+function errorMsg(message = 'Empty items or duplicate items are not accepted.<br>Check your entry and try again.', type = 'danger', timeOut = 5000) {
 
     let currentMsg = document.querySelector('article.message');
 
@@ -123,7 +123,7 @@ function errorMsg(message = 'Empty items or duplicate items are not accepted.<br
 
     document.querySelector('#item').classList.add('is-danger');
 
-    errorTimeoutID = setTimeout(removeMsg, to);
+    errorTimeoutID = setTimeout(removeMsg, timeOut);
 
 }
 
@@ -922,6 +922,10 @@ function loadList(cookie) {
 }
 
 function openSettings() {
+
+    errorMsg('The settings menu is still being setup.<br>Thank you for your patience', 'danger', 500);
+    return
+
     this.classList.add('has-background-info', 'has-text-white')
     
     if (this.parentElement.children.length === 1) {
