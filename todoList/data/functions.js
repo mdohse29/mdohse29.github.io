@@ -923,9 +923,6 @@ function loadList(cookie) {
 
 function openSettings() {
 
-    errorMsg('The settings menu is still being setup.<br>Thank you for your patience', 'danger', 500);
-    return
-
     this.classList.add('has-background-info', 'has-text-white')
     
     if (this.parentElement.children.length === 1) {
