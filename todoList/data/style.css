@@ -1,5 +1,6 @@
 html {
-    background-color: rgb(3, 5, 28);
+    background-color: #03051c;
+    transition: 1s ease-in;
     scrollbar-width: none;
 }
 
@@ -24,16 +25,21 @@ article.message {
     left: 29%;
 }
 
+.select-icons,
+.select-icons>select {
+    width: 100%;
+}
+
 .btn-popover {
     display: inline-flex;
-    width:max-content;
+    width: max-content;
     padding: 10px;
     font-size: 10px;
     font-weight: bold;
     background-color: white;
     border: 1px solid black;
     border-radius: 15px;
-    box-shadow: 0px -2px 5px black,0px 2px 5px white;
+    box-shadow: 0px -2px 5px black, 0px 2px 5px white;
     position: absolute;
     top: -25px;
     z-index: 1100;
@@ -44,7 +50,7 @@ article.message {
 }
 
 .has-background-success {
-    background-color: rgba(72,199,142,.50) !important;
+    background-color: rgba(72, 199, 142, .50) !important;
 }
 
 #list-container {
@@ -53,11 +59,12 @@ article.message {
     scrollbar-width: none;
 }
 
-#list-container > div {
+#list-container>div {
     border-top: 2px solid rgba(211, 211, 211, .5);
 }
 
-#listItem, #doneSubs {
+#listItem,
+#doneSubs {
     cursor: pointer;
     font-size: 20px;
     padding-left: 8px;
@@ -83,7 +90,8 @@ article.message {
     user-select: none;
 }
 
-#listItem i.bi, #done i.bi {
+#listItem i.bi,
+#done i.bi {
     margin-right: 5px;
 }
 
@@ -109,9 +117,10 @@ i.bi-check-circle-fill {
     flex-wrap: wrap;
 }
 
-.options .card, .options .card-content {
+.options .card,
+.options .card-content {
     border-radius: inherit;
-    background-color:rgb(3, 5, 28);
+    background-color: rgb(3, 5, 28);
 }
 
 .options button {
@@ -144,7 +153,7 @@ i.bi-check-circle-fill {
     width: 40%;
 }
 
-#doneSubs > #listSubItem:hover {
+#doneSubs>#listSubItem:hover {
     background-color: rgba(253, 249, 4, 0.45);
 }
 
@@ -156,11 +165,72 @@ i.bi-check-circle-fill {
     animation: fade-in 350ms ease-in;
 }
 
+.fade-in-slow {
+    animation: fade-in 500ms ease-in;
+}
+
+.fade-out-slow {
+    animation: fade-out 500ms ease-out;
+}
+
+.settings-menu {
+    display: flex;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+}
+
+.menu-container {
+    display: inherit;
+    flex-direction: column;
+    background-color: whitesmoke;
+    border-radius: .75rem;
+    width: 200px;
+    height: auto;
+    position: absolute;
+    z-index: 1000;
+    top: 1rem;
+    right: 2rem;
+}
+
+.menu-container fieldset {
+    border-bottom: 1px solid black;
+    text-align: center;
+    padding-bottom: .5rem;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.menu-container fieldset:not(:first-child) {
+    margin-top: .5rem;
+}
+
+.menu-container fieldset>legend {
+    font-weight: bold;
+    margin-right:auto;
+    margin-left: auto;
+    margin-bottom: 5px;
+}
+
+.menu-container fieldset input[name="icon"]{
+    margin-right: 10px;
+}
+
+#settings {
+    padding: 8px;
+
+}
+
+#settings>i.bi-gear::before {
+    font-weight: 900 !important;
+}
+
 @keyframes fade-in {
     from {
         opacity: 0;
     }
-    to{
+
+    to {
         opacity: 1;
     }
 }
@@ -169,29 +239,32 @@ i.bi-check-circle-fill {
     from {
         opacity: 1;
     }
+
     to {
         opacity: 0;
     }
 }
 
-@media (width < 1408px){
+@media (width < 1408px) {
     #cookieList {
         width: 50%;
         left: 25%;
     }
 }
 
-@media (width < 770px){
+@media (width < 770px) {
     #item {
         width: 100%;
     }
+
     .options {
         left: 80px !important;
         max-width: 130px;
     }
+
     #cookieList {
         width: 100%;
         left: 0;
     }
-    
+
 }
