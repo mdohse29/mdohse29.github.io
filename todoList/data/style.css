@@ -194,6 +194,8 @@ i.bi-check-circle-fill {
 }
 
 .menu-container fieldset {
+    display: flex;
+    justify-content: center;
     border-bottom: 1px solid black;
     text-align: center;
     padding-bottom: .5rem;

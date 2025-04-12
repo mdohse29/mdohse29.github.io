@@ -380,8 +380,9 @@ $(document).ready(function () {
             );
 
         } else if (hasMessage.length > 0 && isLocked == 'false') {
-            $('#lock').remove();
+            hasMessage.remove();
         }
+        $('textarea').focus();
     }
 
     function frag() {
@@ -489,7 +490,6 @@ $(document).ready(function () {
 
     $('.toggle-cont, .switch-container > label').click(function () {
         toggleLockImg($(this));
-        $('textarea').focus();
     });
 
     if (previous.includes("toolBox")) {
