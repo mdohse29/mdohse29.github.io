@@ -1,14 +1,69 @@
+div.slideshow {
+    position: relative;
+    width: 600px;
+}
+
+div.slideshow p {
+    text-align: center;
+}
+
 div.slideshow-inner {
-    display: block;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+div.slideshow-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.slideshow-controls > button {
+    height: 10vh;
+    width: 100%;
 }
 
 div.ss-item {
-    display: none;
     position: relative;
-    transition: transform ease-in-out 4s;
+    display: none;
+    float: left;
+    width: 100%;
+    height: 400px;
+    margin-right: -100%;
+    backface-visibility: hidden;
 }
 
-div.ss-item.active {
-    display: block;
-    transform: translateX(100);
+.ss-item:not(.active){
+    transform: translateX(100%);
 }
+
+.ss-item > p {
+    display: inline-block;
+    width: 100%;
+    vertical-align: middle;
+}
+
+.ss-item.active, .ss-item.ss-next, .ss-item.ss-previous{
+    display: block;
+}
+
+/* 
+We need to start non active slides off screen x=100 or something
+when next is clicked active slide stays where it is
+    the next slide will slide in from the right
+The exact opposite should happen for previous
+    the previous slide should start off screen x=-100 or something
+    the active slide stays where it is and the previous slide
+    should slide in from the left.
+*/
+
+/* .ss-next:not(.ss-item-start),
+.active.ss-item-end {
+  transform: translateX(100%);
+}
+
+.ss-previous:not(.ss-item-end),
+.active.ss-item-start {
+  transform: translateX(-100%);
+} */
