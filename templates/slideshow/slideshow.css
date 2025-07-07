@@ -1,0 +1,123 @@
+div.slideshow {
+    position: relative;
+    width: 600px;
+}
+
+div.slideshow p {
+    text-align: center;
+}
+
+div.slideshow-inner {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+div.slideshow-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.slideshow-controls > button {
+    height: 10vh;
+    width: 100%;
+}
+
+div.slideshow-controls > button > .previous-icon::after {
+    content: '<<';
+}
+div.slideshow-controls > button > .next-icon::after {
+    content: '>>';
+}
+
+.visually-hidden {
+    display: none;
+}
+
+div.ss-item {
+    position: relative;
+    display: none;
+    float: left;
+    width: 100%;
+    height: 400px;
+    margin-right: -100%;
+    backface-visibility: hidden;
+    transition: transform ease-in-out 1s;
+}
+
+.nxt {
+    left: 100%;
+}
+
+.prev {
+    left: -100%;
+}
+
+.ss-item > p {
+    display: inline-block;
+    width: 100%;
+    vertical-align: middle;
+}
+
+.title {
+    text-align: center;
+}
+
+.ss-item > .box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.ss-item.active, .ss-item.ss-next, .ss-item.ss-previous{
+    display: block;
+}
+
+.ss-next {
+    animation: slide-left 1s ease-in-out 1;
+}
+
+.ss-previous {
+    animation: slide-right 1s ease-in-out 1;
+}
+
+@keyframes slide-right {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes slide-left {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+/* 
+We need to start non active slides off screen x=100 or something
+when next is clicked active slide stays where it is
+    the next slide will slide in from the right
+The exact opposite should happen for previous
+    the previous slide should start off screen x=-100 or something
+    the active slide stays where it is and the previous slide
+    should slide in from the left.
+*/
+
+/* .ss-next:not(.ss-item-start),
+.active.ss-item-end {
+  transform: translateX(100%);
+}
+
+.ss-previous:not(.ss-item-end),
+.active.ss-item-start {
+  transform: translateX(-100%);
+} */
