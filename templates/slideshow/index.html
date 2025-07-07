@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="slideshow.css">
+</head>
+<body>
+    <div id="slideshow-wrapper" class="slideshow">
+        <div class="slideshow-inner">
+            <!-- div.ss-item > img -->
+            <div class="ss-item active">
+                <div class="box">
+                    <h2 class="title is-2">Example 1</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi, ullam! Quisquam itaque dolorem quidem esse, voluptatum deserunt! Quibusdam exercitationem eius quae quis obcaecati, repellendus explicabo sunt ab dicta, perferendis nesciunt!</p>
+                </div>
+            </div>
+            <div class="ss-item">
+                <div class="box">
+                    <h2 class="title is-2">Example 2</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi, ullam! Quisquam itaque dolorem quidem esse, voluptatum deserunt! Quibusdam exercitationem eius quae quis obcaecati, repellendus explicabo sunt ab dicta, perferendis nesciunt!</p>
+                </div>
+            </div>
+            <div class="ss-item">
+                <div class="box">
+                    <h2 class="title is-2">Example 3</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi, ullam! Quisquam itaque dolorem quidem esse, voluptatum deserunt! Quibusdam exercitationem eius quae quis obcaecati, repellendus explicabo sunt ab dicta, perferendis nesciunt!</p>
+                </div>
+            </div>
+        </div>
+        <div class="slideshow-controls">
+            <button id="previous" class="button slideshow-previous">
+                <span class="previous-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button id="next" class="button slideshow-next">
+                <span class="next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <script src="./slideshow.js"></script>
+</body>
+</html>

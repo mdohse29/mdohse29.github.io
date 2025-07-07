@@ -24,6 +24,17 @@ div.slideshow-controls > button {
     width: 100%;
 }
 
+div.slideshow-controls > button > .previous-icon::after {
+    content: '<<';
+}
+div.slideshow-controls > button > .next-icon::after {
+    content: '>>';
+}
+
+.visually-hidden {
+    display: none;
+}
+
 div.ss-item {
     position: relative;
     display: none;
@@ -32,10 +43,15 @@ div.ss-item {
     height: 400px;
     margin-right: -100%;
     backface-visibility: hidden;
+    transition: transform ease-in-out 1s;
 }
 
-.ss-item:not(.active){
-    transform: translateX(100%);
+.nxt {
+    left: 100%;
+}
+
+.prev {
+    left: -100%;
 }
 
 .ss-item > p {
@@ -44,8 +60,46 @@ div.ss-item {
     vertical-align: middle;
 }
 
+.title {
+    text-align: center;
+}
+
+.ss-item > .box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
 .ss-item.active, .ss-item.ss-next, .ss-item.ss-previous{
     display: block;
+}
+
+.ss-next {
+    animation: slide-left 1s ease-in-out 1;
+}
+
+.ss-previous {
+    animation: slide-right 1s ease-in-out 1;
+}
+
+@keyframes slide-right {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes slide-left {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
 }
 
 /* 
