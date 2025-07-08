@@ -1,16 +1,30 @@
+:root {
+    --ss-container-border-radius: .375rem;
+}
+
 div.slideshow {
     position: relative;
-    width: 600px;
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    border-radius: var(--ss-container-border-radius);
 }
 
 div.slideshow p {
     text-align: center;
+    text-wrap: balance;
+    padding: 0 3%;
+}
+
+div.slideshow p, div.slideshow h2.title.is-2 {
+    color: white;
 }
 
 div.slideshow-inner {
     position: relative;
     width: 100%;
     overflow: hidden;
+    border-radius: var(--ss-container-border-radius) var(--ss-container-border-radius) 0 0;
 }
 
 div.slideshow-controls {
@@ -20,8 +34,17 @@ div.slideshow-controls {
 }
 
 div.slideshow-controls > button {
-    height: 10vh;
     width: 100%;
+    padding: 1rem 0;
+    background-color: blue;
+}
+
+button#previous {
+    border-radius: 0 0 0 var(--ss-container-border-radius);
+}
+
+button#next {
+    border-radius: 0 0 var(--ss-container-border-radius) 0;
 }
 
 div.slideshow-controls > button > .previous-icon::after {
@@ -40,10 +63,9 @@ div.ss-item {
     display: none;
     float: left;
     width: 100%;
-    height: 400px;
+    /* height: 400px; */
     margin-right: -100%;
     backface-visibility: hidden;
-    transition: transform ease-in-out 1s;
 }
 
 .nxt {
@@ -54,12 +76,6 @@ div.ss-item {
     left: -100%;
 }
 
-.ss-item > p {
-    display: inline-block;
-    width: 100%;
-    vertical-align: middle;
-}
-
 .title {
     text-align: center;
 }
@@ -68,8 +84,11 @@ div.ss-item {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    background-color: rgba(0,0,0,.75);
     align-items: center;
     height: 100%;
+    padding: 3rem 2rem;
+    border-radius: var(--ss-container-border-radius) var(--ss-container-border-radius) 0 0;
 }
 
 .ss-item.active, .ss-item.ss-next, .ss-item.ss-previous{
@@ -77,11 +96,11 @@ div.ss-item {
 }
 
 .ss-next {
-    animation: slide-left 1s ease-in-out 1;
+    animation: slide-left .6s ease-in-out 1;
 }
 
 .ss-previous {
-    animation: slide-right 1s ease-in-out 1;
+    animation: slide-right .6s ease-in-out 1;
 }
 
 @keyframes slide-right {
