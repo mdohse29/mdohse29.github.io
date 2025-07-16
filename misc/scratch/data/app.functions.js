@@ -181,18 +181,10 @@ $(document).ready(function () {
     }
 
     function removeOlMarkers(text) {
-        let singleDigit = [
-            /^[ \t]*[A-Z]{1,4}[).][ \t]*\b/gm, // Upper Alpha
-            /^[ \t]*[a-z]{1,4}[).][ \t]*\b/gm, // Lower Alpha
-            /^[ \t]*[0-9]{1,4}[).][ \t]*\b/gm // Digits
-        ]
-
         let editedText = $('#TextArea').val();
-        for (let a in singleDigit) {
-            // console.log(singleDigit[a]);
-            if (editedText.match(singleDigit[a])) {
-                editedText = editedText.replace(new RegExp(singleDigit[a]), '');
-            }
+        const regex = /^[ \t]*[A-Z|a-z|0-9]{1,4}[).][ \t]*(?:\b|\B)/gm;
+        if (editedText.match(regex)) {
+            editedText = editedText.replace(new RegExp(regex), '');
         }
         
         updateClipboard(editedText)
@@ -413,7 +405,7 @@ $(document).ready(function () {
                     [
                         mkInp({ type: 'select', id: 'color', name: 'color', class: 'form-select-sm', options: [{ value: 'dark', isColor: true }, { value: 'green', isColor: true }, { value: 'lavender', isColor: true }, { value: 'blue', isColor: true }, { value: 'white', isColor: true }, { value: 'yellow', isColor: true }] }),
                         mkBtn({ class: 'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id: 'exspc', inner: 'Remove Leading Spaces', title: 'The empty space in front of the paragraphs' }),
-                        mkBtn({ class: 'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id: 'rmv-ol', inner: 'Remove OL Markers', title: 'Remove numbered OL markers' }),
+                        mkBtn({ class: 'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id: 'rmv-ol', inner: 'Remove OL Markers', title: 'Remove numbered OL markers', listeners:[{type:'click', execute:removeOlMarkers}]}),
                         mkBtn({ class: 'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id: 'ff', inner: 'Format Filename', title: 'Formats file names by lowercasing the text and adding underscores to replace spaces.', listeners: [{ type: 'click', execute: function () { let currentText = $('#TextArea').val(); $('#TextArea').val(formatFilename(currentText)); } }] }),
                         mkBtn({ class: 'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id: 'frag', inner: 'Fix Fragments', listeners: [{ type: 'click', execute: frag }] }),
                         mkBtn({ class: 'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id: 'clear', inner: 'Clear', title: 'Clear scratch pad' }),
@@ -442,8 +434,6 @@ $(document).ready(function () {
         $('#TextArea').val('');
         $('#TextArea').focus();
     });
-
-    $('#rmv-ol').click(removeOlMarkers);
 
     $('#TextArea').on('input', function () {
         let text = $('#TextArea').val();
