@@ -171,12 +171,16 @@
 // console.log(Array.isArray(test2[0]))
 // document.body.append(testContainer)
 
-document.querySelector('button').addEventListener('click', function(){
-    this.innerText = (this.innerText === 'Play') ? 'Pause':'Play';
+// document.querySelector('button').addEventListener('click', function(){
+//     this.innerText = (this.innerText === 'Play') ? 'Pause':'Play';
     
-    document.querySelectorAll('.ball').forEach(ball => {
-        let style = window.getComputedStyle(document.querySelector(`#${ball.id}`));
-        ball.style = `left: ${style.left}; bottom: ${style.bottom};`
-        ball.classList.toggle(`${ball.id}-right`);
-    });
+//     document.querySelectorAll('.ball').forEach(ball => {
+//         let style = window.getComputedStyle(document.querySelector(`#${ball.id}`));
+//         ball.style = `left: ${style.left}; bottom: ${style.bottom};`
+//         ball.classList.toggle(`${ball.id}-right`);
+//     });
+// })
+
+fetch('./play.html').then(async data=>{
+    console.log(await data.text());
 })
