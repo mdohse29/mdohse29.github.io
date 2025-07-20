@@ -371,6 +371,15 @@ function clkCopyItem() {
     targetElement = null;
 }
 
+function clkLoadList(){
+    let list = getItemText(targetElement);
+    list = list.substring(list.lastIndexOf(':')+1);
+    closeOptions();
+    clearList();
+    resetListBtn();
+    loadList(getCookie(list));
+}
+
 function toggleLstBtn(event) {
 
     let target = event.target;
@@ -667,7 +676,8 @@ function openOptions(event) {
         b3: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', 'aria-description': 'Edit List Item', id: 'edit', inner: '<i class="bi bi-pencil"></i>', listeners: [{ type: 'click', execute: toggleLstBtn }, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] }),
         b4: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-info is-outlined', 'aria-description': 'Copy Item', id: 'copy', inner: '<i class="bi bi-copy"></i>', listeners: [{ type: 'click', execute: clkCopyItem }, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] }),
         b5: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', 'aria-description': 'Restore List Item', id: 'undo', inner: '<i class="bi bi-arrow-counterclockwise"></i>', listeners: [{ type: 'click', execute: clkUndoItem }, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] }),
-        b6: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', 'aria-description': 'Close Options', id: 'cancel', inner: '<i class="bi bi-x-circle"></i>', listeners: [{ type: 'click', execute: () => { closeOptions(); targetElement = null; } }, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] })
+        b6: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', 'aria-description': 'Close Options', id: 'cancel', inner: '<i class="bi bi-x-circle"></i>', listeners: [{ type: 'click', execute: () => { closeOptions(); targetElement = null; } }, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] }),
+        b7: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-success is-outlined', 'aria-description': 'Load List', id: 'cancel', inner: '<i class="bi bi-arrow-up"></i>', listeners: [{ type: 'click', execute: clkLoadList}, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] })
     }
 
     nestElem([
@@ -679,9 +689,9 @@ function openOptions(event) {
             [opts.b5, opts.b6]
             :
             (targetElement.id === 'listSubItem') ?
-                [opts.b1, opts.b3, opts.b4, opts.b6]
+                [opts.b1, opts.b3, (getItemText(targetElement).includes(':load:')?opts.b7:opts.b4), opts.b6]
                 :
-                [opts.b1, opts.b2, opts.b3, opts.b4, opts.b6]
+                [opts.b1, opts.b2, opts.b3, (getItemText(targetElement).includes(':load:')?opts.b7:opts.b4), opts.b6]
     ]);
 
     // document.querySelector('.options').classList.add('fade-in')
