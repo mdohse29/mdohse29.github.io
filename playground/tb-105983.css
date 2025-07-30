@@ -1,0 +1,35 @@
+:root {
+    --bg-color: 248, 249, 250;
+    --nav-btn-color: 13, 110, 253;
+}
+
+.dnone {
+    display: none;
+}
+
+body {
+    background-color: rgba(var(--nav-btn-color),.2);
+    min-height:100vh;
+    margin:0;
+}
+
+header, main {
+    padding: 0 10%;
+}
+
+header {
+    margin-top: 20px;
+}
+
+/* header > nav {
+    background-color: rgb(var(--bg-color));
+} */
+
+main {
+    height: 85vh;
+}
+
+/* main > .contain {
+    height: 100%;
+    background-color: rgb(var(--bg-color));
+} */
