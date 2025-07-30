@@ -29,7 +29,6 @@ async function createNavBtns() {
     drawers = await getData();
     if (drawers)
         for (d of drawers){
-            // if (!d.hidden)
             document.querySelector('nav .btn-group').appendChild(
                 mkBtn({
                     class: `btn btn-primary p-3${(d.hidden)?' dnone':''}`,
@@ -38,6 +37,7 @@ async function createNavBtns() {
                     inner: d.title,
                     "aria-label": d.title,
                     "aria-selected": "false",
+                    "aria-hidden": `${d.hidden}`,
                     listeners: [
                         {
                             type: 'click',
