@@ -1,6 +1,6 @@
 let drawers = null;
 async function getData(){
-    const data = await fetch('./tbData.json');
+    const data = await fetch('./data/tbData.json');
     if (data.ok){
         return data.json();
     }
@@ -28,6 +28,12 @@ function toggleActiveBtn(elem){
     }
 }
 
+function toggleHidden(){
+    [...document.querySelectorAll('.hbb')].forEach(btn=>{
+        btn.classList.toggle('dnone');
+    })
+}
+
 function buildDrawer(id){
     const drawerData = drawers.filter(d=>{
         return d.id == id;
@@ -36,7 +42,7 @@ function buildDrawer(id){
     if (drawerData){
         //something here
         return nestElem([
-            mkDiv({class:'container-fluid', id:`${drawerData.id}-drawer`}),
+            mkDiv({class:'container-fluid drawer-wrapper', id:`${drawerData.id}-drawer`}),
             [
                 nestElem([
                     mkDiv({class:'drawer-header'}),
@@ -45,7 +51,13 @@ function buildDrawer(id){
                 nestElem([
                     mkDiv({class:'drawer'}),
                     drawerData.buttons.map(btn=>{
-                        return mkLnk({class:'btn btn-lg btn-secondary', inner:btn.text.main, href:btn.url, target:(btn.url.includes('http'))?'_blank':'_self'})
+                        return (btn.text.sub)?
+                        nestElem([
+                            mkLnk({class:`btn btn-lg btn-secondary${(btn.hidden)?' hbb dnone':''}`, inner:btn.text.main, href:btn.url, target:(btn.url.includes('http'))?'_blank':'_self'}),
+                            mkElem({elemType:'span', class:`sub-text${(btn.text.warn)?' alert-text': ''}`, inner:`${btn.text.sub}`})
+                        ])
+                        :
+                        mkLnk({class:`btn btn-lg btn-secondary${(btn.hidden)?' hbb dnone':''}`, inner:btn.text.main, href:btn.url, target:(btn.url.includes('http'))?'_blank':'_self'})
                     })
                 ])
             ]
@@ -59,7 +71,7 @@ async function createNavBtns() {
         for (d of drawers){
             document.querySelector('nav .btn-group').appendChild(
                 mkBtn({
-                    class: `btn btn-primary p-3${(d.hidden)?' dnone':''}`,
+                    class: `btn btn-primary p-3${(d.hidden)?' hbb dnone':''}`,
                     id: d.id,
                     type: 'button',
                     inner: d.title,
@@ -86,4 +98,5 @@ const nav_bar = nestElem([
 ]);
 
 document.body.children[0].appendChild(nav_bar);
+document.body.appendChild(mkDiv({class:'hb', listeners:[{type:'click', execute:toggleHidden}]}))
 createNavBtns();
