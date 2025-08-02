@@ -7,24 +7,24 @@ async function getData(){
     return null;
 }
 
-function toggleActiveBtn(elem){
-    if (elem.selected){
-        elem.classList.remove('active');
-        elem.selected = false;
-        elem.ariaSelected = 'false';
-        document.getElementById(`${elem.id}-drawer`).remove();
+function toggleActiveBtn(){
+    if (this.selected){
+        this.classList.remove('active');
+        this.selected = false;
+        this.ariaSelected = 'false';
+        document.getElementById(`${this.id}-drawer`).remove();
     }else{
-        const active = elem.parentElement.querySelector('.active');
+        const active = this.parentElement.querySelector('.active');
         if (active){
             active.selected = false;
             active.ariaSelected = 'false'
             active.classList.remove('active');
             document.getElementById(`${active.id}-drawer`).remove();
         }
-        elem.selected = true;
-        elem.classList.add('active');
-        elem.ariaSelected = 'true';
-        document.body.children[1].appendChild(buildDrawer(elem.id));
+        this.selected = true;
+        this.classList.add('active');
+        this.ariaSelected = 'true';
+        document.body.children[1].appendChild(buildDrawer(this.id));
     }
 }
 
@@ -53,11 +53,11 @@ function buildDrawer(id){
                     drawerData.buttons.map(btn=>{
                         return (btn.text.sub)?
                         nestElem([
-                            mkLnk({class:`btn btn-lg btn-secondary${(btn.hidden)?' hbb dnone':''}`, inner:btn.text.main, href:btn.url, target:(btn.url.includes('http'))?'_blank':'_self'}),
-                            mkElem({elemType:'span', class:`sub-text${(btn.text.warn)?' alert-text': ''}`, inner:`${btn.text.sub}`})
+                            mkLnk({class:`btn btn-lg btn-primary${(btn.hidden)?' hbb dnone':''}`, inner:btn.text.main, href:btn.url, target:(btn.url.includes('http'))?'_blank':'_self'}),
+                            mkElem({elemType:'span', class:`sub-text`, inner:`${btn.text.sub}`})
                         ])
                         :
-                        mkLnk({class:`btn btn-lg btn-secondary${(btn.hidden)?' hbb dnone':''}`, inner:btn.text.main, href:btn.url, target:(btn.url.includes('http'))?'_blank':'_self'})
+                        mkLnk({class:`btn btn-lg btn-primary${(btn.hidden)?' hbb dnone':''}`, inner:btn.text.main, href:btn.url, target:(btn.url.includes('http'))?'_blank':'_self'})
                     })
                 ])
             ]
@@ -81,9 +81,7 @@ async function createNavBtns() {
                     listeners: [
                         {
                             type: 'click',
-                            execute: function (){
-                                toggleActiveBtn(this);
-                            }
+                            execute: toggleActiveBtn
                         }
                     ]
                 })
