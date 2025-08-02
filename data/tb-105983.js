@@ -31,7 +31,7 @@ function toggleActiveBtn(){
 function toggleHidden(){
     this.active = (!this.active);
     [...document.querySelectorAll('.hbb')].forEach(btn=>{
-        btn.ariaHidden = (btn.ariaHidden === 'false');
+        btn.ariaHidden = (!this.active);
         btn.classList.toggle('dnone');
     })
 }
