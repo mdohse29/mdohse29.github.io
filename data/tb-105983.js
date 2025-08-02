@@ -29,12 +29,15 @@ function toggleActiveBtn(){
 }
 
 function toggleHidden(){
+    this.active = (!this.active);
     [...document.querySelectorAll('.hbb')].forEach(btn=>{
+        btn.ariaHidden = (!this.active);
         btn.classList.toggle('dnone');
     })
 }
 
 function buildDrawer(id){
+    const showHidden = document.body.lastElementChild.active;
     const drawerData = drawers.filter(d=>{
         return d.id == id;
     })[0];
@@ -53,11 +56,11 @@ function buildDrawer(id){
                     drawerData.buttons.map(btn=>{
                         return (btn.text.sub)?
                         nestElem([
-                            mkLnk({class:`btn btn-lg btn-primary${(btn.hidden)?' hbb dnone':''}`, inner:btn.text.main, href:btn.url, target:(btn.url.includes('http'))?'_blank':'_self'}),
+                            mkLnk({class:`btn btn-lg btn-primary${(btn.hidden)?` hbb${(showHidden)?'':' dnone'}`:''}`, inner:btn.text.main, href:btn.url, target:(btn.url.includes('http'))?'_blank':'_self', 'aria-hidden':`${(btn.hidden)?`${(!showHidden)}`:'false'}`}),
                             mkElem({elemType:'span', class:`sub-text`, inner:`${btn.text.sub}`})
                         ])
                         :
-                        mkLnk({class:`btn btn-lg btn-primary${(btn.hidden)?' hbb dnone':''}`, inner:btn.text.main, href:btn.url, target:(btn.url.includes('http'))?'_blank':'_self'})
+                        mkLnk({class:`btn btn-lg btn-primary${(btn.hidden)?` hbb${(showHidden)?'':' dnone'}`:''}`, inner:btn.text.main, href:btn.url, target:(btn.url.includes('http'))?'_blank':'_self', 'aria-hidden':`${(btn.hidden)?`${(!showHidden)}`:'false'}`})
                     })
                 ])
             ]
@@ -97,4 +100,5 @@ const nav_bar = nestElem([ // Add a logo logoIL.webp
 
 document.body.children[0].appendChild(nav_bar);
 document.body.appendChild(mkDiv({class:'hb', 'aria-hidden':'true', listeners:[{type:'click', execute:toggleHidden}]}))
+document.body.lastElementChild.active = false;
 createNavBtns();
