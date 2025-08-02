@@ -95,7 +95,13 @@ async function createNavBtns() {
 const nav_bar = nestElem([ // Add a logo logoIL.webp
     mkElem({elemType:'nav', class:'navbar'}),
     mkDiv({class:'container-fluid'}),
-    mkDiv({class:'btn-group', 'aria-label':'Categories'})
+    [
+        mkDiv({class:'btn-group', 'aria-label':'Categories'}),
+        nestElem([
+            mkElem({elemType:'figure', class:'logo'}),
+            mkElem({elemType:'img', src:'./data/logoIL.webp', alt:'Imagine Learning'})
+        ])
+    ]
 ]);
 
 document.body.children[0].appendChild(nav_bar);
