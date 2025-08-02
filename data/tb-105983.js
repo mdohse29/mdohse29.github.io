@@ -89,12 +89,12 @@ async function createNavBtns() {
         }
 }
 
-const nav_bar = nestElem([
+const nav_bar = nestElem([ // Add a logo logoIL.webp
     mkElem({elemType:'nav', class:'navbar'}),
     mkDiv({class:'container-fluid'}),
     mkDiv({class:'btn-group', 'aria-label':'Categories'})
 ]);
 
 document.body.children[0].appendChild(nav_bar);
-document.body.appendChild(mkDiv({class:'hb', listeners:[{type:'click', execute:toggleHidden}]}))
+document.body.appendChild(mkDiv({class:'hb', 'aria-hidden':'true', listeners:[{type:'click', execute:toggleHidden}]}))
 createNavBtns();
