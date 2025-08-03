@@ -58,6 +58,11 @@ main {
     padding-bottom: 10px;
     outline: 4px solid black;
     border-radius: 15px;
+    position: relative;
+}
+
+.drawer-wrapper.animate{
+    animation: 750ms ease-in-out 100ms slide-down;
 }
 
 .drawer-header, .drawer {
@@ -102,4 +107,19 @@ a.btn {
 
 .hb:hover{
     border: 2px solid white;
+}
+
+.visibly-hidden {
+    visibility: hidden;
+}
+
+@keyframes slide-down {
+    from{
+        top: -19%;
+        opacity: 0;
+    }
+    to{
+        top: 0;
+        opacity: 1;
+    }
 }

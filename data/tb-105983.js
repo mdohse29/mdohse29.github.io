@@ -25,6 +25,7 @@ function toggleActiveBtn(){
         this.classList.add('active');
         this.ariaSelected = 'true';
         document.body.children[1].appendChild(buildDrawer(this.id));
+        document.getElementById(`${this.id}-drawer`).classList.add('animate')
     }
 }
 
@@ -36,6 +37,17 @@ function toggleHidden(){
     })
 }
 
+function openFinish(){
+    this.classList.remove('animate');
+    this.removeEventListener('animationend', openFinish);
+}
+
+function openStart(){
+    this.classList.remove('visibly-hidden');
+    this.removeEventListener('animationstart', openStart);
+}
+
+
 function buildDrawer(id){
     const showHidden = document.body.lastElementChild.active;
     const drawerData = drawers.filter(d=>{
@@ -45,7 +57,7 @@ function buildDrawer(id){
     if (drawerData){
         //something here
         return nestElem([
-            mkDiv({class:'container-fluid drawer-wrapper', id:`${drawerData.id}-drawer`}),
+            mkDiv({class:'container-fluid drawer-wrapper visibly-hidden animate', id:`${drawerData.id}-drawer`, listeners:[{type:'animationend', execute:openFinish}, {type:'animationstart', execute:openStart}]}),
             [
                 nestElem([
                     mkDiv({class:'drawer-header'}),
