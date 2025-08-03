@@ -84,11 +84,29 @@
                 }
             },
             {
-                "hidden": false,
+                "hidden":false,
+                "url":"https://cayman-ui-prod.courseware-prod.imaginelearning.com/#/login",
+                "text": {
+                    "main":"Cayman Production",
+                    "sub":"NEW - V2",
+                    "warn":false
+                }
+            },
+            {
+                "hidden":true,
+                "url":"https://cayman-ui-dev.courseware-nonprod.imaginelearning.com/#/login",
+                "text": {
+                    "main":"Cayman Development",
+                    "sub":"DEV - V2",
+                    "warn":true
+                }
+            },
+            {
+                "hidden": true,
                 "url": "https://cayman-ui.glct-prod.il-apps.com/#/login",
                 "text": {
                     "main": "Cayman Production",
-                    "sub": "NEW",
+                    "sub": "OLD - V1",
                     "warn": false
                 }
             },
