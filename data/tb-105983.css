@@ -1,3 +1,25 @@
+@keyframes slide-down {
+    from{
+        top: -20%;
+        opacity: 0;
+    }
+    to{
+        top: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes drawer-fade {
+    from{
+        opacity: 1;
+        top: 0;
+    }
+    to{
+        opacity: 0;
+        top: 20%;
+    }
+}
+
 :root {
     --bg-color: 248, 249, 250;
     --nav-btn-color: 13, 110, 253;
@@ -65,6 +87,10 @@ main {
     animation: 750ms ease-in-out 100ms slide-down;
 }
 
+.drawer-wrapper.fade-out {
+    animation: 500ms ease-out reverse slide-down;
+}
+
 .drawer-header, .drawer {
     display: flex;
     justify-content: center;
@@ -113,13 +139,3 @@ a.btn {
     visibility: hidden;
 }
 
-@keyframes slide-down {
-    from{
-        top: -19%;
-        opacity: 0;
-    }
-    to{
-        top: 0;
-        opacity: 1;
-    }
-}

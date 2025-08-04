@@ -12,24 +12,21 @@ function toggleActiveBtn(){
         this.classList.remove('active');
         this.selected = false;
         this.ariaSelected = 'false';
-        document.getElementById(`${this.id}-drawer`).remove();
     }else{
         const active = this.parentElement.querySelector('.active');
         if (active){
             active.selected = false;
             active.ariaSelected = 'false'
             active.classList.remove('active');
-            document.getElementById(`${active.id}-drawer`).remove();
         }
         this.selected = true;
         this.classList.add('active');
         this.ariaSelected = 'true';
-        document.body.children[1].appendChild(buildDrawer(this.id));
-        document.getElementById(`${this.id}-drawer`).classList.add('animate')
     }
+    toggleDrawer(this.id);
 }
 
-function toggleHidden(){
+function toggleHb(){
     this.active = (!this.active);
     [...document.querySelectorAll('.hbb')].forEach(btn=>{
         btn.ariaHidden = (!this.active);
@@ -45,6 +42,24 @@ function openFinish(){
 function openStart(){
     this.classList.remove('visibly-hidden');
     this.removeEventListener('animationstart', openStart);
+}
+
+function toggleDrawer(id){
+    const drawer = document.querySelector('.drawer-wrapper')
+    if (!drawer){
+        document.body.children[1].appendChild(buildDrawer(id));
+    }else{
+        drawer.addEventListener('animationend', function(){
+            this.remove();
+            if (document.querySelector('.active'))
+                document.body.children[1].appendChild(buildDrawer(id));
+        });
+        drawer.classList.add('fade-out');
+    }
+}
+
+function removeDrawer(id){
+    document.getElementById(`${id}-drawer`).remove();
 }
 
 
@@ -117,6 +132,6 @@ const nav_bar = nestElem([ // Add a logo logoIL.webp
 ]);
 
 document.body.children[0].appendChild(nav_bar);
-document.body.appendChild(mkDiv({class:'hb', 'aria-hidden':'true', listeners:[{type:'click', execute:toggleHidden}]}))
+document.body.appendChild(mkDiv({class:'hb', 'aria-hidden':'true', listeners:[{type:'click', execute:toggleHb}]}))
 document.body.lastElementChild.active = false;
 createNavBtns();
