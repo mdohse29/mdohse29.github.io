@@ -66,6 +66,13 @@
                     "sub": "Does Not Save",
                     "warn": true
                 }
+            },
+            {
+                "hidden": true,
+                "url": "./templates/",
+                "text": {
+                    "main": "Basic Templates"
+                }
             }
         ]
     },
