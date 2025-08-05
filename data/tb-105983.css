@@ -84,7 +84,7 @@ main {
 }
 
 .drawer-wrapper.animate{
-    animation: 750ms ease-in-out 100ms slide-down;
+    animation: 500ms ease-in-out 100ms slide-down;
 }
 
 .drawer-wrapper.fade-out {
