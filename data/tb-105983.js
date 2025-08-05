@@ -70,7 +70,6 @@ function buildDrawer(id){
     })[0];
 
     if (drawerData){
-        //something here
         return nestElem([
             mkDiv({class:'container-fluid drawer-wrapper visibly-hidden animate', id:`${drawerData.id}-drawer`, listeners:[{type:'animationend', execute:openFinish}, {type:'animationstart', execute:openStart}]}),
             [
@@ -119,7 +118,7 @@ async function createNavBtns() {
         }
 }
 
-const nav_bar = nestElem([ // Add a logo logoIL.webp
+const nav_bar = nestElem([
     mkElem({elemType:'nav', class:'navbar'}),
     mkDiv({class:'container-fluid'}),
     [
