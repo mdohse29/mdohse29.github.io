@@ -24,7 +24,14 @@ function mkLabel(attr = {}) {
 }
 
 function mkBtn(attr = {}) {
-    attr.elemType = 'button'
+    attr.elemType = 'button';
+    return mkElem(attr);
+}
+
+function mkImg(attr = {}){
+    attr.elemType = 'img';
+    if (!attr.alt || attr.alt.length < 1)
+        attr.alt = 'null';
     return mkElem(attr);
 }
 
