@@ -135,7 +135,7 @@ const nav_bar = nestElem([
         mkDiv({class:'btn-group', 'aria-label':'Categories'}),
         nestElem([
             mkElem({elemType:'figure', class:'logo'}),
-            mkElem({elemType:'img', src:'./data/logoIL.webp', alt:'Imagine Learning'})
+            mkImg({src:'./data/logoIL.webp', alt:'Imagine Learning'})
         ])
     ]
 ]);
