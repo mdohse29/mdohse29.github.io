@@ -30,7 +30,17 @@ function toggleHb(){
     this.active = (!this.active);
     [...document.querySelectorAll('.hbb')].forEach(btn=>{
         btn.ariaHidden = (!this.active);
-        btn.classList.toggle('dnone');
+        if(this.active){
+            btn.classList.remove('dnone');
+        }else{
+            btn.classList.add('dnone');
+            if (btn.id && document.getElementById(`${btn.id}-drawer`)){
+                removeDrawer(btn.id);
+                btn.classList.remove('active');
+                btn.selected = false;
+                btn.ariaSelected = 'false';
+            }
+        }
     })
 }
 

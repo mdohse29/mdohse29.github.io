@@ -1,4 +1,4 @@
-@keyframes slide-down {
+@keyframes slide {
     from{
         top: -20%;
         opacity: 0;
@@ -74,11 +74,11 @@ main {
 }
 
 .drawer-wrapper.animate{
-    animation: 500ms ease-in-out 100ms slide-down;
+    animation: 500ms ease-in-out 100ms slide;
 }
 
 .drawer-wrapper.fade-out {
-    animation: 500ms ease-out reverse slide-down;
+    animation: 500ms ease-out reverse slide;
 }
 
 .drawer-header, .drawer {
