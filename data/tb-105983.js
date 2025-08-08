@@ -90,13 +90,8 @@ function buildDrawer(id){
                 nestElem([
                     mkDiv({class:'drawer'}),
                     drawerData.buttons.map(btn=>{
-                        return (btn.text.sub)?
-                        nestElem([
-                            mkLnk({class:`btn btn-lg btn-primary${(btn.hidden)?` hbb${(showHidden)?'':' dnone'}`:''}`, inner:btn.text.main, href:btn.url, target:(btn.url.includes('http'))?'_blank':'_self', 'aria-hidden':`${(btn.hidden)?`${(!showHidden)}`:'false'}`}),
-                            mkElem({elemType:'span', class:`sub-text`, inner:`${btn.text.sub}`})
-                        ])
-                        :
-                        mkLnk({class:`btn btn-lg btn-primary${(btn.hidden)?` hbb${(showHidden)?'':' dnone'}`:''}`, inner:btn.text.main, href:btn.url, target:(btn.url.includes('http'))?'_blank':'_self', 'aria-hidden':`${(btn.hidden)?`${(!showHidden)}`:'false'}`})
+                        const newbtn = mkLnk({class:`btn btn-lg btn-primary${(btn.hidden)?` hbb${(showHidden)?'':' dnone'}`:''}`, inner:btn.text.main, href:btn.url, target:(btn.url.includes('http'))?'_blank':'_self', 'aria-hidden':`${(btn.hidden)?`${(!showHidden)}`:'false'}`});
+                        return (btn.text.sub)?nestElem([newbtn, mkSpan({class:`sub-text`, inner:`${btn.text.sub}`})]):newbtn;
                     })
                 ])
             ]
