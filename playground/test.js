@@ -180,7 +180,6 @@
 //         ball.classList.toggle(`${ball.id}-right`);
 //     });
 // })
-
-fetch('./play.html').then(async data=>{
-    console.log(await data.text());
-})
+let test = mkDiv({class:'testing'});
+test.append(mkSpan({class:'testing'}))
+console.log(test);

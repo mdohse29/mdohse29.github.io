@@ -9,6 +9,25 @@
     }
 }
 
+@keyframes bounce {
+    0%{
+        transform: translateY(10px);
+    }
+    25%{
+        transform: translateY(-10px);
+    }
+    50%{
+        transform: translateY(5px);
+    }
+    75%{
+        transform: translateY(-5px);
+    }
+    100%{
+        transform: translateY(0);
+    }
+
+}
+
 :root {
     --bg-color: 248, 249, 250;
     --nav-btn-color: 13, 110, 253;
@@ -73,12 +92,12 @@ main {
     position: relative;
 }
 
-.drawer-wrapper.animate{
-    animation: 500ms ease-in-out 100ms slide;
+.drawer-wrapper.fade-in{
+    animation: 400ms ease-in 100ms slide;
 }
 
 .drawer-wrapper.fade-out {
-    animation: 500ms ease-out reverse slide;
+    animation: 400ms ease-out reverse slide;
 }
 
 .drawer-header, .drawer {
@@ -105,6 +124,14 @@ a.btn {
 
 .btn > .sub-text {
     font-size: .75rem;
+}
+
+.btn.hover-bounce:hover {
+    animation: 1000ms ease-in-out bounce;
+}
+
+.btn.bouncing {
+    animation: 1000ms ease-in-out bounce;
 }
 
 .sub-text.alert-text {
