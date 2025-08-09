@@ -45,8 +45,16 @@ function toggleHb(){
 }
 
 function openFinish(){
-    this.classList.remove('animate');
+    this.classList.remove('fade-in');
     this.removeEventListener('animationend', openFinish);
+    [...this.querySelectorAll('a.btn')].forEach(btn=>{
+        btn.classList.add('bouncing');
+        btn.addEventListener('animationend', function(){
+            this.classList.remove('bouncing');
+            this.removeEventListener('animationend', function(){});
+            this.classList.add('hover-bounce');
+        })
+    });
 }
 
 function openStart(){
@@ -81,7 +89,7 @@ function buildDrawer(id){
 
     if (drawerData){
         return nestElem([
-            mkDiv({class:'container-fluid drawer-wrapper visibly-hidden animate', id:`${drawerData.id}-drawer`, listeners:[{type:'animationend', execute:openFinish}, {type:'animationstart', execute:openStart}]}),
+            mkDiv({class:'container-fluid drawer-wrapper visibly-hidden fade-in', id:`${drawerData.id}-drawer`, listeners:[{type:'animationend', execute:openFinish}, {type:'animationstart', execute:openStart}]}),
             [
                 nestElem([
                     mkDiv({class:'drawer-header'}),
@@ -129,8 +137,8 @@ const nav_bar = nestElem([
     [
         mkDiv({class:'btn-group', 'aria-label':'Categories'}),
         nestElem([
-            mkElem({elemType:'figure', class:'logo'}),
-            mkImg({src:'./data/logoIL.webp', alt:'Imagine Learning'})
+            mkElem({elemType:'figure', class:'logo', 'aria-label':'Imagine Learning Logo'}),
+            mkImg({src:'./data/logoIL.webp', alt:'Imagine Learning Logo'})
         ])
     ]
 ]);
