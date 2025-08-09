@@ -49,17 +49,19 @@ function openFinish(){
     this.removeEventListener('animationend', openFinish);
     [...this.querySelectorAll('a.btn')].forEach(btn=>{
         btn.classList.add('bouncing');
-        btn.addEventListener('animationend', function(){
-            this.classList.remove('bouncing');
-            this.removeEventListener('animationend', function(){});
-            this.classList.add('hover-bounce');
-        })
+        btn.addEventListener('animationend', openBounce)
     });
 }
 
 function openStart(){
     this.classList.remove('visibly-hidden');
     this.removeEventListener('animationstart', openStart);
+}
+
+function openBounce(){
+    this.classList.remove('bouncing');
+    this.removeEventListener('animationend', openBounce);
+    this.classList.add('hover-bounce');
 }
 
 function toggleDrawer(id){
