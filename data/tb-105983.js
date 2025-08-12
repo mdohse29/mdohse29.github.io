@@ -49,8 +49,14 @@ function openFinish(){
     this.removeEventListener('animationend', openFinish);
     [...this.querySelectorAll('a.btn')].forEach(btn=>{
         btn.classList.add('bouncing');
-        btn.addEventListener('animationend', openBounce)
+        btn.addEventListener('animationend', openComplete)
     });
+}
+
+function moFocusin(){
+    this.blur();
+    this.classList.replace('hover-bounce', 'hover-bounce');
+    this.removeEventListener('mouseover', moFocusin);
 }
 
 function openStart(){
@@ -58,10 +64,13 @@ function openStart(){
     this.removeEventListener('animationstart', openStart);
 }
 
-function openBounce(){
+function openComplete(){
     this.classList.remove('bouncing');
-    this.removeEventListener('animationend', openBounce);
+    this.removeEventListener('animationend', openComplete);
     this.classList.add('hover-bounce');
+    this.addEventListener('focusin', function(){
+        this.addEventListener('mouseover', moFocusin)
+    })
 }
 
 function toggleDrawer(id){
