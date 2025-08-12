@@ -126,7 +126,7 @@ a.btn {
     font-size: .75rem;
 }
 
-.btn.hover-bounce:hover {
+.btn.hover-bounce:hover, .btn.hover-bounce:focus-visible {
     animation: 1000ms ease-in-out bounce;
 }
 
