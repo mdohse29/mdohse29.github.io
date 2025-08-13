@@ -231,6 +231,15 @@
                     "sub": "Chrome Only",
                     "warn": false
                 }
+            },
+            {
+                "hidden": false,
+                "url": "https://cosmos-nextgen-prod-app.content-prod.imaginelearning.com/",
+                "text": {
+                    "main": "Cosmos Prod",
+                    "sub": null,
+                    "warn":false
+                }
             }
         ]
     },
