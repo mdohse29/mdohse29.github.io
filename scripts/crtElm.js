@@ -238,17 +238,20 @@ function nestElem(elemArry = []) {
 function mkElem(attr = { elemType: '' }) {
     if (!attr.elemType) {
         throw new Error('You must specify what type of element to create\nmkElem({elemType:\'\'})');
+    }else if (attr.pptIcon){
+        attr.icon = attr.pptIcon;
+        delete attr.pptIcon;
     }
     let element = document.createElement(attr.elemType);
 
     for (let a in attr) {
         if (a.includes('inner')) {
-            // "pptIcon" is for prepending an icon in an element with text, like a header
-            // "pptIcon" should be an element
+            // "icon" is for prepending an icon in an element with text, like a header
+            // "icon" should be an element
             // Alternatively the html code for the icon could be included with the inner content
             element.innerHTML = attr[a];
-            if (attr.pptIcon) {
-                element.prepend(attr.pptIcon)
+            if (attr.icon) {
+                element.prepend(attr.icon)
             }
         } else if (a.includes('listeners')) {
             if (attr[a].length) {
@@ -257,7 +260,7 @@ function mkElem(attr = { elemType: '' }) {
                 }
             }
         } else {
-            if (attr[a] && !a.includes('elemType') && !a.includes('pptIcon')) {
+            if (attr[a] && !a.includes('elemType') && !a.includes('icon')) {
                 element.setAttribute(a, attr[a]);
             }
         }
