@@ -59,7 +59,7 @@ article.message {
     scrollbar-width: none;
 }
 
-#list-container>div {
+#done, #list {
     border-top: 2px solid rgba(211, 211, 211, .5);
 }
 
