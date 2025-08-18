@@ -250,9 +250,11 @@ function mkElem(attr = { elemType: '' }) {
             // "icon" should be an element
             // Alternatively the html code for the icon could be included with the inner content
             element.innerHTML = attr[a];
-            if (attr.icon) {
-                element.prepend(attr.icon)
-            }
+            // if (attr.icon) {
+            //     element.prepend(attr.icon)
+            // }
+        } else if (a.includes('icon')) {
+            element.prepend(attr.icon);
         } else if (a.includes('listeners')) {
             if (attr[a].length) {
                 for (let l of attr[a]) {
