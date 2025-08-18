@@ -254,7 +254,7 @@ function mkElem(attr = { elemType: '' }) {
             //     element.prepend(attr.icon)
             // }
         } else if (a.includes('icon')) {
-            element.prepend(attr.icon);
+            element.prepend(attr[a]);
         } else if (a.includes('listeners')) {
             if (attr[a].length) {
                 for (let l of attr[a]) {
