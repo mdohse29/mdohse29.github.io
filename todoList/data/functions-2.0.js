@@ -1,7 +1,8 @@
 let curList = 'default';
-const ListItems = [];
+let collection = {};
+let ListItems = [];
 
-function saveList(ln = null){
+function saveList(ln = null){// REDO!!!!
     const list = document.getElementById('list').querySelectorAll('#listItem');
     if (!ln)
         ln = curList;
@@ -16,12 +17,22 @@ function saveList(ln = null){
         }
 
     });
-    let theList = {ln:ListItems};
+    
+    collection[ln] = ListItems;
 
-    window.localStorage.setItem('lists', JSON.stringify(theList));
+    window.localStorage.setItem('lists', JSON.stringify(collection));
 }
 
-function getList(ln = null){
+function getListDB(ln = null){
+    const listDB = window.localStorage.lists;
+
+    if (ln)
+        curList = ln;    
+    
+    if (listDB){
+        return (ln)?JSON.parse(listDB)[ln]:JSON.parse(listDB);
+    }
+    return null;
 
 }
 
