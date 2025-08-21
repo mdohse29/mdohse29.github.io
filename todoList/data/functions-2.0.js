@@ -1,26 +1,25 @@
 let curList = 'default';
-let collection = {};
-let ListItems = [];
+
+function save(collection){
+    window.localStorage.setItem('lists', JSON.stringify(collection));
+}
 
 function saveList(ln = null){// REDO!!!!
-    const list = document.getElementById('list').querySelectorAll('#listItem');
     if (!ln)
         ln = curList;
-    list.forEach(itm=>{
+    const list = document.getElementById('list').querySelectorAll('#listItem');
+    const collection = getListDB();
+    const ListItems = [];
+    for(let itm of list){
         const id = itm.getAttribute('pid');
         const item = itm.children[0];
-        const newItem = {id:id, text:item.innerText, subList:(item.nextElementSibling)?[...item.nextElementSibling.children].map(itm=>{return itm.innerText}):null};
-        if (!itemExists(newItem)){
-            ListItems.push(newItem);
-        }else{
-            updateList(newItem);
-        }
-
-    });
+        
+        ListItems.push({id:id, text:item.innerText.trim(), subList:(item.nextElementSibling)?[...item.nextElementSibling.children].map(itm=>{return itm.innerText}):null});
+    }
     
     collection[ln] = ListItems;
 
-    window.localStorage.setItem('lists', JSON.stringify(collection));
+    save(collection);
 }
 
 function getListDB(ln = null){
@@ -32,27 +31,25 @@ function getListDB(ln = null){
     if (listDB){
         return (ln)?JSON.parse(listDB)[ln]:JSON.parse(listDB);
     }
-    return null;
+    return {};
 
 }
 
 function itemExists(item){
-    return (ListItems.filter(li=>{return (li.id === item.id);}).length > 0);
-}
-
-function updateList(update){
-    const item = ListItems.filter(li=>{if (li.id === update.id) return li;});
-    if (item.length && update)
-        ListItems.splice(ListItems.indexOf(item[0]), 1, update);
+    const ListItems = getListDB(curList);
+    if (ListItems){
+        const e = ListItems.filter(li=>{return (li.id === item.id);});
+        return (e[0])?ListItems.indexOf(e[0]):null;
+    }
+    return null;
 }
 
 function buildListItem(itemText, opt = {sub:false, pid:null}) {
-    // returns ul.item-container > li#listItem if regular && li#listSubItem is sub item
+    // returns ul.item-container > li#listItem if regular && li#listSubItem if sub item
 
     let elem = mkElem(
         {
             elemType: 'li',
-            class: ((opt.sub) ? '' : 'mb-2'),
             title: 'Click for Options',
             id: ((opt.sub) ? 'listSubItem' : ''),
             pid: ((opt.sub && opt.pid) ? opt.pid : ''), // LIVE
@@ -73,5 +70,32 @@ function addItem(ev){
         itemText.split(',').reverse().forEach(itm=>{
             list.prepend(buildListItem(itm.trim()));
         });
+        saveList();
     }
+}
+
+function loadList(ln = null){
+    if (!ln)
+        ln = curList;
+    [...document.getElementById('list').children].forEach(i=>{i.remove()})
+    const list = getListDB(ln);
+    list.forEach(i=>{
+        if (i.subList){
+            nestElem([
+                document.getElementById('list'),
+                nestElem([
+                    buildListItem(i.text, {pid:i.id}),
+                    mkElem({elemType:'ul', class:'sub-list'}),
+                    i.subList.map(j=>{
+                        return buildListItem(j, {sub:true, pid:i.id});
+                    })
+                ])
+            ])
+        }else{
+            nestElem([
+                document.getElementById('list'),
+                buildListItem(i.text, {pid:i.id})
+            ])
+        }
+    })
 }
