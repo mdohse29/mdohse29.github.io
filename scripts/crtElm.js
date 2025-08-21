@@ -223,8 +223,9 @@ function crtSpin() {
 
 function nestElem(elemArry = []) {
     for (let a = elemArry.length - 2; a >= 0; a--) {
-        if (Object.keys(elemArry[a + 1]).length > 0 && elemArry[a + 1].tagName !== 'SELECT') {
+        if (Object.keys(elemArry[a + 1]).length > 0 && elemArry[a + 1].tagName !== 'SELECT' && !(elemArry[a+1] instanceof Element)) {
             for (let b in elemArry[a + 1]) {
+                console.log(elemArry[a + 1][b])
                 elemArry[a].appendChild(elemArry[a + 1][b]);
             }
         } else {
@@ -263,6 +264,7 @@ function mkElem(attr = { elemType: '' }) {
             }
         } else if (a.includes('prop')){
             for (let p in attr.prop){
+                // console.log(p, attr.props)
                 element[p] = attr.prop[p];
             }
         } else {
