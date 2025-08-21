@@ -261,6 +261,10 @@ function mkElem(attr = { elemType: '' }) {
                     element.addEventListener(l.type, l.execute);
                 }
             }
+        } else if (a.includes('prop')){
+            for (let p in attr.prop){
+                element[p] = attr.prop[p];
+            }
         } else {
             if (attr[a] && !a.includes('elemType') && !a.includes('icon')) {
                 element.setAttribute(a, attr[a]);
