@@ -1,10 +1,10 @@
 let curList = 'default';
 
-function save(collection){
+function saveDB(collection){
     window.localStorage.setItem('lists', JSON.stringify(collection));
 }
 
-function saveList(ln = null){// REDO!!!!
+function saveList(ln = null){
     if (!ln)
         ln = curList;
     const list = document.getElementById('list').querySelectorAll('#listItem');
@@ -19,7 +19,7 @@ function saveList(ln = null){// REDO!!!!
     
     collection[ln] = ListItems;
 
-    save(collection);
+    saveDB(collection);
 }
 
 function getListDB(ln = null){
@@ -33,6 +33,16 @@ function getListDB(ln = null){
     }
     return {};
 
+}
+
+function clearListDB(ln = null){
+    if (ln){
+        const collection = getListDB();
+        if (collection[ln])
+            delete collection[ln];
+        if (collection)
+            saveDB(collection);
+    }
 }
 
 function itemExists(item){
@@ -54,7 +64,10 @@ function buildListItem(itemText, opt = {sub:false, pid:null}) {
             id: ((opt.sub) ? 'listSubItem' : ''),
             pid: ((opt.sub && opt.pid) ? opt.pid : ''), // LIVE
             inner: (itemText.toLowerCase().includes('http')) ? itemText : itemText.substring(0, 1).toUpperCase() + itemText.substring(1),
-            icon: mkElem({ elemType: 'i', class: 'bi ' + ((opt.sub) ? 'bi-caret-right' : 'bi-caret-right-fill') })
+            icon: mkElem({ elemType: 'i', class: 'bi ' + ((opt.sub) ? 'bi-caret-right' : 'bi-caret-right-fill') }),
+            prop: {
+                subItem: (opt.sub)?opt.sub:false
+            }
         }
     );
 
@@ -79,23 +92,86 @@ function loadList(ln = null){
         ln = curList;
     [...document.getElementById('list').children].forEach(i=>{i.remove()})
     const list = getListDB(ln);
-    list.forEach(i=>{
-        if (i.subList){
-            nestElem([
-                document.getElementById('list'),
+    if (list)
+        list.forEach(i=>{
+            if (i.subList){
                 nestElem([
-                    buildListItem(i.text, {pid:i.id}),
-                    mkElem({elemType:'ul', class:'sub-list'}),
-                    i.subList.map(j=>{
-                        return buildListItem(j, {sub:true, pid:i.id});
-                    })
+                    document.getElementById('list'),
+                    nestElem([
+                        buildListItem(i.text, {pid:i.id}),
+                        mkElem({elemType:'ul', class:'sub-list'}),
+                        i.subList.map(j=>{
+                            return buildListItem(j, {sub:true, pid:i.id});
+                        })
+                    ])
                 ])
-            ])
-        }else{
-            nestElem([
-                document.getElementById('list'),
-                buildListItem(i.text, {pid:i.id})
-            ])
+            }else{
+                nestElem([
+                    document.getElementById('list'),
+                    buildListItem(i.text, {pid:i.id})
+                ])
+            }
+        })
+}
+
+function resetListBtn() {
+    document.querySelector('#item').classList.remove('is-danger');
+    removeMsg();
+    document.querySelectorAll('.listBtn button').forEach(btn => {
+        if (btn.id === 'addItem') {
+            btn.classList.remove('dnone');
+        } else {
+            btn.classList.add('dnone');
         }
-    })
+    });
+}
+
+function inputKeyActions(event) {
+
+    if (event.keyCode === 13) { // Enter
+
+        if (this.value.match(/^:[a-z]*:.*/)) {
+            let sn = this.value.split(':');
+            sn.shift();
+            switch (sn[0]) {
+                case 'save':
+                    // Save list to specified cookie name :*:cookie_name
+                    saveList(sn[1]); // Save Current list to new cookie
+                    clearList(); // clear the current list after creating new one
+                    clearListDB(curList); // clear list data
+                    resetListBtn();
+                    // saveList(); // reset current cookie
+                    break;
+                case 'load':
+                    // Load specific cookie
+                    clearList();
+                    resetListBtn();
+                    loadList(getCookie(sn[1]));
+                    break;
+            }
+            this.value = '';
+        } else {
+            let buttons = document.querySelectorAll('.listBtn button');
+
+            buttons.forEach(btn => {
+
+                if (!btn.classList.contains('dnone')) {
+
+                    btn.click();
+                    return;
+
+                }
+
+            });
+        }
+
+    } else if (event.keyCode === 27) { // ESC
+
+        // document.querySelector('#item').value = '';
+        // document.querySelector('#item').classList.remove('is-danger');
+        // removeMsg();
+
+        // resetListBtn();
+    }
+
 }
