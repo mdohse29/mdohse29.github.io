@@ -1,4 +1,6 @@
 let curList = 'default';
+// const frameCheck = window.top === window.self;
+
 
 function saveDB(collection){
     window.localStorage.setItem('lists', JSON.stringify(collection));
@@ -54,6 +56,18 @@ function itemExists(item){
     return null;
 }
 
+function doneContainer() {
+
+    return nestElem([
+        mkDiv({ class: 'card-content pt-0', id: 'done' }),
+        {
+            1: mkElem({ elemType: 'h4', class: 'h4', inner: '<i class="bi bi-check-circle-fill has-text-success"></i>Done!' }),
+            2: mkElem({ elemType: 'ul', id: 'doneSubs' })
+        }
+    ]);
+
+}
+
 function buildListItem(itemText, opt = {sub:false, pid:null}) {
     // returns ul.item-container > li#listItem if regular && li#listSubItem if sub item
 
@@ -67,7 +81,13 @@ function buildListItem(itemText, opt = {sub:false, pid:null}) {
             icon: mkElem({ elemType: 'i', class: 'bi ' + ((opt.sub) ? 'bi-caret-right' : 'bi-caret-right-fill') }),
             prop: {
                 subItem: (opt.sub)?opt.sub:false
-            }
+            },
+            listeners: [
+                {
+                    type:'click',
+                    execute:openOptions
+                }
+            ]
         }
     );
 
@@ -77,7 +97,8 @@ function buildListItem(itemText, opt = {sub:false, pid:null}) {
 
 function addItem(ev){
     ev.stopPropagation();
-    const itemText = this.parentElement.previousElementSibling.value.trim();
+    const input = this.parentElement.previousElementSibling;
+    const itemText = input.value.trim();
     const list = document.getElementById('list');
     if (itemText){
         itemText.split(',').reverse().forEach(itm=>{
@@ -85,6 +106,7 @@ function addItem(ev){
         });
         saveList();
     }
+    input.value = '';
 }
 
 function loadList(ln = null){
@@ -126,6 +148,66 @@ function resetListBtn() {
     });
 }
 
+function closeOptions() {
+
+    let options = document.querySelector('.options');
+
+    if (options) {
+        options.addEventListener('animationend', function () {
+            this.remove();
+        });
+        options.querySelectorAll('button').forEach(btn => {
+            btn.setAttribute('disabled', 'disabled');
+        });
+        options.classList.replace('fade-in', 'fade-out');
+    }
+
+}
+
+function optMo() {
+    let text = this.attributes['aria-description'].value;
+    this.parentElement.appendChild(mkElem({ elemType: 'span', class: 'btn-popover', inner: text }));
+}
+
+function optMl() {
+    this.parentElement.querySelector('span').remove();
+}
+
+function openOptions(ev) {
+    targetElement = this;
+    console.log(this)
+    if (document.querySelector('.options')) {
+        closeOptions();
+    }
+
+    const opts = {
+        b1: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-success is-outlined', 'aria-description': 'Mark Item Complete', id: 'tadone', inner: '<i class="bi bi-check-circle"></i>', listeners: [{ type: 'click', execute: complete }, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] }),
+        b2: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-link is-outlined', 'aria-description': 'Create Sub-List Item', id: 'crtSub', inner: '<i class="bi bi-plus-circle-dotted"></i>', listeners: [{ type: 'click', execute: toggleLstBtn }, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] }),
+        b3: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', 'aria-description': 'Edit List Item', id: 'edit', inner: '<i class="bi bi-pencil"></i>', listeners: [{ type: 'click', execute: toggleLstBtn }, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] }),
+        b4: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-info is-outlined', 'aria-description': 'Copy Item', id: 'copy', inner: '<i class="bi bi-copy"></i>', listeners: [{ type: 'click', execute: clkCopyItem }, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] }),
+        b5: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', 'aria-description': 'Restore List Item', id: 'undo', inner: '<i class="bi bi-arrow-counterclockwise"></i>', listeners: [{ type: 'click', execute: clkUndoItem }, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] }),
+        b6: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', 'aria-description': 'Close Options', id: 'cancel', inner: '<i class="bi bi-x-circle"></i>', listeners: [{ type: 'click', execute: closeOptions }, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] }),
+        b7: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-success is-outlined', 'aria-description': 'Load List', id: 'cancel', inner: '<i class="bi bi-arrow-up"></i>', listeners: [{ type: 'click', execute: clkLoadList}, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] })
+    }
+
+    nestElem([
+        document.querySelector('.card'),
+        mkDiv({ class: 'options fade-in', style: 'top: ' + (ev.y - 30) + 'px; left: ' + (ev.x - 27) + 'px;', listeners: [{ type: 'mouseleave', execute: closeOptions}] }),
+        mkDiv({ class: 'card' }),
+        mkDiv({ class: 'card-content p-0' }),
+        (this.parentElement.id === 'done' || this.parentElement.parentElement.id === 'done') ?
+            [opts.b5, opts.b6]
+            :
+            (this.id === 'listSubItem') ?
+                [opts.b1, opts.b3, (getItemText(this).includes(':load:')?opts.b7:opts.b4), opts.b6]
+                :
+                [opts.b1, opts.b2, opts.b3, (getItemText(this).includes(':load:')?opts.b7:opts.b4), opts.b6]
+    ]);
+
+    // document.querySelector('.options').classList.add('fade-in')
+
+}
+
 function inputKeyActions(event) {
 
     if (event.keyCode === 13) { // Enter
@@ -144,9 +226,9 @@ function inputKeyActions(event) {
                     break;
                 case 'load':
                     // Load specific cookie
-                    clearList();
+                    // clearList();
                     resetListBtn();
-                    loadList(getCookie(sn[1]));
+                    loadList(sn[1]);
                     break;
             }
             this.value = '';
@@ -173,5 +255,13 @@ function inputKeyActions(event) {
 
         // resetListBtn();
     }
+
+}
+
+window.onload = function () {
+
+    loadList(curList);
+    if (frameCheck)
+        document.querySelector('#item').focus();
 
 }

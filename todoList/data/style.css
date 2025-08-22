@@ -59,6 +59,10 @@ article.message {
     scrollbar-width: none;
 }
 
+#listItem:hover > li > i, #listSubItem:hover {
+    background-color: rgba(253, 249, 4, 0.45);
+}
+
 #done, #list {
     border-top: 2px solid rgba(211, 211, 211, .5);
 }
@@ -67,8 +71,7 @@ article.message {
 #doneSubs {
     cursor: pointer;
     font-size: 20px;
-    padding-left: 8px;
-    padding-bottom: 8px;
+    padding: 8px;
     border-bottom: 1px solid lightgray;
     user-select: none;
 }
@@ -130,10 +133,6 @@ i.bi-check-circle-fill {
 
 .options button:disabled {
     cursor: pointer;
-}
-
-.has-background-item {
-    background-color: rgba(253, 249, 4, 0.45);
 }
 
 .has-background-subitem {

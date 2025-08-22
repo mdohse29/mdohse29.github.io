@@ -502,18 +502,6 @@ function createItem(item, data = { isSub: false, pid: NaN }) {
 
 }
 
-function doneContainer() {
-
-    return nestElem([
-        mkDiv({ class: 'card-content pt-0', id: 'done' }),
-        {
-            1: mkElem({ elemType: 'h4', class: 'h4', inner: '<i class="bi bi-check-circle-fill has-text-success"></i>Done!' }),
-            2: mkP({ id: 'doneSubs' })
-        }
-    ]);
-
-}
-
 function moveElement(elem) {
     if (elem.id === 'listItem') {
 
@@ -559,7 +547,7 @@ function moveElement(elem) {
         elem.children[0].classList.remove('has-text-success');
         elem.classList.remove('has-background-item')
 
-        elem.addEventListener('click', clkListItem);
+        // elem.addEventListener('click', clkListItem);
         document.querySelector('#doneSubs').appendChild(elem);
 
     }
@@ -640,14 +628,14 @@ function setCookie(cn) {
 
 }
 
-function optMo(event) {
-    let text = event.target.attributes['aria-description'].value;
-    event.target.parentElement.appendChild(mkElem({ elemType: 'span', class: 'btn-popover', inner: text }));
-}
+// function optMo(event) {
+//     let text = event.target.attributes['aria-description'].value;
+//     event.target.parentElement.appendChild(mkElem({ elemType: 'span', class: 'btn-popover', inner: text }));
+// }
 
-function optMl(event) {
-    event.target.parentElement.querySelector('span').remove();
-}
+// function optMl(event) {
+//     event.target.parentElement.querySelector('span').remove();
+// }
 
 function closeOptions() {
 
@@ -980,10 +968,3 @@ window.TESTING = {
     }
 }
 
-window.onload = function () {
-
-    loadList(getCookie());
-    if (frameCheck)
-        document.querySelector('#item').focus();
-
-}
