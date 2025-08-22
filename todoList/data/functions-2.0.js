@@ -1,6 +1,49 @@
 let curList = 'default';
-// const frameCheck = window.top === window.self;
+const frameCheck = window.top === window.self;
+let errorTimeoutID = NaN;
 
+function errorMsg(message = 'Empty items or duplicate items are not accepted.<br>Check your entry and try again.', type = 'danger', timeOut = 5000) {
+    let currentMsg = document.querySelector('article.message');
+    rmvTimeout();
+    if (currentMsg) {
+        currentMsg.remove();
+    }
+    document.querySelector('.card-header.main-bg').prepend(nestElem([
+        mkElem({ elemType: 'article', class: `message is-small is-${type}`, listeners: [{ type: 'mouseenter', execute: manRmvMsg }] }),
+        {
+            1: nestElem([
+                mkDiv({ class: 'message-header is-justify-content-end' }),
+                mkBtn({ class: 'delete', listeners: [{ type: 'click', execute: removeMsg }] })
+            ]),
+            2: nestElem([
+                mkDiv({ class: 'message-body is-flex is-justify-content-center', style: 'text-align: center;' }),
+                mkP({ inner: message })
+            ])
+        }
+    ]));
+    document.querySelector('#item').classList.add('is-danger');
+    errorTimeoutID = setTimeout(removeMsg, timeOut);
+}
+
+function rmvTimeout() {
+    if (errorTimeoutID) {
+        clearTimeout(errorTimeoutID);
+        errorTimeoutID = NaN;
+    }
+}
+
+function removeMsg() {
+    let currentMsg = document.querySelector('article.message');
+    if (currentMsg) {
+        rmvTimeout();
+        currentMsg.remove();
+    }
+}
+
+function manRmvMsg() {
+    rmvTimeout();
+    this.addEventListener('mouseleave', removeMsg);
+}
 
 function saveDB(collection){
     window.localStorage.setItem('lists', JSON.stringify(collection));
@@ -56,6 +99,10 @@ function itemExists(item){
     return null;
 }
 
+function getItemText(elem) {
+    return ((elem.id === 'listItem' && elem.innerText.includes('\n')) ? elem.innerText.substring(0, elem.innerText.indexOf('\n')) : elem.innerText);
+}
+
 function doneContainer() {
 
     return nestElem([
@@ -68,8 +115,17 @@ function doneContainer() {
 
 }
 
+function getContainer(elem){
+    let container = elem.parentElement;
+    while ((container != null && container.id != 'list' && container.id != 'done')){
+        container = container.parentElement;
+    }
+    return container;
+}
+
 function buildListItem(itemText, opt = {sub:false, pid:null}) {
     // returns ul.item-container > li#listItem if regular && li#listSubItem if sub item
+    const sublist = document.querySelector(`#listItem[pid="${opt.pid}"] > .sub-list`);
 
     let elem = mkElem(
         {
@@ -79,6 +135,7 @@ function buildListItem(itemText, opt = {sub:false, pid:null}) {
             pid: ((opt.sub && opt.pid) ? opt.pid : ''), // LIVE
             inner: (itemText.toLowerCase().includes('http')) ? itemText : itemText.substring(0, 1).toUpperCase() + itemText.substring(1),
             icon: mkElem({ elemType: 'i', class: 'bi ' + ((opt.sub) ? 'bi-caret-right' : 'bi-caret-right-fill') }),
+            ident: `${(opt.sub)?(sublist)?sublist.children.length + 1:1:0}`,
             prop: {
                 subItem: (opt.sub)?opt.sub:false
             },
@@ -105,6 +162,8 @@ function addItem(ev){
             list.prepend(buildListItem(itm.trim()));
         });
         saveList();
+    }else{
+        errorMsg('Empty items will be ignored.', 'info', 3000)
     }
     input.value = '';
 }
@@ -148,10 +207,16 @@ function resetListBtn() {
     });
 }
 
+function resetSelectedItem(){
+    window.localStorage.removeItem('selected');
+}
+
+function getSelectedItemID(){
+    return JSON.parse(window.localStorage.selected);
+}
+
 function closeOptions() {
-
     let options = document.querySelector('.options');
-
     if (options) {
         options.addEventListener('animationend', function () {
             this.remove();
@@ -161,7 +226,6 @@ function closeOptions() {
         });
         options.classList.replace('fade-in', 'fade-out');
     }
-
 }
 
 function optMo() {
@@ -174,8 +238,13 @@ function optMl() {
 }
 
 function openOptions(ev) {
-    targetElement = this;
-    console.log(this)
+    window.localStorage.setItem('selected', JSON.stringify(
+        {
+            id: (this.subItem)?this.id:this.parentElement.id,
+            pid:`${(this.subItem)?this.attributes.pid.value:this.parentElement.attributes.pid.value}`,
+            ident: this.attributes.ident.value
+        }
+    ));
     if (document.querySelector('.options')) {
         closeOptions();
     }
@@ -195,7 +264,7 @@ function openOptions(ev) {
         mkDiv({ class: 'options fade-in', style: 'top: ' + (ev.y - 30) + 'px; left: ' + (ev.x - 27) + 'px;', listeners: [{ type: 'mouseleave', execute: closeOptions}] }),
         mkDiv({ class: 'card' }),
         mkDiv({ class: 'card-content p-0' }),
-        (this.parentElement.id === 'done' || this.parentElement.parentElement.id === 'done') ?
+        (getContainer(this).id === 'done') ?
             [opts.b5, opts.b6]
             :
             (this.id === 'listSubItem') ?
@@ -205,6 +274,92 @@ function openOptions(ev) {
     ]);
 
     // document.querySelector('.options').classList.add('fade-in')
+
+}
+
+function complete(){
+    const itmData = getSelectedItemID();
+    const selected = document.querySelector(`[pid="${itmData.pid}"]${(itmData.id === 'listSubItem')?`[ident="${itmData.ident}"]`:''}`);
+    console.log(selected);
+    closeOptions();
+}
+
+function inputActions() {
+
+    removeMsg();
+    this.classList.remove('is-danger');
+
+    if (this.value === ':export') { // REDO or git rid of it
+
+        // let itemText = listToString();
+
+        // if (itemText) {
+
+        //     navigator.clipboard.writeText(itemText.substring(0, itemText.length - 1));
+
+        //     let submit = getActiveBtn();
+
+        //     submit.setAttribute('disabled', 'disabled');
+        //     this.classList.add('is-success');
+        //     this.value = 'Exported to Clipboard!';
+
+        //     setTimeout(() => {
+        //         this.value = '';
+        //         this.classList.remove('is-success');
+        //         submit.removeAttribute('disabled');
+        //     }, 1000);
+
+        // } else {
+
+        //     errorMsg('Nothing to Export!', 'info', 2000);
+        //     this.value = '';
+
+        // }
+
+    } else if (this.value === ':list') {
+        const collection = getListDB();
+        let nosave = true;
+
+
+        let alert = nestElem([
+
+            mkElem({ elemType: 'article', id: 'cookieList', class: 'message is-small is-info' }),
+            {
+
+                1: nestElem([
+                    mkDiv({ class: 'message-header is-justify-content-end' }),
+                    mkBtn({ class: 'delete', listeners: [{ type: 'click', execute: removeMsg }] })
+                ]),
+                2: nestElem([
+                    mkDiv({ class: 'message-body is-flex is-flex-direction-column is-align-content-center', id: 'info', style: 'text-align: center;' }),
+                    mkP({ inner: "Current Saved Lists", style: "font-weight: bold;text-decoration: underline;" })
+                ])
+
+            }
+
+        ])
+        document.body.prepend(alert);
+
+        for (let key in collection){
+            if (key) {
+                console.log(key);
+                document.querySelector('#info').append(mkP({ inner: (curList === key) ? `<span style="color:red;">*</span> ${key} <span style="color:red;">*</span>` : key }));
+                nosave = false;
+            }
+        };
+        if (nosave) {
+            console.log("No saved lists found");
+            document.querySelector('.message-body').append(mkP({ class: 'has-text-danger', inner: 'No saved lists were found' }));
+            rmvTimeout();
+            errorTimeoutID = setTimeout(removeMsg, 2000);
+        }
+        if (Object.keys(collection).length > 1) {
+            this.value = ':load:';
+        } else {
+            this.value = '';
+        }
+        this.focus();
+    }
 
 }
 
@@ -249,11 +404,11 @@ function inputKeyActions(event) {
 
     } else if (event.keyCode === 27) { // ESC
 
-        // document.querySelector('#item').value = '';
-        // document.querySelector('#item').classList.remove('is-danger');
-        // removeMsg();
+        document.querySelector('#item').value = '';
+        document.querySelector('#item').classList.remove('is-danger');
+        removeMsg();
 
-        // resetListBtn();
+        resetListBtn();
     }
 
 }

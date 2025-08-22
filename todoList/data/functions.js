@@ -1,9 +1,9 @@
 const UA = navigator.userAgent;
 let targetElement = null;
-let errorTimeoutID = NaN;
+// let errorTimeoutID = NaN;
 let toID = NaN;
 let listVar = 'default';
-const frameCheck = window.top === window.self;
+// const frameCheck = window.top === window.self;
 
 function dupeCheck(item) {
 
