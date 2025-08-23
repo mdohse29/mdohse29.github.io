@@ -106,7 +106,7 @@ function getItemText(elem) {
 function doneContainer() {
 
     return nestElem([
-        mkDiv({ class: 'card-content pt-0', id: 'done' }),
+        mkDiv({ class: 'card-content pt-3', id: 'done' }),
         {
             1: mkElem({ elemType: 'h4', class: 'h4', inner: '<i class="bi bi-check-circle-fill has-text-success"></i>Done!' }),
             2: mkElem({ elemType: 'ul', id: 'doneSubs' })
@@ -130,12 +130,13 @@ function buildListItem(itemText, opt = {sub:false, pid:null}) {
     let elem = mkElem(
         {
             elemType: 'li',
+            class: 'fade-in-slow',
             title: 'Click for Options',
             id: ((opt.sub) ? 'listSubItem' : ''),
             pid: ((opt.sub && opt.pid) ? opt.pid : ''), // LIVE
             inner: (itemText.toLowerCase().includes('http')) ? itemText : itemText.substring(0, 1).toUpperCase() + itemText.substring(1),
             icon: mkElem({ elemType: 'i', class: 'bi ' + ((opt.sub) ? 'bi-caret-right' : 'bi-caret-right-fill') }),
-            ident: `${(opt.sub)?(sublist)?sublist.children.length + 1:1:0}`,
+            ident: `${(!opt.sub)?0:(sublist)?sublist.children.length + 1:1}`,
             prop: {
                 subItem: (opt.sub)?opt.sub:false
             },
@@ -143,6 +144,10 @@ function buildListItem(itemText, opt = {sub:false, pid:null}) {
                 {
                     type:'click',
                     execute:openOptions
+                },
+                {
+                    type:'animationend',
+                    execute:itemFadeInComplete
                 }
             ]
         }
@@ -163,9 +168,221 @@ function addItem(ev){
         });
         saveList();
     }else{
-        errorMsg('Empty items will be ignored.', 'info', 3000)
+        errorMsg('Empty items will be ignored.', 'link', 3000);
     }
-    input.value = '';
+    resetSelectedItem();
+    resetListBtn();
+}
+
+function addSubItem(ev){
+    ev.stopPropagation();
+    const data = getSelectedItemData();
+    const input = this.parentElement.previousElementSibling;
+    const itemText = input.value.trim();
+    const parent = document.querySelector(`#list #listItem[pid="${data.pid}"]`);
+    if (parent.children.length === 1 && itemText){
+        parent.append(mkElem({elemType:'ul', class:'sub-list'}));
+    }
+
+    if (itemText){
+        itemText.split(',').forEach(i=>{
+            parent.children[1].append(buildListItem(i, {sub:true, pid:data.pid}))
+        });
+        saveList();
+    }else{
+        errorMsg('Empty items will be ignored.', 'link', 3000);
+    }
+
+    resetSelectedItem();
+        resetListBtn();
+}
+
+function editItem(){
+    const data = getSelectedItemData();
+    const input = this.parentElement.previousElementSibling;
+
+}
+
+function setAllCaret(elem) {
+
+    let icons = ((elem.subItem)?elem:elem.parentElement).querySelectorAll('i');
+
+    icons.forEach(icon => {
+
+        icon.classList.replace('bi-check-circle-fill', ((icon.parentElement.id === 'listSubItem') ? 'bi-caret-right' : 'bi-caret-right-fill'));
+        icon.classList.remove('has-text-success');
+
+    });
+
+}
+
+function setAllCheck(elem, isDone = false) {
+    let icons = ((elem.subItem)?elem:elem.parentElement).querySelectorAll('i');
+    icons.forEach(icon => {
+        icon.classList.replace(((icon.parentElement.id === 'listSubItem') ? 'bi-caret-right' : 'bi-caret-right-fill'), 'bi-check-circle-fill');
+        if (isDone) {
+            icon.classList.remove('has-text-success');
+        } else {
+            icon.classList.add('has-text-success');
+        }
+    });
+}
+
+function itemFadeInComplete(ev){
+    ev.stopPropagation();
+    this.removeAttribute('class');
+    this.removeEventListener('animationend', itemFadeInComplete);
+}
+
+function itemFadeInMoveComplete(){
+    const container = getContainer(this);
+    this.removeAttribute('class');
+    this.removeEventListener('animationend', itemFadeInMoveComplete);
+}
+
+function itemFadeOutMoveComplete(){
+    let container = getContainer(this);
+    this.classList.add('dnone');
+    this.removeEventListener('animationend', itemFadeOutMoveComplete);
+    this.addEventListener('animationend', itemFadeInMoveComplete);
+    switch (container.id){
+        case 'list':
+            if (!container.nextElementSibling)
+                container.insertAdjacentElement('afterend', doneContainer())
+            container = container.nextElementSibling; // now done container
+            switch (this.id){
+                case 'listItem':
+                    /*
+                     * * if child is in doneSubs reattach to parent
+                     * * otherwise append
+                    */
+                    const doneSubs = container.children[1].querySelectorAll(`[pid="${this.attributes.pid.value}"]`);
+                    if (doneSubs.length){
+                        [...doneSubs].forEach(i=>{
+                            this.children[1].append(i);
+                        })
+                    }
+                    setAllCheck(this.children[0], true);
+                    container.append(this);
+                    break;
+                case 'listSubItem':
+                    // do something
+                    setAllCheck(this, true);
+                    container.querySelector('#doneSubs').append(this);
+                    break;
+                default:
+                    throw new Error('Something is wrong!!!\n\nCheck item ids, something isn\'t matching');
+            }
+            break;
+        case 'done':
+            console.log('move to list')
+            switch (this.id){
+                case 'listItem':
+                    // do something
+                    setAllCaret(this.children[0]);
+                    
+                    container.previousElementSibling.prepend(this);
+                    break;
+                case 'listSubItem':
+                    // do something
+                    setAllCaret(this);
+                    let parent = container.previousElementSibling.querySelector(`#listItem[pid="${this.attributes.pid.value}"]`);
+                    if (parent){
+                        parent.children[1].append(this);
+                    }else{
+                        this.remove();
+                        container.previousElementSibling.prepend(buildListItem(this.innerText));
+                    }
+                    break;
+                default:
+                    throw new Error('Something is wrong!!!\n\nCheck item ids, something isn\'t matching');
+            }
+            if (container.querySelectorAll('li').length === 0)
+                container.remove();
+            break;
+        default:
+            throw new Error('Something is wrong!!!!\n\nCheck the list containers');
+    }
+    fixIdent();
+    this.classList.replace('fade-out-complete', 'fade-in-slow');
+    this.classList.remove('dnone');
+    saveList();
+}
+
+function complete(){
+    const itmData = getSelectedItemData();
+    const selected = document.querySelector(`#list #listItem[pid="${itmData.pid}"] li[ident="${itmData.ident}"]`);
+    setAllCheck(selected);
+    changeTitle(selected);
+    if (selected.subItem){
+        selected.addEventListener('animationend', itemFadeOutMoveComplete);
+        selected.classList.add('fade-out-complete');
+    }else{
+        selected.parentElement.addEventListener('animationend', itemFadeOutMoveComplete);
+        selected.parentElement.classList.add('fade-out-complete');
+    }
+    resetSelectedItem();
+    closeOptions();
+}
+
+function clkUndoItem(){
+    const itmData = getSelectedItemData();
+    let doneSubs = document.querySelector(`#done #doneSubs [pid="${itmData.pid}"][ident="${itmData.ident}"]`);
+    let selected = (doneSubs)?doneSubs:document.querySelector(`#done #listItem[pid="${itmData.pid}"] li[ident="${itmData.ident}"]`);
+    // setAllCheck(selected);
+    changeTitle(selected);
+    if (selected.subItem){
+        selected.addEventListener('animationend', itemFadeOutMoveComplete);
+        selected.classList.add('fade-out-complete');
+    }else{
+        selected.parentElement.addEventListener('animationend', itemFadeOutMoveComplete);
+        selected.parentElement.classList.add('fade-out-complete');
+    }
+    resetSelectedItem();
+    closeOptions();
+}
+
+function clkLoadList(){
+    const itm = getSelectedItemData();
+    const targetElement = document.querySelector(`#list #listItem[pid="${itm.pid}"] li[ident="${itm.ident}"]`);
+    let list = getItemText(targetElement);
+    list = list.substring(list.lastIndexOf(':')+1);
+    closeOptions();
+    resetSelectedItem();
+    resetListBtn();
+    loadList(list);
+}
+
+function clkCopyItem() {
+    const itm = getSelectedItemData();
+    const targetElement = document.querySelector(`#list #listItem[pid="${itm.pid}"] li[ident="${itm.ident}"]`);
+    navigator.clipboard.writeText(getItemText(targetElement));
+    closeOptions();
+    resetSelectedItem();
+}
+
+function toggleLstBtn() {
+    const data = getSelectedItemData();
+    const targetElement = document.querySelector(`#list #listItem[pid="${data.pid}"] li[ident="${data.ident}"]`);
+
+    closeOptions();
+
+    if (this.id === 'edit') {
+
+        document.querySelector('#item').value = getItemText(targetElement);
+        document.querySelector('#editItem').classList.remove('dnone');
+        document.querySelector('#addSub').classList.add('dnone');
+
+    } else if (this.id === 'crtSub') {
+
+        document.querySelector('#addSub').classList.remove('dnone');
+        document.querySelector('#editItem').classList.add('dnone');
+
+    }
+
+    document.querySelector('#addItem').classList.add('dnone');
+    document.querySelector('#item').focus();
+
 }
 
 function loadList(ln = null){
@@ -173,9 +390,9 @@ function loadList(ln = null){
         ln = curList;
     [...document.getElementById('list').children].forEach(i=>{i.remove()})
     const list = getListDB(ln);
-    if (list)
+    if (list instanceof Array)
         list.forEach(i=>{
-            if (i.subList){
+            if (i.subList){// Need to REDO this section to fix ident numbering on load
                 nestElem([
                     document.getElementById('list'),
                     nestElem([
@@ -185,19 +402,27 @@ function loadList(ln = null){
                             return buildListItem(j, {sub:true, pid:i.id});
                         })
                     ])
-                ])
+                ]);
             }else{
                 nestElem([
                     document.getElementById('list'),
                     buildListItem(i.text, {pid:i.id})
-                ])
+                ]);
             }
-        })
+        });
+    fixIdent();
+}
+
+function fixIdent(){
+    [...document.querySelectorAll('.sub-list')].forEach((i)=>{
+        [...i.children].forEach((j, n)=>{j.setAttribute('ident', `${n+1}`)})
+    })
 }
 
 function resetListBtn() {
     document.querySelector('#item').classList.remove('is-danger');
-    removeMsg();
+    document.querySelector('#item').value = '';
+    // removeMsg();
     document.querySelectorAll('.listBtn button').forEach(btn => {
         if (btn.id === 'addItem') {
             btn.classList.remove('dnone');
@@ -211,7 +436,7 @@ function resetSelectedItem(){
     window.localStorage.removeItem('selected');
 }
 
-function getSelectedItemID(){
+function getSelectedItemData(){
     return JSON.parse(window.localStorage.selected);
 }
 
@@ -245,6 +470,7 @@ function openOptions(ev) {
             ident: this.attributes.ident.value
         }
     ));
+    resetListBtn();
     if (document.querySelector('.options')) {
         closeOptions();
     }
@@ -277,11 +503,14 @@ function openOptions(ev) {
 
 }
 
-function complete(){
-    const itmData = getSelectedItemID();
-    const selected = document.querySelector(`[pid="${itmData.pid}"]${(itmData.id === 'listSubItem')?`[ident="${itmData.ident}"]`:''}`);
-    console.log(selected);
-    closeOptions();
+function changeTitle(elem) {
+    if (elem.subItem){
+        elem.title = (elem.title === 'Click to Undo')?'Click for Options':'Click to Undo';
+    }else{
+        [...elem.parentElement.querySelectorAll('li')].forEach(i=>{
+            i.title = (i.title === 'Click to Undo')?'Click for Options':'Click to Undo';
+        })
+    }
 }
 
 function inputActions() {
@@ -289,33 +518,13 @@ function inputActions() {
     removeMsg();
     this.classList.remove('is-danger');
 
-    if (this.value === ':export') { // REDO or git rid of it
-
-        // let itemText = listToString();
-
-        // if (itemText) {
-
-        //     navigator.clipboard.writeText(itemText.substring(0, itemText.length - 1));
-
-        //     let submit = getActiveBtn();
-
-        //     submit.setAttribute('disabled', 'disabled');
-        //     this.classList.add('is-success');
-        //     this.value = 'Exported to Clipboard!';
-
-        //     setTimeout(() => {
-        //         this.value = '';
-        //         this.classList.remove('is-success');
-        //         submit.removeAttribute('disabled');
-        //     }, 1000);
-
-        // } else {
-
-        //     errorMsg('Nothing to Export!', 'info', 2000);
-        //     this.value = '';
-
-        // }
-
+    if (this.value === ':export') {
+        navigator.clipboard.writeText(window.localStorage.lists).then(()=>{
+            errorMsg('Export Completed!', 'success');
+        }).catch((err)=>{
+            errorMsg(err, 'danger', 5000);
+        });
+        this.value = '';
     } else if (this.value === ':list') {
         const collection = getListDB();
         let nosave = true;
@@ -342,7 +551,6 @@ function inputActions() {
 
         for (let key in collection){
             if (key) {
-                console.log(key);
                 document.querySelector('#info').append(mkP({ inner: (curList === key) ? `<span style="color:red;">*</span> ${key} <span style="color:red;">*</span>` : key }));
                 nosave = false;
             }
@@ -364,9 +572,7 @@ function inputActions() {
 }
 
 function inputKeyActions(event) {
-
     if (event.keyCode === 13) { // Enter
-
         if (this.value.match(/^:[a-z]*:.*/)) {
             let sn = this.value.split(':');
             sn.shift();
@@ -389,34 +595,23 @@ function inputKeyActions(event) {
             this.value = '';
         } else {
             let buttons = document.querySelectorAll('.listBtn button');
-
             buttons.forEach(btn => {
-
                 if (!btn.classList.contains('dnone')) {
-
                     btn.click();
                     return;
-
                 }
-
             });
         }
-
     } else if (event.keyCode === 27) { // ESC
-
-        document.querySelector('#item').value = '';
         document.querySelector('#item').classList.remove('is-danger');
+        resetSelectedItem();
         removeMsg();
-
         resetListBtn();
     }
-
 }
 
 window.onload = function () {
-
     loadList(curList);
     if (frameCheck)
         document.querySelector('#item').focus();
-
 }
