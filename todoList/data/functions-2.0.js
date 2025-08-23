@@ -275,30 +275,30 @@ function itemFadeOutMoveComplete(){
             }
             break;
         case 'done':
-            console.log('move to list')
+            container = container.previousElementSibling;
             switch (this.id){
                 case 'listItem':
                     // do something
                     setAllCaret(this.children[0]);
                     
-                    container.previousElementSibling.prepend(this);
+                    container.prepend(this);
                     break;
                 case 'listSubItem':
                     // do something
                     setAllCaret(this);
-                    let parent = container.previousElementSibling.querySelector(`#listItem[pid="${this.attributes.pid.value}"]`);
+                    let parent = container.querySelector(`#listItem[pid="${this.attributes.pid.value}"]`);
                     if (parent){
                         parent.children[1].append(this);
                     }else{
                         this.remove();
-                        container.previousElementSibling.prepend(buildListItem(this.innerText));
+                        container.prepend(buildListItem(this.innerText));
                     }
                     break;
                 default:
                     throw new Error('Something is wrong!!!\n\nCheck item ids, something isn\'t matching');
             }
-            if (container.querySelectorAll('li').length === 0)
-                container.remove();
+            if (container.nextElementSibling.querySelectorAll('li').length === 0)
+                container.nextElementSibling.remove();
             break;
         default:
             throw new Error('Something is wrong!!!!\n\nCheck the list containers');

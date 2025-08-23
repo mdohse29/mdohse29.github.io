@@ -59,11 +59,7 @@ article.message {
     scrollbar-width: none;
 }
 
-#listItem:hover > li > i, #listSubItem:hover {
-    background-color: rgba(253, 249, 4, 0.45);
-}
-
-#done, #list {
+#list-container>div {
     border-top: 2px solid rgba(211, 211, 211, .5);
 }
 
@@ -71,21 +67,17 @@ article.message {
 #doneSubs {
     cursor: pointer;
     font-size: 20px;
-    padding: 8px;
+    padding-left: 8px;
+    padding-bottom: 8px;
     border-bottom: 1px solid lightgray;
     user-select: none;
 }
 
-#listItem:first-child {
-    padding-top: 0;
-}
-
 #doneSubs {
     border: 0px;
-    padding: 0 0 0 8px;
 }
 
-#done li {
+#done p {
     text-decoration: line-through;
     color: rgb(148, 148, 148);
 }
@@ -140,6 +132,10 @@ i.bi-check-circle-fill {
     cursor: pointer;
 }
 
+.has-background-item {
+    background-color: rgba(253, 249, 4, 0.45);
+}
+
 .has-background-subitem {
     background-color: rgba(248, 116, 210, .2);
 }
@@ -175,10 +171,6 @@ i.bi-check-circle-fill {
 
 .fade-out-slow {
     animation: fade-out 500ms ease-out;
-}
-
-.fade-out-complete {
-    animation: 1s ease-in-out 250ms fade-out;
 }
 
 .settings-menu {
@@ -252,18 +244,6 @@ i.bi-check-circle-fill {
 
     to {
         opacity: 0;
-    }
-}
-
-@keyframes fade-out-complete {
-    from {
-        opacity: 1;
-        height: 100%;
-    }
-
-    to {
-        opacity: 0;
-        height: 0%;
     }
 }
 
