@@ -30,7 +30,7 @@ document.body.prepend(nestElem([
         ]),
         4:nestElem([
             mkDiv({id:'list-container'}),
-            mkDiv({class:'card-content', id:'list'})
+            mkDiv({class:'card-content py-3', id:'list'})
         ]),
         5:mkDiv({class:'card-footer pb-4 pt-4 main-bg'})
     }
