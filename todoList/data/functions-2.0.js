@@ -164,7 +164,9 @@ function addItem(ev){
     const list = document.getElementById('list');
     if (itemText){
         itemText.split(',').reverse().forEach(itm=>{
-            list.prepend(buildListItem(itm.trim()));
+            itm = itm.trim();
+            if (itm.length)
+                list.prepend(buildListItem(itm));
         });
         saveList();
     }else{
@@ -186,7 +188,9 @@ function addSubItem(ev){
 
     if (itemText){
         itemText.split(',').forEach(i=>{
-            parent.children[1].append(buildListItem(i.trim(), {sub:true, pid:data.pid}))
+            i = i.trim();
+            if (i.length)
+                parent.children[1].append(buildListItem(i, {sub:true, pid:data.pid}))
         });
         saveList();
     }else{
