@@ -106,7 +106,7 @@ function getItemText(elem) {
 function doneContainer() {
 
     return nestElem([
-        mkDiv({ class: 'card-content pt-3', id: 'done' }),
+        mkDiv({ class: 'card-content py-3', id: 'done' }),
         {
             1: mkElem({ elemType: 'h4', class: 'h4', inner: '<i class="bi bi-check-circle-fill has-text-success"></i>Done!' }),
             2: mkElem({ elemType: 'ul', id: 'doneSubs' })
