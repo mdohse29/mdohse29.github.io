@@ -325,6 +325,25 @@ function complete(){
     closeOptions();
 }
 
+function editItem(){
+    const itmData = getSelectedItemData();
+    let selected = document.querySelector(`#listItem[pid="${itmData.pid}"] li[ident="${itmData.ident}"]`);
+    let update = this.parentElement.previousElementSibling.value.trim();
+    if (update.length){
+        if (selected){
+            let icon = selected.children[0];
+            selected.innerHTML = update;
+            selected.prepend(icon);
+        }
+    }else{
+        errorMsg('Empty items will be ignored.', 'info', 3000);
+    }
+
+    resetSelectedItem();
+    resetListBtn();
+    saveList();
+}
+
 function clkUndoItem(){
     const itmData = getSelectedItemData();
     let doneSubs = document.querySelector(`#done #doneSubs [pid="${itmData.pid}"][ident="${itmData.ident}"]`);
@@ -482,7 +501,7 @@ function openOptions(ev) {
         b4: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-info is-outlined', 'aria-description': 'Copy Item', id: 'copy', inner: '<i class="bi bi-copy"></i>', listeners: [{ type: 'click', execute: clkCopyItem }, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] }),
         b5: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', 'aria-description': 'Restore List Item', id: 'undo', inner: '<i class="bi bi-arrow-counterclockwise"></i>', listeners: [{ type: 'click', execute: clkUndoItem }, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] }),
         b6: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', 'aria-description': 'Close Options', id: 'cancel', inner: '<i class="bi bi-x-circle"></i>', listeners: [{ type: 'click', execute: closeOptions }, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] }),
-        b7: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-success is-outlined', 'aria-description': 'Load List', id: 'cancel', inner: '<i class="bi bi-arrow-up"></i>', listeners: [{ type: 'click', execute: clkLoadList}, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] })
+        b7: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-success is-outlined', 'aria-description': 'Load List', id: 'load', inner: '<i class="bi bi-arrow-up"></i>', listeners: [{ type: 'click', execute: clkLoadList}, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] })
     }
 
     nestElem([
@@ -610,8 +629,54 @@ function inputKeyActions(event) {
     }
 }
 
+function setCookie(cn) {
+    if (frameCheck) {
+        // let items = document.querySelector('#list').querySelectorAll('#listItem'); // ptag ref
+        let items = [...document.getElementById('list').children].filter(f => { if (f.id === 'listItem') return f });
+        let itemText = '';
+        items.forEach(item => {
+            itemText += item.innerText.replaceAll('\n', '|') + ',';
+        });
+        if (itemText) {
+            document.cookie = `${(cn) ? cn : listVar}=${itemText.substring(0, itemText.length - 1)}; max-age=31536000; samesite=strict; secure`
+            if (itemText.length > 3000) {
+                errorMsg('Please start completing items on the list.<br><br>There is < 1000 bytes of storage left.');
+            }
+        } else {
+            document.cookie = listVar + '=; max-age=0; samesite=strict; secure';
+        }
+    }
+}
+
+function convertCookies(){
+    if (document.cookie.length){
+        let cookieCollection = {};
+        let collection = [];
+        let cookies = `${document.cookie}`.split('; ');
+        if (cookies.length){
+            cookies.forEach(i=>{
+                let ln = i.split('=')[0];
+                let items = i.split('=')[1].split(',');
+                items.forEach(j=>{
+                    if (j.includes('|')){
+                        let text = j.split('|');
+                        collection.push({id:crypto.randomUUID(), text:text.shift(), subList: text})
+                    }
+                })
+                cookieCollection[ln] = collection;
+            })
+            console.log(cookieCollection);
+            saveDB(cookieCollection);
+        }
+            
+    }else{
+        console.log('No cookies, it\'s all good')
+    }
+}
+
 window.onload = function () {
     loadList(curList);
+    resetSelectedItem();
     if (frameCheck)
         document.querySelector('#item').focus();
 }

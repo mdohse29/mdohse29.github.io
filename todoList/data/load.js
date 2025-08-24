@@ -23,7 +23,7 @@ document.body.prepend(nestElem([
                     {
                         1:mkBtn({class:'button ml-2 is-rounded is-info is-outlined', id:'addItem', inner:'Add Item', listeners:[{type:'click', execute:addItem}]}),
                         2:mkBtn({class:'button ml-2 is-rounded is-link is-outlined dnone', id:'addSub', inner:'Add Sub Item', listeners:[{type:'click', execute:addSubItem}]}),
-                        3:mkBtn({class:'button ml-2 is-rounded is-warning dnone', id:'editItem', inner:'Edit Item'})
+                        3:mkBtn({class:'button ml-2 is-rounded is-warning dnone', id:'editItem', inner:'Edit Item', listeners:[{type:'click', execute:editItem}]})
                     }
                 ])
             }
