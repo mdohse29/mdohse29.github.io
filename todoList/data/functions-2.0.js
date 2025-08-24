@@ -186,7 +186,7 @@ function addSubItem(ev){
 
     if (itemText){
         itemText.split(',').forEach(i=>{
-            parent.children[1].append(buildListItem(i, {sub:true, pid:data.pid}))
+            parent.children[1].append(buildListItem(i.trim(), {sub:true, pid:data.pid}))
         });
         saveList();
     }else{
@@ -273,6 +273,7 @@ function itemFadeOutMoveComplete(){
                 default:
                     throw new Error('Something is wrong!!!\n\nCheck item ids, something isn\'t matching');
             }
+
             break;
         case 'done':
             container = container.previousElementSibling;
@@ -306,7 +307,13 @@ function itemFadeOutMoveComplete(){
     fixIdent();
     this.classList.replace('fade-out-complete', 'fade-in-slow');
     this.classList.remove('dnone');
-    saveList();
+    if (container.id === 'done')
+        container = container.previousElementSibling;
+    if (container.children.length === 0){
+        clearListDB(curList);
+    }else{
+        saveList();
+    }
 }
 
 function complete(){
@@ -415,17 +422,17 @@ function loadList(ln = null){
                 nestElem([
                     document.getElementById('list'),
                     nestElem([
-                        buildListItem(i.text, {pid:i.id}),
+                        buildListItem(i.text.trim(), {pid:i.id}),
                         mkElem({elemType:'ul', class:'sub-list'}),
                         i.subList.map(j=>{
-                            return buildListItem(j, {sub:true, pid:i.id});
+                            return buildListItem(j.trim(), {sub:true, pid:i.id});
                         })
                     ])
                 ]);
             }else{
                 nestElem([
                     document.getElementById('list'),
-                    buildListItem(i.text, {pid:i.id})
+                    buildListItem(i.text.trim(), {pid:i.id})
                 ]);
             }
         });
@@ -599,9 +606,10 @@ function inputKeyActions(event) {
                 case 'save':
                     // Save list to specified cookie name :*:cookie_name
                     saveList(sn[1]); // Save Current list to new cookie
-                    clearList(); // clear the current list after creating new one
+                    // clearList(); // clear the current list after creating new one
                     clearListDB(curList); // clear list data
                     resetListBtn();
+                    loadList(curList);
                     // saveList(); // reset current cookie
                     break;
                 case 'load':
@@ -629,43 +637,49 @@ function inputKeyActions(event) {
     }
 }
 
-function setCookie(cn) {
-    if (frameCheck) {
-        // let items = document.querySelector('#list').querySelectorAll('#listItem'); // ptag ref
-        let items = [...document.getElementById('list').children].filter(f => { if (f.id === 'listItem') return f });
-        let itemText = '';
-        items.forEach(item => {
-            itemText += item.innerText.replaceAll('\n', '|') + ',';
-        });
-        if (itemText) {
-            document.cookie = `${(cn) ? cn : listVar}=${itemText.substring(0, itemText.length - 1)}; max-age=31536000; samesite=strict; secure`
-            if (itemText.length > 3000) {
-                errorMsg('Please start completing items on the list.<br><br>There is < 1000 bytes of storage left.');
-            }
-        } else {
-            document.cookie = listVar + '=; max-age=0; samesite=strict; secure';
-        }
-    }
-}
+// function setCookie(cn) {
+//     if (frameCheck) {
+//         // let items = document.querySelector('#list').querySelectorAll('#listItem'); // ptag ref
+//         let items = [...document.getElementById('list').children].filter(f => { if (f.id === 'listItem') return f });
+//         let itemText = '';
+//         items.forEach(item => {
+//             itemText += item.innerText.replaceAll('\n', '|') + ',';
+//         });
+//         if (itemText) {
+//             document.cookie = `${(cn) ? cn : listVar}=${itemText.substring(0, itemText.length - 1)}; max-age=31536000; samesite=strict; secure`
+//             if (itemText.length > 3000) {
+//                 errorMsg('Please start completing items on the list.<br><br>There is < 1000 bytes of storage left.');
+//             }
+//         } else {
+//             document.cookie = listVar + '=; max-age=0; samesite=strict; secure';
+//         }
+//     }
+// }
 
 function convertCookies(){
     if (document.cookie.length){
         let cookieCollection = {};
-        let collection = [];
+        // let collection = [];
         let cookies = `${document.cookie}`.split('; ');
         if (cookies.length){
-            cookies.forEach(i=>{
-                let ln = i.split('=')[0];
-                let items = i.split('=')[1].split(',');
-                items.forEach(j=>{
-                    if (j.includes('|')){
-                        let text = j.split('|');
-                        collection.push({id:crypto.randomUUID(), text:text.shift(), subList: text})
+            for (let cookie of cookies){
+                let ln = cookie.split('=')[0];
+                let lists = cookie.split('=')[1].split(',');
+
+                cookieCollection[ln] = [];
+
+                for (let item of lists){
+                    if (item.includes('|')){
+                        let items = item.split('|');
+                        cookieCollection[ln].push({id:crypto.randomUUID(), text:items.shift(), subList:[...items]})
+                    }else{
+                        cookieCollection[ln].push({id:crypto.randomUUID(), text:item, subList:null});
                     }
-                })
-                cookieCollection[ln] = collection;
-            })
-            console.log(cookieCollection);
+
+                }
+                document.cookie = `${ln}=; max-age=0;`;
+            }
+            // console.log(cookieCollection);
             saveDB(cookieCollection);
         }
             
