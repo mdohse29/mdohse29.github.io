@@ -59,7 +59,7 @@ function saveList(ln = null){
         const id = itm.getAttribute('pid');
         const item = itm.children[0];
         
-        ListItems.push({id:id, text:item.innerText.trim(), subList:(item.nextElementSibling)?[...item.nextElementSibling.children].map(itm=>{return itm.innerText}):null});
+        ListItems.push({id:id, text:item.innerText.trim(), subList:(item.nextElementSibling && item.nextElementSibling.children.length)?[...item.nextElementSibling.children].map(itm=>{return itm.innerText}):null});
     }
     
     collection[ln] = ListItems;
