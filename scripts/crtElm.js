@@ -188,24 +188,24 @@ function tgLblListen(e) {
     }
 }
 
-function createToggle(attr = { id: '', title: '', label: '', isLocked: false }) {
+function createToggle(attr = { id: '', title: '', label: '', isLocked: null}) {
     // css location mdohse29.github.io/templates/toggleSwitch/toggleSwitch.css
     return nestElem([
-        mkDiv({ id: attr.id, class: ((attr.class) ? 'switch-container ' + attr.class : 'switch-container'), title: attr.title, isLocked: attr.isLocked }),
+        mkDiv({ id: attr.id, class: ((attr.class) ? 'switch-container ' + attr.class : 'switch-container'), title: attr.title, isLocked: (attr.isLocked != undefined)?attr.isLocked:null }),
         (attr.label && attr.label.length > 1) ?
             [
                 mkLabel({ inner: attr.label, listeners: [{ type: 'click', execute: tgLblListen }] }),
                 nestElem([
                     mkDiv({ class: 'switch' }),
                     mkDiv({ class: 'toggle-cont', listeners: [{ type: 'click', execute: tgPillListen }] }),
-                    mkDiv({ class: 'toggle-pill' })
+                    mkDiv({ class: 'toggle-pill', title:(attr.isLocked != undefined)?'Hold "Ctrl" while clicking to lock/unlock':null})
                 ])
             ]
             :
             nestElem([
                 mkDiv({ class: 'switch' }),
                 mkDiv({ class: 'toggle-cont', listeners: [{ type: 'click', execute: tgPillListen }] }),
-                mkDiv({ class: 'toggle-pill' })
+                mkDiv({ class: 'toggle-pill', title:(attr.isLocked != undefined)?'Hold "Ctrl" while clicking to lock/unlock':null})
             ])
     ]);
 }
