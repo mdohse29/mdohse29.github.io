@@ -597,6 +597,10 @@ function inputActions() {
             this.value = '';
         }
         this.focus();
+    }else if (this.value === ':convert:'){
+        this.value = '';
+        convertCookies();
+        errorMsg('Conversion Complete!\nRefresh the page and any saved data should be restored.', 'success', 10000)
     }
 
 }
