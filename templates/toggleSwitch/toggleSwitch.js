@@ -28,4 +28,4 @@ for (let label of labels){
     });
 }
 
-document.querySelector('.presentation').appendChild(createToggle({id: 'test3', label: 'Test 3', isLocked: 'false'}))
+document.querySelector('.presentation').appendChild(createToggle({id: 'test3', label: 'Test 3', title:'This was created by script for testing', isLocked: 'false'}))
