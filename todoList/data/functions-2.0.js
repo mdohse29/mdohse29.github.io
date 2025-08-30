@@ -2,7 +2,7 @@ let curList = 'default';
 const frameCheck = window.top === window.self;
 let errorTimeoutID = NaN;
 
-function errorMsg(message = 'Empty items or duplicate items are not accepted.<br>Check your entry and try again.', type = 'danger', timeOut = 5000) {
+function popMsg(message = 'Empty items or duplicate items are not accepted.<br>Check your entry and try again.', type = 'danger', timeOut = 5000) {
     let currentMsg = document.querySelector('article.message');
     rmvTimeout();
     if (currentMsg) {
@@ -170,7 +170,7 @@ function addItem(ev){
         });
         saveList();
     }else{
-        errorMsg('Empty items will be ignored.', 'link', 3000);
+        popMsg('Empty items will be ignored.', 'link', 3000);
     }
     resetSelectedItem();
     resetListBtn();
@@ -194,7 +194,7 @@ function addSubItem(ev){
         });
         saveList();
     }else{
-        errorMsg('Empty items will be ignored.', 'link', 3000);
+        popMsg('Empty items will be ignored.', 'link', 3000);
     }
 
     resetSelectedItem();
@@ -347,7 +347,7 @@ function editItem(){
             selected.prepend(icon);
         }
     }else{
-        errorMsg('Empty items will be ignored.', 'info', 3000);
+        popMsg('Empty items will be ignored.', 'info', 3000);
     }
 
     resetSelectedItem();
@@ -549,10 +549,10 @@ function inputActions() {
     this.classList.remove('is-danger');
 
     if (this.value === ':export') {
-        navigator.clipboard.writeText(window.localStorage.lists).then(()=>{
-            errorMsg('Export Completed!', 'success');
+        navigator.clipboard.writeText(window.localStorage.lists).then(()=>{ 
+            popMsg('Export Completed!', 'success');
         }).catch((err)=>{
-            errorMsg(err, 'danger', 5000);
+            popMsg(err, 'danger', 5000);
         });
         this.value = '';
     } else if (this.value === ':list') {
@@ -600,7 +600,7 @@ function inputActions() {
     }else if (this.value === ':convert:'){
         this.value = '';
         convertCookies();
-        errorMsg('Conversion Complete!\nRefresh the page and any saved data should be restored.', 'success', 10000)
+        popMsg('Conversion Complete!\nRefresh the page and any saved data should be restored.', 'success', 10000)
     }
 
 }
@@ -625,6 +625,11 @@ function inputKeyActions(event) {
                     // clearList();
                     resetListBtn();
                     loadList(sn[1]);
+                    break;
+                case 'delete':
+                    clearListDB(sn[1]);
+                    popMsg(`The list labeled ${sn[1]} has been removed!`, 'success', 4000);
+                    resetListBtn();
                     break;
             }
             this.value = '';
