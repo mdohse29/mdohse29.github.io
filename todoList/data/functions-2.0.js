@@ -21,7 +21,9 @@ function popMsg(message = 'Empty items or duplicate items are not accepted.<br>C
             ])
         }
     ]));
-    document.querySelector('#item').classList.add('is-danger');
+    document.querySelector('#item').focus();
+    if (type==='danger')
+        document.querySelector('#item').classList.add('is-danger');
     errorTimeoutID = setTimeout(removeMsg, timeOut);
 }
 
