@@ -549,8 +549,23 @@ function inputActions() {
     this.classList.remove('is-danger');
 
     if (this.value === ':export') {
-        navigator.clipboard.writeText(window.localStorage.lists).then(()=>{ 
-            popMsg('Export Completed!', 'success');
+        let text = '';
+        if (confirm('Click "OK" for ALL lists\nClick "Cancel" for current list text')){
+            text = window.localStorage.lists;
+        }else{
+            let items = getListDB(curList);
+            if (items)
+                for (let i of items){
+                    text += `\n${i.text}`;
+                    if (i.subList){
+                        for (let s of i.subList){
+                            text += `\n\t${s}`;
+                        }
+                    }
+                }
+        }
+        navigator.clipboard.writeText(text.trim()).then(()=>{ 
+            popMsg('Export Completed!', 'success', 3000);
         }).catch((err)=>{
             popMsg(err, 'danger', 5000);
         });
@@ -558,13 +573,9 @@ function inputActions() {
     } else if (this.value === ':list') {
         const collection = getListDB();
         let nosave = true;
-
-
         let alert = nestElem([
-
             mkElem({ elemType: 'article', id: 'cookieList', class: 'message is-small is-info' }),
             {
-
                 1: nestElem([
                     mkDiv({ class: 'message-header is-justify-content-end' }),
                     mkBtn({ class: 'delete', listeners: [{ type: 'click', execute: removeMsg }] })
@@ -573,12 +584,9 @@ function inputActions() {
                     mkDiv({ class: 'message-body is-flex is-flex-direction-column is-align-content-center', id: 'info', style: 'text-align: center;' }),
                     mkP({ inner: "Current Saved Lists", style: "font-weight: bold;text-decoration: underline;" })
                 ])
-
             }
-
-        ])
+        ]);
         document.body.prepend(alert);
-
         for (let key in collection){
             if (key) {
                 document.querySelector('#info').append(mkP({ inner: (curList === key) ? `<span style="color:red;">*</span> ${key} <span style="color:red;">*</span>` : key }));
@@ -614,21 +622,18 @@ function inputKeyActions(event) {
                 case 'save':
                     // Save list to specified cookie name :*:cookie_name
                     saveList(sn[1]); // Save Current list to new cookie
-                    // clearList(); // clear the current list after creating new one
                     clearListDB(curList); // clear list data
                     resetListBtn();
                     loadList(curList);
-                    // saveList(); // reset current cookie
                     break;
                 case 'load':
                     // Load specific cookie
-                    // clearList();
                     resetListBtn();
                     loadList(sn[1]);
                     break;
                 case 'delete':
                     clearListDB(sn[1]);
-                    popMsg(`The list labeled ${sn[1]} has been removed!`, 'success', 4000);
+                    popMsg(`The list labeled "${sn[1]}" has been removed!`, 'success', 4000);
                     resetListBtn();
                     break;
             }
