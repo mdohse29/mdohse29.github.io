@@ -2,7 +2,7 @@ let curList = 'default';
 const frameCheck = window.top === window.self;
 let errorTimeoutID = NaN;
 
-function errorMsg(message = 'Empty items or duplicate items are not accepted.<br>Check your entry and try again.', type = 'danger', timeOut = 5000) {
+function popMsg(message = 'Empty items or duplicate items are not accepted.<br>Check your entry and try again.', type = 'danger', timeOut = 5000) {
     let currentMsg = document.querySelector('article.message');
     rmvTimeout();
     if (currentMsg) {
@@ -170,7 +170,7 @@ function addItem(ev){
         });
         saveList();
     }else{
-        errorMsg('Empty items will be ignored.', 'link', 3000);
+        popMsg('Empty items will be ignored.', 'link', 3000);
     }
     resetSelectedItem();
     resetListBtn();
@@ -194,7 +194,7 @@ function addSubItem(ev){
         });
         saveList();
     }else{
-        errorMsg('Empty items will be ignored.', 'link', 3000);
+        popMsg('Empty items will be ignored.', 'link', 3000);
     }
 
     resetSelectedItem();
@@ -347,7 +347,7 @@ function editItem(){
             selected.prepend(icon);
         }
     }else{
-        errorMsg('Empty items will be ignored.', 'info', 3000);
+        popMsg('Empty items will be ignored.', 'info', 3000);
     }
 
     resetSelectedItem();
@@ -549,22 +549,33 @@ function inputActions() {
     this.classList.remove('is-danger');
 
     if (this.value === ':export') {
-        navigator.clipboard.writeText(window.localStorage.lists).then(()=>{
-            errorMsg('Export Completed!', 'success');
+        let text = '';
+        if (confirm('Click "OK" for ALL lists\nClick "Cancel" for current list text')){
+            text = window.localStorage.lists;
+        }else{
+            let items = getListDB(curList);
+            if (items)
+                for (let i of items){
+                    text += `\n${i.text}`;
+                    if (i.subList){
+                        for (let s of i.subList){
+                            text += `\n\t${s}`;
+                        }
+                    }
+                }
+        }
+        navigator.clipboard.writeText(text.trim()).then(()=>{ 
+            popMsg('Export Completed!', 'success', 3000);
         }).catch((err)=>{
-            errorMsg(err, 'danger', 5000);
+            popMsg(err, 'danger', 5000);
         });
         this.value = '';
     } else if (this.value === ':list') {
         const collection = getListDB();
         let nosave = true;
-
-
         let alert = nestElem([
-
             mkElem({ elemType: 'article', id: 'cookieList', class: 'message is-small is-info' }),
             {
-
                 1: nestElem([
                     mkDiv({ class: 'message-header is-justify-content-end' }),
                     mkBtn({ class: 'delete', listeners: [{ type: 'click', execute: removeMsg }] })
@@ -573,12 +584,9 @@ function inputActions() {
                     mkDiv({ class: 'message-body is-flex is-flex-direction-column is-align-content-center', id: 'info', style: 'text-align: center;' }),
                     mkP({ inner: "Current Saved Lists", style: "font-weight: bold;text-decoration: underline;" })
                 ])
-
             }
-
-        ])
+        ]);
         document.body.prepend(alert);
-
         for (let key in collection){
             if (key) {
                 document.querySelector('#info').append(mkP({ inner: (curList === key) ? `<span style="color:red;">*</span> ${key} <span style="color:red;">*</span>` : key }));
@@ -600,7 +608,7 @@ function inputActions() {
     }else if (this.value === ':convert:'){
         this.value = '';
         convertCookies();
-        errorMsg('Conversion Complete!\nRefresh the page and any saved data should be restored.', 'success', 10000)
+        popMsg('Conversion Complete!\nRefresh the page and any saved data should be restored.', 'success', 10000)
     }
 
 }
@@ -614,17 +622,19 @@ function inputKeyActions(event) {
                 case 'save':
                     // Save list to specified cookie name :*:cookie_name
                     saveList(sn[1]); // Save Current list to new cookie
-                    // clearList(); // clear the current list after creating new one
                     clearListDB(curList); // clear list data
                     resetListBtn();
                     loadList(curList);
-                    // saveList(); // reset current cookie
                     break;
                 case 'load':
                     // Load specific cookie
-                    // clearList();
                     resetListBtn();
                     loadList(sn[1]);
+                    break;
+                case 'delete':
+                    clearListDB(sn[1]);
+                    popMsg(`The list labeled "${sn[1]}" has been removed!`, 'success', 4000);
+                    resetListBtn();
                     break;
             }
             this.value = '';
