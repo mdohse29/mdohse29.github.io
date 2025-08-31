@@ -135,7 +135,7 @@ function buildListItem(itemText, opt = {sub:false, pid:null}) {
             class: 'fade-in-slow',
             title: 'Click for Options',
             id: ((opt.sub) ? 'listSubItem' : ''),
-            pid: ((opt.sub && opt.pid) ? opt.pid : ''), // LIVE
+            pid: ((opt.sub && opt.pid) ? opt.pid : ''),
             inner: (itemText.toLowerCase().includes('http')) ? itemText : itemText.substring(0, 1).toUpperCase() + itemText.substring(1),
             icon: mkElem({ elemType: 'i', class: 'bi ' + ((opt.sub) ? 'bi-caret-right' : 'bi-caret-right-fill') }),
             ident: `${(!opt.sub)?0:(sublist)?sublist.children.length + 1:1}`,
@@ -203,12 +203,6 @@ function addSubItem(ev){
         resetListBtn();
 }
 
-function editItem(){
-    const data = getSelectedItemData();
-    const input = this.parentElement.previousElementSibling;
-
-}
-
 function setAllCaret(elem) {
 
     let icons = ((elem.subItem)?elem:elem.parentElement).querySelectorAll('i');
@@ -240,17 +234,11 @@ function itemFadeInComplete(ev){
     this.removeEventListener('animationend', itemFadeInComplete);
 }
 
-function itemFadeInMoveComplete(){
-    const container = getContainer(this);
-    this.removeAttribute('class');
-    this.removeEventListener('animationend', itemFadeInMoveComplete);
-}
-
 function itemFadeOutMoveComplete(){
     let container = getContainer(this);
     this.classList.add('dnone');
     this.removeEventListener('animationend', itemFadeOutMoveComplete);
-    this.addEventListener('animationend', itemFadeInMoveComplete);
+    this.addEventListener('animationend', itemFadeInComplete);
     switch (container.id){
         case 'list':
             if (!container.nextElementSibling)
@@ -287,7 +275,6 @@ function itemFadeOutMoveComplete(){
                 case 'listItem':
                     // do something
                     setAllCaret(this.children[0]);
-                    
                     container.prepend(this);
                     break;
                 case 'listSubItem':
@@ -308,6 +295,7 @@ function itemFadeOutMoveComplete(){
                 container.nextElementSibling.remove();
             break;
         default:
+            popMsg('SOMETHING IS WRONG!!!!');
             throw new Error('Something is wrong!!!!\n\nCheck the list containers');
     }
     fixIdent();
@@ -338,6 +326,23 @@ function complete(){
     closeOptions();
 }
 
+function clkUndoItem(){
+    const itmData = getSelectedItemData();
+    let doneSubs = document.querySelector(`#done #doneSubs [pid="${itmData.pid}"][ident="${itmData.ident}"]`);
+    let selected = (doneSubs)?doneSubs:document.querySelector(`#done #listItem[pid="${itmData.pid}"] li[ident="${itmData.ident}"]`);
+    // setAllCheck(selected);
+    changeTitle(selected);
+    if (selected.subItem){
+        selected.addEventListener('animationend', itemFadeOutMoveComplete);
+        selected.classList.add('fade-out-complete');
+    }else{
+        selected.parentElement.addEventListener('animationend', itemFadeOutMoveComplete);
+        selected.parentElement.classList.add('fade-out-complete');
+    }
+    resetSelectedItem();
+    closeOptions();
+}
+
 function editItem(){
     const itmData = getSelectedItemData();
     let selected = document.querySelector(`#listItem[pid="${itmData.pid}"] li[ident="${itmData.ident}"]`);
@@ -355,23 +360,6 @@ function editItem(){
     resetSelectedItem();
     resetListBtn();
     saveList();
-}
-
-function clkUndoItem(){
-    const itmData = getSelectedItemData();
-    let doneSubs = document.querySelector(`#done #doneSubs [pid="${itmData.pid}"][ident="${itmData.ident}"]`);
-    let selected = (doneSubs)?doneSubs:document.querySelector(`#done #listItem[pid="${itmData.pid}"] li[ident="${itmData.ident}"]`);
-    // setAllCheck(selected);
-    changeTitle(selected);
-    if (selected.subItem){
-        selected.addEventListener('animationend', itemFadeOutMoveComplete);
-        selected.classList.add('fade-out-complete');
-    }else{
-        selected.parentElement.addEventListener('animationend', itemFadeOutMoveComplete);
-        selected.parentElement.classList.add('fade-out-complete');
-    }
-    resetSelectedItem();
-    closeOptions();
 }
 
 function clkLoadList(){
@@ -530,8 +518,6 @@ function openOptions(ev) {
                 :
                 [opts.b1, opts.b2, opts.b3, (getItemText(this).includes(':load:')?opts.b7:opts.b4), opts.b6]
     ]);
-
-    // document.querySelector('.options').classList.add('fade-in')
 
 }
 
@@ -706,11 +692,4 @@ function convertCookies(){
     }else{
         console.log('No cookies, it\'s all good')
     }
-}
-
-window.onload = function () {
-    loadList(curList);
-    resetSelectedItem();
-    if (frameCheck)
-        document.querySelector('#item').focus();
 }
