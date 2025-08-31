@@ -36,3 +36,8 @@ document.body.prepend(nestElem([
     }
 ]));
 mrd();
+
+loadList(curList);
+resetSelectedItem();
+if (frameCheck)
+    document.querySelector('#item').focus();
