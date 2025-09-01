@@ -59,7 +59,7 @@ article.message {
     scrollbar-width: none;
 }
 
-#listItem:hover > li > i, #listSubItem:hover {
+#listItem:hover > li > i, #listSubItem:hover, #listSubItem:focus-visible, #listItem > li:focus-visible > i {
     background-color: rgba(253, 249, 4, 0.45);
 }
 

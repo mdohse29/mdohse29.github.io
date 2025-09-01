@@ -114,6 +114,20 @@ div.highlight > p[tag*="tv"]{
     align-self: flex-end;
 }
 
+#info .content > p[id]{
+    font-size: 12px;
+    padding-left: .5em;
+    margin: 0;
+}
+
+#info .content > p[id]:nth-child(1){
+    margin-top: 1em;
+}
+
+#info .content > p[id]:nth-child(2){
+    margin-bottom: 1em;
+}
+
 .tabs-container, .tabs {
     display: flex;
 }
