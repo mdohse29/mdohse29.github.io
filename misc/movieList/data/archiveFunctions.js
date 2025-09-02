@@ -254,13 +254,11 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
                                 ]),
                                 2:nestElem([
                                     mkDiv({class:'content'}),
-                                    {
-                                        1: nestElem([
-                                            mkP(),
-                                            mkElem({elemType:'sub', inner:`Staring: ${info.Actors}`})
-                                        ]),
-                                        2: mkP({inner:info.Plot})
-                                    }
+                                    [
+                                        mkP({id:'rating', inner:`Rated: ${(info.Rated)?info.Rated:'Unavailable'}`}),
+                                        mkP({id:'actors', inner:`Staring: ${info.Actors}`}),
+                                        mkP({inner:info.Plot})
+                                    ]
                                 ])
                             }]),
                             2:nestElem([
