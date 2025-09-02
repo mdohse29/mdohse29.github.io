@@ -125,18 +125,18 @@ function getContainer(elem){
     return container;
 }
 
-function itemKeyActions(ev){
-    /*
-    window.localStorage.setItem('selected', JSON.stringify(
-        {
-            id: (this.subItem)?this.id:this.parentElement.id,
-            pid:`${(this.subItem)?this.attributes.pid.value:this.parentElement.attributes.pid.value}`,
-            ident: this.attributes.ident.value
-        }
-    ));
-    */
-//    let test = this.getBoundingClientRect();
-}
+// function itemKeyActions(ev){
+//     /*
+//     window.localStorage.setItem('selected', JSON.stringify(
+//         {
+//             id: (this.subItem)?this.id:this.parentElement.id,
+//             pid:`${(this.subItem)?this.attributes.pid.value:this.parentElement.attributes.pid.value}`,
+//             ident: this.attributes.ident.value
+//         }
+//     ));
+//     */
+// //    let test = this.getBoundingClientRect();
+// }
 
 function buildListItem(itemText, opt = {sub:false, pid:null}) {
     // returns ul.item-container > li#listItem if regular && li#listSubItem if sub item
@@ -267,6 +267,7 @@ function itemFadeOutMoveComplete(){
                     const doneSubs = container.children[1].querySelectorAll(`[pid="${this.attributes.pid.value}"]`);
                     if (doneSubs.length){
                         [...doneSubs].forEach(i=>{
+                            delete i.dataset.origIdent;
                             this.children[1].append(i);
                         })
                     }
@@ -276,6 +277,7 @@ function itemFadeOutMoveComplete(){
                 case 'listSubItem':
                     // do something
                     setAllCheck(this, true);
+                    this.dataset.origIdent = this.attributes.ident.value;
                     container.querySelector('#doneSubs').append(this);
                     break;
                 default:
@@ -295,8 +297,20 @@ function itemFadeOutMoveComplete(){
                     // do something
                     setAllCaret(this);
                     let parent = container.querySelector(`#listItem[pid="${this.attributes.pid.value}"]`);
+                    const ident = parseInt(this.dataset.origIdent);
                     if (parent){
-                        parent.children[1].append(this);
+                        if (ident === 1 || parent.children[1].children.length === 0){
+                            parent.children[1].prepend(this);
+                        }else{
+                            let current = parent.children[1].children[ident - 1];
+                            if (current){
+                                current.insertAdjacentElement('beforebegin', this);
+                            }else{
+                                parent.children[1].append(this);
+                            }
+                        }
+                        delete this.dataset.origIdent;
+                        // parent.children[1].append(this);
                     }else{
                         this.remove();
                         container.prepend(buildListItem(this.innerText));
@@ -448,7 +462,7 @@ function loadList(ln = null){
 }
 
 function fixIdent(){
-    [...document.querySelectorAll('.sub-list')].forEach((i)=>{
+    [...document.querySelectorAll('.sub-list, #doneSubs')].forEach((i)=>{
         [...i.children].forEach((j, n)=>{j.setAttribute('ident', `${n+1}`)})
     })
 }
