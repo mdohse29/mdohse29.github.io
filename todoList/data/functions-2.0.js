@@ -595,7 +595,7 @@ function inputActions() {
         document.body.prepend(alert);
         for (let key in collection){
             if (key) {
-                document.querySelector('#info').append(mkP({ id:key, inner: (curList === key) ? `<span style="color:red;">*</span> ${key} <span style="color:red;">*</span>` : key, listeners:[{type:'click', execute:function(){removeMsg();resetListBtn();loadList(this.id);}}] }));
+                document.querySelector('#info').append(mkP({ 'data-list':key, inner: (curList === key) ? `<span style="color:red;">*</span> ${key} <span style="color:red;">*</span>` : key, listeners:[{type:'click', execute:function(){removeMsg();resetListBtn();loadList(this.dataset.list);}}] }));
                 nosave = false;
             }
         };
