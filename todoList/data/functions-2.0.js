@@ -92,17 +92,8 @@ function clearListDB(ln = null){
     }
 }
 
-function itemExists(item){
-    const ListItems = getListDB(curList);
-    if (ListItems){
-        const e = ListItems.filter(li=>{return (li.id === item.id);});
-        return (e[0])?ListItems.indexOf(e[0]):null;
-    }
-    return null;
-}
-
 function getItemText(elem) {
-    return ((elem.id === 'listItem' && elem.innerText.includes('\n')) ? elem.innerText.substring(0, elem.innerText.indexOf('\n')) : elem.innerText);
+    return ((elem.id === 'listItem')?elem.children[0].innerText.trim():elem.innerText.trim());
 }
 
 function doneContainer() {
@@ -590,21 +581,21 @@ function inputActions() {
         let nosave = true;
         let alert = nestElem([
             mkElem({ elemType: 'article', id: 'cookieList', class: 'message is-small is-info' }),
-            {
-                1: nestElem([
+            [
+                nestElem([
                     mkDiv({ class: 'message-header is-justify-content-end' }),
                     mkBtn({ class: 'delete', listeners: [{ type: 'click', execute: removeMsg }] })
                 ]),
-                2: nestElem([
+                nestElem([
                     mkDiv({ class: 'message-body is-flex is-flex-direction-column is-align-content-center', id: 'info', style: 'text-align: center;' }),
                     mkP({ inner: "Current Saved Lists", style: "font-weight: bold;text-decoration: underline;" })
                 ])
-            }
+            ]
         ]);
         document.body.prepend(alert);
         for (let key in collection){
             if (key) {
-                document.querySelector('#info').append(mkP({ inner: (curList === key) ? `<span style="color:red;">*</span> ${key} <span style="color:red;">*</span>` : key }));
+                document.querySelector('#info').append(mkP({ id:key, inner: (curList === key) ? `<span style="color:red;">*</span> ${key} <span style="color:red;">*</span>` : key, listeners:[{type:'click', execute:function(){removeMsg();resetListBtn();loadList(this.id);}}] }));
                 nosave = false;
             }
         };
