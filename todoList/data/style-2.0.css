@@ -53,6 +53,11 @@ article.message {
     background-color: rgba(72, 199, 142, .50) !important;
 }
 
+#info > p[id]:hover{
+    cursor: pointer;
+    background-color: rgba(253, 249, 4, 0.45);
+}
+
 #list-container {
     max-height: 72vh;
     overflow-y: scroll;
