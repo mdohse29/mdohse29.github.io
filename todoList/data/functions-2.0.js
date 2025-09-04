@@ -10,16 +10,16 @@ function popMsg(message = 'Empty items or duplicate items are not accepted.<br>C
     }
     document.querySelector('.card-header.main-bg').prepend(nestElem([
         mkElem({ elemType: 'article', class: `message is-small is-${type}`, listeners: [{ type: 'mouseenter', execute: manRmvMsg }] }),
-        {
-            1: nestElem([
+        [
+            nestElem([
                 mkDiv({ class: 'message-header is-justify-content-end' }),
                 mkBtn({ class: 'delete', listeners: [{ type: 'click', execute: removeMsg }] })
             ]),
-            2: nestElem([
+            nestElem([
                 mkDiv({ class: 'message-body is-flex is-justify-content-center', style: 'text-align: center;' }),
                 mkP({ inner: message })
             ])
-        }
+        ]
     ]));
     document.querySelector('#item').focus();
     if (type==='danger')
@@ -58,7 +58,7 @@ function saveList(ln = null){
     const collection = getListDB();
     const ListItems = [];
     for(let itm of list){
-        const id = itm.getAttribute('pid');
+        const id = itm.attributes.pid.value;
         const item = itm.children[0];
         
         ListItems.push({id:id, text:item.innerText.trim(), subList:(item.nextElementSibling && item.nextElementSibling.children.length)?[...item.nextElementSibling.children].map(itm=>{return itm.innerText}):null});
@@ -109,10 +109,10 @@ function doneContainer() {
 
     return nestElem([
         mkDiv({ class: 'card-content py-3', id: 'done' }),
-        {
-            1: mkElem({ elemType: 'h4', class: 'h4', inner: '<i class="bi bi-check-circle-fill has-text-success"></i>Done!' }),
-            2: mkElem({ elemType: 'ul', id: 'doneSubs' })
-        }
+        [
+            mkElem({ elemType: 'h4', class: 'h4', inner: '<i class="bi bi-check-circle-fill has-text-success"></i>Done!' }),
+            mkElem({ elemType: 'ul', id: 'doneSubs' })
+        ]
     ]);
 
 }
@@ -256,7 +256,7 @@ function itemFadeOutMoveComplete(){
     switch (container.id){
         case 'list':
             if (!container.nextElementSibling)
-                container.insertAdjacentElement('afterend', doneContainer())
+                container.insertAdjacentElement('afterend', doneContainer());
             container = container.nextElementSibling; // now done container
             switch (this.id){
                 case 'listItem':
@@ -340,7 +340,7 @@ function itemFadeOutMoveComplete(){
 
 function complete(){
     const itmData = getSelectedItemData();
-    const selected = document.querySelector(`#list #listItem[pid="${itmData.pid}"] li[ident="${itmData.ident}"]`);
+    let selected = document.querySelector(`#list #listItem[pid="${itmData.pid}"] li[ident="${itmData.ident}"]`);
     setAllCheck(selected);
     changeTitle(selected);
     if (selected.subItem){
@@ -358,7 +358,6 @@ function clkUndoItem(){
     const itmData = getSelectedItemData();
     let doneSubs = document.querySelector(`#done #doneSubs [pid="${itmData.pid}"][ident="${itmData.ident}"]`);
     let selected = (doneSubs)?doneSubs:document.querySelector(`#done #listItem[pid="${itmData.pid}"] li[ident="${itmData.ident}"]`);
-    // setAllCheck(selected);
     changeTitle(selected);
     if (selected.subItem){
         selected.addEventListener('animationend', itemFadeOutMoveComplete);
