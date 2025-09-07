@@ -96,3 +96,5 @@ nestElem([
         3:modal
     }
 ])
+
+document.getElementById('search-box').focus();
