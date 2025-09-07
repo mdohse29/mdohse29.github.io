@@ -380,21 +380,26 @@ function editItem(){
     saveList();
 }
 
-function clkLoadList(){
+function clkOpenURL(){
     const itm = getSelectedItemData();
-    const targetElement = document.querySelector(`#list #listItem[pid="${itm.pid}"] li[ident="${itm.ident}"]`);
-    let list = getItemText(targetElement);
-    list = list.substring(list.lastIndexOf(':')+1);
+    if (itm)
+        window.open(itm.text, '_blank');
     closeOptions();
     resetSelectedItem();
     resetListBtn();
-    loadList(list);
+}
+
+function clkLoadList(){
+    const itm = getSelectedItemData();
+    closeOptions();
+    resetSelectedItem();
+    resetListBtn();
+    loadList(itm.text.replace(':load:', ''));
 }
 
 function clkCopyItem() {
     const itm = getSelectedItemData();
-    const targetElement = document.querySelector(`#list #listItem[pid="${itm.pid}"] li[ident="${itm.ident}"]`);
-    navigator.clipboard.writeText(getItemText(targetElement));
+    navigator.clipboard.writeText(itm.text);
     closeOptions();
     resetSelectedItem();
 }
@@ -430,7 +435,7 @@ function loadList(ln = null){
     const list = getListDB(ln);
     if (list instanceof Array)
         list.forEach(i=>{
-            if (i.subList){// Need to REDO this section to fix ident numbering on load
+            if (i.subList){
                 nestElem([
                     document.getElementById('list'),
                     nestElem([
@@ -500,12 +505,18 @@ function optMl() {
     this.parentElement.querySelector('span').remove();
 }
 
+function optsMl(){
+    resetSelectedItem();
+    closeOptions();
+}
+
 function openOptions(ev) {
     window.localStorage.setItem('selected', JSON.stringify(
         {
             id: (this.subItem)?this.id:this.parentElement.id,
             pid:`${(this.subItem)?this.attributes.pid.value:this.parentElement.attributes.pid.value}`,
-            ident: this.attributes.ident.value
+            ident: this.attributes.ident.value,
+            text:this.innerText.trim()
         }
     ));
     resetListBtn();
@@ -515,26 +526,27 @@ function openOptions(ev) {
 
     const opts = {
         b1: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-success is-outlined', 'aria-description': 'Mark Item Complete', id: 'tadone', inner: '<i class="bi bi-check-circle"></i>', listeners: [{ type: 'click', execute: complete }, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] }),
-        b2: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-link is-outlined', 'aria-description': 'Create Sub-List Item', id: 'crtSub', inner: '<i class="bi bi-plus-circle-dotted"></i>', listeners: [{ type: 'click', execute: toggleLstBtn }, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] }),
+        b2: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-link is-outlined', 'aria-description': 'Create Sub-List Item', id: 'crtSub', inner: '<i class="bi bi-plus-lg"></i>', listeners: [{ type: 'click', execute: toggleLstBtn }, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] }),
         b3: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', 'aria-description': 'Edit List Item', id: 'edit', inner: '<i class="bi bi-pencil"></i>', listeners: [{ type: 'click', execute: toggleLstBtn }, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] }),
         b4: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-info is-outlined', 'aria-description': 'Copy Item', id: 'copy', inner: '<i class="bi bi-copy"></i>', listeners: [{ type: 'click', execute: clkCopyItem }, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] }),
         b5: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', 'aria-description': 'Restore List Item', id: 'undo', inner: '<i class="bi bi-arrow-counterclockwise"></i>', listeners: [{ type: 'click', execute: clkUndoItem }, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] }),
         b6: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', 'aria-description': 'Close Options', id: 'cancel', inner: '<i class="bi bi-x-circle"></i>', listeners: [{ type: 'click', execute: closeOptions }, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] }),
-        b7: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-success is-outlined', 'aria-description': 'Load List', id: 'load', inner: '<i class="bi bi-arrow-up"></i>', listeners: [{ type: 'click', execute: clkLoadList}, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] })
+        b7: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-success is-outlined', 'aria-description': 'Load List', id: 'load', inner: '<i class="bi bi-box-arrow-in-up-right"></i>', listeners: [{ type: 'click', execute: clkLoadList}, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] }),
+        b8: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-info is-outlined', 'aria-description': 'Open URL', id: 'link', inner: '<i class="bi bi-box-arrow-up-right"></i>', listeners:[{type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}, {type:'click', execute:clkOpenURL}]})
     }
 
     nestElem([
         document.querySelector('.card'),
-        mkDiv({ class: 'options fade-in', style: 'top: ' + (ev.y - 30) + 'px; left: ' + (ev.x - 27) + 'px;', listeners: [{ type: 'mouseleave', execute: closeOptions}] }),
+        mkDiv({ class: 'options fade-in', style: 'top: ' + (ev.y - 30) + 'px; left: ' + (ev.x - 27) + 'px;', listeners: [{ type: 'mouseleave', execute: optsMl}] }),
         mkDiv({ class: 'card' }),
         mkDiv({ class: 'card-content p-0' }),
         (getContainer(this).id === 'done') ?
             [opts.b5, opts.b6]
             :
             (this.id === 'listSubItem') ?
-                [opts.b1, opts.b3, (getItemText(this).includes(':load:')?opts.b7:opts.b4), opts.b6]
+                [opts.b1, opts.b3, (this.innerText.trim().includes(':load:')?opts.b7:(this.innerText.trim().includes('http'))?opts.b8:opts.b4), opts.b6]
                 :
-                [opts.b1, opts.b2, opts.b3, (getItemText(this).includes(':load:')?opts.b7:opts.b4), opts.b6]
+                [opts.b1, opts.b2, opts.b3, (this.innerText.trim().includes(':load:')?opts.b7:(this.innerText.trim().includes('http'))?opts.b8:opts.b4), opts.b6]
     ]);
 
 }
