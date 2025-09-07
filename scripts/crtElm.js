@@ -247,13 +247,7 @@ function mkElem(attr = { elemType: '' }) {
 
     for (let a in attr) {
         if (a.includes('inner')) {
-            // "icon" is for prepending an icon in an element with text, like a header
-            // "icon" should be an element
-            // Alternatively the html code for the icon could be included with the inner content
-            element.innerHTML = attr[a];
-            // if (attr.icon) {
-            //     element.prepend(attr.icon)
-            // }
+            element.innerHTML = element.innerHTML + attr[a];
         } else if (a.includes('icon')) {
             element.prepend(attr[a]);
         } else if (a.includes('listeners')) {
@@ -268,7 +262,7 @@ function mkElem(attr = { elemType: '' }) {
                 element[p] = attr.prop[p];
             }
         } else {
-            if (attr[a] && !a.includes('elemType') && !a.includes('icon')) {
+            if (attr[a] && !a.includes('elemType')) {
                 element.setAttribute(a, attr[a]);
             }
         }
