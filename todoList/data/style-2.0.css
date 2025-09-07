@@ -141,6 +141,10 @@ i.bi-check-circle-fill {
     margin-bottom: 20px;
 }
 
+.options button > i {
+    font-size: 1.25em;
+}
+
 .options button:disabled {
     cursor: pointer;
 }
