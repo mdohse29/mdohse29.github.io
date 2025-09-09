@@ -64,7 +64,8 @@ function openStart(){
     this.removeEventListener('animationstart', openStart);
 }
 
-function openComplete(){
+function openComplete(ev){
+    ev.stopPropagation();
     this.classList.remove('bouncing');
     this.removeEventListener('animationend', openComplete);
     this.classList.add('hover-bounce');
@@ -78,7 +79,8 @@ function toggleDrawer(id){
     if (!drawer){
         document.body.children[1].appendChild(buildDrawer(id));
     }else{
-        drawer.addEventListener('animationend', function(){
+        drawer.addEventListener('animationend', function(ev){
+            ev.stopPropagation();
             this.remove();
             if (document.querySelector('.active'))
                 document.body.children[1].appendChild(buildDrawer(id));
@@ -114,7 +116,7 @@ function buildDrawer(id){
                     })
                 ])
             ]
-        ])
+        ]);
     }
 }
 
