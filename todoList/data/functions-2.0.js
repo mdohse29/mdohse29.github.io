@@ -607,7 +607,13 @@ function inputActions() {
         document.body.prepend(alert);
         for (let key in collection){
             if (key) {
-                document.querySelector('#info').append(mkP({ 'data-list':key, inner: (curList === key) ? `<span style="color:red;">*</span> ${key} <span style="color:red;">*</span>` : key, listeners:[{type:'click', execute:function(){removeMsg();resetListBtn();loadList(this.dataset.list);}}] }));
+                document.querySelector('#info').append(nestElem([
+                    mkP({ 'data-list':key, inner: (curList === key) ? `<span style="color:red;">*</span> ${key} <span style="color:red;">*</span>` : key }),
+                    [
+                        mkBtn({id:'load', class:'is-success my-2 ml-3', icon:mkElem({elemType:'i', class:'bi bi-box-arrow-in-up-right'}), listeners:[{type:'click', execute:function(){removeMsg();resetListBtn();loadList(this.parentElement.dataset.list);}}]}),
+                        mkBtn({id:'remove', class:'is-success my-2 ml-3', icon:mkElem({elemType:'i', class:'bi bi-trash'}), listeners:[{type:'click', execute:function(){removeMsg();resetListBtn();clearListDB(this.parentElement.dataset.list);loadList('default');popMsg(`"${this.parentElement.dataset.list}" has been removed.`, 'success', 3000)}}]})
+                    ]
+                ]));
                 nosave = false;
             }
         };
