@@ -636,7 +636,7 @@ function inputActions() {
         let savedLists = Object.keys(getListDB());
 
         document.body.prepend(nestElem([
-            mkElem({ elemType: 'article', id: 'cookieList', class: 'message is-small is-info' }),
+            mkElem({ elemType: 'article', id: 'cookieList', class: 'message is-info' }),
             [
                 nestElem([
                     mkDiv({ class: 'message-header' }),
@@ -662,8 +662,8 @@ function inputActions() {
                                         mkDiv({class:'list-action'}),
                                         mkDiv({class:'buttons are-small'}),
                                         [
-                                            mkBtn({id:'load', class:'button is-success is-outlined', icon:mkElem({elemType:'i', class:'bi bi-box-arrow-in-up-right'}), listeners:[{type:'click', execute:function(){removeMsg();resetListBtn();loadList(this.parentElement.parentElement.previousElementSibling.dataset.list);}}]}),
-                                            mkBtn({id:'remove', class:'button is-danger is-outlined', icon:mkElem({elemType:'i', class:'bi bi-trash'}), listeners:[{type:'click', execute:function(){removeMsg();resetListBtn();clearListDB(this.parentElement.parentElement.previousElementSibling.dataset.list);loadList('default');popMsg(`"${this.parentElement.parentElement.previousElementSibling.dataset.list}" has been removed.`, 'success', 3000)}}]})
+                                            mkBtn({id:'load', class:'button is-success is-rounded is-outlined', icon:mkElem({elemType:'i', class:'bi bi-box-arrow-in-up-right'}), listeners:[{type:'click', execute:function(){removeMsg();resetListBtn();loadList(this.parentElement.parentElement.previousElementSibling.dataset.list);}}]}),
+                                            mkBtn({id:'remove', class:'button is-danger is-rounded is-outlined', icon:mkElem({elemType:'i', class:'bi bi-trash'}), listeners:[{type:'click', execute:function(){removeMsg();resetListBtn();clearListDB(this.parentElement.parentElement.previousElementSibling.dataset.list);loadList('default');popMsg(`"${this.parentElement.parentElement.previousElementSibling.dataset.list}" has been removed.`, 'success', 3000)}}]})
                                         ]
                                     ])
                                 ]

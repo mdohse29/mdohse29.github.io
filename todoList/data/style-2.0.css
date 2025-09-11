@@ -52,6 +52,7 @@ article.message {
 .saved-list p.current::before {
     content: '>>';
     color: red;
+    font-weight: bold;
     position: relative;
     left: -5px;
 }
