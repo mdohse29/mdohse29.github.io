@@ -642,7 +642,7 @@ function inputActions() {
                     mkDiv({ class: 'message-header' }),
                     [
                         mkP({ inner: "Saved Lists", class:'is-size-5'}),
-                        mkBtn({ class: 'delete', listeners: [{ type: 'click', execute: removeMsg }] })
+                        mkBtn({ class: 'delete', listeners: [{ type: 'click', execute: ()=>{removeMsg();resetListBtn();} }] })
                     ]
                 ]),
                 nestElem([
@@ -662,8 +662,8 @@ function inputActions() {
                                         mkDiv({class:'list-action'}),
                                         mkDiv({class:'buttons are-small'}),
                                         [
-                                            mkBtn({id:'load', class:'button is-success is-rounded is-outlined', icon:mkElem({elemType:'i', class:'bi bi-box-arrow-in-up-right'}), listeners:[{type:'click', execute:function(){removeMsg();resetListBtn();loadList(this.parentElement.parentElement.previousElementSibling.dataset.list);}}]}),
-                                            mkBtn({id:'remove', class:'button is-danger is-rounded is-outlined', icon:mkElem({elemType:'i', class:'bi bi-trash'}), listeners:[{type:'click', execute:function(){removeMsg();resetListBtn();clearListDB(this.parentElement.parentElement.previousElementSibling.dataset.list);loadList('default');popMsg(`"${this.parentElement.parentElement.previousElementSibling.dataset.list}" has been removed.`, 'success', 3000)}}]})
+                                            mkBtn({id:'load', title:(e===curList)?'Current List':`Load List: ${e}`, class:'button is-success is-rounded is-outlined', icon:mkElem({elemType:'i', class:'bi bi-box-arrow-in-up-right'}), prop:{disabled:(e===curList)}, listeners:[{type:'click', execute:function(){removeMsg();resetListBtn();loadList(this.parentElement.parentElement.previousElementSibling.dataset.list);}}]}),
+                                            mkBtn({id:'remove', title:`Delete List: ${e}`, class:'button is-danger is-rounded is-outlined', icon:mkElem({elemType:'i', class:'bi bi-trash'}), listeners:[{type:'click', execute:function(){removeMsg();resetListBtn();clearListDB(this.parentElement.parentElement.previousElementSibling.dataset.list);loadList('default');popMsg(`"${this.parentElement.parentElement.previousElementSibling.dataset.list}" has been removed.`, 'success', 3000)}}]})
                                         ]
                                     ])
                                 ]
