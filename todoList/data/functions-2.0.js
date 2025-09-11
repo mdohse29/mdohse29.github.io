@@ -636,7 +636,7 @@ function inputActions() {
         let savedLists = Object.keys(getListDB());
 
         document.body.prepend(nestElem([
-            mkElem({ elemType: 'article', id: 'cookieList', class: 'message is-small is-info' }),
+            mkElem({ elemType: 'article', id: 'cookieList', class: 'message is-info' }),
             [
                 nestElem([
                     mkDiv({ class: 'message-header' }),
