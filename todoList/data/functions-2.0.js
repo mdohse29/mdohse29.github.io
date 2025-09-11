@@ -8,6 +8,7 @@ function popMsg(message = 'Empty items or duplicate items are not accepted.<br>C
     if (currentMsg) {
         currentMsg.remove();
     }
+    currentMsg = null;
     document.querySelector('.card-header.main-bg').prepend(nestElem([
         mkElem({ elemType: 'article', class: `message is-small is-${type}`, listeners: [{ type: 'mouseenter', execute: manRmvMsg }] }),
         [
@@ -40,6 +41,7 @@ function removeMsg() {
         rmvTimeout();
         currentMsg.remove();
     }
+    currentMsg = null;
 }
 
 function manRmvMsg() {
@@ -54,19 +56,25 @@ function saveDB(collection){
 function saveList(ln = null){
     if (!ln)
         ln = curList;
-    const list = document.getElementById('list').querySelectorAll('#listItem');
-    const collection = getListDB();
-    const ListItems = [];
+    let list = document.getElementById('list').querySelectorAll('#listItem');
+    let collection = getListDB();
+    let ListItems = [];
     for(let itm of list){
-        const id = itm.attributes.pid.value;
-        const item = itm.children[0];
+        let id = itm.attributes.pid.value;
+        let item = itm.children[0];
         
         ListItems.push({id:id, text:item.innerText.trim(), subList:(item.nextElementSibling && item.nextElementSibling.children.length)?[...item.nextElementSibling.children].map(itm=>{return itm.innerText}):null});
+
+        id = null;
+        item = null;
     }
     
     collection[ln] = ListItems;
 
     saveDB(collection);
+    list = null;
+    collection = null;
+    ListItems = null;
 }
 
 function getListDB(ln = null){
@@ -84,11 +92,12 @@ function getListDB(ln = null){
 
 function clearListDB(ln = null){
     if (ln){
-        const collection = getListDB();
+        let collection = getListDB();
         if (collection[ln])
             delete collection[ln];
         if (collection)
             saveDB(collection);
+        collection = null;
     }
 }
 
@@ -166,9 +175,9 @@ function buildListItem(itemText, opt = {sub:false, pid:null}) {
 
 function addItem(ev){
     ev.stopPropagation();
-    const input = this.parentElement.previousElementSibling;
-    const itemText = input.value.trim();
-    const list = document.getElementById('list');
+    let input = this.parentElement.previousElementSibling;
+    let itemText = input.value.trim();
+    let list = document.getElementById('list');
     if (itemText){
         itemText.split(',').reverse().forEach(itm=>{
             itm = itm.trim();
@@ -181,14 +190,17 @@ function addItem(ev){
     }
     resetSelectedItem();
     resetListBtn();
+    input = null;
+    itemText = null;
+    list = null;
 }
 
 function addSubItem(ev){
     ev.stopPropagation();
-    const data = getSelectedItemData();
-    const input = this.parentElement.previousElementSibling;
-    const itemText = input.value.trim();
-    const parent = document.querySelector(`#list #listItem[pid="${data.pid}"]`);
+    let data = getSelectedItemData();
+    let input = this.parentElement.previousElementSibling;
+    let itemText = input.value.trim();
+    let parent = document.querySelector(`#list #listItem[pid="${data.pid}"]`);
     if (parent.children.length === 1 && itemText){
         parent.append(mkElem({elemType:'ul', class:'sub-list'}));
     }
@@ -206,6 +218,10 @@ function addSubItem(ev){
 
     resetSelectedItem();
         resetListBtn();
+        data = null;
+        input = null;
+        itemText = null;
+        parent = null;
 }
 
 function setAllCaret(elem) {
@@ -218,7 +234,7 @@ function setAllCaret(elem) {
         icon.classList.remove('has-text-success');
 
     });
-
+    icons = null;
 }
 
 function setAllCheck(elem, isDone = false) {
@@ -231,6 +247,7 @@ function setAllCheck(elem, isDone = false) {
             icon.classList.add('has-text-success');
         }
     });
+    icons = null;
 }
 
 function itemFadeInComplete(ev){
@@ -255,7 +272,7 @@ function itemFadeOutMoveComplete(){
                      * * if child is in doneSubs reattach to parent
                      * * otherwise append
                     */
-                    const doneSubs = container.children[1].querySelectorAll(`[pid="${this.attributes.pid.value}"]`);
+                    let doneSubs = container.children[1].querySelectorAll(`[pid="${this.attributes.pid.value}"]`);
                     if (doneSubs.length){
                         [...doneSubs].forEach(i=>{
                             delete i.dataset.origIdent;
@@ -264,6 +281,7 @@ function itemFadeOutMoveComplete(){
                     }
                     setAllCheck(this.children[0], true);
                     container.append(this);
+                    doneSubs = null;
                     break;
                 case 'listSubItem':
                     // do something
@@ -288,7 +306,7 @@ function itemFadeOutMoveComplete(){
                     // do something
                     setAllCaret(this);
                     let parent = container.querySelector(`#listItem[pid="${this.attributes.pid.value}"]`);
-                    const ident = parseInt(this.dataset.origIdent);
+                    let ident = parseInt(this.dataset.origIdent);
                     if (parent){
                         if (ident === 1 || parent.children[1].children.length === 0){
                             parent.children[1].prepend(this);
@@ -299,6 +317,7 @@ function itemFadeOutMoveComplete(){
                             }else{
                                 parent.children[1].append(this);
                             }
+                            current = null;
                         }
                         delete this.dataset.origIdent;
                         // parent.children[1].append(this);
@@ -306,6 +325,8 @@ function itemFadeOutMoveComplete(){
                         this.remove();
                         container.prepend(buildListItem(this.innerText));
                     }
+                    parent = null;
+                    ident = null;
                     break;
                 default:
                     throw new Error('Something is wrong!!!\n\nCheck item ids, something isn\'t matching');
@@ -327,10 +348,11 @@ function itemFadeOutMoveComplete(){
     }else{
         saveList();
     }
+    container = null;
 }
 
 function complete(){
-    const itmData = getSelectedItemData();
+    let itmData = getSelectedItemData();
     let selected = document.querySelector(`#list #listItem[pid="${itmData.pid}"] li[ident="${itmData.ident}"]`);
     setAllCheck(selected);
     changeTitle(selected);
@@ -343,10 +365,12 @@ function complete(){
     }
     resetSelectedItem();
     closeOptions();
+    itmData = null;
+    selected = null;
 }
 
 function clkUndoItem(){
-    const itmData = getSelectedItemData();
+    let itmData = getSelectedItemData();
     let doneSubs = document.querySelector(`#done #doneSubs [pid="${itmData.pid}"][ident="${itmData.ident}"]`);
     let selected = (doneSubs)?doneSubs:document.querySelector(`#done #listItem[pid="${itmData.pid}"] li[ident="${itmData.ident}"]`);
     changeTitle(selected);
@@ -359,10 +383,13 @@ function clkUndoItem(){
     }
     resetSelectedItem();
     closeOptions();
+    itmData = null;
+    selected = null;
+    update = null;
 }
 
 function editItem(){
-    const itmData = getSelectedItemData();
+    let itmData = getSelectedItemData();
     let selected = document.querySelector(`#listItem[pid="${itmData.pid}"] li[ident="${itmData.ident}"]`);
     let update = this.parentElement.previousElementSibling.value.trim();
     if (update.length){
@@ -378,35 +405,42 @@ function editItem(){
     resetSelectedItem();
     resetListBtn();
     saveList();
+
+    itmData = null;
+    selected = null;
+    update = null;
 }
 
 function clkOpenURL(){
-    const itm = getSelectedItemData();
+    let itm = getSelectedItemData();
     if (itm)
         window.open(itm.text, '_blank');
     closeOptions();
     resetSelectedItem();
     resetListBtn();
+    itm = null;
 }
 
 function clkLoadList(){
-    const itm = getSelectedItemData();
+    let itm = getSelectedItemData();
     closeOptions();
     resetSelectedItem();
     resetListBtn();
     loadList(itm.text.replace(':load:', ''));
+    itm = null;
 }
 
 function clkCopyItem() {
-    const itm = getSelectedItemData();
+    let itm = getSelectedItemData();
     navigator.clipboard.writeText(itm.text);
     closeOptions();
     resetSelectedItem();
+    itm = null;
 }
 
 function toggleLstBtn() {
-    const data = getSelectedItemData();
-    const targetElement = document.querySelector(`#list #listItem[pid="${data.pid}"] li[ident="${data.ident}"]`);
+    let data = getSelectedItemData();
+    let targetElement = document.querySelector(`#list #listItem[pid="${data.pid}"] li[ident="${data.ident}"]`);
 
     closeOptions();
 
@@ -426,13 +460,16 @@ function toggleLstBtn() {
     document.querySelector('#addItem').classList.add('dnone');
     document.querySelector('#item').focus();
 
+    data = null;
+    targetElement = null;
+
 }
 
 function loadList(ln = null){
     if (!ln)
         ln = curList;
     [...document.getElementById('list').children].forEach(i=>{i.remove()})
-    const list = getListDB(ln);
+    let list = getListDB(ln);
     if (list instanceof Array)
         list.forEach(i=>{
             if (i.subList){
@@ -454,6 +491,8 @@ function loadList(ln = null){
             }
         });
     fixIdent();
+    ln = null;
+    list = null;
 }
 
 function fixIdent(){
@@ -494,11 +533,13 @@ function closeOptions() {
         });
         options.classList.replace('fade-in', 'fade-out');
     }
+    options = null;
 }
 
 function optMo() {
     let text = this.attributes['aria-description'].value;
     this.parentElement.appendChild(mkElem({ elemType: 'span', class: 'btn-popover', inner: text }));
+    text = null;
 }
 
 function optMl() {
@@ -524,7 +565,7 @@ function openOptions(ev) {
         closeOptions();
     }
 
-    const opts = {
+    let opts = {
         b1: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-success is-outlined', 'aria-description': 'Mark Item Complete', id: 'tadone', inner: '<i class="bi bi-check-circle"></i>', listeners: [{ type: 'click', execute: complete }, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] }),
         b2: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-link is-outlined', 'aria-description': 'Create Sub-List Item', id: 'crtSub', inner: '<i class="bi bi-plus-lg"></i>', listeners: [{ type: 'click', execute: toggleLstBtn }, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] }),
         b3: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', 'aria-description': 'Edit List Item', id: 'edit', inner: '<i class="bi bi-pencil"></i>', listeners: [{ type: 'click', execute: toggleLstBtn }, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] }),
@@ -548,6 +589,8 @@ function openOptions(ev) {
                 :
                 [opts.b1, opts.b2, opts.b3, (this.innerText.trim().includes(':load:')?opts.b7:(this.innerText.trim().includes('http'))?opts.b8:opts.b4), opts.b6]
     ]);
+
+    opts = null;
 
 }
 
@@ -588,47 +631,63 @@ function inputActions() {
             popMsg(err, 'danger', 5000);
         });
         this.value = '';
+        text = null;
     } else if (this.value === ':list') {
-        const collection = getListDB();
-        let nosave = true;
-        let alert = nestElem([
+        let savedLists = Object.keys(getListDB());
+
+        document.body.prepend(nestElem([
             mkElem({ elemType: 'article', id: 'cookieList', class: 'message is-small is-info' }),
             [
                 nestElem([
-                    mkDiv({ class: 'message-header is-justify-content-end' }),
-                    mkBtn({ class: 'delete', listeners: [{ type: 'click', execute: removeMsg }] })
+                    mkDiv({ class: 'message-header' }),
+                    [
+                        mkP({ inner: "Saved Lists", class:'is-size-5'}),
+                        mkBtn({ class: 'delete', listeners: [{ type: 'click', execute: removeMsg }] })
+                    ]
                 ]),
                 nestElem([
                     mkDiv({ class: 'message-body is-flex is-flex-direction-column is-align-content-center', id: 'info', style: 'text-align: center;' }),
-                    mkP({ inner: "Current Saved Lists", style: "font-weight: bold;text-decoration: underline;" })
+                    (savedLists.length)?
+                    nestElem([
+                        mkDiv({class:'saved-lists'}),
+                        savedLists.map((e)=>{
+                            return nestElem([
+                                mkDiv({class:'saved-list'}),
+                                [
+                                    nestElem([
+                                        mkDiv({class:'list-name', 'data-list':e}),
+                                        mkP({inner:e, class:(e===curList)?'current':''})
+                                    ]),
+                                    nestElem([
+                                        mkDiv({class:'list-action'}),
+                                        mkDiv({class:'buttons are-small'}),
+                                        [
+                                            mkBtn({id:'load', class:'button is-success is-outlined', icon:mkElem({elemType:'i', class:'bi bi-box-arrow-in-up-right'}), listeners:[{type:'click', execute:function(){removeMsg();resetListBtn();loadList(this.parentElement.parentElement.previousElementSibling.dataset.list);}}]}),
+                                            mkBtn({id:'remove', class:'button is-danger is-outlined', icon:mkElem({elemType:'i', class:'bi bi-trash'}), listeners:[{type:'click', execute:function(){removeMsg();resetListBtn();clearListDB(this.parentElement.parentElement.previousElementSibling.dataset.list);loadList('default');popMsg(`"${this.parentElement.parentElement.previousElementSibling.dataset.list}" has been removed.`, 'success', 3000)}}]})
+                                        ]
+                                    ])
+                                ]
+                            ])
+                        })
+                    ])
+                    :
+                    mkP({ class: 'has-text-danger is-size-5', inner: 'No saved lists were found' })
                 ])
             ]
-        ]);
-        document.body.prepend(alert);
-        for (let key in collection){
-            if (key) {
-                document.querySelector('#info').append(nestElem([
-                    mkP({ 'data-list':key, inner: (curList === key) ? `<span style="color:red;">*</span> ${key} <span style="color:red;">*</span>` : key }),
-                    [
-                        mkBtn({id:'load', class:'is-success my-2 ml-3', icon:mkElem({elemType:'i', class:'bi bi-box-arrow-in-up-right'}), listeners:[{type:'click', execute:function(){removeMsg();resetListBtn();loadList(this.parentElement.dataset.list);}}]}),
-                        mkBtn({id:'remove', class:'is-success my-2 ml-3', icon:mkElem({elemType:'i', class:'bi bi-trash'}), listeners:[{type:'click', execute:function(){removeMsg();resetListBtn();clearListDB(this.parentElement.dataset.list);loadList('default');popMsg(`"${this.parentElement.dataset.list}" has been removed.`, 'success', 3000)}}]})
-                    ]
-                ]));
-                nosave = false;
-            }
-        };
-        if (nosave) {
+        ]));
+
+        if (!savedLists.length) {
             console.log("No saved lists found");
-            document.querySelector('.message-body').append(mkP({ class: 'has-text-danger', inner: 'No saved lists were found' }));
             rmvTimeout();
-            errorTimeoutID = setTimeout(removeMsg, 2000);
+            errorTimeoutID = setTimeout(removeMsg, 3000);
         }
-        if (Object.keys(collection).length > 1) {
+        if (savedLists.length > 1) {
             this.value = ':load:';
         } else {
             this.value = '';
         }
         this.focus();
+        savedLists = null;
     }else if (this.value === ':convert:'){
         this.value = '';
         convertCookies();
@@ -662,6 +721,7 @@ function inputKeyActions(event) {
                     break;
             }
             this.value = '';
+            sn = null;
         } else {
             let buttons = document.querySelectorAll('.listBtn button');
             buttons.forEach(btn => {
@@ -670,6 +730,7 @@ function inputKeyActions(event) {
                     return;
                 }
             });
+            buttons = null;
         }
     } else if (event.keyCode === 27) { // ESC
         document.querySelector('#item').classList.remove('is-danger');
@@ -720,10 +781,14 @@ function convertCookies(){
 
                 }
                 document.cookie = `${ln}=; max-age=0;`;
+                ln = null;
+                lists = null;
             }
             // console.log(cookieCollection);
             saveDB(cookieCollection);
         }
+        cookieCollection = null;
+        cookies = null;
             
     }else{
         console.log('No cookies, it\'s all good')
