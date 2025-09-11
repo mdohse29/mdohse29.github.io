@@ -25,6 +25,37 @@ article.message {
     left: 29%;
 }
 
+.saved-lists {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.saved-list {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    max-width: 250px;
+    margin-top: 5px;
+}
+
+.saved-list .list-name, .saved-list .list-action {
+    display: inherit;
+    width: inherit;
+    justify-content: inherit;
+    align-items: inherit;
+    flex-wrap: wrap;
+}
+
+.saved-list p.current::before {
+    content: '>>';
+    color: red;
+    position: relative;
+    left: -5px;
+}
+
 .select-icons,
 .select-icons>select {
     width: 100%;
@@ -51,11 +82,6 @@ article.message {
 
 .has-background-success {
     background-color: rgba(72, 199, 142, .50) !important;
-}
-
-#info > p[data-list] > button:hover{
-    cursor: pointer;
-    background-color: rgba(253, 249, 4, 0.45);
 }
 
 #list-container {
