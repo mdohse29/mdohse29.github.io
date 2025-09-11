@@ -619,7 +619,7 @@ function inputActions() {
         };
         if (nosave) {
             console.log("No saved lists found");
-            document.querySelector('.message-body').append(mkP({ class: 'has-text-danger', inner: 'No saved lists were found' }));
+            document.querySelector('#info').append(mkP({ class: 'has-text-danger', inner: 'No saved lists were found' }));
             rmvTimeout();
             errorTimeoutID = setTimeout(removeMsg, 2000);
         }
