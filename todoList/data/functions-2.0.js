@@ -468,6 +468,18 @@ function toggleLstBtn() {
 function loadList(ln = null){
     if (!ln)
         ln = curList;
+    let tag = document.querySelector('.tag');
+    if (ln === 'default'){
+        if(tag)
+            document.querySelector('.tag').remove();
+    }else{
+        if (tag){
+            tag.innerText = ln;
+        }else{
+            document.querySelector('.card-header').prepend(mkSpan({class:'tag is-danger', inner:ln}))
+        }
+    }
+
     [...document.getElementById('list').children].forEach(i=>{i.remove()})
     let list = getListDB(ln);
     if (list instanceof Array)
