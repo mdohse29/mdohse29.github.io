@@ -149,7 +149,7 @@ function buildListItem(itemText, opt = {sub:false, pid:null}) {
             title: 'Click for Options',
             id: ((opt.sub) ? 'listSubItem' : ''),
             pid: ((opt.sub && opt.pid) ? opt.pid : ''),
-            inner: (itemText.toLowerCase().includes('http')) ? itemText : itemText.substring(0, 1).toUpperCase() + itemText.substring(1),
+            inner: itemText.trim(),
             icon: mkElem({ elemType: 'i', class: 'bi ' + ((opt.sub) ? 'bi-caret-right' : 'bi-caret-right-fill') }),
             ident: `${(!opt.sub)?0:(sublist)?sublist.children.length + 1:1}`,
             tabindex: '0',
@@ -175,8 +175,7 @@ function buildListItem(itemText, opt = {sub:false, pid:null}) {
 
 function addItem(ev){
     ev.stopPropagation();
-    let input = this.parentElement.previousElementSibling;
-    let itemText = input.value.trim();
+    let itemText = this.parentElement.previousElementSibling.value.trim();
     let list = document.getElementById('list');
     if (itemText){
         itemText.split(',').reverse().forEach(itm=>{
@@ -190,7 +189,6 @@ function addItem(ev){
     }
     resetSelectedItem();
     resetListBtn();
-    input = null;
     itemText = null;
     list = null;
 }
@@ -198,8 +196,7 @@ function addItem(ev){
 function addSubItem(ev){
     ev.stopPropagation();
     let data = getSelectedItemData();
-    let input = this.parentElement.previousElementSibling;
-    let itemText = input.value.trim();
+    let itemText = this.parentElement.previousElementSibling.value.trim();
     let parent = document.querySelector(`#list #listItem[pid="${data.pid}"]`);
     if (parent.children.length === 1 && itemText){
         parent.append(mkElem({elemType:'ul', class:'sub-list'}));
@@ -219,7 +216,6 @@ function addSubItem(ev){
     resetSelectedItem();
         resetListBtn();
         data = null;
-        input = null;
         itemText = null;
         parent = null;
 }
