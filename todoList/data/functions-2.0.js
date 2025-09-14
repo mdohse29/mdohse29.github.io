@@ -56,6 +56,7 @@ function saveDB(collection){
 function saveList(ln = null){
     if (!ln)
         ln = curList;
+    ln = ln.replaceAll(' ', '-');
     let list = document.getElementById('list').querySelectorAll('#listItem');
     let collection = getListDB();
     let ListItems = [];
@@ -80,8 +81,10 @@ function saveList(ln = null){
 function getListDB(ln = null){
     const listDB = window.localStorage.lists;
 
-    if (ln)
-        curList = ln;    
+    if (ln){
+        ln = ln.replaceAll(' ', '-');
+        curList = ln;
+    }
     
     if (listDB){
         return (ln)?JSON.parse(listDB)[ln]:JSON.parse(listDB);
@@ -92,6 +95,7 @@ function getListDB(ln = null){
 
 function clearListDB(ln = null){
     if (ln){
+        ln = ln.replaceAll(' ', '-');
         let collection = getListDB();
         if (collection[ln])
             delete collection[ln];
@@ -149,7 +153,7 @@ function buildListItem(itemText, opt = {sub:false, pid:null}) {
             title: 'Click for Options',
             id: ((opt.sub) ? 'listSubItem' : ''),
             pid: ((opt.sub && opt.pid) ? opt.pid : ''),
-            inner: (itemText.toLowerCase().includes('http')) ? itemText : itemText.substring(0, 1).toUpperCase() + itemText.substring(1),
+            inner: itemText.trim(),
             icon: mkElem({ elemType: 'i', class: 'bi ' + ((opt.sub) ? 'bi-caret-right' : 'bi-caret-right-fill') }),
             ident: `${(!opt.sub)?0:(sublist)?sublist.children.length + 1:1}`,
             tabindex: '0',
@@ -175,8 +179,7 @@ function buildListItem(itemText, opt = {sub:false, pid:null}) {
 
 function addItem(ev){
     ev.stopPropagation();
-    let input = this.parentElement.previousElementSibling;
-    let itemText = input.value.trim();
+    let itemText = this.parentElement.previousElementSibling.value.trim();
     let list = document.getElementById('list');
     if (itemText){
         itemText.split(',').reverse().forEach(itm=>{
@@ -190,7 +193,6 @@ function addItem(ev){
     }
     resetSelectedItem();
     resetListBtn();
-    input = null;
     itemText = null;
     list = null;
 }
@@ -198,8 +200,7 @@ function addItem(ev){
 function addSubItem(ev){
     ev.stopPropagation();
     let data = getSelectedItemData();
-    let input = this.parentElement.previousElementSibling;
-    let itemText = input.value.trim();
+    let itemText = this.parentElement.previousElementSibling.value.trim();
     let parent = document.querySelector(`#list #listItem[pid="${data.pid}"]`);
     if (parent.children.length === 1 && itemText){
         parent.append(mkElem({elemType:'ul', class:'sub-list'}));
@@ -219,7 +220,6 @@ function addSubItem(ev){
     resetSelectedItem();
         resetListBtn();
         data = null;
-        input = null;
         itemText = null;
         parent = null;
 }
@@ -468,6 +468,7 @@ function toggleLstBtn() {
 function loadList(ln = null){
     if (!ln)
         ln = curList;
+    ln = ln.replaceAll(' ', '-');
     let tag = document.querySelector('.tag');
     if (ln === 'default'){
         if(tag)
@@ -572,6 +573,7 @@ function openOptions(ev) {
             text:this.innerText.trim()
         }
     ));
+    removeMsg();
     resetListBtn();
     if (document.querySelector('.options')) {
         closeOptions();
