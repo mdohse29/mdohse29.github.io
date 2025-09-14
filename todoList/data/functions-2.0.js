@@ -477,7 +477,7 @@ function loadList(ln = null){
         if (tag){
             tag.innerText = ln;
         }else{
-            document.querySelector('.card-header').prepend(mkSpan({class:'tag is-danger', inner:ln}))
+            document.querySelector('.card-header').prepend(mkSpan({class:'tag is-danger', inner:ln, listeners:[{type:'click', execute:function(){navigator.clipboard.writeText(this.innerText);popMsg('List name copied!', 'success')}}]}))
         }
     }
 
