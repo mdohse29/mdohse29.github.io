@@ -56,6 +56,7 @@ function saveDB(collection){
 function saveList(ln = null){
     if (!ln)
         ln = curList;
+    ln = ln.replaceAll(' ', '-');
     let list = document.getElementById('list').querySelectorAll('#listItem');
     let collection = getListDB();
     let ListItems = [];
@@ -80,8 +81,10 @@ function saveList(ln = null){
 function getListDB(ln = null){
     const listDB = window.localStorage.lists;
 
-    if (ln)
-        curList = ln;    
+    if (ln){
+        ln = ln.replaceAll(' ', '-');
+        curList = ln;
+    }
     
     if (listDB){
         return (ln)?JSON.parse(listDB)[ln]:JSON.parse(listDB);
@@ -92,6 +95,7 @@ function getListDB(ln = null){
 
 function clearListDB(ln = null){
     if (ln){
+        ln = ln.replaceAll(' ', '-');
         let collection = getListDB();
         if (collection[ln])
             delete collection[ln];
@@ -464,6 +468,7 @@ function toggleLstBtn() {
 function loadList(ln = null){
     if (!ln)
         ln = curList;
+    ln = ln.replaceAll(' ', '-');
     let tag = document.querySelector('.tag');
     if (ln === 'default'){
         if(tag)
@@ -568,6 +573,7 @@ function openOptions(ev) {
             text:this.innerText.trim()
         }
     ));
+    removeMsg();
     resetListBtn();
     if (document.querySelector('.options')) {
         closeOptions();
