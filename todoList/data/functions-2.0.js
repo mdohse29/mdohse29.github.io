@@ -661,31 +661,32 @@ function inputActions() {
                 ]),
                 nestElem([
                     mkDiv({ class: 'message-body is-flex is-flex-direction-column is-align-content-center', id: 'info', style: 'text-align: center;' }),
-                    (savedLists.length)?
                     nestElem([
                         mkDiv({class:'saved-lists'}),
-                        savedLists.map((e)=>{
-                            return nestElem([
-                                mkDiv({class:'saved-list'}),
-                                [
-                                    nestElem([
-                                        mkDiv({class:'list-name', 'data-list':e}),
-                                        mkP({inner:e, class:(e===curList)?'current':''})
-                                    ]),
-                                    nestElem([
-                                        mkDiv({class:'list-action'}),
-                                        mkDiv({class:'buttons are-small'}),
-                                        [
-                                            mkBtn({id:'load', title:(e===curList)?'Current List':`Load List: ${e}`, class:'button is-success is-rounded is-outlined', icon:mkElem({elemType:'i', class:'bi bi-box-arrow-in-up-right'}), prop:{disabled:(e===curList)}, listeners:[{type:'click', execute:function(){removeMsg();resetListBtn();loadList(this.parentElement.parentElement.previousElementSibling.dataset.list);}}]}),
-                                            mkBtn({id:'remove', title:`Delete List: ${e}`, class:'button is-danger is-rounded is-outlined', icon:mkElem({elemType:'i', class:'bi bi-trash'}), listeners:[{type:'click', execute:function(){removeMsg();resetListBtn();clearListDB(this.parentElement.parentElement.previousElementSibling.dataset.list);loadList('default');popMsg(`"${this.parentElement.parentElement.previousElementSibling.dataset.list}" has been removed.`, 'success', 3000)}}]})
-                                        ]
-                                    ])
-                                ]
-                            ])
-                        })
+                        (savedLists.length)?
+                            savedLists.map((e)=>{
+                                return nestElem([
+                                    mkDiv({class:'saved-list'}),
+                                    [
+                                        nestElem([
+                                            mkDiv({class:'list-name', 'data-list':e}),
+                                            mkP({inner:e, class:(e===curList)?'current':''})
+                                        ]),
+                                        nestElem([
+                                            mkDiv({class:'list-action'}),
+                                            mkDiv({class:'buttons are-small'}),
+                                            [
+                                                mkBtn({id:'load', title:(e===curList)?'Current List':`Load List: ${e}`, class:'button is-success is-rounded is-outlined', icon:mkElem({elemType:'i', class:'bi bi-box-arrow-in-up-right'}), prop:{disabled:(e===curList)}, listeners:[{type:'click', execute:function(){removeMsg();resetListBtn();loadList(this.parentElement.parentElement.previousElementSibling.dataset.list);}}]}),
+                                                mkBtn({id:'remove', title:`Delete List: ${e}`, class:'button is-danger is-rounded is-outlined', icon:mkElem({elemType:'i', class:'bi bi-trash'}), listeners:[{type:'click', execute:function(){removeMsg();resetListBtn();clearListDB(this.parentElement.parentElement.previousElementSibling.dataset.list);loadList('default');popMsg(`"${this.parentElement.parentElement.previousElementSibling.dataset.list}" has been removed.`, 'success', 3000)}}]})
+                                            ]
+                                        ])
+                                    ]
+                                ])
+                            })
+                        :
+                            mkP({ class: 'has-text-danger is-size-5', inner: 'No saved lists were found' })
                     ])
-                    :
-                    mkP({ class: 'has-text-danger is-size-5', inner: 'No saved lists were found' })
+                    
                 ])
             ]
         ]));
