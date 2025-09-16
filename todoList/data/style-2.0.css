@@ -32,9 +32,10 @@ article.message {
     z-index: 2000;
 }
 
-#cookieList {
+#list-display {
     width: 42%;
     left: 29%;
+    outline: 5px solid #3e8ed0;
 }
 
 .saved-lists {
@@ -322,7 +323,7 @@ i.bi-check-circle-fill {
 }
 
 @media (width < 1408px) {
-    #cookieList {
+    #list-display {
         width: 50%;
         left: 25%;
     }
@@ -338,7 +339,7 @@ i.bi-check-circle-fill {
         max-width: 130px;
     }
 
-    #cookieList {
+    #list-display {
         width: 100%;
         left: 0;
     }

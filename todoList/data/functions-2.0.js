@@ -650,12 +650,12 @@ function inputActions() {
         let savedLists = Object.keys(getListDB());
 
         document.body.prepend(nestElem([
-            mkElem({ elemType: 'article', id: 'cookieList', class: 'message is-info' }),
+            mkElem({ elemType: 'article', id: 'list-display', class: 'message is-info' }),
             [
                 nestElem([
                     mkDiv({ class: 'message-header' }),
                     [
-                        mkP({ inner: "Saved Lists", class:'is-size-5'}),
+                        mkP({ inner: "Saved Lists", class:'is-size-4'}),
                         mkBtn({ class: 'delete', listeners: [{ type: 'click', execute: ()=>{removeMsg();resetListBtn();} }] })
                     ]
                 ]),
