@@ -130,9 +130,11 @@ async function createNavBtns() {
                     id: d.id,
                     type: 'button',
                     inner: d.title,
-                    "aria-label": d.title,
-                    "aria-selected": "false",
-                    "aria-hidden": `${d.hidden}`,
+                    prop: {
+                        ariaLabel: d.title,
+                        ariaSelected: false,
+                        ariaHidden: d.hidden
+                    },
                     listeners: [
                         {
                             type: 'click',
