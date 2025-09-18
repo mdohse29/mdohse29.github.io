@@ -16,12 +16,21 @@ li {
     padding-left: 4px;
 }
 
-.tag {
+.tag.is-danger {
     position: absolute;
     margin-top: 2px;
     margin-left: 2px;
     user-select: none;
     -moz-user-select: none;
+}
+
+.tag.is-danger::before {
+    content: 'List:';
+    margin-right: 5px;
+}
+
+.tag.is-danger > .bi.bi-x-lg:hover {
+    cursor: pointer;
 }
 
 article.message {

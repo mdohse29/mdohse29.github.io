@@ -475,9 +475,17 @@ function loadList(ln = null){
             document.querySelector('.tag').remove();
     }else{
         if (tag){
+            let icon = tag.children[0]
             tag.innerText = ln;
+            tag.append(icon);
+            icon = null;
         }else{
-            document.querySelector('.card-header').prepend(mkSpan({class:'tag is-danger', inner:ln, listeners:[{type:'click', execute:function(){navigator.clipboard.writeText(this.innerText);popMsg('List name copied!', 'success')}}]}))
+            document.querySelector('.card-header').prepend(
+                nestElem([
+                    mkSpan({class:'tag is-danger', inner:ln, prop:{ariaHidden: true}, listeners:[{type:'click', execute:function(){navigator.clipboard.writeText(this.innerText);popMsg('List name copied!', 'success')}}]}),
+                    mkElem({elemType:'i', class:'bi bi-x-lg ml-2', title:'Close', prop:{ariaHidden:true}, listeners:[{type:'click', execute: (e)=>{e.stopPropagation();loadList('default')}}]})
+                ])
+            )
         }
     }
 
@@ -506,6 +514,7 @@ function loadList(ln = null){
     fixIdent();
     ln = null;
     list = null;
+    document.getElementById('item').focus();
 }
 
 function fixIdent(){
