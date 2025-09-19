@@ -29,8 +29,15 @@ li {
     margin-right: 5px;
 }
 
-.tag.is-danger > .bi.bi-x-lg:hover {
+.tag.is-danger>.bi.bi-x-lg {
+    border-radius: 50%;
+    width: 20px;
+    text-align: center;
+}
+
+.tag.is-danger>.bi.bi-x-lg:hover {
     cursor: pointer;
+    outline: 1px solid white;
 }
 
 article.message {
@@ -67,7 +74,8 @@ article.message {
     margin-top: 5px;
 }
 
-.saved-list .list-name, .saved-list .list-action {
+.saved-list .list-name,
+.saved-list .list-action {
     display: inherit;
     width: inherit;
     justify-content: inherit;
@@ -118,11 +126,15 @@ article.message {
     scrollbar-width: none;
 }
 
-#listItem:hover > li > i, #listSubItem:hover, #listSubItem:focus-visible, #listItem:has(li:focus-visible) > li > i {
+#listItem:hover>li>i,
+#listSubItem:hover,
+#listSubItem:focus-visible,
+#listItem:has(li:focus-visible)>li>i {
     background-color: rgba(253, 249, 4, 0.45);
 }
 
-#done, #list {
+#done,
+#list {
     border-top: 2px solid rgba(211, 211, 211, .5);
 }
 
@@ -196,7 +208,7 @@ i.bi-check-circle-fill {
     margin-bottom: 20px;
 }
 
-.options button > i {
+.options button>i {
     font-size: 1.25em;
 }
 
@@ -281,12 +293,12 @@ i.bi-check-circle-fill {
 
 .menu-container fieldset>legend {
     font-weight: bold;
-    margin-right:auto;
+    margin-right: auto;
     margin-left: auto;
     margin-bottom: 5px;
 }
 
-.menu-container fieldset input[name="icon"]{
+.menu-container fieldset input[name="icon"] {
     margin-right: 10px;
 }
 
