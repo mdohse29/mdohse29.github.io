@@ -63,7 +63,7 @@
                 "url": "./todoList/",
                 "text": {
                     "main": "ToDo List",
-                    "sub": "Does Not Save",
+                    "sub": "Saves with Local Storage",
                     "warn": true
                 }
             },
