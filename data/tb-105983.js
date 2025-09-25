@@ -160,7 +160,6 @@ const nav_bar = nestElem([
 
 window.onload = function(){
     document.body.children[0].appendChild(nav_bar);
-    document.body.appendChild(mkDiv({class:'hb', 'aria-hidden':'true', listeners:[{type:'click', execute:toggleHb}]}))
-    document.body.lastElementChild.active = false;
+    document.body.appendChild(mkDiv({class:'hb', prop:{ariaHidden:true, active:false}, listeners:[{type:'click', execute:toggleHb}]}))
     createNavBtns();
 }
