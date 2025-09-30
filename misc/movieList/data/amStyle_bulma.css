@@ -1,4 +1,5 @@
 body {
+    background: url('./film.webp') no-repeat center/cover;
     background-color: rgba(0,0,0,.25);
     min-height: 100vh;
 }
@@ -20,8 +21,14 @@ figure > img {
     min-width: 235px;
 }
 
+.title {
+    color: yellow;
+    background-color: rgba(0, 0, 0, 0.639);
+}
+
 .title > h1 {
-    text-shadow: 8px 3px 3px gray;
+    font-family: "Doto", sans-serif;
+    /* text-shadow: 8px 3px 3px gray; */
     font-size: 2em;
 }
 
