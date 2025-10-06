@@ -1,3 +1,4 @@
+import {nestElem, mkDiv, mkElem, mkBtn, mkP, mkSpan} from "../../scripts/crtElm-mod-min.js";
 let curList = 'default';
 const frameCheck = window.top === window.self;
 let errorTimeoutID = NaN;
@@ -177,7 +178,7 @@ function buildListItem(itemText, opt = {sub:false, pid:null}) {
 
 }
 
-function addItem(ev){
+export function addItem(ev){
     ev.stopPropagation();
     let itemText = this.parentElement.previousElementSibling.value.trim();
     let list = document.getElementById('list');
@@ -197,7 +198,7 @@ function addItem(ev){
     list = null;
 }
 
-function addSubItem(ev){
+export function addSubItem(ev){
     ev.stopPropagation();
     let data = getSelectedItemData();
     let itemText = this.parentElement.previousElementSibling.value.trim();
@@ -385,10 +386,9 @@ function clkUndoItem(){
     closeOptions();
     itmData = null;
     selected = null;
-    update = null;
 }
 
-function editItem(){
+export function editItem(){
     let itmData = getSelectedItemData();
     let selected = document.querySelector(`#listItem[pid="${itmData.pid}"] li[ident="${itmData.ident}"]`);
     let update = this.parentElement.previousElementSibling.value.trim();
@@ -465,7 +465,7 @@ function toggleLstBtn() {
 
 }
 
-function loadList(ln = null){
+export function loadList(ln = null){
     if (!ln)
         ln = curList;
     ln = ln.replaceAll(' ', '-');
@@ -491,7 +491,7 @@ function loadList(ln = null){
 
     [...document.getElementById('list').children].forEach(i=>{i.remove()})
     let list = getListDB(ln);
-    if (list instanceof Array)
+    if (list instanceof Array){
         list.forEach(i=>{
             if (i.subList){
                 nestElem([
@@ -511,6 +511,9 @@ function loadList(ln = null){
                 ]);
             }
         });
+    }
+    resetListBtn();
+    resetSelectedItem();
     fixIdent();
     ln = null;
     list = null;
@@ -536,7 +539,7 @@ function resetListBtn() {
     });
 }
 
-function resetSelectedItem(){
+export function resetSelectedItem(){
     window.localStorage.removeItem('selected');
 }
 
@@ -594,7 +597,7 @@ function openOptions(ev) {
         b3: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', 'aria-description': 'Edit List Item', id: 'edit', inner: '<i class="bi bi-pencil"></i>', listeners: [{ type: 'click', execute: toggleLstBtn }, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] }),
         b4: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-info is-outlined', 'aria-description': 'Copy Item', id: 'copy', inner: '<i class="bi bi-copy"></i>', listeners: [{ type: 'click', execute: clkCopyItem }, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] }),
         b5: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-warning is-outlined', 'aria-description': 'Restore List Item', id: 'undo', inner: '<i class="bi bi-arrow-counterclockwise"></i>', listeners: [{ type: 'click', execute: clkUndoItem }, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] }),
-        b6: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', 'aria-description': 'Close Options', id: 'cancel', inner: '<i class="bi bi-x-circle"></i>', listeners: [{ type: 'click', execute: closeOptions }, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] }),
+        b6: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-danger is-outlined', 'aria-description': 'Close Options', id: 'cancel', inner: '<i class="bi bi-x-circle"></i>', listeners: [{ type: 'click', execute: ()=>{closeOptions();resetSelectedItem();} }, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] }),
         b7: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-success is-outlined', 'aria-description': 'Load List', id: 'load', inner: '<i class="bi bi-box-arrow-in-up-right"></i>', listeners: [{ type: 'click', execute: clkLoadList}, { type: 'mouseenter', execute: optMo }, { type: 'mouseleave', execute: optMl }] }),
         b8: mkBtn({ class: 'button is-small ml-2 mr-2 is-rounded is-info is-outlined', 'aria-description': 'Open URL', id: 'link', inner: '<i class="bi bi-box-arrow-up-right"></i>', listeners:[{type:'mouseenter', execute:optMo}, {type:'mouseleave', execute:optMl}, {type:'click', execute:clkOpenURL}]})
     }
@@ -627,7 +630,7 @@ function changeTitle(elem) {
     }
 }
 
-function inputActions() {
+export function inputActions() {
 
     removeMsg();
     this.classList.remove('is-danger');
@@ -720,7 +723,7 @@ function inputActions() {
 
 }
 
-function inputKeyActions(event) {
+export function inputKeyActions(event) {
     if (event.keyCode === 13) { // Enter
         if (this.value.match(/^:[a-z]*:.*/)) {
             let sn = this.value.split(':');
@@ -818,3 +821,11 @@ function convertCookies(){
         console.log('No cookies, it\'s all good')
     }
 }
+
+// window.API = {
+//     manLoadDB:(collection)=>{
+//         if (collection instanceof Object && Object.keys(collection).length){
+//             saveDB(collection);
+//         }
+//     }
+// }
