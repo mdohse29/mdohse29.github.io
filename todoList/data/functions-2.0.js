@@ -822,10 +822,12 @@ function convertCookies(){
     }
 }
 
-// window.API = {
-//     manLoadDB:(collection)=>{
-//         if (collection instanceof Object && Object.keys(collection).length){
-//             saveDB(collection);
-//         }
-//     }
-// }
+window.API = {
+    manLoadDB:(collection)=>{
+        if (collection instanceof Object && Object.keys(collection).length){
+            saveDB(collection);
+        }else{
+            popMsg("DB upload failed!", 'danger', 3500);
+        }
+    }
+}
