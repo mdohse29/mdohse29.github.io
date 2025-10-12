@@ -35,6 +35,56 @@ export function mkImg(attr = {}){
     return mkElem(attr);
 }
 
+export function mkTable(tData={}, attr={}){
+    if (!attr instanceof Object || !tData instanceof Object)
+        throw new Error('Arguments must be set as an object\n\nattr = {}\ntData = {}');
+    if (!Object.keys(tData).length)
+        throw new Error('The tData argument is Empty!\n\ntData = {thead:[], tbody:[]}\ntData = {rows:[]}');
+    let table = mkElem({elemType:'table', ...attr});
+    if (tData.rows && tData.rows instanceof Array && tData.rows.length){
+        tData.rows.forEach(r=>{r.forEach(c=>{if (!c.attr)c.attr={};})});
+        nestElem([
+            table,
+            tData.rows.map(r=>{
+                return nestElem([
+                    mkElem({elemType:'tr'}),
+                    r.map(c=>{
+                        return mkElem({elemType:c.type, ...c.attr});
+                    })
+                ])
+            })
+        ])
+    }else if (((tData.thead && tData.tbody) || tData.tbody)){
+        if (tData.thead && tData.thead.length){
+            nestElem([
+                table,
+                mkElem({elemType:'thead'}),
+                tData.thead.map(r=>{
+                    return nestElem([
+                        mkElem({elemType:'tr'}),
+                        r.map(c=>{
+                            return mkElem({elemType:c.type, ...c.attr});
+                        })
+                    ])
+                })
+            ])
+        }
+        nestElem([
+            table,
+            mkElem({elemType:'tbody'}),
+            tData.tbody.map(r=>{
+                return nestElem([
+                    mkElem({elemType:'tr'}),
+                    r.map(c=>{
+                        return mkElem({elemType:c.type, ...c.attr});
+                    })
+                ])
+            })
+        ])
+    }
+    return table;
+}
+
 export function mkOpt(attr = { value: '' }) {
     let option = mkElem({ elemType: 'option' });
     if (!attr.value) {
