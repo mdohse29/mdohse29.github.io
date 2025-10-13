@@ -1,0 +1,35 @@
+:root {
+    font-size: 15px;
+}
+body {
+    width: 100%;
+    margin: 0px;
+    padding: 1px;
+    height: 100vh;
+}
+
+.container {
+    width: auto;
+    margin: 1.333em;
+    padding: 1em;
+}
+
+table {
+    border-collapse: collapse;
+    border: none;
+}
+
+td, th {
+    padding: .333em;
+}
+
+table.grid td, table.grid th {
+    border: 1px solid black;
+}
+
+table.grid tr:first-of-type > td:first-of-type, table.grid tr:first-of-type > th:first-of-type{
+    border-top-left-radius: 5px;
+}
+table.grid tr:first-of-type > td:last-of-type, table.grid tr:first-of-type > th:last-of-type{
+    border-top-right-radius: 5px;
+}
