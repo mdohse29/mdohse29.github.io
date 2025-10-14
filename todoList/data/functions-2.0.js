@@ -441,8 +441,6 @@ function clkCopyItem() {
 function toggleLstBtn() {
     let data = getSelectedItemData();
     let targetElement = document.querySelector(`#list #listItem[pid="${data.pid}"] li[ident="${data.ident}"]`);
-    this.parentElement.parentElement.parentElement.removeEventListener('mouseleave', optsMl);
-    // ^^^^ Move this into closeOptions()
     closeOptions();
 
     if (this.id === 'edit') {
@@ -550,6 +548,7 @@ function getSelectedItemData(){
 
 function closeOptions() {
     let options = document.querySelector('.options');
+    options.removeEventListener('mouseleave', optsMl);
     if (options) {
         options.addEventListener('animationend', function () {
             this.remove();
