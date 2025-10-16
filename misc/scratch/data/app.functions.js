@@ -162,7 +162,23 @@ $(document).ready(function () {
     // Update Clipboard with trimmed text
 
     function updateClipboard(text) {
-        navigator.clipboard.writeText(text.trim())
+        try{
+            navigator.clipboard.write([
+                new ClipboardItem({
+                    'text/plain': new Blob([text.trim()], {type:'text/plain'})
+                })
+            ]);
+        }catch(e){
+            console.warn('Falling back to old method.', e);
+            let range = document.createRange();
+            range.selectNodeContents(document.getElementById('TextArea'));
+            let selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+
+            document.execCommand('copy'); // Deprecated
+            selection.removeAllRanges();
+        }
     }
 
     function formatFilename(text) {
@@ -182,7 +198,7 @@ $(document).ready(function () {
 
     function removeOlMarkers(text) {
         let editedText = $('#TextArea').val();
-        const regex = /^[ \t]*[A-Z|a-z|0-9]{1,4}[).][ \t]*(?:\b|\B)/gm;
+        const regex = /^[ \t]*(?:[A-Z|a-z|0-9]{1,4}[).]|[-|*]{1,3})[ \t]*(?:\b|\B)/gm;
         if (editedText.match(regex)) {
             editedText = editedText.replace(new RegExp(regex), '');
         }
