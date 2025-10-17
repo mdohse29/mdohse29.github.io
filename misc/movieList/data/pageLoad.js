@@ -97,4 +97,5 @@ nestElem([
     }
 ])
 
-document.getElementById('search-box').focus();
+if (window.top === window.self)
+    document.getElementById('search-box').focus();
