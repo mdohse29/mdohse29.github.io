@@ -183,10 +183,14 @@ export function addItem(ev){
     let itemText = this.parentElement.previousElementSibling.value.trim();
     let list = document.getElementById('list');
     if (itemText){
-        itemText.split(',').reverse().forEach(itm=>{
+        itemText.split(',').reverse().forEach((itm, n)=>{
             itm = itm.trim();
-            if (itm.length)
+            if (itm.length){
                 list.prepend(buildListItem(itm));
+                if (n === 0)
+                    list.querySelector('ul:first-child').scrollIntoView({behavior:'smooth', block:'nearest'});
+            }
+            
         });
         saveList();
     }else{
