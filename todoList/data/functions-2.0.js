@@ -186,9 +186,10 @@ export function addItem(ev){
         itemText.split(',').reverse().forEach((itm, n)=>{
             itm = itm.trim();
             if (itm.length){
-                list.prepend(buildListItem(itm));
+                const elem = buildListItem(itm);
+                list.prepend(elem);
                 if (n === 0)
-                    list.querySelector('ul:first-child').scrollIntoView({behavior:'smooth', block:'nearest'});
+                    elem.scrollIntoView({behavior:'smooth', block:'nearest'});
             }
             
         });
