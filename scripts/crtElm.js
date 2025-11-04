@@ -311,6 +311,15 @@ function mkElem(attr = { elemType: '' }) {
                 // console.log(p, attr.props)
                 element[p] = attr.prop[p];
             }
+        } else if (a.includes('dataset')){
+            if (attr.dataset instanceof Object){
+                for (let ds in attr.dataset){
+                    element.dataset[ds] = attr.dataset[ds];
+                }
+            }else{
+                console.warn('The dataset attribute should be typeof Object\ndataset:{}');
+                
+            }
         } else {
             if (attr[a] && !a.includes('elemType')) {
                 element.setAttribute(a, attr[a]);

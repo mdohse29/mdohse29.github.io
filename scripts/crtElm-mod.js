@@ -308,8 +308,16 @@ export function mkElem(attr = { elemType: '' }) {
             }
         } else if (a.includes('prop')){
             for (let p in attr.prop){
-                // console.log(p, attr.props)
                 element[p] = attr.prop[p];
+            }
+        } else if (a.includes('dataset')){
+            if (attr.dataset instanceof Object){
+                for (let ds in attr.dataset){
+                    element.dataset[ds] = attr.dataset[ds];
+                }
+            }else{
+                console.warn('The dataset attribute should be typeof Object\ndataset:{}');
+                
             }
         } else {
             if (attr[a] && !a.includes('elemType')) {
