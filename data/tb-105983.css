@@ -1,10 +1,10 @@
 @keyframes slide {
     from{
-        transform: translateY(-25%);
+        transform: translateY(-60%) scale(50%);
         opacity: 0;
     }
     to{
-        transform: translateY(0);
+        transform: translateY(0) scale(100%);
         opacity: 1;
     }
 }
