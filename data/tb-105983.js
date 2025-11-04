@@ -47,15 +47,16 @@ function toggleHb(){
 function openFinish(){
     this.classList.remove('fade-in');
     this.removeEventListener('animationend', openFinish);
-    [...this.querySelectorAll('a.btn')].forEach(btn=>{
-        btn.classList.add('bouncing');
-        btn.addEventListener('animationend', openComplete)
-    });
+    // If bouncing on open make sure to remove the listener placed on the button in buildDrawer()
+    // [...this.querySelectorAll('a.btn')].forEach(btn=>{ // unused if not bouncing on open
+    //     btn.classList.add('bouncing');
+    //     btn.addEventListener('animationend', openComplete)
+    // });
 }
 
 function moFocusin(){
     this.blur();
-    this.classList.replace('hover-bounce', 'hover-bounce');
+    this.classList.replace('hover-bounce', 'hover-bounce'); // What?
     this.removeEventListener('mouseover', moFocusin);
 }
 
@@ -64,7 +65,7 @@ function openStart(){
     this.removeEventListener('animationstart', openStart);
 }
 
-function openComplete(ev){
+function openComplete(ev){ // unused if not bouncing on open
     ev.stopPropagation();
     this.classList.remove('bouncing');
     this.removeEventListener('animationend', openComplete);
@@ -96,22 +97,24 @@ function removeDrawer(id){
 
 function buildDrawer(id){
     const showHidden = document.body.lastElementChild.active;
-    const drawerData = drawers.filter(d=>{
+    const DD = drawers.filter(d=>{
         return d.id == id;
     })[0];
 
-    if (drawerData){
+    if (DD){
         return nestElem([
-            mkDiv({class:'container-fluid drawer-wrapper visibly-hidden fade-in', id:`${drawerData.id}-drawer`, listeners:[{type:'animationend', execute:openFinish}, {type:'animationstart', execute:openStart}]}),
+            mkDiv({class:'container-fluid drawer-wrapper visibly-hidden fade-in', id:`${DD.id}-drawer`, listeners:[{type:'animationend', execute:openFinish}, {type:'animationstart', execute:openStart}]}),
             [
                 nestElem([
                     mkDiv({class:'drawer-header'}),
-                    mkElem({elemType:'h2', class:'title', 'aria-label':drawerData.title, inner:drawerData.title})
+                    mkElem({elemType:'h2', class:'title', 'aria-label':DD.title, inner:DD.title})
                 ]),
                 nestElem([
                     mkDiv({class:'drawer'}),
-                    drawerData.buttons.map(btn=>{
-                        const newbtn = mkLnk({class:`btn btn-lg btn-primary${(btn.hidden)?` hbb${(showHidden)?'':' dnone'}`:''}`, inner:btn.text.main, href:btn.url, target:(btn.url.includes('http'))?'_blank':'_self', 'aria-hidden':`${(btn.hidden)?`${(!showHidden)}`:'false'}`});
+                    DD.buttons.map(btn=>{
+                        const newbtn = mkLnk({class:`btn btn-lg btn-primary hover-bounce${(btn.hidden)?` hbb${(showHidden)?'':' dnone'}`:''}`, inner:btn.text.main, href:btn.url, target:(btn.url.includes('http'))?'_blank':'_self', 'aria-hidden':`${(btn.hidden)?`${(!showHidden)}`:'false'}`, listeners:[{type:'mouseover', execute:function(){
+        this.addEventListener('mouseover', moFocusin)
+    }}]});
                         return (btn.text.sub)?nestElem([newbtn, mkSpan({class:`sub-text`, inner:`${btn.text.sub}`})]):newbtn;
                     })
                 ])
