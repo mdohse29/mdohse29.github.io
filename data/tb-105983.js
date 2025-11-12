@@ -1,3 +1,4 @@
+import {nestElem, mkElem, mkDiv, mkLnk, mkBtn, mkImg, mkSpan} from '../scripts/crtElm-mod-min.js';
 let drawers = null;
 async function getData(){
     const data = await fetch('./data/tbData.json');
@@ -126,7 +127,7 @@ function buildDrawer(id){
 async function createNavBtns() {
     drawers = await getData();
     if (drawers)
-        for (d of drawers){
+        for (let d of drawers){
             document.querySelector('nav .btn-group').appendChild(
                 mkBtn({
                     class: `btn btn-primary p-3${(d.hidden)?' hbb dnone':''}`,
