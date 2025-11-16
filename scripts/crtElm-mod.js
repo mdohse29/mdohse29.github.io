@@ -307,9 +307,10 @@ export function mkElem(attr = { elemType: '' }) {
                 }
             }
         } else if (a.includes('prop')){
-            for (let p in attr.prop){
-                element[p] = attr.prop[p];
-            }
+            if (attr.prop instanceof Object)
+                for (let p in attr.prop){
+                    element[p] = attr.prop[p];
+                }
         } else if (a.includes('dataset')){
             if (attr.dataset instanceof Object){
                 for (let ds in attr.dataset){
