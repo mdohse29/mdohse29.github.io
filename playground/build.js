@@ -27,13 +27,20 @@ let table1 = mkTable({
             {
                 type:'td',
                 attr:{
-                    inner:'r2c1'
+                    inner:'r2c1',
+                    dataset: {
+                        testing: 'testing_stuff'
+                    }
                 }
             },
             {
                 type:'td',
                 attr:{
-                    inner:'r2c2'
+                    inner:'r2c2',
+                    style:'font-size: 32px;',
+                    dataset: {
+                        isLarge: true
+                    }
                 }
             }
         ]
