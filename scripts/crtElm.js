@@ -15,6 +15,8 @@ function mkP(attr = {}) {
 
 function mkLnk(attr = {}) {
     attr.elemType = 'a';
+    if (!attr.target)
+        attr.target = '_blank';
     return mkElem(attr);
 }
 
