@@ -15,6 +15,8 @@ export function mkP(attr = {}) {
 
 export function mkLnk(attr = {}) {
     attr.elemType = 'a';
+    if (!attr.target)
+        attr.target = '_blank';
     return mkElem(attr);
 }
 
