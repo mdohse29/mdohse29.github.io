@@ -1,4 +1,4 @@
-import * as testing from '../scripts/crtElm-mod-min.js';
+import * as testing from '../scripts/crtElm-mod.js';
 // async function searchShows(title){
 //     const searchApi = await fetch('https://api.tvmaze.com/search/shows?q=' + title);
 //     const results = await searchApi.json();
@@ -182,7 +182,7 @@ import * as testing from '../scripts/crtElm-mod-min.js';
 //     });
 // })
 let test = testing.mkDiv({class:'testing'});
-test.append(testing.mkSpan({class:'testing', inner:'OMG', style:'font-size: 48px;'}))
+test.append(testing.mkSpan({class:'testing', inner:'OMG', 'aria-hidden':false, prop:{focusIn:true}, style:'font-size: 48px;'}))
 window.onload = ()=>{
     document.body.prepend(test)
 }
