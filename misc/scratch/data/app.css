@@ -33,6 +33,18 @@ select > option {
     text-transform: capitalize;
 }
 
+div.alert[role="alert"] {
+    display: inline-block;
+    text-align: center;
+    font-weight: 900;
+    position: absolute;
+    -moz-user-select: none;
+    user-select: none;
+    z-index: 1000;
+    top: 0;
+    right: 0;
+}
+
 .presentation {
     display: flex;
     justify-content: center;
