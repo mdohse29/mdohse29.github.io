@@ -3,6 +3,7 @@ $(document).ready(function () {
     //     displays what someone currently has in the clipboard
     let previous = document.referrer;
     const currentDate = new Date();
+    let to1id = NaN;
 
     function stopProcessing() {
         $('#TextArea').off('paste', processText);
@@ -44,6 +45,26 @@ $(document).ready(function () {
             $('#temp').remove();
         }
         $('#TextArea').focus();
+    }
+
+    function alertMsg(msg,type,title){
+        if (to1id){
+            clearTimeout(to1id);
+            $('[role="alert"]').remove();
+        }
+        const alert = nestElem([
+            mkDiv({class: `alert alert-${type}`, role:'alert', listeners:[{type:'mouseenter', execute:function(){clearTimeout(to1id); to1id = NaN; this.addEventListener('mouseleave', function(){this.remove()})}}]}),
+            (title && title.length)?[
+                mkElem({elemType:'h4', class:'alert-heading', inner:title}),
+                mkP({inner:msg, class:'alert-msg'})
+            ]:mkP({inner:msg, class:'alert-msg'})
+        ]);
+        $('body').prepend(alert);
+
+        to1id = setTimeout(()=>{
+            $(alert).remove();
+            to1id = NaN;
+        }, 4000);
     }
 
     function popup(prop = {}) {
@@ -283,7 +304,7 @@ $(document).ready(function () {
 
             if (text.includes("/>") || text.includes("</")) {
                 console.log("HTML closing tags have been detected.");
-                alert("HTML MARKERS HAVE BEEN DETECTED\n\nDOUBLE CHECK THE DOCUMENT FOR UNUSUAL FORMATTING");
+                alertMsg("HTML MARKERS HAVE BEEN DETECTED<br>DOUBLE CHECK THE DOCUMENT FOR UNUSUAL FORMATTING", 'danger', 'HTML Tags Detected');
             }
 
             let regtest = /^[o]\b\s/gm;
