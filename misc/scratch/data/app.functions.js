@@ -56,6 +56,7 @@ $(document).ready(function () {
             mkDiv({class: `alert alert-${type}`, role:'alert', listeners:[{type:'mouseenter', execute:function(){clearTimeout(to1id); to1id = NaN; this.addEventListener('mouseleave', function(){this.remove()})}}]}),
             (title && title.length)?[
                 mkElem({elemType:'h4', class:'alert-heading', inner:title}),
+                mkElem({elemType:'hr'}),
                 mkP({inner:msg, class:'alert-msg'})
             ]:mkP({inner:msg, class:'alert-msg'})
         ]);
@@ -304,7 +305,7 @@ $(document).ready(function () {
 
             if (text.includes("/>") || text.includes("</")) {
                 console.log("HTML closing tags have been detected.");
-                alertMsg("HTML MARKERS HAVE BEEN DETECTED<br>DOUBLE CHECK THE DOCUMENT FOR UNUSUAL FORMATTING", 'danger', 'HTML Tags Detected');
+                alertMsg("HTML Markers have been detected<br>Remove any unwanted HTML tags before re-copying the content.", 'danger', 'HTML Tags Detected');
             }
 
             let regtest = /^[o]\b\s/gm;
