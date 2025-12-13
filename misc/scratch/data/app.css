@@ -36,7 +36,6 @@ select > option {
 div.alert[role="alert"] {
     display: inline-block;
     text-align: center;
-    font-weight: 900;
     position: absolute;
     -moz-user-select: none;
     user-select: none;
