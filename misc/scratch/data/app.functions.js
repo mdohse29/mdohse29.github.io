@@ -55,7 +55,7 @@ $(document).ready(function () {
         const alert = nestElem([
             mkDiv({class: `alert alert-${type}`, role:'alert', listeners:[{type:'mouseenter', execute:function(){clearTimeout(to1id); to1id = NaN; this.addEventListener('mouseleave', function(){this.remove()})}}]}),
             (title && title.length)?[
-                mkElem({elemType:'h4', class:'alert-heading', inner:title}),
+                mkElem({elemType:'h4', class:'alert-heading', inner:title, icon:mkElem({elemType:'i', class:'bi bi-exclamation-triangle me-2'})}),
                 mkElem({elemType:'hr'}),
                 mkP({inner:msg, class:'alert-msg'})
             ]:mkP({inner:msg, class:'alert-msg'})
