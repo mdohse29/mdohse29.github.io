@@ -21,6 +21,38 @@ async function getData(){
     return null;
 }
 
+async function triviaAPI(){
+    try{
+        const resp = await fetch('https://opentdb.com/api.php?amount=10&category=11&difficulty=easy&type=multiple');
+        if (resp.ok){
+            const {results} = await resp.json();
+            const data = {
+                title:'Movie Trivia',
+                intro:'Click Start To Begin<br>Good Luck!',
+                questions:[]
+            }
+            for (const item of results){
+                const question = {
+                    question: item.question,
+                    options: []
+                }
+                question.options.push({value: item.correct_answer, correct:true})
+                for (const ans of item.incorrect_answers){
+                    question.options.push({value: ans, correct: false});
+                }
+                question.options = shuffleArray(question.options);
+                data.questions.push(question);
+            }
+            return data;
+        }
+    }catch(err){
+        console.error(err);
+    }
+    const backUp = await getData();
+    console.log('Loading Backup Data!');
+    return backUp;
+}
+
 function nxtBtn(){
     const prompt = qContainer.querySelector('.inner-prompt');
     const qIdent = parseInt(prompt.dataset.ident);
@@ -30,13 +62,14 @@ function nxtBtn(){
 }
 
 function shuffleArray(array) {
+    const fresh = [...array]; // I added so it doesn't mutate the original array
     // AI generated Fisher-Yates shuffle implementation :-(
-    for (let i = array.length - 1; i > 0; i--) {
+    for (let i = fresh.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];  // Using deconstructing assignment to swap elements
+        [fresh[i], fresh[j]] = [fresh[j], fresh[i]];  // Using deconstructing assignment to swap elements
         // This method avoids the need for a temporary variable
     }
-    return array;
+    return fresh;
 }
 
 function answerSelect(ev){
@@ -98,7 +131,9 @@ function showCorrect(){
 }
 
 window.onload = async ()=>{
-    qData = await getData();
+    // qData = await getData();
+    qData = await triviaAPI();
+    console.log(qData)  
     const intro = qContainer.querySelector('.intro');
     const title = qContainer.querySelector('.q-title');
     intro.addEventListener('transitionend', function(){this.remove()});

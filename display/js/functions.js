@@ -190,7 +190,7 @@ function drawerClk(){
                 $(this).parent().removeClass('border-bottom');
                 $(this).attr('isexpanded', 'true');
                 $(this).removeClass('dnone');
-
+                $(this).scrollTop(0);
             },
             complete: function(){
 

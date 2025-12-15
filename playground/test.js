@@ -181,8 +181,43 @@ import * as testing from '../scripts/crtElm-mod.js';
 //         ball.classList.toggle(`${ball.id}-right`);
 //     });
 // })
-let test = testing.mkDiv({class:'testing'});
-test.append(testing.mkSpan({class:'testing', inner:'OMG', 'aria-hidden':false, prop:{focusIn:true}, style:'font-size: 48px;'}))
-window.onload = ()=>{
-    document.body.prepend(test)
+// let test = testing.mkDiv({class:'testing'});
+// test.append(testing.mkSpan({class:'testing', inner:'OMG', 'aria-hidden':false, prop:{focusIn:true}, style:'font-size: 48px;'}))
+// window.onload = ()=>{
+//     document.body.prepend(test)
+// }
+async function getData(){
+    try{
+        const resp = await fetch('https://opentdb.com/api.php?amount=10&category=11&difficulty=easy&type=multiple');
+        if (resp.ok){
+            const {results} = await resp.json();
+            const data = {
+                title:'Movie Trivia',
+                intro:'Click Start To Begin<br>Good Luck!',
+                questions:[]
+            }
+            for (const item of results){
+                const question = {
+                    question: item.question,
+                    options: []
+                }
+                question.options.push({value: item.correct_answer, correct:true})
+                for (const ans of item.incorrect_answers){
+                    question.options.push({value: ans, correct: false});
+                }
+                data.questions.push(question);
+            }
+            return data;
+        }
+    }catch(err){
+        console.error(err);
+    }
+    return null;
 }
+
+async function init(){
+    let data = await getData();
+    console.log(data);
+}
+
+init();
