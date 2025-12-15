@@ -133,7 +133,6 @@ function showCorrect(){
 window.onload = async ()=>{
     // qData = await getData();
     qData = await triviaAPI();
-    console.log(qData)  
     const intro = qContainer.querySelector('.intro');
     const title = qContainer.querySelector('.q-title');
     intro.addEventListener('transitionend', function(){this.remove()});
