@@ -1,0 +1,216 @@
+{
+    "title": "The Quiz Challenge",
+    "intro": "Click Start To Begin<br>Good Luck!",
+    "questions": [
+        {
+            "question":"Which sitcom featured the coffee shop \"Central Perk\"?",
+            "options":[
+                {
+                    "value": "Seinfeld",
+                    "correct": false
+                },
+                {
+                    "value": "Friends",
+                    "correct": true
+                },
+                {
+                    "value":"Mad About You",
+                    "correct":false
+                },
+                {
+                    "value":"Frasier",
+                    "correct":false
+                }
+            ]
+        },
+        {
+            "question":"What was the name of the fictional town where Twin Peaks is set?",
+            "options":[
+                {
+                    "value": "Blue River",
+                    "correct": false
+                },
+                {
+                    "value": "Pine Valley",
+                    "correct": false
+                },
+                {
+                    "value":"Twin Peaks",
+                    "correct":true
+                },
+                {
+                    "value":"North Bend",
+                    "correct":false
+                }
+            ]
+        },
+        {
+            "question":"Which 1990s animated series popularized the phrase \"Eat my shorts\"?",
+            "options":[
+                {
+                    "value": "Beavis and Butt-Head",
+                    "correct": false
+                },
+                {
+                    "value": "South Park",
+                    "correct": false
+                },
+                {
+                    "value":"The Simpsons",
+                    "correct":true
+                },
+                {
+                    "value":"Ren & Stimpy",
+                    "correct":false
+                }
+            ]
+        },
+        {
+            "question":"Who was the host of the original Double Dare on Nickelodeon in the 1990s?",
+            "options":[
+                {
+                    "value": "Bob Barker",
+                    "correct": false
+                },
+                {
+                    "value": "Marc Summers",
+                    "correct": true
+                },
+                {
+                    "value":"Alex Trebek",
+                    "correct":false
+                },
+                {
+                    "value":"Howie Mandel",
+                    "correct":false
+                }
+            ]
+        },
+        {
+            "question":"In The X-Files, what was Fox Mulder's FBI badge number?",
+            "options":[
+                {
+                    "value": "10125",
+                    "correct": false
+                },
+                {
+                    "value": "24189",
+                    "correct": false
+                },
+                {
+                    "value":"60216",
+                    "correct":true
+                },
+                {
+                    "value":"35711",
+                    "correct":false
+                }
+            ]
+        },
+        {
+            "question": "Which 1990s movie features a character named Forrest Gump who runs across the United States?",
+            "options": [
+                {
+                    "value": "The Shawshank Redemption",
+                    "correct": false
+                },
+                {
+                    "value": "Forrest Gump",
+                    "correct": true
+                },
+                {
+                    "value": "Pulp Fiction",
+                    "correct": false
+                },
+                {
+                    "value": "Jurassic Park",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "question": "In which 1990s film does a young girl named Matilda discover she has telekinetic powers?",
+            "options": [
+                {
+                    "value": "Home Alone",
+                    "correct": false
+                },
+                {
+                    "value": "Matilda",
+                    "correct": true
+                },
+                {
+                    "value": "The Lion King",
+                    "correct": false
+                },
+                {
+                    "value": "Toy Story",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "question": "Which 1990s movie is about a group of friends who find a body and try to solve a mystery in a small town?",
+            "options": [
+                {
+                    "value": "Scream",
+                    "correct": true
+                },
+                {
+                    "value": "Clueless",
+                    "correct": false
+                },
+                {
+                    "value": "Titanic",
+                    "correct": false
+                },
+                {
+                    "value": "Independence Day",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "question": "What is the name of the animated film from 1994 where a lion cub becomes king?",
+            "options": [
+                {
+                    "value": "Beauty and the Beast",
+                    "correct": false
+                },
+                {
+                    "value": "Aladdin",
+                    "correct": false
+                },
+                {
+                    "value": "The Lion King",
+                    "correct": true
+                },
+                {
+                    "value": "Mulan",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "question": "Which 1990s film stars Leonardo DiCaprio and Kate Winslet as passengers on a doomed ship?",
+            "options": [
+                {
+                    "value": "Romeo + Juliet",
+                    "correct": false
+                },
+                {
+                    "value": "Titanic",
+                    "correct": true
+                },
+                {
+                    "value": "The Basketball Diaries",
+                    "correct": false
+                },
+                {
+                    "value": "What's Eating Gilbert Grape",
+                    "correct": false
+                }
+            ]
+        }
+    ]
+}
