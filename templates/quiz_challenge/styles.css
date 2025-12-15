@@ -1,3 +1,7 @@
+* {
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
+}
 header {
     text-align: center;
 }
