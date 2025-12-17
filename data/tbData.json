@@ -240,6 +240,15 @@
                     "sub": null,
                     "warn":false
                 }
+            },
+            {
+                "hidden":false,
+                "url":"https://cosmos-nextgen-staging-app.content-nonprod.imaginelearning.com/",
+                "text":{
+                    "main":"Cosmos Stage",
+                    "sub":"",
+                    "warn":false
+                }
             }
         ]
     },
