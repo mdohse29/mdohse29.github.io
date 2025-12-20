@@ -37,9 +37,21 @@ button {
     position: inherit;
 }
 .q-title{
+    flex-direction: column;
     height: 20%;
     color: white;
     background-color: rgba(0, 0, 0, 0.685);
+}
+.q-title > h2 {
+    margin: 0;
+}
+.q-count {
+    -moz-user-select: none;
+    user-select: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-family: sans-serif;
 }
 .q-prompt {
     justify-content: space-around;
