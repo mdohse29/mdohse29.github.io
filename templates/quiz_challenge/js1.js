@@ -1,4 +1,4 @@
-import { mkBtn, mkElem, nestElem, mkP } from '/scripts/crtElm-mod-min.js';
+import { mkBtn, mkElem, nestElem, mkP, mkSpan } from '/scripts/crtElm-mod-min.js';
 const qContainer = document.querySelector('.q-container');
 let qData = null;
 const score = {
@@ -23,11 +23,12 @@ async function getData(){
 
 async function triviaAPI(){
     try{
-        const resp = await fetch('https://opentdb.com/api.php?amount=10&category=11&difficulty=easy&type=multiple');
+        const resp = await fetch(`https://opentdb.com/api.php?amount=${shuffleArray([5,6,7])[0]}&category=${shuffleArray([11,14,26,27])[0]}&difficulty=${shuffleArray(['easy', 'medium', 'hard'])[0]}&type=multiple`);
         if (resp.ok){
             const {results} = await resp.json();
             const data = {
-                title:'Movie Trivia',
+                title:'Trivia Quiz',
+                category:results[0].category,
                 intro:'Click Start To Begin<br>Good Luck!',
                 questions:[]
             }
@@ -89,15 +90,25 @@ function answerSelect(ev){
     }
 }
 
+function strInt(int){
+    return (int < 10)?`0${int}`:`${int}`;
+}
+
 function loadQuestion(){
     score.attempts = 0;
     const prompt = qContainer.querySelector('.inner-prompt');
     const opts = qContainer.querySelector('.q-opts');
     prompt.replaceChildren();
+    prompt.previousElementSibling.replaceChildren();
     opts.replaceChildren();
     if (qData.questions.length){
         const question = qData.questions.shift();
-        prompt.dataset.ident = (score.total - qData.questions.length);
+        const ident = (score.total - qData.questions.length);
+        prompt.dataset.ident = ident;
+        nestElem([
+            prompt.previousElementSibling,
+            mkSpan({inner:`${strInt(ident)} of ${strInt(score.total)}`})
+        ])
         nestElem([
             prompt,
             mkP({inner:question.question})
@@ -140,7 +151,10 @@ window.onload = async ()=>{
     if (qData.title){
         nestElem([
             title,
-            mkElem({elemType:'h2', inner:qData.title})
+            [
+                mkElem({elemType:'h2', inner:qData.title}),
+                mkSpan({class:'category', inner:qData.category})
+            ]
         ])
     }
     loadQuestion();
