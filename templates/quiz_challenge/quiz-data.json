@@ -1,5 +1,6 @@
 {
-    "title": "TV/Movie Trivia",
+    "title": "Trivia Quiz",
+    "category": "TV/Movies",
     "intro": "Click Start To Begin<br>Good Luck!",
     "questions": [
         {
