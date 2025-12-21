@@ -76,17 +76,22 @@ function shuffleArray(array) {
 function answerSelect(ev){
     ev.stopPropagation();
     const self = this;
+    const qCount = document.querySelector('.q-count > span');
     score.attempts++;
     if (self.correct){
         score.correct++;
+        qCount.classList.add('check');
         self.classList.add('correct');
         nxtBtn();
     }else{
         score.incorrect++;
         self.classList.add('incorrect');
         self.disabled = true;
-        if (score.attempts >= score.max_attempts)
+        if (score.attempts >= score.max_attempts){
+            qCount.classList.add('x');
             nxtBtn();
+
+        }
     }
 }
 
