@@ -23,7 +23,7 @@ async function getData(){
 
 async function triviaAPI(){
     try{
-        const resp = await fetch(`https://opentdb.com/api.php?amount=${shuffleArray([5,6,7])[0]}&category=${shuffleArray([11,14,26,27])[0]}&difficulty=${shuffleArray(['easy', 'medium', 'hard'])[0]}&type=multiple`);
+        const resp = await fetch(`https://opentdb.com/api.php?amount=${shuffleArray([5,6,7,8,9,10])[0]}&category=${shuffleArray([11,14,26,27])[0]}&difficulty=${shuffleArray(['easy', 'medium', 'hard'])[0]}&type=multiple`);
         if (resp.ok){
             const {results} = await resp.json();
             const data = {
@@ -96,7 +96,7 @@ function answerSelect(ev){
 }
 
 function strInt(int){
-    return (int < 10)?`0${int}`:`${int}`;
+    return (int < 10 && int >= 0)?`0${int}`:`${int}`;
 }
 
 function loadQuestion(){
