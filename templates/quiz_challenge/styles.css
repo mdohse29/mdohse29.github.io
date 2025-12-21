@@ -122,8 +122,8 @@ button.nxt, div.intro > button {
 button.nxt {
     position: absolute;
     z-index: 1000;
-    bottom: 9px;
-    right: 17px;
+    bottom: 2%;
+    right: 1%;
     padding: .5em;
     border-radius: .5em;
 }
