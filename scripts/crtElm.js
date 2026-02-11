@@ -172,6 +172,20 @@ function mkInp(attr = { type: '', id: '' }) {
     return (elements.label) ? elements : elements.input;
 }
 
+function shuffleArray(array) {
+    /** Intakes an Array and returns a fresh array that is randomly shuffled */
+    if (!(array instanceof Array))
+        throw new TypeError('Argument must be type Array')
+    const fresh = [...array]; // I added so it doesn't mutate the original array
+    // AI generated Fisher-Yates shuffle implementation :-(
+    for (let i = fresh.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [fresh[i], fresh[j]] = [fresh[j], fresh[i]];  // Using deconstructing assignment to swap elements
+        // This method avoids the need for a temporary variable
+    }
+    return fresh;
+}
+
 function tgPillListen(e) {
     let pill = this.querySelector('.toggle-pill');
     let container = this;
