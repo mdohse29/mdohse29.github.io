@@ -136,7 +136,7 @@ function getContainer(elem){
 //         {
 //             id: (this.subItem)?this.id:this.parentElement.id,
 //             pid:`${(this.subItem)?this.dataset.pid:this.parentElement.dataset.pid}`,
-//             ident: this.attributes.ident.value
+//             ident: this.dataset.ident
 //         }
 //     ));
 //     */
@@ -153,15 +153,13 @@ function buildListItem(itemText, opt = {sub:false, pid:null}) {
             class: 'fade-in-slow',
             title: 'Click for Options',
             id: ((opt.sub) ? 'listSubItem' : ''),
-            // pid: ((opt.sub && opt.pid) ? opt.pid : ''),
             inner: itemText.trim(),
             icon: mkElem({ elemType: 'i', class: 'bi ' + ((opt.sub) ? 'bi-caret-right' : 'bi-caret-right-fill') }),
-            ident: `${(!opt.sub)?0:(sublist)?sublist.children.length + 1:1}`,
             tabindex: '0',
             prop: {
                 subItem: (opt.sub)?opt.sub:false
             },
-            dataset: ((opt.sub && opt.pid)?{pid:opt.pid}:{}),
+            dataset: ((opt.sub && opt.pid)?{pid:opt.pid, ident:(sublist)?sublist.children.length + 1:1}:{ident:0}),
             listeners: [
                 {
                     type:'click',
@@ -295,7 +293,7 @@ function itemFadeOutMoveComplete(){
                 case 'listSubItem':
                     // do something
                     setAllCheck(this, true);
-                    this.dataset.origIdent = this.attributes.ident.value;
+                    this.dataset.origIdent = this.dataset.ident;
                     container.querySelector('#doneSubs').append(this);
                     break;
                 default:
@@ -362,7 +360,7 @@ function itemFadeOutMoveComplete(){
 
 function complete(){
     let itmData = getSelectedItemData();
-    let selected = document.querySelector(`#list #listItem[data-pid="${itmData.pid}"] li[ident="${itmData.ident}"]`);
+    let selected = document.querySelector(`#list #listItem[data-pid="${itmData.pid}"] li[data-ident="${itmData.ident}"]`);
     setAllCheck(selected);
     changeTitle(selected);
     if (selected.subItem){
@@ -380,8 +378,8 @@ function complete(){
 
 function clkUndoItem(){
     let itmData = getSelectedItemData();
-    let doneSubs = document.querySelector(`#done #doneSubs [data-pid="${itmData.pid}"][ident="${itmData.ident}"]`);
-    let selected = (doneSubs)?doneSubs:document.querySelector(`#done #listItem[data-pid="${itmData.pid}"] li[ident="${itmData.ident}"]`);
+    let doneSubs = document.querySelector(`#done #doneSubs [data-pid="${itmData.pid}"][data-ident="${itmData.ident}"]`);
+    let selected = (doneSubs)?doneSubs:document.querySelector(`#done #listItem[data-pid="${itmData.pid}"] li[data-ident="${itmData.ident}"]`);
     changeTitle(selected);
     if (selected.subItem){
         selected.addEventListener('animationend', itemFadeOutMoveComplete);
@@ -398,7 +396,7 @@ function clkUndoItem(){
 
 export function editItem(){
     let itmData = getSelectedItemData();
-    let selected = document.querySelector(`#listItem[data-pid="${itmData.pid}"] li[ident="${itmData.ident}"]`);
+    let selected = document.querySelector(`#listItem[data-pid="${itmData.pid}"] li[data-ident="${itmData.ident}"]`);
     let update = this.parentElement.previousElementSibling.value.trim();
     if (update.length){
         if (selected){
@@ -448,7 +446,7 @@ function clkCopyItem() {
 
 function toggleLstBtn() {
     let data = getSelectedItemData();
-    let targetElement = document.querySelector(`#list #listItem[data-pid="${data.pid}"] li[ident="${data.ident}"]`);
+    let targetElement = document.querySelector(`#list #listItem[data-pid="${data.pid}"] li[data-ident="${data.ident}"]`);
     closeOptions();
 
     if (this.id === 'edit') {
@@ -529,7 +527,7 @@ export function loadList(ln = null){
 
 function fixIdent(){
     [...document.querySelectorAll('.sub-list, #doneSubs')].forEach((i)=>{
-        [...i.children].forEach((j, n)=>{j.setAttribute('ident', `${n+1}`)})
+        [...i.children].forEach((j, n)=>{j.dataset.ident = n+1})
     })
 }
 
@@ -589,7 +587,7 @@ function openOptions(ev) {
         {
             id: (this.subItem)?this.id:this.parentElement.id,
             pid:`${(this.subItem)?this.dataset.pid:this.parentElement.dataset.pid}`,
-            ident: this.attributes.ident.value,
+            ident: this.dataset.ident,
             text:this.innerText.trim()
         }
     ));
