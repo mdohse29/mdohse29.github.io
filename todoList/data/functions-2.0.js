@@ -62,7 +62,7 @@ function saveList(ln = null){
     let collection = getListDB();
     let ListItems = [];
     for(let itm of list){
-        let id = itm.attributes.pid.value;
+        let id = itm.dataset.pid;
         let item = itm.children[0];
         
         ListItems.push({id:id, text:item.innerText.trim(), subList:(item.nextElementSibling && item.nextElementSibling.children.length)?[...item.nextElementSibling.children].map(itm=>{return itm.innerText}):null});
@@ -135,7 +135,7 @@ function getContainer(elem){
 //     window.localStorage.setItem('selected', JSON.stringify(
 //         {
 //             id: (this.subItem)?this.id:this.parentElement.id,
-//             pid:`${(this.subItem)?this.attributes.pid.value:this.parentElement.attributes.pid.value}`,
+//             pid:`${(this.subItem)?this.dataset.pid:this.parentElement.dataset.pid}`,
 //             ident: this.attributes.ident.value
 //         }
 //     ));
@@ -145,7 +145,7 @@ function getContainer(elem){
 
 function buildListItem(itemText, opt = {sub:false, pid:null}) {
     // returns ul.item-container > li#listItem if regular && li#listSubItem if sub item
-    const sublist = document.querySelector(`#listItem[pid="${opt.pid}"] > .sub-list`);
+    const sublist = document.querySelector(`#listItem[data-pid="${opt.pid}"] > .sub-list`);
 
     let elem = mkElem(
         {
@@ -153,7 +153,7 @@ function buildListItem(itemText, opt = {sub:false, pid:null}) {
             class: 'fade-in-slow',
             title: 'Click for Options',
             id: ((opt.sub) ? 'listSubItem' : ''),
-            pid: ((opt.sub && opt.pid) ? opt.pid : ''),
+            // pid: ((opt.sub && opt.pid) ? opt.pid : ''),
             inner: itemText.trim(),
             icon: mkElem({ elemType: 'i', class: 'bi ' + ((opt.sub) ? 'bi-caret-right' : 'bi-caret-right-fill') }),
             ident: `${(!opt.sub)?0:(sublist)?sublist.children.length + 1:1}`,
@@ -161,6 +161,7 @@ function buildListItem(itemText, opt = {sub:false, pid:null}) {
             prop: {
                 subItem: (opt.sub)?opt.sub:false
             },
+            dataset: ((opt.sub && opt.pid)?{pid:opt.pid}:{}),
             listeners: [
                 {
                     type:'click',
@@ -174,7 +175,7 @@ function buildListItem(itemText, opt = {sub:false, pid:null}) {
         }
     );
 
-    return (!opt.sub)?(elem = nestElem([mkElem({elemType:'ul', id:'listItem', class:'item-container', pid:(opt.pid)?opt.pid:crypto.randomUUID()}), elem])):elem;
+    return (!opt.sub)?(elem = nestElem([mkElem({elemType:'ul', id:'listItem', dataset: {pid:(opt.pid)?opt.pid:crypto.randomUUID()}}), elem])):elem;
 
 }
 
@@ -207,7 +208,7 @@ export function addSubItem(ev){
     ev.stopPropagation();
     let data = getSelectedItemData();
     let itemText = this.parentElement.previousElementSibling.value.trim();
-    let parent = document.querySelector(`#list #listItem[pid="${data.pid}"]`);
+    let parent = document.querySelector(`#list #listItem[data-pid="${data.pid}"]`);
     if (parent.children.length === 1 && itemText){
         parent.append(mkElem({elemType:'ul', class:'sub-list'}));
     }
@@ -258,6 +259,8 @@ function setAllCheck(elem, isDone = false) {
 
 function itemFadeInComplete(ev){
     ev.stopPropagation();
+    // Really should remove attribute, but okay for now
+    // Update to remove class fade-in-slow
     this.removeAttribute('class');
     this.removeEventListener('animationend', itemFadeInComplete);
 }
@@ -278,7 +281,7 @@ function itemFadeOutMoveComplete(){
                      * * if child is in doneSubs reattach to parent
                      * * otherwise append
                     */
-                    let doneSubs = container.children[1].querySelectorAll(`[pid="${this.attributes.pid.value}"]`);
+                    let doneSubs = container.children[1].querySelectorAll(`[data-pid="${this.dataset.pid}"]`);
                     if (doneSubs.length){
                         [...doneSubs].forEach(i=>{
                             delete i.dataset.origIdent;
@@ -311,7 +314,7 @@ function itemFadeOutMoveComplete(){
                 case 'listSubItem':
                     // do something
                     setAllCaret(this);
-                    let parent = container.querySelector(`#listItem[pid="${this.attributes.pid.value}"]`);
+                    let parent = container.querySelector(`#listItem[data-pid="${this.dataset.pid}"]`);
                     let ident = parseInt(this.dataset.origIdent);
                     if (parent){
                         if (ident === 1 || parent.children[1].children.length === 0){
@@ -359,7 +362,7 @@ function itemFadeOutMoveComplete(){
 
 function complete(){
     let itmData = getSelectedItemData();
-    let selected = document.querySelector(`#list #listItem[pid="${itmData.pid}"] li[ident="${itmData.ident}"]`);
+    let selected = document.querySelector(`#list #listItem[data-pid="${itmData.pid}"] li[ident="${itmData.ident}"]`);
     setAllCheck(selected);
     changeTitle(selected);
     if (selected.subItem){
@@ -377,8 +380,8 @@ function complete(){
 
 function clkUndoItem(){
     let itmData = getSelectedItemData();
-    let doneSubs = document.querySelector(`#done #doneSubs [pid="${itmData.pid}"][ident="${itmData.ident}"]`);
-    let selected = (doneSubs)?doneSubs:document.querySelector(`#done #listItem[pid="${itmData.pid}"] li[ident="${itmData.ident}"]`);
+    let doneSubs = document.querySelector(`#done #doneSubs [data-pid="${itmData.pid}"][ident="${itmData.ident}"]`);
+    let selected = (doneSubs)?doneSubs:document.querySelector(`#done #listItem[data-pid="${itmData.pid}"] li[ident="${itmData.ident}"]`);
     changeTitle(selected);
     if (selected.subItem){
         selected.addEventListener('animationend', itemFadeOutMoveComplete);
@@ -395,7 +398,7 @@ function clkUndoItem(){
 
 export function editItem(){
     let itmData = getSelectedItemData();
-    let selected = document.querySelector(`#listItem[pid="${itmData.pid}"] li[ident="${itmData.ident}"]`);
+    let selected = document.querySelector(`#listItem[data-pid="${itmData.pid}"] li[ident="${itmData.ident}"]`);
     let update = this.parentElement.previousElementSibling.value.trim();
     if (update.length){
         if (selected){
@@ -445,7 +448,7 @@ function clkCopyItem() {
 
 function toggleLstBtn() {
     let data = getSelectedItemData();
-    let targetElement = document.querySelector(`#list #listItem[pid="${data.pid}"] li[ident="${data.ident}"]`);
+    let targetElement = document.querySelector(`#list #listItem[data-pid="${data.pid}"] li[ident="${data.ident}"]`);
     closeOptions();
 
     if (this.id === 'edit') {
@@ -585,7 +588,7 @@ function openOptions(ev) {
     window.localStorage.setItem('selected', JSON.stringify(
         {
             id: (this.subItem)?this.id:this.parentElement.id,
-            pid:`${(this.subItem)?this.attributes.pid.value:this.parentElement.attributes.pid.value}`,
+            pid:`${(this.subItem)?this.dataset.pid:this.parentElement.dataset.pid}`,
             ident: this.attributes.ident.value,
             text:this.innerText.trim()
         }
