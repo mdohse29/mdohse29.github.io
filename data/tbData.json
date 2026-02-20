@@ -371,6 +371,15 @@
                     "sub": null,
                     "warn": false
                 }
+            },
+            {
+                "hidden": false,
+                "url": "https://regex101.com",
+                "text": {
+                    "main": "Regex 101",
+                    "sub": null,
+                    "warn": false
+                }
             }
         ]
     }
