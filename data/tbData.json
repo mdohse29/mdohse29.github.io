@@ -180,10 +180,10 @@
             },
             {
                 "hidden": false,
-                "url": "https://auth.edgenuity.com/Login/Login/",
+                "url": "https://okta.imaginelearning.com/",
                 "text": {
-                    "main": "CW Production",
-                    "sub": "Courseware",
+                    "main": "OKTA Login",
+                    "sub": "CW Prod / Cosmos",
                     "warn": false
                 }
             },
@@ -206,48 +206,12 @@
                 }
             },
             {
-                "hidden": true,
-                "url": "https://consumer-lms.cns-staging-shard-monarch.il-consumer.com/",
-                "text": {
-                    "main": "Monarch Stage",
-                    "sub": "Consumer",
-                    "warn": false
-                }
-            },
-            {
-                "hidden": true,
-                "url": "https://consumer-lms.cns-staging-shard-calvert.il-consumer.com/",
-                "text": {
-                    "main": "Calvert Stage",
-                    "sub": "Consumer",
-                    "warn": false
-                }
-            },
-            {
                 "hidden": false,
                 "url": "https://testapp.imaginelearning.com/?dev",
                 "text": {
                     "main": "IL Test App",
                     "sub": "Chrome Only",
                     "warn": false
-                }
-            },
-            {
-                "hidden": false,
-                "url": "https://cosmos-nextgen-prod-app.content-prod.imaginelearning.com/",
-                "text": {
-                    "main": "Cosmos Prod",
-                    "sub": null,
-                    "warn":false
-                }
-            },
-            {
-                "hidden":false,
-                "url":"https://cosmos-nextgen-staging-app.content-nonprod.imaginelearning.com/",
-                "text":{
-                    "main":"Cosmos Stage",
-                    "sub":"",
-                    "warn":false
                 }
             }
         ]
