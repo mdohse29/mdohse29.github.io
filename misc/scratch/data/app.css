@@ -200,6 +200,7 @@ a.btn {
     position: absolute;
     top: 10px;
     right: 10px;
+    z-index: 1000;
 }
 
 .usr-btn {
@@ -326,7 +327,7 @@ ul > li {
     height: var(--md-modal-height);
     top: 0px;
     left: 0px;
-    z-index: 5;
+    z-index: 2000;
 }
 
 .md-modal-background {
@@ -349,7 +350,7 @@ ul > li {
     position: relative;
     padding: 10px 10px 0px 10px;
     max-width: 860px;
-    z-index: 6;
+    z-index: inherit;
 }
 
 .md-modal-header, .md-modal-footer {

@@ -106,11 +106,12 @@ $(document).ready(function () {
     }
 
     function closeSearch() {
-        $('#search').val("");
-        $('#replace').val("");
-        $('#word').prop('checked', false);
-        $('.search-replace').addClass('dnone');
-        $('.search-replace').removeAttr('style');
+        // $('#search').val("");
+        // $('#replace').val("");
+        // $('#word').prop('checked', false);
+        // $('.search-replace').addClass('dnone');
+        // $('.search-replace').removeAttr('style');
+        $('.search-replace').remove();
         $('textarea').focus();
     }
 
@@ -121,17 +122,34 @@ $(document).ready(function () {
             // if (previous.includes('toolBox'))
             //     $('body').prepend(mkrtnl());
 
-            // $('#ff').click(function(){
-            //     let currentText = $('#TextArea').val();
-            //     $('#TextArea').val(formatFilename(currentText));
-            // });
-
-            // $('#tgDblSpc').click(function(){
-            //     $('#dbl').toggleClass('dnone');
-            // });
-
             $('#sandr').click(function () {
-                $('.search-replace').removeClass('dnone');
+                let strictSearch = mkInp({type:'checkbox', id:'word', label:'Strict Search', labelOpt:{class:'awesome'}});
+                let regex = mkInp({type:'checkbox', id:'regex', label:'Regex'});
+                $('body').append(
+                    nestElem([
+                        mkDiv({class:'search-replace'}),
+                        [
+                            nestElem([
+                                mkDiv({class:'search'}),
+                                [
+                                    mkInp({type:'text', id:'search', placeholder:'Search', class:'form-control', autocomplete:'off'}),
+                                    mkInp({type:'text', id:'replace', placeholder:'Replace', class:'form-control', autocomplete:'off'}),
+                                    mkBtn({class:'btn btn-outline-success', id:'rep', inner:'Replace'}),
+                                    mkBtn({class:'btn btn-close btn-dark btn-lg mx-2', id:'search-close'})
+                                ]
+                            ])/*,
+                            nestElem([
+                                mkDiv({class:'search-options d-block'}),
+                                [
+                                    strictSearch.input,
+                                    strictSearch.label,
+                                    regex.input,
+                                    regex.label
+                                ]
+                            ])*/
+                        ]
+                    ])
+                )
 
                 let position = $('#TextArea').position();
                 let scWidth = $('#TextArea').prop('scrollWidth') / 2;
@@ -143,36 +161,38 @@ $(document).ready(function () {
 
                 $('.search-replace').attr('style', 'top: ' + top + 'px; left: ' + left + 'px;');
                 $('#search').focus();
+                $('#search-close').click(closeSearch);
+                $('#rep').click(function () {
+                    //Search and Replace
+                    let text = $('#TextArea').val();
+                    let search = $('#search').val();
+                    let replace = $('#replace').val();
+                    let strict = $('#word').is(':checked');
+                    if (strict) {
+                        let regex = searchRegex(search);
+                        // let regex = search;
+                        // console.log(regex);
+                        text = text.replaceAll(new RegExp(regex, "gm"), replace);
+                    } else {
+                        text = text.replaceAll(search, replace);
+                    }
+                    $('#TextArea').val(text);
+                    // closeSearch();
+                })
 
             });
 
-            $('#rep').click(function () {
-                //Search and Replace
-                let text = $('#TextArea').val();
-                let search = $('#search').val();
-                let replace = $('#replace').val();
-                let strict = $('#word').is(':checked');
-                if (strict) {
-                    let regex = searchRegex(search);
-                    // let regex = search;
-                    // console.log(regex);
-                    text = text.replaceAll(new RegExp(regex, "gm"), replace);
-                } else {
-                    text = text.replaceAll(search, replace);
-                }
-                $('#TextArea').val(text);
-                // closeSearch();
-            })
+            
 
             $('#stop').click(stopProcessing);
 
             $('#start').click(startProcessing);
 
             $('#ad-close').click(function () {
+                closeSearch()
                 toggleSpclFtr("goodbye");
             });
 
-            $('#search-close').click(closeSearch);
 
         } else if (text == "goodbye") {
             $('.spclFtr').remove();
