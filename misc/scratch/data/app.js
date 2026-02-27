@@ -22,7 +22,7 @@ function crtad(){
     }
 
     return nestElem([
-        mkDiv({class:'spclFtr m-2'}),
+        mkDiv({class:'spclFtr'}),
         [
             mkBtn({class:'btn btn-outline-danger btn-sm', id:'sandr', inner:'S&R', title:'Still a work in progress...'}),
             mkBtn({class:'btn btn-outline-danger btn-sm' + ((btnenbl) ? ' dnone' : ''), id:'stop', inner:'Disable Text Processing'}),
