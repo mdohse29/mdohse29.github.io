@@ -194,12 +194,16 @@ a.btn {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    padding: 10px;
+    border: 7px inset #00000080;
+    border-bottom-left-radius: 10px;
+    background-color: #f5f5f580;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 0;
+    right: 0;
     z-index: 1000;
 }
 
@@ -278,6 +282,9 @@ a.btn {
 .search > input {
     margin-left: 3px;
     margin-right: 3px;
+}
+.search-options {
+    font-size: .80rem;
 }
 .search-options > label {
     margin: 0px 5px;
@@ -400,5 +407,8 @@ ul > li {
 @media (width < 1152px){
     #TextAreaContain {
         max-width: 100%;
+    }
+    .spclFtr {
+        top: 10%;
     }
 }

@@ -123,6 +123,7 @@ $(document).ready(function () {
             //     $('body').prepend(mkrtnl());
 
             $('#sandr').click(function () {
+                closeSearch()
                 let strictSearch = mkInp({type:'checkbox', id:'word', label:'Strict Search', labelOpt:{class:'awesome'}});
                 let regex = mkInp({type:'checkbox', id:'regex', label:'Regex'});
                 $('body').append(
@@ -137,29 +138,36 @@ $(document).ready(function () {
                                     mkBtn({class:'btn btn-outline-success', id:'rep', inner:'Replace'}),
                                     mkBtn({class:'btn btn-close btn-dark btn-lg mx-2', id:'search-close'})
                                 ]
-                            ])/*,
+                            ]),
                             nestElem([
-                                mkDiv({class:'search-options d-block'}),
+                                mkDiv({class:'search-options pt-3 px-2 d-block'}),
                                 [
                                     strictSearch.input,
-                                    strictSearch.label,
+                                    strictSearch.label/*,
                                     regex.input,
-                                    regex.label
+                                    regex.label*/
                                 ]
-                            ])*/
+                            ])
                         ]
                     ])
                 )
 
                 let position = $('#TextArea').position();
-                let scWidth = $('#TextArea').prop('scrollWidth') / 2;
-                let scHeight = $('#TextArea').prop('scrollHeight') / 2;
+                let scWidth = $('#TextArea').prop('offsetWidth') / 2;
+                let scHeight = $('#TextArea').prop('offsetHeight') / 2;
                 let srScWidth = $('.search-replace').prop('scrollWidth') / 2;
                 let srScHeight = $('.search-replace').prop('scrollHeight') / 2;
                 let top = (position.top + (scHeight - srScHeight));
                 let left = (position.left + (scWidth - srScWidth))
 
                 $('.search-replace').attr('style', 'top: ' + top + 'px; left: ' + left + 'px;');
+                $('.search-replace').on('keydown', (ev)=>{
+                    if (ev.key === 'Escape'){
+                        closeSearch()
+                    }else if (ev.key === 'Enter'){
+                        $('#rep').click()
+                    }
+                })
                 $('#search').focus();
                 $('#search-close').click(closeSearch);
                 $('#rep').click(function () {
@@ -169,12 +177,12 @@ $(document).ready(function () {
                     let replace = $('#replace').val();
                     let strict = $('#word').is(':checked');
                     if (strict) {
-                        let regex = searchRegex(search);
-                        // let regex = search;
-                        // console.log(regex);
-                        text = text.replaceAll(new RegExp(regex, "gm"), replace);
+                        let regex = new RegExp(`\\b${search}\\b`, 'g');
+
+                        text = text.replace(regex, replace);
                     } else {
-                        text = text.replaceAll(search, replace);
+                        let regex = new RegExp(search, 'gi')
+                        text = text.replace(regex, replace);
                     }
                     $('#TextArea').val(text);
                     // closeSearch();
@@ -260,40 +268,6 @@ $(document).ready(function () {
         updateClipboard(text.join('\n'))
         $('#TextArea').val(text.join('\n').trim());
         // popup({timeOut:500});
-    }
-
-    function searchRegex(searchText) {
-        /*
-        Seems to be working so far. Most likely still needs some work.
-        Right now it is escaping any non-alphanumeric character, except white space
-        Further testing is needed.
-        */
-        // let spclCharCheck = new RegExp("([\[\]\.\,\\\/\!\@\#\$\%\^\&\*\(\)\_\-\=\+\<\>\{\}\"\?])", "g");
-
-        let spclCharCheck = new RegExp("([^A-Za-z0-9 \\w])", "g"); // create new function
-
-        if (searchText.match(spclCharCheck)) { // Delete
-
-            let formattedText = searchText.replace(spclCharCheck, '\\$1'); // new fun
-            formattedText = formattedText.replaceAll("_", "\\_"); // new fun
-
-            let pat1 = new RegExp("\\b" + formattedText + "\\b", "g");
-            let pat2 = new RegExp("\\b" + formattedText + "\\B", "g");
-            let pat3 = new RegExp("\\B" + formattedText + "\\b", "g");
-            let pat4 = new RegExp("\\B" + formattedText + "\\B", "g");
-
-            if (searchText.match(pat1)) {
-                return "\\b" + formattedText + "\\b";
-            } else if (searchText.match(pat2)) {
-                return "\\b" + formattedText + "\\B";
-            } else if (searchText.match(pat3)) {
-                return "\\B" + formattedText + "\\b";
-            } else if (searchText.match(pat4)) {
-                return "\\B" + formattedText + "\\B";
-            }
-
-        } //Delete
-        return "\\b" + searchText + "\\b"; // Get rid of this
     }
 
     function processText() {
