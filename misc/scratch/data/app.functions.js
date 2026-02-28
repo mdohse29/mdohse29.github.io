@@ -162,9 +162,10 @@ $(document).ready(function () {
 
                 $('.search-replace').attr('style', 'top: ' + top + 'px; left: ' + left + 'px;');
                 $('.search-replace').on('keydown', (ev)=>{
-                    console.dir(ev)
                     if (ev.key === 'Escape'){
                         closeSearch()
+                    }else if (ev.key === 'Enter'){
+                        $('#rep').click()
                     }
                 })
                 $('#search').focus();
@@ -184,7 +185,7 @@ $(document).ready(function () {
                         text = text.replace(regex, replace);
                     }
                     $('#TextArea').val(text);
-                    closeSearch();
+                    // closeSearch();
                 })
 
             });
