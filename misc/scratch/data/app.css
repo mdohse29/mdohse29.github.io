@@ -410,5 +410,6 @@ ul > li {
     }
     .spclFtr {
         top: 10%;
+        border-top-left-radius: 10px;
     }
 }
