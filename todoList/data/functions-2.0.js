@@ -182,7 +182,7 @@ export function addItem(ev){
     let itemText = this.parentElement.previousElementSibling.value.trim();
     let list = document.getElementById('list');
     if (itemText){
-        itemText.split(',').reverse().forEach((itm, n)=>{
+        itemText.split('|').reverse().forEach((itm, n)=>{
             itm = itm.trim();
             if (itm.length){
                 const elem = buildListItem(itm);
@@ -212,7 +212,7 @@ export function addSubItem(ev){
     }
 
     if (itemText){
-        itemText.split(',').forEach(i=>{
+        itemText.split('|').forEach(i=>{
             i = i.trim();
             if (i.length)
                 parent.children[1].append(buildListItem(i, {sub:true, pid:data.pid}))
@@ -493,7 +493,7 @@ export function loadList(ln = null){
             document.querySelector('.card-header').prepend(
                 nestElem([
                     mkSpan({class:'tag is-danger', inner:ln, prop:{ariaHidden: true}, listeners:[{type:'click', execute:function(){navigator.clipboard.writeText(this.innerText);popMsg('List name copied!', 'success')}}]}),
-                    mkElem({elemType:'i', class:'bi bi-x-lg ml-2', title:'Close', prop:{ariaHidden:true}, listeners:[{type:'click', execute: (e)=>{e.stopPropagation();loadList('default')}}]})
+                    mkElem({elemType:'i', class:'bi bi-x-lg ml-2', title:'Exit List', prop:{ariaHidden:true}, listeners:[{type:'click', execute: (e)=>{e.stopPropagation();loadList('default')}}]})
                 ])
             )
         }
@@ -543,9 +543,17 @@ function resetListBtn() {
     document.querySelectorAll('.listBtn button').forEach(btn => {
         if (btn.id === 'addItem') {
             btn.classList.remove('dnone');
+            if (!btn.disabled)
+                btn.disabled = true;
         } else {
             btn.classList.add('dnone');
         }
+    });
+}
+
+function disableBtnToggle(disable){
+    document.querySelectorAll('.listBtn button').forEach(btn => {
+        btn.disabled = disable;
     });
 }
 
@@ -735,6 +743,8 @@ export function inputActions() {
 }
 
 export function inputKeyActions(event) {
+    disableBtnToggle((this.value.trim().length <= 0))
+
     if (event.keyCode === 13) { // Enter
         if (this.value.match(/^:[a-z]*:.*/)) {
             let sn = this.value.split(':');
