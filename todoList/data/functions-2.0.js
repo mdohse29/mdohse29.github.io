@@ -436,9 +436,14 @@ function clkLoadList(){
     itm = null;
 }
 
-function clkCopyItem() {
+async function clkCopyItem() {
     let itm = getSelectedItemData();
-    navigator.clipboard.writeText(itm.text);
+    try{
+        await navigator.clipboard.writeText(itm.text);
+        popMsg("Item Copied!", "success", 1000);
+    }catch(err){
+        popMsg("Something went wrong!<br>Item was not copied.", "danger", 1000)
+    }
     closeOptions();
     resetSelectedItem();
     itm = null;
