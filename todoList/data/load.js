@@ -13,13 +13,13 @@ document.body.prepend(nestElem([
         nestElem([
             mkDiv({class:'card-content is-flex is-justify-content-space-between'}),
             [
-                mkInp({type:'text', id:'item', spellcheck:'true', class:'input is-inline', placeholder:'e.g. Laundry or Laundry, Dishes, Yard work', title:'Multiple items at once should be separated with a comma ,', autocomplete:'off', listeners:[{type:'keydown', execute:inputKeyActions}, {type:'input', execute:inputActions}]}),
+                mkInp({type:'text', id:'item', spellcheck:'true', class:'input is-inline', placeholder:'e.g. Laundry or Laundry|Dishes|Yard work', title:'Multiple items at once should be separated with a pipe character |', autocomplete:'off', listeners:[{type:'keyup', execute:inputKeyActions}, {type:'input', execute:inputActions}]}),
                 nestElem([
                     mkDiv({class:'listBtn'}),
                     [
-                        mkBtn({class:'button ml-2 is-rounded is-info is-outlined', id:'addItem', inner:'Add Item', listeners:[{type:'click', execute:addItem}]}),
-                        mkBtn({class:'button ml-2 is-rounded is-link is-outlined dnone', id:'addSub', inner:'Add Sub Item', listeners:[{type:'click', execute:addSubItem}]}),
-                        mkBtn({class:'button ml-2 is-rounded is-warning dnone', id:'editItem', inner:'Edit Item', listeners:[{type:'click', execute:editItem}]})
+                        mkBtn({class:'button ml-2 is-rounded is-info is-outlined', id:'addItem', inner:'Add Item', prop:{disabled:true}, listeners:[{type:'click', execute:addItem}]}),
+                        mkBtn({class:'button ml-2 is-rounded is-link is-outlined dnone', id:'addSub', inner:'Add Sub Item', prop:{disabled:true}, listeners:[{type:'click', execute:addSubItem}]}),
+                        mkBtn({class:'button ml-2 is-rounded is-warning dnone', id:'editItem', inner:'Edit Item', prop:{disabled:true}, listeners:[{type:'click', execute:editItem}]})
                     ]
                 ])
             ]
