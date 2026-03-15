@@ -457,6 +457,7 @@ function toggleLstBtn() {
     if (this.id === 'edit') {
 
         document.querySelector('#item').value = getItemText(targetElement);
+        disableBtnToggle(false)
         document.querySelector('#editItem').classList.remove('dnone');
         document.querySelector('#addSub').classList.add('dnone');
 
@@ -543,12 +544,11 @@ function resetListBtn() {
     document.querySelectorAll('.listBtn button').forEach(btn => {
         if (btn.id === 'addItem') {
             btn.classList.remove('dnone');
-            if (!btn.disabled)
-                btn.disabled = true;
         } else {
             btn.classList.add('dnone');
         }
     });
+    disableBtnToggle(true)
 }
 
 function disableBtnToggle(disable){
@@ -573,7 +573,7 @@ function closeOptions() {
             this.remove();
         });
         options.querySelectorAll('button').forEach(btn => {
-            btn.setAttribute('disabled', 'disabled');
+            btn.disabled = true;
         });
         options.classList.replace('fade-in', 'fade-out');
     }

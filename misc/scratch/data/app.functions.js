@@ -140,7 +140,7 @@ $(document).ready(function () {
                                 ]
                             ]),
                             nestElem([
-                                mkDiv({class:'search-options pt-3 px-2 d-block'}),
+                                mkDiv({class:'search-options pt-3 px-2 d-block', title:'Must match exact word and capitalization.'}),
                                 [
                                     strictSearch.input,
                                     strictSearch.label/*,
