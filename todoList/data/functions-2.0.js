@@ -193,6 +193,7 @@ export function addItem(ev){
             
         });
         saveList();
+        popMsg('New ToDo Item Saved', 'success', 1500);
     }else{
         popMsg('Empty items will be ignored.', 'link', 3000);
     }
@@ -218,6 +219,7 @@ export function addSubItem(ev){
                 parent.children[1].append(buildListItem(i, {sub:true, pid:data.pid}))
         });
         saveList();
+        popMsg('New ToDo Sub-Item Saved', 'success', 1500)
     }else{
         popMsg('Empty items will be ignored.', 'link', 3000);
     }
@@ -370,6 +372,7 @@ function complete(){
         selected.parentElement.addEventListener('animationend', itemFadeOutMoveComplete);
         selected.parentElement.classList.add('fade-out-complete');
     }
+    popMsg('ToDo Item Complete! ✅', 'success', 1500);
     resetSelectedItem();
     closeOptions();
     itmData = null;
@@ -388,6 +391,7 @@ function clkUndoItem(){
         selected.parentElement.addEventListener('animationend', itemFadeOutMoveComplete);
         selected.parentElement.classList.add('fade-out-complete');
     }
+    popMsg('ToDo item has been returned', 'info', 3000);
     resetSelectedItem();
     closeOptions();
     itmData = null;
@@ -403,9 +407,10 @@ export function editItem(){
             let icon = selected.children[0];
             selected.innerHTML = update;
             selected.prepend(icon);
+            popMsg('ToDo Item Updated! ✅', 'success', 1500);
         }
     }else{
-        popMsg('Empty items will be ignored.', 'info', 3000);
+        popMsg('Empty items will be ignored.', 'warning', 3000);
     }
 
     resetSelectedItem();
@@ -440,7 +445,7 @@ async function clkCopyItem() {
     let itm = getSelectedItemData();
     try{
         await navigator.clipboard.writeText(itm.text);
-        popMsg("Item Copied!", "success", 1000);
+        popMsg("ToDo Item Copied!", "success", 1000);
     }catch(err){
         popMsg("Something went wrong!<br>Item was not copied.", "danger", 1000)
     }
@@ -650,6 +655,7 @@ function changeTitle(elem) {
 }
 
 export function inputActions() {
+    disableBtnToggle((this.value.trim().length <= 0))
 
     removeMsg();
     this.classList.remove('is-danger');
@@ -743,7 +749,6 @@ export function inputActions() {
 }
 
 export function inputKeyActions(event) {
-    disableBtnToggle((this.value.trim().length <= 0))
 
     if (event.keyCode === 13) { // Enter
         if (this.value.match(/^:[a-z]*:.*/)) {
