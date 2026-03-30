@@ -645,7 +645,7 @@ function openOptions(ev) {
 }
 
 export function showAllLists(){
-    let input = this;
+    let input = document.getElementById('item');
     let savedLists = Object.keys(getListDB());
     let current = document.getElementById('list-display');
 
