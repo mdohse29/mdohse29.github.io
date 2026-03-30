@@ -319,6 +319,12 @@ i.bi-check-circle-fill {
     margin-right: 10px;
 }
 
+.btn-dis-list {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
 #settings {
     padding: 8px;
 
