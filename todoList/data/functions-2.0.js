@@ -193,7 +193,7 @@ export function addItem(ev){
             
         });
         saveList();
-        popMsg('New ToDo Item Saved', 'success', 1500);
+        popMsg('New ToDo Item Saved', 'success', 3000);
     }else{
         popMsg('Empty items will be ignored.', 'link', 3000);
     }
@@ -219,7 +219,7 @@ export function addSubItem(ev){
                 parent.children[1].append(buildListItem(i, {sub:true, pid:data.pid}))
         });
         saveList();
-        popMsg('New ToDo Sub-Item Saved', 'success', 1500)
+        popMsg('New ToDo Sub-Item Saved', 'success', 3000)
     }else{
         popMsg('Empty items will be ignored.', 'link', 3000);
     }
@@ -372,7 +372,7 @@ function complete(){
         selected.parentElement.addEventListener('animationend', itemFadeOutMoveComplete);
         selected.parentElement.classList.add('fade-out-complete');
     }
-    popMsg('ToDo Item Complete! ✅', 'success', 1500);
+    popMsg('ToDo Item Complete! ✅', 'success', 3000);
     resetSelectedItem();
     closeOptions();
     itmData = null;
@@ -407,7 +407,7 @@ export function editItem(){
             let icon = selected.children[0];
             selected.innerHTML = update;
             selected.prepend(icon);
-            popMsg('ToDo Item Updated! ✅', 'success', 1500);
+            popMsg('ToDo Item Updated! ✅', 'success', 3000);
         }
     }else{
         popMsg('Empty items will be ignored.', 'warning', 3000);
@@ -445,7 +445,7 @@ async function clkCopyItem() {
     let itm = getSelectedItemData();
     try{
         await navigator.clipboard.writeText(itm.text);
-        popMsg("ToDo Item Copied!", "success", 1000);
+        popMsg("ToDo Item Copied!", "success", 2000);
     }catch(err){
         popMsg("Something went wrong!<br>Item was not copied.", "danger", 1000)
     }
@@ -644,48 +644,12 @@ function openOptions(ev) {
 
 }
 
-function changeTitle(elem) {
-    if (elem.subItem){
-        elem.title = (elem.title === 'Click to Undo')?'Click for Options':'Click to Undo';
-    }else{
-        [...elem.parentElement.querySelectorAll('li')].forEach(i=>{
-            i.title = (i.title === 'Click to Undo')?'Click for Options':'Click to Undo';
-        })
-    }
-}
+export function showAllLists(){
+    let input = this;
+    let savedLists = Object.keys(getListDB());
+    let current = document.getElementById('list-display');
 
-export function inputActions() {
-    disableBtnToggle((this.value.trim().length <= 0))
-
-    removeMsg();
-    this.classList.remove('is-danger');
-
-    if (this.value === ':export') {
-        let text = '';
-        if (confirm('Click "OK" for ALL lists\nClick "Cancel" for current list text')){
-            text = window.localStorage.lists;
-        }else{
-            let items = getListDB(curList);
-            if (items)
-                for (let i of items){
-                    text += `\n${i.text}`;
-                    if (i.subList){
-                        for (let s of i.subList){
-                            text += `\n\t${s}`;
-                        }
-                    }
-                }
-        }
-        navigator.clipboard.writeText(text.trim()).then(()=>{ 
-            popMsg('Export Completed!', 'success', 3000);
-        }).catch((err)=>{
-            popMsg(err, 'danger', 5000);
-        });
-        this.value = '';
-        text = null;
-    } else if (this.value === ':list') {
-        let savedLists = Object.keys(getListDB());
-
+    if (!current){
         document.body.prepend(nestElem([
             mkElem({ elemType: 'article', id: 'list-display', class: 'message is-info' }),
             [
@@ -734,21 +698,77 @@ export function inputActions() {
             errorTimeoutID = setTimeout(removeMsg, 3000);
         }
         if (savedLists.length > 1) {
-            this.value = ':load:';
+            input.value = ':load:';
         } else {
-            this.value = '';
+            input.value = '';
         }
-        this.focus();
-        savedLists = null;
-    }else if (this.value === ':convert:'){
+    }
+    input.focus();
+    savedLists = null;
+}
+
+function changeTitle(elem) {
+    if (elem.subItem){
+        elem.title = (elem.title === 'Click to Undo')?'Click for Options':'Click to Undo';
+    }else{
+        [...elem.parentElement.querySelectorAll('li')].forEach(i=>{
+            i.title = (i.title === 'Click to Undo')?'Click for Options':'Click to Undo';
+        })
+    }
+}
+
+export function inputActions() {
+    disableBtnToggle((this.value.trim().length <= 0))
+
+    removeMsg();
+    this.classList.remove('is-danger');
+
+    if (this.value === ':export') {
+        let text = '';
+        if (confirm('Click "OK" for ALL lists\nClick "Cancel" for current list text')){
+            text = window.localStorage.lists;
+        }else{
+            let items = getListDB(curList);
+            if (items)
+                for (let i of items){
+                    text += `\n${i.text}`;
+                    if (i.subList){
+                        for (let s of i.subList){
+                            text += `\n\t${s}`;
+                        }
+                    }
+                }
+        }
+        navigator.clipboard.writeText(text.trim()).then(()=>{ 
+            popMsg('Export Completed!', 'success', 3000);
+        }).catch((err)=>{
+            popMsg(err, 'danger', 5000);
+        });
+        this.value = '';
+        text = null;
+    } else if (this.value === ':list') {
+        showAllLists();
+    } else if (this.value === ':btn:'){
+        let btn = document.querySelector('.btn-dis-list');
+        if (btn){
+            btn.remove();
+        }else{
+            document.querySelector('.card-header.main-bg').append(
+                mkBtn({inner:'<span class="icon"><i class="bi bi-list" style="font-size: 1.5em;"></i></span>', class:'button btn-dis-list', listeners:[{type:'click', execute:showAllLists}]})
+            );
+        }
+        
+        this.value = '';
+    }/*else if (this.value === ':convert:'){
         this.value = '';
         convertCookies();
         popMsg('Conversion Complete!\nRefresh the page and any saved data should be restored.', 'success', 10000)
-    }
+    }*/
 
 }
 
 export function inputKeyActions(event) {
+    disableBtnToggle((this.value.trim().length <= 0))
 
     if (event.keyCode === 13) { // Enter
         if (this.value.match(/^:[a-z]*:.*/)) {
