@@ -391,7 +391,7 @@ function clkUndoItem(){
         selected.parentElement.addEventListener('animationend', itemFadeOutMoveComplete);
         selected.parentElement.classList.add('fade-out-complete');
     }
-    popMsg('ToDo item has been returned', 'info', 3000);
+    popMsg('ToDo item has been restored', 'info', 3000);
     resetSelectedItem();
     closeOptions();
     itmData = null;
@@ -645,7 +645,7 @@ function openOptions(ev) {
 }
 
 export function showAllLists(){
-    let input = this;
+    let input = document.getElementById('item');
     let savedLists = Object.keys(getListDB());
     let current = document.getElementById('list-display');
 
