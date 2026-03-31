@@ -754,7 +754,7 @@ export function inputActions() {
             btn.remove();
         }else{
             document.querySelector('.card-header.main-bg').append(
-                mkBtn({inner:'<span class="icon"><i class="bi bi-list" style="font-size: 1.5em;"></i></span>', class:'button btn-dis-list', listeners:[{type:'click', execute:showAllLists}]})
+                mkBtn({inner:'<span class="icon"><i class="bi bi-list" style="font-size: 1.5em;"></i></span>', class:'button btn-dis-list', prop:{ariaHidden: true}, listeners:[{type:'click', execute:showAllLists}]})
             );
         }
         
