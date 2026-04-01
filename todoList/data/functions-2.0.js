@@ -763,16 +763,15 @@ export function inputActions(event) {
 
 export function documentKeyActions(event){
     event.stopPropagation();
-    
     if (event.key === 'm' && event.altKey && event.ctrlKey){
         let btn = document.querySelector('.btn-dis-list');
         if (btn){
             btn.remove();
         }else{
-            nestElem(
+            nestElem([
                 document.querySelector('.card-header.main-bg'),
                 mkBtn({inner:'<span class="icon"><i class="bi bi-list" style="font-size: 1.5em;"></i></span>', class:'button btn-dis-list', prop:{ariaHidden: true}, listeners:[{type:'click', execute:showAllLists}]})
-            );
+            ]);
         }
     }
     if (event.key === 'Esc' || event.key === 'Escape' || event.keyCode === 27){
