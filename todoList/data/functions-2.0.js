@@ -65,7 +65,13 @@ function saveList(ln = null){
         let id = itm.dataset.pid;
         let item = itm.children[0];
         
-        ListItems.push({id:id, text:item.innerText.trim(), subList:(item.nextElementSibling && item.nextElementSibling.children.length)?[...item.nextElementSibling.children].map(itm=>{return itm.innerText}):null});
+        ListItems.push(
+            {
+                id:id,
+                text:item.innerText.trim(),
+                subList:(item.nextElementSibling && item.nextElementSibling.children.length)?[...item.nextElementSibling.children].map(itm=>{return itm.innerText}):null
+            }
+        );
 
         id = null;
         item = null;
@@ -129,19 +135,6 @@ function getContainer(elem){
     }
     return container;
 }
-
-// function itemKeyActions(ev){
-//     /*
-//     window.localStorage.setItem('selected', JSON.stringify(
-//         {
-//             id: (this.subItem)?this.id:this.parentElement.id,
-//             pid:`${(this.subItem)?this.dataset.pid:this.parentElement.dataset.pid}`,
-//             ident: this.dataset.ident
-//         }
-//     ));
-//     */
-// //    let test = this.getBoundingClientRect();
-// }
 
 function buildListItem(itemText, opt = {sub:false, pid:null}) {
     // returns ul.item-container > li#listItem if regular && li#listSubItem if sub item
@@ -717,13 +710,14 @@ function changeTitle(elem) {
     }
 }
 
-export function inputActions() {
-    disableBtnToggle((this.value.trim().length <= 0))
+export function inputActions(event) {
+    const input = event.target;
+    disableBtnToggle((input.value.trim().length <= 0))
 
     removeMsg();
-    this.classList.remove('is-danger');
+    input.classList.remove('is-danger');
 
-    if (this.value === ':export') {
+    if (input.value === ':export') {
         let text = '';
         if (confirm('Click "OK" for ALL lists\nClick "Cancel" for current list text')){
             text = window.localStorage.lists;
@@ -744,11 +738,11 @@ export function inputActions() {
         }).catch((err)=>{
             popMsg(err, 'danger', 5000);
         });
-        this.value = '';
+        input.value = '';
         text = null;
-    } else if (this.value === ':list') {
+    } else if (input.value === ':list') {
         showAllLists();
-    } else if (this.value === ':btn:'){
+    }/* else if (input.value === ':btn:'){
         let btn = document.querySelector('.btn-dis-list');
         if (btn){
             btn.remove();
@@ -758,20 +752,43 @@ export function inputActions() {
             );
         }
         
-        this.value = '';
-    }/*else if (this.value === ':convert:'){
-        this.value = '';
+        input.value = '';
+    }else if (input.value === ':convert:'){
+        input.value = '';
         convertCookies();
         popMsg('Conversion Complete!\nRefresh the page and any saved data should be restored.', 'success', 10000)
     }*/
 
 }
 
-export function inputKeyActions(event) {
-    disableBtnToggle((this.value.trim().length <= 0))
+export function documentKeyActions(event){
+    event.stopPropagation();
+    
+    if (event.key === 'm' && event.altKey && event.ctrlKey){
+        let btn = document.querySelector('.btn-dis-list');
+        if (btn){
+            btn.remove();
+        }else{
+            nestElem(
+                document.querySelector('.card-header.main-bg'),
+                mkBtn({inner:'<span class="icon"><i class="bi bi-list" style="font-size: 1.5em;"></i></span>', class:'button btn-dis-list', prop:{ariaHidden: true}, listeners:[{type:'click', execute:showAllLists}]})
+            );
+        }
+    }
+    if (event.key === 'Esc' || event.key === 'Escape' || event.keyCode === 27){
+        document.getElementById('item').classList.remove('is-danger');
+        resetSelectedItem();
+        removeMsg();
+        resetListBtn();
+    }
 
+}
+
+export function inputKeyActions(event) {
+    const input = event.target;
+    disableBtnToggle((input.value.trim().length <= 0))
     if (event.keyCode === 13) { // Enter
-        if (this.value.match(/^:[a-z]*:.*/)) {
+        if (input.value.match(/^:[a-z]*:.*/)) {
             let sn = this.value.split(':');
             sn.shift();
             switch (sn[0]) {
@@ -805,11 +822,6 @@ export function inputKeyActions(event) {
             });
             buttons = null;
         }
-    } else if (event.keyCode === 27) { // ESC
-        document.querySelector('#item').classList.remove('is-danger');
-        resetSelectedItem();
-        removeMsg();
-        resetListBtn();
     }
 }
 
@@ -832,41 +844,41 @@ export function inputKeyActions(event) {
 //     }
 // }
 
-function convertCookies(){
-    if (document.cookie.length){
-        let cookieCollection = {};
-        // let collection = [];
-        let cookies = `${document.cookie}`.split('; ');
-        if (cookies.length){
-            for (let cookie of cookies){
-                let ln = cookie.split('=')[0];
-                let lists = cookie.split('=')[1].split(',');
+// function convertCookies(){
+//     if (document.cookie.length){
+//         let cookieCollection = {};
+//         // let collection = [];
+//         let cookies = `${document.cookie}`.split('; ');
+//         if (cookies.length){
+//             for (let cookie of cookies){
+//                 let ln = cookie.split('=')[0];
+//                 let lists = cookie.split('=')[1].split(',');
 
-                cookieCollection[ln] = [];
+//                 cookieCollection[ln] = [];
 
-                for (let item of lists){
-                    if (item.includes('|')){
-                        let items = item.split('|');
-                        cookieCollection[ln].push({id:crypto.randomUUID(), text:items.shift(), subList:[...items]})
-                    }else{
-                        cookieCollection[ln].push({id:crypto.randomUUID(), text:item, subList:null});
-                    }
+//                 for (let item of lists){
+//                     if (item.includes('|')){
+//                         let items = item.split('|');
+//                         cookieCollection[ln].push({id:crypto.randomUUID(), text:items.shift(), subList:[...items]})
+//                     }else{
+//                         cookieCollection[ln].push({id:crypto.randomUUID(), text:item, subList:null});
+//                     }
 
-                }
-                document.cookie = `${ln}=; max-age=0;`;
-                ln = null;
-                lists = null;
-            }
-            // console.log(cookieCollection);
-            saveDB(cookieCollection);
-        }
-        cookieCollection = null;
-        cookies = null;
+//                 }
+//                 document.cookie = `${ln}=; max-age=0;`;
+//                 ln = null;
+//                 lists = null;
+//             }
+//             // console.log(cookieCollection);
+//             saveDB(cookieCollection);
+//         }
+//         cookieCollection = null;
+//         cookies = null;
             
-    }else{
-        console.log('No cookies, it\'s all good')
-    }
-}
+//     }else{
+//         console.log('No cookies, it\'s all good')
+//     }
+// }
 
 window.API = {
     manLoadDB:(collection)=>{
