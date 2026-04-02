@@ -27,7 +27,7 @@ function crtad(){
             mkBtn({class:'btn btn-outline-danger btn-sm', id:'sandr', inner:'S&R', title:'Still a work in progress...'}),
             mkBtn({class:'btn btn-outline-danger btn-sm' + ((btnenbl) ? ' dnone' : ''), id:'stop', inner:'Disable Text Processing'}),
             mkBtn({class:'btn btn-outline-danger btn-sm' + ((btnenbl) ? '' : ' dnone'), id:'start', inner:'Enable Text Processing'}),
-            // mkBtn({class:'btn btn-outline-danger btn-sm', id:'ff', inner:'Format Filename'}),
+            mkBtn({class:'btn btn-outline-danger btn-sm', id:'caps', inner:'Transform All Caps', listeners:[{type:'click', execute:function(){let TA = document.querySelector('#TextArea'); if (TA.value.length) TA.value = TA.value.toUpperCase(); TA.focus()}}]}),
             // mkBtn({class:'btn btn-outline-danger btn-sm', id:'tgDblSpc', inner:'Toggle DblSpc'}),
             mkBtn({class:'btn btn-close btn-dark', id:'ad-close'})
         ]
