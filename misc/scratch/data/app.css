@@ -26,7 +26,7 @@ textarea:focus {
 }
 
 select {
-    max-width: 75px;
+    max-width: 120px;
 }
 
 select > option {
