@@ -435,7 +435,7 @@ $(document).ready(function () {
                 nestElem([
                     mkDiv({ class: 'options mb-2' }),
                     [
-                        mkInp({ type: 'select', id: 'color', name: 'color', class: 'form-select-sm', title:'Select Background Color', options: [{ value: 'dark', isColor: true }, { value: 'green', isColor: true }, { value: 'lavender', isColor: true }, { value: 'blue', isColor: true }, { value: 'white', isColor: true }, { value: 'yellow', isColor: true }] }),
+                        mkInp({ type: 'select', id: 'color', name: 'color', class: 'form-select form-select-sm dark', title:'Select Background Color', options: [{ value: 'dark', isColor: true }, { value: 'green', isColor: true }, { value: 'lavender', isColor: true }, { value: 'blue', isColor: true }, { value: 'white', isColor: true }, { value: 'yellow', isColor: true }] }),
                         mkBtn({ class: 'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id: 'exspc', inner: 'Remove Leading Spaces', title: 'The empty space in front of the paragraphs' }),
                         mkBtn({ class: 'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id: 'rmv-ol', inner: 'Remove OL Markers', title: 'Remove numbered OL markers', listeners:[{type:'click', execute:removeOlMarkers}]}),
                         mkBtn({ class: 'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id: 'ff', inner: 'Format Filename', title: 'Formats file names by lowercasing the text and adding underscores to replace spaces.', listeners: [{ type: 'click', execute: function () { let currentText = $('#TextArea').val(); $('#TextArea').val(formatFilename(currentText)); } }] }),
@@ -446,7 +446,7 @@ $(document).ready(function () {
                         mkBtn({ class: 'btn btn-sm ms-1', id: 'info', inner: '<i class="bi bi-info-circle"></i>', title: 'How this works' })
                     ]
                 ]),
-                mkElem({ elemType: 'textarea', name: 'scratchPad', class: 'dark testing', id: 'TextArea', encoding: 'UTF-8' })
+                mkElem({ elemType: 'textarea', name: 'scratchPad', class: 'dark', id: 'TextArea', encoding: 'UTF-8' })
             ]
         ])
     );
