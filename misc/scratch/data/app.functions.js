@@ -443,7 +443,7 @@ $(document).ready(function () {
                         mkBtn({ class: 'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id: 'clear', inner: 'Clear', title: 'Clear scratch pad' }),
                         createToggle({ id: 'flat', label: 'Flatten Text', title: 'Convert multiple lines of text into a single line. Check \'How This Works\' info button for example.', isLocked: 'false' }),
                         createToggle({ id: 'dbl', label: 'Paragraph Spacing', title: 'Adds space between lines. Click Info button for more info', isLocked: 'false' }),
-                        mkBtn({ class: 'btn btn-sm ms-1', id: 'info', inner: '<i class="bi bi-info-circle"></i>', title: 'How this works' })
+                        mkBtn({ class: 'btn p-0', id: 'info', inner: '<i class="bi bi-info-circle"></i>', title: 'How this works' })
                     ]
                 ]),
                 mkElem({ elemType: 'textarea', name: 'scratchPad', class: 'dark', id: 'TextArea', encoding: 'UTF-8' })

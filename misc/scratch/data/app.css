@@ -87,6 +87,15 @@ a.btn {
     justify-content: start;
     align-items: center;
     flex-wrap: wrap;
+    position: relative;
+}
+
+#info {
+    font-size: large;
+    position: absolute;
+    top: 3rem;
+    right: .5rem;
+    z-index: 1000;
 }
 
 .toggle-cont {
@@ -228,6 +237,10 @@ a.btn {
 
 .options > button:not(button[id="info"]):active {
     box-shadow: none;
+}
+
+select.dark ~ #info {
+    color: white;
 }
 
 .dark {
