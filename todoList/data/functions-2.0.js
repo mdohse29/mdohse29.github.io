@@ -628,9 +628,9 @@ function openOptions(ev) {
             [opts.b5, opts.b6]
             :
             (this.id === 'listSubItem') ?
-                [opts.b1, opts.b3, (this.innerText.trim().includes(':load:')?opts.b7:(this.innerText.trim().includes('http'))?opts.b8:opts.b4), opts.b6]
+                [opts.b1, opts.b3, (this.innerText.trim().startsWith(':load:')?opts.b7:(this.innerText.trim().startsWith('http'))?opts.b8:opts.b4), opts.b6]
                 :
-                [opts.b1, opts.b2, opts.b3, (this.innerText.trim().includes(':load:')?opts.b7:(this.innerText.trim().includes('http'))?opts.b8:opts.b4), opts.b6]
+                [opts.b1, opts.b2, opts.b3, (this.innerText.trim().startsWith(':load:')?opts.b7:(this.innerText.trim().startsWith('http'))?opts.b8:opts.b4), opts.b6]
     ]);
 
     opts = null;
@@ -706,7 +706,7 @@ function changeTitle(elem) {
     }else{
         [...elem.parentElement.querySelectorAll('li')].forEach(i=>{
             i.title = (i.title === 'Click to Undo')?'Click for Options':'Click to Undo';
-        })
+        });
     }
 }
 
@@ -787,13 +787,14 @@ export function inputKeyActions(event) {
     const input = event.target;
     disableBtnToggle((input.value.trim().length <= 0))
     if (event.keyCode === 13) { // Enter
-        if (input.value.match(/^:[a-z]*:.*/)) {
-            let sn = this.value.split(':');
-            sn.shift();
-            switch (sn[0]) {
+        let key = input.value.match(/^:([a-z]*):(.*)/);
+        if (key) {
+            key.shift();
+            let [cmd, list_name] = key;
+            switch (cmd) {
                 case 'save':
                     // Save list to specified cookie name :*:cookie_name
-                    saveList(sn[1]); // Save Current list to new cookie
+                    saveList(list_name); // Save Current list to new cookie
                     clearListDB(curList); // clear list data
                     resetListBtn();
                     loadList(curList);
@@ -801,16 +802,16 @@ export function inputKeyActions(event) {
                 case 'load':
                     // Load specific cookie
                     resetListBtn();
-                    loadList(sn[1]);
+                    loadList(list_name);
                     break;
                 case 'delete':
-                    clearListDB(sn[1]);
-                    popMsg(`The list labeled "${sn[1]}" has been removed!`, 'success', 4000);
+                    clearListDB(list_name);
+                    popMsg(`The list labeled "${list_name}" has been removed!`, 'success', 4000);
                     resetListBtn();
                     break;
             }
-            this.value = '';
-            sn = null;
+            input.value = '';
+            key = null;
         } else {
             let buttons = document.querySelectorAll('.listBtn button');
             buttons.forEach(btn => {
