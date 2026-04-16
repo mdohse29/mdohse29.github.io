@@ -1,0 +1,97 @@
+{
+    "title": "Trivia Quiz",
+    "category": "TV/Movies",
+    "intro": "Click Start To Begin<br>Good Luck!",
+    "questions": [
+        {
+            "question": "Which TV show features a chemistry teacher turned meth producer?",
+            "options": [
+                { "value": "Breaking Bad", "correct": true },
+                { "value": "Better Call Saul", "correct": false },
+                { "value": "Ozark", "correct": false },
+                { "value": "Dexter", "correct": false }
+            ]
+        },
+        {
+            "question": "In Game of Thrones, what is the name of Jon Snow's direwolf?",
+            "options": [
+                { "value": "Ghost", "correct": true },
+                { "value": "Nymeria", "correct": false },
+                { "value": "Summer", "correct": false },
+                { "value": "Grey Wind", "correct": false }
+            ]
+        },
+        {
+            "question": "Which TV series is set in the fictional town of Hawkins, Indiana?",
+            "options": [
+                { "value": "Stranger Things", "correct": true },
+                { "value": "Riverdale", "correct": false },
+                { "value": "Twin Peaks", "correct": false },
+                { "value": "Dark", "correct": false }
+            ]
+        },
+        {
+            "question": "Who is the main character in the TV show Sherlock?",
+            "options": [
+                { "value": "John Watson", "correct": false },
+                { "value": "Sherlock Holmes", "correct": true },
+                { "value": "Mycroft Holmes", "correct": false },
+                { "value": "Greg Lestrade", "correct": false }
+            ]
+        },
+        {
+            "question": "Which sitcom features the Dunphy family?",
+            "options": [
+                { "value": "Modern Family", "correct": true },
+                { "value": "The Office", "correct": false },
+                { "value": "Parks and Recreation", "correct": false },
+                { "value": "Brooklyn Nine-Nine", "correct": false }
+            ]
+        },
+        {
+            "question": "Which movie features the quote, \"I am Iron Man\"?",
+            "options": [
+                { "value": "Iron Man", "correct": true },
+                { "value": "The Avengers", "correct": false },
+                { "value": "Captain America: Civil War", "correct": false },
+                { "value": "Thor", "correct": false }
+            ]
+        },
+        {
+            "question": "In The Matrix, what color pill does Neo take?",
+            "options": [
+                { "value": "Red", "correct": true },
+                { "value": "Blue", "correct": false },
+                { "value": "Green", "correct": false },
+                { "value": "Yellow", "correct": false }
+            ]
+        },
+        {
+            "question": "Which movie is about a theme park filled with cloned dinosaurs?",
+            "options": [
+                { "value": "Jurassic Park", "correct": true },
+                { "value": "King Kong", "correct": false },
+                { "value": "Godzilla", "correct": false },
+                { "value": "Avatar", "correct": false }
+            ]
+        },
+        {
+            "question": "Who directed the movie Inception?",
+            "options": [
+                { "value": "Christopher Nolan", "correct": true },
+                { "value": "Steven Spielberg", "correct": false },
+                { "value": "James Cameron", "correct": false },
+                { "value": "Quentin Tarantino", "correct": false }
+            ]
+        },
+        {
+            "question": "Which film features a character named Jack Sparrow?",
+            "options": [
+                { "value": "Pirates of the Caribbean", "correct": true },
+                { "value": "Treasure Island", "correct": false },
+                { "value": "Hook", "correct": false },
+                { "value": "Peter Pan", "correct": false }
+            ]
+        }
+    ]
+}

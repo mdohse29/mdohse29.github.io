@@ -24,6 +24,7 @@ async function getData(){
 async function triviaAPI(){
     try{
         const resp = await fetch(`https://opentdb.com/api.php?amount=${shuffleArray([5,6,7,8,9,10])[0]}&category=${shuffleArray([11,14,26,27])[0]}&difficulty=${shuffleArray(['easy', 'medium', 'hard'])[0]}&type=multiple`);
+        // const resp = {ok:false}; // Use for testing backup data
         if (resp.ok){
             const {results} = await resp.json();
             const data = {

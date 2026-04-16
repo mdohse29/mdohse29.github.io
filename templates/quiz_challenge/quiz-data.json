@@ -4,213 +4,93 @@
     "intro": "Click Start To Begin<br>Good Luck!",
     "questions": [
         {
-            "question":"Which sitcom featured the coffee shop \"Central Perk\"?",
-            "options":[
-                {
-                    "value": "Seinfeld",
-                    "correct": false
-                },
-                {
-                    "value": "Friends",
-                    "correct": true
-                },
-                {
-                    "value":"Mad About You",
-                    "correct":false
-                },
-                {
-                    "value":"Frasier",
-                    "correct":false
-                }
-            ]
-        },
-        {
-            "question":"What was the name of the fictional town where Twin Peaks is set?",
-            "options":[
-                {
-                    "value": "Blue River",
-                    "correct": false
-                },
-                {
-                    "value": "Pine Valley",
-                    "correct": false
-                },
-                {
-                    "value":"Twin Peaks",
-                    "correct":true
-                },
-                {
-                    "value":"North Bend",
-                    "correct":false
-                }
-            ]
-        },
-        {
-            "question":"Which 1990s animated series popularized the phrase \"Eat my shorts\"?",
-            "options":[
-                {
-                    "value": "Beavis and Butt-Head",
-                    "correct": false
-                },
-                {
-                    "value": "South Park",
-                    "correct": false
-                },
-                {
-                    "value":"The Simpsons",
-                    "correct":true
-                },
-                {
-                    "value":"Ren & Stimpy",
-                    "correct":false
-                }
-            ]
-        },
-        {
-            "question":"Who was the host of the original Double Dare on Nickelodeon in the 1990s?",
-            "options":[
-                {
-                    "value": "Bob Barker",
-                    "correct": false
-                },
-                {
-                    "value": "Marc Summers",
-                    "correct": true
-                },
-                {
-                    "value":"Alex Trebek",
-                    "correct":false
-                },
-                {
-                    "value":"Howie Mandel",
-                    "correct":false
-                }
-            ]
-        },
-        {
-            "question":"In The X-Files, what was Fox Mulder's FBI badge number?",
-            "options":[
-                {
-                    "value": "10125",
-                    "correct": false
-                },
-                {
-                    "value": "24189",
-                    "correct": false
-                },
-                {
-                    "value":"60216",
-                    "correct":true
-                },
-                {
-                    "value":"35711",
-                    "correct":false
-                }
-            ]
-        },
-        {
-            "question": "Which 1990s movie features a character named Forrest Gump who runs across the United States?",
+            "question": "Which TV show features a chemistry teacher turned meth producer?",
             "options": [
-                {
-                    "value": "The Shawshank Redemption",
-                    "correct": false
-                },
-                {
-                    "value": "Forrest Gump",
-                    "correct": true
-                },
-                {
-                    "value": "Pulp Fiction",
-                    "correct": false
-                },
-                {
-                    "value": "Jurassic Park",
-                    "correct": false
-                }
+                { "value": "Breaking Bad", "correct": true },
+                { "value": "Better Call Saul", "correct": false },
+                { "value": "Ozark", "correct": false },
+                { "value": "Dexter", "correct": false }
             ]
         },
         {
-            "question": "In which 1990s film does a young girl named Matilda discover she has telekinetic powers?",
+            "question": "In Game of Thrones, what is the name of Jon Snow's direwolf?",
             "options": [
-                {
-                    "value": "Home Alone",
-                    "correct": false
-                },
-                {
-                    "value": "Matilda",
-                    "correct": true
-                },
-                {
-                    "value": "The Lion King",
-                    "correct": false
-                },
-                {
-                    "value": "Toy Story",
-                    "correct": false
-                }
+                { "value": "Ghost", "correct": true },
+                { "value": "Nymeria", "correct": false },
+                { "value": "Summer", "correct": false },
+                { "value": "Grey Wind", "correct": false }
             ]
         },
         {
-            "question": "Which 1990s movie is about a group of friends who find a body and try to solve a mystery in a small town?",
+            "question": "Which TV series is set in the fictional town of Hawkins, Indiana?",
             "options": [
-                {
-                    "value": "Scream",
-                    "correct": true
-                },
-                {
-                    "value": "Clueless",
-                    "correct": false
-                },
-                {
-                    "value": "Titanic",
-                    "correct": false
-                },
-                {
-                    "value": "Independence Day",
-                    "correct": false
-                }
+                { "value": "Stranger Things", "correct": true },
+                { "value": "Riverdale", "correct": false },
+                { "value": "Twin Peaks", "correct": false },
+                { "value": "Dark", "correct": false }
             ]
         },
         {
-            "question": "What is the name of the animated film from 1994 where a lion cub becomes king?",
+            "question": "Who is the main character in the TV show Sherlock?",
             "options": [
-                {
-                    "value": "Beauty and the Beast",
-                    "correct": false
-                },
-                {
-                    "value": "Aladdin",
-                    "correct": false
-                },
-                {
-                    "value": "The Lion King",
-                    "correct": true
-                },
-                {
-                    "value": "Mulan",
-                    "correct": false
-                }
+                { "value": "John Watson", "correct": false },
+                { "value": "Sherlock Holmes", "correct": true },
+                { "value": "Mycroft Holmes", "correct": false },
+                { "value": "Greg Lestrade", "correct": false }
             ]
         },
         {
-            "question": "Which 1990s film stars Leonardo DiCaprio and Kate Winslet as passengers on a doomed ship?",
+            "question": "Which sitcom features the Dunphy family?",
             "options": [
-                {
-                    "value": "Romeo + Juliet",
-                    "correct": false
-                },
-                {
-                    "value": "Titanic",
-                    "correct": true
-                },
-                {
-                    "value": "The Basketball Diaries",
-                    "correct": false
-                },
-                {
-                    "value": "What's Eating Gilbert Grape",
-                    "correct": false
-                }
+                { "value": "Modern Family", "correct": true },
+                { "value": "The Office", "correct": false },
+                { "value": "Parks and Recreation", "correct": false },
+                { "value": "Brooklyn Nine-Nine", "correct": false }
+            ]
+        },
+        {
+            "question": "Which movie features the quote, \"I am Iron Man\"?",
+            "options": [
+                { "value": "Iron Man", "correct": true },
+                { "value": "The Avengers", "correct": false },
+                { "value": "Captain America: Civil War", "correct": false },
+                { "value": "Thor", "correct": false }
+            ]
+        },
+        {
+            "question": "In The Matrix, what color pill does Neo take?",
+            "options": [
+                { "value": "Red", "correct": true },
+                { "value": "Blue", "correct": false },
+                { "value": "Green", "correct": false },
+                { "value": "Yellow", "correct": false }
+            ]
+        },
+        {
+            "question": "Which movie is about a theme park filled with cloned dinosaurs?",
+            "options": [
+                { "value": "Jurassic Park", "correct": true },
+                { "value": "King Kong", "correct": false },
+                { "value": "Godzilla", "correct": false },
+                { "value": "Avatar", "correct": false }
+            ]
+        },
+        {
+            "question": "Who directed the movie Inception?",
+            "options": [
+                { "value": "Christopher Nolan", "correct": true },
+                { "value": "Steven Spielberg", "correct": false },
+                { "value": "James Cameron", "correct": false },
+                { "value": "Quentin Tarantino", "correct": false }
+            ]
+        },
+        {
+            "question": "Which film features a character named Jack Sparrow?",
+            "options": [
+                { "value": "Pirates of the Caribbean", "correct": true },
+                { "value": "Treasure Island", "correct": false },
+                { "value": "Hook", "correct": false },
+                { "value": "Peter Pan", "correct": false }
             ]
         }
     ]
