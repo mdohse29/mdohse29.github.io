@@ -346,6 +346,23 @@ function mkElem(attr = { elemType: '' }) {
 
     return element;
 }
+/**
+ * Generates a date string for the current date
+ * @param {function} cb - Callback Function
+ * @returns {string} - Current date in string format, mm/dd/yyyy
+ */
+function date_string(cb){
+    const date = new Date(),
+    year = date.getFullYear(),
+    month = String(date.getMonth() + 1).padStart(2, '0'),
+    day_int = String(date.getDate()).padStart(2, '0'),
+    date_string = `${month}-${day_int}-${year}`;
+
+    if (cb){
+        return cb(date_string);
+    }
+    return date_string;
+}
 
 function mrd(rtn = false) {
     const attr = { inner: 'Created By: MR D', style: 'font-size: 8px;color: transparent;' };
