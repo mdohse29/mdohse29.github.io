@@ -10,10 +10,9 @@
     <script>
         console.log(date_string());
         let testing_stuff = date_string((date=>{
-            const date_arr = date.split('-');
-            const year = date_arr.pop();
-            date_arr.unshift(year);
-            return date_arr.join('-');
+            const date_arr = date.split('-').map((d, n)=>{return (n===0)?parseInt(d)-1:parseInt(d)});
+            date_arr[1] = date_arr[1] - 1;
+            return date_arr
         }))
         console.log(testing_stuff)
         console.log('testing');
