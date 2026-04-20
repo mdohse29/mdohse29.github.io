@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing crtElm non mod</title>
+</head>
+<body>
+    <script src="../scripts/crtElm.js"></script>
+    <script>
+        console.log(date_string());
+        let testing_stuff = date_string((date=>{
+            const date_arr = date.split('-').map((d, n)=>{return (n===0)?parseInt(d)-1:parseInt(d)});
+            date_arr[1] = date_arr[1] - 1;
+            return date_arr
+        }))
+        console.log(testing_stuff)
+        console.log('testing');
+    </script>
+</body>
+</html>
