@@ -330,11 +330,15 @@ $(document).ready(function () {
                 changed = true;
             }
 
-            regtest = /^\s*\n/gm;
-            if (text.match(regtest)) {
-                console.log('Removing empty lines');
-                text = text.replaceAll(regtest, '');
-                changed = true;
+            if (!$('#retspc .toggle-cont').hasClass('tg-on')){
+                regtest = /^\s*\n/gm;
+                if (text.match(regtest)) {
+                    console.log('Removing empty lines');
+                    text = text.replaceAll(regtest, '');
+                    changed = true;
+                }
+            }else{
+                $('#retspc .toggle-pill').click() // Reset the toggle after single use
             }
 
             if ($('#flat .toggle-cont').hasClass('tg-on')) {
@@ -346,7 +350,7 @@ $(document).ready(function () {
                         text = oneStr[a];
                     }
                 }
-                $('.toggle-pill').click() // Reset the toggle after single use
+                $('#flat .toggle-pill').click() // Reset the toggle after single use
             }
 
             regtest = /(\S)\s{2,}(\S)/gm;
@@ -443,6 +447,7 @@ $(document).ready(function () {
                         mkBtn({ class: 'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id: 'clear', inner: 'Clear', title: 'Clear scratch pad' }),
                         createToggle({ id: 'flat', label: 'Flatten Text', title: 'Convert multiple lines of text into a single line. Check \'How This Works\' info button for example.', isLocked: 'false' }),
                         createToggle({ id: 'dbl', label: 'Paragraph Spacing', title: 'Adds space between lines. Click Info button for more info', isLocked: 'false' }),
+                        createToggle({ id: 'retspc', class:'dnone', label: 'Retain Copied Spacing', title: 'Retains whatever paragraph spacing was copied from the source.', isLocked: 'false' }),
                         mkBtn({ class: 'btn p-0', id: 'info', inner: '<i class="bi bi-info-circle"></i>', title: 'How this works' })
                     ]
                 ]),
@@ -471,9 +476,9 @@ $(document).ready(function () {
         let text = $('#TextArea').val();
         toggleSpclFtr(text);
         // Remove after decision is made
-        // if (text == "Testing"){
-        //     $('#dbl').removeClass('dnone');
-        // }
+        if (text.toLowerCase() == "ciara"){
+            $('#retspc').removeClass('dnone');
+        }
     });
 
     $('#TextArea').on('paste', processText);
