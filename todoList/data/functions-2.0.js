@@ -725,6 +725,7 @@ export function inputActions(event) {
             let items = getListDB(curList);
             if (items)
                 for (let i of items){
+                    text += `\n--------------------Item ${items.indexOf(i)+1}--------------------`
                     text += `\n${i.text}`;
                     if (i.subList){
                         for (let s of i.subList){
