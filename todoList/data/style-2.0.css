@@ -151,7 +151,7 @@ article.message {
 }
 
 #done,
-#list {
+#list-container {
     border-top: 2px solid rgba(211, 211, 211, .5);
 }
 
