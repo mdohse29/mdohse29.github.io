@@ -1,4 +1,4 @@
-import {nestElem, mkDiv, mkBtn, mrd, mkInp} from "../../scripts/crtElm-mod-min.js";
+import {nestElem, mkDiv, mkBtn, mrd, mkInp, mkHeader} from "../../scripts/crtElm-mod-min.js";
 import {inputActions, inputKeyActions, addItem, editItem, addSubItem, loadList, documentKeyActions} from "./functions-2.0-min.js"
 document.addEventListener('keydown', documentKeyActions);
 document.body.prepend(nestElem([
@@ -9,7 +9,7 @@ document.body.prepend(nestElem([
     [
         nestElem([
             mkDiv({class:'card-header main-bg'}),
-            mkDiv({class:'card-header-title is-justify-content-center is-size-2', inner:'ToDo List'})
+            mkHeader({size:1, class:'card-header-title is-justify-content-center is-size-1', inner:'ToDo List'})
         ]),
         nestElem([
             mkDiv({class:'card-content is-flex is-justify-content-space-between'}),
