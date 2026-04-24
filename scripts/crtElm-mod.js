@@ -13,6 +13,21 @@ export function mkP(attr = {}) {
     return mkElem(attr);
 }
 
+export function mkHeader(attr = {size:1}, w_sym_tag = false, sym_tag_attr = {}){
+    if (attr.size === undefined)
+        attr.size = 1;
+    attr.size = parseInt(attr.size);
+    if (attr.size > 0 && attr.size <= 6){
+        attr.elemType = `h${attr.size}`;
+    }else{
+        attr.elemType = 'h1';
+    }
+    delete attr.size;
+    if (w_sym_tag)
+        sym_tag_attr.elemType = 'header';
+    return (w_sym_tag)?nestElem([mkElem(sym_tag_attr), mkElem(attr)]):mkElem(attr);
+}
+
 export function mkLnk(attr = {}) {
     attr.elemType = 'a';
     if (!attr.target)
