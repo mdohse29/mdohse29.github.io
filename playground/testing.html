@@ -40,9 +40,53 @@
                 align-items: center;
                 flex-direction: column;
             }
+            div.tg-container {
+                display: inline-flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                box-sizing: border-box;
+            }
+            .md-tog {
+                appearance: none;
+                width: 52px;
+                height: 27px;
+                padding: 1px;
+                border: 1px solid black;
+                border-radius: 15px;
+                background-color: #979797;
+                transition: background-color 0.5s;
+            }
+            .md-tog::after {
+                content: '';
+                width: 25px;
+                height: 20px;
+                background-color: white;
+                border: 1px solid black;
+                border-radius: inherit;
+                position: absolute;
+                padding: 0;
+                transition: transform 0.5s;
+            }
+            .md-tog:checked {
+                background-color: green;
+            }
+            .md-tog:checked:disabled {
+                background-color: red;
+            }
+            .md-tog:checked::after {
+                transform: translateX(20px);
+            }
     </style>
 </head>
 <body>
     <div class="container"><label for="toggle">Testing toggle</label><input type="checkbox" name="toggle" class="toggle" id="toggle"></div>
+    <div class="tg-container"><label for="test">MD Toggle</label><input type="checkbox" name="test" id="test" class="md-tog" disabled checked></div>
+    <script>
+        const tog = document.querySelector('.tg-container');
+        tog.addEventListener('click', function(ev){
+            console.log(ev.currentTarget)
+        })
+    </script>
 </body>
 </html>
