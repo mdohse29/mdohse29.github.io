@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .toggle {
+            appearance: none;
+            width: 42px;
+            height: 24px;
+            border-radius: 12px;
+            background-color: #e8e8e8;
+            border: 1px solid #979797;
+            cursor: pointer;
+            transition: background-color 0.5s, border-color 0.5s;
+            }
+
+            .toggle:checked {
+            background-color: #1dca4f;
+            border-color: #106128;
+            }
+
+            .toggle:after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            transition: transform 0.5s;
+            }
+
+            .toggle:checked:after {
+            transform: translateX(20px);
+            }
+            .container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+            }
+    </style>
+</head>
+<body>
+    <div class="container"><label for="toggle">Testing toggle</label><input type="checkbox" name="toggle" class="toggle" id="toggle"></div>
+</body>
+</html>

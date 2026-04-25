@@ -10,7 +10,7 @@
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"> -->
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="/img/lineicons5-free-pakage/html-icons/css/icons.css">
+    <link rel="stylesheet" href="/img/lineicons5-free-pakage/html-icons/lineicons.css">
     <!-- <script type="module" src="./test.js"></script> -->
 </head>
 
@@ -21,7 +21,7 @@
     <script type="module">
         import {mkHeader, nestElem, mkP, mkElem} from '/scripts/crtElm-mod.js';
         document.body.prepend(nestElem([
-            mkHeader({size:1, inner:'Testing no js expanders', style:'color: purple;'}, true, {style:'text-align: center;'}),
+            mkHeader({size:1, inner:'Testing no js expanders', icon: mkElem({elemType:'i', class:'lni lni-kubernetes lni-is-spinning'}), style:'color: purple;'}, true, {style:'text-align: center;'}),
             [
                 mkP({inner:'Just Messing Around'}),
                 mkP({inner:'Testing this out!'})
