@@ -1,0 +1,40 @@
+div.tg-container {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+div.tg-container > label, div.tg-container > input[type="checkbox"] {
+    cursor: pointer;
+}
+.md-tog {
+    appearance: none;
+    width: 52px;
+    height: 17px;
+    padding: 1px;
+    border: 1px solid black;
+    border-radius: 15px;
+    background-color: #979797;
+    transition: background-color 0.5s;
+}
+.md-tog::after {
+    content: '';
+    width: 25px;
+    height: 11px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: inherit;
+    position: absolute;
+    padding: 0;
+    transition: transform 0.5s;
+}
+.md-tog:checked {
+    background-color: green;
+}
+.md-tog[data-locked="true"]:checked {
+    background-color: red;
+}
+.md-tog:checked::after {
+    transform: translateX(20px);
+}

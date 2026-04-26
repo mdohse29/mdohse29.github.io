@@ -125,7 +125,7 @@ function mkInp(attr = { type: '', id: '' }) {
         case 'select':
             elements.input = mkElem({ elemType: attr.type });
             for (let at in attr) {
-                if (!at.match(/options|listeners|label|type/) && attr[at]) {
+                if (!at.match(/options|listeners|label|labelOpt|type/) && attr[at]) {
                     elements.input.setAttribute(at, attr[at]);
                 }
             }
@@ -141,7 +141,7 @@ function mkInp(attr = { type: '', id: '' }) {
             for (let a in attr) {
                 if (a.includes('inner')) {
                     elements.input.innerHTML = attr[a];
-                } else if (!a.match(/options|listeners|label/) && attr[a]) {
+                } else if (!a.match(/options|listeners|label|labelOpt/) && attr[a]) {
                     elements.input.setAttribute(a, attr[a]);
                 }
             }

@@ -47,6 +47,9 @@
                 justify-content: center;
                 box-sizing: border-box;
             }
+            div.tg-container > label, div.tg-container > input[type="checkbox"] {
+                cursor: pointer;
+            }
             .md-tog {
                 appearance: none;
                 width: 52px;
@@ -71,7 +74,7 @@
             .md-tog:checked {
                 background-color: green;
             }
-            .md-tog:checked:disabled {
+            .md-tog[data-locked="true"]:checked {
                 background-color: red;
             }
             .md-tog:checked::after {
@@ -81,12 +84,31 @@
 </head>
 <body>
     <div class="container"><label for="toggle">Testing toggle</label><input type="checkbox" name="toggle" class="toggle" id="toggle"></div>
-    <div class="tg-container"><label for="test">MD Toggle</label><input type="checkbox" name="test" id="test" class="md-tog" disabled checked></div>
-    <script>
-        const tog = document.querySelector('.tg-container');
-        tog.addEventListener('click', function(ev){
-            console.log(ev.currentTarget)
-        })
+    <div class="tg-container"><label for="test">MD Toggle</label><input type="checkbox" name="test" id="test" class="md-tog" data-locked="false"></div>
+    <script type="module">
+        import {mkDiv, mkInp, nestElem} from 'https://mdohse29.github.io/scripts/crtElm-mod.js';
+        const tog = document.querySelector('#test');
+        function md_toggle_switch(ev){
+            if (ev.ctrlKey){
+                ev.target.dataset.locked = ev.target.dataset.locked != 'true';
+                if (!ev.target.checked)
+                    ev.preventDefault();
+                return;
+            }
+            if (ev.target.dataset.locked === 'true'){
+                ev.preventDefault();
+                return;
+            }
+        }
+        tog.addEventListener('click', md_toggle_switch)
+        const {label, input} = mkInp({type:'checkbox', id:'test2', name:'test2', class:'md-tog', 'data-locked': 'false', listeners:[{type:'click', execute:md_toggle_switch}], label:'Testing 2'});
+        document.body.prepend(nestElem([
+            mkDiv({class:'tg-container'}),
+            [
+                label,
+                input
+            ]
+        ]));
     </script>
 </body>
 </html>
