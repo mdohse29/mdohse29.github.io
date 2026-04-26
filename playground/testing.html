@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .toggle {
+            appearance: none;
+            width: 42px;
+            height: 24px;
+            border-radius: 12px;
+            background-color: #e8e8e8;
+            border: 1px solid #979797;
+            cursor: pointer;
+            transition: background-color 0.5s, border-color 0.5s;
+            }
+
+            .toggle:checked {
+            background-color: #1dca4f;
+            border-color: #106128;
+            }
+
+            .toggle:after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            transition: transform 0.5s;
+            }
+
+            .toggle:checked:after {
+            transform: translateX(20px);
+            }
+            .container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+            }
+            div.tg-container {
+                display: inline-flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                box-sizing: border-box;
+            }
+            div.tg-container > label, div.tg-container > input[type="checkbox"] {
+                cursor: pointer;
+            }
+            .md-tog {
+                appearance: none;
+                width: 52px;
+                height: 27px;
+                padding: 1px;
+                border: 1px solid black;
+                border-radius: 15px;
+                background-color: #979797;
+                transition: background-color 0.5s;
+            }
+            .md-tog::after {
+                content: '';
+                width: 25px;
+                height: 20px;
+                background-color: white;
+                border: 1px solid black;
+                border-radius: inherit;
+                position: absolute;
+                padding: 0;
+                transition: transform 0.5s;
+            }
+            .md-tog:checked {
+                background-color: green;
+            }
+            .md-tog[data-locked="true"]:checked {
+                background-color: red;
+            }
+            .md-tog:checked::after {
+                transform: translateX(20px);
+            }
+    </style>
+</head>
+<body>
+    <div class="container"><label for="toggle">Testing toggle</label><input type="checkbox" name="toggle" class="toggle" id="toggle"></div>
+    <div class="tg-container"><label for="test">MD Toggle</label><input type="checkbox" name="test" id="test" class="md-tog" data-locked="false"></div>
+    <script type="module">
+        import {mkDiv, mkInp, nestElem} from 'https://mdohse29.github.io/scripts/crtElm-mod.js';
+        const tog = document.querySelector('#test');
+        function md_toggle_switch(ev){
+            if (ev.ctrlKey){
+                ev.target.dataset.locked = ev.target.dataset.locked != 'true';
+                if (!ev.target.checked)
+                    ev.preventDefault();
+                return;
+            }
+            if (ev.target.dataset.locked === 'true'){
+                ev.preventDefault();
+                return;
+            }
+        }
+        tog.addEventListener('click', md_toggle_switch)
+        const {label, input} = mkInp({type:'checkbox', id:'test2', name:'test2', class:'md-tog', 'data-locked': 'false', listeners:[{type:'click', execute:md_toggle_switch}], label:'Testing 2'});
+        document.body.prepend(nestElem([
+            mkDiv({class:'tg-container'}),
+            [
+                label,
+                input
+            ]
+        ]));
+    </script>
+</body>
+</html>

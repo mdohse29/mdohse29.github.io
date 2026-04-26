@@ -35,6 +35,10 @@
     animation: ball2 500ms linear infinite alternate none;
 }
 
+details > summary:hover {
+    cursor: pointer;
+}
+
 @keyframes ball1 {
     0% {
         left: 0;

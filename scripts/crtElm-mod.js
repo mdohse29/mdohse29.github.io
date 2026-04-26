@@ -140,7 +140,7 @@ export function mkInp(attr = { type: '', id: '' }) {
         case 'select':
             elements.input = mkElem({ elemType: attr.type });
             for (let at in attr) {
-                if (!at.match(/options|listeners|label|type/) && attr[at]) {
+                if (!at.match(/options|listeners|label|labelOpt|type/) && attr[at]) {
                     elements.input.setAttribute(at, attr[at]);
                 }
             }
@@ -156,7 +156,7 @@ export function mkInp(attr = { type: '', id: '' }) {
             for (let a in attr) {
                 if (a.includes('inner')) {
                     elements.input.innerHTML = attr[a];
-                } else if (!a.match(/options|listeners|label/) && attr[a]) {
+                } else if (!a.match(/options|listeners|label|labelOpt/) && attr[a]) {
                     elements.input.setAttribute(a, attr[a]);
                 }
             }
@@ -306,7 +306,7 @@ export function nestElem(elemArry = []) {
     for (let a = elemArry.length - 2; a >= 0; a--) {
         if (Object.keys(elemArry[a + 1]).length > 0 && elemArry[a + 1].tagName !== 'SELECT' && !(elemArry[a+1] instanceof Element)) {
             for (let b in elemArry[a + 1]) {
-                console.log(elemArry[a + 1][b])
+                // console.log(elemArry[a + 1][b])
                 elemArry[a].appendChild(elemArry[a + 1][b]);
             }
         } else {
