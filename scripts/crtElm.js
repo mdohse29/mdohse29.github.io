@@ -30,42 +30,103 @@ function mkBtn(attr = {}) {
     return mkElem(attr);
 }
 
-function mkImg(attr = {}){
+function mkImg(attr = {}) {
     attr.elemType = 'img';
     if (!attr.alt || attr.alt.length < 1)
         attr.alt = 'null';
     return mkElem(attr);
 }
 
-function mkTable(tData={}, attr={}){
+function mkToggle(attr = { id: '', label: '', lockable: false }) {
+    const settings = {};
+    if (attr.lockable != undefined) {
+        settings.lockable = attr.lockable;
+        delete attr.lockable;
+    }
+    if (attr.name == undefined) {
+        attr.name = attr.id;
+    }
+    if (attr.label) {
+        settings.label = attr.label;
+        if (attr.labelOpt)
+            settings.labelOpt = attr.labelOpt;
+        delete attr.labelOpt;
+        delete attr.label;
+    }
+    if (attr.class) {
+        settings.class = attr.class;
+        delete attr.class;
+    }
+    if (attr.listeners) {
+        settings.listeners = attr.listeners;
+        delete attr.listeners;
+    }
+    function md_toggle_switch(ev) {
+        if (ev.ctrlKey && ev.target.dataset.locked != undefined) {
+            ev.target.dataset.locked = ev.target.dataset.locked != 'true';
+            // ev.target.dispatchEvent(new Event('change'));
+            if (!ev.target.checked) {
+                ev.preventDefault();
+            }
+            return;
+        }
+        if (ev.target.dataset.locked === 'true') {
+            ev.preventDefault();
+            return;
+        }
+    }
+
+    const checkbox = mkElem({
+        elemType: 'input',
+        type: 'checkbox',
+        class: `md-tog${(settings.class) ? ` ${settings.class}` : ''}`,
+        dataset: (settings.lockable) ? { locked: false } : {},
+        listeners: [{ type: 'click', execute: md_toggle_switch }, ...(settings.listeners) ? settings.listeners : []],
+        ...attr
+    })
+    const toggle = nestElem([
+        mkDiv({ class: 'md-tg-container' }),
+        (settings.label) ?
+            [
+                mkLabel({ for: attr.id, inner: settings.label, ...(settings.labelOpt) ? settings.labelOpt : {} }),
+                checkbox
+            ]
+            :
+            checkbox
+    ])
+    // console.log(attr, settings);
+    return toggle;
+}
+
+function mkTable(tData = {}, attr = {}) {
     if (!attr instanceof Object || !tData instanceof Object)
         throw new Error('Arguments must be set as an object\n\nattr = {}\ntData = {}');
     if (!Object.keys(tData).length)
         throw new Error('The tData argument is Empty!\n\ntData = {thead:[], tbody:[]}\ntData = {rows:[]}');
-    let table = mkElem({elemType:'table', ...attr});
-    if (tData.rows && tData.rows instanceof Array && tData.rows.length){
-        tData.rows.forEach(r=>{r.forEach(c=>{if (!c.attr)c.attr={};})});
+    let table = mkElem({ elemType: 'table', ...attr });
+    if (tData.rows && tData.rows instanceof Array && tData.rows.length) {
+        tData.rows.forEach(r => { r.forEach(c => { if (!c.attr) c.attr = {}; }) });
         nestElem([
             table,
-            tData.rows.map(r=>{
+            tData.rows.map(r => {
                 return nestElem([
-                    mkElem({elemType:'tr'}),
-                    r.map(c=>{
-                        return mkElem({elemType:c.type, ...c.attr});
+                    mkElem({ elemType: 'tr' }),
+                    r.map(c => {
+                        return mkElem({ elemType: c.type, ...c.attr });
                     })
                 ])
             })
         ])
-    }else if (((tData.thead && tData.tbody) || tData.tbody)){
-        if (tData.thead && tData.thead.length){
+    } else if (((tData.thead && tData.tbody) || tData.tbody)) {
+        if (tData.thead && tData.thead.length) {
             nestElem([
                 table,
-                mkElem({elemType:'thead'}),
-                tData.thead.map(r=>{
+                mkElem({ elemType: 'thead' }),
+                tData.thead.map(r => {
                     return nestElem([
-                        mkElem({elemType:'tr'}),
-                        r.map(c=>{
-                            return mkElem({elemType:c.type, ...c.attr});
+                        mkElem({ elemType: 'tr' }),
+                        r.map(c => {
+                            return mkElem({ elemType: c.type, ...c.attr });
                         })
                     ])
                 })
@@ -73,12 +134,12 @@ function mkTable(tData={}, attr={}){
         }
         nestElem([
             table,
-            mkElem({elemType:'tbody'}),
-            tData.tbody.map(r=>{
+            mkElem({ elemType: 'tbody' }),
+            tData.tbody.map(r => {
                 return nestElem([
-                    mkElem({elemType:'tr'}),
-                    r.map(c=>{
-                        return mkElem({elemType:c.type, ...c.attr});
+                    mkElem({ elemType: 'tr' }),
+                    r.map(c => {
+                        return mkElem({ elemType: c.type, ...c.attr });
                     })
                 ])
             })
@@ -254,24 +315,24 @@ function tgLblListen(e) {
     }
 }
 
-function createToggle(attr = { id: '', title: '', label: '', isLocked: null}) {
+function createToggle(attr = { id: '', title: '', label: '', isLocked: null }) {
     // css location mdohse29.github.io/templates/toggleSwitch/toggleSwitch.css
     return nestElem([
-        mkDiv({ id: attr.id, class: ((attr.class) ? 'switch-container ' + attr.class : 'switch-container'), title: attr.title, isLocked: (attr.isLocked != undefined)?attr.isLocked:null }),
+        mkDiv({ id: attr.id, class: ((attr.class) ? 'switch-container ' + attr.class : 'switch-container'), title: attr.title, isLocked: (attr.isLocked != undefined) ? attr.isLocked : null }),
         (attr.label && attr.label.length > 1) ?
             [
                 mkLabel({ inner: attr.label, listeners: [{ type: 'click', execute: tgLblListen }] }),
                 nestElem([
                     mkDiv({ class: 'switch' }),
                     mkDiv({ class: 'toggle-cont', listeners: [{ type: 'click', execute: tgPillListen }] }),
-                    mkDiv({ class: 'toggle-pill', title:(attr.isLocked != undefined)?'Hold "Ctrl" while clicking to lock/unlock':null})
+                    mkDiv({ class: 'toggle-pill', title: (attr.isLocked != undefined) ? 'Hold "Ctrl" while clicking to lock/unlock' : null })
                 ])
             ]
             :
             nestElem([
                 mkDiv({ class: 'switch' }),
                 mkDiv({ class: 'toggle-cont', listeners: [{ type: 'click', execute: tgPillListen }] }),
-                mkDiv({ class: 'toggle-pill', title:(attr.isLocked != undefined)?'Hold "Ctrl" while clicking to lock/unlock':null})
+                mkDiv({ class: 'toggle-pill', title: (attr.isLocked != undefined) ? 'Hold "Ctrl" while clicking to lock/unlock' : null })
             ])
     ]);
 }
@@ -289,7 +350,7 @@ function crtSpin() {
 
 function nestElem(elemArry = []) {
     for (let a = elemArry.length - 2; a >= 0; a--) {
-        if (Object.keys(elemArry[a + 1]).length > 0 && elemArry[a + 1].tagName !== 'SELECT' && !(elemArry[a+1] instanceof Element)) {
+        if (Object.keys(elemArry[a + 1]).length > 0 && elemArry[a + 1].tagName !== 'SELECT' && !(elemArry[a + 1] instanceof Element)) {
             for (let b in elemArry[a + 1]) {
                 console.log(elemArry[a + 1][b])
                 elemArry[a].appendChild(elemArry[a + 1][b]);
@@ -305,7 +366,7 @@ function nestElem(elemArry = []) {
 function mkElem(attr = { elemType: '' }) {
     if (!attr.elemType) {
         throw new Error('You must specify what type of element to create\nmkElem({elemType:\'\'})');
-    }else if (attr.pptIcon){
+    } else if (attr.pptIcon) {
         attr.icon = attr.pptIcon;
         delete attr.pptIcon;
     }
@@ -322,20 +383,20 @@ function mkElem(attr = { elemType: '' }) {
                     element.addEventListener(l.type, l.execute);
                 }
             }
-        } else if (a.includes('prop')){
+        } else if (a.includes('prop')) {
             if (attr.prop instanceof Object)
-                for (let p in attr.prop){
+                for (const p of Object.keys(attr.prop)) {
                     // console.log(p, attr.props)
                     element[p] = attr.prop[p];
                 }
-        } else if (a.includes('dataset')){
-            if (attr.dataset instanceof Object){
-                for (let ds in attr.dataset){
+        } else if (a.includes('dataset')) {
+            if (attr.dataset instanceof Object) {
+                for (const ds of Object.keys(attr.dataset)) {
                     element.dataset[ds] = attr.dataset[ds];
                 }
-            }else{
+            } else {
                 console.warn('The dataset attribute should be typeof Object\ndataset:{}');
-                
+
             }
         } else {
             if (attr[a] && !a.includes('elemType')) {
@@ -351,14 +412,14 @@ function mkElem(attr = { elemType: '' }) {
  * @param {function} cb - Callback Function
  * @returns {string} - Current date in string format, mm/dd/yyyy
  */
-function date_string(cb){
+function date_string(cb) {
     const date = new Date(),
-    year = date.getFullYear(),
-    month = String(date.getMonth() + 1).padStart(2, '0'),
-    day_int = String(date.getDate()).padStart(2, '0'),
-    date_string = `${month}-${day_int}-${year}`;
+        year = date.getFullYear(),
+        month = String(date.getMonth() + 1).padStart(2, '0'),
+        day_int = String(date.getDate()).padStart(2, '0'),
+        date_string = `${month}-${day_int}-${year}`;
 
-    if (cb){
+    if (cb) {
         return cb(date_string);
     }
     return date_string;
