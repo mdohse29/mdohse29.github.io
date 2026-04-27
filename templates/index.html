@@ -10,12 +10,28 @@
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
-            flex: 1;
+            gap: 5px;
+            margin: 10px auto;
+            max-width: 1080px;
+        }
+        ul, li {
+            border-radius: 1rem;
+            padding: 10px;
+            background-color: #aaa4f6;
         }
         li {
+            flex: 1 0 auto;
             list-style: none;
             font-size: x-large;
-            padding: 10px; 
+            text-align: center;
+            transition: background-color 750ms;
+        }
+        li:hover, li:has(> a:focus-visible){
+            background-color: #7168f2b8;
+            box-shadow: 0 0 4px 3px white;
+        }
+        li > a, li:hover > a:active, li:hover > a:hover, li:hover > a:focus, li:hover > a:visited {
+            color: white;
         }
     </style>
 </head>
