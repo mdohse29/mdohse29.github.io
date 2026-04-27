@@ -16,38 +16,12 @@
 </head>
 <body>
     <script type="module">
-        import {mkInp, mkDiv, nestElem} from '../../scripts/crtElm-mod.js';
-        function md_toggle_switch(ev){
-            if (ev.ctrlKey){
-                ev.target.dataset.locked = ev.target.dataset.locked != 'true';
-                ev.target.dispatchEvent(new Event('change'));
-                if (!ev.target.checked){
-                    ev.preventDefault();
-                }
-                return;
-            }
-            if (ev.target.dataset.locked === 'true'){
-                ev.preventDefault();
-                return;
-            }
-        }
-        
-        const check1 = mkInp({type:'checkbox', id:'test1', name:'test1', class:'md-tog', 'data-locked': 'false', listeners:[{type:'click', execute:md_toggle_switch}], label:'Testing 1'});
-        const check2 = mkInp({type:'checkbox', id:'test2', name:'test2', class:'md-tog', 'data-locked': 'false', listeners:[{type:'click', execute:md_toggle_switch}], label:'Testing 2'});
+        import {mkToggle} from '../../scripts/crtElm-mod.js';
+                
+        const check1 = mkToggle({id:'test1', name:'toggle1', class:'test-class', 'data-testing':'true', lockable: true, label:'Testing 1', listeners:[{type:'mouseenter', execute:()=>{console.log('Ooo la la')}}]});
+        const check2 = mkToggle({id:'test2', lockable: true, label:'Testing 2'});
 
-        document.body.prepend(nestElem([
-            mkDiv({class:'tg-container'}),
-            [
-                check1.label,
-                check1.input
-            ]
-        ]),nestElem([
-            mkDiv({class:'tg-container'}),
-            [
-                check2.label,
-                check2.input
-            ]
-        ]),mkDiv({id:'output'}));
+        document.body.prepend(check1, check2)
     </script>
 </body>
 </html>

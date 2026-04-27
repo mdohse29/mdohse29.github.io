@@ -1,11 +1,12 @@
-div.tg-container {
+div.md-tg-container {
     display: inline-flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
+    margin: 0 5px;
 }
-div.tg-container > label, div.tg-container > input[type="checkbox"] {
+div.md-tg-container > label, div.md-tg-container > input[type="checkbox"] {
     cursor: pointer;
 }
 .md-tog {
