@@ -9,7 +9,7 @@ div.md-tg-container {
 div.md-tg-container > label, div.md-tg-container > input[type="checkbox"] {
     cursor: pointer;
 }
-.md-tog {
+input[type="checkbox"].md-tog {
     appearance: none;
     width: 52px;
     height: 17px;
@@ -19,7 +19,7 @@ div.md-tg-container > label, div.md-tg-container > input[type="checkbox"] {
     background-color: #979797;
     transition: background-color 0.5s;
 }
-.md-tog::after {
+input[type="checkbox"].md-tog::after {
     content: '';
     width: 25px;
     height: 11px;
@@ -30,12 +30,12 @@ div.md-tg-container > label, div.md-tg-container > input[type="checkbox"] {
     padding: 0;
     transition: transform 0.5s;
 }
-.md-tog:checked {
+input[type="checkbox"].md-tog:checked {
     background-color: green;
 }
-.md-tog[data-locked="true"]:checked {
+input[type="checkbox"].md-tog[data-locked="true"]:checked {
     background-color: red;
 }
-.md-tog:checked::after {
+input[type="checkbox"].md-tog:checked::after {
     transform: translateX(20px);
 }
