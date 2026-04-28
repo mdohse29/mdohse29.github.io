@@ -18,8 +18,8 @@
     <script type="module">
         import {mkToggle} from '../../scripts/crtElm-mod.js';
                 
-        const check1 = mkToggle({id:'test1', name:'toggle1', class:'test-class', 'data-testing':'true', lockable: true, label:'Testing 1', listeners:[{type:'mouseenter', execute:()=>{console.log('Ooo la la')}}]});
-        const check2 = mkToggle({id:'test2', lockable: true, label:'Testing 2'});
+        const check1 = mkToggle({id:'test1', name:'toggle1', class:'test-class', 'data-testing':'true', lockable: true, label:'Testing 1', listeners:[{type:'change', execute:(ev)=>{console.log(ev.target.checked)}}]});
+        const check2 = mkToggle({id:'test2', name:'toggle1', lockable: false, label:'Testing 2', labelOpt:{listeners: [{type:'mouseenter', execute: function(){console.log(this.innerText)}}]}});
 
         document.body.prepend(check1, check2)
     </script>
