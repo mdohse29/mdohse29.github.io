@@ -48,8 +48,16 @@ function mkToggle(attr = { id: '', label: '', lockable: false }) {
     }
     if (attr.label) {
         settings.label = attr.label;
-        if (attr.labelOpt)
+        if (attr.labelOpt) {
+            if (attr.labelOpt.listeners != undefined && attr.labelOpt.listeners.length) {
+                attr.labelOpt.listeners.push({ type: 'click', execute: md_toggle_label });
+            } else {
+                attr.labelOpt.listeners = [{ type: 'click', execute: md_toggle_label }]
+            }
             settings.labelOpt = attr.labelOpt;
+        } else {
+            settings.labelOpt = { listeners: [{ type: 'click', execute: md_toggle_label }] }
+        }
         delete attr.labelOpt;
         delete attr.label;
     }
@@ -64,7 +72,6 @@ function mkToggle(attr = { id: '', label: '', lockable: false }) {
     function md_toggle_switch(ev) {
         if (ev.ctrlKey && ev.target.dataset.locked != undefined) {
             ev.target.dataset.locked = ev.target.dataset.locked != 'true';
-            // ev.target.dispatchEvent(new Event('change'));
             if (!ev.target.checked) {
                 ev.preventDefault();
             }
@@ -75,26 +82,37 @@ function mkToggle(attr = { id: '', label: '', lockable: false }) {
             return;
         }
     }
+    function md_toggle_label(ev) {
+        ev.preventDefault();
+        const new_ev = new Event('click', { bubbles: false });
+        new_ev.ctrlKey = ev.ctrlKey;
+        if (!ev.target.nextElementSibling.hasAttribute('data-locked') || (ev.target.nextElementSibling.dataset.locked === 'false')) {
+            if (!ev.ctrlKey || !ev.target.nextElementSibling.checked) {
+                ev.target.nextElementSibling.checked = !ev.target.nextElementSibling.checked;
+                ev.target.nextElementSibling.dispatchEvent(new Event('change'));
+            }
+        }
+        ev.target.nextElementSibling.dispatchEvent(new_ev);
+    }
 
     const checkbox = mkElem({
         elemType: 'input',
         type: 'checkbox',
-        class: `md-tog${(settings.class) ? ` ${settings.class}` : ''}`,
+        class: `md-tog`,
         dataset: (settings.lockable) ? { locked: false } : {},
         listeners: [{ type: 'click', execute: md_toggle_switch }, ...(settings.listeners) ? settings.listeners : []],
         ...attr
     })
     const toggle = nestElem([
-        mkDiv({ class: 'md-tg-container' }),
+        mkDiv({ class: `md-tg-container${(settings.class) ? ` ${settings.class}` : ''}` }),
         (settings.label) ?
             [
-                mkLabel({ for: attr.id, inner: settings.label, ...(settings.labelOpt) ? settings.labelOpt : {} }),
+                mkLabel({ for: attr.id, inner: settings.label, ...settings.labelOpt }),
                 checkbox
             ]
             :
             checkbox
     ])
-    // console.log(attr, settings);
     return toggle;
 }
 
