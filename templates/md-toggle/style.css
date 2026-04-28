@@ -6,6 +6,9 @@ div.md-tg-container {
     box-sizing: border-box;
     margin: 0 5px;
 }
+div.md-tg-container > label {
+    font-size: .85rem;
+}
 div.md-tg-container > label, div.md-tg-container > input[type="checkbox"] {
     cursor: pointer;
 }
