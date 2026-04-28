@@ -15,13 +15,30 @@
     </style>
 </head>
 <body>
+    <table style="text-align:center;">
+        <thead>
+            <tr>
+                <th>Toggle w/ Locking</th>
+                <th>Toggle w/o Locking</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
     <script type="module">
-        import {mkToggle} from '../../scripts/crtElm-mod.js';
-                
-        const check1 = mkToggle({id:'test1', name:'toggle1', class:'test-class', 'data-testing':'true', lockable: true, label:'Testing 1', listeners:[{type:'change', execute:(ev)=>{console.log(ev.target.checked)}}]});
-        const check2 = mkToggle({id:'test2', name:'toggle1', lockable: false, label:'Testing 2', labelOpt:{listeners: [{type:'mouseenter', execute: function(){console.log(this.innerText)}}]}});
+        import {mkToggle, nestElem, mkElem} from '../../scripts/crtElm-mod.js';
+        const toggles = [
+            mkToggle({id:'test1', name:'toggle1', class:'test-class', 'data-testing':'true', title:'Hold Ctrl while clicking to engage the lock', lockable: true, label:'Toggle 1', listeners:[{type:'change', execute:(ev)=>{console.log(ev.target.checked)}}]}),
+            mkToggle({id:'test2', name:'toggle1', lockable: false, label:'Toggle 2', labelOpt:{listeners: [{type:'mouseenter', execute: function(){console.log(this.innerText)}}]}})
+        ];
+        [...document.querySelectorAll('td')].forEach((i, n)=>{
+            i.append(toggles[n])
+        })
 
-        document.body.prepend(check1, check2)
     </script>
 </body>
 </html>
