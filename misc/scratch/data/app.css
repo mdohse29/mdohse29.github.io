@@ -430,3 +430,9 @@ ul > li {
         border-top-left-radius: 10px;
     }
 }
+
+@media (width < 886px){
+    #info {
+        top: 5rem;
+    }
+}

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MD-Toggle Switch</title>
+    <script src="functions.js"></script>
     <link rel="stylesheet" href="style.css">
     <style>
         .tg-container {
@@ -15,13 +16,31 @@
     </style>
 </head>
 <body>
-    <script type="module">
-        import {mkToggle} from '../../scripts/crtElm-mod.js';
-                
-        const check1 = mkToggle({id:'test1', name:'toggle1', class:'test-class', 'data-testing':'true', lockable: true, label:'Testing 1', listeners:[{type:'change', execute:(ev)=>{console.log(ev.target.checked)}}]});
-        const check2 = mkToggle({id:'test2', name:'toggle1', lockable: false, label:'Testing 2', labelOpt:{listeners: [{type:'mouseenter', execute: function(){console.log(this.innerText)}}]}});
+    <table style="text-align:center;">
+        <thead>
+            <tr>
+                <th>Toggle w/ Locking</th>
+                <th>Toggle w/o Locking</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="md-tg-container" title="Hold Ctrl to activate/deactivate the lock"><label for="test1">Toggle 1</label><input type="checkbox" class="md-tog" name="test1" id="test1" data-locked="false"></div>
+                </td>
+                <td>
+                    <div class="md-tg-container"><label for="test2">Toggle 2</label><input type="checkbox" class="md-tog" name="test2" id="test2"></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
 
-        document.body.prepend(check1, check2)
+        [...document.querySelectorAll('input[type="checkbox"]')].forEach(i => {
+            i.addEventListener('click', md_toggle_functions.md_toggle_switch);
+            i.previousElementSibling.addEventListener('click', md_toggle_functions.md_toggle_label);
+        });
+
     </script>
 </body>
 </html>

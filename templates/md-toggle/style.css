@@ -10,6 +10,8 @@ div.md-tg-container > label {
     font-size: .85rem;
 }
 div.md-tg-container > label, div.md-tg-container > input[type="checkbox"] {
+    user-select: none;
+    -moz-user-select: none;
     cursor: pointer;
 }
 input[type="checkbox"].md-tog {
