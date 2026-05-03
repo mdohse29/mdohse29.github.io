@@ -60,6 +60,7 @@ li {
 article.message {
     position: absolute;
     width: 100%;
+    min-height: 6rem;
     top: 0;
     user-select: none;
     z-index: 2000;
