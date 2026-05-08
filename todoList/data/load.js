@@ -1,6 +1,6 @@
 import {nestElem, mkDiv, mkBtn, mrd, mkInp, mkHeader} from "../../scripts/crtElm-mod-min.js";
 import {inputActions, inputKeyActions, addItem, editItem, addSubItem, loadList, documentKeyActions} from "./functions-2.0-min.js"
-document.addEventListener('keydown', documentKeyActions);
+document.addEventListener('keydown', documentKeyActions, {capture:true});
 document.body.prepend(nestElem([
     mkDiv({class:'container mt-5'}),
     mkDiv({class:'columns is-centered'}),
