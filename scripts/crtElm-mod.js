@@ -413,7 +413,7 @@ export function mkElem(attr = { elemType: '' }) {
         } else if (a.includes('listeners')) {
             if (attr[a].length) {
                 for (let l of attr[a]) {
-                    element.addEventListener(l.type, l.execute);
+                    element.addEventListener(l.type, l.execute, (l.options && l.options instanceof Object)?l.options:{});
                 }
             }
         } else if (a.includes('prop')) {
