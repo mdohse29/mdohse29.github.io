@@ -26,7 +26,7 @@
         <tbody>
             <tr>
                 <td>
-                    <div class="md-tg-container" title="Hold Ctrl to activate/deactivate the lock"><label for="test1">Toggle 1</label><input type="checkbox" class="md-tog" name="test1" id="test1" data-locked="false"></div>
+                    <div class="md-tg-container" title="Toggle something on/off"><label for="test1">Toggle 1</label><input type="checkbox" class="md-tog" title="Hold Ctrl to activate/deactivate the lock" name="test1" id="test1" data-locked="false"></div>
                 </td>
                 <td>
                     <div class="md-tg-container"><label for="test2">Toggle 2</label><input type="checkbox" class="md-tog" name="test2" id="test2"></div>
@@ -41,6 +41,11 @@
             i.previousElementSibling.addEventListener('click', md_toggle_functions.md_toggle_label);
         });
 
+    </script>
+    <script type="module">
+        import {mkToggle, mkElem, nestElem} from '../../scripts/crtElm-mod.js';
+        document.querySelector('thead > tr').append(mkElem({elemType:'th', inner:'Testing crtElm'}))
+        document.querySelector('tbody > tr').append(nestElem([mkElem({elemType:'td'}), mkToggle({id:'script1', label:'Testing', lockable: true})]))
     </script>
 </body>
 </html>
