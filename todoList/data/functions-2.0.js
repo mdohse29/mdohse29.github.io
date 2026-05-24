@@ -671,7 +671,7 @@ export function showAllLists(){
                                             mkDiv({class:'buttons are-small'}),
                                             [
                                                 mkBtn({id:'load', title:(e===curList)?'Current List':`Load List: ${e}`, class:'button is-success is-rounded is-outlined', 'data-list':e, icon:mkElem({elemType:'i', class:'bi bi-box-arrow-in-up-right'}), prop:{disabled:(e===curList)}, listeners:[{type:'click', execute:function(){removeMsg();resetListBtn();loadList(this.dataset.list);}}]}),
-                                                mkBtn({id:'remove', title:`Delete List: ${e}`, class:'button is-danger is-rounded is-outlined', 'data-list':e, icon:mkElem({elemType:'i', class:'bi bi-trash'}), listeners:[{type:'click', execute:function(){removeMsg();resetListBtn();clearListDB(this.dataset.list);loadList('default');popMsg(`"${this.dataset.list}" has been removed.`, 'success', 3000)}}]})
+                                                mkBtn({id:'remove', title:`Delete List: ${e}`, class:'button is-danger is-rounded is-outlined', 'data-list':e, icon:mkElem({elemType:'i', class:'bi bi-trash'}), listeners:[{type:'click', execute:function(){if (window.confirm(`Are you sure you want to delete\n"${this.dataset.list}"`)){removeMsg();resetListBtn();clearListDB(this.dataset.list);loadList('default');popMsg(`"${this.dataset.list}" has been removed.`, 'success', 3000)}else{this.blur()}}}]})
                                             ]
                                         ])
                                     ]
