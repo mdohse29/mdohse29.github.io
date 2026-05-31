@@ -325,7 +325,8 @@ $(document).ready(function () { // Not sure why but I was looking at multiple ev
         let tag = $('.tab.active').attr('tag');
         let alreadyFound = [];
         let num = $('#num').val();
-        let elements = masterList.filter((elm) => {
+        let shuffled_movies = shuffleArray(masterList);
+        let elements = shuffled_movies.filter((elm) => {
             if (tag === 'all'){
                 return elm;
             }else{
