@@ -26,6 +26,14 @@ function crtad(){
         [
             mkBtn({class:'btn btn-outline-danger btn-sm', id:'sandr', inner:'S&R', title:'Still a work in progress...'}),
             mkBtn({class:'btn btn-outline-danger btn-sm', id:'abc', inner:'A -> Z', title:'Alphabetize a list', listeners:[{type:'click', execute:()=>{let TA = document.querySelector('#TextArea'); if (TA.value.length){let temp = TA.value.split('\n'); temp.sort(); TA.value=temp.join('\n');} TA.focus();}}]}),
+            mkBtn({class:'btn btn-outline-danger btn-sm', id:'clrun', inner:'Clear Unselected', listeners:[{type:'click', execute:()=>{
+                const textarea = document.querySelector('textarea'),
+                start = textarea.selectionStart,
+                end = textarea.selectionEnd
+                if (start!==end)
+                    textarea.value = textarea.value.substring(start, end);
+                textarea.focus();
+            }}]}),
             mkBtn({class:'btn btn-outline-danger btn-sm', id:'caps', inner:'Transform All Caps', listeners:[{type:'click', execute:()=>{let TA = document.querySelector('#TextArea'); if (TA.value.length) TA.value = TA.value.toUpperCase(); TA.focus()}}]}),
             mkBtn({class:'btn btn-outline-danger btn-sm' + ((btnenbl) ? ' dnone' : ''), id:'stop', inner:'Disable Text Processing'}),
             mkBtn({class:'btn btn-outline-danger btn-sm' + ((btnenbl) ? '' : ' dnone'), id:'start', inner:'Enable Text Processing'}),
