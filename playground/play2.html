@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playing Around</title>
+</head>
+<body>
+    <h1>testing a form</h1>
+    <form action="/" method="POST">
+        <label for="test"></label>
+        <input type="text" name="test" id="test">
+        <button>Submit</button>
+    </form>
+    <script>
+        // Just testing how to retrieve data from a form via custom script instead of default functionality
+        // Use case would probably be wanting to use a form but process data on client side instead of server
+        const form = document.querySelector('form');
+        form.addEventListener('submit', (ev)=>{
+            ev.preventDefault()
+            const data = new FormData(form);
+            console.log(Array.from(document.querySelectorAll('form')))
+            console.log(Object.fromEntries(data));
+        });
+    </script>
+</body>
+</html>

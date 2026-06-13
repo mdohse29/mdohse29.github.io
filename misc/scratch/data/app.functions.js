@@ -243,6 +243,7 @@ $(document).ready(function () {
             formatted.push(fn.toLowerCase().trim().replaceAll(/[ -]/g, '_').replaceAll(/_{2,}/g, '_').replace(/_(\..*?)$/, '$1'));
 
         }
+        $('#TextArea').focus();
         return formatted.join('\n');
     }
 
@@ -255,6 +256,7 @@ $(document).ready(function () {
         
         updateClipboard(editedText)
         $('#TextArea').val(editedText);
+        $('#TextArea').focus();
     }
 
     function removeExtraLines() {
@@ -267,6 +269,7 @@ $(document).ready(function () {
 
         updateClipboard(text.join('\n'))
         $('#TextArea').val(text.join('\n').trim());
+        $('#TextArea').focus();
         // popup({timeOut:500});
     }
 
@@ -428,6 +431,7 @@ $(document).ready(function () {
         if (nl.length) {
             updateClipboard(nl.join('\n'));
             $('#TextArea').val(nl.join('\n'));
+            $('#TextArea').focus();
         }
     }
 
