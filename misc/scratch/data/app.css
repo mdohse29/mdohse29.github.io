@@ -43,7 +43,7 @@ div.alert[role="alert"] {
     position: absolute;
     -moz-user-select: none;
     user-select: none;
-    z-index: 1000;
+    z-index: 2000;
     top: 0;
     right: 0;
 }
@@ -95,7 +95,7 @@ a.btn {
     position: absolute;
     top: 3rem;
     right: .5rem;
-    z-index: 1000;
+    z-index: 100;
 }
 
 .toggle-cont {
@@ -217,7 +217,7 @@ a.btn {
     position: absolute;
     top: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 500;
 }
 
 .usr-btn {
@@ -288,7 +288,7 @@ select.dark ~ #info {
     position: absolute;
     border: 2px solid black;
     border-radius: 10px;
-    z-index: 2;
+    z-index: 100;
     background-color: whitesmoke;
     padding: 15px;
 }
@@ -351,7 +351,7 @@ ul > li {
     height: var(--md-modal-height);
     top: 0px;
     left: 0px;
-    z-index: 2000;
+    z-index: 1000;
 }
 
 .md-modal-background {
