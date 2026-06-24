@@ -60,7 +60,7 @@
             },
             {
                 "hidden": false,
-                "url": "./todoList/",
+                "url": "https://dohsedomain.com/pages/misc_stuff/todoList/",
                 "text": {
                     "main": "ToDo List",
                     "sub": "Saves with Local Storage",

@@ -1,13 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+        (async function () {
+            const newUrl = "https://dohsedomain.com";
+
+            try {
+                const response = await fetch(newUrl, {
+                    method: "HEAD",
+                    mode: "cors",
+                    cache: "no-store"
+                });
+
+                if (response.ok) {
+                    window.location.replace(`${newUrl}/pages/momsPage/`);
+                }
+            } catch (err) {
+                console.log("New site not reachable:", err);
+            }
+        })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Playing Around</title>
 </head>
 <body>
     <h1>testing a form</h1>
-    <form action="/" method="POST">
+    <!-- <form action="/" method="POST">
         <label for="test"></label>
         <input type="text" name="test" id="test">
         <button>Submit</button>
@@ -22,6 +41,6 @@
             console.log(Array.from(document.querySelectorAll('form')))
             console.log(Object.fromEntries(data));
         });
-    </script>
+    </script> -->
 </body>
 </html>
