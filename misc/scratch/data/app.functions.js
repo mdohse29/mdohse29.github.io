@@ -115,99 +115,99 @@ $(document).ready(function () {
         $('textarea').focus();
     }
 
-    function toggleSpclFtr(text) {
+    // function toggleSpclFtr(text) {
 
-        if (text == 'Admin' && $('.spclFtr').length === 0) {
-            $('body').prepend(crtad());
-            // if (previous.includes('toolBox'))
-            //     $('body').prepend(mkrtnl());
+    //     if (text == 'Admin' && $('.spclFtr').length === 0) {
+    //         $('body').prepend(crtad());
+    //         // if (previous.includes('toolBox'))
+    //         //     $('body').prepend(mkrtnl());
 
-            $('#sandr').click(function () {
-                closeSearch()
-                let strictSearch = mkInp({type:'checkbox', id:'word', label:'Strict Search', labelOpt:{class:'awesome'}});
-                let regex = mkInp({type:'checkbox', id:'regex', label:'Regex'});
-                $('body').append(
-                    nestElem([
-                        mkDiv({class:'search-replace'}),
-                        [
-                            nestElem([
-                                mkDiv({class:'search'}),
-                                [
-                                    mkInp({type:'text', id:'search', placeholder:'Search', class:'form-control', autocomplete:'off'}),
-                                    mkInp({type:'text', id:'replace', placeholder:'Replace', class:'form-control', autocomplete:'off'}),
-                                    mkBtn({class:'btn btn-outline-success', id:'rep', inner:'Replace'}),
-                                    mkBtn({class:'btn btn-close btn-dark btn-lg mx-2', id:'search-close'})
-                                ]
-                            ]),
-                            nestElem([
-                                mkDiv({class:'search-options pt-3 px-2 d-block', title:'Must match exact word and capitalization.'}),
-                                [
-                                    strictSearch.input,
-                                    strictSearch.label/*,
-                                    regex.input,
-                                    regex.label*/
-                                ]
-                            ])
-                        ]
-                    ])
-                )
+    //         $('#sandr').click(function () {
+    //             closeSearch()
+    //             let strictSearch = mkInp({type:'checkbox', id:'word', label:'Strict Search', labelOpt:{class:'awesome'}});
+    //             let regex = mkInp({type:'checkbox', id:'regex', label:'Regex'});
+    //             $('body').append(
+    //                 nestElem([
+    //                     mkDiv({class:'search-replace'}),
+    //                     [
+    //                         nestElem([
+    //                             mkDiv({class:'search'}),
+    //                             [
+    //                                 mkInp({type:'text', id:'search', placeholder:'Search', class:'form-control', autocomplete:'off'}),
+    //                                 mkInp({type:'text', id:'replace', placeholder:'Replace', class:'form-control', autocomplete:'off'}),
+    //                                 mkBtn({class:'btn btn-outline-success', id:'rep', inner:'Replace'}),
+    //                                 mkBtn({class:'btn btn-close btn-dark btn-lg mx-2', id:'search-close'})
+    //                             ]
+    //                         ]),
+    //                         nestElem([
+    //                             mkDiv({class:'search-options pt-3 px-2 d-block', title:'Must match exact word and capitalization.'}),
+    //                             [
+    //                                 strictSearch.input,
+    //                                 strictSearch.label/*,
+    //                                 regex.input,
+    //                                 regex.label*/
+    //                             ]
+    //                         ])
+    //                     ]
+    //                 ])
+    //             )
 
-                let position = $('#TextArea').position();
-                let scWidth = $('#TextArea').prop('offsetWidth') / 2;
-                let scHeight = $('#TextArea').prop('offsetHeight') / 2;
-                let srScWidth = $('.search-replace').prop('scrollWidth') / 2;
-                let srScHeight = $('.search-replace').prop('scrollHeight') / 2;
-                let top = (position.top + (scHeight - srScHeight));
-                let left = (position.left + (scWidth - srScWidth))
+    //             let position = $('#TextArea').position();
+    //             let scWidth = $('#TextArea').prop('offsetWidth') / 2;
+    //             let scHeight = $('#TextArea').prop('offsetHeight') / 2;
+    //             let srScWidth = $('.search-replace').prop('scrollWidth') / 2;
+    //             let srScHeight = $('.search-replace').prop('scrollHeight') / 2;
+    //             let top = (position.top + (scHeight - srScHeight));
+    //             let left = (position.left + (scWidth - srScWidth))
 
-                $('.search-replace').attr('style', 'top: ' + top + 'px; left: ' + left + 'px;');
-                $('.search-replace').on('keydown', (ev)=>{
-                    if (ev.key === 'Escape'){
-                        closeSearch()
-                    }else if (ev.key === 'Enter'){
-                        $('#rep').click()
-                    }
-                })
-                $('#search').focus();
-                $('#search-close').click(closeSearch);
-                $('#rep').click(function () {
-                    //Search and Replace
-                    let text = $('#TextArea').val();
-                    let search = $('#search').val();
-                    let replace = $('#replace').val();
-                    let strict = $('#word').is(':checked');
-                    if (strict) {
-                        let regex = new RegExp(`\\b${search}\\b`, 'g');
+    //             $('.search-replace').attr('style', 'top: ' + top + 'px; left: ' + left + 'px;');
+    //             $('.search-replace').on('keydown', (ev)=>{
+    //                 if (ev.key === 'Escape'){
+    //                     closeSearch()
+    //                 }else if (ev.key === 'Enter'){
+    //                     $('#rep').click()
+    //                 }
+    //             })
+    //             $('#search').focus();
+    //             $('#search-close').click(closeSearch);
+    //             $('#rep').click(function () {
+    //                 //Search and Replace
+    //                 let text = $('#TextArea').val();
+    //                 let search = $('#search').val();
+    //                 let replace = $('#replace').val();
+    //                 let strict = $('#word').is(':checked');
+    //                 if (strict) {
+    //                     let regex = new RegExp(`\\b${search}\\b`, 'g');
 
-                        text = text.replace(regex, replace);
-                    } else {
-                        let regex = new RegExp(search, 'gi')
-                        text = text.replace(regex, replace);
-                    }
-                    $('#TextArea').val(text);
-                    // closeSearch();
-                })
+    //                     text = text.replace(regex, replace);
+    //                 } else {
+    //                     let regex = new RegExp(search, 'gi')
+    //                     text = text.replace(regex, replace);
+    //                 }
+    //                 $('#TextArea').val(text);
+    //                 // closeSearch();
+    //             })
 
-            });
+    //         });
 
             
 
-            $('#stop').click(stopProcessing);
+    //         $('#stop').click(stopProcessing);
 
-            $('#start').click(startProcessing);
+    //         $('#start').click(startProcessing);
 
-            $('#ad-close').click(function () {
-                closeSearch()
-                toggleSpclFtr("goodbye");
-            });
+    //         $('#ad-close').click(function () {
+    //             closeSearch()
+    //             toggleSpclFtr("goodbye");
+    //         });
 
 
-        } else if (text == "goodbye") {
-            $('.spclFtr').remove();
-            $('#toolBox').remove();
+    //     } else if (text == "goodbye") {
+    //         $('.spclFtr').remove();
+    //         $('#toolBox').remove();
 
-        }
-    }
+    //     }
+    // }
 
     // Update Clipboard with trimmed text
 
@@ -333,7 +333,7 @@ $(document).ready(function () {
                 changed = true;
             }
 
-            if (!$('#retspc .toggle-cont').hasClass('tg-on')){
+            if (!$('.toggle-cont').hasClass('tg-on')){
                 regtest = /^\s*\n/gm;
                 if (text.match(regtest)) {
                     console.log('Removing empty lines');
@@ -341,7 +341,7 @@ $(document).ready(function () {
                     changed = true;
                 }
             }else{
-                $('#retspc .toggle-pill').click() // Reset the toggle after single use
+                $('.toggle-pill').click() // Reset the toggle after single use
             }
 
             if ($('#flat .toggle-cont').hasClass('tg-on')) {
@@ -451,7 +451,6 @@ $(document).ready(function () {
                         mkBtn({ class: 'btn btn-primary btn-sm ms-1 usr-btn btn-shadow', id: 'clear', inner: 'Clear', title: 'Clear scratch pad' }),
                         createToggle({ id: 'flat', label: 'Flatten Text', title: 'Convert multiple lines of text into a single line. Check \'How This Works\' info button for example.', isLocked: 'false' }),
                         createToggle({ id: 'dbl', label: 'Paragraph Spacing', title: 'Adds space between lines. Click Info button for more info', isLocked: 'false' }),
-                        createToggle({ id: 'retspc', class:'dnone', label: 'Retain Copied Spacing', title: 'Retains whatever paragraph spacing was copied from the source.', isLocked: 'false' }),
                         mkBtn({ class: 'btn p-0', id: 'info', inner: '<i class="bi bi-info-circle"></i>', title: 'How this works' })
                     ]
                 ]),
@@ -476,14 +475,10 @@ $(document).ready(function () {
         $('#TextArea').focus();
     });
 
-    $('#TextArea').on('input', function () {
-        let text = $('#TextArea').val();
-        toggleSpclFtr(text);
-        // Remove after decision is made
-        if (text.toLowerCase() == "ciara"){
-            $('#retspc').removeClass('dnone');
-        }
-    });
+    // $('#TextArea').on('input', function () {
+    //     let text = $('#TextArea').val();
+    //     toggleSpclFtr(text);
+    // });
 
     $('#TextArea').on('paste', processText);
 
@@ -524,8 +519,8 @@ $(document).ready(function () {
         toggleLockImg($(this));
     });
 
-    if (previous.includes("toolBox")) {
-        toggleSpclFtr('Admin');
-    }
+    // if (previous.includes("toolBox")) {
+    //     toggleSpclFtr('Admin');
+    // }
 
 });
