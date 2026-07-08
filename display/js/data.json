@@ -6,15 +6,6 @@
     ],
     "demos": [
         {
-            "title":"The Scratchpad",
-            "url":"../misc/scratch/",
-            "details":[
-                "This tool was developed to address the need for pasting clean text from a Word document into a content management application. At my workplace, our content team frequently transfers content authored in Word into the CMT. Unfortunately, this process often introduces hidden characters and unwanted formatting from the Word document.<br><br>To mitigate these issues, I created this solution to reduce the likelihood of unwanted entities being pasted into the CMT. The tool automatically runs the text through several checks to ensure that no hidden entities or formatting errors are present before the text is entered into the CMT. This simple yet effective tool has significantly reduced the amount of post-entry work required to find, fix, and replace unwanted formatting and entities.",
-                "<strong>Styling</strong><br>Bootstrap - for buttons and basic layout<br>Custom CSS - for everything else<br>Icons 8 @ <a href=\"https://icons8.com\" target=\"_blank\">https://icons8.com</a> - for the bug, info, and lock icons<br><br><strong>Scripting</strong><br>Javascript - for logic and creating elements<br>JQuery - for functionality<br>RegEX - for some of the text validating functions",
-                "I decided to make my own modal and toggle switch for this, instead of using something from Bootstrap. Nothing super fancy, but it works. This one probably gets fiddled with the most since it is currently being used by people in my office. A bug will come up or a request made for something to be added. More requests than bugs <span style=\"font-size: 25px;\">😉</span>"
-            ]
-        },
-        {
             "title":"Trivia Quiz Challenge",
             "url":"/templates/quiz_challenge/",
             "details":[

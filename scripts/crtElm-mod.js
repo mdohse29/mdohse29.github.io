@@ -369,15 +369,22 @@ export function createToggle(attr = { id: '', title: '', label: '', isLocked: nu
             ])
     ]);
 }
-
-export function crtSpin() {
+/**
+ *
+ * @param cb = Callback Function (spinner)=>{}
+ * @returns Returns a spinner element
+ */
+export function crtSpin(cb) {
     // MUST be using Bootstrap css
-
-    return nestElem([
+    const spinner = nestElem([
         mkDiv({ class: 'spinner-background' }),
         mkDiv({ class: 'spinner-border', role: 'status' }),
         mkSpan({ class: 'visually-hidden', inner: 'Loading...' })
     ]);
+    if (cb instanceof Function)
+        return cb(spinner);
+
+    return spinner;
 
 }
 
